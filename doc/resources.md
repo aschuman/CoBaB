@@ -25,6 +25,7 @@
 
 * Hintergr&uuml;nde: [Wikipedia](https://en.wikipedia.org/wiki/C%2B%2B)
 * C++ Referenzen: [cppreference](http://en.cppreference.com/w/) und [cplusplus](http://www.cplusplus.com/)
+* [C++ FAQ](http://www.parashift.com/c++-faq/)
 * Software für Windows: [qt-creator](http://www.qt.io/download-open-source/) -> QtCreator for Windows
 * Software für Linux: [qt-creator](http://www.qt.io/download-open-source/) -> QtCreator for Linux
 
