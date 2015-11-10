@@ -33,6 +33,7 @@
 
 * Hintergr&uuml;nde: [Wikipedia](https://en.wikipedia.org/wiki/Qt_%28software%29)
 * http://www.qt.io/
+* [Getting started programming with Qt widgets](http://doc.qt.io/qt-5/gettingstartedqt.html)
 * [Qt Documentation](http://doc.qt.io/qt-5/reference-overview.html)
 * [Qt Examples & Tutorials](http://doc.qt.io/qt-5/qtexamplesandtutorials.html), z.B. das [Qt Application Example](http://doc.qt.io/qt-5/qtwidgets-mainwindows-application-example.html)
 * [The Qt Designer](http://doc.qt.io/qt-5/qtdesigner-manual.html)
