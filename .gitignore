@@ -26,3 +26,12 @@
 *.exe
 *.out
 *.app
+
+#files produced by pdftex
+*.aux
+*.dvi
+*.fdb_latexmk
+*.fls
+*.log
+*.pdf
+*.gz

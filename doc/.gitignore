@@ -1,8 +1,0 @@
-#files produced by pdftex
-*.aux
-*.dvi
-*.fdb_latexmk
-*.fls
-*.log
-*.pdf
-*.gz
