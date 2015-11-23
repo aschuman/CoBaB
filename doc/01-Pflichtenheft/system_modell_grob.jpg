@@ -1,0 +1,245 @@
+<html>
+<head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script language="JavaScript">
+<!--
+function makeAlphaNumeric(originalName)
+{
+alphaNumName = "";
+pos=0;
+while (pos<originalName.length)
+{
+c=originalName.charAt(pos);
+if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+{
+alphaNumName = alphaNumName + c;
+}
+pos++;
+}
+return alphaNumName;
+}
+function openHelpWindow(url)
+{
+var aWindowName = makeAlphaNumeric(window.location.host) + "helpWin";
+popUpWin = window.open(url,aWindowName,'toolbar=0,location=no,directories=0,status=0,menubar=1,scrollbars=1,resizable=1,width=400,height=450');
+}
+function openWindow(name, url, width, height, scroll, menu)
+{
+var aWindowName = makeAlphaNumeric(window.location.host) + name;
+var popUpWin = window.open(url, aWindowName, 'scrollbars='+scroll+',toolbar=0,location=no,directories=0,status=0,menubar='+menu+',resizable=1,width='+width+',height='+height);
+}
+// -->
+</script>
+<title>AXIS 70U - Scan Document</title>
+</head>
+
+<body bgcolor="#CCCCCC" background="/pictures/curve.gif">
+
+<table border=0 width=683 cellspacing=0 cellpadding=0 height=45>
+<tr>
+<td width=50><img src="/pictures/bit.gif" border=0 height=1 width=50 hspace=0 vspace=0></td>
+<td align=left valign=bottom width=540><a href="http://www.axis.com/r/?keyword=70UProduct"><img src="/pictures/product.gif" alt="AXIS 70U" border=0 hspace=0 vspace=3></a><br clear=all><img src="/pictures/product_line.gif" height=3 alt="line" border=0 width=525 align=top vspace=3><br clear=all><img src="/pictures/bit.gif" border=0 height=2 width=540 hspace=0 vspace=0></td>
+<td align=right valign=bottom height=45 width=102><a href="http://www.axis.com"><img align=bottom src="/pictures/logo.gif" width=102 height=38 border=0 alt="Axis Communications" hspace=0 vspace=0></a></td>
+</tr>
+</table>
+
+<table border=0 align=left cellpadding=5 cellspacing=0>
+<tr>
+<td valign=top align=left><br><br>
+
+
+
+
+
+<a href="/user/scan/scan.shtml"><IMG SRC="/scannerpics/buttons/scandocument_mark.gif" alt="Allows you to scan documents to your Web browser" border=0 vspace=3 width=117 height=18></a><br>
+        <a href="/user/destinations/destinations.shtml"><IMG SRC="/scannerpics/buttons/destinations.gif" alt="Lists the defined e-mail and file destinations" border=0 vspace=3 width=117 height=18></a><br>
+<a href="/user/profiles/profiles.shtml"><IMG SRC="/scannerpics/buttons/profilelist.gif" alt="Lists the defined scanning profiles" border=0 vspace=3 width=117 height=18></a><br>
+<br>
+        <a href="/user/help/general_help_user.shtml?overview.shtml"><IMG SRC="/pictures/buttons/general_help.gif" alt="Describes the AXIS 70U and the web interface" border=0 vspace=3 width=117 height=18></a><br>
+<br>
+
+<IMG SRC="/pictures/bit.gif" border="0" width=1 height=93>
+<br>
+      <a href="/user/scan/scan.shtml"><IMG SRC="/pictures/buttons/user_mark.gif"
+alt="Returns to the Scan Document page"
+border=0 vspace=3 width=57 height=18></a>
+<a href="/admin/this_server/this_server.shtml"><IMG SRC="/pictures/buttons/admin.gif" alt="Allows you to configure the AXIS 70U" border=0 vspace=3 width=60 height=18></a><br>
+
+
+
+
+
+
+</td>
+</tr>
+</table>
+<table cellpadding=0 cellspacing=0 width=560>
+<tr>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+document.write("<td align=center height=30>\
+\
+<a href=javascript:top.openHelpWindow(\"../help/help.shtml?scandoc/scandoc.shtml\")><IMG align=right src=\"/pictures/buttons/help.gif\" border=0 width=23 height=22 hspace=0 vspace=0 alt=\"Display Help for Scan Document\"></a>\
+\
+");
+// -->
+</SCRIPT>
+<NOSCRIPT>
+    <td align=center height=30>
+
+<a href="/user/help/help.shtml?scandoc/scandoc.shtml" target="blank"><IMG align="right" src="/pictures/buttons/help.gif" border=0 width=23 height=22 hspace=0 vspace=0 alt="Display Help for Scan Document"></a><br clear="all">
+
+    </NOSCRIPT>
+
+<b><font size=2 face=Arial,Geneva,Times>Scan Document</font></b>
+</td>
+</tr>
+</table>
+<table border=1 cellspacing=0 cellpadding=15 width=560>
+<tr>
+<td>
+
+
+<font size=2 face=Arial,Geneva,Times>
+
+
+<form method="post" action="scan.shtml">
+<input type="hidden" name="wspage" value="scan">
+<input type="hidden" name="selProf" value="">
+<NOSCRIPT>
+<input type="hidden" name="scriptOn" value="No">
+</NOSCRIPT>
+<table border=0 cellpadding=5 cellspacing=2>
+<tr>
+<td><font size=2 face=Arial,Geneva,Times>Connected Device:</font></td>
+<td><font size=2 face=Arial,Geneva,Times>HP Scanjet 7650</font></td>
+</tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr>
+<td nowrap><font size=2 face=Arial,Geneva,Times>Profile:</font></td>
+<td nowrap>
+<select name="profileName" size="1">
+<font size=2 face=Arial,Geneva,Times><option>Color high</option>
+<option>Color low</option>
+<option>Color PDF</option>
+<option>Gray high</option>
+<option>Gray low</option>
+<option selected>Text</option>
+<option>Text high</option>
+<option>Text low</option>
+<option>Text PDF</option>
+<option>Text photo</option>
+</font>
+</select>&nbsp;&nbsp;
+
+<input type="submit" name="scanCustom" value="Custom &gt;&gt;"></td>
+
+</tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr>
+
+<td colspan=2>
+<input type="submit" name="scanNow"   value="    Scan    ">&nbsp;&nbsp;
+<input type="submit" name="reserve"   value="  Reserve  ">
+</td>
+
+</tr>
+<tr>
+<td colspan=2><hr></td>
+</tr>
+
+</table>
+</form>
+
+
+</td>
+</tr>
+</table>
+</body>
+</html>
+
+
+
+
