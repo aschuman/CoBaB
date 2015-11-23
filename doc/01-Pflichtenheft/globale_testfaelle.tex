@@ -1,27 +1,64 @@
 % !TeX spellcheck = de_DE_frami
 	Es gibt für jede funktionale Anforderung einen Testfall.
+
 \begin{enumerate} [label=\bfseries /TF \arabic*0/]
-	\item Das Programm starten /F 10/
-	\item Das Programm beenden /F 20/
-	\item Eine Sprache auswählen /F 30/
-	\item Ein Bild aus der Medienbibliothek auswählen /F 40/, /F 50/, /F 60/
-	\item Ein Video aus der Medienbibliothek auswählen /F 60/
-	\item Eine Annotation auf die ausgewählte Datei machen /F 70/
-	\item Einen Suchverfahren auswählen /F 80/
-	\item (W) Mehrere Suchverfahren wählen /F 260/
-	\item Die Suche anfordern /F 90/
-	\item Die Suche terminieren /F 100/
-	\item (W) Die Suche pausieren /F 110/
-	\item (W) Die pausierte Suche fortsetzen /F 120/
-	\item (W) Den Zurück-Button anfordern /F 130/
-	\item (W) Die Suchergebnisse entfernen /F 140/
-	\item (W) Benachrichtigungston ein- und ausschalten /F 150/, /F 160/
-	\item Suchergebnisse auswählen und anzeigen /F 170/, /F 180/
-	\item (W) Ein ganzes Video abspielen /F 190/
-	\item Zutreffende Suchergebnisse auswählen /F 200/
-	\item Neue Suche mit den ausgewählten Suchergebnissen starten /F 210/
-	\item (W) Speichern der Suchergebnisse /F 220/, /F 230/
-	\item (W) Aufrufen von gespeicherten Suchergebnissen /F 240/, /F 250/
-	\item Aufrufen des Help-Menüs /F 270/
-	\item Aufrufen des About-Menüs /F 280/
+	\item Grundfunktionalität
+	\begin{enumerate}
+		\item
+		\begin{description}
+			\item[Vorbedingung] Programm ist startbereit; es steht ein korrekter Datensatz und ein Suchverfahren auf der Festplatte zur Verfügung
+			\item[Aktion] Benutzer startet Programm (\req{F 10})
+			\item[Nachbedingung] Startbildschirm der GUI wird angezeigt; die Liste der gewählten Datensätze ist leer; Schaltfläche zum Hinufügen eines neuen Datensatzes ist sichtbar
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer klickt die Schaltfläche zum Hinzufügen eines neuen Datensatzes (\req{F 70})
+			\item[Nachbedingung] Ein Dialog der die Auswahl eines Datensatzes von der Festplatte ermöglicht wird angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer wählt einen korrekten Datensatz und bestätigt seine Wahl (\req{F 70})
+			\item[Nachbedingung] der Dialog wird nicht mehr angezeigt; die Liste der gewählten Datensätze enthält den eben gewählten Datensatz
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion]
+			\item[Nachbedingung]
+		\end{description}
+	\end{enumerate}
+
+	\item Sprachwahl
+	\begin{enumerate}
+		\item
+		\begin{description}
+			\item[Vorbedingung] Programm ist startbereit; Einstellungen wurden noch nicht geändert
+			\item[Aktion] Benutzer startet Programm (\req{F 10})
+			\item[Nachbedingung] deutsches GUI wird angezeigt; Menüpunkt 'Sprache' ist sichtbar, es sind die Sprachen Deutsch und Englisch wählbar; Deutsch ist als aktuell gewählte Sprache markiert
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer wählt über den Menpunkt 'Sprache' die englische Sprache aus (\req{F 60})
+			\item[Nachbedingung] die GUI wird auf englisch dargestellt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer beendet das Programm über den üblichen Schließen-Button (\req{F 20})
+			\item[Nachbedingung] die GUI wird ist nicht mehr sichtbar; der Prozess hat terminiert
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer startet das Programm (\req{F 10})
+			\item[Nachbedingung] GUI wird auf Englisch angezeigt (\req{F 60}); unter dem Menüpunt 'Sprache' ist nun Englisch als aktuell gewählte Sprache markiert
+		\end{description}
+	\end{enumerate}
+
+	\item weitere Menüpunkte
+	\begin{enumerate}
+		\item
+		\begin{description}
+			\item[Vorbedingung] das Menü ist verfügbar
+			\item[Aktion] der Benutzer wählt über den Menüpunkt ganz Rechts das About-Menü (\req{F 50})
+			\item[Nachbedingung] ein Dialog mit Informationen zum Programm wird angezeigt
+		\end{description}
+	\end{enumerate}
 \end{enumerate}
