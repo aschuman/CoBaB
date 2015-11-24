@@ -2,28 +2,77 @@
 	Es gibt für jede funktionale Anforderung einen Testfall.
 
 \begin{enumerate} [label=\bfseries /TF \arabic*0/]
-	\item Grundfunktionalität
+	\item
 	\begin{enumerate}
-		\item
+		\item Datensatz zur Bibliothek hinzufügen % Vorgang zu generisch beschrieben; ToDo: bestimmte Datensätze und Verfahren zur konkretisierung spezifizieren und hier verwenden
 		\begin{description}
-			\item[Vorbedingung] Programm ist startbereit; es steht ein korrekter Datensatz und ein Suchverfahren auf der Festplatte zur Verfügung
+			\item[Vorbedingung] Programm ist startbereit; es wurden weder Datensätze noch Suchverfahren entfernt oder manipuliert
 			\item[Aktion] Benutzer startet Programm (\req{F 10})
-			\item[Nachbedingung] Startbildschirm der GUI wird angezeigt; die Liste der gewählten Datensätze ist leer; Schaltfläche zum Hinufügen eines neuen Datensatzes ist sichtbar
+			\item[Nachbedingung] Startbildschirm der GUI wird angezeigt; die Bibliothek wird angezeigt (\req{F 70}) und enthält mindestens einen Datensatz
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer klickt die Schaltfläche zum Hinzufügen eines neuen Datensatzes (\req{F 70})
+			\item[Aktion] Der Benutzer doppelklickt einen Datensatz (\req{F 72})
+			\item[Nachbedingung] Es wird eine Übersicht des Datensatzes angezeigt (\req{F 80})
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer klickt auf ein Bild aus der Übersicht
+			\item[Nachbedingung] Das Bild wird groß dargestellt (\req{F 85})
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer rechtsklickt auf einen Bereich des Bildes der nicht annotiert ist
+			\item[Nachbedingung] Es wird ein Kontextmenü angezeigt in dem mindestens ein Suchverfahren zur Auswahl bereitsteht
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer fährt mit der Maus über ein Suchverfahren
+			\item[Nachbedingung] Es wird eine Beschreibung des Suchverfahrens angezeigt (\req{F 121})
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer linksklickt auf eines der Suchverfahren (\req{F 120})
+			\item[Nachbedingung] Das angezeigte Fenster enthält die Parameter des Suchverfahrens und entsprechende UI-Elemente sie festzulegen
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer nimmt seine Eingaben vor und bestätigt sie (\req{F 125})
+			\item[Nachbedingung] Es werden die vorgenommenen Einstellungen angezeigt (\req{F 128}); eine Schaltfläche zum Starten der Suche wird angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer startet die Suche (\req{F 130})
+			\item[Nachbedingung] Eine Animation zeigt die Aktivität des Suchverfahrens an (\req{F 140})
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer wartet eine entsprechende Zeit
+			\item[Nachbedingung] Eine Übersicht über die Ergebnisse der Suche wird angezeigt (\req{F 160})
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer klickt auf ein Ergebnis
+			\item[Nachbedingung] Das Ergebnis(-bild) wird groß dargestellt (\req{F 170})
+		\end{description}
+	\end{enumerate}
+	\item
+	\begin{enumerate}
+		\item Datensatz zur Bibliothek hinzufügen
+		\begin{description}
+			\item[Vorbedingung] Programm ist startbereit; ein korrekter Datensatz liegt auf der Festplatte; % "korrekt" = ?
+			\item[Aktion] Benutzer startet Programm (\req{F 10})
+			\item[Nachbedingung] Startbildschirm der GUI wird angezeigt; die Bibliothek wird angezeigt (\req{F 70})
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer klickt die Schaltfläche zum Hinzufügen eines neuen Datensatzes (\req{F 72})
 			\item[Nachbedingung] Ein Dialog der die Auswahl eines Datensatzes von der Festplatte ermöglicht wird angezeigt
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer wählt einen korrekten Datensatz und bestätigt seine Wahl (\req{F 70})
+			\item[Aktion] Der Benutzer wählt einen korrekten Datensatz von der Festplatte und bestätigt seine Wahl (\req{F 71})
 			\item[Nachbedingung] der Dialog wird nicht mehr angezeigt; die Liste der gewählten Datensätze enthält den eben gewählten Datensatz
-		\end{description}
-		\item
-		\begin{description}
-			\item[Aktion]
-			\item[Nachbedingung]
 		\end{description}
 	\end{enumerate}
 
@@ -37,7 +86,7 @@
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer wählt über den Menpunkt 'Sprache' die englische Sprache aus (\req{F 60})
+			\item[Aktion] Der Benutzer wählt über den Menpunkt 'Sprache' die englische Sprache aus (\req{FW 10})
 			\item[Nachbedingung] die GUI wird auf englisch dargestellt
 		\end{description}
 		\item
@@ -48,7 +97,7 @@
 		\item
 		\begin{description}
 			\item[Aktion] Der Benutzer startet das Programm (\req{F 10})
-			\item[Nachbedingung] GUI wird auf Englisch angezeigt (\req{F 60}); unter dem Menüpunt 'Sprache' ist nun Englisch als aktuell gewählte Sprache markiert
+			\item[Nachbedingung] GUI wird auf Englisch angezeigt (\req{FW 10}); unter dem Menüpunt 'Sprache' ist nun Englisch als aktuell gewählte Sprache markiert
 		\end{description}
 	\end{enumerate}
 
@@ -56,9 +105,14 @@
 	\begin{enumerate}
 		\item
 		\begin{description}
-			\item[Vorbedingung] das Menü ist verfügbar
-			\item[Aktion] der Benutzer wählt über den Menüpunkt ganz Rechts das About-Menü (\req{F 50})
+			\item[Vorbedingung] das Menü ist verfügbar; deutsch ist die gewählte Sprache (falls \req{FW 10} implementiert)
+			\item[Aktion] der Benutzer wählt über den Menüpunkt ganz Rechts "About" aus (\req{F 50})
 			\item[Nachbedingung] ein Dialog mit Informationen zum Programm wird angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] der Benutzer wählt über den Menüpunkt ganz Rechts "Hilfe" aus (\req{F 40})
+			\item[Nachbedingung] ein Dialog mit Hinweisen zur Benutzung des Programms wird angezeigt
 		\end{description}
 	\end{enumerate}
 \end{enumerate}
