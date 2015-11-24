@@ -4,28 +4,37 @@
 	\item[\req{F 10}] Starten des Programms
 	\item[\req{F 20}] Beenden des Programms
 	\item[\req{F 30}] Erkennen verfügbarer Suchverfahren
-	\item[\req{F 40}] ? Anzeigen eines Help-Menüs
+	\item[\req{F 40}] Anzeigen eines Hilfe-Dialogs mit Hinweisen zur Benutzung des Programms
 	\item[\req{F 50}] Anzeigen eines About-Dialogs mit Informationen zum Programm
-	\item[\req{F 60}] nicht-flüchtige Auswahl der Sprachen Deutsch und Englisch
 	\newline
 %	\item[\req{F 0}] Er\"offnen eines neuen Suchkontexts
 %	\item[\req{F 0}] Er\"offnen eines neuen \glslink{Suchkontext}{Suchkontexts}
-	\item[\req{F 70}] Ausw\"ahlen der Datens\"atze
-	\item[\req{F 80}] Anzeigen einer Übersicht der Bilder bzw. Videos der gewählten Datensätze
+	\item
+	\item[\req{F 60}] Wiederanzeigen der Ergebnisse einer vorherigen Suche (siehe auch \req{F 205})
+	\item[\req{F 70}] Anzeigen einer Bibliothek von Datensätzen
+	\item[\req{F 71}] Hinzufügen von Datensätzen zur Bibliothek
+	\item[\req{F 72}] Ausw\"ahlen eines Datensatzes aus der Bibliothek
+	\item[\req{F 80}] Anzeigen einer Übersicht der Bilder bzw. Videos des gewählten Datensatzes
+	\item[\req{F 85}] Anzeigen einer größeren Darstellung eines ausgewählten Bildes bzw. Videos
+	\item[\req{F 86}] Zoomen und Scrollen in der größeren Darstellung
 	\item[\req{F 90}] Ausw\"ahlen eines Bildes bzw. Videos aus den gewählten Datensätzen als Suchvorlage
-	\item[\req{F 100}] Auswahl eines annotierten Bildbereiches der Vorlage
+	\item[\req{F 100}] Anzeigen annotierter Bildbereiche
+	\item[\req{F 105}] Auswahl eines annotierten Bildbereiches als Suchvorlage
 	\item[\req{F 110}] Einschränkung der Suchvorlage auf einen benutzerdefinierten rechteckigen Bereich (falls keine Annotation gewählt wurde)
-	\item[\req{F 120}] Auswahl des Suchverfahrens
+	\item[\req{F 120}] Auswahl eines für ggf. gewählte Annotation geeigneten Suchverfahrens
+	\item[\req{F 125}] Festlegen der für das gewählte Suchverfahren spezifischen Parameter
+	\item[\req{F 128}] Anzeigen der zurzeit eingestellten Parameter zur Überprüfung durch den Benutzer
 	\newline
 	\item[\req{F 130}] Starten der Suche
-	\item[\req{F 140}] Anzeigen einer Sanduhr während des Suchvorgangs
+	\item[\req{F 140}] Anzeigen einer Fortschrittsanimation während des Suchvorgangs
 	\item[\req{F 150}] Abbrechen der Suche
 	\newline
 	\item[\req{F 160}] Anzeigen einer \"Ubersicht der Suchergebnisse
-	\item[\req{F 170}] Auswahl und Anzeige eines einzelnen Suchergebnisses
+	\item[\req{F 170}] Anzeigen eines einzelnen Suchergebnisses
 	\item[\req{F 180}] Abspielen eines Videos aus Einzelbildern
-	\item Einstellen eines Feedbacks zu einem Suchergebnis
+	\item[\req{F 190}] Einstellen eines Feedbacks zu einem Suchergebnis
 	\item[\req{F 200}] \"Ubermitteln des Feedbacks an das Suchverfahren
+	\item[\req{F 205}] Speichern der Suchergebnisse (siehe auch \req{F 60})
 	\newline
 	\item[\req{F 210}] Unterstützung der Bildformate JPEG, PNG und BMP
 	\item[\req{F 220}] Unterstützung von Videos in Form von Einzelbildern in untert\"utzten Bildformaten
@@ -33,15 +42,17 @@
 
 \subsection{Wunschanforderungen}
 \begin{description}
-	\item[\req{F 300}] Wählen einer Suchvorlage, die nicht in den gewählten Datensätzen enthalten ist
+	\item[\req{FW 10}] nicht-flüchtige Auswahl der Übersetzungen der GUI in Deutsch und Englisch
 	\newline
-	\item[\req{F 350}] Abspielen eines Benachrichtigungstons bei Abschluss einer Suche
-	\item[\req{F 360}] Ein-/Abschalten des Benachrichtigungstons
-	\item[\req{F 370}] Abspielen von Videos (mit Ausgabe der Audiospur)
-	\item[\req{F 380}] Durchführen einer weiteren Suche in den Ergebnissen einer bereits beendeten Suche
+	\item[\req{FW 20}] Wählen einer Suchvorlage, die nicht in den gewählten Datensätzen enthalten ist (erweitert \req{F 90})
+	\item[\req{FW 25}] Wählen von mehreren Datensätzen in denen gesucht wird (erweitert \req{F 72})
 	\newline
-	\item[\req{F 390}] Unterstützung der Videoformate AVI, FLK, MKV, MP4
-	\item[\req{F 400}] Wechsel in einen Vollbildmodus für Präsentation
+	\item[\req{FW 30}] Abspielen eines Benachrichtigungstons bei Abschluss einer Suche
+	\item[\req{FW 40}] Ein-/Abschalten des Benachrichtigungstons
+	\item[\req{FW 50}] Abspielen von Videos (mit Ausgabe der Audiospur)
+	\item[\req{FW 60}] Durchführen einer weiteren Suche in den Ergebnissen einer bereits beendeten Suche
+	\newline
+	\item[\req{F 70}] Wechsel in einen Vollbildmodus für Präsentation
 %	\newline
 %	\item[\req{F 0}] Duplizieren des aktuellen Suchkontextes
 %	\item[\req{F 0}] Wechsel des aktuellen Suchkontextes %unklar
