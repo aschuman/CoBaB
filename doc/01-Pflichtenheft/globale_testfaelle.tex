@@ -2,6 +2,7 @@
 Zum Testen während der Entwicklung und zum Durchspielen der Testszenarien werden mindestens nachfolgende Testdaten benötigt:
 \begin{itemize}
 	\item ein Bilddatensatz (mit mehreren Bildern und mindestens einem annotiertem Bild)
+	\item ein Bilddatensatz enthält ein Foto mit realem Motiv
 	\item ein Datensatz mit mindestens einem Video aus Einzelbildern
 	\item ein Suchverfahren, das eine beliebige Sortierung als Suchergebnis zurück gibt
 	\item ein weiteres Testsuchverfahren, dass eine alphabetische Sortierung als Suchergebnis zurück % alphabetisch worin?
@@ -12,13 +13,13 @@ Insbesondere die Schnittstelle zwischen Suchverfahren und Anwendung soll durch d
 Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detail.
 
 \begin{description} %[label=\bfseries /TS \arabic*0/]
-	\item[\req{TF 10}] Grundfunktionalität % Vorgang zu generisch beschrieben; ToDo: bestimmte Datensätze und Verfahren zur konkretisierung spezifizieren und hier verwenden
+	\item[\req{TS 10}] Grundfunktionalität % Vorgang zu generisch beschrieben; ToDo: bestimmte Datensätze und Verfahren zur konkretisierung spezifizieren und hier verwenden
 	\begin{enumerate}
 		\item
 		\begin{description}
-			\item[Vorbedingung] Programm ist startbereit; es wurden weder Datensätze noch Suchverfahren entfernt oder manipuliert
-			\item[Aktion] Benutzer startet Programm (\req{F 10})
-			\item[Nachbedingung] die Startansicht der GUI wird angezeigt; die Bibliothek wird angezeigt (\req{F 80}) und enthält mindestens einen Datensatz
+			\item[Vorbedingung] Das Programm ist startbereit. Es wurden weder Datensätze noch Suchverfahren entfernt oder manipuliert.
+			\item[Aktion] Der Benutzer startet das Programm. (\req{F 10})
+			\item[Nachbedingung] Die Startansicht der GUI wird angezeigt. Die Bibliothek wird angezeigt (\req{F 80}) und enthält mindestens einen Datensatz
 		\end{description}
 		\item
 		\begin{description}
@@ -43,7 +44,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\item
 		\begin{description}
 			\item[Aktion] Der Benutzer linksklickt auf eines der Suchverfahren (\req{F 180})
-			\item[Nachbedingung] Das angezeigte Fenster enthält die Parameter des Suchverfahrens und entsprechende UI-Elemente sie festzulegen
+			\item[Nachbedingung] Das angezeigte Fenster enthält die Parameter des Suchverfahrens und entsprechende UI-Elemente, die ermöglichen sie festzulegen.
 		\end{description}
 		\item
 		\begin{description}
@@ -87,7 +88,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
-	\item[\req{TF 20}] Feedback und Lesezeichen
+	\item[\req{TS 20}] Feedback und Lesezeichen
 	\begin{enumerate}
 		\item
 		\begin{description}
@@ -117,7 +118,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
-	\item[\req{TF 30}] erweiterte Funktionen zu Bilddatensätzen
+	\item[\req{TS 30}] erweiterte Funktionen zu Bilddatensätzen
 	\begin{enumerate}
 		\item
 		\begin{description}
@@ -167,7 +168,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
-	\item[\req{TF 40}] Datensatz zur Bibliothek hinzufügen
+	\item[\req{TS 40}] Datensatz zur Bibliothek hinzufügen
 	\begin{enumerate}
 		\item
 		\begin{description}
@@ -187,7 +188,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
-	\item[\req{TF 60}] Videos aus Einzelbildern anzeigen
+	\item[\req{TS 60}] Videos aus Einzelbildern anzeigen
 	\begin{enumerate}
 		\item
 		\begin{description}
@@ -202,7 +203,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
-	\item[\req{TF 50}] Sprachwahl
+	\item[\req{TS 50}] Sprachwahl
 	\begin{enumerate}
 		\item
 		\begin{description}
@@ -227,7 +228,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
-	\item[\req{TF 60}] weitere Menüpunkte
+	\item[\req{TS 60}] weitere Menüpunkte
 	\begin{enumerate}
 		\item
 		\begin{description}
