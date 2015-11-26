@@ -1,5 +1,15 @@
 % !TeX spellcheck = de_DE_frami
-Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detail.	
+Zum Testen während der Entwicklung und zum Durchspielen der Testszenarien werden mindestens nachfolgende Testdaten benötigt:
+\begin{itemize}
+	\item ein Bilddatensatz (mit mehreren Bildern und mindestens einem annotiertem Bild)
+	\item ein Datensatz mit mindestens einem Video aus Einzelbildern
+	\item ein Suchverfahren, das eine beliebige Sortierung als Suchergebnis zurückgibt
+	\item ein weiteres Testsuchverfahren, dass eine alphabetische Sortierung als Suchergebnis zurück % alphabetisch worin?
+	\item ein Suchverfahren, dass auf eine Annotation des oben geforderten annotierten Bildes anwendbar ist
+\end{itemize}
+Insbesondere die Schnittstelle zwischen Suchverfahren und Anwendung soll durch diese Testdaten überprüft werden.
+
+Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detail.
 
 \begin{description} %[label=\bfseries /TS \arabic*0/]
 	\item[\req{TF 10}] Grundfunktionalität % Vorgang zu generisch beschrieben; ToDo: bestimmte Datensätze und Verfahren zur konkretisierung spezifizieren und hier verwenden
