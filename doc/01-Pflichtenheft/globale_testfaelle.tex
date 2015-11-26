@@ -88,13 +88,33 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
-	\item[\req{TS 20}] Feedback und Lesezeichen
+	\item[\req{TS 20}] Feedback, Chronik und Lesezeichen
 	\begin{enumerate}
 		\item
 		\begin{description}
 			\item[Vorbedingung] Es wurde gerade eine Suche durchgeführt; es werden die Ergebnisse der Suche angezeigt
 			\item[Aktion] Der Benutzer stellt ein positives und ein negatives Feedback für je ein Suchergebnis ein (\req{FW 290})
 			\item[Nachbedingung] Das gegebene Feedback wird in der Übersicht dargestellt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer beendet das Programm (\req{F 20})
+			\item[Nachbedingung] Das Programm wurde beendet
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer startet das Programm erneut (\req{FW 10})
+			\item[Nachbedingung] Die Startansicht der GUI wird angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer wählt den Menüpunkt \enquote{Chronik} (\req{FW 75})
+			\item[Nachbedingung] Die zuletzt beendeten Suchen werden angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer wählt die zuletzt beendete Suche(\req{FW 65}, \req{FW 310})
+			\item[Nachbedingung] Die bereits zuvor angezeigten Suchergebnisse werden in der selben Reihenfolge wieder angezeigt; das zuvor festgelegte Feedback wird wieder angezeigt
 		\end{description}
 		\item
 		\begin{description}
