@@ -3,26 +3,27 @@
 \begin{description}
 	\item[\req{F 10}] Starten des Programms
 	\item[\req{F 20}] Beenden des Programms
-	\item[\req{F 30}] Erkennen verfügbarer Suchverfahren
+	\item[\req{F 30}] Automatisches Erkennen verfügbarer Suchverfahren
 	\item[\req{F 40}] Anzeigen eines Hilfe-Dialogs mit Hinweisen zur Benutzung des Programms
 	\item[\req{F 50}] Anzeigen eines About-Dialogs mit Informationen zum Programm
 	\newline
 %	\item[\req{F 0}] Er\"offnen eines neuen Suchkontexts
 %	\item[\req{F 0}] Er\"offnen eines neuen \glslink{Suchkontext}{Suchkontexts}
-	\item
 	\item[\req{F 60}] Wiederanzeigen der Ergebnisse einer vorherigen Suche (siehe auch \req{F 205})
 	\item[\req{F 70}] Anzeigen einer Übersicht der gespeicherten Suchergebnisse
 	\item[\req{F 80}] Anzeigen einer Bibliothek von Datensätzen
 	\item[\req{F 90}] Hinzufügen von Datensätzen zur Bibliothek
 	\item[\req{F 100}] Ausw\"ahlen eines Datensatzes aus der Bibliothek
 	\item[\req{F 110}] Anzeigen einer Übersicht der Bilder bzw. Videos des gewählten Datensatzes
+	\item[\req{F 115}] Unterstützung der Bildformate JPEG, PNG und BMP
 	\item[\req{F 120}] Anzeigen einer größeren Darstellung eines ausgewählten Bildes bzw. Videos des Datensatzes
-	\item[\req{F 130}] Zoomen und Scrollen in der größeren Darstellung
+	\item[\req{F 130}] Abspielen eines Videos aus Einzelbildern
+	\item[\req{F 135}] Buttons zur Auswahl des vorherigen oder nächsten Bildes
 	\item[\req{F 140}] Ausw\"ahlen eines Bildes bzw. Videos aus den gewählten Datensätzen als Suchvorlage
 	\item[\req{F 150}] Anzeigen annotierter Bildbereiche
 	\item[\req{F 160}] Auswahl eines annotierten Bildbereiches als Suchvorlage
 	\item[\req{F 170}] Einschränkung der Suchvorlage auf einen benutzerdefinierten rechteckigen Bereich (falls keine Annotation gewählt wurde)
-	\item[\req{F 180}] Auswahl eines für ggf. gewählte Annotation geeigneten Suchverfahrens
+	\item[\req{F 180}] Auswahl eines für ggf. gewählte Annotation geeigneten Suchverfahrens per Rechtsklick auf das Bild
 	\item[\req{F 190}] Anzeigen einer Beschreibung für die Suchverfahren
 	\item[\req{F 200}] Festlegen der für das gewählte Suchverfahren spezifischen Parameter
 	\item[\req{F 210}] Anzeigen sämtlicher vorgenommener Einstellungen zur aktuellen Suche, um Überprüfung durch den Benutzer zu ermöglichen
@@ -32,15 +33,16 @@
 	\item[\req{F 240}] Anzeigen einer Fortschrittsanimation während des Suchvorgangs
 	\item[\req{F 250}] Abbrechen der Suche
 	\newline
-	\item[\req{F 260}] Anzeigen einer \"Ubersicht der Suchergebnisse
-	\item[\req{F 270}] Anzeigen einer größeren Darstellung eines ausgewählten Suchergebnisses
-	\item[\req{F 280}] Abspielen eines Videos aus Einzelbildern
-	\item[\req{F 290}] Einstellen eines Feedbacks zu einem Suchergebnis
-	\item[\req{F 300}] \"Ubermitteln des Feedbacks an das Suchverfahren
+	\item[\req{F 260}] Anzeigen einer \"Ubersicht der Suchergebnisse  
+	\item[\req{F 290}] Einstellen eines Feedbacks zu einem Suchergebnis und Starten einer weiteren Suche mit diesem Feedback und dem selben Suchverfahren
+	\item[\req{F 300}]
 	\item[\req{F 310}] nicht-flüchtiges Speichern der Suchergebnisse (siehe auch \req{F 60})
 	\newline
-	\item[\req{F 320}] Unterstützung der Bildformate JPEG, PNG und BMP
-	\item[\req{F 330}] Unterstützung von Videos in Form von Einzelbildern in untert\"utzten Bildformaten
+	\item[\req{F 340}] Es gibt ein Testsuchverfahren, das eine zufällige Sortierung als Suchergebnis zurückgibt
+	\item[\req{F 350}] Ein weiteres Testsuchverfahren gibt eine alphabetische Sortierung als Suchergebnis zurück
+	\item[\req{F 360}] Die Testsuchverfahren \req{F 340} und \req{F350} ermöglichen, das Verhalten der Schnittstelle zwischen Suchalgorithmen und Anwendung zu testen
+	\item[\req{F 370}] Es gibt einen Logger zum Aufzeichnen, Anzeigen und Abspeichern von Informationen, Warnungen, Fehlern und Debugmeldungen.
+	 
 \end{description}
 
 \subsection{Wunschanforderungen}
@@ -53,9 +55,13 @@
 	\item[\req{FW 30}] Abspielen eines Benachrichtigungstons bei Abschluss einer Suche
 	\item[\req{FW 40}] Ein-/Abschalten des Benachrichtigungstons
 	\item[\req{FW 50}] Abspielen von Videos (mit Ausgabe der Audiospur)
-	\item[\req{FW 60}] Durchführen einer weiteren Suche in den Ergebnissen einer bereits beendeten Suche
+	\item[\req{FW 60}] Durchführen einer weiteren Suche in den Ergebnissen einer bereits beendeten Suche mit anderem Suchverfahren \req{F 290}
 	\newline
 	\item[\req{FW 70}] Wechsel in einen Vollbildmodus für Präsentation
+	
+	\item[\req{FW 80}] Zoomen und Scrollen in der größeren Darstellung in der Datensatzauwahl
+	\item[\req{FW 90}] Generierung eines zufälligen oder festgelegten Vorschaubildes für den Datensatz
+	\item[\req{FW 100}] Anzeigen einer größeren Darstellung eines ausgewählten Suchergebnisses
 %	\newline
 %	\item[\req{F 0}] Duplizieren des aktuellen Suchkontextes
 %	\item[\req{F 0}] Wechsel des aktuellen Suchkontextes %unklar
