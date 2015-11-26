@@ -152,7 +152,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer verwendet das Mausrad zum Zoomen und Drag-and-Drop zum Scrollen in der vergrößerten Ansicht (\req{F 130})
+			\item[Aktion] Der Benutzer verwendet das Mausrad zum Zoomen und Drag-and-Drop zum Scrollen in der vergrößerten Ansicht (\req{FW 70}) % Achtung! Wunschanforderung.
 			\item[Nachbedingung] Die vergröerte Ansicht zoomt und scrollt
 		\end{description}
 	\end{enumerate}
@@ -174,6 +174,21 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\begin{description}
 			\item[Aktion] Der Benutzer wählt einen korrekten Datensatz von der Festplatte und bestätigt seine Wahl (\req{F 90})
 			\item[Nachbedingung] der Dialog wird nicht mehr angezeigt; die Liste der gewählten Datensätze enthält den eben gewählten Datensatz
+		\end{description}
+	\end{enumerate}
+
+	\item[\req{TF 60}] Videos aus Einzelbildern anzeigen
+	\begin{enumerate}
+		\item
+		\begin{description}
+			\item[Vorbedingung] es wurde ein Datensatz gewählt, der mindestens ein Video aus Einzelbildern enthält.
+			\item[Aktion] der Benutzer wählt eines der Videos zur Ansicht (\req{F 120})
+			\item[Nachbedingung] ein Videoplayer wird angezeigt; eine Schaltfläche zum Starten des Videos ist verfügbar
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] der Benutzer klickt auf die Schaltfläche zum Starten des Videos (\req{F 280})
+			\item[Nachbedingung] das Video wird abgespielt
 		\end{description}
 	\end{enumerate}
 
