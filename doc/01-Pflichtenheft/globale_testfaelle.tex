@@ -8,17 +8,17 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\begin{description}
 			\item[Vorbedingung] Programm ist startbereit; es wurden weder Datensätze noch Suchverfahren entfernt oder manipuliert
 			\item[Aktion] Benutzer startet Programm (\req{F 10})
-			\item[Nachbedingung] die Startansicht der GUI wird angezeigt; die Bibliothek wird angezeigt (\req{F 70}) und enthält mindestens einen Datensatz
+			\item[Nachbedingung] die Startansicht der GUI wird angezeigt; die Bibliothek wird angezeigt (\req{F 80}) und enthält mindestens einen Datensatz
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer doppelklickt einen Datensatz (\req{F 72})
-			\item[Nachbedingung] Es wird eine Übersicht des Datensatzes angezeigt (\req{F 80})
+			\item[Aktion] Der Benutzer doppelklickt einen Datensatz (\req{F 100})
+			\item[Nachbedingung] Es wird eine Übersicht des Datensatzes angezeigt (\req{F 110})
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer klickt auf ein Bild aus der Übersicht (\req{F 90})
-			\item[Nachbedingung] Das Bild wird groß dargestellt (\req{F 85})
+			\item[Aktion] Der Benutzer klickt auf ein Bild aus der Übersicht (\req{F 140})
+			\item[Nachbedingung] Das Bild wird groß dargestellt (\req{F 120})
 		\end{description}
 		\item
 		\begin{description}
@@ -28,47 +28,47 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\item
 		\begin{description}
 			\item[Aktion] Der Benutzer fährt mit der Maus über ein Suchverfahren
-			\item[Nachbedingung] Es wird eine Beschreibung des Suchverfahrens angezeigt (\req{F 121})
+			\item[Nachbedingung] Es wird eine Beschreibung des Suchverfahrens angezeigt (\req{F 190})
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer linksklickt auf eines der Suchverfahren (\req{F 120})
+			\item[Aktion] Der Benutzer linksklickt auf eines der Suchverfahren (\req{F 180})
 			\item[Nachbedingung] Das angezeigte Fenster enthält die Parameter des Suchverfahrens und entsprechende UI-Elemente sie festzulegen
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer nimmt seine Eingaben vor und bestätigt sie (\req{F 125})
-			\item[Nachbedingung] Es werden die vorgenommenen Einstellungen angezeigt (\req{F 128}); eine Schaltfläche zum Starten der Suche wird angezeigt
+			\item[Aktion] Der Benutzer nimmt seine Eingaben vor und bestätigt sie (\req{F 200})
+			\item[Nachbedingung] Es werden die vorgenommenen Einstellungen angezeigt (\req{F 210}); eine Schaltfläche zum Starten der Suche wird angezeigt
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer startet die Suche (\req{F 130})
-			\item[Nachbedingung] Eine Animation zeigt die Aktivität des Suchverfahrens an (\req{F 140})
+			\item[Aktion] Der Benutzer startet die Suche (\req{F 230})
+			\item[Nachbedingung] Eine Animation zeigt die Aktivität des Suchverfahrens an (\req{F 240})
 		\end{description}
 		\item
 		\begin{description}
 			\item[Aktion] Der Benutzer wartet
-			\item[Nachbedingung] Eine Übersicht über die Ergebnisse der Suche wird angezeigt (\req{F 160})
+			\item[Nachbedingung] Eine Übersicht über die Ergebnisse der Suche wird angezeigt (\req{F 260})
 		\end{description}
 		\item
 		\begin{description}
 			\item[Aktion] Der Benutzer linksklickt auf ein Ergebnis
-			\item[Nachbedingung] Das Ergebnis wird groß dargestellt (\req{F 170})
+			\item[Nachbedingung] Das Ergebnis wird groß dargestellt (\req{F 270})
 		\end{description}
 		\item
 		\begin{description}
 			\item[Aktion] Der Benutzer wählt die Schaltfläche zur Rückkehr
-			\item[Nachbedingung] Es werden wieder die vorgenommenen Einstellungen angezeigt (\req{F 128}); eine Schaltfläche zum Starten der Suche wird angezeigt
+			\item[Nachbedingung] Es werden wieder die vorgenommenen Einstellungen angezeigt (\req{F 210}); eine Schaltfläche zum Starten der Suche wird angezeigt
 		\end{description}
 		\item
 		\begin{description}
 			\item[Aktion] Der Benutzer Startet die Suche erneut
-			\item[Nachbedingung] Eine Animation zeigt die Aktivität des Suchverfahrens an (\req{F 140})
+			\item[Nachbedingung] Eine Animation zeigt die Aktivität des Suchverfahrens an (\req{F 240})
 		\end{description}
 		\item
 		\begin{description}
 			\item[Aktion] Der Benutzer bricht die Suche ab
-			\item[Nachbedingung] Es werden wieder die vorgenommenen Einstellungen angezeigt (\req{F 128}); eine Schaltfläche zum Starten der Suche wird angezeigt
+			\item[Nachbedingung] Es werden wieder die vorgenommenen Einstellungen angezeigt (\req{F 210}); eine Schaltfläche zum Starten der Suche wird angezeigt
 		\end{description}
 		\item
 		\begin{description}
@@ -82,12 +82,12 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\item
 		\begin{description}
 			\item[Vorbedingung] Es wurde gerade eine Suche durchgeführt; es werden die Ergebnisse der Suche angezeigt
-			\item[Aktion] Der Benutzer stellt ein positives und ein negatives Feedback für je ein Suchergebnis ein (\req{FW 190})
+			\item[Aktion] Der Benutzer stellt ein positives und ein negatives Feedback für je ein Suchergebnis ein (\req{FW 290})
 			\item[Nachbedingung] Das gegebene Feedback wird in der Übersicht dargestellt
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer klickt auf die Schaltfläche zum Speichern der Suchergebnisse (\req{F 205}), gibt einen einen Namen für das Lesezeichen ein und beendet anschließend das Programm (\req{F 20})
+			\item[Aktion] Der Benutzer klickt auf die Schaltfläche zum Speichern der Suchergebnisse (\req{F 310}), gibt einen einen Namen für das Lesezeichen ein und beendet anschließend das Programm (\req{F 20})
 			\item[Nachbedingung] Das Programm wurde beendet
 		\end{description}
 		\item
@@ -97,12 +97,12 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer klickt auf die Schaltfläche für das Anzeigen der Lesezeichen (\req{F 61})
+			\item[Aktion] Der Benutzer klickt auf die Schaltfläche für das Anzeigen der Lesezeichen (\req{F 70})
 			\item[Nachbedingung] in der angezeigten Liste ist mindestens das zuvor angelegte Lesezeichen zu finden
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer wählt das zuvor angelegte Lesezeichen (\req{F 60}, \req{F 205})
+			\item[Aktion] Der Benutzer wählt das zuvor angelegte Lesezeichen (\req{F 60}, \req{F 310})
 			\item[Nachbedingung] Die bereits zuvor angezeigten Suchergebnisse werden in der selben Reihenfolge wieder angezeigt; das zuvor festgelegte Feedback wird wieder angezeigt
 		\end{description}
 	\end{enumerate}
@@ -112,47 +112,47 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\item
 		\begin{description}
 			\item[Vorbedingung] Es wurde ein Datensatz (bestehend aus Bildern) gewählt; das Programm zeigt die Übersicht der Bilder des Datensatzes; es ist ein Foto eines realen Motivs im Datensatz vorhanden; das Foto weist annotierte Bildbereiche auf
-			\item[Aktion] Der Benutzer wählt dieses Bild zur vergrößerten Ansicht (\req{F 85})
-			\item[Nachbedingung] das Bild wird in vergrößerter Ansicht angezeigt; es werden die annotierten Bildbereiche angezeigt (\req{F 100})
+			\item[Aktion] Der Benutzer wählt dieses Bild zur vergrößerten Ansicht (\req{F 120})
+			\item[Nachbedingung] das Bild wird in vergrößerter Ansicht angezeigt; es werden die annotierten Bildbereiche angezeigt (\req{F 150})
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer verwendet das Mausrad zum Zoomen und Drag-and-Drop zum Scrollen in der vergrößerten Ansicht (\req{F 86})
+			\item[Aktion] Der Benutzer verwendet das Mausrad zum Zoomen und Drag-and-Drop zum Scrollen in der vergrößerten Ansicht (\req{F 130})
 			\item[Nachbedingung] Die vergröerte Ansicht zoomt und scrollt
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer rechtsklickt auf einen annotierten Bildbereich (\req{F 105})
+			\item[Aktion] Der Benutzer rechtsklickt auf einen annotierten Bildbereich (\req{F 160})
 			\item[Nachbedingung] Es wird ein Kontextmenü angezeigt in dem mindestens ein Suchverfahren zur Auswahl bereitsteht (\req{F 30})
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer linksklickt auf ein Suchverfahren (\req{F 120})
-			\item[Nachbedingung] Es wird der gewählte annotierte Bildbereich angezeigt (\req{F 128}); eine Schaltfläche zur Rückkehr zur Übersicht des Datensatzes wird angezeigt
+			\item[Aktion] Der Benutzer linksklickt auf ein Suchverfahren (\req{F 180})
+			\item[Nachbedingung] Es wird der gewählte annotierte Bildbereich angezeigt (\req{F 210}); eine Schaltfläche zur Rückkehr zur Übersicht des Datensatzes wird angezeigt
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer linksklickt die Schaltfläche zur Rückkehr (\req{F 129})
+			\item[Aktion] Der Benutzer linksklickt die Schaltfläche zur Rückkehr (\req{F 220})
 			\item[Nachbedingung] Das eben gewählte Bild wird in der vergrößerten Ansicht dargestellt
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer wählt das Werkzeug zur Auswahl eines Bildbereiches und wählt per Drag-and-Drop in der vergrößerten Ansicht einen Bildbereich (\req{F 110})
+			\item[Aktion] Der Benutzer wählt das Werkzeug zur Auswahl eines Bildbereiches und wählt per Drag-and-Drop in der vergrößerten Ansicht einen Bildbereich (\req{F 170})
 			\item[Nachbedingung] Der gewählte Bereich wird dargestellt
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer rechtsklickt in den gewählten Bereich und linksklickt auf ein Suchverfahren (\req{F 120})
-			\item[Nachbedingung] Es wird der gewählte Bildbereich angezeigt (\req{F 128}); eine Schaltfläche zur Rückkehr zur Übersicht des Datensatzes wird angezeigt
+			\item[Aktion] Der Benutzer rechtsklickt in den gewählten Bereich und linksklickt auf ein Suchverfahren (\req{F 180})
+			\item[Nachbedingung] Es wird der gewählte Bildbereich angezeigt (\req{F 210}); eine Schaltfläche zur Rückkehr zur Übersicht des Datensatzes wird angezeigt
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer linksklickt die Schaltfläche zur Rückkehr (\req{F 129})
+			\item[Aktion] Der Benutzer linksklickt die Schaltfläche zur Rückkehr (\req{F 220})
 			\item[Nachbedingung] Das eben gewählte Bild wird in der vergrößerten Ansicht dargestellt; der gewählte Bildbereich wird angezeigt
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer verwendet das Mausrad zum Zoomen und Drag-and-Drop zum Scrollen in der vergrößerten Ansicht (\req{F 86})
+			\item[Aktion] Der Benutzer verwendet das Mausrad zum Zoomen und Drag-and-Drop zum Scrollen in der vergrößerten Ansicht (\req{F 130})
 			\item[Nachbedingung] Die vergröerte Ansicht zoomt und scrollt
 		\end{description}
 	\end{enumerate}
@@ -163,16 +163,16 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\begin{description}
 			\item[Vorbedingung] Programm ist startbereit; ein korrekter Datensatz liegt auf der Festplatte; % "korrekt" = ?
 			\item[Aktion] Benutzer startet Programm (\req{F 10})
-			\item[Nachbedingung] Startbildschirm der GUI wird angezeigt; die Bibliothek wird angezeigt (\req{F 70})
+			\item[Nachbedingung] Startbildschirm der GUI wird angezeigt; die Bibliothek wird angezeigt (\req{F 80})
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer klickt die Schaltfläche zum Hinzufügen eines neuen Datensatzes (\req{F 72})
+			\item[Aktion] Der Benutzer klickt die Schaltfläche zum Hinzufügen eines neuen Datensatzes (\req{F 100})
 			\item[Nachbedingung] Ein Dialog der die Auswahl eines Datensatzes von der Festplatte ermöglicht wird angezeigt
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer wählt einen korrekten Datensatz von der Festplatte und bestätigt seine Wahl (\req{F 71})
+			\item[Aktion] Der Benutzer wählt einen korrekten Datensatz von der Festplatte und bestätigt seine Wahl (\req{F 90})
 			\item[Nachbedingung] der Dialog wird nicht mehr angezeigt; die Liste der gewählten Datensätze enthält den eben gewählten Datensatz
 		\end{description}
 	\end{enumerate}
