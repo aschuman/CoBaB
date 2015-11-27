@@ -8,7 +8,7 @@
 \usepackage{graphicx}
 \usepackage{lmodern}
 \usepackage{csquotes}
-%\usepackage[toc]{glossaries}
+\usepackage[toc]{glossaries}
 
 \setlist[enumerate]{itemsep=-2.5mm}
 \setlist[enumerate,2]{label=\arabic*.}
@@ -23,8 +23,10 @@
     linkcolor=black,
     urlcolor=black
 }
-%\makeglossaries
-%\input{glossar.tex}
+
+\renewcommand{\glossarysection}[2][]{}
+\makeglossaries
+\input{glossar.tex}
 
 \begin{document}
 \begin{titlepage}
@@ -79,6 +81,6 @@ Auftraggeber: & Arne Schumann,\\
 \input{entwicklungsumgebung.tex}
 
 \section{Glossar}
-%\printglossaries
+\printglossaries
 
 \end{document}
