@@ -35,24 +35,25 @@ Die Fotoviewer erlaubt das Browsen durch die Fotos des gewählten Datensatzes mi
 \item Videoplayer \newline
 Der Videoplayer ist ähnlich der Foto-Anzeige aufgebaut, zuzüglich üblicher Funktionen zum Abspielen und Pausieren.
 \item Datensatzanzeige \newline
-
+Nach der Auswahl eines Datensatz wird das Inhalt angezeigt. Dem Datensatz entsprechend wird der Fotoviewer oder der Videoplayer integriert, um dem Benuter den Datensatz grafisch anzuzeigen und die Wahl einer Vorlage ermoeglichen.
 \item Ergebnisseanzeige \newline
-
-
+Nachdem die Suche erfolgreich abgeschlossen ist, werden die Ergebnisse in einem Fenster angezeigt. Die Suchergebnisse (Bilder/Videos) werden von meist zutreffend zu weniger zutreffend aufgelistet. Zum Vorschau sind Miniaturbilder vorgesehen.
 %\item Datensatzauswahl \newline
 %Die Datensatzauswahl stellt ein Dialogfenster dar. Hier kann ein Datensatz aus den verfügbaren ausgewählt werden.
 \end{itemize}
-\item FotoViewerManager \newline
-\item VideoplayerManager \newline
-\item Navigation \newline
-\item SuchvorgangManager \newline
-\item ErgebnisseManager \newline
-\item Logger \newline
-
-
 \subsection{Controller}
 \begin{itemize}
-
+\item FotoViewerManager \newline
+Steuert den Fotoviewer und ermöglicht die Auswahl eines Bildbereichs für eine Suche. Außerdem skaliert der FotoViewer zu große Bilder, um diese an die MainMenu-Größe anzupassen. 
+\item VideoplayerManager \newline
+Ähnlich dem FotoViewerManager ist der VideoplayerManager für die korrekte Arbeit des Videoplayer zuständig.
+\item Navigation \newline
+Die Navigation erlaubt dem Benutzer, eine Suchanfrage zu bereiten durch hin-und-her Springen zwischen  GUI-Seiten. Auf jeder Seite bestimmt der Benutzer die verschieden Parameter für die Suche (Suchraum, Suchvorlage, Algorithmen, ...). Am Ende kann der Benutzer die Parameter noch einmal überprüfen und dann die Suche anstoßen.
+\item SuchvorgangManager \newline
+Der Suchvorgangmanager startet oder beendet eine Suchanfrage. Fehlerhafte Suche (korruptiert Daten, Überschreiten der Wartezeit, ..) werden abgebrochen und anschließen werden Fehlermeldungen an den Benutzer gesendet.
+\item ErgebnisseManager \newline
+Diese Komponente sammelt die Suchergebnisse (Bewertung der Bilder/Videos durch den Algorithmus) und sortiert diese absteigend.
+\item Logger \newline
+Der Logger dokumentiert den Verlauf des Programms (Aktivitäten, Suchlaufzeit, Fehlermeldungen, ...). Das Protokoll wird in einer Log-Datei gespeichert nach jedem Beenden des Programms. Prinzipiell ist die Log-Datei nür für Entwickler interessant. Der Benutzer kann jedoch diese Datei mitansehen, in dem er das Programm mit speziellen Argumente startet.
 \end{itemize}
-
 \pagebreak
