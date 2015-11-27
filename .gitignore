@@ -36,3 +36,6 @@
 *.pdf
 *.gz
 *.toc
+*.glo
+*.ist
+*.glsdefs
