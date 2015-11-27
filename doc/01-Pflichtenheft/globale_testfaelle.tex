@@ -2,10 +2,8 @@
 Zum Testen während der Entwicklung und zum Durchspielen der Testszenarien werden mindestens nachfolgende Testdaten benötigt:
 \begin{itemize}
 	\item ein Bilddatensatz (mit mehreren Bildern und mindestens einem annotiertem Bild)
-	\item ein Bilddatensatz enthält ein Foto mit realem Motiv
 	\item ein Datensatz mit mindestens einem Video aus Einzelbildern
-	\item ein Suchverfahren, das eine beliebige Sortierung als Suchergebnis zurück gibt
-	\item ein weiteres Testsuchverfahren, dass eine alphabetische Sortierung als Suchergebnis zurück % alphabetisch worin?
+	\item ein Testsuchverfahren, das eine beliebige Sortierung als Suchergebnis zurück gibt
 	\item ein Suchverfahren, dass auf eine Annotation des oben geforderten annotierten Bildes anwendbar ist
 \end{itemize}
 Insbesondere die Schnittstelle zwischen Suchverfahren und Anwendung soll durch diese Testdaten überprüft werden.
@@ -19,7 +17,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\begin{description}
 			\item[Vorbedingung] Das Programm ist startbereit. Es wurden weder Datensätze noch Suchverfahren entfernt oder manipuliert.
 			\item[Aktion] Der Benutzer startet das Programm. (\req{F 10})
-			\item[Nachbedingung] Die Startansicht der GUI wird angezeigt. Die Bibliothek wird angezeigt (\req{F 80}) und enthält mindestens einen Datensatz
+			\item[Nachbedingung] Die Startansicht der GUI wird angezeigt. Die Bibliothek wird angezeigt (\req{F 80}) und enthält alle Datensätze des Standardordners
 		\end{description}
 		\item
 		\begin{description}
@@ -64,7 +62,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\item
 		\begin{description}
 			\item[Aktion] Der Benutzer linksklickt auf ein Ergebnis
-			\item[Nachbedingung] Das Ergebnis wird groß dargestellt (\req{F 270})
+			\item[Nachbedingung] Das Ergebnis wird groß dargestellt (\req{FW 100})
 		\end{description}
 		\item
 		\begin{description}
@@ -73,7 +71,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer Startet die Suche erneut
+			\item[Aktion] Der Benutzer startet die Suche erneut
 			\item[Nachbedingung] Eine Animation zeigt die Aktivität des Suchverfahrens an (\req{F 240})
 		\end{description}
 		\item

@@ -9,10 +9,7 @@
 	\newline
 %	\item[\req{F 0}] Er\"offnen eines neuen Suchkontexts
 %	\item[\req{F 0}] Er\"offnen eines neuen \glslink{Suchkontext}{Suchkontexts}
-	\item[\req{F 60}] Wiederanzeigen der Ergebnisse einer gespeicherten vergangenen Suche (siehe auch \req{F 310})
-	\item[\req{F 65}] Wiederanzeigen der Ergebnisse zuletzt beendeter Suchen (siehe auch \req{F 315})
-	\item[\req{F 70}] Anzeigen einer Übersicht der gespeicherten Suchergebnisse
-	\item[\req{F 75}] Anzeigen einer Übersicht der Ergebnisse zuletzt beendeter Suchen
+ 
 	\item[\req{F 80}] Anzeigen einer Bibliothek von Datensätzen, wie in Abbildung \ref{fig:bibliothek} zu sehen ist
 	\item[\req{F 90}] Hinzufügen von Datensätzen zur Bibliothek, wie in Abbildung \ref{fig:filechooser} zu sehen ist
 	\item[\req{F 100}] Ausw\"ahlen eines Datensatzes aus der Bibliothek
@@ -33,12 +30,11 @@
 	\newline
 	\item[\req{F 230}] Starten der Suche
 	\item[\req{F 240}] Anzeigen einer Fortschrittsanimation während des Suchvorgangs
-	\item[\req{F 250}] Abbrechen der Suche
+
 	\newline
 	\item[\req{F 260}] Anzeigen einer \"Ubersicht der Suchergebnisse, wie in Abbildung \ref{fig:suchergebnisse}
 	\item[\req{F 290}] Einstellen eines Feedbacks zu einem Suchergebnis und Starten einer weiteren Suche mit diesem Feedback und dem selben Suchverfahren
-	\item[\req{F 310}] nicht-flüchtiges Speichern der Suchergebnisse (siehe auch \req{F 60})
-	\item[\req{F 315}] automatisches nicht-flüchtiges Speichern der letzten Suchergebnisse (siehe auch \req{F 65})
+	
 	\item[\req{F 320}] Loggen von Informationen, Warnungen, Fehlern und Debugmeldungen
 	 
 \end{description}
@@ -52,7 +48,7 @@
 	\newline
 	\item[\req{FW 30}] Abspielen eines Benachrichtigungstons bei Abschluss einer Suche
 	\item[\req{FW 40}] Ein-/Abschalten des Benachrichtigungstons
-	\item[\req{FW 50}] Abspielen von Videos (mit Ausgabe der Audiospur)
+	\item[\req{FW 50}] Abspielen von Videos aus Videodateien (mit Ausgabe der Audiospur)
 	\item[\req{FW 60}] Durchführen einer weiteren Suche in den Ergebnissen einer bereits beendeten Suche mit anderem Suchverfahren \req{F 290}
 	\newline
 	\item[\req{FW 70}] Wechsel in einen Vollbildmodus für Präsentation
@@ -60,11 +56,15 @@
 	\item[\req{FW 80}] Zoomen und Scrollen in der größeren Darstellung in der Datensatzauswahl
 	\item[\req{FW 90}] Generierung eines zufälligen oder festgelegten Vorschaubildes für den Datensatz
 	\item[\req{FW 100}] Anzeigen einer größeren Darstellung eines ausgewählten Suchergebnisses
-%	\newline
-%	\item[\req{F 0}] Duplizieren des aktuellen Suchkontextes
-%	\item[\req{F 0}] Wechsel des aktuellen Suchkontextes %unklar
-%	\item[\req{F 0}] nicht-fl\"uchtiges Speichern des Suchkontexts
-%	\item[\req{F 0}] Laden eines gespeicherten Suchkontextes
-%	\item[\req{F 0}] Verkn\"upfen (bilden von Vereinigungs- oder Schnittmenge) von Suchergebnissen verschiedener Suchkontexte
+	
+	\item[\req{F 310}] nicht-flüchtiges Speichern der Lesezeichen (siehe auch \req{F 60})
+	\item[\req{F 315}] automatisches nicht-flüchtiges Speichern der Chronik (siehe auch \req{F 65})
+	\item[\req{FW 70}] Anzeigen einer Übersicht der Lesezeichen
+	\item[\req{FW 75}] Anzeigen einer Übersicht der Chronik
+	\item[\req{FW 60}] Wiederanzeigen der Ergebnisse eines Lesezeichens (siehe auch \req{F 310})
+	\item[\req{FW 65}] Wiederanzeigen der Ergebnisse der Chronik (siehe auch \req{F 315})
+	
+	\item[\req{F 250}] Abbrechen der Suche mit Weiterführung der Oberfläche
+	\item[\req{FW 110}] Festlegung eines Wertes zwischen 0 und 10 als Feedback
 \end{description}
 \pagebreak
