@@ -1,5 +1,11 @@
+\begin{figure}
 \includegraphics[width=1\linewidth]{img/SystemModell}
-Die Grundstruktur des Programm folgt dem Prinzip der MVC-Architektur. Die Unterteilung der Submodule in Modell, View und Controller soll eine leichte Modifikation und Erweiterung unter anderen Platformen ermöglichen.
+\caption{Systemmodell}
+\label{fig:systemmodell}
+\end{figure}
+\vspace{10pt}
+
+Die Grundstruktur des Programm folgt dem Prinzip der MVC-Architektur. Die Unterteilung der Submodule in Model, View und Controller ermöglicht eine leichte Modifikation und Erweiterung.
 
 \begin{itemize}
 \item Datensatz\newline
@@ -7,7 +13,7 @@ Die Bilder und Videos bilden eine Grundlage der Anwendung, außerdem werden auch
 \item Datensatzschnittstelle\newline
 Die Datensatzschnittstelle bietet sowohl der Anwendung als auch den Suchverfahren einen einheitlichen Zugriff auf die hinterlegten Daten. Diese Schnittstelle wird von der Datensatzkomponente implementiert.
 \item Suchalgorithmen\newline
-Verschiedene austauschbare inhaltsbasiert Suchalgorithmen. Unter eine wohldefinierte Schnitstelle kann CoBaB die Algorithmen verwenden.
+Verschiedene austauschbare inhaltsbasierte Suchalgorithmen. Unter einer wohldefinierten Schnitstelle kann CoBaB die Algorithmen verwenden.
 \item Suchschnittstelle\newline
 Die Suchschnittstelle ermöglicht eine einheitliche Verwendung der Suchalgorithmen.
 \end{itemize}
@@ -27,33 +33,33 @@ Der Benutzer kann sich die letzten Suchergebnisse anzeigen lassen und außerdem 
 \subsection{View}
 \begin{itemize}
 \item Mainwindow \newline
-Das Mainwindow ist beim Starten des Programms zu sehen. Anfangs ist nur eine voreingestellte Auswahl an Datensätzen zu sehen.Jedes mal beim erneuten Öffnen werden die zuletzt genutzten Datensätze angezeigt. Man kann entweder einen Datensatz aus den angezeigten wählen oder über einen Auswahl-Dialog einen neuen suchen.
+Das Mainwindow ist beim Starten des Programms zu sehen. Anfangs ist nur eine voreingestellte Auswahl an Datensätzen zu sehen. Jedes mal beim erneuten Öffnen werden die zuletzt genutzten Datensätze angezeigt. Man kann entweder einen Datensatz aus den angezeigten wählen oder über einen Auswahl-Dialog einen neuen suchen.
 \item Menü-Anzeige \newline
-Das Menü beinhaltet Bequemlichkeitsfunktionen wie \textbf{Datei}, wo zusätzliche Das Beenden des Programms und die Datensatzauswahl ermöglicht ist, \textbf{Sprachauswahl}, \textbf{Hilfe}, wo es Informationen über das Programm gibt oder Anweisungen zum Benutzen der Anwendung, \textbf{Chronik} mit gespeicherten früheren Suchen, \textbf{Lesezeichen}, die der Benutzer selbst aus seinen Suchergebnissen herstellt.
+Das Menü beinhaltet Bequemlichkeitsfunktionen wie \textbf{Datei}, wo zusätzliche das Beenden des Programms und die Datensatzauswahl ermöglicht wird, \textbf{Sprachauswahl}, \textbf{Hilfe}, wo es Informationen über das Programm gibt oder Anweisungen zum Benutzen der Anwendung, \textbf{Chronik} mit gespeicherten früheren Suchen, \textbf{Lesezeichen}, die der Benutzer selbst aus seinen Suchergebnissen erstellt.
 \item Fotoviewer \newline
-Die Fotoviewer erlaubt das Browsen durch die Fotos des gewählten Datensatzes mit bekannten Funktionen wie \enquote{voriges}, \enquote{nächstes}, Zoom und Vollbildmodus. Es gibt zusätzlich eine Option zum Wählen eines bestimmten Bereichs des Bildes. Durch einen Rechtsklick bestimmt man das Suchverfahren, das auf das Foto angewendet wird.
+Der Fotoviewer erlaubt das Browsen durch die Fotos des gewählten Datensatzes mit bekannten Funktionen wie \enquote{vorheriges}, \enquote{nächstes}, Zoom und Vollbildmodus. Es gibt zusätzlich eine Option zum Wählen eines bestimmten Bereichs des Bildes. Durch einen Rechtsklick bestimmt man das Suchverfahren, das auf das Foto angewendet wird.
 \item Videoplayer \newline
-Der Videoplayer ist ähnlich der Foto-Anzeige aufgebaut, zuzüglich üblicher Funktionen zum Abspielen und Pausieren.
+Der Videoplayer ist ähnlich dem Fotoviewer aufgebaut, zuzüglich üblicher Funktionen zum Abspielen und Pausieren.
 \item Datensatzanzeige \newline
-Nach der Auswahl eines Datensatz wird das Inhalt angezeigt. Dem Datensatz entsprechend wird der Fotoviewer oder der Videoplayer integriert, um dem Benuter den Datensatz grafisch anzuzeigen und die Wahl einer Vorlage ermoeglichen.
-\item Ergebnisseanzeige \newline
-Nachdem die Suche erfolgreich abgeschlossen ist, werden die Ergebnisse in einem Fenster angezeigt. Die Suchergebnisse (Bilder/Videos) werden von meist zutreffend zu weniger zutreffend aufgelistet. Zum Vorschau sind Miniaturbilder vorgesehen.
+Nach der Auswahl eines Datensatz wird der Inhalt angezeigt. Dem Datensatz entsprechend wird der Fotoviewer oder der Videoplayer integriert, um dem Benuter den Datensatz grafisch anzuzeigen und die Wahl einer Vorlage zu ermöglichen.
+\item Ergebnisanzeige \newline
+Nachdem die Suche erfolgreich abgeschlossen ist, werden die Ergebnisse in einem Fenster angezeigt. Die Suchergebnisse (Bilder/Videos) werden von meist zutreffend zu weniger zutreffend aufgelistet. Zur Vorschau sind Miniaturbilder vorgesehen.
 %\item Datensatzauswahl \newline
 %Die Datensatzauswahl stellt ein Dialogfenster dar. Hier kann ein Datensatz aus den verfügbaren ausgewählt werden.
 \end{itemize}
 \subsection{Controller}
 \begin{itemize}
 \item FotoViewerManager \newline
-Steuert den Fotoviewer und ermöglicht die Auswahl eines Bildbereichs für eine Suche. Außerdem skaliert der FotoViewer zu große Bilder, um diese an die MainMenu-Größe anzupassen. 
-\item VideoplayerManager \newline
-Ähnlich dem FotoViewerManager ist der VideoplayerManager für die korrekte Arbeit des Videoplayer zuständig.
+Steuert den FotoViewer und ermöglicht die Auswahl eines Bildbereichs für eine Suche. Außerdem skaliert der FotoViewer zu große Bilder, um diese an die Größe des FotoViewers anzupassen. 
+\item VideoPlayerManager \newline
+Ähnlich dem FotoViewerManager ist der VideoPlayerManager für die korrekte Arbeit des VideoPlayers zuständig.
 \item Navigation \newline
-Die Navigation erlaubt dem Benutzer, eine Suchanfrage zu bereiten durch hin-und-her Springen zwischen  GUI-Seiten. Auf jeder Seite bestimmt der Benutzer die verschieden Parameter für die Suche (Suchraum, Suchvorlage, Algorithmen, ...). Am Ende kann der Benutzer die Parameter noch einmal überprüfen und dann die Suche anstoßen.
+Die Navigation erlaubt dem Benutzer, eine Suchanfrage durch hin-und-her Springen zwischen GUI-Seiten zu erstellen. Auf jeder Seite bestimmt der Benutzer die verschieden Parameter für die Suche (Suchraum, Suchvorlage, Algorithmen, ...). Am Ende kann der Benutzer die Parameter noch einmal überprüfen und dann die Suche anstoßen.
 \item SuchvorgangManager \newline
-Der Suchvorgangmanager startet oder beendet eine Suchanfrage. Fehlerhafte Suche (korruptiert Daten, Überschreiten der Wartezeit, ..) werden abgebrochen und anschließen werden Fehlermeldungen an den Benutzer gesendet.
-\item ErgebnisseManager \newline
+Der SuchvorgangManager startet oder beendet eine Suchanfrage. Fehlerhafte Suchen (fehlerhafte Daten, Überschreiten der Wartezeit, ...) werden abgebrochen und anschließend werden Fehlermeldungen an den Benutzer gesendet.
+\item ErgebnisManager \newline
 Diese Komponente sammelt die Suchergebnisse (Bewertung der Bilder/Videos durch den Algorithmus) und sortiert diese absteigend.
 \item Logger \newline
-Der Logger dokumentiert den Verlauf des Programms (Aktivitäten, Suchlaufzeit, Fehlermeldungen, ...). Das Protokoll wird in einer Log-Datei gespeichert nach jedem Beenden des Programms. Prinzipiell ist die Log-Datei nür für Entwickler interessant. Der Benutzer kann jedoch diese Datei mitansehen, in dem er das Programm mit speziellen Argumente startet.
+Der Logger dokumentiert den Verlauf des Programms (Aktivitäten, Suchlaufzeit, Fehlermeldungen, ...). Das Protokoll wird nach jedem Beenden des Programms in einer Log-Datei gespeichert. Prinzipiell ist die Log-Datei nur für Entwickler interessant. Der Benutzer kann jedoch diese Datei mitansehen, in dem er das Programm mit speziellen Argumenten startet.
 \end{itemize}
 \pagebreak
