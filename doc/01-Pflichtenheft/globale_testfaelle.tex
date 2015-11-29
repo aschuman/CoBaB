@@ -108,11 +108,16 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\item
 		\begin{description}
 			\item[Aktion] Der Benutzer linksklickt auf ein Suchverfahren (\ref{f:auswahl_suchverfahren})
-			\item[Nachbedingung] Es wird der gewählte annotierte Bildbereich angezeigt (\ref{f:ueberpruefung}); eine Schaltfläche zur Rückkehr zur Übersicht des Datensatzes wird angezeigt
+			\item[Nachbedingung] Es wird die Parameterauswahl angezeigt
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer linksklickt die Schaltfläche zur Rückkehr (\ref{f:einstellungen_nach_ueberpruefung_aendern})
+			\item[Aktion] Der Benutzer wählt seine Parameter und bestätigt sie (\ref{f:parameterwahl})
+			\item[Nachbedingung] Es wird der gewählte annotierte Bildbereich angezeigt (\ref{f:ueberpruefung}); eine Schaltfläche zur Rückkehr zur Parameterauswahl wird angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer linksklickt die Schaltfläche zur Rückkehr zweimal (\ref{f:einstellungen_nach_ueberpruefung_aendern})
 			\item[Nachbedingung] Das eben gewählte Bild wird in der vergrößerten Ansicht dargestellt
 		\end{description}
 		\item
@@ -123,11 +128,16 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\item
 		\begin{description}
 			\item[Aktion] Der Benutzer rechtsklickt in den gewählten Bereich und linksklickt auf ein Suchverfahren (\ref{f:auswahl_suchverfahren})
-			\item[Nachbedingung] Es wird der gewählte Bildbereich angezeigt (\ref{f:ueberpruefung}); eine Schaltfläche zur Rückkehr zur Übersicht des Datensatzes wird angezeigt
+			\item[Nachbedingung] Es wird die Parameterauswahl angezeigt
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer linksklickt die Schaltfläche zur Rückkehr (\ref{f:einstellungen_nach_ueberpruefung_aendern})
+			\item[Aktion] Der Benutzer wählt seine Parameter und bestätigt sie (\ref{f:parameterwahl})
+			\item[Nachbedingung] Es wird der gewählte Bildbereich angezeigt (\ref{f:ueberpruefung}); eine Schaltfläche zur Rückkehr zur Parameterauswahl wird angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer linksklickt die Schaltfläche zur Rückkehr zweimal (\ref{f:einstellungen_nach_ueberpruefung_aendern})
 			\item[Nachbedingung] Das eben gewählte Bild wird in der vergrößerten Ansicht dargestellt; der gewählte Bildbereich wird angezeigt
 		\end{description}
 		\item
@@ -148,12 +158,17 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\item
 		\begin{description}
 			\item[Aktion] Der Benutzer klickt die Schaltfläche zum Hinzufügen eines neuen Datensatzes (\ref{f:auswahl_eines_datensatzes})
-			\item[Nachbedingung] Ein \gls{Dialog} der die Auswahl eines Datensatzes von der Festplatte ermöglicht wird angezeigt
+			\item[Nachbedingung] Ein \gls{Dialog}, der die Auswahl eines Datensatzes von der Festplatte ermöglicht, wird angezeigt
 		\end{description}
 		\item
 		\begin{description}
 			\item[Aktion] Der Benutzer wählt einen korrekten Datensatz von der Festplatte und bestätigt seine Wahl (\ref{f:datensatz_hinzufuegen})
-			\item[Nachbedingung] der \gls{Dialog} wird nicht mehr angezeigt; die Liste der gewählten Datensätze enthält den eben gewählten Datensatz
+			\item[Nachbedingung] Der \gls{Dialog} wird nicht mehr angezeigt; es wird eine Übersicht des gewählten Datensatzes angezeigt (\ref{f:uebersicht_anzeigen})
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer linksklickt die Schaltfläche zur Rückkehr
+			\item[Nachbedingung] Die Liste der Bibliothek enthält den eben gewählten Datensatz
 		\end{description}
 	\end{enumerate}
 
