@@ -10,8 +10,9 @@ Insbesondere die Schnittstelle zwischen Suchverfahren und Anwendung soll durch d
 
 Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detail.
 
-\begin{description} %[label=\bfseries /TS \arabic*0/]
-	\item[\req{TS 10}] Grundfunktionalität % Vorgang zu generisch beschrieben; ToDo: bestimmte Datensätze und Verfahren zur konkretisierung spezifizieren und hier verwenden
+\subsection{Testszenarien von Pflichtanforderungen}
+\begin{enumerate} [label=\bfseries /TS \arabic*0/, leftmargin=*]
+	\item Grundfunktionalität % Vorgang zu generisch beschrieben; ToDo: bestimmte Datensätze und Verfahren zur konkretisierung spezifizieren und hier verwenden
 	\begin{enumerate}
 		\item
 		\begin{description}
@@ -86,57 +87,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
-	\item[\req{TS 20}] Feedback, Chronik und Lesezeichen
-	\begin{enumerate}
-		\item
-		\begin{description}
-			\item[Vorbedingung] Es wurde gerade eine Suche durchgeführt; es werden die Ergebnisse der Suche angezeigt
-			\item[Aktion] Der Benutzer stellt ein positives und ein negatives Feedback für je ein Suchergebnis ein (\ref{f:feedback})
-			\item[Nachbedingung] Das gegebene Feedback wird in der Übersicht dargestellt
-		\end{description}
-		\item
-		\begin{description}
-			\item[Aktion] Der Benutzer beendet das Programm (\ref{f:beenden})
-			\item[Nachbedingung] Das Programm wurde beendet
-		\end{description}
-		\item
-		\begin{description}
-			\item[Aktion] Der Benutzer startet das Programm erneut (\ref{f:programmstart})
-			\item[Nachbedingung] Die Startansicht der GUI wird angezeigt
-		\end{description}
-		\item
-		\begin{description}
-			\item[Aktion] Der Benutzer wählt den Menüpunkt \enquote{Chronik} (\ref{fw:chronik_uebersicht})
-			\item[Nachbedingung] Die zuletzt beendeten Suchen werden angezeigt
-		\end{description}
-		\item
-		\begin{description}
-			\item[Aktion] Der Benutzer wählt die zuletzt beendete Suche(\ref{fw:chronik}, \ref{fw:speichern_chronik})
-			\item[Nachbedingung] Die bereits zuvor angezeigten Suchergebnisse werden in der selben Reihenfolge wieder angezeigt; das zuvor festgelegte Feedback wird wieder angezeigt
-		\end{description}
-		\item
-		\begin{description}
-			\item[Aktion] Der Benutzer klickt auf die Schaltfläche zum Speichern der Suchergebnisse (\ref{fw:speichern_lesezeichen}), gibt einen Namen für das Lesezeichen ein und beendet anschließend das Programm (\ref{f:beenden})
-			\item[Nachbedingung] Das Programm wurde beendet
-		\end{description}
-		\item
-		\begin{description}
-			\item[Aktion] Der Benutzer startet das Programm erneut (\ref{f:programmstart})
-			\item[Nachbedingung] Die Startansicht der GUI wird angezeigt
-		\end{description}
-		\item
-		\begin{description}
-			\item[Aktion] Der Benutzer klickt auf die Schaltfläche für das Anzeigen der Lesezeichen (\ref{fw:lesezeichen_uebersicht})
-			\item[Nachbedingung] in der angezeigten Liste ist mindestens das zuvor angelegte Lesezeichen zu finden
-		\end{description}
-		\item
-		\begin{description}
-			\item[Aktion] Der Benutzer wählt das zuvor angelegte Lesezeichen (\ref{fw:lesezeichen}, \ref{fw:speichern_lesezeichen})
-			\item[Nachbedingung] Die bereits zuvor angezeigten Suchergebnisse werden in der selben Reihenfolge wieder angezeigt; das zuvor festgelegte Feedback wird wieder angezeigt
-		\end{description}
-	\end{enumerate}
-
-	\item[\req{TS 30}] erweiterte Funktionen zu Bilddatensätzen
+	\item erweiterte Funktionen zu Bilddatensätzen
 	\begin{enumerate}
 		\item
 		\begin{description}
@@ -186,7 +137,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
-	\item[\req{TS 40}] Datensatz zur Bibliothek hinzufügen
+	\item Datensatz zur Bibliothek hinzufügen
 	\begin{enumerate}
 		\item
 		\begin{description}
@@ -206,7 +157,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
-	\item[\req{TS 50}] Videos aus Einzelbildern anzeigen
+	\item Videos aus Einzelbildern anzeigen
 	\begin{enumerate}
 		\item
 		\begin{description}
@@ -221,7 +172,75 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
-	\item[\req{TS 60}] Sprachwahl
+	\item weitere Menüpunkte
+	\begin{enumerate}
+		\item
+		\begin{description}
+			\item[Vorbedingung] das Menü ist verfügbar
+			\item[Aktion] der Benutzer wählt über den Menüpunkt ganz rechts \enquote{About} aus (\ref{f:about})
+			\item[Nachbedingung] ein \gls{Dialog} mit Informationen zum Programm wird angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] der Benutzer wählt über den Menüpunkt ganz rechts \enquote{Hilfe} aus (\ref{f:hilfe})
+			\item[Nachbedingung] ein \gls{Dialog} mit Hinweisen zur Benutzung des Programms wird angezeigt
+		\end{description}
+	\end{enumerate}
+\end{enumerate}
+
+\subsection{Testszenarien von Wunschanforderungen}
+\begin{enumerate} [label=\bfseries /TSW \arabic*0/, leftmargin=*]
+	\item Feedback, Chronik und Lesezeichen
+	\begin{enumerate}
+		\item
+		\begin{description}
+			\item[Vorbedingung] Es wurde gerade eine Suche durchgeführt; es werden die Ergebnisse der Suche angezeigt
+			\item[Aktion] Der Benutzer stellt ein positives und ein negatives Feedback für je ein Suchergebnis ein (\ref{f:feedback})
+			\item[Nachbedingung] Das gegebene Feedback wird in der Übersicht dargestellt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer beendet das Programm (\ref{f:beenden})
+			\item[Nachbedingung] Das Programm wurde beendet
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer startet das Programm erneut (\ref{f:programmstart})
+			\item[Nachbedingung] Die Startansicht der GUI wird angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer wählt den Menüpunkt \enquote{Chronik} (\ref{fw:chronik_uebersicht})
+			\item[Nachbedingung] Die zuletzt beendeten Suchen werden angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer wählt die zuletzt beendete Suche(\ref{fw:chronik}, \ref{fw:speichern_chronik})
+			\item[Nachbedingung] Die bereits zuvor angezeigten Suchergebnisse werden in der selben Reihenfolge wieder angezeigt; das zuvor festgelegte Feedback wird wieder angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer klickt auf die Schaltfläche zum Speichern der Suchergebnisse (\ref{fw:speichern_lesezeichen}), gibt einen Namen für das Lesezeichen ein und beendet anschließend das Programm (\ref{f:beenden})
+			\item[Nachbedingung] Das Programm wurde beendet
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer startet das Programm erneut (\ref{f:programmstart})
+			\item[Nachbedingung] Die Startansicht der GUI wird angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer klickt auf die Schaltfläche für das Anzeigen der Lesezeichen (\ref{fw:lesezeichen_uebersicht})
+			\item[Nachbedingung] in der angezeigten Liste ist mindestens das zuvor angelegte Lesezeichen zu finden
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer wählt das zuvor angelegte Lesezeichen (\ref{fw:lesezeichen}, \ref{fw:speichern_lesezeichen})
+			\item[Nachbedingung] Die bereits zuvor angezeigten Suchergebnisse werden in der selben Reihenfolge wieder angezeigt; das zuvor festgelegte Feedback wird wieder angezeigt
+		\end{description}
+	\end{enumerate}
+
+	\item Sprachwahl
 	\begin{enumerate}
 		\item
 		\begin{description}
@@ -245,20 +264,5 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 			\item[Nachbedingung] GUI wird auf Englisch angezeigt (\ref{fw:sprache}); unter dem Menüpunkt \enquote{Sprache} ist nun Englisch als aktuell gewählte Sprache markiert
 		\end{description}
 	\end{enumerate}
-
-	\item[\req{TS 70}] weitere Menüpunkte
-	\begin{enumerate}
-		\item
-		\begin{description}
-			\item[Vorbedingung] das Menü ist verfügbar; deutsch ist die gewählte Sprache (falls \ref{fw:sprache} implementiert)
-			\item[Aktion] der Benutzer wählt über den Menüpunkt ganz rechts \enquote{About} aus (\ref{f:about})
-			\item[Nachbedingung] ein \gls{Dialog} mit Informationen zum Programm wird angezeigt
-		\end{description}
-		\item
-		\begin{description}
-			\item[Aktion] der Benutzer wählt über den Menüpunkt ganz rechts \enquote{Hilfe} aus (\ref{f:hilfe})
-			\item[Nachbedingung] ein \gls{Dialog} mit Hinweisen zur Benutzung des Programms wird angezeigt
-		\end{description}
-	\end{enumerate}
-\end{description}
+\end{enumerate}
 \pagebreak
