@@ -264,5 +264,106 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 			\item[Nachbedingung] GUI wird auf Englisch angezeigt (\ref{fw:sprache}); unter dem Menüpunkt \enquote{Sprache} ist nun Englisch als aktuell gewählte Sprache markiert
 		\end{description}
 	\end{enumerate}
+
+	\item Signalton
+	\begin{enumerate}
+		\item
+		\begin{description}
+			\item[Vorbedingung] Das Programm befindet sich in der Bibliothek; Audioausgabe des Computers ist möglich und eingeschaltet
+			\item[Aktion] Der Benutzer schaltet in den Einstellungen den Signalton ein, falls dieser noch nicht eingeschaltet war \ref{fw:signalton_einaus}
+			\item[Nachbedingung] Die GUI zeigt an, dass der Signalton eingeschaltet ist
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer beendet das Programm (\ref{f:beenden})
+			\item[Nachbedingung] Das Programm ist beendet
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer startet das Programm (\ref{f:programmstart})
+			\item[Nachbedingung] Das Programm zeigt die Bibliothek an
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer lässt sich die eben vorgenommenen Einstellungen bezüglich des Signaltons anzeigen
+			\item[Nachbedingung] Die GUI zeigt an, dass der Signalton eingeschaltet ist
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer wählt einen Datensatz, eine Suchvorlage, einen Algorithmus und die Parameter
+			\item[Nachbedingung] Dem Benutzer werden die gewählten Einstellungen und die Schaltfläche zum Starten der Suche angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer startet die Suche (\ref{f:suche_starten}), bringt das Programm in den Hintergrund und wartet
+			\item[Nachbedingung] Es ist ein Signalton zu hören (\ref{fw:signalton})
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer bringt die GUI in den Vordergrund
+			\item[Nachbedingung] Die Suche ist beendet; die Ergebnisse werden angezeigt (\ref{f:suchergebnisse_anzeigen})
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer kehrt zur Bibliothek zurück
+			\item[Nachbedingung] Die Bibliothek wird angezeigt (\ref{f:bibliothek_anzeigen})
+		\end{description}
+
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer lässt sich die eben vorgenommenen Einstellungen anzeigen
+			\item[Nachbedingung] Die GUI zeigt an, dass der Signalton eingeschaltet ist
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer schaltet den Signalton aus (\ref{fw:signalton_einaus})
+			\item[Nachbedingung] Das Programm ist beendet
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer beendet das Programm (\ref{f:beenden})
+			\item[Nachbedingung] Das Programm ist beendet
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer startet das Programm (\ref{f:programmstart})
+			\item[Nachbedingung] Das Programm zeigt die Bibliothek an
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer lässt sich die eben vorgenommenen Einstellungen bezüglich des Signaltons anzeigen
+			\item[Nachbedingung] Die GUI zeigt an, dass der Signalton ausgeschaltet ist
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer nimmt alle Schritte vor um eine Suche zu starten und wartet
+			\item[Nachbedingung] die Suche ist beendet und die Ergebnisse werden angezeigt; es wird kein Signalton abgespielt
+		\end{description}
+	\end{enumerate}
+
+	\item Videos abspielen
+	\begin{enumerate}
+		\item
+		\begin{description}
+			\item[Vorbedingung] Das Programm zeigt die Übersicht eines Videodatensatzes (Videos in Videoformaten)
+			\item[Aktion] Der Benutzer wählt ein Video aus (\ref{f:anzeigen_groessere_darstellung})
+			\item[Nachbedingung] Das gewählte Video wird im Videoplayer angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer startet das Video (\ref{fw:echte_videos_abspielen})
+			\item[Nachbedingung] Das gewählte Video wird im Videoplayer abgespielt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer rechtsklickt auf das Video und wählt ein Suchverfahren (\ref{f:auswahl_suchverfahren})
+			\item[Nachbedingung] Die Parameterwahl wird angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer wählt die Parameter nach belieben (\ref{f:parameterwahl}) und startet die Suche (\ref{f:suche_starten})
+			\item[Nachbedingung] Das gewählte Video wird angezeigt (nicht abgespielt); die vorgenommenen Einstellungen werden angezeigt (\ref{f:ueberpruefung})
+		\end{description}
+	\end{enumerate}
 \end{enumerate}
 \pagebreak
