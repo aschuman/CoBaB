@@ -79,6 +79,21 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
+	\item Kommandozeile \label{ts:standardordner_übergeben}
+	\begin{enumerate}[leftmargin=0pt]
+		\item
+		\begin{description}
+			\item[Vorbedingung] Das Programm ist startbereit
+			\item[Aktion] Der Benutzer startet das Programm mit einem Pfad als Kommandozeilenargument in der entsprechenden Position
+			\item[Nachbedingung] In der Bibliothek werden die Datensätze, die sich an dem übergebenen Pfad befinden, angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] der Benutzer wählt über den Menüpunkt ganz rechts \enquote{Hilfe} aus (\ref{f:hilfe})
+			\item[Nachbedingung] ein \gls{Dialog} mit Hinweisen zur Benutzung des Programms wird angezeigt
+		\end{description}
+	\end{enumerate}
+
 	\item erweiterte Funktionen zu Bilddatensätzen \label{ts:erweiterte_Funktionen_zu_Bilddatensätzen}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
@@ -136,6 +151,11 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\begin{description}
 			\item[Aktion] Der Benutzer verwendet die Schaltflächen, um zum nächsten und vorherigen Bild zu wechseln (\ref{f:vorheriges_naechstes})
 			\item[Nachbedingung] Das Bild in der größeren Ansicht wechselt vor bzw. zurück entsprechend der durch die Übersicht gegebenen Reihenfolge
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer linksklickt die Schaltfläche zur Rückkehr zur Bibliothek \ref{f:rückkehr_zu_bibliothek}
+			\item[Nachbedingung] Die Bibliothek wird angezeigt
 		\end{description}
 	\end{enumerate}
 
@@ -465,10 +485,10 @@ Funktion & Test \\
 \ref{f:programmstart} & \ref{ts:grundfunktionalitaet} \\
 \ref{f:beenden} & \ref{ts:grundfunktionalitaet} \\
 \ref{f:erkennen_suchverfahren} & \ref{ts:grundfunktionalitaet} \\
-\ref{f:standardordner_übergeben} & -- \\
+\ref{f:standardordner_übergeben} & \ref{ts:standardordner_übergeben} \\
 \ref{f:hilfe} & \ref{ts:weitere_menuepunkte} \\
 \ref{f:about} & \ref{ts:weitere_menuepunkte} \\
-\ref{f:rückkehr_zu_bibliothek} & -- \\
+\ref{f:rückkehr_zu_bibliothek} & \ref{ts:erweiterte_Funktionen_zu_Bilddatensätzen} \\
 \ref{f:bibliothek_anzeigen} & \ref{ts:grundfunktionalitaet} \\
 \ref{f:datensatz_hinzufuegen} & \ref{ts:datensatz_hinzufuegen} \\
 \ref{f:auswahl_eines_datensatzes} & \ref{ts:grundfunktionalitaet} \\
@@ -479,7 +499,6 @@ Funktion & Test \\
 \ref{f:vorheriges_naechstes} & \ref{ts:erweiterte_Funktionen_zu_Bilddatensätzen} \\
 \ref{f:bildauswahl} & \ref{ts:grundfunktionalitaet} \\
 \ref{f:annotation_anzeigen} & \ref{ts:erweiterte_Funktionen_zu_Bilddatensätzen} \\
-\ref{f:annotation_auswaehlen} & \ref{ts:erweiterte_Funktionen_zu_Bilddatensätzen} \\
 \end{tabular}
 \end{minipage}
 \hfill
@@ -487,6 +506,7 @@ Funktion & Test \\
 \begin{tabular}{r | l}
 Funktion & Test \\
 \hline
+\ref{f:annotation_auswaehlen} & \ref{ts:erweiterte_Funktionen_zu_Bilddatensätzen} \\
 \ref{f:bereich_auswaehlen} & \ref{ts:erweiterte_Funktionen_zu_Bilddatensätzen} \\
 \ref{f:auswahl_suchverfahren} & \ref{ts:grundfunktionalitaet} \\
 \ref{f:beschreibung_suchverfahren} & \ref{ts:grundfunktionalitaet} \\
@@ -502,6 +522,7 @@ Funktion & Test \\
 \ref{fw:externe_suchvorlage} & -- \\
 \ref{fw:mehrere_datensaetze_waehlen} & -- \\
 \ref{fw:vorschaubild} & -- \\
+\ref{fw:signalton} & \ref{ts:signalton} \\
 \end{tabular}
 \end{minipage}
 \hfill
@@ -509,7 +530,6 @@ Funktion & Test \\
 \begin{tabular}{r | l}
 Funktion & Test \\
 \hline
-\ref{fw:signalton} & \ref{ts:signalton} \\
 \ref{fw:signalton_einaus} & \ref{ts:signalton} \\
 \ref{fw:echtes_video_abspielen} & \ref{ts:echtes_video_abspielen} \\
 \ref{fw:zehner_feedback} & \ref{ts:zehner_feedback} \\
