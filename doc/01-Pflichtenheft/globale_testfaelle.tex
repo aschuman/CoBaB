@@ -395,5 +395,25 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 			\item[Nachbedingung] Die GUI wird wie zu Beginn des Testszenarios angezeigt
 		\end{description}
 	\end{enumerate}
+
+	\item Zoomen und Scrollen
+	\begin{enumerate}[leftmargin=0pt]
+		\item
+		\begin{description}
+			\item[Vorbedingung] Das Programm zeigt die Übersicht eines Bilddatensatzes; ein Bild ist ausgewählt (\ref{fw:zoom_scroll})
+			\item[Aktion] Der Benutzer rollt das Mausrad vorwärts während sich der Cursor über der größeren Ansicht befindet
+			\item[Nachbedingung] Es wird ein kleinerer Ausschnitt des Bildes größer angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer hält die Rechte Maustaste und bewegt den Cursor im Bereich der größeren Ansicht (\ref{fw:zoom_scroll})
+			\item[Nachbedingung] Das Bild folgt dem Cursor, wodurch andere Bereiche des Bildes sichtbar werden; falls der Rand des gesamten Bildes sichtbar ist verschiebt sich der sichtbare Bereich jedoch nicht über den Rand hinaus
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer rollt das Mausrad rückwärts (\ref{fw:zoom_scroll})
+			\item[Nachbedingung] Es wird wieder ein größerer Ausschnitt des Bildes kleiner angezeigt
+		\end{description}
+	\end{enumerate}
 \end{enumerate}
 \pagebreak
