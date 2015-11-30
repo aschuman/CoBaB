@@ -77,11 +77,6 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer bricht die Suche ab
-			\item[Nachbedingung] Es werden wieder die vorgenommenen Einstellungen angezeigt (\ref{f:ueberpruefung}); eine Schaltfläche zum Starten der Suche wird angezeigt
-		\end{description}
-		\item
-		\begin{description}
 			\item[Aktion] Der Benutzer beendet das Programm über den üblichen Schließen-Button (\ref{f:beenden})
 			\item[Nachbedingung] die GUI ist nicht mehr sichtbar; der Prozess hat terminiert
 		\end{description}
@@ -414,16 +409,53 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 			\item[Aktion] Der Benutzer rollt das Mausrad rückwärts (\ref{fw:zoom_scroll})
 			\item[Nachbedingung] Es wird wieder ein größerer Ausschnitt des Bildes kleiner angezeigt
 		\end{description}
+	\end{enumerate}
 
 	\item Suchergebnisse größer anzeigen
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
 			\item[Vorbedingung] Das Programm zeigt die Übersicht der Ergebnisse einer Suche an
-			\item[Aktion] Der Benutzer wählt ein Ergebnis
+			\item[Aktion] Der Benutzer wählt ein Ergebnis \ref{fw:groesseres_suchergebnis}
 			\item[Nachbedingung] Das Ergebnis wird in einer größeren Ansicht angezeigt
 		\end{description}
-		Hier sind ggf. die Funktionen \ref{f:video_abspielen}, \ref{fw:echtes_video_abspielen} und \ref{fw:zoom_scroll} analog zu deren Testfällen fu überprüfen.
 	\end{enumerate}
+	Falls \ref{fw:groesseres_suchergebnis} implementiert ist, sind hier ggf. die Funktionen \ref{f:video_abspielen}, \ref{fw:echtes_video_abspielen} und \ref{fw:zoom_scroll} analog zu deren Testfällen zu überprüfen.
+
+	\item Suche abbrechen
+	\begin{enumerate}[leftmargin=0pt]
+		\item
+		\begin{description}
+			\item[Vorbedingung] Es wurden alle Einstellungen einer bevorstehenden Suche vorgenommen; Es werden die vorgenommenen Einstellungen angezeigt; eine Schaltfläche zum Starten der Suche wird angezeigt
+			\item[Aktion] Der Benutzer startet die Suche
+			\item[Nachbedingung] Eine Animation zeigt die Aktivität des Suchverfahrens an (\ref{f:fortschrittsanimation})
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer bricht die Suche ab \ref{fw:suche_abbrechen}
+			\item[Nachbedingung] Es werden wieder die vorgenommenen Einstellungen angezeigt; eine Schaltfläche zum Starten der Suche wird angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer startet die Suche \ref{f:suche_starten}
+			\item[Nachbedingung] Eine Animation zeigt die Aktivität des Suchverfahrens an (\ref{f:fortschrittsanimation})
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer wartet
+			\item[Nachbedingung] Die Ergebnisse der Suche werden angezeigt \ref{f:suchergebnisse_anzeigen}
+		\end{description}
+	\end{enumerate}
+
+	\item genaueres Feedback
+	\begin{enumerate}[leftmargin=0pt]
+		\item
+		\begin{description}
+			\item[Vorbedingung] Das Programm zeigt die Übersicht der Ergebnisse einer Suche an; der Benutzer hat die Möglichkeit ein Feedback in Form eines Wertes von 0 bis 10 festzulegen
+			\item[Aktion] Der Benutzer wählt ein Feedback für eines der Ergebnisse \ref{fw:zehner_feedback}
+			\item[Nachbedingung] Das gegebene Feedback wird dargestellt
+		\end{description}
+	\end{enumerate}
+	Falls \ref{fw:zehner_feedback} implementiert ist, ist hier ggf. die Funktionen \ref{fw:lesezeichen} analog zu ihren Testfällen zu überprüfen.
 \end{enumerate}
 \pagebreak
