@@ -356,7 +356,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
-	\item Videos abspielen
+	\item Videos in Videoformaten abspielen
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
@@ -366,7 +366,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer startet das Video (\ref{fw:echte_videos_abspielen})
+			\item[Aktion] Der Benutzer startet das Video (\ref{fw:echtes_video_abspielen})
 			\item[Nachbedingung] Das gewählte Video wird im Videoplayer abgespielt
 		\end{description}
 		\item
@@ -400,8 +400,8 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
-			\item[Vorbedingung] Das Programm zeigt die Übersicht eines Bilddatensatzes; ein Bild ist ausgewählt (\ref{fw:zoom_scroll})
-			\item[Aktion] Der Benutzer rollt das Mausrad vorwärts während sich der Cursor über der größeren Ansicht befindet
+			\item[Vorbedingung] Das Programm zeigt die Übersicht eines Bilddatensatzes; ein Bild ist ausgewählt
+			\item[Aktion] Der Benutzer rollt das Mausrad vorwärts während sich der Cursor über der größeren Ansicht befindet (\ref{fw:zoom_scroll})
 			\item[Nachbedingung] Es wird ein kleinerer Ausschnitt des Bildes größer angezeigt
 		\end{description}
 		\item
@@ -414,6 +414,16 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 			\item[Aktion] Der Benutzer rollt das Mausrad rückwärts (\ref{fw:zoom_scroll})
 			\item[Nachbedingung] Es wird wieder ein größerer Ausschnitt des Bildes kleiner angezeigt
 		\end{description}
+
+	\item Suchergebnisse größer anzeigen
+	\begin{enumerate}[leftmargin=0pt]
+		\item
+		\begin{description}
+			\item[Vorbedingung] Das Programm zeigt die Übersicht der Ergebnisse einer Suche an
+			\item[Aktion] Der Benutzer wählt ein Ergebnis
+			\item[Nachbedingung] Das Ergebnis wird in einer größeren Ansicht angezeigt
+		\end{description}
+		Hier sind ggf. die Funktionen \ref{f:video_abspielen}, \ref{fw:echtes_video_abspielen} und \ref{fw:zoom_scroll} analog zu deren Testfällen fu überprüfen.
 	\end{enumerate}
 \end{enumerate}
 \pagebreak
