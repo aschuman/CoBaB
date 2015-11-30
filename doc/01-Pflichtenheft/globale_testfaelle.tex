@@ -1,4 +1,5 @@
 % !TeX spellcheck = de_DE_frami
+\subsection{Testdaten}
 Zum Testen während der Entwicklung und zum Durchspielen der Testszenarien werden mindestens nachfolgende Testdaten benötigt:
 \begin{itemize}
 	\item ein Bilddatensatz (mit mehreren Bildern und mindestens einem annotiertem Bild)
@@ -8,9 +9,10 @@ Zum Testen während der Entwicklung und zum Durchspielen der Testszenarien werde
 \end{itemize}
 Insbesondere die Schnittstelle zwischen Suchverfahren und Anwendung soll durch diese Testdaten überprüft werden.
 
+\subsection{Testszenarien}
 Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detail.
 
-\subsection{Testszenarien der Pflichtanforderungen}
+\subsubsection{Testszenarien der Pflichtanforderungen}
 \begin{enumerate} [label=\bfseries /TS \arabic*0/, leftmargin=*]
 	\item Grundfunktionalität \label{ts:grundfunktionalitaet}
 	\begin{enumerate}[leftmargin=0pt, itemindent=0pt]
@@ -62,12 +64,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer linksklickt auf ein Ergebnis
-			\item[Nachbedingung] Das Ergebnis wird groß dargestellt (\ref{fw:groesseres_suchergebnis})
-		\end{description}
-		\item
-		\begin{description}
-			\item[Aktion] Der Benutzer wählt die Schaltfläche zur Rückkehr
+			\item[Aktion] Der Benutzer wählt die Schaltfläche zur Rückkehr (\ref{f:einstellungen_nach_ueberpruefung_aendern})
 			\item[Nachbedingung] Es werden wieder die vorgenommenen Einstellungen angezeigt (\ref{f:ueberpruefung}); eine Schaltfläche zum Starten der Suche wird angezeigt
 		\end{description}
 		\item
@@ -77,12 +74,12 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer beendet das Programm über den üblichen Schließen-Button (\ref{f:beenden})
+			\item[Aktion] Der Benutzer beendet das Programm (während der laufenden Suche) über den üblichen Schließen-Button (\ref{f:beenden})
 			\item[Nachbedingung] die GUI ist nicht mehr sichtbar; der Prozess hat terminiert
 		\end{description}
 	\end{enumerate}
 
-	\item erweiterte Funktionen zu Bilddatensätzen
+	\item erweiterte Funktionen zu Bilddatensätzen \label{ts:erweiterte_Funktionen_zu_Bilddatensätzen}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
@@ -162,12 +159,12 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer linksklickt die Schaltfläche zur Rückkehr
+			\item[Aktion] Der Benutzer linksklickt die Schaltfläche zur Rückkehr (\ref{f:einstellungen_nach_ueberpruefung_aendern})
 			\item[Nachbedingung] Die Liste der Bibliothek enthält den eben gewählten Datensatz
 		\end{description}
 	\end{enumerate}
 
-	\item Videos aus Einzelbildern anzeigen
+	\item Videos aus Einzelbildern abspielen \label{ts:video_abspielen}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
@@ -198,7 +195,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\end{enumerate}
 \end{enumerate}
 
-\subsection{Testszenarien der Wunschanforderungen}
+\subsubsection{Testszenarien der Wunschanforderungen}
 \begin{enumerate} [label=\bfseries /TSW \arabic*0/, leftmargin=*]
 	\item Feedback, Chronik und Lesezeichen \label{ts:feedback_chronik_lesezeichen}
 	\begin{enumerate}[leftmargin=0pt]
@@ -351,7 +348,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
-	\item Videos in Videoformaten abspielen
+	\item Videos in Videoformaten abspielen \label{ts:echtes_video_abspielen}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
@@ -376,7 +373,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
-	\item Präsentationsmodus
+	\item Präsentationsmodus \label{ts:präsentation}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
@@ -391,7 +388,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
-	\item Zoomen und Scrollen
+	\item Zoomen und Scrollen \label{ts:zoom_scroll}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
@@ -411,7 +408,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
-	\item Suchergebnisse größer anzeigen
+	\item Suchergebnisse größer anzeigen \label{ts:groesseres_suchergebnis}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
@@ -422,7 +419,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\end{enumerate}
 	Falls \ref{fw:groesseres_suchergebnis} implementiert ist, sind hier ggf. die Funktionen \ref{f:video_abspielen}, \ref{fw:echtes_video_abspielen} und \ref{fw:zoom_scroll} analog zu deren Testfällen zu überprüfen.
 
-	\item Suche abbrechen
+	\item Suche abbrechen \label{ts:suche_abbrechen}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
@@ -442,12 +439,12 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer wartet
+			\item[Aktion] Der Benutzer wartet \label{test}
 			\item[Nachbedingung] Die Ergebnisse der Suche werden angezeigt \ref{f:suchergebnisse_anzeigen}
 		\end{description}
 	\end{enumerate}
 
-	\item genaueres Feedback
+	\item genaueres Feedback \label{ts:zehner_feedback}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
@@ -459,12 +456,77 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	Falls \ref{fw:zehner_feedback} implementiert ist, ist hier ggf. die Funktionen \ref{fw:lesezeichen} analog zu ihren Testfällen zu überprüfen.
 \end{enumerate}
 
-Die folgende Tabelle zeigt, welche Funktion durch welches Testszenario überprüft wird. Dies vereinfacht die Feststellung der Überdeckung.
+\subsection{Testüberdeckung}
+Die folgende Tabelle zeigt, welche Funktion durch welches Testszenario primär überprüft wird. Dies vereinfacht die Feststellung der Überdeckung. \newline \newline
+\begin{minipage}[t]{0.28\textwidth}
 \begin{tabular}{r | l}
+Funktion & Test \\
+\hline
 \ref{f:programmstart} & \ref{ts:grundfunktionalitaet} \\
 \ref{f:beenden} & \ref{ts:grundfunktionalitaet} \\
 \ref{f:erkennen_suchverfahren} & \ref{ts:grundfunktionalitaet} \\
+\ref{f:standardordner_übergeben} & -- \\
 \ref{f:hilfe} & \ref{ts:weitere_menuepunkte} \\
 \ref{f:about} & \ref{ts:weitere_menuepunkte} \\
+\ref{f:rückkehr_zu_bibliothek} & -- \\
+\ref{f:bibliothek_anzeigen} & \ref{ts:grundfunktionalitaet} \\
+\ref{f:datensatz_hinzufuegen} & \ref{ts:datensatz_hinzufuegen} \\
+\ref{f:auswahl_eines_datensatzes} & \ref{ts:grundfunktionalitaet} \\
+\ref{f:uebersicht_anzeigen} & \ref{ts:grundfunktionalitaet} \\
+\ref{f:bildformate} & -- \\
+\ref{f:anzeigen_groessere_darstellung} & \ref{ts:grundfunktionalitaet} \\
+\ref{f:video_abspielen} & \ref{ts:video_abspielen} \\
+\ref{f:vorheriges_naechstes} & \ref{ts:erweiterte_Funktionen_zu_Bilddatensätzen} \\
+\ref{f:bildauswahl} & \ref{ts:grundfunktionalitaet} \\
+\ref{f:annotation_anzeigen} & \ref{ts:erweiterte_Funktionen_zu_Bilddatensätzen} \\
+\ref{f:annotation_auswaehlen} & \ref{ts:erweiterte_Funktionen_zu_Bilddatensätzen} \\
 \end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.28\textwidth}
+\begin{tabular}{r | l}
+Funktion & Test \\
+\hline
+\ref{f:bereich_auswaehlen} & \ref{ts:erweiterte_Funktionen_zu_Bilddatensätzen} \\
+\ref{f:auswahl_suchverfahren} & \ref{ts:grundfunktionalitaet} \\
+\ref{f:beschreibung_suchverfahren} & \ref{ts:grundfunktionalitaet} \\
+\ref{f:parameterwahl} & \ref{ts:grundfunktionalitaet} \\
+\ref{f:ueberpruefung} & \ref{ts:grundfunktionalitaet} \\
+\ref{f:einstellungen_nach_ueberpruefung_aendern} & \ref{ts:erweiterte_Funktionen_zu_Bilddatensätzen} \\
+\ref{f:suche_starten} & \ref{ts:grundfunktionalitaet} \\
+\ref{f:fortschrittsanimation} & \ref{ts:grundfunktionalitaet} \\
+\ref{f:suchergebnisse_anzeigen} & \ref{ts:grundfunktionalitaet} \\
+\ref{f:feedback} & -- \\
+\ref{f:loggen} & -- \\
+\ref{fw:sprache} & \ref{ts:sprachwahl} \\
+\ref{fw:externe_suchvorlage} & -- \\
+\ref{fw:mehrere_datensaetze_waehlen} & -- \\
+\ref{fw:vorschaubild} & -- \\
+\end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.28\textwidth}
+\begin{tabular}{r | l}
+Funktion & Test \\
+\hline
+\ref{fw:signalton} & \ref{ts:signalton} \\
+\ref{fw:signalton_einaus} & \ref{ts:signalton} \\
+\ref{fw:echtes_video_abspielen} & \ref{ts:echtes_video_abspielen} \\
+\ref{fw:zehner_feedback} & \ref{ts:zehner_feedback} \\
+\ref{fw:weitere_suche} & -- \\
+\ref{fw:präsentation} & \ref{ts:präsentation} \\
+\ref{fw:zoom_scroll} & \ref{ts:zoom_scroll} \\
+\ref{fw:groesseres_suchergebnis} & \ref{ts:groesseres_suchergebnis} \\
+\ref{fw:speichern_historie} & -- \\
+\ref{fw:speichern_lesezeichen} & \ref{ts:feedback_chronik_lesezeichen} \\
+\ref{fw:speichern_chronik} & \ref{ts:feedback_chronik_lesezeichen} \\
+\ref{fw:historie_uebersicht} & -- \\
+\ref{fw:lesezeichen_uebersicht} & \ref{ts:feedback_chronik_lesezeichen} \\
+\ref{fw:chronik_uebersicht} & \ref{ts:feedback_chronik_lesezeichen} \\
+\ref{fw:lesezeichen} & \ref{ts:feedback_chronik_lesezeichen} \\
+\ref{fw:chronik} & \ref{ts:feedback_chronik_lesezeichen} \\
+\ref{fw:suche_abbrechen} & \ref{ts:suche_abbrechen} \\
+ &  \\
+\end{tabular}
+\end{minipage}
 \pagebreak

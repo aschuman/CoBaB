@@ -3,20 +3,20 @@
 \begin{enumerate} [label=\bfseries /F \arabic*0/, leftmargin=*]
 	\item Starten des Programms \label{f:programmstart}
 	\item Beenden des Programms \label{f:beenden}
-	\item Programmführung auf deutsch
+	%\item Programmführung auf deutsch % keine Funktion
 	\item Automatisches Erkennen verfügbarer Suchverfahren \label{f:erkennen_suchverfahren}
-	\item Übergeben eines Standardordners für die Bibliotheksdatensätze über die Kommandozeile
+	\item Übergeben eines Standardordners für die Bibliotheksdatensätze über die Kommandozeile \label{f:standardordner_übergeben}
 	\item Anzeigen eines Hilfe-\glslink{Dialog}{Dialogs} mit Hinweisen zur Benutzung des Programms \label{f:hilfe}
 	\item Anzeigen eines About-\glslink{Dialog}{Dialogs} mit Informationen zum Programm \label{f:about}
-	\item Home-Funktion, um zur Bibliothek zurückzukehren
-	\item Zurück-Funktion, um zur vorherigen Seite zurückzukehren
+	\item Rückkehr zur Bibliothek \label{f:rückkehr_zu_bibliothek}
+	%\item Zurück-Funktion, um zur vorherigen Seite zurückzukehren % siehe f:einstellungen_nach_ueberpruefung_aendern
 	\newline
  
 	\item Anzeigen einer Bibliothek von Datensätzen, wie in Abbildung \ref{fig:bibliothek} zu sehen ist \label{f:bibliothek_anzeigen}
 	\item Hinzufügen von Datensätzen zur Bibliothek, wie in Abbildung \ref{fig:filedialog} zu sehen ist \label{f:datensatz_hinzufuegen}
 	\item Ausw\"ahlen eines Datensatzes aus der Bibliothek \label{f:auswahl_eines_datensatzes}
 	\item Anzeigen einer Übersicht der Bilder bzw. Videos des gewählten Datensatzes, wie in Abbildung \ref{fig:fotoanzeiger} zu sehen ist \label{f:uebersicht_anzeigen}
-	\item Unterstützung der Bildformate JPEG, PNG und BMP
+	\item Unterstützung der Bildformate JPEG, PNG und BMP \label{f:bildformate}
 	\item Anzeigen einer größeren Darstellung eines ausgewählten Bildes bzw. Videos des Datensatzes \label{f:anzeigen_groessere_darstellung}
 	\item Abspielen eines Videos aus Einzelbildern \label{f:video_abspielen}
 	\item Auswählen des vorherigen oder nächsten Bildes bzw. Videos für die große Ansicht \label{f:vorheriges_naechstes}
@@ -28,7 +28,7 @@
 	\item Anzeigen einer Beschreibung für die Suchverfahren \label{f:beschreibung_suchverfahren}
 	\item Festlegen der für das gewählte Suchverfahren spezifischen Parameter, wie in Abbildung \ref{fig:parameterauswahl} zu sehen ist \label{f:parameterwahl}
 	\item Anzeigen sämtlicher vorgenommener Einstellungen zur aktuellen Suche, um eine Überprüfung durch den Benutzer zu ermöglichen, wie in Abbildung \ref{fig:überprüfung} zu sehen ist \label{f:ueberpruefung}
-	\item Ändern sämtlicher vorgenommener Einstellungen nach der Überprüfung \label{f:einstellungen_nach_ueberpruefung_aendern}
+	\item Ändern beliebiger zu einer Suche vorgenommener Einstellungen \label{f:einstellungen_nach_ueberpruefung_aendern}
 	\newline
 	\item Starten der Suche \label{f:suche_starten}
 	\item Anzeigen einer Fortschrittsanimation während des Suchvorgangs \label{f:fortschrittsanimation}
@@ -36,7 +36,7 @@
 	\item Anzeigen einer sortierten \"Ubersicht der Suchergebnisse, wie in Abbildung \ref{fig:suchergebnisse} zu sehen ist \label{f:suchergebnisse_anzeigen}
 	\item optionales Einstellen eines Feedbacks zu einem Suchergebnis und Starten einer weiteren Suche mit diesem Feedback und dem selben Suchverfahren \label{f:feedback}
 	
-	\item Loggen von Informationen, Warnungen, Fehlern und Debugmeldungen
+	\item Loggen von Informationen, Warnungen, Fehlern und Debugmeldungen \label{f:loggen}
 	 
 \end{enumerate}
 
@@ -44,8 +44,8 @@
 \begin{enumerate} [label=\bfseries /FW \arabic*0/, leftmargin=*]
 	\item nicht-flüchtige Auswahl der Übersetzungen der \gls{GUI} in Deutsch und Englisch \label{fw:sprache}
 	\newline
-	\item Wählen einer Suchvorlage, die nicht in den gewählten Datensätzen enthalten ist (erweitert \ref{f:bildauswahl})
-	\item Wählen von mehreren Datensätzen, in denen gesucht wird (erweitert \ref{f:auswahl_eines_datensatzes})
+	\item Wählen einer Suchvorlage, die nicht in den gewählten Datensätzen enthalten ist (erweitert \ref{f:bildauswahl}) \label{fw:externe_suchvorlage}
+	\item Wählen von mehreren Datensätzen, in denen gesucht wird (erweitert \ref{f:auswahl_eines_datensatzes}) \label{fw:mehrere_datensaetze_waehlen}
 	\item Generierung eines zufälligen oder festgelegten Vorschaubildes für den Datensatz \label{fw:vorschaubild}
 	\newline
 	\item Abspielen eines Benachrichtigungstons bei Abschluss einer Suche \label{fw:signalton}
@@ -53,8 +53,8 @@
 	\item Abspielen von Videos aus Videodateien (mit Ausgabe der Audiospur) \label{fw:echtes_video_abspielen}
 	\newline
 	\item Festlegung eines Wertes zwischen 0 und 10 als Feedback \label{fw:zehner_feedback}
-	\item Durchführen einer weiteren Suche in den Ergebnissen einer bereits beendeten Suche mit anderem Suchverfahren (siehe auch \ref{f:feedback})
-	\item Duchführen von zwei verschiedenen Suchverfahren nacheinander und Anzeigen der Schnitt- oder Vereinigungsmenge als Ergebnis
+	\item Durchführen einer weiteren Suche in den Ergebnissen einer bereits beendeten Suche mit anderem Suchverfahren (siehe auch \ref{f:feedback}) \label{fw:weitere_suche}
+	%\item Duchführen von zwei verschiedenen Suchverfahren nacheinander und Anzeigen der Schnitt- oder Vereinigungsmenge als Ergebnis % siehe vorherige Funktion
 	\newline
 	\item Wechsel in einen Vollbildmodus für Präsentation \label{fw:präsentation}
 	\item Zoomen und Scrollen in der größeren Darstellung im Fotoanzeiger oder Videoplayer \label{fw:zoom_scroll}
@@ -63,7 +63,7 @@
 	\item nicht-flüchtiges Speichern der zuletzt verwendeten Datensätze \label{fw:speichern_historie}
 	\item nicht-flüchtiges Speichern der Lesezeichen (siehe auch \ref{fw:lesezeichen}) \label{fw:speichern_lesezeichen}
 	\item automatisches nicht-flüchtiges Speichern der Chronik (siehe auch \ref{fw:chronik}) \label{fw:speichern_chronik}
-	\item Anzeigen der Historie der Datensätze (siehe auch \ref{fw:speichern_historie})
+	\item Anzeigen der Historie der Datensätze (siehe auch \ref{fw:speichern_historie}) \label{fw:historie_uebersicht}
 	\item Anzeigen einer Übersicht der Lesezeichen \label{fw:lesezeichen_uebersicht}
 	\item Anzeigen einer Übersicht der Chronik \label{fw:chronik_uebersicht}
 	\item Wiederanzeigen der Ergebnisse eines Lesezeichens (siehe auch \ref{fw:speichern_lesezeichen}) \label{fw:lesezeichen}
