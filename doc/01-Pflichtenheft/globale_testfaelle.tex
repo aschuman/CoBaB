@@ -4,7 +4,7 @@ Zum Testen während der Entwicklung und zum Durchspielen der Testszenarien werde
 	\item ein Bilddatensatz (mit mehreren Bildern und mindestens einem annotiertem Bild)
 	\item ein Datensatz mit mindestens einem Video aus Einzelbildern
 	\item ein Testsuchverfahren, das eine beliebige Sortierung als Suchergebnis zurück gibt
-	\item ein Suchverfahren, dass auf eine Annotation des oben geforderten annotierten Bildes anwendbar ist
+	\item ein Suchverfahren, das auf eine Annotation des oben geforderten annotierten Bildes anwendbar ist
 \end{itemize}
 Insbesondere die Schnittstelle zwischen Suchverfahren und Anwendung soll durch diese Testdaten überprüft werden.
 
@@ -32,8 +32,8 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer rechtsklickt auf einen Bereich des Bildes der nicht annotiert ist
-			\item[Nachbedingung] Es wird ein Kontextmenü angezeigt in dem mindestens ein Suchverfahren zur Auswahl bereitsteht (\ref{f:erkennen_suchverfahren})
+			\item[Aktion] Der Benutzer rechtsklickt auf einen Bereich des Bildes, der nicht annotiert ist
+			\item[Nachbedingung] Es wird ein Kontextmenü angezeigt, in dem mindestens ein Suchverfahren zur Auswahl bereitsteht (\ref{f:erkennen_suchverfahren})
 		\end{description}
 		\item
 		\begin{description}
@@ -98,7 +98,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\item
 		\begin{description}
 			\item[Aktion] Der Benutzer kehrt zum annotierten Bild zurück; der Benutzer rechtsklickt auf einen annotierten Bildbereich (\ref{f:annotation_auswaehlen})
-			\item[Nachbedingung] Es wird ein Kontextmenü angezeigt in dem mindestens ein Suchverfahren zur Auswahl bereitsteht (\ref{f:erkennen_suchverfahren})
+			\item[Nachbedingung] Es wird ein Kontextmenü angezeigt, in dem mindestens ein Suchverfahren zur Auswahl bereitsteht (\ref{f:erkennen_suchverfahren})
 		\end{description}
 		\item
 		\begin{description}
@@ -146,7 +146,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
-			\item[Vorbedingung] Programm ist startbereit; ein korrekter Datensatz liegt auf der Festplatte; % "korrekt" = ?
+			\item[Vorbedingung] Programm ist startbereit; ein korrekter Datensatz liegt auf der Festplatte % "korrekt" = ?
 			\item[Aktion] Benutzer startet Programm (\ref{f:programmstart})
 			\item[Nachbedingung] Startbildschirm der GUI wird angezeigt; die Bibliothek wird angezeigt (\ref{f:bibliothek_anzeigen})
 		\end{description}
@@ -327,7 +327,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\item
 		\begin{description}
 			\item[Aktion] Der Benutzer schaltet den Signalton aus (\ref{fw:signalton_einaus})
-			\item[Nachbedingung] Das Programm ist beendet
+			\item[Nachbedingung] Die GUI zeigt an, dass der Signalton ausgeschaltet ist
 		\end{description}
 		\item
 		\begin{description}
@@ -346,7 +346,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer nimmt alle Schritte vor um eine Suche zu starten und wartet
+			\item[Aktion] Der Benutzer nimmt alle Schritte vor, um eine Suche zu starten und wartet
 			\item[Nachbedingung] die Suche ist beendet und die Ergebnisse werden angezeigt; es wird kein Signalton abgespielt
 		\end{description}
 	\end{enumerate}
@@ -366,12 +366,12 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer rechtsklickt auf das Video und wählt ein Suchverfahren (\ref{f:auswahl_suchverfahren})
+			\item[Aktion] Der Benutzer pausiert das Video, rechtsklickt in das Video und wählt ein Suchverfahren (\ref{f:auswahl_suchverfahren})
 			\item[Nachbedingung] Die Parameterwahl wird angezeigt
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer wählt die Parameter nach belieben (\ref{f:parameterwahl}) und startet die Suche (\ref{f:suche_starten})
+			\item[Aktion] Der Benutzer wählt die Parameter nach Belieben (\ref{f:parameterwahl}) und startet die Suche (\ref{f:suche_starten})
 			\item[Nachbedingung] Das gewählte Video wird angezeigt (nicht abgespielt); die vorgenommenen Einstellungen werden angezeigt (\ref{f:ueberpruefung})
 		\end{description}
 	\end{enumerate}
@@ -380,14 +380,14 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
-			\item[Vorbedingung]Das Programm zeigt die Bibliothek; die GUI befindet sich nicht im Präsentationsmodus
-			\item[Aktion] Der Benutzer startet den Präsentationsmodus über das Menü (\ref{fw:präsentation})ss
-			\item[Nachbedingung] Die GUI wird als Vollbild angezeigt; die Option den Vollbildmodus zu beenden ist verfügbar
+			\item[Vorbedingung]Das Programm ist startberteit
+			\item[Aktion] Der Benutzer startet das Programm mit einem speziellen Kommandozeilenparameter
+			\item[Nachbedingung] Das Programm ist im Präsentationsmodus, die GUI wird als Vollbild angezeigt (\ref{fw:präsentation})
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer beendet den Vollbildmodus
-			\item[Nachbedingung] Die GUI wird wie zu Beginn des Testszenarios angezeigt
+			\item[Aktion] Der Benutzer beendet den Vollbildmodus mit einem Tastenkürzel
+			\item[Nachbedingung] Die GUI wird im normalen Modus angezeigt
 		\end{description}
 	\end{enumerate}
 
@@ -396,13 +396,13 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\item
 		\begin{description}
 			\item[Vorbedingung] Das Programm zeigt die Übersicht eines Bilddatensatzes; ein Bild ist ausgewählt
-			\item[Aktion] Der Benutzer rollt das Mausrad vorwärts während sich der Cursor über der größeren Ansicht befindet (\ref{fw:zoom_scroll})
+			\item[Aktion] Der Benutzer rollt das Mausrad vorwärts, während sich der Cursor über der größeren Ansicht befindet (\ref{fw:zoom_scroll})
 			\item[Nachbedingung] Es wird ein kleinerer Ausschnitt des Bildes größer angezeigt
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer hält die Rechte Maustaste und bewegt den Cursor im Bereich der größeren Ansicht (\ref{fw:zoom_scroll})
-			\item[Nachbedingung] Das Bild folgt dem Cursor, wodurch andere Bereiche des Bildes sichtbar werden; falls der Rand des gesamten Bildes sichtbar ist verschiebt sich der sichtbare Bereich jedoch nicht über den Rand hinaus
+			\item[Aktion] Der Benutzer hält die linke Maustaste und bewegt den Cursor im Bereich der größeren Ansicht (\ref{fw:zoom_scroll})
+			\item[Nachbedingung] Das Bild folgt dem Cursor, wodurch andere Bereiche des Bildes sichtbar werden; falls der Rand des gesamten Bildes sichtbar ist, verschiebt sich der sichtbare Bereich jedoch nicht über den Rand hinaus
 		\end{description}
 		\item
 		\begin{description}
@@ -426,7 +426,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
-			\item[Vorbedingung] Es wurden alle Einstellungen einer bevorstehenden Suche vorgenommen; Es werden die vorgenommenen Einstellungen angezeigt; eine Schaltfläche zum Starten der Suche wird angezeigt
+			\item[Vorbedingung] Es wurden alle Einstellungen einer bevorstehenden Suche vorgenommen; es werden die vorgenommenen Einstellungen angezeigt; eine Schaltfläche zum Starten der Suche wird angezeigt
 			\item[Aktion] Der Benutzer startet die Suche
 			\item[Nachbedingung] Eine Animation zeigt die Aktivität des Suchverfahrens an (\ref{f:fortschrittsanimation})
 		\end{description}
@@ -451,7 +451,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
-			\item[Vorbedingung] Das Programm zeigt die Übersicht der Ergebnisse einer Suche an; der Benutzer hat die Möglichkeit ein Feedback in Form eines Wertes von 0 bis 10 festzulegen
+			\item[Vorbedingung] Das Programm zeigt die Übersicht der Ergebnisse einer Suche an; der Benutzer hat die Möglichkeit, ein Feedback in Form eines Wertes von 0 bis 10 festzulegen
 			\item[Aktion] Der Benutzer wählt ein Feedback für eines der Ergebnisse \ref{fw:zehner_feedback}
 			\item[Nachbedingung] Das gegebene Feedback wird dargestellt
 		\end{description}
