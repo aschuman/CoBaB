@@ -12,7 +12,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 
 \subsection{Testszenarien der Pflichtanforderungen}
 \begin{enumerate} [label=\bfseries /TS \arabic*0/, leftmargin=*]
-	\item Grundfunktionalität % Vorgang zu generisch beschrieben; ToDo: bestimmte Datensätze und Verfahren zur konkretisierung spezifizieren und hier verwenden
+	\item Grundfunktionalität \label{ts:grundfunktionalitaet}
 	\begin{enumerate}[leftmargin=0pt, itemindent=0pt]
 		\item
 		\begin{description}
@@ -142,7 +142,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
-	\item Datensatz zur Bibliothek hinzufügen
+	\item Datensatz zur Bibliothek hinzufügen \label{ts:datensatz_hinzufuegen}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
@@ -182,7 +182,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
-	\item weitere Menüpunkte
+	\item weitere Menüpunkte \label{ts:weitere_menuepunkte}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
@@ -200,7 +200,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 
 \subsection{Testszenarien der Wunschanforderungen}
 \begin{enumerate} [label=\bfseries /TSW \arabic*0/, leftmargin=*]
-	\item Feedback, Chronik und Lesezeichen
+	\item Feedback, Chronik und Lesezeichen \label{ts:feedback_chronik_lesezeichen}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
@@ -250,7 +250,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
-	\item Sprachwahl
+	\item Sprachwahl \label{ts:sprachwahl}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
@@ -275,7 +275,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
-	\item Signalton
+	\item Signalton \label{ts:signalton}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
@@ -458,4 +458,13 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\end{enumerate}
 	Falls \ref{fw:zehner_feedback} implementiert ist, ist hier ggf. die Funktionen \ref{fw:lesezeichen} analog zu ihren Testfällen zu überprüfen.
 \end{enumerate}
+
+Die folgende Tabelle zeigt, welche Funktion durch welches Testszenario überprüft wird. Dies vereinfacht die Feststellung der Überdeckung.
+\begin{tabular}{r | l}
+\ref{f:programmstart} & \ref{ts:grundfunktionalitaet} \\
+\ref{f:beenden} & \ref{ts:grundfunktionalitaet} \\
+\ref{f:erkennen_suchverfahren} & \ref{ts:grundfunktionalitaet} \\
+\ref{f:hilfe} & \ref{ts:weitere_menuepunkte} \\
+\ref{f:about} & \ref{ts:weitere_menuepunkte} \\
+\end{tabular}
 \pagebreak
