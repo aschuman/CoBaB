@@ -163,7 +163,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
-			\item[Vorbedingung] Das Programm zeigt die Ergebnisse einer Suche; falls {\ref{fw:weitere_suche} implementiert wurde, ist in der Auswahl des Suchverfahrens der selbe Algorithmus gewählt, der zu den angezeigten Ergebnissen geführt hat
+			\item[Vorbedingung] Das Programm zeigt die Ergebnisse einer Suche; falls \ref{fw:weitere_suche} implementiert wurde, ist in der Auswahl des Suchverfahrens der selbe Algorithmus gewählt, der zu den angezeigten Ergebnissen geführt hat
 			\item[Aktion] Der Benutzer stellt für mehrere Ergebnisse ein Feedback ein (\ref{f:feedback})
 			\item[Nachbedingung] Das eingestellte Feedback wird dargestellt
 		\end{description}
@@ -384,6 +384,21 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
+\item weitere Suche \label{ts:weitere_suche}
+	\begin{enumerate}[leftmargin=0pt]
+		\item
+		\begin{description}
+			\item[Vorbedingung] Das Programm zeigt die Ergebnisse einer Suche
+			\item[Aktion] Der Benutzer stellt für mehrere Ergebnisse ein Feedback ein (\ref{f:feedback})
+			\item[Nachbedingung] Das gegebene Feedback wird dargestellt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer wählt einen anderen Algorithmus für die nächste Suche, startet die Suche (\ref{fw:weitere_suche}) und wartet
+			\item[Nachbedingung] die Ergebnisse werden angezeigt
+		\end{description}
+	\end{enumerate}
+
 	\item Videos in Videoformaten abspielen \label{ts:echtes_video_abspielen}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
@@ -413,7 +428,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
-			\item[Vorbedingung]Das Programm ist startberteit
+			\item[Vorbedingung] Das Programm ist startberteit
 			\item[Aktion] Der Benutzer startet das Programm mit einem speziellen Kommandozeilenparameter
 			\item[Nachbedingung] Das Programm ist im Präsentationsmodus, die GUI wird als Vollbild angezeigt (\ref{fw:präsentation})
 		\end{description}
@@ -563,7 +578,7 @@ Funktion & Test \\
 \hline
 \ref{fw:echtes_video_abspielen} & \ref{ts:echtes_video_abspielen} \\
 \ref{fw:zehner_feedback} & \ref{ts:zehner_feedback} \\
-\ref{fw:weitere_suche} & -- \\
+\ref{fw:weitere_suche} & \ref{ts:weitere_suche} \\
 \ref{fw:präsentation} & \ref{ts:präsentation} \\
 \ref{fw:zoom_scroll} & \ref{ts:zoom_scroll} \\
 \ref{fw:groesseres_suchergebnis} & \ref{ts:groesseres_suchergebnis} \\
@@ -585,5 +600,6 @@ Funktion & Test \\
 Es verbleiben also einige Funktionen, für die kein Testfall formuliert wurde.
 So muss die Unterstützung der in \ref{f:bildformate} festgelegten Bildformate im einzelnen getestet werden.
 Der Logger in \ref{f:loggen} ist für den Benutzer nicht relevant  und hat daher keinen globalen Testfall.
+Falls \ref{fw:vorschaubild} implementiert wurde ist festzustellen, ob in der Bibliothek angemessene Bilder für Bild- und Videdatensätze (ggf. auch Videodatensätze mit Videos in Videoformaten) angezeigt werden.
 
 \pagebreak
