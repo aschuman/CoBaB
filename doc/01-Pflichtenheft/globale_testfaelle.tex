@@ -477,7 +477,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 \end{enumerate}
 
 \subsection{Testüberdeckung}
-Die folgende Tabelle zeigt, welche Funktion durch welches Testszenario primär überprüft wird. Dies vereinfacht die Feststellung der Überdeckung. \newline \newline
+Tabelle \ref{tab:testueberdeckung} zeigt, welche Funktion durch welches Testszenario primär überprüft wird. Dies vereinfacht die Feststellung der Überdeckung. \newline \newline
 \begin{minipage}[t]{0.28\textwidth}
 \begin{tabular}{r | l}
 Funktion & Test \\
@@ -548,7 +548,9 @@ Funktion & Test \\
 \ref{fw:suche_abbrechen} & \ref{ts:suche_abbrechen} \\
  &  \\
 \end{tabular}
-\end{minipage}\newline \newline
+\end{minipage}
+\captionof{table}{Testüberdeckung}
+\label{tab:testueberdeckung}
 Es verbleiben also einige Funktionen, für die kein Testfall formuliert wurde.
 So muss die Unterstützung der in \ref{f:bildformate} festgelegten Bildformate im einzelnen getestet werden.
 Der Logger in \ref{f:loggen} ist für den Benutzer nicht relevant  und hat daher keinen globalen Testfall.
