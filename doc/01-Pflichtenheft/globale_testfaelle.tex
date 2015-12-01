@@ -159,6 +159,22 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
+	\item Feedback und weitere Suche \label{ts:feedback}
+	\begin{enumerate}[leftmargin=0pt]
+		\item
+		\begin{description}
+			\item[Vorbedingung] Das Programm zeigt die Ergebnisse einer Suche; falls {\ref{fw:weitere_suche} implementiert wurde, ist in der Auswahl des Suchverfahrens der selbe Algorithmus gewählt, der zu den angezeigten Ergebnissen geführt hat
+			\item[Aktion] Der Benutzer stellt für mehrere Ergebnisse ein Feedback ein (\ref{f:feedback})
+			\item[Nachbedingung] Das eingestellte Feedback wird dargestellt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer startet über die entsprechende Schaltfläch eine weitere Suche und wartet (\ref{f:feedback})
+			\item[Nachbedingung] Die Ergebnisse werden angezeigt
+		\end{description}
+	\end{enumerate}
+	Es bleibt zu testen, dass sich die Ergebnisse der zweiten im Sinne des Feedbacks verändert haben (oder gleich bleiben), wofür kein Testfall formuliert wird.
+
 	\item Datensatz zur Bibliothek hinzufügen \label{ts:datensatz_hinzufuegen}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
@@ -464,6 +480,21 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
+	\item zusätzliche Datensätze \label{ts:mehrere_datensaetze_waehlen}
+	\begin{enumerate}[leftmargin=0pt]
+		\item
+		\begin{description}
+			\item[Vorbedingung] Das Programm befindet sich in der Parameterwahl.
+			\item[Aktion] Der Benutzer wählt einen weiteren Datensatz für die Suche aus und bestätigt seine eingaben.
+			\item[Nachbedingung] Die Überprüfung wird angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer startet die Suche und wartet
+			\item[Nachbedingung] Die Suchergebnisse werden angezeigt; Elemente des zusätzlich gewählten Datensatzes sind enthalten
+		\end{description}
+	\end{enumerate}
+
 	\item genaueres Feedback \label{ts:zehner_feedback}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
@@ -516,13 +547,13 @@ Funktion & Test \\
 \ref{f:suche_starten} & \ref{ts:grundfunktionalitaet} \\
 \ref{f:fortschrittsanimation} & \ref{ts:grundfunktionalitaet} \\
 \ref{f:suchergebnisse_anzeigen} & \ref{ts:grundfunktionalitaet} \\
-\ref{f:feedback} & -- \\
+\ref{f:feedback} & \ref{ts:feedback} \\
 \ref{f:loggen} & -- \\
 \ref{fw:sprache} & \ref{ts:sprachwahl} \\
-\ref{fw:externe_suchvorlage} & -- \\
-\ref{fw:mehrere_datensaetze_waehlen} & -- \\
+\ref{fw:mehrere_datensaetze_waehlen} & \ref{ts:mehrere_datensaetze_waehlen} \\
 \ref{fw:vorschaubild} & -- \\
 \ref{fw:signalton} & \ref{ts:signalton} \\
+\ref{fw:signalton_einaus} & \ref{ts:signalton} \\
 \end{tabular}
 \end{minipage}
 \hfill
@@ -530,7 +561,6 @@ Funktion & Test \\
 \begin{tabular}{r | l}
 Funktion & Test \\
 \hline
-\ref{fw:signalton_einaus} & \ref{ts:signalton} \\
 \ref{fw:echtes_video_abspielen} & \ref{ts:echtes_video_abspielen} \\
 \ref{fw:zehner_feedback} & \ref{ts:zehner_feedback} \\
 \ref{fw:weitere_suche} & -- \\
@@ -546,6 +576,7 @@ Funktion & Test \\
 \ref{fw:lesezeichen} & \ref{ts:feedback_chronik_lesezeichen} \\
 \ref{fw:chronik} & \ref{ts:feedback_chronik_lesezeichen} \\
 \ref{fw:suche_abbrechen} & \ref{ts:suche_abbrechen} \\
+ &  \\
  &  \\
 \end{tabular}
 \end{minipage}
