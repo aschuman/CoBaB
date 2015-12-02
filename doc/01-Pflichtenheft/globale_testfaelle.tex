@@ -159,6 +159,22 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
+	\item Feedback und weitere Suche \label{ts:feedback}
+	\begin{enumerate}[leftmargin=0pt]
+		\item
+		\begin{description}
+			\item[Vorbedingung] Das Programm zeigt die Ergebnisse einer Suche; falls \ref{fw:weitere_suche} implementiert wurde, ist in der Auswahl des Suchverfahrens der selbe Algorithmus gewählt, der zu den angezeigten Ergebnissen geführt hat
+			\item[Aktion] Der Benutzer stellt für mehrere Ergebnisse ein Feedback ein (\ref{f:feedback})
+			\item[Nachbedingung] Das eingestellte Feedback wird dargestellt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer startet über die entsprechende Schaltfläch eine weitere Suche und wartet (\ref{f:feedback})
+			\item[Nachbedingung] Die Ergebnisse werden angezeigt
+		\end{description}
+	\end{enumerate}
+	Es bleibt zu testen, dass sich die Ergebnisse der zweiten im Sinne des Feedbacks verändert haben (oder gleich bleiben), wofür kein Testfall formuliert wird.
+
 	\item Datensatz zur Bibliothek hinzufügen \label{ts:datensatz_hinzufuegen}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
@@ -217,7 +233,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 
 \subsubsection{Testszenarien der Wunschanforderungen}
 \begin{enumerate} [label=\bfseries /TSW \arabic*0/, leftmargin=*]
-	\item Feedback, Chronik und Lesezeichen \label{ts:feedback_chronik_lesezeichen}
+	\item Feedback, Suchchronik und Lesezeichen \label{ts:feedback_chronik_lesezeichen}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
@@ -264,6 +280,31 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\begin{description}
 			\item[Aktion] Der Benutzer wählt das zuvor angelegte Lesezeichen (\ref{fw:lesezeichen}, \ref{fw:speichern_lesezeichen})
 			\item[Nachbedingung] Die bereits zuvor angezeigten Suchergebnisse werden in der selben Reihenfolge wieder angezeigt; das zuvor festgelegte Feedback wird wieder angezeigt
+		\end{description}
+	\end{enumerate}
+
+	\item Datensatz-Historie \label{ts:historie}
+	\begin{enumerate}[leftmargin=0pt]
+		\item
+		\begin{description}
+			\item[Vorbedingung] Das Programm zeigt die Bibliothek; ein Datensatz befindet sich auf der Festplatte, aber nicht in der Bibliothek
+			\item[Aktion] Der Benutzer wählt diesen Datensatz
+			\item[Nachbedingung] Die Übersicht des Datensatzes wird angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer beendet das Prgramm (\ref{f:beenden})
+			\item[Nachbedingung] Die GUI wird nicht mehr angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer startet das Programm (\ref{f:programmstart})
+			\item[Nachbedingung] Die Bibliothek wird angezeigt; der eben gewählte Datensatz wird in der Historie als zuletzt verwendeter Datensatz angezeigt (\ref{fw:speichern_historie}, \ref{fw:historie_uebersicht})
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer wählt diesen zuletzt verwendeten Datensatz
+			\item[Nachbedingung] Die Übersicht des Datensatzes wird angezeigt
 		\end{description}
 	\end{enumerate}
 
@@ -368,6 +409,21 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
+\item weitere Suche \label{ts:weitere_suche}
+	\begin{enumerate}[leftmargin=0pt]
+		\item
+		\begin{description}
+			\item[Vorbedingung] Das Programm zeigt die Ergebnisse einer Suche
+			\item[Aktion] Der Benutzer stellt für mehrere Ergebnisse ein Feedback ein (\ref{f:feedback})
+			\item[Nachbedingung] Das gegebene Feedback wird dargestellt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer wählt einen anderen Algorithmus für die nächste Suche, startet die Suche (\ref{fw:weitere_suche}) und wartet
+			\item[Nachbedingung] die Ergebnisse werden angezeigt
+		\end{description}
+	\end{enumerate}
+
 	\item Videos in Videoformaten abspielen \label{ts:echtes_video_abspielen}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
@@ -397,7 +453,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
-			\item[Vorbedingung]Das Programm ist startberteit
+			\item[Vorbedingung] Das Programm ist startberteit
 			\item[Aktion] Der Benutzer startet das Programm mit einem speziellen Kommandozeilenparameter
 			\item[Nachbedingung] Das Programm ist im Präsentationsmodus, die GUI wird als Vollbild angezeigt (\ref{fw:präsentation})
 		\end{description}
@@ -464,6 +520,21 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
+	\item zusätzliche Datensätze \label{ts:mehrere_datensaetze_waehlen}
+	\begin{enumerate}[leftmargin=0pt]
+		\item
+		\begin{description}
+			\item[Vorbedingung] Das Programm befindet sich in der Parameterwahl.
+			\item[Aktion] Der Benutzer wählt einen weiteren Datensatz für die Suche aus und bestätigt seine eingaben.
+			\item[Nachbedingung] Die Überprüfung wird angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer startet die Suche und wartet
+			\item[Nachbedingung] Die Suchergebnisse werden angezeigt; Elemente des zusätzlich gewählten Datensatzes sind enthalten
+		\end{description}
+	\end{enumerate}
+
 	\item genaueres Feedback \label{ts:zehner_feedback}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
@@ -477,7 +548,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 \end{enumerate}
 
 \subsection{Testüberdeckung}
-Die folgende Tabelle zeigt, welche Funktion durch welches Testszenario primär überprüft wird. Dies vereinfacht die Feststellung der Überdeckung. \newline \newline
+Tabelle \ref{tab:testueberdeckung} zeigt, welche Funktion durch welches Testszenario primär überprüft wird. Dies vereinfacht die Feststellung der Überdeckung. \newline \newline
 \begin{minipage}[t]{0.28\textwidth}
 \begin{tabular}{r | l}
 Funktion & Test \\
@@ -516,13 +587,13 @@ Funktion & Test \\
 \ref{f:suche_starten} & \ref{ts:grundfunktionalitaet} \\
 \ref{f:fortschrittsanimation} & \ref{ts:grundfunktionalitaet} \\
 \ref{f:suchergebnisse_anzeigen} & \ref{ts:grundfunktionalitaet} \\
-\ref{f:feedback} & -- \\
+\ref{f:feedback} & \ref{ts:feedback} \\
 \ref{f:loggen} & -- \\
 \ref{fw:sprache} & \ref{ts:sprachwahl} \\
-\ref{fw:externe_suchvorlage} & -- \\
-\ref{fw:mehrere_datensaetze_waehlen} & -- \\
+\ref{fw:mehrere_datensaetze_waehlen} & \ref{ts:mehrere_datensaetze_waehlen} \\
 \ref{fw:vorschaubild} & -- \\
 \ref{fw:signalton} & \ref{ts:signalton} \\
+\ref{fw:signalton_einaus} & \ref{ts:signalton} \\
 \end{tabular}
 \end{minipage}
 \hfill
@@ -530,27 +601,30 @@ Funktion & Test \\
 \begin{tabular}{r | l}
 Funktion & Test \\
 \hline
-\ref{fw:signalton_einaus} & \ref{ts:signalton} \\
 \ref{fw:echtes_video_abspielen} & \ref{ts:echtes_video_abspielen} \\
 \ref{fw:zehner_feedback} & \ref{ts:zehner_feedback} \\
-\ref{fw:weitere_suche} & -- \\
+\ref{fw:weitere_suche} & \ref{ts:weitere_suche} \\
 \ref{fw:präsentation} & \ref{ts:präsentation} \\
 \ref{fw:zoom_scroll} & \ref{ts:zoom_scroll} \\
 \ref{fw:groesseres_suchergebnis} & \ref{ts:groesseres_suchergebnis} \\
-\ref{fw:speichern_historie} & -- \\
+\ref{fw:speichern_historie} & \ref{ts:historie} \\
 \ref{fw:speichern_lesezeichen} & \ref{ts:feedback_chronik_lesezeichen} \\
 \ref{fw:speichern_chronik} & \ref{ts:feedback_chronik_lesezeichen} \\
-\ref{fw:historie_uebersicht} & -- \\
+\ref{fw:historie_uebersicht} & \ref{ts:historie} \\
 \ref{fw:lesezeichen_uebersicht} & \ref{ts:feedback_chronik_lesezeichen} \\
 \ref{fw:chronik_uebersicht} & \ref{ts:feedback_chronik_lesezeichen} \\
 \ref{fw:lesezeichen} & \ref{ts:feedback_chronik_lesezeichen} \\
 \ref{fw:chronik} & \ref{ts:feedback_chronik_lesezeichen} \\
 \ref{fw:suche_abbrechen} & \ref{ts:suche_abbrechen} \\
  &  \\
+ &  \\
 \end{tabular}
-\end{minipage}\newline \newline
+\end{minipage}
+\captionof{table}{Testüberdeckung}
+\label{tab:testueberdeckung}
 Es verbleiben also einige Funktionen, für die kein Testfall formuliert wurde.
-Die Unterstützung der in \ref{f:bildformate} festgelegten Bildformate muss im einzelnen getestet werden.
+So muss die Unterstützung der in \ref{f:bildformate} festgelegten Bildformate im einzelnen getestet werden.
 Der Logger in \ref{f:loggen} ist für den Benutzer nicht relevant  und hat daher keinen globalen Testfall.
+Falls \ref{fw:vorschaubild} implementiert wurde ist festzustellen, ob in der Bibliothek angemessene Bilder für Bild- und Videdatensätze (ggf. auch Videodatensätze mit Videos in Videoformaten) angezeigt werden.
 
 \pagebreak
