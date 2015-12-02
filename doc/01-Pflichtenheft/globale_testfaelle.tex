@@ -283,6 +283,31 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 	\end{enumerate}
 
+	\item Datensatz-Historie \label{ts:historie}
+	\begin{enumerate}[leftmargin=0pt]
+		\item
+		\begin{description}
+			\item[Vorbedingung] Das Programm zeigt die Bibliothek; ein Datensatz befindet sich auf der Festplatte, aber nicht in der Bibliothek
+			\item[Aktion] Der Benutzer wählt diesen Datensatz
+			\item[Nachbedingung] Die Übersicht des Datensatzes wird angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer beendet das Prgramm (\ref{f:beenden})
+			\item[Nachbedingung] Die GUI wird nicht mehr angezeigt
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer startet das Programm (\ref{f:programmstart})
+			\item[Nachbedingung] Die Bibliothek wird angezeigt; der eben gewählte Datensatz wird in der Historie als zuletzt verwendeter Datensatz angezeigt (\ref{fw:speichern_historie}, \ref{fw:historie_uebersicht})
+		\end{description}
+		\item
+		\begin{description}
+			\item[Aktion] Der Benutzer wählt diesen zuletzt verwendeten Datensatz
+			\item[Nachbedingung] Die Übersicht des Datensatzes wird angezeigt
+		\end{description}
+	\end{enumerate}
+
 	\item Sprachwahl \label{ts:sprachwahl}
 	\begin{enumerate}[leftmargin=0pt]
 		\item
@@ -582,10 +607,10 @@ Funktion & Test \\
 \ref{fw:präsentation} & \ref{ts:präsentation} \\
 \ref{fw:zoom_scroll} & \ref{ts:zoom_scroll} \\
 \ref{fw:groesseres_suchergebnis} & \ref{ts:groesseres_suchergebnis} \\
-\ref{fw:speichern_historie} & -- \\
+\ref{fw:speichern_historie} & \ref{ts:historie} \\
 \ref{fw:speichern_lesezeichen} & \ref{ts:feedback_chronik_lesezeichen} \\
 \ref{fw:speichern_chronik} & \ref{ts:feedback_chronik_lesezeichen} \\
-\ref{fw:historie_uebersicht} & -- \\
+\ref{fw:historie_uebersicht} & \ref{ts:historie} \\
 \ref{fw:lesezeichen_uebersicht} & \ref{ts:feedback_chronik_lesezeichen} \\
 \ref{fw:chronik_uebersicht} & \ref{ts:feedback_chronik_lesezeichen} \\
 \ref{fw:lesezeichen} & \ref{ts:feedback_chronik_lesezeichen} \\
