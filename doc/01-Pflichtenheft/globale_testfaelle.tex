@@ -18,9 +18,9 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\begin{enumerate}[leftmargin=0pt, itemindent=0pt]
 		\item
 		\begin{description}
-			\item[Vorbedingung] Das Programm ist startbereit. Es wurden weder Datensätze noch \gls{Suchverfahren} entfernt oder manipuliert.
-			\item[Aktion] Der Benutzer startet das Programm. (\ref{f:programmstart})
-			\item[Nachbedingung] Die Startansicht der \gls{GUI} wird angezeigt. Die Bibliothek wird angezeigt (\ref{f:bibliothek_anzeigen}) und enthält alle Datensätze des Standardordners
+			\item[Vorbedingung] Das Programm ist startbereit; es wurden weder Datensätze noch \gls{Suchverfahren} entfernt oder manipuliert
+			\item[Aktion] Der Benutzer startet das Programm (\ref{f:programmstart})
+			\item[Nachbedingung] Die Startansicht der \gls{GUI} wird angezeigt; die Bibliothek wird angezeigt (\ref{f:bibliothek_anzeigen}) und enthält alle Datensätze des Standardordners
 		\end{description}
 		\item
 		\begin{description}
@@ -45,7 +45,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\item
 		\begin{description}
 			\item[Aktion] Der Benutzer linksklickt auf eines der \gls{Suchverfahren} (\ref{f:auswahl_suchverfahren})
-			\item[Nachbedingung] Das angezeigte Fenster enthält die Parameter des \glslink{Suchverfahren}{Suchverfahrens} und entsprechende UI-Elemente, die ermöglichen sie festzulegen.
+			\item[Nachbedingung] Das angezeigte Fenster enthält die Parameter des \glslink{Suchverfahren}{Suchverfahrens} und entsprechende UI-Elemente, die ermöglichen sie festzulegen
 		\end{description}
 		\item
 		\begin{description}
@@ -89,8 +89,8 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] der Benutzer wählt über den Menüpunkt ganz rechts \enquote{Hilfe} aus (\ref{f:hilfe})
-			\item[Nachbedingung] ein \gls{Dialog} mit Hinweisen zur Benutzung des Programms wird angezeigt
+			\item[Aktion] Der Benutzer wählt über den Menüpunkt ganz rechts \enquote{Hilfe} aus (\ref{f:hilfe})
+			\item[Nachbedingung] Ein \gls{Dialog} mit Hinweisen zur Benutzung des Programms wird angezeigt
 		\end{description}
 	\end{enumerate}
 
@@ -100,7 +100,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\begin{description}
 			\item[Vorbedingung] Es wurde ein Datensatz (bestehend aus Bildern) gewählt; das Programm zeigt die Übersicht der Bilder des Datensatzes; es ist ein Foto eines realen Motivs im Datensatz vorhanden; das Foto weist \glslink{Annotation}{annotierte} Bildbereiche auf
 			\item[Aktion] Der Benutzer wählt dieses Bild zur vergrößerten Ansicht (\ref{f:anzeigen_groessere_darstellung})
-			\item[Nachbedingung] das Bild wird in vergrößerter Ansicht angezeigt; es werden die \glslink{Annotation}{annotierten} Bildbereiche angezeigt (\ref{f:annotation_anzeigen})
+			\item[Nachbedingung] Das Bild wird in vergrößerter Ansicht angezeigt; es werden die \glslink{Annotation}{annotierten} Bildbereiche angezeigt (\ref{f:annotation_anzeigen})
 		\end{description}
 		\item
 		\begin{description}
@@ -154,7 +154,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer linksklickt die Schaltfläche zur Rückkehr zur Bibliothek \ref{f:rückkehr_zu_bibliothek}
+			\item[Aktion] Der Benutzer linksklickt die Schaltfläche zur Rückkehr zur Bibliothek (\ref{f:rückkehr_zu_bibliothek})
 			\item[Nachbedingung] Die Bibliothek wird angezeigt
 		\end{description}
 	\end{enumerate}
@@ -173,7 +173,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 			\item[Nachbedingung] Die Ergebnisse werden angezeigt
 		\end{description}
 	\end{enumerate}
-	Es bleibt zu testen, dass sich die Ergebnisse der zweiten im Sinne des \glslink{Feedback}{Feedbacks} verändert haben (oder gleich bleiben), wofür kein Testfall formuliert wird.
+	Es bleibt zu testen, dass sich die Ergebnisse der zweiten Suche im Sinne des \glslink{Feedback}{Feedbacks} verändert haben (oder gleich bleiben), wofür kein Testfall formuliert wird.
 
 	\item Datensatz zur Bibliothek hinzufügen \label{ts:datensatz_hinzufuegen}
 	\begin{enumerate}[leftmargin=0pt]
@@ -204,14 +204,14 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
-			\item[Vorbedingung] es wurde ein Datensatz gewählt, der mindestens ein Video aus Einzelbildern enthält.
-			\item[Aktion] der Benutzer wählt eines der Videos zur Ansicht (\ref{f:anzeigen_groessere_darstellung})
-			\item[Nachbedingung] ein Videoplayer wird angezeigt; eine Schaltfläche zum Starten des Videos ist verfügbar
+			\item[Vorbedingung] Es wurde ein Datensatz gewählt, der mindestens ein Video aus Einzelbildern enthält
+			\item[Aktion] Der Benutzer wählt eines der Videos zur Ansicht (\ref{f:anzeigen_groessere_darstellung})
+			\item[Nachbedingung] Ein Videoplayer wird angezeigt; eine Schaltfläche zum Starten des Videos ist verfügbar
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] der Benutzer klickt auf die Schaltfläche zum Starten des Videos (\ref{f:video_abspielen})
-			\item[Nachbedingung] das Video wird abgespielt
+			\item[Aktion] Der Benutzer klickt auf die Schaltfläche zum Starten des Videos (\ref{f:video_abspielen})
+			\item[Nachbedingung] Das Video wird abgespielt
 		\end{description}
 	\end{enumerate}
 
@@ -219,14 +219,14 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
-			\item[Vorbedingung] das Menü ist verfügbar
-			\item[Aktion] der Benutzer wählt über den Menüpunkt ganz rechts \enquote{About} aus (\ref{f:about})
-			\item[Nachbedingung] ein \gls{Dialog} mit Informationen zum Programm wird angezeigt
+			\item[Vorbedingung] Das Menü ist verfügbar
+			\item[Aktion] Der Benutzer wählt über den Menüpunkt ganz rechts \enquote{About} aus (\ref{f:about})
+			\item[Nachbedingung] Ein \gls{Dialog} mit Informationen zum Programm wird angezeigt
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] der Benutzer wählt über den Menüpunkt ganz rechts \enquote{Hilfe} aus (\ref{f:hilfe})
-			\item[Nachbedingung] ein \gls{Dialog} mit Hinweisen zur Benutzung des Programms wird angezeigt
+			\item[Aktion] Der Benutzer wählt über den Menüpunkt ganz rechts \enquote{Hilfe} aus (\ref{f:hilfe})
+			\item[Nachbedingung] Ein \gls{Dialog} mit Hinweisen zur Benutzung des Programms wird angezeigt
 		\end{description}
 	\end{enumerate}
 \end{enumerate}
@@ -258,7 +258,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer wählt die zuletzt beendete Suche(\ref{fw:chronik}, \ref{fw:speichern_chronik})
+			\item[Aktion] Der Benutzer wählt die zuletzt beendete Suche (\ref{fw:chronik}, \ref{fw:speichern_chronik})
 			\item[Nachbedingung] Die bereits zuvor angezeigten Suchergebnisse werden in der selben Reihenfolge wieder angezeigt; das zuvor festgelegte \gls{Feedback} wird wieder angezeigt
 		\end{description}
 		\item
@@ -314,17 +314,17 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\begin{description}
 			\item[Vorbedingung] Programm ist startbereit; Einstellungen wurden noch nicht geändert
 			\item[Aktion] Benutzer startet Programm (\ref{f:programmstart})
-			\item[Nachbedingung] deutsche \gls{GUI} wird angezeigt; Menüpunkt \enquote{Sprache} ist sichtbar, es sind die Sprachen Deutsch und Englisch wählbar; Deutsch ist als aktuell gewählte Sprache markiert
+			\item[Nachbedingung] Deutsche \gls{GUI} wird angezeigt; Menüpunkt \enquote{Sprache} ist sichtbar, es sind die Sprachen Deutsch und Englisch wählbar; Deutsch ist als aktuell gewählte Sprache markiert
 		\end{description}
 		\item
 		\begin{description}
 			\item[Aktion] Der Benutzer wählt über den Menüpunkt \enquote{Sprache} die englische Sprache aus (\ref{fw:sprache})
-			\item[Nachbedingung] die \gls{GUI} wird auf englisch dargestellt
+			\item[Nachbedingung] Die \gls{GUI} wird auf Englisch dargestellt
 		\end{description}
 		\item
 		\begin{description}
 			\item[Aktion] Der Benutzer beendet das Programm über den üblichen Schließen-Button (\ref{f:beenden})
-			\item[Nachbedingung] die \gls{GUI} ist nicht mehr sichtbar; der Prozess hat terminiert
+			\item[Nachbedingung] Die \gls{GUI} ist nicht mehr sichtbar; der Prozess hat terminiert
 		\end{description}
 		\item
 		\begin{description}
@@ -338,7 +338,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\item
 		\begin{description}
 			\item[Vorbedingung] Das Programm befindet sich in der Bibliothek; Audioausgabe des Computers ist möglich und eingeschaltet
-			\item[Aktion] Der Benutzer schaltet in den Einstellungen den Signalton ein, falls dieser noch nicht eingeschaltet war \ref{fw:signalton_einaus}
+			\item[Aktion] Der Benutzer schaltet in den Einstellungen den Signalton ein, falls dieser noch nicht eingeschaltet war (\ref{fw:signalton_einaus})
 			\item[Nachbedingung] Die \gls{GUI} zeigt an, dass der Signalton eingeschaltet ist
 		\end{description}
 		\item
@@ -420,7 +420,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\item
 		\begin{description}
 			\item[Aktion] Der Benutzer wählt einen anderen Algorithmus für die nächste Suche, startet die Suche (\ref{fw:weitere_suche}) und wartet
-			\item[Nachbedingung] die Ergebnisse werden angezeigt
+			\item[Nachbedingung] Die Ergebnisse werden angezeigt
 		\end{description}
 	\end{enumerate}
 
@@ -444,7 +444,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer wählt die Parameter nach Belieben (\ref{f:parameterwahl}) und startet die Suche (\ref{f:suche_starten})
+			\item[Aktion] Der Benutzer wählt die Parameter nach Belieben (\ref{f:parameterwahl}) und klickt auf \enquote{Weiter}
 			\item[Nachbedingung] Das gewählte Video wird angezeigt (nicht abgespielt); die vorgenommenen Einstellungen werden angezeigt (\ref{f:ueberpruefung})
 		\end{description}
 	\end{enumerate}
@@ -489,7 +489,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\item
 		\begin{description}
 			\item[Vorbedingung] Das Programm zeigt die Übersicht der Ergebnisse einer Suche an
-			\item[Aktion] Der Benutzer wählt ein Ergebnis \ref{fw:groesseres_suchergebnis}
+			\item[Aktion] Der Benutzer wählt ein Ergebnis (\ref{fw:groesseres_suchergebnis})
 			\item[Nachbedingung] Das Ergebnis wird in einer größeren Ansicht angezeigt
 		\end{description}
 	\end{enumerate}
@@ -505,18 +505,18 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer bricht die Suche ab \ref{fw:suche_abbrechen}
+			\item[Aktion] Der Benutzer bricht die Suche ab (\ref{fw:suche_abbrechen})
 			\item[Nachbedingung] Es werden wieder die vorgenommenen Einstellungen angezeigt; eine Schaltfläche zum Starten der Suche wird angezeigt
 		\end{description}
 		\item
 		\begin{description}
-			\item[Aktion] Der Benutzer startet die Suche \ref{f:suche_starten}
+			\item[Aktion] Der Benutzer startet die Suche (\ref{f:suche_starten})
 			\item[Nachbedingung] Eine Animation zeigt die Aktivität des \glslink{Suchverfahren}{Suchverfahrens} an (\ref{f:fortschrittsanimation})
 		\end{description}
 		\item
 		\begin{description}
 			\item[Aktion] Der Benutzer wartet \label{test}
-			\item[Nachbedingung] Die Ergebnisse der Suche werden angezeigt \ref{f:suchergebnisse_anzeigen}
+			\item[Nachbedingung] Die Ergebnisse der Suche werden angezeigt (\ref{f:suchergebnisse_anzeigen})
 		\end{description}
 	\end{enumerate}
 
@@ -524,8 +524,8 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\begin{enumerate}[leftmargin=0pt]
 		\item
 		\begin{description}
-			\item[Vorbedingung] Das Programm befindet sich in der Parameterwahl.
-			\item[Aktion] Der Benutzer wählt einen weiteren Datensatz für die Suche aus und bestätigt seine Eingaben.
+			\item[Vorbedingung] Das Programm befindet sich in der Parameterwahl
+			\item[Aktion] Der Benutzer wählt einen weiteren Datensatz für die Suche aus und bestätigt seine Eingaben
 			\item[Nachbedingung] Die Überprüfung wird angezeigt
 		\end{description}
 		\item
@@ -540,11 +540,11 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 		\item
 		\begin{description}
 			\item[Vorbedingung] Das Programm zeigt die Übersicht der Ergebnisse einer Suche an; der Benutzer hat die Möglichkeit, ein \gls{Feedback} in Form eines Wertes von 0 bis 10 festzulegen
-			\item[Aktion] Der Benutzer wählt ein \gls{Feedback} für eines der Ergebnisse \ref{fw:zehner_feedback}
+			\item[Aktion] Der Benutzer wählt ein \gls{Feedback} für eines der Ergebnisse (\ref{fw:zehner_feedback})
 			\item[Nachbedingung] Das gegebene \gls{Feedback} wird dargestellt
 		\end{description}
 	\end{enumerate}
-	Falls \ref{fw:zehner_feedback} implementiert ist, ist hier ggf. die Funktionen \ref{fw:lesezeichen} analog zu ihren Testfällen zu überprüfen.
+	Falls \ref{fw:zehner_feedback} implementiert ist, ist hier ggf. die Funktion \ref{fw:lesezeichen} analog zu ihren Testfällen zu überprüfen.
 \end{enumerate}
 
 \subsection{Testüberdeckung}

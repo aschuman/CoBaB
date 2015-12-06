@@ -25,7 +25,7 @@ Die Konfigurationsdaten passen die Anwendung an die Präferenzen des Benutzers a
 \item Datensatzkomponente\newline
 Die Datensatzkomponente implementiert die Datensatzschnittstelle, um auf die Bilder bzw. Videos zuzugreifen.
 \item Suchanfrage\newline
-Die Suchanfrage ist der Input für das Verfahren. Die Anwendung generiert eine Suchanfrage, die aus gewählter Suchvorlage, gewünschtem \gls{Suchverfahren}, den Suchparametern und dem Suchraum besteht. Der Suchraum ist durch den Datensatz festgelegt, in dem gesucht werden soll.
+Die Suchanfrage ist der Input für das Verfahren. Die Anwendung generiert eine Suchanfrage, die aus gewählter Suchvorlage, gewünschtem \gls{Suchverfahren}, den Suchparametern und dem Suchraum besteht. Der Suchraum ist durch die Datensätze festgelegt, in denen gesucht werden soll.
 \item \gls{Suchchronik}\newline
 Die \gls{Suchchronik} speichert die letzten Suchergebnisse, um sie anzeigen zu lassen. Außerdem speichert sie \gls{Lesezeichen} für spezielle Ergebnisse.
 \end{itemize}
@@ -36,13 +36,13 @@ Die \gls{Suchchronik} speichert die letzten Suchergebnisse, um sie anzeigen zu l
 Das MainWindow ist das Hauptfenster von CoBaB. Es zeigt die \glspl{Widget} an.
 
 \item Menü-Anzeige \newline
-Das Menü beinhaltet Bequemlichkeitsfunktionen wie \textbf{Datei}, wo zusätzlich das Beenden des Programms und die Datensatzauswahl ermöglicht wird, \textbf{Sprachauswahl}, \textbf{Hilfe}, wo es Informationen über das Programm gibt oder Anweisungen zum Benutzen der Anwendung, \textbf{\gls{Suchchronik}} mit gespeicherten früheren Suchen, \textbf{\gls{Lesezeichen}}, die der Benutzer selbst aus seinen Suchergebnissen erstellt.
+Das Menü beinhaltet Bequemlichkeitsfunktionen wie \textbf{Datei}, wo zusätzlich das Beenden des Programms und die Datensatzauswahl ermöglicht wird, \textbf{Sprachauswahl}, \textbf{Hilfe}, wo es Informationen über das Programm oder Anweisungen zum Benutzen der Anwendung gibt, \textbf{\gls{Suchchronik}} mit gespeicherten früheren Suchen und \textbf{\gls{Lesezeichen}}, die der Benutzer selbst aus seinen Suchergebnissen erstellt.
 
 \item Bibliothek \newline
-Die Bibliothek ist beim Starten des Programms zu sehen. Anfangs ist nur eine voreingestellte Auswahl an Datensätzen zu sehen. Jedes mal beim erneuten Öffnen werden die zuletzt genutzten Datensätze angezeigt. Man kann entweder einen Datensatz aus den angezeigten wählen oder über einen Auswahl-\gls{Dialog} einen neuen suchen.
+Die Bibliothek ist beim Starten des Programms zu sehen. Anfangs ist nur eine voreingestellte Auswahl an Datensätzen zu sehen. Jedes Mal beim erneuten Öffnen werden die zuletzt genutzten Datensätze angezeigt. Man kann entweder einen Datensatz aus den angezeigten wählen oder über einen Auswahl-\gls{Dialog} einen neuen suchen.
 
 \item Datensatzanzeige \newline
-Nach der Auswahl eines Datensatzes wird der Inhalt angezeigt. Dem Datensatz entsprechend wird der Fotoviewer oder der Videoplayer integriert, um dem Benuter den Datensatz grafisch anzuzeigen und die Wahl einer Vorlage zu ermöglichen.
+Nach der Auswahl eines Datensatzes, wird der Inhalt angezeigt. Dem Datensatz entsprechend wird der Fotoviewer oder der Videoplayer integriert, um dem Benuter den Datensatz grafisch anzuzeigen und die Wahl einer Vorlage zu ermöglichen.
 
 \item Fotoviewer \newline
 Der Fotoviewer erlaubt das Browsen durch die Fotos des gewählten Datensatzes mit bekannten Funktionen wie \enquote{vorheriges}, \enquote{nächstes}, Zoom und Vollbildmodus. Es gibt zusätzlich eine Option zum Wählen eines bestimmten Bereichs des Bildes. Durch einen Rechtsklick bestimmt man das \gls{Suchverfahren}, das auf das Foto angewendet wird.
@@ -56,20 +56,20 @@ Die \gls{Suchverfahren} stellen den Teil dieses \gls{Widget} bereit, in dem die 
 \item Überprüfung \newline 
 Dieses \gls{Widget} zeigt die Zusammenstellung der gewünschten Auswahl an.
 
-\item Ergebnisanzeige \newline
+\item Ergebnis-Anzeige \newline
 Nachdem die Suche erfolgreich abgeschlossen ist, werden die Ergebnisse in einem Fenster angezeigt. Die Suchergebnisse (Bilder/Videos) werden von meist zutreffend zu weniger zutreffend aufgelistet. Zur Vorschau sind Miniaturbilder vorgesehen.
 
 \end{itemize}
 \subsection{Controller}
 \begin{itemize}
-\item FotoViewerManager \newline
+\item FotoviewerManager \newline
 Steuert den Fotoviewer und ermöglicht die Auswahl eines Bildbereichs für eine Suche. Außerdem skaliert der Fotoviewer zu große Bilder, um diese an die Größe des Fotoviewers anzupassen.
 
-\item VideoPlayerManager \newline
-Ähnlich dem FotoViewerManager ist der VideoPlayerManager für die korrekte Arbeit des Videoplayers zuständig.
+\item VideoplayerManager \newline
+Ähnlich dem FotoviewerManager ist der VideoplayerManager für die korrekte Arbeit des Videoplayers zuständig.
 
 \item Navigation \newline
-Die Navigation erlaubt dem Benutzer, eine Suchanfrage zu erstellen. Dabei ist ein Zurückspringen auf voherige Seiten möglich. Auf jeder Seite bestimmt der Benutzer die verschieden Parameter für die Suche (Suchraum, Suchvorlage, Algorithmen, ...). Am Ende kann der Benutzer die Parameter noch einmal überprüfen und dann die Suche anstoßen.
+Die Navigation erlaubt dem Benutzer, eine Suchanfrage zu erstellen. Dabei ist ein Zurückspringen auf vorherige Seiten möglich. Auf jeder Seite bestimmt der Benutzer die verschieden Parameter für die Suche (Suchraum, Suchvorlage, Algorithmen, ...). Am Ende kann der Benutzer die Parameter noch einmal überprüfen und dann die Suche anstoßen.
 
 \item SuchvorgangManager \newline
 Der SuchvorgangManager startet oder beendet eine Suchanfrage. Fehlerhafte Suchen (fehlerhafte Daten, Überschreiten der Wartezeit, ...) werden abgebrochen und anschließend werden Fehlermeldungen an den Benutzer gesendet.
