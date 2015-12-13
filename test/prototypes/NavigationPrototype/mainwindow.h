@@ -19,8 +19,17 @@ public:
     void addView(QWidget* w);
     void showView(int index);
 
+signals:
+    void toHomeView();
+    void toPreviousView();
+
+private slots:
+    void on_btnHome_clicked();
+
+    void on_btnPrev_clicked();
+
 private:
-    std::unique_ptr<Ui::MainWindow> ui;
+    Ui::MainWindow* ui;
 };
 
 #endif // MAINWINDOW_H

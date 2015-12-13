@@ -14,6 +14,8 @@ public:
     explicit Navigator(QObject *parent = 0);
 
 private slots:
+    void onToHomeView();
+    void onToPreviousView();
     void onLibraryChosen(QString dataset);
     void onAlgorithmChosen(QString algo, int anno, QString pic);
 

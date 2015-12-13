@@ -13,6 +13,18 @@ Navigator::Navigator(QObject *parent)
 
     QObject::connect(libView.get(), SIGNAL(libraryChosen(QString)), this, SLOT(onLibraryChosen(QString)));
     QObject::connect(dataView.get(), SIGNAL(algorithmChosen(QString, int, QString)), this, SLOT(onAlgorithmChosen(QString, int, QString)));
+    QObject::connect(&w, SIGNAL(toHomeView()), this, SLOT(onToHomeView()));
+    QObject::connect(&w, SIGNAL(toPreviousView()), this, SLOT(onToPreviousView()));
+}
+
+void Navigator::onToHomeView()
+{
+    w.showView(0);
+}
+
+void Navigator::onToPreviousView()
+{
+    w.showView(0);
 }
 
 void Navigator::onLibraryChosen(QString dataset)

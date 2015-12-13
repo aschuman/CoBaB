@@ -3,7 +3,7 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(std::make_unique<Ui::MainWindow>())
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 }
@@ -21,4 +21,14 @@ void MainWindow::addView(QWidget* w)
 void MainWindow::showView(int index)
 {
     ui->stackedWidget->setCurrentIndex(index);
+}
+
+void MainWindow::on_btnHome_clicked()
+{
+    emit toHomeView();
+}
+
+void MainWindow::on_btnPrev_clicked()
+{
+    emit toPreviousView();
 }
