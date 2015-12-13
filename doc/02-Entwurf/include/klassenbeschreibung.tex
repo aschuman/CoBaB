@@ -1,6 +1,33 @@
 \subsection{Übersicht}
 
 \subsection{Model}
+\begin{itemize}
+
+	\item ConfigData \newline
+			Diese Klasse liest aus der Config-Textdatei die gewählte Sprache, die Aktivierung bzw. Deaktivierung des 							Benachrichtigungstons und die Texte des Hilfe- und Aboutdialogs ein.
+			Werden die Sprache oder die Einstellung des Benachrichtigungstons geändert, überschreibt diese Klasse die 							entsprechenden Werte in der Config-Datei.
+	\item SearchResult \newline
+			Ein Ergebnis des Suchalgorithmus ist ein Foto oder Video. Das Feedback, das der Benutzer für dieses Foto oder Video 				eingestellt hat, wird zusammen mit dem Ergebnis als SearchResult abgelegt.
+	\item SearchResultElement \newline
+			Ein Objekt dieser Klasse repräsentiert das gesamte Suchergebnis, es besteht aus einer Liste von SeachResult. Dieses 				Objekt wird als Chronikeintrag und auf Wunsch des Benutzers als Lesezeichen gespeichert.
+	\item SearchResultIO \newline
+			Diese abstrakte Klasse ermöglicht, neue Suchergebnisse (SearchResultElement) zu speichern und alte Suchergebnisse zu 				laden. Konkret können Lesezeichen mit der Klasse Bookmark und Chronikeinträge mit der Klasse Chronicle verwaltet 					werden.
+	\item SearchQuery \newline
+			Diese Klasse stellt die Benutzereingaben zusammen, um sie an das Suchverfahren weiterzugeben.
+	\item SearchInterface \newline
+			Diese Schnittstelle ermöglicht eine einheitliche Verwendung der Suchalgorithmen.
+	\item TestAlgorithm \newline
+			Dieser Algorithmus implementiert das SearchInterface zu Testzwecken.
+	\item DataSet \newline
+			Repräsentiert einen Datensatz, es kann sich entweder um einen Foto- oder Videodatensatz handeln.
+	\item DataSetInterface \newline
+			Diese Schnittstelle bietet der Anwendung und den Suchverfahren einen einheitlichen Zugriff auf die Datensätze.
+	\item DataSetComp \newline
+			Die Datensatzkompontente implementiert die Datensatzschnittstelle.
+	\item DataSetParser \newline
+			Parst einen Datensatz.
+
+\end{itemize}
 
 \subsection{View}
 
