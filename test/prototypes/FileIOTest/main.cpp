@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
     file.close();
 
     //write out
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text)) {
        QMessageBox::information(0, "error", file.errorString());
     }
     QTextStream out(&file);
