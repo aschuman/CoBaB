@@ -43,16 +43,41 @@ int main(int argc, char *argv[])
     //readWrite();
 
     // bookmark tests
-    SearchResultIO resultIO();
+    SearchResultIO *resultIO = new SearchResultIO();
+
+    //test with one file
+    qint64 start = (QDateTime::currentDateTime()).toMSecsSinceEpoch();
     for(int i = 0; i < 10; i++) {
         QList<QString> list;
-        for(int j = 0; j < 10000; j++) {
+        for(int j = 0; j < 400000; j++) {
             list.push_back(QString("Pfad/Pfad/Pfad/Pfad/Bilder/Datensatz%1/Bild%2").arg(i).arg(j));
         }
         SearchResult result(list);
         result.setName(QString::number(i));
-        resultIO.storeSearchResult(result);
+        stream << result.getDate().toTime_t() << endl;
+        resultIO->storeSearchResult(result);
     }
+    qint64 end = (QDateTime::currentDateTime()).toMSecsSinceEpoch();
+    stream << "one (write) " << (end-start) << endl;
+
+    //test with many files
+    start = (QDateTime::currentDateTime()).toMSecsSinceEpoch();
+    for(int i = 0; i < 10; i++) {
+        QList<QString> list;
+        for(int j = 0; j < 400000; j++) {
+            list.push_back(QString("Pfad/Pfad/Pfad/Pfad/Bilder/Datensatz%1/Bild%2").arg(i).arg(j));
+        }
+        SearchResult result(list);
+        result.setName(QString::number(i));
+        stream << result.getDate().toTime_t() << endl;
+        resultIO->storeSearchResultManyFiles(result);
+    }
+    end = (QDateTime::currentDateTime()).toMSecsSinceEpoch();
+    stream << "many (write) " << (end-start) << endl;
+
+    //that's the result from the list, not the file!
+    SearchResult loaded = resultIO->loadSearchResult("5");
+    stream << loaded.getName() << endl << loaded.getDate().toTime_t() << endl;
 
     return a.exec();
 }
