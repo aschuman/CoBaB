@@ -2,13 +2,16 @@
 #include "ui_mediaplayer.h"
 #include "medium.h"
 #include <utility>
+#include <QMouseEvent>
 
 
 MediaPlayer::MediaPlayer(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MediaPlayer),
     annotationPen(QColor(200,100,0)),
-    currentImageItem(nullptr)
+    selectionPen(QColor(255,0,0)),
+    currentImageItem(nullptr),
+    currentSelection(nullptr)
 {
     ui->setupUi(this);
     ui->graphicsView->setScene(&scene);
@@ -37,5 +40,18 @@ void MediaPlayer::display(Medium *medium)
 
     for(auto it = medium->beginAnnotations(); it != medium->endAnnotatoins(); ++it){
         currentAnnotations.push_back(scene.addRect(it->getRect(), annotationPen));
+    }
+}
+
+void MediaPlayer::on_graphicsView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint)
+{
+    if(fromScenePoint.x() == 0 && fromScenePoint.y() == 0){
+        if(currentSelection != nullptr){
+            scene.removeItem(currentSelection);
+            delete currentSelection;
+        }
+        currentSelection = scene.addRect(currentRubberBand, selectionPen);
+    } else {
+        currentRubberBand = viewportRect;
     }
 }
