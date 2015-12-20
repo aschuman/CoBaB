@@ -28,7 +28,9 @@ public:
 private:
     Ui::MediaPlayer *ui;
     QGraphicsScene scene;
+    QPen annotationPen;
     QGraphicsPixmapItem* currentImageItem;
+    QList<QGraphicsRectItem*> currentAnnotations;
 };
 
 #endif // MEDIAPLAYER_H

@@ -23,8 +23,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
     std::unique_ptr<MediaPlayer> mediaPlayer;
-    std::vector<QString> fileNames;
-    std::vector<QString>::iterator fileNameIt;
+    std::vector<Medium> media;
+    std::vector<Medium>::iterator mediaIt;
 
     void updatePlayer();
 };

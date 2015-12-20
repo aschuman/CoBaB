@@ -15,14 +15,10 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     medium.cpp \
-    image.cpp \
-    imagevideo.cpp \
     mediaplayer.cpp
 
 HEADERS  += mainwindow.h \
     medium.h \
-    image.h \
-    imagevideo.h \
     mediaplayer.h
 
 FORMS    += \
