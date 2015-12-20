@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
+#include <QRubberBand>
 #include "medium.h"
 
 namespace Ui {
@@ -25,12 +26,18 @@ public:
     bool isPlaying();
     void showAnnotations(bool show);
 
+private slots:
+    void on_graphicsView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint);
+
 private:
     Ui::MediaPlayer *ui;
     QGraphicsScene scene;
     QPen annotationPen;
+    QPen selectionPen;
     QGraphicsPixmapItem* currentImageItem;
     QList<QGraphicsRectItem*> currentAnnotations;
+    QGraphicsRectItem* currentSelection;
+    QRect currentRubberBand;
 };
 
 #endif // MEDIAPLAYER_H
