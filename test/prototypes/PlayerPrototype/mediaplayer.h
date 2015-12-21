@@ -26,6 +26,9 @@ public:
     bool isPlaying();
     void showAnnotations(bool show);
 
+protected:
+    void resizeEvent(QResizeEvent * event);
+
 private slots:
     void on_graphicsView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint);
 
@@ -38,6 +41,8 @@ private:
     QList<QGraphicsRectItem*> currentAnnotations;
     QGraphicsRectItem* currentSelection;
     QRect currentRubberBand;
+
+    void fit();
 };
 
 #endif // MEDIAPLAYER_H
