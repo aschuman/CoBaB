@@ -32,6 +32,13 @@ void MediaPlayer::display(Medium *medium)
             delete *it;
         }
         currentAnnotations.clear();
+        currentImageItem = nullptr;
+    }
+
+    if(currentSelection != nullptr){
+        scene.removeItem(currentSelection);
+        delete currentSelection;
+        currentSelection = nullptr;
     }
 
     QImage image(medium->getFile());
