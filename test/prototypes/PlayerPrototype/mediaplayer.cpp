@@ -52,6 +52,9 @@ void MediaPlayer::on_graphicsView_rubberBandChanged(const QRect &viewportRect, c
         }
         currentSelection = scene.addRect(currentRubberBand, selectionPen);
     } else {
-        currentRubberBand = viewportRect;
+        currentRubberBand.setLeft(fromScenePoint.x());
+        currentRubberBand.setTop(fromScenePoint.y());
+        currentRubberBand.setRight(toScenePoint.x());
+        currentRubberBand.setBottom(toScenePoint.y());
     }
 }
