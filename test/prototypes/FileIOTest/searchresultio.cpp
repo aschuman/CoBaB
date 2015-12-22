@@ -3,22 +3,33 @@
 #include <QListIterator>
 #include <QDataStream>
 #include <QMessageBox>
+#include <QTextStream>
+
+QTextStream stream2(stdout);
 
 SearchResultIO::SearchResultIO()
 {
 }
-
-QDataStream & SearchResultIO::operator<<(SearchResult result) {
-    QDataStream::setDevice(device);
-    QDataStream::operator<<(&result.getName());
-    return QDataStream::operator<<(&result.getSearchResultList());
+QDataStream &SearchResultIO::operator<<(SearchResult result) {
+    return *this << result.getName() << (qint64)result.getDate().toTime_t() << result.getSearchResultList();
 }
+QDataStream &SearchResultIO::operator>>(SearchResult &result) {
+    QString loadedString;
+    qint64 loadedInt;
+    QList<QString> loadedList;
+    *this >> loadedString >> loadedInt >> loadedList;
+    result.setSearchResultList(loadedList);
+    result.setName(loadedString);
+    result.setDate(loadedInt);
+    return *this;
+}
+
 void SearchResultIO::storeSearchResult(SearchResult searchResult) {
     searchResultList.push_back(searchResult);
 
     QFile file("../FileIOTest/bookmarks/resultTest.dat");
     file.open(QIODevice::WriteOnly | QIODevice::Append);
-    device = &file;
+    this->setDevice(&file);
     *this << searchResult;
     file.close();
 }
@@ -27,11 +38,11 @@ void SearchResultIO::storeSearchResult(SearchResult searchResult) {
 void SearchResultIO::storeSearchResultManyFiles(SearchResult searchResult) {
     searchResultList.push_back(searchResult);
 
-    QFile file2("../FileIOTest/bookmarks/resultTest"+searchResult.getName()+".dat");
-    file2.open(QIODevice::WriteOnly);
-    device = &file2;
+    QFile file("../FileIOTest/bookmarks/resultTest"+searchResult.getName()+".dat");
+    file.open(QIODevice::WriteOnly);
+    this->setDevice(&file);
     *this << searchResult;
-    file2.close();
+    file.close();
 }
 
 SearchResult SearchResultIO::loadSearchResult(QString name) {
@@ -45,22 +56,19 @@ SearchResult SearchResultIO::loadSearchResult(QString name) {
 
     QFile file("../FileIOTest/bookmarks/resultTest.dat");
     file.open(QIODevice::ReadOnly);
-    QString name2;
-    int date;
-    QList<QString> list;
-    QDataStream in(&file);
-    while(!in.atEnd()) {
-        in >> name2 >> date >> list;
-        if(name2 == name) {
-            SearchResult result(list);
-            result.setName(name);
-            result.setDate(date);
+    SearchResult result;
+    this->setDevice(&file);
+    while(!this->atEnd()) {
+        *this >> result;
+        if(result.getName() == name) {
+            file.close();
             return result;
         }
     }
-    QMessageBox::information(0, "error", "loading of the file not possible");
-    throw 0;
+    file.close();
+    throw;
 }
+
 SearchResult SearchResultIO::loadSearchResultManyFiles(QString name) {
     QListIterator<SearchResult> iterator(searchResultList);
     while(iterator.hasNext()) {
@@ -70,16 +78,12 @@ SearchResult SearchResultIO::loadSearchResultManyFiles(QString name) {
         }
     }
 
-    QFile file2("../FileIOTest/bookmarks/resultTest"+name+".dat");
-    QString name2;
-    int date;
-    QList<QString> list;
-    file2.open(QIODevice::ReadOnly);
-    QDataStream in2(&file2);
-    in2 >> name2 >> date >> list;
-    SearchResult result(list);
-    result.setName(name);
-    result.setDate(date);
+    QFile file("../FileIOTest/bookmarks/resultTest"+name+".dat");
+    file.open(QIODevice::ReadOnly);
+    this->setDevice(&file);
+    SearchResult result;
+    *this >> result;
+    file.close();
     return result;
 }
 

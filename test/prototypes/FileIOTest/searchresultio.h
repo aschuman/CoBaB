@@ -13,10 +13,10 @@ public:
     void storeSearchResultManyFiles(SearchResult searchResult);
     SearchResult loadSearchResultManyFiles(QString name);
     QDataStream &SearchResultIO::operator<<(SearchResult result);
+    QDataStream &SearchResultIO::operator>>(SearchResult &result);
     QList<SearchResult> getSearchResultList();
 private:
     QList<SearchResult> searchResultList;
-    QFile *device;
 };
 
 #endif // SEARCHRESULTIO_H

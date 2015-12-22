@@ -1,6 +1,11 @@
 #include "searchresult.h"
 #include <QDateTime>
 
+SearchResult::SearchResult() {
+    date = QDateTime::currentDateTime();
+    name = QString::number(date.toTime_t());
+}
+
 SearchResult::SearchResult(QList<QString> list)
 {
     searchResultList = list;
@@ -22,5 +27,8 @@ void SearchResult::setDate(int sec) {
 }
 QList<QString> SearchResult::getSearchResultList() {
     return searchResultList;
+}
+void SearchResult::setSearchResultList(QList<QString> list) {
+    searchResultList = list;
 }
 
