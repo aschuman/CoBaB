@@ -32,15 +32,28 @@ void MediaPlayer::display(Medium *medium)
             delete *it;
         }
         currentAnnotations.clear();
+        currentImageItem = nullptr;
+    }
+
+    if(currentSelection != nullptr){
+        scene.removeItem(currentSelection);
+        delete currentSelection;
+        currentSelection = nullptr;
     }
 
     QImage image(medium->getFile());
-    scene.setSceneRect(image.rect()); // adjust visible area
     currentImageItem = scene.addPixmap(QPixmap::fromImage(std::move(image))); // don't know how many copies are made here
+    scene.setSceneRect(0,0, image.width(), image.height()); // adjust visible area
 
     for(auto it = medium->beginAnnotations(); it != medium->endAnnotatoins(); ++it){
         currentAnnotations.push_back(scene.addRect(it->getRect(), annotationPen));
     }
+    fit();
+}
+
+void MediaPlayer::resizeEvent(QResizeEvent *event)
+{
+    fit();
 }
 
 void MediaPlayer::on_graphicsView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint)
@@ -52,6 +65,16 @@ void MediaPlayer::on_graphicsView_rubberBandChanged(const QRect &viewportRect, c
         }
         currentSelection = scene.addRect(currentRubberBand, selectionPen);
     } else {
-        currentRubberBand = viewportRect;
+        currentRubberBand.setLeft(fromScenePoint.x());
+        currentRubberBand.setTop(fromScenePoint.y());
+        currentRubberBand.setRight(toScenePoint.x());
+        currentRubberBand.setBottom(toScenePoint.y());
     }
+}
+
+void MediaPlayer::fit()
+{
+    qreal width = currentImageItem->sceneBoundingRect().width();
+    qreal height = currentImageItem->sceneBoundingRect().height();
+    ui->graphicsView->fitInView(QRect(0,0, qMax(width, (qreal)ui->graphicsView->width()), qMax(height, (qreal)ui->graphicsView->height())), Qt::KeepAspectRatio);
 }
