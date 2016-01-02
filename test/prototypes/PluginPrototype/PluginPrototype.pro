@@ -14,8 +14,11 @@ SOURCES += main.cpp \
 
 HEADERS += \
     application.h \
-    iprinter.h \
     greeting.h \
-    list.h
+    list.h \
+    printer.h \
+    iprinter.h
 
 CONFIG += c++14
+
+DESTDIR = ..

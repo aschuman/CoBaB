@@ -1,16 +1,19 @@
 QT += core
 QT -= gui
 
-TARGET = IdentityPlugin
-CONFIG += console
-CONFIG -= app_bundle
+#TARGET = IdentityPlugin
+TARGET = $$qtLibraryTarget(IdentityPlugin)
 
-TEMPLATE = app
+TEMPLATE = lib
+CONFIG += plugin
+INCLUDEPATH += ./..
 
 SOURCES += \
     identityprinter.cpp
 
 HEADERS += \
-    identityprinter.h \
-    concreteprinters.h
+    identityprinter.h
 
+DESTDIR = ../plugins
+
+CONFIG += c++14

@@ -1,8 +1,8 @@
 #include "identityprinter.h"
 #include <iostream>
 
-template<typename T>
-void IdentityPrinter<T>::print(const T &value)
+//template<typename T>
+void IdentityPrinter::print(const Greeting &value)
 {
-    std::cout << value << std::endl;
+    std::cout << value.get().toStdString() << std::endl;
 }

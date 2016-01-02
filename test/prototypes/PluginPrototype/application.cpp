@@ -28,7 +28,8 @@ void Application::loadPlugins()
 
     for(const QString& fileName : pluginsDir.entryList(QDir::Files))
     {
-        QPluginLoader loader(pluginsDir.absoluteFilePath(fileName));
+        QString filePath = pluginsDir.absoluteFilePath(fileName);
+        QPluginLoader loader(filePath);
         QObject* plugin = loader.instance();
         if(plugin)
                 plugins.push_back(std::make_unique<QObject>(plugin));

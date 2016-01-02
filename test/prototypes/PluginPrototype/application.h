@@ -4,7 +4,7 @@
 #include <qlist.h>
 #include <memory>
 #include <vector>
-#include "iprinter.h"
+#include "printer.h"
 
 
 class Application : public QObject
