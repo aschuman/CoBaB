@@ -4,7 +4,9 @@
 #include <qlist.h>
 #include <memory>
 #include <vector>
+#include "iprinter.h"
 #include "printer.h"
+#include "greeting.h"
 
 
 class Application : public QObject
@@ -20,8 +22,9 @@ signals:
     void finished();
 
 private:
-    std::vector<std::unique_ptr<QObject>> plugins;
+    std::vector<std::unique_ptr<IPrinter>> plugins;
     void loadPlugins();
+    void greet(const Greeting& g);
 };
 
 #endif // APPLICATION_H

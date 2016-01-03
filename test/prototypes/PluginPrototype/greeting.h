@@ -7,7 +7,10 @@ class Greeting
     QString mSubject;
 public:
     Greeting(QString subject);
-    QString get() const;
+    QString get() const
+    {
+        return "Hello " + mSubject + "!";
+    }
 };
 
 #endif // GREETING_H

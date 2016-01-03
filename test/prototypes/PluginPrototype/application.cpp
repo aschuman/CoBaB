@@ -3,6 +3,7 @@
 #include <qdir.h>
 #include <qlibraryinfo.h>
 #include <qpluginloader.h>
+#include "printer.h"
 
 Application::Application()
 {
@@ -31,8 +32,18 @@ void Application::loadPlugins()
         QString filePath = pluginsDir.absoluteFilePath(fileName);
         QPluginLoader loader(filePath);
         QObject* plugin = loader.instance();
-        if(plugin)
-                plugins.push_back(std::make_unique<QObject>(plugin));
+        IPrinter* printer = dynamic_cast<IPrinter*>(plugin);
+        if(printer)
+                plugins.push_back(std::unique_ptr<IPrinter>(printer));
+    }
+}
+
+void Application::greet(const Greeting& greeting)
+{
+    for(auto& printer : plugins){
+        Printer<Greeting>* greetingsPrinter = dynamic_cast<Printer<Greeting>*>(printer.get());
+        if(greetingsPrinter)
+            greetingsPrinter->print(greeting);
     }
 }
 
@@ -41,6 +52,7 @@ void Application::run()
     std::cout << "loading plugins..." << std::endl;
     loadPlugins();
     std::cout << "loaded " << plugins.size() << " plugins" << std::endl;
+    greet(Greeting("WoRlD"));
 
     emit finished();
 }
