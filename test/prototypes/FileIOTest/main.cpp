@@ -50,19 +50,21 @@ int main(int argc, char *argv[])
     if(QFile("../FileIOTest/bookmarks/resultTest.dat").exists()) {
         start = (QDateTime::currentDateTime()).toMSecsSinceEpoch();
         SearchResult loaded2 = resultIO.loadSearchResult("3");
-        stream << loaded2.getName() << endl;
-        stream << loaded2.getDate().toTime_t() << endl;
-        stream << loaded2.getSearchResultList().last() << endl;
+        stream << "read the third result, when the results are in one file:" << endl;
+        stream << "loaded name: " << loaded2.getName() << endl;
+        stream << "loaded date: " << loaded2.getDate().toTime_t() << endl;
+        stream << "loaded last list element: " << loaded2.getSearchResultList().last() << endl;
         end = (QDateTime::currentDateTime()).toMSecsSinceEpoch();
-        stream << "one (read) " << (end-start) << endl;
+        stream << "time to read the third result (from the first start): " << (end-start) << endl << endl;
 
         start = (QDateTime::currentDateTime()).toMSecsSinceEpoch();
         SearchResult loaded3 = resultIO.loadSearchResultManyFiles("3");
-        stream << loaded3.getName() << endl;
-        stream << loaded3.getDate().toTime_t() << endl;
-        stream << loaded3.getSearchResultList().last() << endl;
+        stream << "read the third result, when the results are in their own files:" << endl;
+        stream << "loaded name: " << loaded3.getName() << endl;
+        stream << "loaded date: " << loaded3.getDate().toTime_t() << endl;
+        stream << "loaded last list element: " << loaded3.getSearchResultList().last() << endl;
         end = (QDateTime::currentDateTime()).toMSecsSinceEpoch();
-        stream << "many (read) " << (end-start) << endl;
+        stream << "time to read the third result: " << (end-start) << endl << endl;
     }
 
     //write test with one file
@@ -74,11 +76,11 @@ int main(int argc, char *argv[])
         }
         SearchResult result(list);
         result.setName(QString::number(i));
-        stream << result.getDate().toTime_t() << endl;
+        stream << "current date, which is saved in a result: " << result.getDate().toTime_t() << endl;
         resultIO.storeSearchResult(result);
     }
     end = (QDateTime::currentDateTime()).toMSecsSinceEpoch();
-    stream << "one (write) " << (end-start) << endl;
+    stream << "time to write the results in one file: " << (end-start) << endl << endl;
 
     //write test with many files
     start = (QDateTime::currentDateTime()).toMSecsSinceEpoch();
@@ -89,15 +91,17 @@ int main(int argc, char *argv[])
         }
         SearchResult result(list);
         result.setName(QString::number(i));
-        stream << result.getDate().toTime_t() << endl;
+        stream << "current date, which is saved in result " << i << ": " << result.getDate().toTime_t() << endl;
         resultIO.storeSearchResultManyFiles(result);
     }
     end = (QDateTime::currentDateTime()).toMSecsSinceEpoch();
-    stream << "many (write) " << (end-start) << endl;
+    stream << "time to write the results in their own files: " << (end-start) << endl << endl;
 
     //that's the result from the list, not the file!
     SearchResult loaded = resultIO.loadSearchResult("5");
-    stream << loaded.getName() << endl << loaded.getDate().toTime_t() << endl;
+    stream << "the fifth result, that is still in the list: " << endl;
+    stream << "loaded name: " << loaded.getName() << endl;
+    stream << "loaded date: " << loaded.getDate().toTime_t() << endl;
 
     return a.exec();
 }
