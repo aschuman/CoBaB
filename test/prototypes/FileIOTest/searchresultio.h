@@ -12,8 +12,8 @@ public:
     SearchResult loadSearchResult(QString name);
     void storeSearchResultManyFiles(SearchResult searchResult);
     SearchResult loadSearchResultManyFiles(QString name);
-    QDataStream &SearchResultIO::operator<<(SearchResult result);
-    QDataStream &SearchResultIO::operator>>(SearchResult &result);
+    QDataStream &operator<<(SearchResult result);
+    QDataStream &operator>>(SearchResult &result);
     QList<SearchResult> getSearchResultList();
 private:
     QList<SearchResult> searchResultList;
