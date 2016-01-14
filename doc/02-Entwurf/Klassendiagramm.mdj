@@ -29625,7 +29625,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«slot»+startSearch(algo: Algorithm, query: SearchQuery)",
+											"text": "«slot»+startSearch(algo: Algorithm)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -35073,24 +35073,8 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "Algorithm",
-									"isReadOnly": false,
-									"isOrdered": false,
-									"isUnique": false,
-									"direction": "in"
-								},
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAFSE6/w3zHoAR0=",
-									"_parent": {
-										"$ref": "AAAAAAFSEaYNCPLBjQI="
-									},
-									"name": "query",
-									"visibility": "public",
-									"isStatic": false,
-									"isLeaf": false,
 									"type": {
-										"$ref": "AAAAAAFRcyXot7Tn4rI="
+										"$ref": "AAAAAAFSIhXUhFomVNU="
 									},
 									"isReadOnly": false,
 									"isOrdered": false,
@@ -94038,9 +94022,9 @@
 													"showShadow": true,
 													"containerChangeable": false,
 													"containerExtending": false,
-													"left": 723,
+													"left": 743,
 													"top": 136,
-													"width": 231,
+													"width": 191,
 													"height": 13,
 													"autoResize": false,
 													"alpha": 1.5707963267948966,
@@ -94050,7 +94034,7 @@
 													},
 													"edgePosition": 1,
 													"underline": false,
-													"text": "4 : startSearch(chosenAlgorithm, query)",
+													"text": "4 : startSearch(chosenAlgorithm)",
 													"horizontalAlignment": 2,
 													"verticalAlignment": 5
 												},
@@ -94429,7 +94413,7 @@
 									"signature": {
 										"$ref": "AAAAAAFSEaYNCPLBjQI="
 									},
-									"arguments": "chosenAlgorithm, query",
+									"arguments": "chosenAlgorithm",
 									"isConcurrentIteration": false
 								},
 								{
