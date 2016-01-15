@@ -1,45 +1,33 @@
 \subsection{Übersicht}
 
 \subsection{Model}
+
+\subsection{ConfigData}
+Die Klasse ConfigData speichert die Benutzereinstellungen Sprache und Benachrichtigungston. Außerdem werden die Hilfe- und Aboutdateien gelesen.
+
+Methoden
 \begin{itemize}
+\item private ConfigData() Erzeugt ein neues ConfigData Objekt.
+\item public ConfigData getInstance() Liefert die ConfigData Instanz zurück. Dies stellt sicher, dass nur eine Instanz von ConfigData existiert.
+\item public Language getLanguage() Lädt die vom Benutzer gewählte Sprache.
+\item public void setLanguage(Language language) Speichert die vom Benutzer gewählte Sprache.
+\item public bool getSoundOn() Lädt die vom Benutzer gewählte Toneinstellung.
+\item public void setSoundOn(bool soundOn) Speichert die vom Benutzer gewählte Toneinstellung.
+\item public QString getHelp() Lädt die Hilfedatei und gibt deren Inhalt zurück.
+\item public QString getAbout() Lädt die Aboutdatei und gibt deren Inhalt zurück.
+\end{itemize}
 
-	\item ConfigData \newline
-Diese Klasse liest aus den Config-Textdateien die gewählte Sprache, die Aktivierung bzw. Deaktivierung des Benachrichtigungstons und die Texte des Hilfe- und Aboutdialogs ein.
-Werden die Sprache oder die Einstellung des Benachrichtigungstons geändert, überschreibt diese Klasse die entsprechenden Werte in den Config-Dateien.
+\subsection{<<enumeration>> Language}
+Language repräsentiert die verfügbaren Sprachen: Deutsch und Englisch.
 
-	\item SearchResultElement \newline
-Das Feedback, das der Benutzer für ein Foto oder Video eingestellt hat, wird zusammen mit dem Pfad zu diesem Foto oder Video als SearchResultElement abgelegt.
-
-	\item SearchResult \newline
-Ein Objekt dieser Klasse repräsentiert das gesamte Suchergebnis, es besteht aus einer Liste von SeachResultElement. Dieses Objekt wird als Chronikeintrag und auf Wunsch des Benutzers als Lesezeichen gespeichert.
-
-	\item SearchResultIO \newline
-Diese abstrakte Klasse ermöglicht, neue Suchergebnisse (SearchResult) zu speichern und alte Suchergebnisse zu laden. Konkret können Lesezeichen mit der Klasse Bookmark und Chronikeinträge mit der Klasse Chronicle verwaltet werden.
-
-	\item SearchQuery \newline
-Diese Klasse stellt die Benutzereingaben zusammen, um sie an das Suchverfahren weiterzugeben.
-
-	\item SearchInterface \newline
-Diese Schnittstelle ermöglicht eine einheitliche Verwendung der Suchalgorithmen.
-
-	\item TestAlgorithm \newline
-Dieser Algorithmus implementiert das SearchInterface zu Testzwecken.
-
-	\item DataSet \newline
-Repräsentiert einen Datensatz, es kann sich entweder um einen Foto- oder Videodatensatz handeln.
-
-	\item DataSetInterface \newline
-Diese Schnittstelle bietet der Anwendung und den Suchverfahren einen einheitlichen Zugriff auf die Datensätze.
-
-	\item DataSetComp \newline
-Die Datensatzkomponente implementiert die Datensatzschnittstelle.
-
-	\item DataSetParser \newline
-Gibt den Datensatztyp zurück.
-
-	\item DataSetCreator \newline
-Erstellt einen neuen Datensatz, entweder einen Foto- oder Videodatensatz.
-
+\subsection{Annotation}
+Eine Annotation ist ein in den Datensätzen vordefinierter Bereich eines Bildes oder Videos.
+\begin{itemize}
+\item public Annotation(QString id) Gibt eine Instanz dieser Klasse zurück. Die übergebene id identifiziert die Annotation in einem Medium.
+\item public QString getId() Gibt die id der Annotation zurück.
+\item public AnnotationType getType() Gibt den Typ der Annotation zurück.
+\item public friend QDataStream& operator<<(QDataStream& out, Annotation& annotation) Speichert die Annotation in einer Datei.
+\item public friend QDataStream& operator>>(QDataStream& in, Annotation& annotation) Lädt die Annotation aus einer Datei.
 \end{itemize}
 
 \subsection{View}
