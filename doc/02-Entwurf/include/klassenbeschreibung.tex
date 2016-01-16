@@ -2,7 +2,7 @@
 
 \subsection{Model}
 
-\subsection{ConfigData}
+\subsection*{ConfigData}
 Die Klasse ConfigData speichert die Benutzereinstellungen Sprache und Benachrichtigungston. Außerdem werden die Hilfe- und Aboutdateien gelesen.
 
 Methoden
@@ -17,18 +17,91 @@ Methoden
 \item public QString getAbout() Lädt die Aboutdatei und gibt deren Inhalt zurück.
 \end{itemize}
 
-\subsection{<<enumeration>> Language}
+\subsection*{<<enumeration>> Language}
 Language repräsentiert die verfügbaren Sprachen: Deutsch und Englisch.
 
-\subsection{Annotation}
-Eine Annotation ist ein in den Datensätzen vordefinierter Bereich eines Bildes oder Videos.
+\subsection*{Annotation}
+Eine Annotation ist ein in den Datensätzen vordefinierter Bereich eines Bildes oder Videos, der den Typ face oder person haben kann.
+
+Methoden
 \begin{itemize}
 \item public Annotation(QString id) Gibt eine Instanz dieser Klasse zurück. Die übergebene id identifiziert die Annotation in einem Medium.
 \item public QString getId() Gibt die id der Annotation zurück.
 \item public AnnotationType getType() Gibt den Typ der Annotation zurück.
-\item public friend QDataStream& operator<<(QDataStream& out, Annotation& annotation) Speichert die Annotation in einer Datei.
-\item public friend QDataStream& operator>>(QDataStream& in, Annotation& annotation) Lädt die Annotation aus einer Datei.
+\item public friend QDataStream\& operator<<(QDataStream\& out, Annotation\& annotation) Speichert die Annotation in einer Datei.
+\item public friend QDataStream\& operator>>(QDataStream\& in, Annotation\& annotation) Lädt die Annotation aus einer Datei.
+\item public void toStream(QDataStream in) Speichert die Annotation, durch den Aufruf von operator<<, in einer Datei.
+\item public void fromStream(QDataStream out) Lädt die Annotation, durch den Aufruf von operator>>, aus einer Datei.
 \end{itemize}
+
+\subsection*{RectangleAnnotation : public Annotation}
+Eine RectangleAnnotation ist eine rechteckige Annotation.
+
+Methoden
+\begin{itemize}
+\item public RectangleAnnotation(QString id) Erzeugt ein Objekt von RectangleAnnotation. Die übergebene id identifiziert die Annotation in einem Medium.
+\end{itemize}
+
+\subsection*{DataPacket}
+Ein DataPacket ist eine Eingabe für den Algorithmus.
+
+Methoden
+\begin{itemize}
+\item public DataPacketType getType() Gibt den Typ des DataPackets zurück, abhängig von der Kindklasse.
+\item public abstract void toStream(QDataStream in) Speichert das DataPacket, durch den Aufruf von operator<<, in einer Datei.
+\item public abstract void fromStream(QDataStream out) Speichert das DataPacket, durch den Aufruf von operator>>, in einer Datei.
+\end{itemize}
+
+\subsection*{<<enumeration>> DataPacketType}
+DataPacketType enthält die Typen von DataPackets, also die vorhandenen Kindklassen.
+
+\subsection*{SearchQuery : DataPacket}
+Eine SearchQuery ist eine Suchanfrage an den Algorithmus.
+
+Methoden
+\begin{itemize}
+\item public SearchQuery() Erzeugt ein SearchQuery Objekt.
+\item public QList<Dataset> getDatasets() Gibt den Suchraum, in Form von einer Datensatzliste zurück.
+\item public void setDatasets(QList<Dataset> datasets) Setzt den Suchraum für die Suchanfrage.
+\item public SearchObject getSearchObject() Gibt das SearchObject für diese Anfrage zurück.
+\item public void setSearchObject(SearchObject searchObject) Setzt das SearchObject für diese Anfrage.
+\item public friend QDataStream\& operator<<(QDataStream\& out, SearchQuery\& searchQuery) Speichert die SearchQuery in einer Datei.
+\item public friend QDataStream\& operator>>(QDataStream\& in, SearchQuery\& searchQuery) Lädt die SearchQuery aus einer Datei.
+\item public void toStream(QDataStream in) Speichert die SearchQuery, durch den Aufruf von operator<<, in einer Datei.
+\item public void fromStream(QDataStream out) Lädt die SearchQuery, durch den Aufruf von operator>>, aus einer Datei.
+\end{itemize}
+
+\subsection*{SearchResult : DataPacket}
+Ein SearchResult ist die Ausgabe eines Algorithmus. Allerdings kann es auch eine Eingabe sein, wenn ein Algorithmus auf einem bestehenden Suchergebnis weiterarbeitet.
+
+Methoden
+\begin{itemize}
+\item public SearchResult(QList<SearchResultElement> list) Erzeugt ein neues SearchResult, das eine Liste von SearchResultElements enthält.
+\item public QList<SearchResultElement> getSearchResultList() Gibt die Liste der SearchResultElements zurück.
+\item public void sortByScore() Sortiert die Ergebnisliste nach dem Score.
+\item public friend QDataStream\& operator<<(QDataStream\& out, SearchResult\& searchResult) Speichert das SearchResult in einer Datei.
+\item public friend QDataStream\& operator>>(QDataStream\& in, SearchResult\& searchResult) Lädt das SearchResult aus einer Datei.
+\item public void toStream(QDataStream in) Speichert das SearchResult, durch den Aufruf von operator<<, in einer Datei.
+\item public void fromStream(QDataStream out) Lädt das SearchResult, durch den Aufruf von operator>>, aus einer Datei.
+\end{itemize}
+
+\subsection*{Feedback : DataPacket}
+Das Feedback gibt an, wie gut das vom Algorithmus erzeugte Suchergebnis ist.
+
+Methoden
+\begin{itemize}
+\item public Feedback(FeedbackType type) Erzeugt ein neues Feedback Objekt. Der Typ kann entweder dual oder extended sein.
+\item public int getFeedback() Gibt den Wert des Feedbacks zurück.
+\item public void setFeedback(int feedback) Setzt das Feedback auf den übergebenen Wert.
+\item public FeedbackType getFeedbackType() Gibt den Feedback Typ zurück.
+\item public SearchObject getSearchObject() Gibt das SearchObject, zu dem dieses Feedback gehört zurück.
+\item public void setSearchObject(SearchObject searchObject) Setzt das SearchObject für dieses Feedback.
+\item public friend QDataStream\& operator<<(QDataStream\& out, Feedback\& feedback) Speichert das Feedback in einer Datei.
+\item public friend QDataStream\& operator>>(QDataStream\& in, Feedback\& feedback) Lädt das Feedback aus einer Datei.
+\item public void toStream(QDataStream in) Speichert das Feedback, durch den Aufruf von operator<<, in einer Datei.
+\item public void fromStream(QDataStream out) Lädt das Feedback, durch den Aufruf von operator>>, aus einer Datei.
+\end{itemize} 
+
 
 \subsection{View}
 
