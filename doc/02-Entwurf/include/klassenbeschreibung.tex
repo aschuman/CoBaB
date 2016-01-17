@@ -145,7 +145,115 @@ Methoden
 \subsubsection*{<<enumeration>> FeedbackType}
 Der FeedbackType kann dual (positiv, negativ, neutral) oder extended (Werte von 1 bis 10) sein.
 
+\subsection*{<<interface>> Serializable}
+Das Interface Serializable ist dazu da, damit die implementierenden Klassen serialisierbar sind.
 
+Methoden
+\begin{itemize}
+\item \textit{public void toStream(QDataStream in)} Speichert das serialisierbare Objekt in einer Datei.
+\item \textit{public void fromStream(QDataStream out)} Lädt das serialisierbare Objekt aus einer Datei.
+\end{itemize}
+
+\subsection*{Bookmark : public Serializable}
+Ein Bookmark speichert ein Suchergebnis, eine Suchanfrage und das Feedback, sodass ein früherer Suchvorgang wiederhergestellt werden kann.
+
+Methoden
+\begin{itemize}
+\item \textit{public Bookmark(SearchResut result, QString algorithm, SearchQuery query} Erzeugt ein neues Bookmark.
+\item \textit{public friend QDataStream\& operator<<(QDataStream\& out, Bookmark\& bookmark)} Speichert das Bookmark in einer Datei.
+\item \textit{public friend QDataStream\& operator>>(QDataStream\& in, Bookmark\& bookmark)} Lädt das Bookmark aus einer Datei.
+\item \textit{public void toStream(QDataStream in)} Speichert das Bookmark, durch den Aufruf von operator<<, in einer Datei.
+\item \textit{public void fromStream(QDataStream out)} Lädt das Bookmark, durch den Aufruf von operator>>, aus einer Datei.
+\end{itemize}
+
+\subsection*{BookmarkList}
+Die BookmarkList hält eine List von Bookmarks und speichert die Bookmarks.
+
+Methoden
+\begin{itemize}
+\item \textit{public BookmarkList()} Erzeugt eine BookmarkList.
+\item \textit{public void load(QString path)} Lädt die Bookmarks aus der Datei.
+\item \textit{public void save(QString path)} Speichert die Bookmark Liste in der Datei mit dem übergebenen Pfad.
+\item \textit{public void addBookmark(Bookmark bookmark)} Fügt ein Bookmark in die Liste hinzu.
+\item \textit{public void removeBookmark(const Bookmark* bookmark)} Entfernt bookmark aus der Bookmark Liste.
+\item \textit{public QList<Bookmark*> sortByName()} Gibt die Bookmark Liste nach Namen sortiert zurück.
+\item \textit{public QList<Bookmark*> sortByDate()} Gibt die Bookmark Liste nach Datum sortiert zurück.
+\item \textit{private void validateResult(SearchResult searchResult)} Überprüft, ob das übergebene SearchResult gültig ist, also noch alle Datensätze und Medien vorhanden sind.
+\end{itemize}
+
+\subsection*{Dataset}
+Ein Dataset hat einen Typ und enthält Medien diesen Typs.
+
+Methoden
+\begin{itemize}
+\item \textit{public Dataset(QString path)} Erzeugt einen Datensatz mit dem übergebenen Ordnerpfad.
+\item \textit{public QString getName()} Gibt den Namen des Datensatzes (des Ordners) zurück.
+\item \textit{public int getNumberOfMedia()} Gibt die Anzahl der Medien in der MediaList zurück.
+\item \textit{public QImage getPreviewPhoto()} Gibt das Vorschaubild des Dtaensatzes zurück.
+\item \textit{private void createPreviewPhoto()} Erstellt ein Vorschaubild aus den Medien.
+\item \textit{public QList<Medium> getMediaList()} Gibt die Liste aller Medien zurück.
+\item \textit{public QString getPath()} Gibt den absoluten Pfad des Datensatzes zurück.
+\item \textit{public DatasetType getType()} Gibt den Typ des Datensatzes und damit auch der Medien zurück.
+\end{itemize}
+
+\subsection*{DatasetList}
+Eine DatasetList hält eine List von Datensätzen und speichert sie.
+
+Methoden
+\begin{itemize}
+\item \textit{public DatasetList()} Erzeugt eine DatasetList.
+\item \textit{public QList<Dataset> getDatasetList()} Gibt die Liste der Datensätze zurück.
+\item \textit{public void addDataset(Dataset dataset)} Fügt den übergebenen Dataset der Liste hinzu.
+\item \textit{public void load(QString path)} Lädt die Datensatzliste aus der Datei mit dem übergebenen Pfad.
+\item \textit{public void store(QString path)} Speichert die Datensatzliste in der Datei mit dem übergebenen Pfad.
+\end{itemize}
+
+\subsection*{DatasetType}
+Der Datensatztyp kann photo, video oder single frame video sein.
+
+\subsection*{Medium}
+Ein Medium wird durch einen Pfad charakterisiert. Außerdem hat ein Medium eine Liste von Annotationen und dem zugehörigen Index. Der Index ist bei Photos 0, in Videos gibt er an, in welchem Frame sich die Annotation befindet.
+
+Methoden
+\begin{itemize}
+\item \textit{public Medium(QString path, QList<QPair<int, Annotation>> annotations)} Erzeugt ein Medium, das den übergebenen Pfad und die Annotationsliste hat.
+\item \textit{public MediumType getType()} Gibt den Typ des Mediums zurück.
+\item \textit{public QList<QPair<int, Annotation>>} Gibt die Liste der Annotationen zurück.
+\end{itemize}
+
+\subsection*{<<enumeration>> MediumType}
+Der MediumType gibt den Typ des Meiums an: photo, video oder single frame video.
+
+\subsection*{Photo : public Medium}
+Ein Photo ist ein Bild, in dem Annotationen sein können.
+
+Methoden
+\begin{itemize}
+\item \textit{public Photo(QString path} Erzeugt ein Photo, mit dem übergebenen Pfad.
+\end{itemize}
+
+\subsection*{SingleFrameVideo : public Medium}
+Ein SingelFrameVideo ist ein Video aus Einzebildern.
+
+Methoden
+\begin{itemize}
+\item \textit{public SingleFrameVideo(QString path)} Erzeugt ein SingleFrameVideo.
+\item \textit{public int getFramerate()} Gibt die Framerate des Videos zurück.
+\item \textit{public QList<QString> getFrameList()} Gibt die Liste der Frames zurück.
+\end{itemize}
+
+\subsection*{Video : public Medium}
+Ein Video aus einer Videodatei.
+
+Methoden
+\begin{itemize}
+\item \textit{public Video(QString path)} Erzeugt ein Video aus dem übergebenen Pfad.
+\end{itemize}
+
+\subsection*{<<interface>> Algorithm}
+\subsection*{<<interface>> SearchAlgorithm : public Algorithm}
+\subsection*{TestAlgorithm : public SearchAlgorithm}
+\subsection*{AlgorithmList}
 
 \subsection{View}
 
