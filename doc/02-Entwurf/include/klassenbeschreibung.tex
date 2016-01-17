@@ -7,49 +7,51 @@ Die Klasse ConfigData speichert die Benutzereinstellungen Sprache und Benachrich
 
 Methoden
 \begin{itemize}
-\item private ConfigData() Erzeugt ein neues ConfigData Objekt.
-\item public ConfigData getInstance() Liefert die ConfigData Instanz zurück. Dies stellt sicher, dass nur eine Instanz von ConfigData existiert.
-\item public Language getLanguage() Lädt die vom Benutzer gewählte Sprache.
-\item public void setLanguage(Language language) Speichert die vom Benutzer gewählte Sprache.
-\item public bool getSoundOn() Lädt die vom Benutzer gewählte Toneinstellung.
-\item public void setSoundOn(bool soundOn) Speichert die vom Benutzer gewählte Toneinstellung.
-\item public QString getHelp() Lädt die Hilfedatei und gibt deren Inhalt zurück.
-\item public QString getAbout() Lädt die Aboutdatei und gibt deren Inhalt zurück.
+\item \textit{private ConfigData()} Erzeugt ein neues ConfigData Objekt.
+\item \textit{public ConfigData getInstance()} Liefert die ConfigData Instanz zurück. Dies stellt sicher, dass nur eine Instanz von ConfigData existiert.
+\item \textit{public Language getLanguage()} Lädt die vom Benutzer gewählte Sprache.
+\item \textit{public void setLanguage(Language language)} Speichert die vom Benutzer gewählte Sprache.
+\item \textit{public bool getSoundOn()} Lädt die vom Benutzer gewählte Toneinstellung.
+\item \textit{public void setSoundOn(bool soundOn)} Speichert die vom Benutzer gewählte Toneinstellung.
+\item \textit{public QString getHelp()} Lädt die Hilfedatei und gibt deren Inhalt zurück.
+\item \textit{public QString getAbout()} Lädt die Aboutdatei und gibt deren Inhalt zurück.
 \end{itemize}
 
 \subsection*{<<enumeration>> Language}
 Language repräsentiert die verfügbaren Sprachen: Deutsch und Englisch.
 
-\subsection*{Annotation}
+\subsection*{Annotation : public Serializable}
 Eine Annotation ist ein in den Datensätzen vordefinierter Bereich eines Bildes oder Videos, der den Typ face oder person haben kann.
 
 Methoden
 \begin{itemize}
-\item public Annotation(QString id) Gibt eine Instanz dieser Klasse zurück. Die übergebene id identifiziert die Annotation in einem Medium.
-\item public QString getId() Gibt die id der Annotation zurück.
-\item public AnnotationType getType() Gibt den Typ der Annotation zurück.
-\item public friend QDataStream\& operator<<(QDataStream\& out, Annotation\& annotation) Speichert die Annotation in einer Datei.
-\item public friend QDataStream\& operator>>(QDataStream\& in, Annotation\& annotation) Lädt die Annotation aus einer Datei.
-\item public void toStream(QDataStream in) Speichert die Annotation, durch den Aufruf von operator<<, in einer Datei.
-\item public void fromStream(QDataStream out) Lädt die Annotation, durch den Aufruf von operator>>, aus einer Datei.
+\item \textit{public Annotation(QString id)} Gibt eine Instanz dieser Klasse zurück. Die übergebene id identifiziert die Annotation in einem Medium.
+\item \textit{public QString getId()} Gibt die id der Annotation zurück.
+\item \textit{public AnnotationType getType()} Gibt den Typ der Annotation zurück.
+\item \textit{public friend QDataStream\& operator<<(QDataStream\& out, Annotation\& annotation)} Speichert die Annotation in einer Datei.
+\item \textit{public friend QDataStream\& operator>>(QDataStream\& in, Annotation\& annotation)} Lädt die Annotation aus einer Datei.
+\item \textit{public void toStream(QDataStream in)} Speichert die Annotation, durch den Aufruf von operator<<, in einer Datei.
+\item \textit{public void fromStream(QDataStream out)} Lädt die Annotation, durch den Aufruf von operator>>, aus einer Datei.
 \end{itemize}
 
-\subsection*{RectangleAnnotation : public Annotation}
+\subsection*{RectangleAnnotation : public Annotation, public QRect}
 Eine RectangleAnnotation ist eine rechteckige Annotation.
 
 Methoden
 \begin{itemize}
-\item public RectangleAnnotation(QString id) Erzeugt ein Objekt von RectangleAnnotation. Die übergebene id identifiziert die Annotation in einem Medium.
+\item \textit{public RectangleAnnotation(QString id)} Erzeugt ein Objekt von RectangleAnnotation. Die übergebene id identifiziert die Annotation in einem Medium.
+\item \textit{public friend QDataStream\& operator<<(QDataStream\& out, RectangleAnnotation\& annotation)} Speichert die RectangleAnnotation in einer Datei.
+\item \textit{public friend QDataStream\& operator>>(QDataStream\& in, RectangleAnnotation\& annotation)} Lädt die RectangleAnnotation aus einer Datei.
 \end{itemize}
 
-\subsection*{DataPacket}
+\subsection*{DataPacket : public Serializable}
 Ein DataPacket ist eine Eingabe für den Algorithmus.
 
 Methoden
 \begin{itemize}
-\item public DataPacketType getType() Gibt den Typ des DataPackets zurück, abhängig von der Kindklasse.
-\item public abstract void toStream(QDataStream in) Speichert das DataPacket, durch den Aufruf von operator<<, in einer Datei.
-\item public abstract void fromStream(QDataStream out) Speichert das DataPacket, durch den Aufruf von operator>>, in einer Datei.
+\item \textit{public DataPacketType getType()} Gibt den Typ des DataPackets zurück, abhängig von der Kindklasse.
+\item \textit{public abstract void toStream(QDataStream in)} Speichert das DataPacket, durch den Aufruf von operator<<, in einer Datei.
+\item \textit{public abstract void fromStream(QDataStream out)} Speichert das DataPacket, durch den Aufruf von operator>>, in einer Datei.
 \end{itemize}
 
 \subsection*{<<enumeration>> DataPacketType}
@@ -60,15 +62,15 @@ Eine SearchQuery ist eine Suchanfrage an den Algorithmus.
 
 Methoden
 \begin{itemize}
-\item public SearchQuery() Erzeugt ein SearchQuery Objekt.
-\item public QList<Dataset> getDatasets() Gibt den Suchraum, in Form von einer Datensatzliste zurück.
-\item public void setDatasets(QList<Dataset> datasets) Setzt den Suchraum für die Suchanfrage.
-\item public SearchObject getSearchObject() Gibt das SearchObject für diese Anfrage zurück.
-\item public void setSearchObject(SearchObject searchObject) Setzt das SearchObject für diese Anfrage.
-\item public friend QDataStream\& operator<<(QDataStream\& out, SearchQuery\& searchQuery) Speichert die SearchQuery in einer Datei.
-\item public friend QDataStream\& operator>>(QDataStream\& in, SearchQuery\& searchQuery) Lädt die SearchQuery aus einer Datei.
-\item public void toStream(QDataStream in) Speichert die SearchQuery, durch den Aufruf von operator<<, in einer Datei.
-\item public void fromStream(QDataStream out) Lädt die SearchQuery, durch den Aufruf von operator>>, aus einer Datei.
+\item \textit{public SearchQuery()} Erzeugt ein SearchQuery Objekt.
+\item \textit{public QList<Dataset> getDatasets()} Gibt den Suchraum, in Form von einer Datensatzliste zurück.
+\item \textit{public void setDatasets(QList<Dataset> datasets)} Setzt den Suchraum für die Suchanfrage.
+\item \textit{public SearchObject getSearchObject()} Gibt das SearchObject für diese Anfrage zurück.
+\item \textit{public void setSearchObject(SearchObject searchObject)} Setzt das SearchObject für diese Anfrage.
+\item \textit{public friend QDataStream\& operator<<(QDataStream\& out, SearchQuery\& searchQuery)} Speichert die SearchQuery in einer Datei.
+\item \textit{public friend QDataStream\& operator>>(QDataStream\& in, SearchQuery\& searchQuery)} Lädt die SearchQuery aus einer Datei.
+\item \textit{public void toStream(QDataStream in)} Speichert die SearchQuery, durch den Aufruf von operator<<, in einer Datei.
+\item \textit{public void fromStream(QDataStream out)} Lädt die SearchQuery, durch den Aufruf von operator>>, aus einer Datei.
 \end{itemize}
 
 \subsection*{SearchResult : DataPacket}
@@ -76,13 +78,51 @@ Ein SearchResult ist die Ausgabe eines Algorithmus. Allerdings kann es auch eine
 
 Methoden
 \begin{itemize}
-\item public SearchResult(QList<SearchResultElement> list) Erzeugt ein neues SearchResult, das eine Liste von SearchResultElements enthält.
-\item public QList<SearchResultElement> getSearchResultList() Gibt die Liste der SearchResultElements zurück.
-\item public void sortByScore() Sortiert die Ergebnisliste nach dem Score.
-\item public friend QDataStream\& operator<<(QDataStream\& out, SearchResult\& searchResult) Speichert das SearchResult in einer Datei.
-\item public friend QDataStream\& operator>>(QDataStream\& in, SearchResult\& searchResult) Lädt das SearchResult aus einer Datei.
-\item public void toStream(QDataStream in) Speichert das SearchResult, durch den Aufruf von operator<<, in einer Datei.
-\item public void fromStream(QDataStream out) Lädt das SearchResult, durch den Aufruf von operator>>, aus einer Datei.
+\item \textit{public SearchResult(QList<SearchResultElement> list)} Erzeugt ein neues SearchResult, das eine Liste von SearchResultElements enthält.
+\item \textit{public QList<SearchResultElement> getSearchResultList()} Gibt die Liste der SearchResultElements zurück.
+\item \textit{public void sortByScore()} Sortiert die Ergebnisliste nach dem Score.
+\item \textit{public friend QDataStream\& operator<<(QDataStream\& out, SearchResult\& searchResult)} Speichert das SearchResult in einer Datei.
+\item \textit{public friend QDataStream\& operator>>(QDataStream\& in, SearchResult\& searchResult)} Lädt das SearchResult aus einer Datei.
+\item \textit{public void toStream(QDataStream in)} Speichert das SearchResult, durch den Aufruf von operator<<, in einer Datei.
+\item \textit{public void fromStream(QDataStream out)} Lädt das SearchResult, durch den Aufruf von operator>>, aus einer Datei.
+\end{itemize}
+
+\subsubsection*{SearchResultElement : public Serializable}
+Ein SearchResultElement ist ein Element von SearchResult. Abgesehen von einem SearchObject enthält es einen Score für dieses, der durch den Algorithmus bestimmt und gesetzt wurde.
+
+Methoden
+\begin{itemize}
+\item \textit{public SearchResultElement()} Erzeugt ein SearchResultElement.
+\item \textit{public int getScore()} Gibt den Score für dieses Element zurück.
+\item \textit{public void setScore(int score)} Setzt den Score für dieses Element.
+\item \textit{public SearchObject getSearchObject()} Gibt das SearchObject zurück.
+\item \textit{public void setSearchObject(SearchObject searchObject)} Setzt das übergebene SearchObject für das Element.
+\item \textit{public friend QDataStream\& operator<<(QDataStream\& out, SearchResultElement\& searchResultElement)} Speichert das SearchResultElement in einer Datei.
+\item \textit{public friend QDataStream\& operator>>(QDataStream\& in, SearchResultElement\& searchResultElement)} Lädt das SearchResultElemnt aus einer Datei.
+\item \textit{public void toStream(QDataStream in)} Speichert das SearchResultElement, durch den Aufruf von operator<<, in einer Datei.
+\item \textit{public void fromStream(QDataStream out)} Lädt das SearchResultElement, durch den Aufruf von operator>>, aus einer Datei.
+\end{itemize}
+
+\subsection*{SearchObject : public Serializable}
+Das SearchObject repräsentiert eine Annotation oder ein Rechteck in einem Bild oder Frame eines Videos aus einem Datensatz.
+
+Methoden
+\begin{itemize}
+\item \textit{public SearchObject} Erzeugt ein SearchObject.
+\item \textit{public QString getMedium()} Gibt den Dateipfad des Mediums zurück.
+\item \textit{public void setMedium(QString medium)} Setzt das Medium auf den gegebenen Dateipfad, relativ zum SourceDataset.
+\item \textit{public Annotation getAnnotation()} Gibt die Annotation im Medium zurück.
+\item \textit{public void setAnnotation(Annotation annotation)} Setzt eine Annotation eines Mediums für das SearchObject.
+\item \textit{public QRect getROI()} Gibt ein QRect zurück, das die \enquote{region of interest} im Medium repräsentiert.
+\item \textit{public void setROI(QRect ROI)} Setzt ein QRect als ROI.
+\item \textit{public Dataset getSourceDataset} Gibt den Datensatz, in dem sich das Medium befindet zurück.
+\item \textit{public void setSourceDataset(Dataset dataset)} Setzt den Datensatz, in dem sich das Medium befindet.
+\item \textit{public int getMediumIndex()} Gibt den Index eines Mediums, also den Frame in einem Video zurück.
+\item \textit{public void setMediumIndex(int index)} Setzt den MediumIndex.
+\item \textit{public friend QDataStream\& operator<<(QDataStream\& out, SearchObject\& searchObject)} Speichert das SearchObject in einer Datei.
+\item \textit{public friend QDataStream\& operator>>(QDataStream\& in, SearchObject\& searchObject)} Lädt das SearchObject aus einer Datei.
+\item \textit{public void toStream(QDataStream in)} Speichert das SearchObject, durch den Aufruf von operator<<, in einer Datei.
+\item \textit{public void fromStream(QDataStream out)} Lädt das SearchObject, durch den Aufruf von operator>>, aus einer Datei.
 \end{itemize}
 
 \subsection*{Feedback : DataPacket}
@@ -90,17 +130,21 @@ Das Feedback gibt an, wie gut das vom Algorithmus erzeugte Suchergebnis ist.
 
 Methoden
 \begin{itemize}
-\item public Feedback(FeedbackType type) Erzeugt ein neues Feedback Objekt. Der Typ kann entweder dual oder extended sein.
-\item public int getFeedback() Gibt den Wert des Feedbacks zurück.
-\item public void setFeedback(int feedback) Setzt das Feedback auf den übergebenen Wert.
-\item public FeedbackType getFeedbackType() Gibt den Feedback Typ zurück.
-\item public SearchObject getSearchObject() Gibt das SearchObject, zu dem dieses Feedback gehört zurück.
-\item public void setSearchObject(SearchObject searchObject) Setzt das SearchObject für dieses Feedback.
-\item public friend QDataStream\& operator<<(QDataStream\& out, Feedback\& feedback) Speichert das Feedback in einer Datei.
-\item public friend QDataStream\& operator>>(QDataStream\& in, Feedback\& feedback) Lädt das Feedback aus einer Datei.
-\item public void toStream(QDataStream in) Speichert das Feedback, durch den Aufruf von operator<<, in einer Datei.
-\item public void fromStream(QDataStream out) Lädt das Feedback, durch den Aufruf von operator>>, aus einer Datei.
+\item \textit{public Feedback(FeedbackType type)} Erzeugt ein neues Feedback Objekt. Der Typ kann entweder dual oder extended sein.
+\item \textit{public int getFeedback()} Gibt den Wert des Feedbacks zurück.
+\item \textit{public void setFeedback(int feedback)} Setzt das Feedback auf den übergebenen Wert.
+\item \textit{public FeedbackType getFeedbackType()} Gibt den Feedback Typ zurück.
+\item \textit{public SearchObject getSearchObject()} Gibt das SearchObject, zu dem dieses Feedback gehört zurück.
+\item \textit{public void setSearchObject(SearchObject searchObject)} Setzt das SearchObject für dieses Feedback.
+\item \textit{public friend QDataStream\& operator<<(QDataStream\& out, Feedback\& feedback)} Speichert das Feedback in einer Datei.
+\item \textit{public friend QDataStream\& operator>>(QDataStream\& in, Feedback\& feedback)} Lädt das Feedback aus einer Datei.
+\item \textit{public void toStream(QDataStream in)} Speichert das Feedback, durch den Aufruf von operator<<, in einer Datei.
+\item \textit{public void fromStream(QDataStream out)} Lädt das Feedback, durch den Aufruf von operator>>, aus einer Datei.
 \end{itemize} 
+
+\subsubsection*{<<enumeration>> FeedbackType}
+Der FeedbackType kann dual (positiv, negativ, neutral) oder extended (Werte von 1 bis 10) sein.
+
 
 
 \subsection{View}
