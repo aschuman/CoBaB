@@ -258,3 +258,21 @@ Methoden
 \subsection{View}
 
 \subsection{Controller}
+\subsection*{MainControl}
+MainControl ist der Einstiegspunkt des Programms und verwaltet die Manager sowie den Navigator. Insbesondere erstellt MainControl die PageWidgets un registriert sie beim Navigator.
+Da die Manager und der Navigator nicht direkt Kommunizieren, verbindet MainControl ihre Signals und Slots.
+
+\subsection*{Navigator}
+Der Navigator ist in der Lage das aktuell im MainWindow angezeigte PageWidget durch ein anderes zu ersetzen. Desweiteren ist der Navigator für den austausch von Daten zwischen den PageWidgets verantwortlich.
+
+\subsection*{SearchManager}
+Der SearchManager startet einen Algorithm in einem neuen Thread und leitet mögliche Informationen zum Fortschritt der Suche an das ResultsPageWidget weiter.
+
+\subsection*{SearchResultManager}
+Der SearchResultManager besitzt ein SearchResult und benachrichtigt das ResultsPageWidget über neue Suchergebnisse. Suchergebnisse können einzeln während der laufenden Suche hinzugefügt werden.
+
+\subsection*{MainWindowManager}
+Der MainWindowManager stellt die Bookmarks und Chronikeinträge dem MainWindow zur Verfügung und gibt bekannt welches Bookmark im MainWindow ausgewählt wurde, wenn eines ausgewählt wurde.
+
+\subsection*{BookmarkManager}
+Der BookmarkManager besitzt BookmarkLists für je die Chronik und die vom Benutzer erstellten Bookmarks. Einträge für diese BookmarkLists werden hinzugefügt und abgefragt über den BookmarkManager.
