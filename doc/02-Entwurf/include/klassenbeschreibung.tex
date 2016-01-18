@@ -256,6 +256,14 @@ Methoden
 \subsection*{AlgorithmList}
 
 \subsection{View}
+\subsection*{PageWidget}
+Ein PageWidget ist ein QWidget, das als eine Seite der grafischen Oberfläche im MainWindow dem Benutzer angezeigt wird. Die abstrakte Klasse PageWidget bietet dem erbenden PageWidget, das momentan im MainWindow angezeigt wird, die Möglichkeit ein PageWidget auszusuchen, um es dem Benutzer als nächstes anzuzeigen, und diesem über den Stack des Navigators nötige Daten weiterzugeben.
+
+\subsection*{<<enumeration>> PageType}
+PageWidgets lassen sich beim Navigator mit einem PageType registrieren, welcher fortan zur Referenzierung dieses PageWidgets dient.
+
+\subsection*{PageWidgetDispatcher}
+Kapselt Signale, die zum verwenden des Stacks des Navigators und dem wechseln des PageWidgets nötig sind. (Ohne diese Kapselung stünden diese Signale den speziellen PageWidgets zur Verfügung)
 
 \subsection{Controller}
 \subsection*{MainControl}
