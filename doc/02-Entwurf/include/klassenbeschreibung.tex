@@ -266,42 +266,58 @@ PageWidgets lassen sich beim Navigator mit einem PageType registrieren, welcher 
 Kapselt Signale, die zum verwenden des Stacks des Navigators und dem wechseln des PageWidgets nötig sind. (Ohne diese Kapselung stünden diese Signale den speziellen PageWidgets zur Verfügung)
 
 \subsection*{CMainWindow}
+Die Klasse erbt von QMainWindow und stellt das Hauptfenster des Programms dar, auf dem die weiteren Seiten als Widgets angezeigt werden.
+
+\subsection*{CLibraryPageWidget}
+Das ist das Widget, in dem alle Datensätze dargestellt werden und man wählen kann, in welchem von denen man ein Bild aussuchen will, nach dem danach gesucht wird. Durch das ChooseDataSetButton kann man auch einen Datensatz wählen, der nicht im Datenbank liegt. 
 
 \subsection*{CViewerPageWidget}
+Diese Klasse erbt von QWidget und und bildet die Basis für die Widgets, die den Inhalt eines Datensatzes in Form von Photoalbum oder Videoplayer darstellen.
 
 \subsection*{CPhotoViewer}
+Erbt von CViewerPageWidget und seine Funktion ist das Darstellen der Bilder, die in einem Datensatz enthalten sind.
+
 \subsection*{CClickableQGraphicsPixmapItem}
+Erbt von QGraphicsPixmapItem und stell das Bild dar, das bei CCustomGraphicsView angezeigt wird und auf dem Annotationen gemacht werden können. Mit einem Rechtsklick kann man den Algorithmus für die Suche wählen.
 
 \subsection*{CSingleFrameVideoViewer}
+Erbt von CViewerPageWidget und seine Funktion ist das Darstellen der Videos in einem Datensatz, die in Form von EInzelbilder vorliegen.
+
 \subsection*{CSingleFrameVideoPlayer}
+
+
 \subsection*{CGraphicsSingleFrameVideoItem}
+Erbt von CClickableQGraphicsPixmapItem und stellt mithilfe des CSingleFrameVideoPlayers ein Video aus Einzeldateien, wobei man Annotationen machen und beim Rechtsklick den Algorithmus wählen kann.
 
 \subsection*{CVideoViewer}
+Erbt von CViewerPageWidget und seine Funktion ist das Darstellen der Videos, die in einem Datensatz enthalten sind.
+
 \subsection*{CClickableGraphicsVideoItem}
 
 
 \subsection*{CCustomGraphicsView}
-Diese Klasse benutzt ein QGraphicsView um ein Bild darzustellen, CAnnotationDrawer um die Annotationen die zum Bild gehören darzustellen und fügt die Möglichkeit hinzu, die Größe des Bildes zu verändern durch die ZoomInButton und ZoomOutButton, sowohl eine ROI(region of interest) zu zeichnen, nach der dann gesucht werden kann. Hier werden auch die die Klicks der Benutzer abgefangen und die Menü mit den Algoritmen gezeigt.  
+Diese Klasse benutzt ein QGraphicsView um ein Bild darzustellen, CAnnotationDrawer um die Annotationen die zum Bild gehören darzustellen und fügt die Möglichkeit hinzu, die Größe des Bildes zu verändern durch die ZoomInButton und ZoomOutButton, sowohl eine ROI(region of interest) zu zeichnen, nach der dann gesucht werden kann. Hier werden auch die Klicks der Benutzer abgefangen und die Menü mit den Algoritmen gezeigt.  
 
 \subsection*{CAnnotationDrawer}
-Diese Klasse hat ein String, das bestimmt der Typ der Annotation und benutzt die CAnnotationGraphicsItemFactory, um ein korespondierendes ClickableGraphicsItem zu bekommen und dann zeigt dieses im CCustomGraphicsView.  
+Diese Klasse hat ein String, das bestimmt der Typ der Annotation und benutzt die CAnnotationGraphicsItemFactory, um ein korespondierendes ClickableGraphicsItem zu bekommen und dann zeigt dieses im CCustomGraphicsView.
+  
 \subsection*{CAnnotationGraphicsItemFactory}
 Das ist eine Fabrik, die unterschiedliche ClickableGraphicsItems bildet, um man die Annotationen, abhängig von deren Typ, durch den CAnnotationDrawer  darstellen zu können.
+
 \subsection*{CClickableGraphicsIdRectItem}
-Diese Klasse erbt von QGraphicsRectItem und fügt die Möglichkeit auf dieses Item zu klicken hinzu und zeigt die Id der Annotation. 
+Diese Klasse erbt von QGraphicsRectItem und fügt die Möglichkeit auf dieses Item zu klicken hinzu und zeigt die Id der Annotation.
+ 
 \subsection*{CClickableGraphicsRectItem}
 Diese Klasse erbt von QGraphicsRectItem und fügt die Möglichkeit auf dieses Item zu klicken hinzu.
-
-\subsection*{CLibraryPageWidget}
-Das ist das Widget, in dem alle Datensätze dargestellt werden und man wählen kann, in welchem von denen man ein Bild wählen will, nach dem danach gesucht wird. Durch das ChooseDataSetButton kann man auch einen Datensatz wählen, der nicht im Datenbank liegt. 
 
 \subsection*{CParameterPageWidget}
 Das ist das Widget, in dem die Parameter für den entsprächenden Suchalgoritmus gezeigt und bestimmt werden. Sowohl werden die Datensätze, in denen gesucht wird bestimmt. Dann kann man zu CConfirmationPageWidget fortsetzen.
 
 \subsection*{CConfirmationPageWidget}
-Das ist das Widget, in dem man die Suchvorlage und alle Parameter wieder darstellt werden. Mit dem SearchButton  kann die Suche gestartet werden.
+Das ist das Widget, in dem man die Suchvorlage und alle Parameter wieder darstellt werden. Mit dem SearchButton kann die Suche gestartet werden.
 
 \subsection*{CResultsPageWidget}
+Das ist das Widget, wo die Ergebnisse der Suche erscheinen. Man kann die Suche speichern oder bewerten und erneut suchen.
 
 \subsection*{CSearchResultModel}
 
@@ -316,12 +332,17 @@ Das ist eine Klasse, die von QStyledItemDelegate erbt und ist ein clickable Icon
 
 \subsection*{CCheckableIconDelegate}
 Das ist eine Klasse, die von CIconDelegate erbt und ein Checkbox hinzufügt. Damit werden die Datensätze im CParameterPageWidget dargestellt und man bekommt die Information in welche von denen gesucht wird. 
+
 \subsection*{CFeedbackDelegate}
 Das ist eine Klasse, die von CIconDelegate erbt und kannt ein CFeedbackEditor benutzen um Feedback zu bekommen. Man nutzt diese Klasse um die Resultaten der Suche in CResultsPageWidget darzustellen mit der Option Feedback zu bekommen. 
+
 \subsection*{CFeedbackEditor}
 Diese Klasse stellt Feedback graphisch dar und bekommt die Wert des Feedbacks abhängig vom Typ des Feedbacks.
+
 \subsection*{CFeedbackTrueFalse}
+
 Diese Klasse stellt zweiwertiges Feedback dar.
+
 \subsection*{CFeedback0to10}
 Diese Klasse stellt zehnwertiges Feedback dar.
 
