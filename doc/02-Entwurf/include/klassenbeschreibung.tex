@@ -21,12 +21,12 @@ Methoden
 Language repräsentiert die verfügbaren Sprachen: Deutsch und Englisch.
 
 \subsection*{Annotation : public Serializable}
-Eine Annotation ist ein in den Datensätzen vordefinierter Bereich eines Bildes oder Videos, der den Typ face oder person haben kann.
+Eine Annotation ist ein in den Datensätzen vordefinierter Bereich eines Bildes oder Videos, der den Typ Face oder Person haben kann.
 
 Methoden
 \begin{itemize}
-\item \textit{public Annotation(QString id)} Gibt eine Instanz dieser Klasse zurück. Die übergebene id identifiziert die Annotation in einem Medium.
-\item \textit{public QString getId()} Gibt die id der Annotation zurück.
+\item \textit{public Annotation(QString Id)} Gibt eine Instanz dieser Klasse zurück. Die übergebene Id Identifiziert die Annotation in einem Medium.
+\item \textit{public QString getId()} Gibt die Id der Annotation zurück.
 \item \textit{public AnnotationType getType()} Gibt den Typ der Annotation zurück.
 \item \textit{public friend QDataStream\& operator<<(QDataStream\& out, Annotation\& annotation)} Speichert die Annotation in einer Datei.
 \item \textit{public friend QDataStream\& operator>>(QDataStream\& in, Annotation\& annotation)} Lädt die Annotation aus einer Datei.
@@ -39,7 +39,7 @@ Eine RectangleAnnotation ist eine rechteckige Annotation.
 
 Methoden
 \begin{itemize}
-\item \textit{public RectangleAnnotation(QString id)} Erzeugt ein Objekt von RectangleAnnotation. Die übergebene id identifiziert die Annotation in einem Medium.
+\item \textit{public RectangleAnnotation(QString Id)} Erzeugt ein Objekt von RectangleAnnotation. Die übergebene Id Identifiziert die Annotation in einem Medium.
 \item \textit{public friend QDataStream\& operator<<(QDataStream\& out, RectangleAnnotation\& annotation)} Speichert die RectangleAnnotation in einer Datei.
 \item \textit{public friend QDataStream\& operator>>(QDataStream\& in, RectangleAnnotation\& annotation)} Lädt die RectangleAnnotation aus einer Datei.
 \end{itemize}
@@ -62,8 +62,8 @@ Eine SearchQuery ist eine Suchanfrage an den Algorithmus.
 
 Methoden
 \begin{itemize}
-\item \textit{public SearchQuery()} Erzeugt ein SearchQuery Objekt.
-\item \textit{public QList<Dataset> getDatasets()} Gibt den Suchraum, in Form von einer Datensatzliste zurück.
+\item \textit{public SearchQuery()} Erzeugt ein SearchQuery-Objekt.
+\item \textit{public QList<Dataset> getDatasets()} Gibt den Suchraum, in Form von einer Datensatzliste, zurück.
 \item \textit{public void setDatasets(QList<Dataset> datasets)} Setzt den Suchraum für die Suchanfrage.
 \item \textit{public SearchObject getSearchObject()} Gibt das SearchObject für diese Anfrage zurück.
 \item \textit{public void setSearchObject(SearchObject searchObject)} Setzt das SearchObject für diese Anfrage.
@@ -133,7 +133,7 @@ Methoden
 \item \textit{public Feedback(FeedbackType type)} Erzeugt ein neues Feedback Objekt. Der Typ kann entweder dual oder extended sein.
 \item \textit{public int getFeedback()} Gibt den Wert des Feedbacks zurück.
 \item \textit{public void setFeedback(int feedback)} Setzt das Feedback auf den übergebenen Wert.
-\item \textit{public FeedbackType getFeedbackType()} Gibt den Feedback Typ zurück.
+\item \textit{public FeedbackType getFeedbackType()} Gibt den Feedback-Typ zurück.
 \item \textit{public SearchObject getSearchObject()} Gibt das SearchObject, zu dem dieses Feedback gehört zurück.
 \item \textit{public void setSearchObject(SearchObject searchObject)} Setzt das SearchObject für dieses Feedback.
 \item \textit{public friend QDataStream\& operator<<(QDataStream\& out, Feedback\& feedback)} Speichert das Feedback in einer Datei.
@@ -175,25 +175,25 @@ Methoden
 \item \textit{public void load(QString path)} Lädt die Bookmarks aus der Datei.
 \item \textit{public void save(QString path)} Speichert die Bookmark Liste in der Datei mit dem übergebenen Pfad.
 \item \textit{public void addBookmark(Bookmark bookmark)} Fügt ein Bookmark in die Liste hinzu.
-\item \textit{public void removeBookmark(const Bookmark* bookmark)} Entfernt bookmark aus der Bookmark Liste.
-\item \textit{public QList<Bookmark*> sortByName()} Gibt die Bookmark Liste nach Namen sortiert zurück.
-\item \textit{public QList<Bookmark*> sortByDate()} Gibt die Bookmark Liste nach Datum sortiert zurück.
+\item \textit{public void removeBookmark(const Bookmark* bookmark)} Entfernt bookmark aus der BookmarkListe.
+\item \textit{public QList<Bookmark*> sortByName()} Gibt die nach Namen sortierte Bookmarkliste zurück.
+\item \textit{public QList<Bookmark*> sortByDate()} Gibt die nach Datum sortierte Bookmarkliste zurück.
 \item \textit{private void validateResult(SearchResult searchResult)} Überprüft, ob das übergebene SearchResult gültig ist, also noch alle Datensätze und Medien vorhanden sind.
 \end{itemize}
 
 \subsection*{Dataset}
-Ein Dataset hat einen Typ und enthält Medien diesen Typs.
+Ein Dataset hat einen Typ und enthält Medien vom diesen Typ.
 
 Methoden
 \begin{itemize}
 \item \textit{public Dataset(QString path)} Erzeugt einen Datensatz mit dem übergebenen Ordnerpfad.
 \item \textit{public QString getName()} Gibt den Namen des Datensatzes (des Ordners) zurück.
 \item \textit{public int getNumberOfMedia()} Gibt die Anzahl der Medien in der MediaList zurück.
-\item \textit{public QImage getPreviewPhoto()} Gibt das Vorschaubild des Dtaensatzes zurück.
+\item \textit{public QImage getPreviewPhoto()} Gibt das Vorschaubild des Datensatzes zurück.
 \item \textit{private void createPreviewPhoto()} Erstellt ein Vorschaubild aus den Medien.
 \item \textit{public QList<Medium> getMediaList()} Gibt die Liste aller Medien zurück.
 \item \textit{public QString getPath()} Gibt den absoluten Pfad des Datensatzes zurück.
-\item \textit{public DatasetType getType()} Gibt den Typ des Datensatzes und damit auch der Medien zurück.
+\item \textit{public DatasetType getType()} Gibt den Typ des Datensatzes (und damit auch der Medien) zurück.
 \end{itemize}
 
 \subsection*{DatasetList}
@@ -209,7 +209,7 @@ Methoden
 \end{itemize}
 
 \subsection*{DatasetType}
-Der Datensatztyp kann photo, video oder single frame video sein.
+Der Datensatztyp kann Photo, Video oder Single-Frame-Video sein.
 
 \subsection*{Medium}
 Ein Medium wird durch einen Pfad charakterisiert. Außerdem hat ein Medium eine Liste von Annotationen und dem zugehörigen Index. Der Index ist bei Photos 0, in Videos gibt er an, in welchem Frame sich die Annotation befindet.
@@ -233,7 +233,7 @@ Methoden
 \end{itemize}
 
 \subsection*{SingleFrameVideo : public Medium}
-Ein SingelFrameVideo ist ein Video aus Einzebildern.
+Ein SingelFrameVideo ist ein Video aus Einzelbildern.
 
 Methoden
 \begin{itemize}
@@ -269,13 +269,13 @@ Kapselt Signale, die zum verwenden des Stacks des Navigators und dem wechseln de
 Die Klasse erbt von QMainWindow und stellt das Hauptfenster des Programms dar, auf dem die weiteren Seiten als Widgets angezeigt werden.
 
 \subsection*{CLibraryPageWidget}
-Das ist das Widget, in dem alle Datensätze dargestellt werden und man wählen kann, in welchem von denen man ein Bild aussuchen will, nach dem danach gesucht wird. Durch das ChooseDataSetButton kann man auch einen Datensatz wählen, der nicht im Datenbank liegt. 
+Das ist das Widget, in dem alle Datensätze dargestellt werden und man wählen kann, in welchem von denen man ein Bild aussuchen will, nach dem gesucht wird. Durch das ChooseDataSetButton kann man auch einen Datensatz wählen, der nicht in der Datenbank liegt. 
 
 \subsection*{CViewerPageWidget}
 Diese Klasse erbt von QWidget und und bildet die Basis für die Widgets, die den Inhalt eines Datensatzes in Form von Photoalbum oder Videoplayer darstellen.
 
 \subsection*{CPhotoViewer}
-Erbt von CViewerPageWidget und seine Funktion ist das Darstellen der Bilder, die in einem Datensatz enthalten sind.
+Erbt von CViewerPageWidget. Seine Funktion ist das Darstellen der Bilder, die in einem Datensatz enthalten sind.
 
 \subsection*{CClickableQGraphicsPixmapItem}
 Erbt von QGraphicsPixmapItem und stell das Bild dar, das bei CCustomGraphicsView angezeigt wird und auf dem Annotationen gemacht werden können. Mit einem Rechtsklick kann man den Algorithmus für die Suche wählen.
@@ -290,13 +290,13 @@ Erbt von CViewerPageWidget und seine Funktion ist das Darstellen der Videos in e
 Erbt von CClickableQGraphicsPixmapItem und stellt mithilfe des CSingleFrameVideoPlayers ein Video aus Einzeldateien, wobei man Annotationen machen und beim Rechtsklick den Algorithmus wählen kann.
 
 \subsection*{CVideoViewer}
-Erbt von CViewerPageWidget und seine Funktion ist das Darstellen der Videos, die in einem Datensatz enthalten sind.
+Erbt von CViewerPageWidget und seine Funktion ist das Darstellen und Abspielen der Videos, die in einem Datensatz enthalten sind.
 
 \subsection*{CClickableGraphicsVideoItem}
 
 
 \subsection*{CCustomGraphicsView}
-Diese Klasse benutzt ein QGraphicsView um ein Bild darzustellen, CAnnotationDrawer um die Annotationen die zum Bild gehören darzustellen und fügt die Möglichkeit hinzu, die Größe des Bildes zu verändern durch die ZoomInButton und ZoomOutButton, sowohl eine ROI(region of interest) zu zeichnen, nach der dann gesucht werden kann. Hier werden auch die Klicks der Benutzer abgefangen und die Menü mit den Algoritmen gezeigt.  
+Diese Klasse benutzt ein QGraphicsView um ein Bild darzustellen, CAnnotationDrawer um die Annotationen die zum Bild gehören darzustellen und fügt die Möglichkeit hinzu, die Größe des Bildes zu verändern durch die ZoomInButton und ZoomOutButton, sowohl eine ROI(region of interest) zu zeichnen, nach der dann gesucht werden kann. Hier werden auch die Klicks der Benutzer abgefangen und die Menü mit den Algorithmen gezeigt.  
 
 \subsection*{CAnnotationDrawer}
 Diese Klasse hat ein String, das bestimmt der Typ der Annotation und benutzt die CAnnotationGraphicsItemFactory, um ein korespondierendes ClickableGraphicsItem zu bekommen und dann zeigt dieses im CCustomGraphicsView.
@@ -305,19 +305,19 @@ Diese Klasse hat ein String, das bestimmt der Typ der Annotation und benutzt die
 Das ist eine Fabrik, die unterschiedliche ClickableGraphicsItems bildet, um man die Annotationen, abhängig von deren Typ, durch den CAnnotationDrawer  darstellen zu können.
 
 \subsection*{CClickableGraphicsIdRectItem}
-Diese Klasse erbt von QGraphicsRectItem und fügt die Möglichkeit auf dieses Item zu klicken hinzu und zeigt die Id der Annotation.
+Diese Klasse erbt von QGraphicsRectItem und fügt die Möglichkeit, auf dieses Item zu klicken hinzu, und zeigt die Id der Annotation.
  
 \subsection*{CClickableGraphicsRectItem}
-Diese Klasse erbt von QGraphicsRectItem und fügt die Möglichkeit auf dieses Item zu klicken hinzu.
+Diese Klasse erbt von QGraphicsRectItem und fügt die Möglichkeit, auf dieses Item zu klicken, hinzu.
 
 \subsection*{CParameterPageWidget}
-Das ist das Widget, in dem die Parameter für den entsprächenden Suchalgoritmus gezeigt und bestimmt werden. Sowohl werden die Datensätze, in denen gesucht wird bestimmt. Dann kann man zu CConfirmationPageWidget fortsetzen.
+Das Widget, in dem die Parameter für den gewählten Suchalgorithmus gezeigt und bestimmt werden. Sowohl werden die Datensätze, in denen gesucht wird, bestimmt. Dann kann man zu CConfirmationPageWidget fortsetzen.
 
 \subsection*{CConfirmationPageWidget}
-Das ist das Widget, in dem man die Suchvorlage und alle Parameter wieder darstellt werden. Mit dem SearchButton kann die Suche gestartet werden.
+Das Widget, in dem die Suchvorlage und alle Parameter angezeigt werden, sodass der Benutzer diese überprüfen kann. Mit dem SearchButton wird die Suche gestartet.
 
 \subsection*{CResultsPageWidget}
-Das ist das Widget, wo die Ergebnisse der Suche erscheinen. Man kann die Suche speichern oder bewerten und erneut suchen.
+Das Widget, wo die Ergebnisse der Suche erscheinen. Man kann die Suche speichern und bewerten. Nach der Bewertung kann erneut gesucht werden.
 
 \subsection*{CSearchResultModel}
 
@@ -334,7 +334,7 @@ Das ist eine Klasse, die von QStyledItemDelegate erbt und ist ein clickable Icon
 Das ist eine Klasse, die von CIconDelegate erbt und ein Checkbox hinzufügt. Damit werden die Datensätze im CParameterPageWidget dargestellt und man bekommt die Information in welche von denen gesucht wird. 
 
 \subsection*{CFeedbackDelegate}
-Das ist eine Klasse, die von CIconDelegate erbt und kannt ein CFeedbackEditor benutzen um Feedback zu bekommen. Man nutzt diese Klasse um die Resultaten der Suche in CResultsPageWidget darzustellen mit der Option Feedback zu bekommen. 
+Die Klasse erbt von CIconDelegate und kann ein CFeedbackEditor benutzen, um Feedback zu bekommen. Man nutzt diese Klasse um die Resultate der Suche in CResultsPageWidget darzustellen, mit der Option Feedback zu bekommen. 
 
 \subsection*{CFeedbackEditor}
 Diese Klasse stellt Feedback graphisch dar und bekommt die Wert des Feedbacks abhängig vom Typ des Feedbacks.
@@ -349,20 +349,20 @@ Diese Klasse stellt zehnwertiges Feedback dar.
 
 \subsection{Controller}
 \subsection*{MainControl}
-MainControl ist der Einstiegspunkt des Programms und verwaltet die Manager sowie den Navigator. Insbesondere erstellt MainControl die PageWidgets un registriert sie beim Navigator.
-Da die Manager und der Navigator nicht direkt Kommunizieren, verbindet MainControl ihre Signals und Slots.
+MainControl ist der Einstiegspunkt des Programms und verwaltet die Manager-Klassen sowie den Navigator. Insbesondere erstellt MainControl die PageWidgets un registriert sie beim Navigator.
+Da die Manager und der Navigator nicht direkt kommunizieren, verbindet MainControl ihre Signals und Slots.
 
 \subsection*{Navigator}
-Der Navigator ist in der Lage das aktuell im MainWindow angezeigte PageWidget durch ein anderes zu ersetzen. Desweiteren ist der Navigator für den austausch von Daten zwischen den PageWidgets verantwortlich.
+Der Navigator ist in der Lage, das aktuell im MainWindow angezeigte PageWidget durch ein anderes zu ersetzen. Desweiteren ist der Navigator für den Austausch von Daten zwischen den PageWidgets verantwortlich.
 
 \subsection*{SearchManager}
-Der SearchManager startet einen Algorithm in einem neuen Thread und leitet mögliche Informationen zum Fortschritt der Suche an das ResultsPageWidget weiter.
+Der SearchManager startet einen Algorithmus in einem neuen Thread und leitet mögliche Informationen zum Fortschritt der Suche an das ResultsPageWidget weiter.
 
 \subsection*{SearchResultManager}
 Der SearchResultManager besitzt ein SearchResult und benachrichtigt das ResultsPageWidget über neue Suchergebnisse. Suchergebnisse können einzeln während der laufenden Suche hinzugefügt werden.
 
 \subsection*{MainWindowManager}
-Der MainWindowManager stellt die Bookmarks und Chronikeinträge dem MainWindow zur Verfügung und gibt bekannt welches Bookmark im MainWindow ausgewählt wurde, wenn eines ausgewählt wurde.
+Der MainWindowManager stellt die Bookmarks und Chronikeinträge dem MainWindow zur Verfügung und gibt bekannt, welches Bookmark im MainWindow zuletzt ausgewählt wurde.
 
 \subsection*{BookmarkManager}
-Der BookmarkManager besitzt BookmarkLists für je die Chronik und die vom Benutzer erstellten Bookmarks. Einträge für diese BookmarkLists werden hinzugefügt und abgefragt über den BookmarkManager.
+Der BookmarkManager besitzt 2 Liste für die Chronik und die vom Benutzer erstellten Bookmarks. Einträge für diese BookmarkListe werden über den BookmarkManager hinzugefügt und abgefragt.
