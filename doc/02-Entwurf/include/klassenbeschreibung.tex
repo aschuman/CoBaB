@@ -35,7 +35,7 @@ Methoden
 \end{itemize}
 
 \subsection*{RectangleAnnotation : public Annotation, public QRect}
-Eine RectangleAnnotation ist eine rechteckige Annotation.
+Eine rechteckige Annotation.
 
 Methoden
 \begin{itemize}
@@ -212,7 +212,7 @@ Methoden
 Der Datensatztyp kann Photo, Video oder Single-Frame-Video sein.
 
 \subsection*{Medium}
-Ein Medium wird durch einen Pfad charakterisiert. Außerdem hat ein Medium eine Liste von Annotationen und dem zugehörigen Index. Der Index ist bei Photos 0, in Videos gibt er an, in welchem Frame sich die Annotation befindet.
+Ein Medium wird durch einen Pfad charakterisiert. Außerdem hat ein Medium eine Liste von Annotationen und den zugehörigen Index. Der Index ist bei Photos 0, in Videos gibt er an, in welchem Frame sich die Annotation befindet.
 
 Methoden
 \begin{itemize}
@@ -257,7 +257,7 @@ Methoden
 
 \subsection{View}
 \subsection*{PageWidget}
-Ein PageWidget ist ein QWidget, das als eine Seite der grafischen Oberfläche im MainWindow dem Benutzer angezeigt wird. Die abstrakte Klasse PageWidget bietet dem erbenden PageWidget, das momentan im MainWindow angezeigt wird, die Möglichkeit ein PageWidget auszusuchen, um es dem Benutzer als nächstes anzuzeigen, und diesem über den Stack des Navigators nötige Daten weiterzugeben.
+Ein PageWidget ist ein QWidget, das als eine Seite der grafischen Oberfläche im MainWindow dem Benutzer angezeigt wird. Die abstrakte Klasse PageWidget bietet dem erbenden Widget, das momentan im MainWindow angezeigt wird, die Möglichkeit ein PageWidget auszusuchen, um es dem Benutzer als nächstes anzuzeigen, und diesem über den Stack des Navigators nötige Daten weiterzugeben.
 
 \subsection*{<<enumeration>> PageType}
 PageWidgets lassen sich beim Navigator mit einem PageType registrieren, welcher fortan zur Referenzierung dieses PageWidgets dient.
@@ -269,7 +269,7 @@ Kapselt Signale, die zum verwenden des Stacks des Navigators und dem wechseln de
 Die Klasse erbt von QMainWindow und stellt das Hauptfenster des Programms dar, auf dem die weiteren Seiten als Widgets angezeigt werden.
 
 \subsection*{CLibraryPageWidget}
-Das ist das Widget, in dem alle Datensätze dargestellt werden und man wählen kann, in welchem von denen man ein Bild aussuchen will, nach dem gesucht wird. Durch das ChooseDataSetButton kann man auch einen Datensatz wählen, der nicht in der Datenbank liegt. 
+Das Widget, in dem alle Datensätze dargestellt werden. Man kann einen Datensatz für die Suche auswählen. Durch das ChooseDataSetButton kann man auch einen Datensatz wählen, der nicht in der Datenbank liegt. 
 
 \subsection*{CViewerPageWidget}
 Diese Klasse erbt von QWidget und und bildet die Basis für die Widgets, die den Inhalt eines Datensatzes in Form von Photoalbum oder Videoplayer darstellen.
@@ -290,13 +290,13 @@ Erbt von CViewerPageWidget und seine Funktion ist das Darstellen der Videos in e
 Erbt von CClickableQGraphicsPixmapItem und stellt mithilfe des CSingleFrameVideoPlayers ein Video aus Einzeldateien, wobei man Annotationen machen und beim Rechtsklick den Algorithmus wählen kann.
 
 \subsection*{CVideoViewer}
-Erbt von CViewerPageWidget und seine Funktion ist das Darstellen und Abspielen der Videos, die in einem Datensatz enthalten sind.
+Erbt von CViewerPageWidget. Seine Funktion ist das Darstellen und Abspielen der Videos, die in einem Datensatz enthalten sind.
 
 \subsection*{CClickableGraphicsVideoItem}
 
 
 \subsection*{CCustomGraphicsView}
-Diese Klasse benutzt ein QGraphicsView um ein Bild darzustellen, CAnnotationDrawer um die Annotationen die zum Bild gehören darzustellen und fügt die Möglichkeit hinzu, die Größe des Bildes zu verändern durch die ZoomInButton und ZoomOutButton, sowohl eine ROI(region of interest) zu zeichnen, nach der dann gesucht werden kann. Hier werden auch die Klicks der Benutzer abgefangen und die Menü mit den Algorithmen gezeigt.  
+Diese Klasse benutzt ein QGraphicsView um ein Bild darzustellen, CAnnotationDrawer um die Annotationen die zum Bild gehören darzustellen und fügt die Möglichkeit hinzu, die Größe des Bildes durch die ZoomIn- und ZoomOutButton zu verändern, sowohl eine ROI(region of interest) zu zeichnen, nach der dann gesucht werden kann. Hier werden auch die Klicks der Benutzer abgefangen und die Menü mit den Algorithmen gezeigt.  
 
 \subsection*{CAnnotationDrawer}
 Diese Klasse hat ein String, das bestimmt der Typ der Annotation und benutzt die CAnnotationGraphicsItemFactory, um ein korespondierendes ClickableGraphicsItem zu bekommen und dann zeigt dieses im CCustomGraphicsView.
@@ -328,10 +328,10 @@ Das Widget, wo die Ergebnisse der Suche erscheinen. Man kann die Suche speichern
 \subsection*{CMediaModel}
 
 \subsection*{CIconDelegate}
-Das ist eine Klasse, die von QStyledItemDelegate erbt und ist ein clickable IconDelegate, das aus einem Bild und darunter Text besteht. Diese nutzt man um die Datensätze in CLibraryPageWidget, CViewerPageWidget darzustellen und herauszufinden welcher von denen selectiert ist.
+Diese Klasse erbt von QStyledItemDelegate und ist ein clickable IconDelegate, das aus einem Bild und darunter Text besteht. Diese nutzt man um die Datensätze in CLibraryPageWidget, CViewerPageWidget darzustellen und herauszufinden welcher von denen selectiert ist.
 
 \subsection*{CCheckableIconDelegate}
-Das ist eine Klasse, die von CIconDelegate erbt und ein Checkbox hinzufügt. Damit werden die Datensätze im CParameterPageWidget dargestellt und man bekommt die Information in welche von denen gesucht wird. 
+Diese Klasse erbt von CIconDelegate und ein Checkbox hinzufügt. Damit werden die Datensätze im CParameterPageWidget dargestellt und man bekommt die Information in welche von denen gesucht wird. 
 
 \subsection*{CFeedbackDelegate}
 Die Klasse erbt von CIconDelegate und kann ein CFeedbackEditor benutzen, um Feedback zu bekommen. Man nutzt diese Klasse um die Resultate der Suche in CResultsPageWidget darzustellen, mit der Option Feedback zu bekommen. 
@@ -341,10 +341,10 @@ Diese Klasse stellt Feedback graphisch dar und bekommt die Wert des Feedbacks ab
 
 \subsection*{CDualFeedback}
 
-Stellt Feedback (positive, neutral, negative) dar.
+Stellt DualFeedback (positive, neutral, negative) dar.
 
 \subsection*{CExtendedFeedback}
-Stellt Feedback als Werte von 1 bis 10 dar.
+Stellt ExtendedFeedback (Werte von 1 bis 10) dar.
 
 
 \subsection{Controller}
@@ -365,4 +365,4 @@ Der SearchResultManager besitzt ein SearchResult und benachrichtigt das ResultsP
 Der MainWindowManager stellt die Bookmarks und Chronikeinträge dem MainWindow zur Verfügung und gibt bekannt, welches Bookmark im MainWindow zuletzt ausgewählt wurde.
 
 \subsection*{BookmarkManager}
-Der BookmarkManager besitzt 2 Liste für die Chronik und die vom Benutzer erstellten Bookmarks. Einträge für diese BookmarkListe werden über den BookmarkManager hinzugefügt und abgefragt.
+Der BookmarkManager besitzt 2 Listen für die Chronik und die vom Benutzer erstellten Bookmarks. Einträge für diese BookmarkLists werden über den BookmarkManager hinzugefügt und abgefragt.
