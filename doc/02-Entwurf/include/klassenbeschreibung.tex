@@ -5,6 +5,11 @@
 \subsection*{ConfigData}
 Die Klasse ConfigData speichert die Benutzereinstellungen Sprache und Benachrichtigungston. Außerdem werden die Hilfe- und Aboutdateien gelesen.
 
+Attribute
+\begin{itemize}
+\item\textit{private ConfigData instance} Die einzige Instanz von ConfigData. 
+\end{itemize}
+
 Methoden
 \begin{itemize}
 \item \textit{private ConfigData()} Erzeugt ein neues ConfigData Objekt.
@@ -23,9 +28,15 @@ Language repräsentiert die verfügbaren Sprachen: Deutsch und Englisch.
 \subsection*{Annotation : public Serializable}
 Eine Annotation ist ein in den Datensätzen vordefinierter Bereich eines Bildes oder Videos, der den Typ Face oder Person haben kann.
 
+Attribute
+\begin{itemize}
+\item\textit{protected QString mId} Diese Id identifiziert diese Annotation in einem  Medium.
+\item\textit{protected QString mType} Beschreibt den Typ dieser Annotation.
+\end{itemize}
+
 Methoden
 \begin{itemize}
-\item \textit{public Annotation(QString Id)} Gibt eine Instanz dieser Klasse zurück. Die übergebene Id Identifiziert die Annotation in einem Medium.
+\item \textit{public Annotation(QString Id)} Gibt eine Instanz dieser Klasse zurück. Die übergebene Id identifiziert die Annotation in einem Medium.
 \item \textit{public QString getId()} Gibt die Id der Annotation zurück.
 \item \textit{public AnnotationType getType()} Gibt den Typ der Annotation zurück.
 \item \textit{public friend QDataStream\& operator<<(QDataStream\& out, Annotation\& annotation)} Speichert die Annotation in einer Datei.
@@ -47,9 +58,16 @@ Methoden
 \subsection*{DataPacket : public Serializable}
 Ein DataPacket ist eine Eingabe für den Algorithmus.
 
+Attribute
+\begin{itemize}
+\item\textit{protected DataPacketType mType} Beschreibt den Typ dieses DataPackets.
+\item\textit{protected QUuid mUuid} Identifiziert dieses DataPacket eindeutig. 
+\end{itemize}
+
 Methoden
 \begin{itemize}
 \item \textit{public DataPacketType getType()} Gibt den Typ des DataPackets zurück, abhängig von der Kindklasse.
+\item\textit{public QUuid getUuid} Gibt die eindeutige Id dieses DataPacktets zurück.
 \item \textit{public abstract void toStream(QDataStream in)} Speichert das DataPacket, durch den Aufruf von operator<<, in einer Datei.
 \item \textit{public abstract void fromStream(QDataStream out)} Speichert das DataPacket, durch den Aufruf von operator>>, in einer Datei.
 \end{itemize}
@@ -59,6 +77,12 @@ DataPacketType enthält die Typen von DataPackets, also die vorhandenen Kindklas
 
 \subsection*{SearchQuery : DataPacket}
 Eine SearchQuery ist eine Suchanfrage an den Algorithmus.
+
+Attribute
+\begin{itemize}
+\item\textit{private QList<QString> mDatasets} Beschreibt den Suchraum der Suchanfrage.
+\item\textit{private SearchObject mSearchObject} Das zu dieser Suchanfrage gehörende SearchObject.
+\end{itemize}
 
 Methoden
 \begin{itemize}
@@ -76,6 +100,11 @@ Methoden
 \subsection*{SearchResult : DataPacket}
 Ein SearchResult ist die Ausgabe eines Algorithmus. Allerdings kann es auch eine Eingabe sein, wenn ein Algorithmus auf einem bestehenden Suchergebnis weiterarbeitet.
 
+Attribute
+\begin{itemize}
+\item\textit{private QList<SearchResultElement> mSearchResultElementList} Die Liste der zu diesem SearchResult gehörenden SearchResultElements.
+\end{itemize}
+
 Methoden
 \begin{itemize}
 \item \textit{public SearchResult(QList<SearchResultElement> list)} Erzeugt ein neues SearchResult, das eine Liste von SearchResultElements enthält.
@@ -89,6 +118,12 @@ Methoden
 
 \subsubsection*{SearchResultElement : public Serializable}
 Ein SearchResultElement ist ein Element von SearchResult. Abgesehen von einem SearchObject enthält es einen Score für dieses, der durch den Algorithmus bestimmt und gesetzt wurde.
+
+Attribute
+\begin{itemize}
+\item\textit{private int mScore} Vom Suchalgorithmus zugewiesene Zahl, die die Übereinstimmung dieses SearchResultElements mit dem SearchObject der SearchQuery beschreibt.
+\item\textit{private SearchObject mSearchObject} Das zu diesem SearchResultElement gehörende SearchObject.
+\end{itemize}
 
 Methoden
 \begin{itemize}
@@ -105,6 +140,15 @@ Methoden
 
 \subsection*{SearchObject : public Serializable}
 Das SearchObject repräsentiert eine Annotation oder ein Rechteck in einem Bild oder Frame eines Videos aus einem Datensatz.
+
+Attribute
+\begin{itemize}
+\item\textit{private QString mMedium} Der Pfad des zugehörigen Mediums.
+\item\textit{private Annotation mAnnotation} Die ausgewählte Annotation.
+\item\textit{private QRect mROI} Die \enquote{region of interest} im zugehörigem Medium.
+\item\textit{private QString mSourceDataset} Der Pfad des Datensatzes, in dem sich das Medium befindet.
+\item\textit{private int mMediumIndex} Beschreibt die Framenummer des Mediums in einem Video.
+\end{itemize}
 
 Methoden
 \begin{itemize}
@@ -125,17 +169,21 @@ Methoden
 \item \textit{public void fromStream(QDataStream out)} Lädt das SearchObject, durch den Aufruf von operator>>, aus einer Datei.
 \end{itemize}
 
-\subsection*{Feedback : DataPacket}
-Das Feedback gibt an, wie gut das vom Algorithmus erzeugte Suchergebnis ist.
+\subsection*{SearchFeedback : DataPacket}
+Das SearchFeedback gibt an, wie gut das vom Algorithmus erzeugte Suchergebnis ist.
+
+Attribute
+\begin{itemize}
+\item\textit{private QList<QPair<SearchObject, int>>} Der Integer-Wert beschreibt das zum SearchObject gehörende Feedback.
+\item\textit{private FeedbackType mType} Der Typ des Feedbacks, entweder dual oder extended.
+\end{itemize}
 
 Methoden
 \begin{itemize}
-\item \textit{public Feedback(FeedbackType type)} Erzeugt ein neues Feedback Objekt. Der Typ kann entweder dual oder extended sein.
-\item \textit{public int getFeedback()} Gibt den Wert des Feedbacks zurück.
-\item \textit{public void setFeedback(int feedback)} Setzt das Feedback auf den übergebenen Wert.
+\item \textit{public SearchFeedback(FeedbackType type)} Erzeugt ein neues SearchFeedback Objekt. Der Typ kann entweder dual oder extended sein.
+\item \textit{public QList<QPair<SearchObject, int>>  getFeedbackList()} Gibt die FeedbackList  zurück.
+\item \textit{public void setFeedbackList(QList<QPair<SearchObject, int>> feedbackList)} Setzt die FeedbackList auf die übergebene Liste.
 \item \textit{public FeedbackType getFeedbackType()} Gibt den Feedback-Typ zurück.
-\item \textit{public SearchObject getSearchObject()} Gibt das SearchObject, zu dem dieses Feedback gehört zurück.
-\item \textit{public void setSearchObject(SearchObject searchObject)} Setzt das SearchObject für dieses Feedback.
 \item \textit{public friend QDataStream\& operator<<(QDataStream\& out, Feedback\& feedback)} Speichert das Feedback in einer Datei.
 \item \textit{public friend QDataStream\& operator>>(QDataStream\& in, Feedback\& feedback)} Lädt das Feedback aus einer Datei.
 \item \textit{public void toStream(QDataStream in)} Speichert das Feedback, durch den Aufruf von operator<<, in einer Datei.
@@ -157,6 +205,18 @@ Methoden
 \subsection*{Bookmark : public Serializable}
 Ein Bookmark speichert ein Suchergebnis, eine Suchanfrage und das Feedback, sodass ein früherer Suchvorgang wiederhergestellt werden kann.
 
+Attribute
+\begin{itemize}
+\item\textit{private QString mName} Der Name dieses Bookmarks.
+\item\textit{private QDateTime mDate} Die Zeit, zu der das Bookmark gespeichet wurde.
+\item\textit{private QString mAlgorithm} Der Name des Algorithmus, der für diese Suche eingesetzt wurde.
+\item\textit{private SearchQuery mSearchQuery} Die Suchanfrage dieser Suche.
+\item\textit{private SearchResult mSearchResult} Das Suchergebnis dieser Suche.
+\item\textit{private QJsonObject mParameter} Die für diese Suche gesetzten Parameter.
+\item\textit{private SearchFeedback mSearchFeedback} Das vom Benutzer gesetzte Feedback.
+\end{itemize}
+
+
 Methoden
 \begin{itemize}
 \item \textit{public Bookmark(SearchResut result, QString algorithm, SearchQuery query} Erzeugt ein neues Bookmark.
@@ -164,10 +224,24 @@ Methoden
 \item \textit{public friend QDataStream\& operator>>(QDataStream\& in, Bookmark\& bookmark)} Lädt das Bookmark aus einer Datei.
 \item \textit{public void toStream(QDataStream in)} Speichert das Bookmark, durch den Aufruf von operator<<, in einer Datei.
 \item \textit{public void fromStream(QDataStream out)} Lädt das Bookmark, durch den Aufruf von operator>>, aus einer Datei.
+\item\textit{public void setFeedback(SearchFeedback feedback)} Speichert das Feedback im Bookmark.
+\item\textit{public SearchFeedback getFeedback()} Gibt das Feedback zurück.
+\item\textit{public void setName(QString name)} Setzt den Namen des Bookmarks.
+\item\textit{public QString getName()} Gibt den Namen des Bookmarks zurück.
+\item\textit{public QDateTime getDate()} Gibt die Zeit, zu der das Bookmark erstellt wurde, zurück.
+\item\textit{public QString getAlgorithm()} Gibt den Namen des verwendeten Algorithmus zurück.
+\item\textit{public SearchQuery getSearchQuery()} Gibt die Suchanfrage zurück.
+\item\textit{public SearchResult getSearchResult()} Gibt das Suchergebnis zurück.
+\item\textit{public QJsonObject getParameter()} Gibt die Parameter zurück.
 \end{itemize}
 
 \subsection*{BookmarkList}
-Die BookmarkList hält eine List von Bookmarks und speichert die Bookmarks.
+Die BookmarkList hält eine Liste von Bookmarks und speichert die Bookmarks.
+
+Attribute
+\begin{itemize}
+\item\textit{private QList<Bookmark> mBookmarkList} Eine Liste von Bookmarks.
+\end{itemize}
 
 Methoden
 \begin{itemize}
@@ -184,6 +258,15 @@ Methoden
 \subsection*{Dataset}
 Ein Dataset hat einen Typ und enthält Medien vom diesen Typ.
 
+Attribute
+\begin{itemize}
+\item\textit{protected QString mName} Der Name des Ordners.
+\item\textit{protected QImage mPreviewPhoto} Das Vorschaubild dieses Datensatzes.
+\item\textit{protected QList<Medium> mMediaList} Die Liste von Medium in diesem Datensatz.
+\item\textit{protected QString mPath} Der Pfad dieses Datensatzes.
+\item\textit{protected DatasetType mType} Der Typ dieses Datensatzes.
+\end{itemize}
+
 Methoden
 \begin{itemize}
 \item \textit{public Dataset(QString path)} Erzeugt einen Datensatz mit dem übergebenen Ordnerpfad.
@@ -197,7 +280,12 @@ Methoden
 \end{itemize}
 
 \subsection*{DatasetList}
-Eine DatasetList hält eine List von Datensätzen und speichert sie.
+Eine DatasetList hält eine Liste von Datensätzen und speichert sie.
+
+Attribute
+\begin{itemize}
+\item\textit{private QList<Dataset> mDatasetList} Die Liste von Datensätze.
+\end{itemize}
 
 Methoden
 \begin{itemize}
@@ -214,6 +302,13 @@ Der Datensatztyp kann Photo, Video oder Single-Frame-Video sein.
 \subsection*{Medium}
 Ein Medium wird durch einen Pfad charakterisiert. Außerdem hat ein Medium eine Liste von Annotationen und den zugehörigen Index. Der Index ist bei Photos 0, in Videos gibt er an, in welchem Frame sich die Annotation befindet.
 
+Attribute
+\begin{itemize}
+\item\textit{protected QString mRelativePath} Der Pfad zu diesem Medium.
+\item\textit{protected MediumType mType} Der Typ dieses Mediums.
+\item\textit{protected QList<QPair<int, Annotation>> mAnnotationList} Die Liste von Annotationen für dieses Medium.
+\end{itemize}
+
 Methoden
 \begin{itemize}
 \item \textit{public Medium(QString path, QList<QPair<int, Annotation>> annotations)} Erzeugt ein Medium, das den übergebenen Pfad und die Annotationsliste hat.
@@ -229,11 +324,17 @@ Ein Photo ist ein Bild, in dem Annotationen sein können.
 
 Methoden
 \begin{itemize}
-\item \textit{public Photo(QString path} Erzeugt ein Photo, mit dem übergebenen Pfad.
+\item \textit{public Photo(QString path)} Erzeugt ein Photo, mit dem übergebenen Pfad.
 \end{itemize}
 
 \subsection*{SingleFrameVideo : public Medium}
 Ein SingelFrameVideo ist ein Video aus Einzelbildern.
+
+Attribute
+\begin{itemize}
+\item\textit{private int mFramerate} Die Framerate dieses Videos.
+\item\textit{private QList<QString> mFrameList} Die Liste von Frames dieses Videos.
+\end{itemize}
 
 Methoden
 \begin{itemize}
