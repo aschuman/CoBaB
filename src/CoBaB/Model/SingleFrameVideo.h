@@ -15,7 +15,7 @@ public:
     /**
      * @param path
      */
-    void SingleFrameVideo(QString path, QList<QPair<int, QList<Annotation> > > annotations);
+    SingleFrameVideo(QString path, QList<QPair<int, Annotation> > annotations);
     
     int getFramerate();
     

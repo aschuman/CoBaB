@@ -13,7 +13,7 @@
 /**
  * @param path
  */
-void Dataset::Dataset(QString path) {
+Dataset::Dataset(QString path) {
     mPath = path;
     createPreviewPhoto();
 }

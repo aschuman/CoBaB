@@ -14,8 +14,8 @@
  * @param path
  * @param annotations
  */
-void Medium::Medium(QString path, QList<QPair<int, Annotation>> annotations) {
-    mAnnotationList = annotation;
+Medium::Medium(QString path, QList<QPair<int, Annotation>> annotations) {
+    mAnnotationList = annotations;
     mRelativePath = path;
 }
 

@@ -2,7 +2,7 @@
  * Project \
  */
 
-
+#include <QDataStream>
 #ifndef _SERIALIZABLE_H
 #define _SERIALIZABLE_H
 

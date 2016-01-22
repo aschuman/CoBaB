@@ -8,7 +8,9 @@
 
 #include "QDir.h"
 #include "QDataStream.h"
-
+#include "Medium.h"
+#include "DatasetType.h"
+#include <QImage>
 
 class Dataset: public QDir, public QDataStream {
 public: 
@@ -16,7 +18,7 @@ public:
     /**
      * @param path
      */
-    void Dataset(QString path);
+    Dataset(QString path);
     
     QString getName();
     

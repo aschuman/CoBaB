@@ -7,7 +7,8 @@
 #define _MEDIUM_H
 
 #include "QDataStream.h"
-
+#include "Annotation.h"
+#include "MediumType.h"
 
 class Medium: public QDataStream {
 public: 
@@ -16,11 +17,11 @@ public:
      * @param path
      * @param annotations
      */
-    void Medium(QString path, QList<QPair<int; Annotation>> annotations);
+    Medium(QString path, QList<QPair<int, Annotation>> annotations);
     
     MediumType getType();
     
-    QList<QPair<int; Annotation>> getAnnotationList();
+    QList<QPair<int, Annotation>> getAnnotationList();
 protected: 
     QString mRelativePath;
     MediumType mMediumType;
