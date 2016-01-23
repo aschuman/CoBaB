@@ -6,8 +6,8 @@
 #ifndef _SEARCHRESULT_H
 #define _SEARCHRESULT_H
 
-#include "..\..\include\DataPacket.h"
-#include "..\..\include\SearchResultElement.h"
+#include "DataPacket.h"
+#include "SearchResultElement.h"
 
 
 class SearchResult: public DataPacket {

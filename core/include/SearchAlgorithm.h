@@ -6,7 +6,7 @@
 #ifndef _SEARCHALGORITHM_H
 #define _SEARCHALGORITHM_H
 
-#include "..\..\include\Algorithm.h"
+#include "Algorithm.h"
 
 
 class SearchAlgorithm: public Algorithm {

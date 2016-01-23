@@ -6,7 +6,7 @@
 #ifndef _SINGLEFRAMEVIDEO_H
 #define _SINGLEFRAMEVIDEO_H
 
-#include "..\..\include\Medium.h"
+#include "Medium.h"
 
 
 class SingleFrameVideo: public Medium {

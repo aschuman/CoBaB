@@ -5,7 +5,7 @@
 #ifndef _ALGORITHM_H
 #define _ALGORITHM_H
 
-#include "..\..\include\DataPacket.h"
+#include "DataPacket.h"
 #include <QList>
 #include <QJsonObject>
 

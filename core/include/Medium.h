@@ -6,8 +6,8 @@
 #ifndef _MEDIUM_H
 #define _MEDIUM_H
 
-#include "..\..\include\Annotation.h"
-#include "..\..\include\MediumType.h"
+#include "Annotation.h"
+#include "MediumType.h"
 
 class Medium {
 public: 

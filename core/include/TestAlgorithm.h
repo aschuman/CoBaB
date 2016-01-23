@@ -6,7 +6,8 @@
 #ifndef _TESTALGORITHM_H
 #define _TESTALGORITHM_H
 
-#include "..\..\include\SearchAlgorithm.h"
+#include <memory>
+#include "SearchAlgorithm.h"
 
 
 class TestAlgorithm: public SearchAlgorithm {
@@ -55,7 +56,7 @@ public:
      */
     void sendProgress(double progress, QString message);
 private: 
-    DataPacket mInputData;
+    std::unique_ptr<DataPacket> mInputData;
     QString mDescription;
     QList<int> mParameterList;
     QString mName;

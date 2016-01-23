@@ -6,10 +6,10 @@
 #ifndef _DATASET_H
 #define _DATASET_H
 
-#include "..\..\include\Medium.h"
-#include "..\..\include\DatasetType.h"
-#include <QDir.h>
-#include <QDataStream.h>
+#include "Medium.h"
+#include "DatasetType.h"
+#include <QDir>
+#include <QDataStream>
 #include <QImage>
 
 class Dataset {

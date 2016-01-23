@@ -6,9 +6,9 @@
 #ifndef _SEARCHQUERY_H
 #define _SEARCHQUERY_H
 
-#include "..\..\include\DataPacket.h"
-#include "..\..\include\Dataset.h"
-#include "..\..\include\SearchObject.h"
+#include "DataPacket.h"
+#include "Dataset.h"
+#include "SearchObject.h"
 
 
 class SearchQuery: public DataPacket {

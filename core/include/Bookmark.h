@@ -6,10 +6,10 @@
 #ifndef _BOOKMARK_H
 #define _BOOKMARK_H
 
-#include "..\..\include\Serializable.h"
-#include "..\..\include\SearchResult.h"
-#include "..\..\include\SearchQuery.h"
-#include "..\..\include\SearchFeedback.h"
+#include "Serializable.h"
+#include "SearchResult.h"
+#include "SearchQuery.h"
+#include "SearchFeedback.h"
 #include <QDateTime>
 #include <QJsonObject>
 

@@ -6,8 +6,8 @@
 #ifndef _BOOKMARKLIST_H
 #define _BOOKMARKLIST_H
 
-#include "..\..\include\Bookmark.h"
-#include "..\..\include\SearchResult.h"
+#include "Bookmark.h"
+#include "SearchResult.h"
 
 class BookmarkList {
 public: 

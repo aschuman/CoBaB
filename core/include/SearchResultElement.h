@@ -6,8 +6,8 @@
 #ifndef _SEARCHRESULTELEMENT_H
 #define _SEARCHRESULTELEMENT_H
 
-#include "..\..\include\Serializable.h"
-#include "..\..\include\SearchObject.h"
+#include "Serializable.h"
+#include "SearchObject.h"
 
 
 class SearchResultElement: public Serializable {

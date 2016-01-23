@@ -6,8 +6,8 @@
 #ifndef _SEARCHOBJECT_H
 #define _SEARCHOBJECT_H
 
-#include "..\..\include\Serializable.h"
-#include "..\..\include\Dataset.h"
+#include "Serializable.h"
+#include "Dataset.h"
 #include <QRect>
 
 class SearchObject: public Serializable {

@@ -6,8 +6,8 @@
 #ifndef _CONFIGDATA_H
 #define _CONFIGDATA_H
 
-#include "..\..\include\Language.h"
-#include <QSettings.h>
+#include "Language.h"
+#include <QSettings>
 
 
 class ConfigData: public QSettings {

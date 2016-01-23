@@ -6,8 +6,8 @@
 #ifndef _DATAPACKET_H
 #define _DATAPACKET_H
 
-#include "..\..\include\Serializable.h"
-#include "..\..\include\DataPacketType.h"
+#include "Serializable.h"
+#include "DataPacketType.h"
 #include <QUuid>
 
 

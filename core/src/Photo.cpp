@@ -3,7 +3,7 @@
  */
 
 
-#include "..\..\include\CoBaB.h"
+#include "CoBaB.h"
 
 /**
  * Photo implementation

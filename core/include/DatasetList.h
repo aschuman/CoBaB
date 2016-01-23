@@ -6,7 +6,7 @@
 #ifndef _DATASETLIST_H
 #define _DATASETLIST_H
 
-#include "..\..\include\Dataset.h"
+#include "Dataset.h"
 
 
 class DatasetList {

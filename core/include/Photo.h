@@ -6,7 +6,7 @@
 #ifndef _PHOTO_H
 #define _PHOTO_H
 
-#include "..\..\include\Medium.h"
+#include "Medium.h"
 
 
 class Photo: public Medium {

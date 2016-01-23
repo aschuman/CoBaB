@@ -6,8 +6,8 @@
 #ifndef _RECTANGLEANNOTATION_H
 #define _RECTANGLEANNOTATION_H
 
-#include "..\..\include\Annotation.h"
-#include <QRect.h>
+#include "Annotation.h"
+#include <QRect>
 
 
 class RectangleAnnotation: public Annotation, public QRect {

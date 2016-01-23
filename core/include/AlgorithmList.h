@@ -6,8 +6,8 @@
 #ifndef _ALGORITHMLIST_H
 #define _ALGORITHMLIST_H
 
-#include "..\..\include\DataPacket.h"
-#include "..\..\include\Algorithm.h"
+#include "DataPacket.h"
+#include "Algorithm.h"
 #include <QList>
 
 class AlgorithmList {
@@ -21,7 +21,7 @@ public:
     /**
      * @param packet
      */
-    QList<Algorithm> findCompatibleAlgorithms(DataPacket packet);
+    QList<Algorithm> findCompatibleAlgorithms(const DataPacket& packet);
     
     QList<Algorithm> getAlgorithmList();
 private: 

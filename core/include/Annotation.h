@@ -6,10 +6,10 @@
 #ifndef _ANNOTATION_H
 #define _ANNOTATION_H
 
-#include "..\..\include\Serializable.h"
-#include "..\..\include\Annotation.h"
-#include "..\..\include\AnnotationType.h"
-#include <QDataStream.h>
+#include "Serializable.h"
+#include "Annotation.h"
+#include "AnnotationType.h"
+#include <QDataStream>
 
 
 class Annotation: public Serializable {

@@ -6,10 +6,10 @@
 #ifndef _SEARCHFEEDBACK_H
 #define _SEARCHFEEDBACK_H
 
-#include "..\..\include\DataPacket.h"
-#include "..\..\include\FeedbackType.h"
-#include "..\..\include\SearchFeedback.h"
-#include <QDataStream.h>
+#include "DataPacket.h"
+#include "FeedbackType.h"
+#include "SearchFeedback.h"
+#include <QDataStream>
 
 
 class SearchFeedback: public DataPacket {

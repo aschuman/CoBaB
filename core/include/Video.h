@@ -6,7 +6,7 @@
 #ifndef _VIDEO_H
 #define _VIDEO_H
 
-#include "..\..\include\Medium.h"
+#include "Medium.h"
 
 
 class Video: public Medium {

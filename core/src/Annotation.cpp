@@ -3,7 +3,7 @@
  */
 
 
-#include "..\..\include\CoBaB.h"
+#include "CoBaB.h"
 
 /**
  * Annotation implementation
@@ -21,14 +21,14 @@ Annotation::Annotation(QString id) {
  * @return QString
  */
 QString Annotation::getId() {
-    return null;
+    return "";
 }
 
 /**
  * @return AnnotationType
  */
 AnnotationType Annotation::getType() {
-    return null;
+    return AnnotationType::FACE;
 }
 
 /**
@@ -37,7 +37,7 @@ AnnotationType Annotation::getType() {
  * @return QDataStream&
  */
 QDataStream& operator<<(QDataStream& out, Annotation& annotation) {
-    return null;
+    return out;
 }
 
 /**
@@ -46,7 +46,7 @@ QDataStream& operator<<(QDataStream& out, Annotation& annotation) {
  * @return QDataStream&
  */
 QDataStream& operator>>(QDataStream& in, Annotation& annotation) {
-    return null;
+    return in;
 }
 
 /**
