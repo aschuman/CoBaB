@@ -352,9 +352,74 @@ Methoden
 \end{itemize}
 
 \subsection*{<<interface>> Algorithm}
+Die Algorithmen, die von CoBaB ausgeführt werden sollen, müssen mindestens diese Schnittstelle implementieren.
+
+Methoden
+\begin{itemize}
+\item\textit{public QList<DataPacket> run()} Startet den Algorithmus. Die Liste von DataPackets sind die Ergebnisse des Algorithmus.
+\item\textit{public void cancel()} Bricht die Ausführung des Algorithmus ab.
+\item\textit{public bool setInputs(QList<DataPacket> inputDataList)} Übergibt die benötigten Daten an den Algorithmus. Der Algorithmus gibt zurück, ob diese Liste seinen Eingabeparametern entspricht und es somit möglich ist, ihn zu starten.
+\item\textit{public bool setParameters(QJsonObject parameters)} Übergibt die vom Benutzer festgelegten Parameterwerte an den Algorithmus. Der Algorithmus gibt zurück, ob diese Parameterdatei für ihn geeignet ist.
+\item\textit{public QString getId()} Gibt eine für diesen Algorithmus eindeutige Identifikation zurück.
+\end{itemize}
+
 \subsection*{<<interface>> SearchAlgorithm : public Algorithm}
+Die Implementierung dieser Schnittstelle ermöglicht CoBaB, genauere Angaben über den Algorithmus anzuzeigen.
+
+Methoden
+\begin{itemize}
+\item\textit{public QString getDescription()} Gibt eine Beschreibung des Algorithmus zurück.
+\item\textit{public QString getName()} Gibt den Namen des Algorithmus zurück.
+\item\textit{public void setName(QString name)} Setzt den Namen des Algorithmus auf name.
+\item\textit{public bool supportsProgressInfo()} Gibt zurück, ob der Algorithmus Fortschrittsinformationen senden kann.
+\item\textit{public sendIntermediateResults(SearchResult searchResult)} Ist ein Signal, dass vom Algorithmus gesendet wird, wenn Zwischenergebnisse verfügbar sind.
+\item\textit{public sendProgress(double progress, QString message)} Ist ein Signal, das den Fortschritt des Algorithmus sendet.
+\end{itemize}
+
 \subsection*{TestAlgorithm : public SearchAlgorithm}
+Dieser Suchalgorithmus wird zu Testzwecken implementiert. Er generiert ein zufälliges SearchResult.
+
+Attribute
+\begin{itemize}
+\item\textit{private DataPacket mInputData} Die Eingabedaten für den Algorithmus.
+\item\textit{private QString mDescription} Die Beschreibung für den Algorithmus.
+\item\textit{private QList<int> mParameterList} Mögliche Einträge für die Parameterliste: randomSeed, sleep time interval.
+\item\textit{private QString mName} Der Name des Algorithmus.
+\end{itemize}
+
+Methoden
+\begin{itemize}
+\item\textit{public TestAlgorithm()} Erstellt einen neuen Test-Algorithmus.
+\item\textit{public QList<DataPacket> run()} Startet den Algorithmus. Die Liste von DataPackets sind die Ergebnisse des Algorithmus.
+\item\textit{public void cancel()} Bricht die Ausführung des Algorithmus ab.
+\item\textit{public bool setInputs(QList<DataPacket> inputDataList)} Übergibt die benötigten Daten an den Algorithmus. Der Algorithmus gibt zurück, ob diese Liste seinen Eingabeparametern entspricht und es somit möglich ist, ihn zu starten.
+\item\textit{public bool setParameters(QJsonObject parameters)} Übergibt die vom Benutzer festgelegten Parameterwerte an den Algorithmus. Der Algorithmus gibt zurück, ob diese Parameterdatei für ihn geeignet ist.
+\item\textit{public QString getId()} Gibt eine für diesen Algorithmus eindeutige Identifikation zurück.
+\item\textit{public QString getDescription()} Gibt eine Beschreibung des Algorithmus zurück.
+\item\textit{public void setDescription(QString description)} Setzt die Beschreibung für den Algorithmus.
+\item\textit{public QString getName()} Gibt den Namen des Algorithmus zurück.
+\item\textit{public void setName(QString name)} Setzt den Namen des Algorithmus auf name.
+\item\textit{public bool supportsProgressInfo()} Gibt zurück, ob der Algorithmus Fortschrittsinformationen senden kann.
+\item\textit{public sendIntermediateResults(SearchResult searchResult)} Ist ein Signal, dass vom Algorithmus gesendet wird, wenn Zwischenergebnisse verfügbar sind.
+\item\textit{public sendProgress(double progress, QString message)} Ist ein Signal, das den Fortschritt des Algorithmus sendet.
+\end{itemize}
+
 \subsection*{AlgorithmList}
+Diese Liste verwaltet verfügbare Algorithmen.
+
+Attribute
+\begin{itemize}
+\item\textit{private QList<Algorithm> mAlgorithmList} Die Liste der verfügbaren Algorithmen.
+\end{itemize}
+
+Methoden
+\begin{itemize}
+\item\textit{public AlgorithmList(QString file)} Erzeugt eine Liste der verfügbaren Algorithmen.
+\item\textit{public QList<Algorithm> findCompatibleAlgorithms(DataPacket packet)} Gibt das DataPacket als Eingabe an alle Algorithmen und gibt die Liste der Algorithmen zurück, die diese Eingabe akzeptiert haben.
+\item\textit{public QList<Algorithm> getAlgorithmList()} Gibt die Liste der verfügbaren Algorithmen zurück.
+\end{itemize}
+
+\pagebreak
 
 \subsection{View}
 \subsection*{PageWidget}
@@ -447,6 +512,7 @@ Stellt DualFeedback (positive, neutral, negative) dar.
 \subsection*{CExtendedFeedback}
 Stellt ExtendedFeedback (Werte von 1 bis 10) dar.
 
+\pagebreak
 
 \subsection{Controller}
 \subsection*{MainControl}
