@@ -27,7 +27,7 @@
 *.out
 *.app
 
-#files produced by pdftex
+# files produced by pdftex
 *.aux
 *.dvi
 *.fdb_latexmk
@@ -41,3 +41,10 @@
 *.glsdefs
 *.glg
 *.gls
+
+# developer-specific qt files
+*pro.user
+*pro.user.*
+
+# build directory
+build-*/
