@@ -15,5 +15,5 @@
  */
 Photo::Photo(QString path, QList<QPair<int, Annotation>> annotations)
     : Medium(path, annotations) {
-    mMediumType = PHOTO;
+    mMediumType = MediumType::PHOTO;
 }

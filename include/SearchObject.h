@@ -54,13 +54,13 @@ public:
      * @param out
      * @param searchObject
      */
-    QDataStream& operator<<(QDataStream& out, SearchObject& searchObject);
+    friend QDataStream& operator<<(QDataStream& out, SearchObject& searchObject);
     
     /**
      * @param in
      * @param searchObject
      */
-    QDataStream& operator>>(QDataStream& in, SearchObject& searchObject);
+    friend QDataStream& operator>>(QDataStream& in, SearchObject& searchObject);
     
     /**
      * @param in

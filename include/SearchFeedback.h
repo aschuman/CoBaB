@@ -33,13 +33,13 @@ public:
      * @param out
      * @param feedback
      */
-    QDataStream& operator<<(QDataStream& out, SearchFeedback& feedback);
+    friend QDataStream& operator<<(QDataStream& out, SearchFeedback& feedback);
     
     /**
      * @param in
      * @param feedback
      */
-    QDataStream& operator>>(QDataStream& in, SearchFeedback& feedback);
+    friend QDataStream& operator>>(QDataStream& in, SearchFeedback& feedback);
     
     /**
      * @param in

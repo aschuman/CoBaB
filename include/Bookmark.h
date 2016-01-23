@@ -27,13 +27,13 @@ public:
      * @param out
      * @param bookmark
      */
-    QDataStream& operator<<(QDataStream& out, Bookmark& bookmark);
+    friend QDataStream& operator<<(QDataStream& out, Bookmark& bookmark);
     
     /**
      * @param in
      * @param bookmark
      */
-    QDataStream& operator>>(QDataStream& in, Bookmark& bookmark);
+    friend QDataStream& operator>>(QDataStream& in, Bookmark& bookmark);
     
     /**
      * @param in

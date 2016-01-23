@@ -43,7 +43,7 @@ FeedbackType SearchFeedback::getFeedbackType() {
  * @param feedback
  * @return QDataStream&
  */
-QDataStream& SearchFeedback::operator<<(QDataStream& out, SearchFeedback& feedback) {
+QDataStream& operator<<(QDataStream& out, SearchFeedback& feedback) {
     return null;
 }
 
@@ -52,7 +52,7 @@ QDataStream& SearchFeedback::operator<<(QDataStream& out, SearchFeedback& feedba
  * @param feedback
  * @return QDataStream&
  */
-QDataStream& SearchFeedback::operator>>(QDataStream& in, SearchFeedback& feedback) {
+QDataStream& operator>>(QDataStream& in, SearchFeedback& feedback) {
     return null;
 }
 

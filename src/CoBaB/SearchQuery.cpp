@@ -47,7 +47,7 @@ void SearchQuery::setSearchObject(SearchObject searchObject) {
  * @param searchQuery
  * @return QDataStream&
  */
-QDataStream& SearchQuery::operator<<(QDataStream& out, SearchQuery& searchQuery) {
+QDataStream& operator<<(QDataStream& out, SearchQuery& searchQuery) {
     return null;
 }
 
@@ -56,7 +56,7 @@ QDataStream& SearchQuery::operator<<(QDataStream& out, SearchQuery& searchQuery)
  * @param searchQuery
  * @return QDataStream&
  */
-QDataStream& SearchQuery::operator>>(QDataStream& in, SearchQuery& searchQuery) {
+QDataStream& operator>>(QDataStream& in, SearchQuery& searchQuery) {
     return null;
 }
 

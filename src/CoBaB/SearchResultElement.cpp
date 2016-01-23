@@ -47,7 +47,7 @@ void SearchResultElement::setSearchObject(SearchObject searchObject) {
  * @param searchResultElement
  * @return QDataStream&
  */
-QDataStream& SearchResultElement::operator<<(QDataStream& out, SearchResultElement& searchResultElement) {
+QDataStream& operator<<(QDataStream& out, SearchResultElement& searchResultElement) {
     return null;
 }
 
@@ -56,7 +56,7 @@ QDataStream& SearchResultElement::operator<<(QDataStream& out, SearchResultEleme
  * @param searchResultElement
  * @return QDataStream&
  */
-QDataStream& SearchResultElement::operator>>(QDataStream& in, SearchResultElement& searchResultElement) {
+QDataStream& operator>>(QDataStream& in, SearchResultElement& searchResultElement) {
     return null;
 }
 

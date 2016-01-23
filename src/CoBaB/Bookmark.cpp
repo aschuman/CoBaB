@@ -24,7 +24,7 @@ Bookmark::Bookmark(SearchResult result, QString algorithm, SearchQuery query) {
  * @param bookmark
  * @return QDataStream&
  */
-QDataStream& Bookmark::operator<<(QDataStream& out, Bookmark& bookmark) {
+QDataStream& operator<<(QDataStream& out, Bookmark& bookmark) {
     return null;
 }
 
@@ -33,7 +33,7 @@ QDataStream& Bookmark::operator<<(QDataStream& out, Bookmark& bookmark) {
  * @param bookmark
  * @return QDataStream&
  */
-QDataStream& Bookmark::operator>>(QDataStream& in, Bookmark& bookmark) {
+QDataStream& operator>>(QDataStream& in, Bookmark& bookmark) {
     return null;
 }
 

@@ -89,7 +89,7 @@ void SearchObject::setMediumIndex(int index) {
  * @param searchObject
  * @return QDataStream&
  */
-QDataStream& SearchObject::operator<<(QDataStream& out, SearchObject& searchObject) {
+QDataStream& operator<<(QDataStream& out, SearchObject& searchObject) {
     return null;
 }
 
@@ -98,7 +98,7 @@ QDataStream& SearchObject::operator<<(QDataStream& out, SearchObject& searchObje
  * @param searchObject
  * @return QDataStream&
  */
-QDataStream& SearchObject::operator>>(QDataStream& in, SearchObject& searchObject) {
+QDataStream& operator>>(QDataStream& in, SearchObject& searchObject) {
     return null;
 }
 

@@ -28,13 +28,13 @@ public:
      * @param out
      * @param annotation
      */
-    QDataStream& operator<<(QDataStream& out, Annotation& annotation);
+    friend QDataStream& operator<<(QDataStream& out, Annotation& annotation);
     
     /**
      * @param in
      * @param annotation
      */
-    QDataStream& operator>>(QDataStream& in, Annotation& annotation);
+    friend QDataStream& operator>>(QDataStream& in, Annotation& annotation);
     
     /**
      * @param in

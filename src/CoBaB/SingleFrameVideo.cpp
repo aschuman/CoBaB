@@ -21,7 +21,7 @@
  */
 SingleFrameVideo::SingleFrameVideo(QString path, QList<QPair<int, Annotation>> annotations)
     : Medium(path, annotations) {
-    mMediumType = SINGLE_FRAME_VIDEO;
+    mMediumType = MediumType::SINGLE_FRAME_VIDEO;
 
     QDir dir(mRelativePath);
     dir.setFilter(QDir::Files);

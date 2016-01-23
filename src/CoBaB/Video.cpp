@@ -15,5 +15,5 @@
  */
 Video::Video(QString path, QList<QPair<int, QList<Annotation>>> annotations)
     : Medium(path, annotations) {
-    mMediumType = VIDEO;
+    mMediumType = MediumType::VIDEO;
 }

@@ -36,7 +36,7 @@ AnnotationType Annotation::getType() {
  * @param annotation
  * @return QDataStream&
  */
-QDataStream& Annotation::operator<<(QDataStream& out, Annotation& annotation) {
+QDataStream& operator<<(QDataStream& out, Annotation& annotation) {
     return null;
 }
 
@@ -45,7 +45,7 @@ QDataStream& Annotation::operator<<(QDataStream& out, Annotation& annotation) {
  * @param annotation
  * @return QDataStream&
  */
-QDataStream& Annotation::operator>>(QDataStream& in, Annotation& annotation) {
+QDataStream& operator>>(QDataStream& in, Annotation& annotation) {
     return null;
 }
 

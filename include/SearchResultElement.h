@@ -33,13 +33,13 @@ public:
      * @param out
      * @param searchResultElement
      */
-    QDataStream& operator<<(QDataStream& out, SearchResultElement& searchResultElement);
+    friend QDataStream& operator<<(QDataStream& out, SearchResultElement& searchResultElement);
     
     /**
      * @param in
      * @param searchResultElement
      */
-    QDataStream& operator>>(QDataStream& in, SearchResultElement& searchResultElement);
+    friend QDataStream& operator>>(QDataStream& in, SearchResultElement& searchResultElement);
     
     /**
      * @param in
