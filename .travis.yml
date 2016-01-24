@@ -1,0 +1,18 @@
+language: cpp
+compiler: gcc
+
+before_install:
+  - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
+  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+  - sudo apt-get update -qq
+
+install:
+  - sudo apt-get install -qq g++-5
+  - sudo apt-get install qt5-default
+
+script:
+  - g++-5 --version
+  - qmake --version
+  - qmake "QMAKE_CXX=g++-5" "CC=gcc-5" "QMAKE_CXXFLAGS += -std=c++14" CoBaB.pro
+  - make
+  - test/test
