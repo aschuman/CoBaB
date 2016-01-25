@@ -9,6 +9,7 @@ before_install:
 install:
   - sudo apt-get install -qq g++-5
   - sudo apt-get install qt5-default
+  - sudo apt-get install cppcheck
 
 script:
   - g++-5 --version
@@ -16,3 +17,4 @@ script:
   - qmake "QMAKE_CXX=g++-5" "CC=gcc-5" "QMAKE_CXXFLAGS += -std=c++14" CoBaB.pro
   - make
   - test/test
+  - cppcheck . -q --error-exitcode=31
