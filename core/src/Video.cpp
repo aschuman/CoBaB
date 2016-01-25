@@ -13,7 +13,7 @@
 /**
  * @param path
  */
-Video::Video(QString path, QList<QPair<int, QList<Annotation>>> annotations)
+Video::Video(QString path, QList<QPair<int, Annotation>> annotations)
     : Medium(path, annotations) {
     mMediumType = MediumType::VIDEO;
 }

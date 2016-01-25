@@ -45,6 +45,7 @@ public:
      * @param out
      */
     void fromStream(QDataStream out);
+
 protected: 
     QString mId;
     QString mType = "unknown";

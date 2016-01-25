@@ -15,6 +15,8 @@
  */
 Dataset::Dataset(QString path) {
     mPath = path;
+    QDir dir(path);
+    mName = dir.dirName();
     createPreviewPhoto();
 }
 

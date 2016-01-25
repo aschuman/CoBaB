@@ -15,7 +15,7 @@ public:
     /**
      * @param path
      */
-    Video(QString path, QList<QPair<int, QList<Annotation>>> annotations);
+    Video(QString path, QList<QPair<int, Annotation> > annotations);
 };
 
 #endif //_VIDEO_H

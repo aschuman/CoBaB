@@ -17,11 +17,11 @@ public:
      */
     SingleFrameVideo(QString path, QList<QPair<int, Annotation> > annotations);
     
-    int getFramerate();
+    double getFramerate();
     
     QList<QString> getFrameList();
 private: 
-    int mFramerate;
+    double mFramerate;
     QList<QString> mFrameList;
 };
 

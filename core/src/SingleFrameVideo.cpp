@@ -29,17 +29,10 @@ SingleFrameVideo::SingleFrameVideo(QString path, QList<QPair<int, Annotation>> a
     mFrameList = dir.entryList();
     QListIterator<QString> iterator(mFrameList);
     while (iterator.hasNext()) {
-        QString file = iterator.next();
-        if(file == FRAMERATE_FILE) {
-            mFrameList.removeOne(file);
-            QTextStream stream(file);
-            QString framerate;
-            stream >> framerate;
-            bool *ok;
-            mFramerate = framerate.toInt(ok, 10);
-            if(!ok) {
-                mFramerate = DEFAULT_FRAMERATE;
-            }
+        QString fileName = iterator.next();
+        if(fileName == FRAMERATE_FILE) {
+            mFrameList.removeOne(fileName);
+            mFramerate = readFramerateFromJson(fileName);
             break;
         }
     }
@@ -53,28 +46,18 @@ SingleFrameVideo::SingleFrameVideo(QString path, QList<QPair<int, Annotation>> a
     }
 
     struct {
-            bool operator()(QPair<int, Annotation> a, QPair<int, Annotation> b)
-            {
-                return a.first < b.first;
-            }
-        } customLess;
-        std::sort(mAnnotationList.begin(), mAnnotationList.end(), customLess);
-        QListIterator<QPair<int, Annotation>> iter(mAnnotationList);
-        iter.toBack();
-        while(iter.hasPrevious()) {
-            QPair<int, Annotation> pair = iter.previous();
-            if(pair.first > mFrameList.size()) {
-                mAnnotationList.removeOne(pair);
-            } else {
-                break;
-            }
+        bool operator()(QPair<int, Annotation> a, QPair<int, Annotation> b) {
+            return a.first < b.first;
         }
+    } customLess;
+    std::sort(mAnnotationList.begin(), mAnnotationList.end(), customLess);
+
 }
 
 /**
  * @return int
  */
-int SingleFrameVideo::getFramerate() {
+double SingleFrameVideo::getFramerate() {
     return mFramerate;
 }
 
@@ -83,4 +66,18 @@ int SingleFrameVideo::getFramerate() {
  */
 QList<QString> SingleFrameVideo::getFrameList() {
     return mFrameList;
+}
+
+double readFramerateFromJson(QString path) {
+    QFile loadFile(path);
+
+    if (!loadFile.open(QIODevice::ReadOnly)) {
+            return DEFAULT_FRAMERATE;
+        }
+
+    QByteArray saveData = loadFile.readAll();
+
+    QJsonDocument loadDoc(QJsonDocument::fromJson(saveData));
+
+    return loadDoc.object()["fps"].toDouble();
 }
