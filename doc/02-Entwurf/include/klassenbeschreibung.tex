@@ -1,5 +1,3 @@
-\subsection{Übersicht}
-
 \subsection{Model}
 
 \subsection*{ConfigData}
@@ -50,7 +48,7 @@ Eine rechteckige Annotation.
 
 Methoden
 \begin{itemize}
-\item \textit{public RectangleAnnotation(QString Id)} Erzeugt ein Objekt von RectangleAnnotation. Die übergebene Id Identifiziert die Annotation in einem Medium.
+\item \textit{public RectangleAnnotation(QString id)} Erzeugt ein Objekt von RectangleAnnotation. Die übergebene Id Identifiziert die Annotation in einem Medium.
 \item \textit{public friend QDataStream\& operator<<(QDataStream\& out, RectangleAnnotation\& annotation)} Speichert die RectangleAnnotation in einer Datei.
 \item \textit{public friend QDataStream\& operator>>(QDataStream\& in, RectangleAnnotation\& annotation)} Lädt die RectangleAnnotation aus einer Datei.
 \end{itemize}
@@ -369,6 +367,7 @@ Die Implementierung dieser Schnittstelle ermöglicht CoBaB, genauere Angaben üb
 Methoden
 \begin{itemize}
 \item\textit{public QString getDescription()} Gibt eine Beschreibung des Algorithmus zurück.
+\item\textit{public void setDescription(QString description)} Setzt die Beschreibung des Algorithmus.
 \item\textit{public QString getName()} Gibt den Namen des Algorithmus zurück.
 \item\textit{public void setName(QString name)} Setzt den Namen des Algorithmus auf name.
 \item\textit{public bool supportsProgressInfo()} Gibt zurück, ob der Algorithmus Fortschrittsinformationen senden kann.
@@ -385,11 +384,12 @@ Attribute
 \item\textit{private QString mDescription} Die Beschreibung für den Algorithmus.
 \item\textit{private QList<int> mParameterList} Mögliche Einträge für die Parameterliste: randomSeed, sleep time interval.
 \item\textit{private QString mName} Der Name des Algorithmus.
+\item\textit{private QString mId} Die Id des Algorithmus.
 \end{itemize}
 
 Methoden
 \begin{itemize}
-\item\textit{public TestAlgorithm()} Erstellt einen neuen Test-Algorithmus.
+\item\textit{public TestAlgorithm(QString id)} Erstellt einen neuen Test-Algorithmus.
 \item\textit{public QList<DataPacket> run()} Startet den Algorithmus. Die Liste von DataPackets sind die Ergebnisse des Algorithmus.
 \item\textit{public void cancel()} Bricht die Ausführung des Algorithmus ab.
 \item\textit{public bool setInputs(QList<DataPacket> inputDataList)} Übergibt die benötigten Daten an den Algorithmus. Der Algorithmus gibt zurück, ob diese Liste seinen Eingabeparametern entspricht und es somit möglich ist, ihn zu starten.
@@ -399,6 +399,7 @@ Methoden
 \item\textit{public void setDescription(QString description)} Setzt die Beschreibung für den Algorithmus.
 \item\textit{public QString getName()} Gibt den Namen des Algorithmus zurück.
 \item\textit{public void setName(QString name)} Setzt den Namen des Algorithmus auf name.
+\item\textit{public QString getId()} Gibt die Id des Algorithmus zurück.
 \item\textit{public bool supportsProgressInfo()} Gibt zurück, ob der Algorithmus Fortschrittsinformationen senden kann.
 \item\textit{public sendIntermediateResults(SearchResult searchResult)} Ist ein Signal, dass vom Algorithmus gesendet wird, wenn Zwischenergebnisse verfügbar sind.
 \item\textit{public sendProgress(double progress, QString message)} Ist ein Signal, das den Fortschritt des Algorithmus sendet.
