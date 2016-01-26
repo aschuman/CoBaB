@@ -7,6 +7,8 @@
 #include <QDir>
 #include <QTextStream>
 #include <algorithm>
+#include <QJsonObject>
+#include <QJsonDocument>
 
 /**
  * SingleFrameVideo implementation

@@ -23,6 +23,7 @@ public:
 private: 
     double mFramerate;
     QList<QString> mFrameList;
+    double readFramerateFromJson(QString path);
 };
 
 #endif //_SINGLEFRAMEVIDEO_H
