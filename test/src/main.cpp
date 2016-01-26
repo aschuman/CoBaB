@@ -1,5 +1,7 @@
 #include <QtTest/QTest>
 
+#include "pagestackframetester.h"
+
 #define EXEC(Tester) {Tester tester; r |= QTest::qExec(&tester);}
 
 int main(){
@@ -8,6 +10,8 @@ int main(){
     // add test class 'ExampleTester' like this
     // (do not forget to include header):
     // EXEC(ExampleTester)
+
+    EXEC(PageStackFrameTester)
 
     return r;
 }
