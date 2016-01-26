@@ -435,29 +435,142 @@ Kapselt Signale, die zum verwenden des Stacks des Navigators und dem wechseln de
 \subsection*{CMainWindow}
 Die Klasse erbt von QMainWindow und stellt das Hauptfenster des Programms dar, auf dem die weiteren Seiten als Widgets angezeigt werden.
 
+Attribute
+\begin{itemize}
+	\item\textit{private QMenuBar mMenubar}  
+	\item\textit{private QToolbar toolbar}
+	\item\textit{private QMenu mFileMenu}
+	\item\textit{private QMenu mLanguageMenu}
+	\item\textit{private QMenu mBookmarkMenu}
+	\item\textit{private QMenu mHistoryMenu}
+	\item\textit{private QMenu mHelpMenu}
+	\item\textit{private QStackedWidget mStackedWidget}
+	\item\textit{private QAction mHomeAction}
+	\item\textit{private QAction mBackAction}
+\end{itemize}
+
+Methoden
+\begin{itemize}
+	\item\textit{public MainWindow()}
+	\item\textit{public setCentralWidget(QWidget* widget)}
+	\item\textit{public setMenubar(QMenuBar * menuBar)}
+	\item\textit{public setToolbar(QToolBar * toolbar)}
+\end{itemize}
+
 \subsection*{CLibraryPageWidget}
 Das Widget, in dem alle Datensätze dargestellt werden. Man kann einen Datensatz für die Suche auswählen. Durch das ChooseDataSetButton kann man auch einen Datensatz wählen, der nicht in der Datenbank liegt. 
+
+Attribute
+\begin{itemize}
+	\item\textit{private QListView mDatasetsListView}
+	\item\textit{private CDatasetModel mDatasetModel}
+	\item\textit{private QPushButton mChooseDatasetButton}
+	\item\textit{public int EXIT_NEXT}     
+\end{itemize}
+
+Methoden
+\begin{itemize}
+	\item\textit{public CLibraryPageWidget()}
+	\item\textit{public setDatasetList(QList<Dataset>) datasets}
+	\item\textit{public setMenubar(signal_clicked_Dataset())}
+	\item\textit{public reset()}
+\end{itemize}
 
 \subsection*{CViewerPageWidget}
 Diese Klasse erbt von QWidget und und bildet die Basis für die Widgets, die den Inhalt eines Datensatzes in Form von Photoalbum oder Videoplayer darstellen.
 
+Attribute
+\begin{itemize}
+	\item\textit{private QListView mMediaListView}
+	\item\textit{private CMediaModel mMediaListModel}
+	\item\textit{private QPushButton mNextButton}
+	\item\textit{private QPushButton MBeforeButton}
+	\item\textit{private QPushButton mFullscreenButton}
+	\item\textit{private CCustomGraphicsView mGraphicsView}
+	\item\textit{public int EXIT_NEXT}      
+\end{itemize}
+
+Methoden
+\begin{itemize}
+	\item\textit{public CViewerPageWidget()}
+	\item\textit{public setDataset(Dataset dataset)}
+	\item\textit{public signal_Fulscreen()}
+	\item\textit{public signal_Before()}
+	\item\textit{public signal_Next()}
+	\item\textit{public reset()}
+\end{itemize}
+
 \subsection*{CPhotoViewer}
 Erbt von CViewerPageWidget. Seine Funktion ist das Darstellen der Bilder, die in einem Datensatz enthalten sind.
+
+Attribute
+\begin{itemize}
+	\item\textit{private CClickableGraphicsPixmapItem mItem}    
+\end{itemize}
+
+Methoden
+\begin{itemize}
+	\item\textit{public CPhotoViewer()}
+\end{itemize}
 
 \subsection*{CClickableQGraphicsPixmapItem}
 Erbt von QGraphicsPixmapItem und stell das Bild dar, das bei CCustomGraphicsView angezeigt wird und auf dem Annotationen gemacht werden können. Mit einem Rechtsklick kann man den Algorithmus für die Suche wählen.
 
+Methoden
+\begin{itemize}
+	\item\textit{public CClickableQGraphicsPixmapItem()}
+	\item\textit{public mousePressEvent(QGraphicsSceneMouseEvent *event)}
+\end{itemize}
+
 \subsection*{CSingleFrameVideoViewer}
 Erbt von CViewerPageWidget und seine Funktion ist das Darstellen der Videos in einem Datensatz, die in Form von EInzelbilder vorliegen.
 
-\subsection*{CSingleFrameVideoPlayer}
+Attribute
+\begin{itemize}
+	\item\textit{private CSingleFrameVideoPlayer mPlayer}
+	\item\textit{private QPushButton mPlayOrPauseButton}
+	\item\textit{private CGraphicsSingleFrameVideoItem mItem}    
+\end{itemize}
 
+Methoden
+\begin{itemize}
+	\item\textit{public CSingleFrameVideoViewer()}
+	\item\textit{public signal_PlayOrPause()}
+\end{itemize}
+
+\subsection*{CSingleFrameVideoPlayer} Eine Komponente, die das Video in Form von Einzelbildern in dem GraphicsView anzeigt.
+
+Methoden
+\begin{itemize}
+	\item\textit{public CSingleFrameVideoPlayer()}
+	\item\textit{public setMedium(SingleFrameVideo sfVideo)}
+	\item\textit{public play()}
+\end{itemize}
 
 \subsection*{CGraphicsSingleFrameVideoItem}
 Erbt von CClickableQGraphicsPixmapItem und stellt mithilfe des CSingleFrameVideoPlayers ein Video aus Einzeldateien, wobei man Annotationen machen und beim Rechtsklick den Algorithmus wählen kann.
 
+Methoden
+\begin{itemize}
+	\item\textit{public CGraphicsSingleFrameVideoItem()}
+	\item\textit{public setPlayer(CSingleFrameVideoPlayer player)}
+\end{itemize}
+
 \subsection*{CVideoViewer}
 Erbt von CViewerPageWidget. Seine Funktion ist das Darstellen und Abspielen der Videos, die in einem Datensatz enthalten sind.
+
+Attribute
+\begin{itemize}
+	\item\textit{private QMediaPlayer mPlayer}
+	\item\textit{private QPushButton mPlayOrPauseButton}
+	\item\textit{private CClickableGraphicsVideoItem mItem}    
+\end{itemize}
+
+Methoden
+\begin{itemize}
+	\item\textit{public CVideoViewer()}
+	\item\textit{public signal_PlayOrPause()}
+\end{itemize}
 
 \subsection*{CClickableGraphicsVideoItem}
 
