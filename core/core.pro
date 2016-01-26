@@ -13,7 +13,8 @@ HEADERS += \
     include/Photo.h \
     include/Serializable.h \
     include/SingleFrameVideo.h \
-    include/Video.h
+    include/Video.h \
+    include/pagewidget.h
 
 SOURCES += \
     src/main.cpp \
@@ -22,4 +23,5 @@ SOURCES += \
     src/Medium.cpp \
     src/Photo.cpp \
     src/SingleFrameVideo.cpp \
-    src/Video.cpp
+    src/Video.cpp \
+    src/pagewidget.cpp
