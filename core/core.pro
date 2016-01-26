@@ -6,6 +6,8 @@ INCLUDEPATH = include
 
 HEADERS += \
     include/maincontrol.h \
+    include/pagestackframe.h \
+    include/pagetype.h \
     include/Medium.h \
     include/MediumType.h \
     include/Photo.h \
@@ -16,6 +18,8 @@ HEADERS += \
 SOURCES += \
     src/main.cpp \
     src/maincontrol.cpp \
+    src/maincontrol.cpp \
+    src/pagestackframe.cpp \
     src/Medium.cpp \
     src/Photo.cpp \
     src/SingleFrameVideo.cpp \
