@@ -18,7 +18,6 @@ HEADERS += \
 SOURCES += \
     src/main.cpp \
     src/maincontrol.cpp \
-    src/maincontrol.cpp \
     src/pagestackframe.cpp \
     src/Medium.cpp \
     src/Photo.cpp \
