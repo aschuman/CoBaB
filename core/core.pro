@@ -5,6 +5,7 @@ QT += widgets core
 INCLUDEPATH = include
 
 HEADERS += \
+    include/maincontrol.h \
     include/Medium.h \
     include/MediumType.h \
     include/Photo.h \
@@ -14,6 +15,7 @@ HEADERS += \
 
 SOURCES += \
     src/main.cpp \
+    src/maincontrol.cpp \
     src/Medium.cpp \
     src/Photo.cpp \
     src/SingleFrameVideo.cpp \
