@@ -14,6 +14,7 @@ HEADERS += \
     include/Serializable.h \
     include/SingleFrameVideo.h \
     include/Video.h \
+    include/pageregistration.h \
     include/pagewidget.h
 
 SOURCES += \
@@ -24,4 +25,5 @@ SOURCES += \
     src/Photo.cpp \
     src/SingleFrameVideo.cpp \
     src/Video.cpp \
+    src/pageregistration.cpp \
     src/pagewidget.cpp
