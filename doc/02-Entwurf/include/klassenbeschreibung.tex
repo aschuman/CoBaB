@@ -1,7 +1,21 @@
 \subsection{Model}
 
+\begin{figure}[H]
+\includegraphics[width=1\linewidth]{img/Klassendiagramm/Model}
+\caption{Model}
+\label{fig:model}
+\end{figure}
+
+
 \subsection*{ConfigData}
+
 Die Klasse ConfigData speichert die Benutzereinstellungen Sprache und Benachrichtigungston. Außerdem werden die Hilfe- und Aboutdateien gelesen.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/ConfigData}
+\label{fig:configData}
+\end{figure}
 
 Attribute
 \begin{itemize}
@@ -23,8 +37,20 @@ Methoden
 \subsection*{<<enumeration>> Language}
 Language repräsentiert die verfügbaren Sprachen: Deutsch und Englisch.
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Language}
+\label{fig:language}
+\end{figure}
+
 \subsection*{Annotation : public Serializable}
 Eine Annotation ist ein in den Datensätzen vordefinierter Bereich eines Bildes oder Videos, der den Typ Face oder Person haben kann.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Annotation}
+\label{fig:annotation}
+\end{figure}
 
 Attribute
 \begin{itemize}
@@ -46,6 +72,12 @@ Methoden
 \subsection*{RectangleAnnotation : public Annotation, public QRect}
 Eine rechteckige Annotation.
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/RectangleAnnotation}
+\label{fig:rectangleAnnotation}
+\end{figure}
+
 Methoden
 \begin{itemize}
 \item \textit{public RectangleAnnotation(QString id)} Erzeugt ein Objekt von RectangleAnnotation. Die übergebene Id Identifiziert die Annotation in einem Medium.
@@ -55,6 +87,12 @@ Methoden
 
 \subsection*{DataPacket : public Serializable}
 Ein DataPacket ist eine Eingabe für den Algorithmus.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/DataPacket}
+\label{fig:dataPacket}
+\end{figure}
 
 Attribute
 \begin{itemize}
@@ -73,8 +111,20 @@ Methoden
 \subsection*{<<enumeration>> DataPacketType}
 DataPacketType enthält die Typen von DataPackets, also die vorhandenen Kindklassen.
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/DataPacketType}
+\label{fig:dataPacketType}
+\end{figure}
+
 \subsection*{SearchQuery : DataPacket}
 Eine SearchQuery ist eine Suchanfrage an den Algorithmus.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/SearchQuery}
+\label{fig:searchQuery}
+\end{figure}
 
 Attribute
 \begin{itemize}
@@ -98,6 +148,12 @@ Methoden
 \subsection*{SearchResult : DataPacket}
 Ein SearchResult ist die Ausgabe eines Algorithmus. Allerdings kann es auch eine Eingabe sein, wenn ein Algorithmus auf einem bestehenden Suchergebnis weiterarbeitet.
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/SearchResult}
+\label{fig:searchResult}
+\end{figure}
+
 Attribute
 \begin{itemize}
 \item\textit{private QList<SearchResultElement> mSearchResultElementList} Die Liste der zu diesem SearchResult gehörenden SearchResultElements.
@@ -116,6 +172,12 @@ Methoden
 
 \subsubsection*{SearchResultElement : public Serializable}
 Ein SearchResultElement ist ein Element von SearchResult. Abgesehen von einem SearchObject enthält es einen Score für dieses, der durch den Algorithmus bestimmt und gesetzt wurde.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/SearchResultElement}
+\label{fig:searchResultElement}
+\end{figure}
 
 Attribute
 \begin{itemize}
@@ -138,6 +200,12 @@ Methoden
 
 \subsection*{SearchObject : public Serializable}
 Das SearchObject repräsentiert eine Annotation oder ein Rechteck in einem Bild oder Frame eines Videos aus einem Datensatz.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/SearchObject}
+\label{fig:searchObject}
+\end{figure}
 
 Attribute
 \begin{itemize}
@@ -170,6 +238,12 @@ Methoden
 \subsection*{SearchFeedback : DataPacket}
 Das SearchFeedback gibt an, wie gut das vom Algorithmus erzeugte Suchergebnis ist.
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/SearchFeedback}
+\label{fig:searchFeedback}
+\end{figure}
+
 Attribute
 \begin{itemize}
 \item\textit{private QList<QPair<SearchObject, int>>} Der Integer-Wert beschreibt das zum SearchObject gehörende Feedback.
@@ -191,8 +265,20 @@ Methoden
 \subsubsection*{<<enumeration>> FeedbackType}
 Der FeedbackType kann dual (positiv, negativ, neutral) oder extended (Werte von 1 bis 10) sein.
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/FeedbackType}
+\label{fig:feedbackType}
+\end{figure}
+
 \subsection*{<<interface>> Serializable}
 Das Interface Serializable ist dazu da, damit die implementierenden Klassen serialisierbar sind.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Serializable}
+\label{fig:serializable}
+\end{figure}
 
 Methoden
 \begin{itemize}
@@ -202,6 +288,12 @@ Methoden
 
 \subsection*{Bookmark : public Serializable}
 Ein Bookmark speichert ein Suchergebnis, eine Suchanfrage und das Feedback, sodass ein früherer Suchvorgang wiederhergestellt werden kann.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Bookmark}
+\label{fig:bookmark}
+\end{figure}
 
 Attribute
 \begin{itemize}
@@ -236,6 +328,12 @@ Methoden
 \subsection*{BookmarkList}
 Die BookmarkList hält eine Liste von Bookmarks und speichert die Bookmarks.
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/BookmarkList}
+\label{fig:bookmarkList}
+\end{figure}
+
 Attribute
 \begin{itemize}
 \item\textit{private QList<Bookmark> mBookmarkList} Eine Liste von Bookmarks.
@@ -254,7 +352,13 @@ Methoden
 \end{itemize}
 
 \subsection*{Dataset}
-Ein Dataset hat einen Typ und enthält Medien vom diesen Typ.
+Ein Dataset hat einen Typ und enthält Medien von diesem Typ.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Dataset}
+\label{fig:dataset}
+\end{figure}
 
 Attribute
 \begin{itemize}
@@ -280,6 +384,12 @@ Methoden
 \subsection*{DatasetList}
 Eine DatasetList hält eine Liste von Datensätzen und speichert sie.
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/DatasetList}
+\label{fig:datasetList}
+\end{figure}
+
 Attribute
 \begin{itemize}
 \item\textit{private QList<Dataset> mDatasetList} Die Liste von Datensätze.
@@ -295,10 +405,22 @@ Methoden
 \end{itemize}
 
 \subsection*{DatasetType}
-Der Datensatztyp kann Photo, Video oder Single-Frame-Video sein.
+Der Datensatztyp kann Photo, Video oder SingleFrameVideo sein.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/DatasetType}
+\label{fig:datasetType}
+\end{figure}
 
 \subsection*{Medium}
 Ein Medium wird durch einen Pfad charakterisiert. Außerdem hat ein Medium eine Liste von Annotationen und den zugehörigen Index. Der Index ist bei Photos 0, in Videos gibt er an, in welchem Frame sich die Annotation befindet.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Medium}
+\label{fig:medium}
+\end{figure}
 
 Attribute
 \begin{itemize}
@@ -315,10 +437,22 @@ Methoden
 \end{itemize}
 
 \subsection*{<<enumeration>> MediumType}
-Der MediumType gibt den Typ des Meiums an: photo, video oder single frame video.
+Der MediumType gibt den Typ des Mediums an: photo, video oder single frame video.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/MediumType}
+\label{fig:mediumType}
+\end{figure}
 
 \subsection*{Photo : public Medium}
 Ein Photo ist ein Bild, in dem Annotationen sein können.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Photo}
+\label{fig:photo}
+\end{figure}
 
 Methoden
 \begin{itemize}
@@ -327,6 +461,12 @@ Methoden
 
 \subsection*{SingleFrameVideo : public Medium}
 Ein SingelFrameVideo ist ein Video aus Einzelbildern.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/SingleFrameVideo}
+\label{fig:singleFrameVideo}
+\end{figure}
 
 Attribute
 \begin{itemize}
@@ -344,6 +484,12 @@ Methoden
 \subsection*{Video : public Medium}
 Ein Video aus einer Videodatei.
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Video}
+\label{fig:video}
+\end{figure}
+
 Methoden
 \begin{itemize}
 \item \textit{public Video(QString path)} Erzeugt ein Video aus dem übergebenen Pfad.
@@ -351,6 +497,12 @@ Methoden
 
 \subsection*{<<interface>> Algorithm}
 Die Algorithmen, die von CoBaB ausgeführt werden sollen, müssen mindestens diese Schnittstelle implementieren.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Algorithm}
+\label{fig:algorithm}
+\end{figure}
 
 Methoden
 \begin{itemize}
@@ -363,6 +515,12 @@ Methoden
 
 \subsection*{<<interface>> SearchAlgorithm : public Algorithm}
 Die Implementierung dieser Schnittstelle ermöglicht CoBaB, genauere Angaben über den Algorithmus anzuzeigen.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/SearchAlgorithm}
+\label{fig:searchAlgorithm}
+\end{figure}
 
 Methoden
 \begin{itemize}
@@ -377,6 +535,12 @@ Methoden
 
 \subsection*{TestAlgorithm : public SearchAlgorithm}
 Dieser Suchalgorithmus wird zu Testzwecken implementiert. Er generiert ein zufälliges SearchResult.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/TestAlgorithm}
+\label{fig:testAlgorithm}
+\end{figure}
 
 Attribute
 \begin{itemize}
@@ -408,6 +572,12 @@ Methoden
 \subsection*{AlgorithmList}
 Diese Liste verwaltet verfügbare Algorithmen.
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/AlgorithmList}
+\label{fig:algorithmList}
+\end{figure}
+
 Attribute
 \begin{itemize}
 \item\textit{private QList<Algorithm> mAlgorithmList} Die Liste der verfügbaren Algorithmen.
@@ -423,6 +593,14 @@ Methoden
 \pagebreak
 
 \subsection{View}
+
+\begin{figure}[H]
+\includegraphics[width=1\linewidth]{img/Klassendiagramm/View}
+\caption{View}
+\label{fig:view}
+\end{figure}
+
+
 \subsection*{PageWidget}
 Ein PageWidget ist ein QWidget, das als eine Seite der grafischen Oberfläche im MainWindow dem Benutzer angezeigt wird. Die abstrakte Klasse PageWidget bietet dem erbenden Widget, das momentan im MainWindow angezeigt wird, die Möglichkeit ein PageWidget auszusuchen, um es dem Benutzer als nächstes anzuzeigen, und diesem über den Stack des Navigators nötige Daten weiterzugeben.
 
@@ -432,7 +610,7 @@ PageWidgets lassen sich beim Navigator mit einem PageType registrieren, welcher 
 \subsection*{PageWidgetDispatcher}
 Kapselt Signale, die zum verwenden des Stacks des Navigators und dem wechseln des PageWidgets nötig sind. (Ohne diese Kapselung stünden diese Signale den speziellen PageWidgets zur Verfügung)
 
-\subsection*{CMainWindow}
+\subsection*{MainWindow}
 Die Klasse erbt von QMainWindow und stellt das Hauptfenster des Programms dar, auf dem die weiteren Seiten als Widgets angezeigt werden.
 
 Attribute
@@ -457,7 +635,7 @@ Methoden
 	\item\textit{public setToolbar(QToolBar * toolbar)}
 \end{itemize}
 
-\subsection*{CLibraryPageWidget}
+\subsection*{LibraryPageWidget}
 Das Widget, in dem alle Datensätze dargestellt werden. Man kann einen Datensatz für die Suche auswählen. Durch das ChooseDataSetButton kann man auch einen Datensatz wählen, der nicht in der Datenbank liegt. 
 
 Attribute
@@ -465,18 +643,18 @@ Attribute
 	\item\textit{private QListView mDatasetsListView}
 	\item\textit{private CDatasetModel mDatasetModel}
 	\item\textit{private QPushButton mChooseDatasetButton}
-	\item\textit{public int EXIT_NEXT}     
+	\item\textit{public int EXIT\_NEXT}     
 \end{itemize}
 
 Methoden
 \begin{itemize}
 	\item\textit{public CLibraryPageWidget()}
 	\item\textit{public setDatasetList(QList<Dataset>) datasets}
-	\item\textit{public setMenubar(signal_clicked_Dataset())}
+	\item\textit{public setMenubar(signal\_clicked\_Dataset())}
 	\item\textit{public reset()}
 \end{itemize}
 
-\subsection*{CViewerPageWidget}
+\subsection*{ViewerPageWidget}
 Diese Klasse erbt von QWidget und und bildet die Basis für die Widgets, die den Inhalt eines Datensatzes in Form von Photoalbum oder Videoplayer darstellen.
 
 Attribute
@@ -487,21 +665,21 @@ Attribute
 	\item\textit{private QPushButton MBeforeButton}
 	\item\textit{private QPushButton mFullscreenButton}
 	\item\textit{private CCustomGraphicsView mGraphicsView}
-	\item\textit{public int EXIT_NEXT}      
+	\item\textit{public int EXIT\_NEXT}      
 \end{itemize}
 
 Methoden
 \begin{itemize}
 	\item\textit{public CViewerPageWidget()}
 	\item\textit{public setDataset(Dataset dataset)}
-	\item\textit{public signal_Fulscreen()}
-	\item\textit{public signal_Before()}
-	\item\textit{public signal_Next()}
+	\item\textit{public signal\_Fullscreen()}
+	\item\textit{public signal\_Before()}
+	\item\textit{public signal\_Next()}
 	\item\textit{public reset()}
 \end{itemize}
 
-\subsection*{CPhotoViewer}
-Erbt von CViewerPageWidget. Seine Funktion ist das Darstellen der Bilder, die in einem Datensatz enthalten sind.
+\subsection*{PhotoViewer}
+Erbt von ViewerPageWidget. Seine Funktion ist das Darstellen der Bilder, die in einem Datensatz enthalten sind.
 
 Attribute
 \begin{itemize}
@@ -513,8 +691,8 @@ Methoden
 	\item\textit{public CPhotoViewer()}
 \end{itemize}
 
-\subsection*{CClickableQGraphicsPixmapItem}
-Erbt von QGraphicsPixmapItem und stell das Bild dar, das bei CCustomGraphicsView angezeigt wird und auf dem Annotationen gemacht werden können. Mit einem Rechtsklick kann man den Algorithmus für die Suche wählen.
+\subsection*{ClickableQGraphicsPixmapItem}
+Erbt von QGraphicsPixmapItem und stell das Bild dar, das bei CustomGraphicsView angezeigt wird und auf dem Annotationen gemacht werden können. Mit einem Rechtsklick kann man den Algorithmus für die Suche wählen.
 
 Methoden
 \begin{itemize}
@@ -522,8 +700,8 @@ Methoden
 	\item\textit{public mousePressEvent(QGraphicsSceneMouseEvent *event)}
 \end{itemize}
 
-\subsection*{CSingleFrameVideoViewer}
-Erbt von CViewerPageWidget und seine Funktion ist das Darstellen der Videos in einem Datensatz, die in Form von EInzelbilder vorliegen.
+\subsection*{SingleFrameVideoViewer}
+Erbt von ViewerPageWidget und seine Funktion ist das Darstellen der Videos in einem Datensatz, die in Form von EInzelbilder vorliegen.
 
 Attribute
 \begin{itemize}
@@ -535,7 +713,7 @@ Attribute
 Methoden
 \begin{itemize}
 	\item\textit{public CSingleFrameVideoViewer()}
-	\item\textit{public signal_PlayOrPause()}
+	\item\textit{public signal\_PlayOrPause()}
 \end{itemize}
 
 \subsection*{CSingleFrameVideoPlayer} Eine Komponente, die das Video in Form von Einzelbildern in dem GraphicsView anzeigt.
@@ -547,8 +725,8 @@ Methoden
 	\item\textit{public play()}
 \end{itemize}
 
-\subsection*{CGraphicsSingleFrameVideoItem}
-Erbt von CClickableQGraphicsPixmapItem und stellt mithilfe des CSingleFrameVideoPlayers ein Video aus Einzeldateien, wobei man Annotationen machen und beim Rechtsklick den Algorithmus wählen kann.
+\subsection*{GraphicsSingleFrameVideoItem}
+Erbt von ClickableQGraphicsPixmapItem und stellt mithilfe des SingleFrameVideoPlayers ein Video aus Einzeldateien, wobei man Annotationen machen und beim Rechtsklick den Algorithmus wählen kann.
 
 Methoden
 \begin{itemize}
@@ -556,8 +734,8 @@ Methoden
 	\item\textit{public setPlayer(CSingleFrameVideoPlayer player)}
 \end{itemize}
 
-\subsection*{CVideoViewer}
-Erbt von CViewerPageWidget. Seine Funktion ist das Darstellen und Abspielen der Videos, die in einem Datensatz enthalten sind.
+\subsection*{VideoViewer}
+Erbt von ViewerPageWidget. Seine Funktion ist das Darstellen und Abspielen der Videos, die in einem Datensatz enthalten sind.
 
 Attribute
 \begin{itemize}
@@ -569,72 +747,80 @@ Attribute
 Methoden
 \begin{itemize}
 	\item\textit{public CVideoViewer()}
-	\item\textit{public signal_PlayOrPause()}
+	\item\textit{public signal\_PlayOrPause()}
 \end{itemize}
 
-\subsection*{CClickableGraphicsVideoItem}
+\subsection*{ClickableGraphicsVideoItem}
 
 
-\subsection*{CCustomGraphicsView}
-Diese Klasse benutzt ein QGraphicsView um ein Bild darzustellen, CAnnotationDrawer um die Annotationen die zum Bild gehören darzustellen und fügt die Möglichkeit hinzu, die Größe des Bildes durch die ZoomIn- und ZoomOutButton zu verändern, sowohl eine ROI(region of interest) zu zeichnen, nach der dann gesucht werden kann. Hier werden auch die Klicks der Benutzer abgefangen und die Menü mit den Algorithmen gezeigt.  
+\subsection*{CustomGraphicsView}
+Diese Klasse benutzt ein QGraphicsView um ein Bild darzustellen, AnnotationDrawer um die Annotationen die zum Bild gehören darzustellen und fügt die Möglichkeit hinzu, die Größe des Bildes durch die ZoomIn- und ZoomOutButton zu verändern, sowohl eine ROI(region of interest) zu zeichnen, nach der dann gesucht werden kann. Hier werden auch die Klicks der Benutzer abgefangen und die Menü mit den Algorithmen gezeigt.  
 
-\subsection*{CAnnotationDrawer}
-Diese Klasse hat ein String, das bestimmt der Typ der Annotation und benutzt die CAnnotationGraphicsItemFactory, um ein korespondierendes ClickableGraphicsItem zu bekommen und dann zeigt dieses im CCustomGraphicsView.
+\subsection*{AnnotationDrawer}
+Diese Klasse hat ein String, das bestimmt der Typ der Annotation und benutzt die AnnotationGraphicsItemFactory, um ein korrespondierendes ClickableGraphicsItem zu bekommen und dann zeigt dieses im CustomGraphicsView.
   
-\subsection*{CAnnotationGraphicsItemFactory}
-Das ist eine Fabrik, die unterschiedliche ClickableGraphicsItems bildet, um man die Annotationen, abhängig von deren Typ, durch den CAnnotationDrawer  darstellen zu können.
+\subsection*{AnnotationGraphicsItemFactory}
+Das ist eine Fabrik, die unterschiedliche ClickableGraphicsItems bildet, um man die Annotationen, abhängig von deren Typ, durch den AnnotationDrawer  darstellen zu können.
 
-\subsection*{CClickableGraphicsIdRectItem}
+\subsection*{ClickableGraphicsIdRectItem}
 Diese Klasse erbt von QGraphicsRectItem und fügt die Möglichkeit, auf dieses Item zu klicken hinzu, und zeigt die Id der Annotation.
  
-\subsection*{CClickableGraphicsRectItem}
+\subsection*{ClickableGraphicsRectItem}
 Diese Klasse erbt von QGraphicsRectItem und fügt die Möglichkeit, auf dieses Item zu klicken, hinzu.
 
-\subsection*{CParameterPageWidget}
-Das Widget, in dem die Parameter für den gewählten Suchalgorithmus gezeigt und bestimmt werden. Sowohl werden die Datensätze, in denen gesucht wird, bestimmt. Dann kann man zu CConfirmationPageWidget fortsetzen.
+\subsection*{ParameterPageWidget}
+Das Widget, in dem die Parameter für den gewählten Suchalgorithmus gezeigt und bestimmt werden. Sowohl werden die Datensätze, in denen gesucht wird, bestimmt. Dann kann man zu ConfirmationPageWidget fortsetzen.
 
-\subsection*{CConfirmationPageWidget}
+\subsection*{ConfirmationPageWidget}
 Das Widget, in dem die Suchvorlage und alle Parameter angezeigt werden, sodass der Benutzer diese überprüfen kann. Mit dem SearchButton wird die Suche gestartet.
 
-\subsection*{CResultsPageWidget}
+\subsection*{ResultsPageWidget}
 Das Widget, wo die Ergebnisse der Suche erscheinen. Man kann die Suche speichern und bewerten. Nach der Bewertung kann erneut gesucht werden.
 
-\subsection*{CSearchResultModel}
+\subsection*{SearchResultModel}
 
-\subsection*{CParameterModel}
+\subsection*{ParameterModel}
 
-\subsection*{CDatasetModel}
+\subsection*{DatasetModel}
 
-\subsection*{CMediaModel}
+\subsection*{MediaModel}
 
-\subsection*{CIconDelegate}
-Diese Klasse erbt von QStyledItemDelegate und ist ein clickable IconDelegate, das aus einem Bild und darunter Text besteht. Diese nutzt man um die Datensätze in CLibraryPageWidget, CViewerPageWidget darzustellen und herauszufinden welcher von denen selectiert ist.
+\subsection*{IconDelegate}
+Diese Klasse erbt von QStyledItemDelegate und ist ein clickable IconDelegate, das aus einem Bild und darunter Text besteht. Diese nutzt man um die Datensätze in LibraryPageWidget, ViewerPageWidget darzustellen und herauszufinden welcher von denen selektiert ist.
 
-\subsection*{CCheckableIconDelegate}
-Diese Klasse erbt von CIconDelegate und ein Checkbox hinzufügt. Damit werden die Datensätze im CParameterPageWidget dargestellt und man bekommt die Information in welche von denen gesucht wird. 
+\subsection*{CheckableIconDelegate}
+Diese Klasse erbt von IconDelegate und eine Checkbox hinzufügt. Damit werden die Datensätze im ParameterPageWidget dargestellt und man bekommt die Information in welche von denen gesucht wird. 
 
-\subsection*{CFeedbackDelegate}
-Die Klasse erbt von CIconDelegate und kann ein CFeedbackEditor benutzen, um Feedback zu bekommen. Man nutzt diese Klasse um die Resultate der Suche in CResultsPageWidget darzustellen, mit der Option Feedback zu bekommen. 
+\subsection*{FeedbackDelegate}
+Die Klasse erbt von IconDelegate und kann ein FeedbackEditor benutzen, um Feedback zu bekommen. Man nutzt diese Klasse um die Resultate der Suche in ResultsPageWidget darzustellen, mit der Option Feedback zu bekommen. 
 
-\subsection*{CFeedbackEditor}
+\subsection*{FeedbackEditor}
 Diese Klasse stellt Feedback graphisch dar und bekommt die Wert des Feedbacks abhängig vom Typ des Feedbacks.
 
-\subsection*{CDualFeedback}
+\subsection*{DualFeedbackEditor}
 
-Stellt DualFeedback (positive, neutral, negative) dar.
+Stellt duales Feedback (positive, neutral, negative) dar.
 
-\subsection*{CExtendedFeedback}
-Stellt ExtendedFeedback (Werte von 1 bis 10) dar.
+\subsection*{ExtendedFeedbackEditor}
+Stellt erweitertes Feedback (Werte von 1 bis 10) dar.
 
 \pagebreak
 
 \subsection{Controller}
+
+\begin{figure}[H]
+\includegraphics[width=1\linewidth]{img/Klassendiagramm/Controller}
+\caption{Controller}
+\label{fig:controller}
+\end{figure}
+
+
 \subsection*{MainControl}
-MainControl ist der Einstiegspunkt des Programms und verwaltet die Manager-Klassen sowie den Navigator. Insbesondere erstellt MainControl die PageWidgets un registriert sie beim Navigator.
+MainControl ist der Einstiegspunkt des Programms und verwaltet die Manager-Klassen sowie den Navigator. Insbesondere erstellt MainControl die PageWidgets und registriert sie beim Navigator.
 Da die Manager und der Navigator nicht direkt kommunizieren, verbindet MainControl ihre Signals und Slots.
 
 \subsection*{Navigator}
-Der Navigator ist in der Lage, das aktuell im MainWindow angezeigte PageWidget durch ein anderes zu ersetzen. Desweiteren ist der Navigator für den Austausch von Daten zwischen den PageWidgets verantwortlich.
+Der Navigator ist in der Lage, das aktuell im MainWindow angezeigte PageWidget durch ein anderes zu ersetzen. Des weiteren ist der Navigator für den Austausch von Daten zwischen den PageWidgets verantwortlich.
 
 \subsection*{SearchManager}
 Der SearchManager startet einen Algorithmus in einem neuen Thread und leitet mögliche Informationen zum Fortschritt der Suche an das ResultsPageWidget weiter.
