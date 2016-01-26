@@ -13,14 +13,17 @@ HEADERS += \
     include/Photo.h \
     include/Serializable.h \
     include/SingleFrameVideo.h \
-    include/Video.h
+    include/Video.h \
+    include/pageregistration.h \
+    include/pagewidget.h
 
 SOURCES += \
     src/main.cpp \
-    src/maincontrol.cpp \
     src/maincontrol.cpp \
     src/pagestackframe.cpp \
     src/Medium.cpp \
     src/Photo.cpp \
     src/SingleFrameVideo.cpp \
-    src/Video.cpp
+    src/Video.cpp \
+    src/pageregistration.cpp \
+    src/pagewidget.cpp
