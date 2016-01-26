@@ -7,8 +7,8 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     MainControl mc;
-    QObject::connect(&mc, &MainControl::finished, &a, &QApplication::quit);
-    QTimer::singleShot(0, &mc, &MainControl::run);
+    QObject::connect(&mc, SIGNAL(finished()), &a, SLOT(quit()));
+    QTimer::singleShot(0, &mc, SIGNAL(run()));
 
     return a.exec();
 }
