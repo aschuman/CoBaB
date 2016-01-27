@@ -615,24 +615,32 @@ Die Klasse erbt von QMainWindow und stellt das Hauptfenster des Programms dar, a
 
 Attribute
 \begin{itemize}
-	\item\textit{private QMenuBar mMenubar}  
+	\item\textit{private QMenuBar mMenubar}
+	Das Menubar, das im Library gezeigt wird.   
 	\item\textit{private QToolbar toolbar}
+	Das Toolbar, das die Back- und Next-Buttons enthält.
 	\item\textit{private QMenu mFileMenu}
+	Filemenu mit den Hauptfunktionen(Open, Exit etc.)
 	\item\textit{private QMenu mLanguageMenu}
+	Menü mit den optionale Sprachen.
 	\item\textit{private QMenu mBookmarkMenu}
+	Das Menü, von dem man Bookmarks wählen kann.
 	\item\textit{private QMenu mHistoryMenu}
+	Das Menü mit den letzten Suchergebnisse.
 	\item\textit{private QMenu mHelpMenu}
+	Menü mit mehr Information für das Programm.
 	\item\textit{private QStackedWidget mStackedWidget}
+	Das StackedWidget indem alle PageWidgets Gewechselt werden.
 	\item\textit{private QAction mHomeAction}
 	\item\textit{private QAction mBackAction}
 \end{itemize}
 
 Methoden
 \begin{itemize}
-	\item\textit{public MainWindow()}
-	\item\textit{public void setCentralWidget(QWidget* widget)}
-	\item\textit{public void setMenubar(QMenuBar * menuBar)}
-	\item\textit{public void setToolbar(QToolBar * toolbar)}
+	\item\textit{public MainWindow()} erzeugt ein neues MainWindow Objekt.
+	\item\textit{public void setCentralWidget(QWidget* widget)} so wird das aktuelle Widget gesetzt.
+	\item\textit{public void setMenubar(QMenuBar *  menuBar)} macht das MenuBar sichtbar oder unsichtbar.
+	\item\textit{public void setToolbar(QToolBar * toolbar)} macht das ToolBar sichtbar oder unsichtbar.
 \end{itemize}
 
 \subsection*{LibraryPageWidget}
@@ -640,18 +648,20 @@ Das Widget, in dem alle Datensätze dargestellt werden. Man kann einen Datensatz
 
 Attribute
 \begin{itemize}
-	\item\textit{private QListView mDatasetsListView}
+	\item\textit{private QListView mDatasetsListView} ListView zur Darstellung der Datensätze.
 	\item\textit{private DatasetModel mDatasetModel}
-	\item\textit{private QPushButton mChooseDatasetButton}
+	Ein DatasetModel in dem die darzustellende Datenzete enthalten sind.
+	\item\textit{private QPushButton mChooseDatasetButton} PushButton der ein FileDialog öffnet um einen neuen Datensatz zu wählen.
 	\item\textit{public int EXIT\_NEXT}     
 \end{itemize}
 
 Methoden
 \begin{itemize}
-	\item\textit{public LibraryPageWidget()}
-	\item\textit{public void setDatasetList(QList<Dataset>) *datasets}
+	\item\textit{public LibraryPageWidget()} erzeugt ein neues LibraryPageWidget Objekt.
+	\item\textit{public void setDatasetList(QList<Dataset>) *datasets} füllt ein DatasetModel mit den Datensätze, die darzustellen sind.
 	\item\textit{public void reset()}
-	\item\textit{public void signal\_clicked\_Dataset()}
+	leert die Library 
+	\item\textit{public void signal\_clicked\_Dataset()} signal für den Controller, wenn auf einem Datensatz geklickt wurde.
 \end{itemize}
 
 \subsection*{ViewerPageWidget}
@@ -660,22 +670,27 @@ Diese Klasse erbt von QWidget und und bildet die Basis für die Widgets, die den
 Attribute
 \begin{itemize}
 	\item\textit{private QListView mMediaListView}
-	\item\textit{private MediaModel mMediaListModel}
+	
+	\item\textit{private MediaModel mMediaListModel}ListView zur Darstellung der Medien in dem Datensatz.
 	\item\textit{private QPushButton mNextButton}
+	Button um zum nächsten Media zu wechseln. 
 	\item\textit{private QPushButton MBeforeButton}
+	Button um zum vorrigen Media zu wechseln.
 	\item\textit{private QPushButton mFullscreenButton}
-	\item\textit{private CustomGraphicsView mGraphicsView}
+	Button für den Vollbild-Modus.
+	\item\textit{private CustomGraphicsView mGraphicsView} Die modifizierte GraphicsView, in der das gewählte Media gezeigt/gespielt wird.  
 	\item\textit{public int EXIT\_NEXT}      
 \end{itemize}
 
 Methoden
 \begin{itemize}
-	\item\textit{public ViewerPageWidget()}
-	\item\textit{public void setDataset(Dataset *dataset)}
-	\item\textit{public void reset()}
-	\item\textit{public void signal\_Fullscreen()}
-	\item\textit{public void signal\_Before()}
-	\item\textit{public void signal\_Next()}
+	\item\textit{public ViewerPageWidget()} erzeugt ein neues ViewerPageWidget Objekt.
+	\item\textit{public void setDataset(Dataset *dataset)}füllt ein MediaModel mit den Medien voneinem gewählten Datensatz.
+	\item\textit{public void reset()} leert das Viewer.
+	\item\textit{public void signal\_Fullscreen()} signal für den Controller das FullscreenButton geklickt worden ist.
+	\item\textit{public void signal\_Before()} 
+	signal für den Controller, wenn BeforeButton geklickt worden ist.
+	\item\textit{public void signal\_Next()} signal für den Controller, wenn NextButton geklickt worden ist.
 \end{itemize}
 
 \subsection*{PhotoViewer}
@@ -683,12 +698,13 @@ Erbt von ViewerPageWidget. Seine Funktion ist das Darstellen der Bilder, die in 
 
 Attribute
 \begin{itemize}
-	\item\textit{private ClickableGraphicsPixmapItem mItem}    
+	\item\textit{private ClickableGraphicsPixmapItem mItem} GraphicsItem für die Darstellung des Bildes mit Möglichkeit Klicks abzufangen. 
+	   
 \end{itemize}
 
 Methoden
 \begin{itemize}
-	\item\textit{public PhotoViewer()}
+	\item\textit{public PhotoViewer()} erzeugt ein neues PhotoViewer Objekt.
 \end{itemize}
 
 \subsection*{ClickableQGraphicsPixmapItem}
@@ -696,8 +712,8 @@ Erbt von QGraphicsPixmapItem und stell das Bild dar, das bei CustomGraphicsView 
 
 Methoden
 \begin{itemize}
-	\item\textit{public ClickableQGraphicsPixmapItem()}
-	\item\textit{public void mousePressEvent(QGraphicsSceneMouseEvent *event)}
+	\item\textit{public ClickableQGraphicsPixmapItem()} erzeugt ein neues ClickableQGraphicsPixmapItem Objekt.
+	\item\textit{public void mousePressEvent(QGraphicsSceneMouseEvent *event)} abfangt den Rechtsklick des Benutzers, bestimmt wo es war und sendet ein signal zum Controller.
 \end{itemize}
 
 \subsection*{SingleFrameVideoViewer}
@@ -705,25 +721,26 @@ Erbt von ViewerPageWidget und seine Funktion ist das Darstellen der Videos in ei
 
 Attribute
 \begin{itemize}
-	\item\textit{private SingleFrameVideoPlayer mPlayer}
-	\item\textit{private QPushButton mPlayOrPauseButton}
-	\item\textit{private GraphicsSingleFrameVideoItem mItem}    
+	\item\textit{private SingleFrameVideoPlayer mPlayer} ein SingleFrameVideoPlayer, der das Video abspielt. 
+	\item\textit{private QPushButton mPlayOrPauseButton} Button, um das Video abzuspielen oder zu pausieren.
+	\item\textit{private GraphicsSingleFrameVideoItem mItem} GraphicsItem, das ein SingleFrameVideo abspielt und benutzt ClickableQGraphicsPixmapItems.
 \end{itemize}
 
 Methoden
 \begin{itemize}
-	\item\textit{public SingleFrameVideoViewer()}
+	\item\textit{public SingleFrameVideoViewer()} erzeugt ein neues SingleFrameVideoViewer Objekt.
 	\item\textit{public void signal\_PlayOrPause()}
-\end{itemize}
+\end{itemize} signal für den Controller, wenn das PlayOrPauseButton geklickt worden ist. 
 
 \subsection*{SingleFrameVideoPlayer} 
 Eine Komponente, die das Video in Form von Einzelbildern in dem GraphicsView anzeigt.
 
 Methoden
 \begin{itemize}
-	\item\textit{public SingleFrameVideoPlayer()}
-	\item\textit{public void setMedium(SingleFrameVideo sfVideo)}
-	\item\textit{public void play()}
+	\item\textit{public SingleFrameVideoPlayer()} 
+	erzeugt ein neues SingleFrameVideoPlazer Objekt.
+	\item\textit{public void setMedium(SingleFrameVideo sfVideo)} fügt die Information des Medias im Player.
+	\item\textit{public void play()} beginnt das Abspielen des Videos.
 \end{itemize}
 
 \subsection*{GraphicsSingleFrameVideoItem}
@@ -731,8 +748,8 @@ Erbt von ClickableQGraphicsPixmapItem und stellt mithilfe des SingleFrameVideoPl
 
 Methoden
 \begin{itemize}
-	\item\textit{public GraphicsSingleFrameVideoItem()}
-	\item\textit{public void setPlayer(CSingleFrameVideoPlayer player)}
+	\item\textit{public GraphicsSingleFrameVideoItem()}erzeugt ein neues GraphicsSingleFrameVideoItem Objekt.
+	\item\textit{public void setPlayer(CSingleFrameVideoPlayer player)} setzt das VideoPlayer für das Abspielen des Videos.
 \end{itemize}
 
 \subsection*{VideoViewer}
@@ -740,24 +757,25 @@ Erbt von ViewerPageWidget. Seine Funktion ist das Darstellen und Abspielen der V
 
 Attribute
 \begin{itemize}
-	\item\textit{private QMediaPlayer mPlayer}
-	\item\textit{private QPushButton mPlayOrPauseButton}
-	\item\textit{private ClickableGraphicsVideoItem mItem}    
+	\item\textit{private QMediaPlayer mPlayer} ein MediaPlayer, der das Video abspielt. 
+	\item\textit{private QPushButton mPlayOrPauseButton} Button, um das Video abzuspielen oder zu pausieren.
+	\item\textit{private ClickableGraphicsVideoItem mItem} GraphicsItem für die Darstellung des Videos mit Möglichkeit Klicks abzufangen.     
 \end{itemize}
 
 Methoden
 \begin{itemize}
-	\item\textit{public VideoViewer()}
+	\item\textit{public VideoViewer()} erzeugt ein neues VideoViewer Objekt.
 	\item\textit{public void signal\_PlayOrPause()}
-\end{itemize}
+\end{itemize} signal für den Controller, wenn das PlayOrPauseButton geklickt worden ist.
 
 \subsection*{ClickableQGraphicsVideoItem}
 Erbt von QGraphicsVideoItem und stell das Video dar, das bei CustomGraphicsView angezeigt wird und auf dem Annotationen gemacht werden können. Mit einem Rechtsklick kann man den Algorithmus für die Suche wählen.
 
 Methoden
 \begin{itemize}
-	\item\textit{public ClickableQGraphicsVideoItem()}
-	\item\textit{public void mousePressEvent(QGraphicsSceneMouseEvent *event)}
+	\item\textit{public ClickableQGraphicsVideoItem()} erzeugt ein neues ClickableQGraphicsVideoItem Objekt.
+	\item\textit{public void mousePressEvent(QGraphicsSceneMouseEvent *event)} 
+	abfangt den Rechtsklick des Benutzers, bestimmt wo es war und auf welches Frame und sendet ein signal zum Controller.
 \end{itemize}
 
 \subsection*{CustomGraphicsView}
@@ -765,23 +783,25 @@ Diese Klasse benutzt ein QGraphicsView um ein Bild darzustellen, AnnotationDrawe
 
 Attribute
 \begin{itemize}
-	\item\textit{private QGraphicsView mView}
-	\item\textit{private AnnotationDrawer mAnnotationDrawer}
-	\item\textit{private QPushButton mZoomInButton} 
-	\item\textit{private QPushButton mZoomOutButton}
-	\item\textit{private QPushButton mROIButton}
-	\item\textit{private QGraphicsRectItem}   
+	\item\textit{private QGraphicsView mView} ein GraphicsView, in der das Media gezeigt wird. 
+	\item\textit{private AnnotationDrawer mAnnotationDrawer} ein AnnotationDrawer, der die Annotationen des Bildes/Frames hinzufügt. 
+	\item\textit{private QPushButton mZoomInButton} ein PushButton für die ZoomIn Funktion. 
+	\item\textit{private QPushButton mZoomOutButton} 
+	ein PushButton für die ZoomOut Funktion.
+	\item\textit{private QPushButton mROIButton} ein PushButton für das Wählen von ein "region of interest".
+	\item\textit{private QGraphicsRectItem mROI} ein QGraphicsRectItem, der der von dem Benutzer gewählten "region of interest" darstellt und nach dem gesucht werden kann.
 \end{itemize}
 
 Methoden
 \begin{itemize}
-	\item\textit{public CustomGraphicsView()}
-	\item\textit{public void setZoom(float z)}
-	\item\textit{public QGraphicsScene scene()}
-	\item\textit{public void signal\_roi()}
-	\item\textit{public void slot\_roi()}
-	\item\textit{public void signal\_rightClick()}
-	\item\textit{public void signal\_algorithmChosen()}
+	\item\textit{public CustomGraphicsView()} 
+	erzeugt ein neues CustomGraphicsView Objekt.
+	\item\textit{public void setZoom(float z)} setzt die Größe des Bildes/Frames.
+	\item\textit{public QGraphicsScene scene()} erzeugt ein QGraphicsScene indem alles gezeigt wird.
+	\item\textit{public void signal\_roi()} signal, wenn das ROIButton geklickt worden ist.
+	\item\textit{public void slot\_roi()} abfangt das signal _roi und wartet auf dem Benutzer ein Rechteck zu zeichnen.
+	\item\textit{public void signal\_rightClick()} signal für den Controller, wenn ein Rechtsklick erfolgt mit Information wo es war. 
+	\item\textit{public void signal\_algorithmChosen()} signal für den Controller, wenn ein Algorithmus gewählt worden ist und welcher.
 \end{itemize}
 
 \subsection*{AnnotationDrawer}
@@ -789,12 +809,12 @@ Diese Klasse besitzt ein String, das den Typ der Annotation bestimmt, und benutz
 
 Attribute
 \begin{itemize}
-	\item\textit{private QString mVisualizer}  
+	\item\textit{private QString mVisualizer} das Typ der Annotation.   
 \end{itemize}
 
 Methoden
 \begin{itemize}
-	\item\textit{public AnnotationDrawer()}
+	\item\textit{public AnnotationDrawer()} erzeugt ein neues AnnotationDrawer Objekt.
 \end{itemize}
   
 \subsection*{AnnotationGraphicsItemFactory}
@@ -802,8 +822,8 @@ Das ist eine Fabrik-Klasse, die unterschiedliche ClickableGraphicsItems bildet, 
 
 Methoden
 \begin{itemize}
-	\item\textit{public AnnotationGraphicsItemFactory()}
-	\item\textit{public QGraphicsRectItem getAnnotationVisualized()}
+	\item\textit{public AnnotationGraphicsItemFactory()}erzeugt ein neues AnnotationGraphicsItemFactory Objekt.
+	\item\textit{public QGraphicsRectItem getAnnotationVisualizer()} erzeugt ein QGraphicsItem den Visualizer entsprechend.
 \end{itemize}
  
 \subsection*{ClickableGraphicsRectItem}
