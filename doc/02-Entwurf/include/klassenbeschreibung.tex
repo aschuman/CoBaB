@@ -1010,17 +1010,53 @@ Methoden
 MainControl ist der Einstiegspunkt des Programms und verwaltet die Manager-Klassen sowie den Navigator. Insbesondere erstellt MainControl die PageWidgets und registriert sie beim Navigator.
 Da die Manager und der Navigator nicht direkt kommunizieren, verbindet MainControl ihre Signals und Slots.
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/MainControl}
+\label{fig:mainControl}
+\end{figure}
+
 \subsection*{Navigator}
 Der Navigator ist in der Lage, das aktuell im MainWindow angezeigte PageWidget durch ein anderes zu ersetzen. Des weiteren ist der Navigator für den Austausch von Daten zwischen den PageWidgets verantwortlich.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Navigator}
+\label{fig:navigator}
+\end{figure}
 
 \subsection*{SearchManager}
 Der SearchManager startet einen Algorithmus in einem neuen Thread und leitet mögliche Informationen zum Fortschritt der Suche an das ResultsPageWidget weiter.
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/SearchManager}
+\label{fig:searchManager}
+\end{figure}
+
 \subsection*{SearchResultManager}
 Der SearchResultManager besitzt ein SearchResult und benachrichtigt das ResultsPageWidget über neue Suchergebnisse. Suchergebnisse können einzeln während der laufenden Suche hinzugefügt werden.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/SearchResultManager}
+\label{fig:searchResultManager}
+\end{figure}
 
 \subsection*{MainWindowManager}
 Der MainWindowManager stellt die Bookmarks und Chronikeinträge dem MainWindow zur Verfügung und gibt bekannt, welches Bookmark im MainWindow zuletzt ausgewählt wurde.
 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/MainWindowManager}
+\label{fig:mainWindowManager}
+\end{figure}
+
 \subsection*{BookmarkManager}
 Der BookmarkManager besitzt 2 Listen für die Chronik und die vom Benutzer erstellten Bookmarks. Einträge für diese BookmarkLists werden über den BookmarkManager hinzugefügt und abgefragt.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/BookmarkManager}
+\label{fig:bookmarkManager}
+\end{figure}
