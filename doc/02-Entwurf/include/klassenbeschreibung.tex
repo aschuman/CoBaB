@@ -601,220 +601,219 @@ Methoden
 \end{figure}
 
 
-\subsection*{PageWidget}
-Ein PageWidget ist ein QWidget, das als eine Seite der grafischen Oberfläche im MainWindow dem Benutzer angezeigt wird. Die abstrakte Klasse PageWidget bietet dem erbenden Widget, das momentan im MainWindow angezeigt wird, die Möglichkeit ein PageWidget auszusuchen, um es dem Benutzer als nächstes anzuzeigen, und diesem über den Stack des Navigators nötige Daten weiterzugeben.
+\subsection*{<<abstract>> PageWidget}
+Ein PageWidget ist ein QWidget, das als eine Seite der grafischen Oberfläche im MainWindow dem Benutzer angezeigt wird. Die abstrakte Klasse PageWidget bietet dem erbenden Widget, das momentan im MainWindow angezeigt wird, die Möglichkeit ein PageWidget auszusuchen. Dieses wird dem Benutzer als nächstes angezeigt. Über den Stack des Navigators werden benötige Daten an das PageWidget übergeben.
 
 \subsection*{<<enumeration>> PageType}
 PageWidgets lassen sich beim Navigator mit einem PageType registrieren, welcher fortan zur Referenzierung dieses PageWidgets dient.
 
 \subsection*{PageWidgetDispatcher}
-Kapselt Signale, die zum verwenden des Stacks des Navigators und dem wechseln des PageWidgets nötig sind. (Ohne diese Kapselung stünden diese Signale den speziellen PageWidgets zur Verfügung)
+Kapselt Signale, die zum Verwenden des Stacks des Navigators und dem Wechseln des PageWidgets nötig sind. Ohne diese Kapselung ständen diese Signale den speziellen PageWidgets zur Verfügung.
 
-\subsection*{MainWindow}
-Die Klasse erbt von QMainWindow und stellt das Hauptfenster des Programms dar, auf dem die weiteren Seiten als Widgets angezeigt werden.
+\subsection*{MainWindow : public QMainWindow}
+Die Klasse stellt das Hauptfenster des Programms dar, auf dem die weiteren Seiten als PageWidgets angezeigt werden.
 
 Attribute
 \begin{itemize}
 	\item\textit{private QMenuBar mMenubar}
-	Das Menubar, das im Library gezeigt wird.   
+	Die Menubar, die in der Library gezeigt wird.   
 	\item\textit{private QToolbar toolbar}
-	Das Toolbar, das die Back- und Next-Buttons enthält.
+	Die Toolbar, die die Back- und Next-Buttons enthält.
 	\item\textit{private QMenu mFileMenu}
-	Filemenu mit den Hauptfunktionen(Open, Exit etc.)
+	Das Dateimenü mit den Hauptfunktionen (Öffnen, Schließen, etc.)
 	\item\textit{private QMenu mLanguageMenu}
-	Menü mit den optionale Sprachen.
+	Das Menü mit den verfügbaren Sprachen.
 	\item\textit{private QMenu mBookmarkMenu}
-	Das Menü, von dem man Bookmarks wählen kann.
+	Das Menü, mit dem man Lesezeicheneinträge öffnen kann.
 	\item\textit{private QMenu mHistoryMenu}
-	Das Menü mit den letzten Suchergebnisse.
+	Das Menü, mit dem man die letzten Suchergebnisse öffnen kann.
 	\item\textit{private QMenu mHelpMenu}
-	Menü mit mehr Information für das Programm.
+	Das Menü, mit dem man die Hilfe öffnen oder den About Dialog anzeigen kann.
 	\item\textit{private QStackedWidget mStackedWidget}
-	Das StackedWidget indem alle PageWidgets Gewechselt werden.
+	Das StackedWidget, in dem die PageWidgets gewechselt werden.
 	\item\textit{private QAction mHomeAction}
 	\item\textit{private QAction mBackAction}
 \end{itemize}
 
 Methoden
 \begin{itemize}
-	\item\textit{public MainWindow()} erzeugt ein neues MainWindow Objekt.
-	\item\textit{public void setCentralWidget(QWidget* widget)} so wird das aktuelle Widget gesetzt.
-	\item\textit{public void setMenubar(QMenuBar *  menuBar)} macht das MenuBar sichtbar oder unsichtbar.
-	\item\textit{public void setToolbar(QToolBar * toolbar)} macht das ToolBar sichtbar oder unsichtbar.
+	\item\textit{public MainWindow()} Erzeugt ein neues MainWindow Objekt.
+	\item\textit{public void setCentralWidget(QWidget *widget)} Damit wird das aktuelle Widget gesetzt.
+	\item\textit{public void setMenubar(QMenuBar *menuBar)} Macht die menuBar sichtbar oder unsichtbar.
+	\item\textit{public void setToolbar(QToolBar *toolbar)} Macht die toolbar sichtbar oder unsichtbar.
 \end{itemize}
 
-\subsection*{LibraryPageWidget}
-Das Widget, in dem alle Datensätze dargestellt werden. Man kann einen Datensatz für die Suche auswählen. Durch das ChooseDataSetButton kann man auch einen Datensatz wählen, der nicht in der Datenbank liegt. 
+\subsection*{LibraryPageWidget : public PageWidget}
+Das PageWidget, in dem alle Datensätze dargestellt werden. Man kann einen Datensatz für die Suche auswählen. Durch den ChooseDataSetButton kann man auch einen Datensatz wählen, der nicht in der Datenbank liegt. 
 
 Attribute
 \begin{itemize}
-	\item\textit{private QListView mDatasetsListView} ListView zur Darstellung der Datensätze.
+	\item\textit{private QListView mDatasetsListView} Ein ListView zur Darstellung der Datensätze.
 	\item\textit{private DatasetModel mDatasetModel}
-	Ein DatasetModel in dem die darzustellende Datenzete enthalten sind.
-	\item\textit{private QPushButton mChooseDatasetButton} PushButton der ein FileDialog öffnet um einen neuen Datensatz zu wählen.
+	Ein DatasetModel, das die darzustellende Datensätze enthält.
+	\item\textit{private QPushButton mChooseDatasetButton} Ein PushButton, der einen FileDialog öffnet, um einen neuen Datensatz zu wählen.
 	\item\textit{public int EXIT\_NEXT}     
 \end{itemize}
 
 Methoden
 \begin{itemize}
-	\item\textit{public LibraryPageWidget()} erzeugt ein neues LibraryPageWidget Objekt.
-	\item\textit{public void setDatasetList(QList<Dataset>) *datasets} füllt ein DatasetModel mit den Datensätze, die darzustellen sind.
-	\item\textit{public void reset()}
-	leert die Library 
-	\item\textit{public void signal\_clicked\_Dataset()} signal für den Controller, wenn auf einem Datensatz geklickt wurde.
+	\item\textit{public LibraryPageWidget()} Erzeugt ein neues LibraryPageWidget Objekt.
+	\item\textit{public void setDatasetList(QList<Dataset> *datasets)} Füllt ein DatasetModel mit den Datensätzen, die darzustellen sind.
+	\item\textit{public void reset()} Leert die Library.
+	\item\textit{public void signal\_clicked\_Dataset()} Ein Signal für den Controller, wenn auf einen Datensatz geklickt wurde.
 \end{itemize}
 
-\subsection*{ViewerPageWidget}
-Diese Klasse erbt von QWidget und und bildet die Basis für die Widgets, die den Inhalt eines Datensatzes in Form von Photoalbum oder Videoplayer darstellen.
+\subsection*{ViewerPageWidget : public PageWidget}
+Diese Klasse bildet die Basis für die PageWidgets, die den Inhalt eines Datensatzes in Form von Photoalbum oder Videoplayer darstellen.
 
 Attribute
 \begin{itemize}
 	\item\textit{private QListView mMediaListView}
 	
-	\item\textit{private MediaModel mMediaListModel}ListView zur Darstellung der Medien in dem Datensatz.
+	\item\textit{private MediaModel mMediaListModel} Ein ListView zur Darstellung der Medien in dem Datensatz.
 	\item\textit{private QPushButton mNextButton}
-	Button um zum nächsten Media zu wechseln. 
+	Button, um zum nächsten Medium zu wechseln. 
 	\item\textit{private QPushButton MBeforeButton}
-	Button um zum vorrigen Media zu wechseln.
+	Button, um zum vorherigen Medium zu wechseln.
 	\item\textit{private QPushButton mFullscreenButton}
 	Button für den Vollbild-Modus.
-	\item\textit{private CustomGraphicsView mGraphicsView} Die modifizierte GraphicsView, in der das gewählte Media gezeigt/gespielt wird.  
+	\item\textit{private CustomGraphicsView mGraphicsView} Die modifizierte GraphicsView, in der das gewählte Medium angezeigt bzw. abgespielt wird.  
 	\item\textit{public int EXIT\_NEXT}      
 \end{itemize}
 
 Methoden
 \begin{itemize}
-	\item\textit{public ViewerPageWidget()} erzeugt ein neues ViewerPageWidget Objekt.
-	\item\textit{public void setDataset(Dataset *dataset)}füllt ein MediaModel mit den Medien voneinem gewählten Datensatz.
-	\item\textit{public void reset()} leert das Viewer.
-	\item\textit{public void signal\_Fullscreen()} signal für den Controller das FullscreenButton geklickt worden ist.
+	\item\textit{public ViewerPageWidget()} Erzeugt ein neues ViewerPageWidget Objekt.
+	\item\textit{public void setDataset(Dataset *dataset)} Füllt ein MediaModel mit den Medien von einem gewählten Datensatz.
+	\item\textit{public void reset()} Leert den Viewer.
+	\item\textit{public void signal\_Fullscreen()} Ein Signal für den Controller, dass der FullscreenButton geklickt wurde.
 	\item\textit{public void signal\_Before()} 
-	signal für den Controller, wenn BeforeButton geklickt worden ist.
-	\item\textit{public void signal\_Next()} signal für den Controller, wenn NextButton geklickt worden ist.
+	Ein Signal für den Controller, dass der BeforeButton geklickt wurde.
+	\item\textit{public void signal\_Next()} Ein Signal für den Controller, dass der NextButton geklickt wurde.
 \end{itemize}
 
-\subsection*{PhotoViewer}
-Erbt von ViewerPageWidget. Seine Funktion ist das Darstellen der Bilder, die in einem Datensatz enthalten sind.
+\subsection*{PhotoViewer : public ViewerPageWidget}
+Seine Funktion ist das Darstellen der Bilder, die in einem Datensatz enthalten sind.
 
 Attribute
 \begin{itemize}
-	\item\textit{private ClickableGraphicsPixmapItem mItem} GraphicsItem für die Darstellung des Bildes mit Möglichkeit Klicks abzufangen. 
+	\item\textit{private ClickableGraphicsPixmapItem mItem} Ein GraphicsItem für die Darstellung des Bildes mit der Möglichkeit Klicks abzufangen. 
 	   
 \end{itemize}
 
 Methoden
 \begin{itemize}
-	\item\textit{public PhotoViewer()} erzeugt ein neues PhotoViewer Objekt.
+	\item\textit{public PhotoViewer()} Erzeugt ein neues PhotoViewer Objekt.
 \end{itemize}
 
-\subsection*{ClickableQGraphicsPixmapItem}
-Erbt von QGraphicsPixmapItem und stell das Bild dar, das bei CustomGraphicsView angezeigt wird und auf dem Annotationen gemacht werden können. Mit einem Rechtsklick kann man den Algorithmus für die Suche wählen.
+\subsection*{ClickableQGraphicsPixmapItem : public QGraphicsPixmapItem}
+Stellt das Bild dar, das bei CustomGraphicsView angezeigt wird und auf dem Annotationen gemacht werden können. Mit einem Rechtsklick kann man den Algorithmus für die Suche wählen.
 
 Methoden
 \begin{itemize}
-	\item\textit{public ClickableQGraphicsPixmapItem()} erzeugt ein neues ClickableQGraphicsPixmapItem Objekt.
-	\item\textit{public void mousePressEvent(QGraphicsSceneMouseEvent *event)} abfangt den Rechtsklick des Benutzers, bestimmt wo es war und sendet ein signal zum Controller.
+	\item\textit{public ClickableQGraphicsPixmapItem()} Erzeugt ein neues ClickableQGraphicsPixmapItem Objekt.
+	\item\textit{public void mousePressEvent(QGraphicsSceneMouseEvent *event)} Fängt den Rechtsklick des Benutzers ab und sendet die Position des Klicks als Signal an den Controller.
 \end{itemize}
 
-\subsection*{SingleFrameVideoViewer}
-Erbt von ViewerPageWidget und seine Funktion ist das Darstellen der Videos in einem Datensatz, die in Form von EInzelbilder vorliegen.
+\subsection*{SingleFrameVideoViewer : public ViewerPageWidget}
+Seine Funktion ist das Darstellen von Videos aus einem Datensatz, die in Form von Einzelbildern vorliegen.
 
 Attribute
 \begin{itemize}
-	\item\textit{private SingleFrameVideoPlayer mPlayer} ein SingleFrameVideoPlayer, der das Video abspielt. 
-	\item\textit{private QPushButton mPlayOrPauseButton} Button, um das Video abzuspielen oder zu pausieren.
-	\item\textit{private GraphicsSingleFrameVideoItem mItem} GraphicsItem, das ein SingleFrameVideo abspielt und benutzt ClickableQGraphicsPixmapItems.
+	\item\textit{private SingleFrameVideoPlayer mPlayer} Ein SingleFrameVideoPlayer, der das Video abspielt. 
+	\item\textit{private QPushButton mPlayOrPauseButton} Ein Button, um das Video abzuspielen oder zu pausieren.
+	\item\textit{private GraphicsSingleFrameVideoItem mItem} Ein GraphicsItem, das ein SingleFrameVideo abspielt und ClickableQGraphicsPixmapItems benutzt.
 \end{itemize}
 
 Methoden
 \begin{itemize}
-	\item\textit{public SingleFrameVideoViewer()} erzeugt ein neues SingleFrameVideoViewer Objekt.
-	\item\textit{public void signal\_PlayOrPause()}
-\end{itemize} signal für den Controller, wenn das PlayOrPauseButton geklickt worden ist. 
+	\item\textit{public SingleFrameVideoViewer()} Erzeugt ein neues SingleFrameVideoViewer Objekt.
+	\item\textit{public void signal\_PlayOrPause()} Ein Signal für den Controller, wenn der PlayOrPauseButton geklickt wurde.
+\end{itemize} 
 
 \subsection*{SingleFrameVideoPlayer} 
-Eine Komponente, die das Video in Form von Einzelbildern in dem GraphicsView anzeigt.
+Eine Komponente des SingleFrameVideoViewer, die das Video in Form von Einzelbildern in dem GraphicsView anzeigt.
 
 Methoden
 \begin{itemize}
 	\item\textit{public SingleFrameVideoPlayer()} 
-	erzeugt ein neues SingleFrameVideoPlazer Objekt.
-	\item\textit{public void setMedium(SingleFrameVideo sfVideo)} fügt die Information des Medias im Player.
-	\item\textit{public void play()} beginnt das Abspielen des Videos.
+	Erzeugt ein neues SingleFrameVideoPlayer Objekt.
+	\item\textit{public void setMedium(SingleFrameVideo sfVideo)} Gibt dem Player ein Medium.
+	\item\textit{public void play()} Beginnt das Abspielen des Videos.
 \end{itemize}
 
-\subsection*{GraphicsSingleFrameVideoItem}
-Erbt von ClickableQGraphicsPixmapItem und stellt mithilfe des SingleFrameVideoPlayers ein Video aus Einzeldateien, wobei man Annotationen machen und beim Rechtsklick den Algorithmus wählen kann.
+\subsection*{GraphicsSingleFrameVideoItem : public ClickableQGraphicsPixmapItem}
+Stellt mithilfe des SingleFrameVideoPlayers ein Video aus Einzelbildern dar, wobei man Bereiche markieren, Annotationen auswählen und mit einem Rechtsklick den Algorithmus wählen kann.
 
 Methoden
 \begin{itemize}
-	\item\textit{public GraphicsSingleFrameVideoItem()}erzeugt ein neues GraphicsSingleFrameVideoItem Objekt.
-	\item\textit{public void setPlayer(CSingleFrameVideoPlayer player)} setzt das VideoPlayer für das Abspielen des Videos.
+	\item\textit{public GraphicsSingleFrameVideoItem()} Erzeugt ein neues GraphicsSingleFrameVideoItem Objekt.
+	\item\textit{public void setPlayer(CSingleFrameVideoPlayer player)} Setzt den VideoPlayer für das Abspielen des Videos.
 \end{itemize}
 
-\subsection*{VideoViewer}
-Erbt von ViewerPageWidget. Seine Funktion ist das Darstellen und Abspielen der Videos, die in einem Datensatz enthalten sind.
+\subsection*{VideoViewer : public ViewerPageWidget}
+Seine Funktion ist das Darstellen und Abspielen der Videos aus Videodateien, die in einem Datensatz enthalten sind.
 
 Attribute
 \begin{itemize}
-	\item\textit{private QMediaPlayer mPlayer} ein MediaPlayer, der das Video abspielt. 
-	\item\textit{private QPushButton mPlayOrPauseButton} Button, um das Video abzuspielen oder zu pausieren.
-	\item\textit{private ClickableGraphicsVideoItem mItem} GraphicsItem für die Darstellung des Videos mit Möglichkeit Klicks abzufangen.     
+	\item\textit{private QMediaPlayer mPlayer} Ein MediaPlayer, der das Video abspielt. 
+	\item\textit{private QPushButton mPlayOrPauseButton} Ein Button, um das Video abzuspielen oder zu pausieren.
+	\item\textit{private ClickableGraphicsVideoItem mItem} Ein GraphicsItem für die Darstellung des Videos mit der Möglichkeit Klicks abzufangen.     
 \end{itemize}
 
 Methoden
 \begin{itemize}
-	\item\textit{public VideoViewer()} erzeugt ein neues VideoViewer Objekt.
-	\item\textit{public void signal\_PlayOrPause()}
-\end{itemize} signal für den Controller, wenn das PlayOrPauseButton geklickt worden ist.
+	\item\textit{public VideoViewer()} Erzeugt ein neues VideoViewer Objekt.
+	\item\textit{public void signal\_PlayOrPause()} EIn Signal für den Controller, wenn der PlayOrPauseButton geklickt wurde.
+\end{itemize} 
 
-\subsection*{ClickableQGraphicsVideoItem}
-Erbt von QGraphicsVideoItem und stell das Video dar, das bei CustomGraphicsView angezeigt wird und auf dem Annotationen gemacht werden können. Mit einem Rechtsklick kann man den Algorithmus für die Suche wählen.
+\subsection*{ClickableQGraphicsVideoItem : public QGraphicsVideoItem}
+Stellt das Video dar, das bei CustomGraphicsView angezeigt wird und auf dem man Bereiche markieren und Annotationen auswählen kann. Mit einem Rechtsklick kann man den Algorithmus für die Suche wählen.
 
 Methoden
 \begin{itemize}
-	\item\textit{public ClickableQGraphicsVideoItem()} erzeugt ein neues ClickableQGraphicsVideoItem Objekt.
+	\item\textit{public ClickableQGraphicsVideoItem()} Erzeugt ein neues ClickableQGraphicsVideoItem Objekt.
 	\item\textit{public void mousePressEvent(QGraphicsSceneMouseEvent *event)} 
-	abfangt den Rechtsklick des Benutzers, bestimmt wo es war und auf welches Frame und sendet ein signal zum Controller.
+	Fängt den Rechtsklick des Benutzers ab, bestimmt den Frame und die Position des Klicks und sendet ein Signal zum Controller.
 \end{itemize}
 
 \subsection*{CustomGraphicsView}
-Diese Klasse benutzt ein QGraphicsView um ein Bild darzustellen, AnnotationDrawer um die Annotationen die zum Bild gehören darzustellen und fügt die Möglichkeit hinzu, die Größe des Bildes durch die ZoomIn- und ZoomOutButton zu verändern, sowohl eine ROI(region of interest) zu zeichnen, nach der dann gesucht werden kann. Hier werden auch die Klicks der Benutzer abgefangen und die Menü mit den Algorithmen gezeigt.
+Diese Klasse benutzt ein QGraphicsView um ein Bild darzustellen und einen AnnotationDrawer um die Annotationen, die zum Bild gehören, darzustellen. Außerdem fügt er die Möglichkeit hinzu, die Größe des Bildes durch die ZoomIn- und ZoomOutButtons zu verändern und eine ROI(\enquote{region of interest}) zu zeichnen, nach der dann gesucht werden kann. Hier werden auch die Klicks des Benutzers abgefangen und das Menü mit den Algorithmen angezeigt.
 
 Attribute
 \begin{itemize}
-	\item\textit{private QGraphicsView mView} ein GraphicsView, in der das Media gezeigt wird. 
-	\item\textit{private AnnotationDrawer mAnnotationDrawer} ein AnnotationDrawer, der die Annotationen des Bildes/Frames hinzufügt. 
-	\item\textit{private QPushButton mZoomInButton} ein PushButton für die ZoomIn Funktion. 
+	\item\textit{private QGraphicsView mView} Ein GraphicsView, in der das Medium angezeigt wird. 
+	\item\textit{private AnnotationDrawer mAnnotationDrawer} Ein AnnotationDrawer, der die Annotationen des Bildes/Frames hinzufügt. 
+	\item\textit{private QPushButton mZoomInButton} Ein PushButton für die ZoomIn Funktion. 
 	\item\textit{private QPushButton mZoomOutButton} 
-	ein PushButton für die ZoomOut Funktion.
-	\item\textit{private QPushButton mROIButton} ein PushButton für das Wählen von ein "region of interest".
-	\item\textit{private QGraphicsRectItem mROI} ein QGraphicsRectItem, der der von dem Benutzer gewählten "region of interest" darstellt und nach dem gesucht werden kann.
+	Ein PushButton für die ZoomOut Funktion.
+	\item\textit{private QPushButton mROIButton} Ein PushButton für das Einzeichnen einer \enquote{region of interest}.
+	\item\textit{private QGraphicsRectItem mROI} Ein QGraphicsRectItem, der die vom Benutzer gezeichnete \enquote{region of interest} darstellt.
 \end{itemize}
 
 Methoden
 \begin{itemize}
 	\item\textit{public CustomGraphicsView()} 
-	erzeugt ein neues CustomGraphicsView Objekt.
-	\item\textit{public void setZoom(float z)} setzt die Größe des Bildes/Frames.
-	\item\textit{public QGraphicsScene scene()} erzeugt ein QGraphicsScene indem alles gezeigt wird.
-	\item\textit{public void signal\_roi()} signal, wenn das ROIButton geklickt worden ist.
-	\item\textit{public void slot\_roi()} abfangt das signal _roi und wartet auf dem Benutzer ein Rechteck zu zeichnen.
-	\item\textit{public void signal\_rightClick()} signal für den Controller, wenn ein Rechtsklick erfolgt mit Information wo es war. 
-	\item\textit{public void signal\_algorithmChosen()} signal für den Controller, wenn ein Algorithmus gewählt worden ist und welcher.
+	Erzeugt ein neues CustomGraphicsView Objekt.
+	\item\textit{public void setZoom(float z)} Setzt die Größe des Bildes/Frames.
+	\item\textit{public QGraphicsScene scene()} Erzeugt ein QGraphicsScene, in dem alles gezeigt wird.
+	\item\textit{public void signal\_roi()} Ein Signal, wenn der ROIButton geklickt wurde.
+	\item\textit{public void slot\_roi()} Fängt das signal\_roi ab und wartet darauf, dass der Benutzer ein Rechteck zeichnet.
+	\item\textit{public void signal\_rightClick()} Ein Signal mit Positionsinformationen für den Controller, wenn ein Rechtsklick erfolgte. 
+	\item\textit{public void signal\_algorithmChosen()} Ein Signal für den Controller, welcher Algorithmus gewählt wurde.
 \end{itemize}
 
 \subsection*{AnnotationDrawer}
-Diese Klasse besitzt ein String, das den Typ der Annotation bestimmt, und benutzt die AnnotationGraphicsItemFactory, um ein korrespondierendes ClickableGraphicsItem zu erzeugen, das sie in CustomGraphicsView zeigt.
+Diese Klasse besitzt einen String, der den Typ der Annotation bestimmt. Der AnnotationDrawer benutzt die AnnotationGraphicsItemFactory, um ein korrespondierendes ClickableGraphicsItem zu erzeugen, das er im CustomGraphicsView anzeigt.
 
 Attribute
 \begin{itemize}
-	\item\textit{private QString mVisualizer} das Typ der Annotation.   
+	\item\textit{private QString mVisualizer} Der Typ der Annotation.   
 \end{itemize}
 
 Methoden
 \begin{itemize}
-	\item\textit{public AnnotationDrawer()} erzeugt ein neues AnnotationDrawer Objekt.
+	\item\textit{public AnnotationDrawer()} Erzeugt ein neues AnnotationDrawer Objekt.
 \end{itemize}
   
 \subsection*{AnnotationGraphicsItemFactory}
@@ -822,12 +821,12 @@ Das ist eine Fabrik-Klasse, die unterschiedliche ClickableGraphicsItems bildet, 
 
 Methoden
 \begin{itemize}
-	\item\textit{public AnnotationGraphicsItemFactory()}erzeugt ein neues AnnotationGraphicsItemFactory Objekt.
-	\item\textit{public QGraphicsRectItem getAnnotationVisualizer()} erzeugt ein QGraphicsItem den Visualizer entsprechend.
+	\item\textit{public AnnotationGraphicsItemFactory()} Erzeugt ein neues AnnotationGraphicsItemFactory Objekt.
+	\item\textit{public QGraphicsRectItem getAnnotationVisualizer()} Erzeugt ein QGraphicsItem dem Visualizer entsprechend.
 \end{itemize}
  
-\subsection*{ClickableGraphicsRectItem}
-Diese Klasse erbt von QGraphicsRectItem und fügt die Möglichkeit ein, auf dieses Item klicken zu können.
+\subsection*{ClickableGraphicsRectItem : public QGraphicsRectItem}
+Diese Klasse fügt die Möglichkeit hinzu, auf dieses Item klicken zu können.
 
 Methoden
 \begin{itemize}
@@ -835,8 +834,8 @@ Methoden
 	\item\textit{public void mousePressEvent(QGraphicsSceneMouseEvent *event)}
 \end{itemize}
 
-\subsection*{ClickableGraphicsIdRectItem}
-Diese Klasse erbt von QGraphicsRectItem und fügt die Möglichkeit ein, auf dieses Item klicken zu können, und zeigt die Id der Annotation.
+\subsection*{ClickableGraphicsIdRectItem : public QGraphicsRectItem}
+Diese Klasse fügt die Möglichkeit hinzu, auf dieses Item klicken zu können, und zeigt die Id der Annotation.
 
 Methoden
 \begin{itemize}
@@ -845,8 +844,8 @@ Methoden
 	\item\textit{public void showID(Annotation *an)}
 \end{itemize}
 
-\subsection*{ParameterPageWidget}
-Das ist das Widget, in dem die Parameter für den gewählten Suchalgorithmus gezeigt und bestimmt werden. Außerdem werden die Datensätze, in denen gesucht wird, bestimmt. Dann kann man zu ConfirmationPageWidget fortsetzen.
+\subsection*{ParameterPageWidget : public PageWidget}
+Das ist das PageWidget, in dem die Parameter für den gewählten Suchalgorithmus angezeigt und bestimmt werden. Außerdem werden die Datensätze, in denen gesucht wird, bestimmt. Dann kann man zu ConfirmationPageWidget fortsetzen.
 
 Attribute
 \begin{itemize}
@@ -866,8 +865,8 @@ Methoden
 	\item\textit{public void signal\_next()}
 \end{itemize}
 
-\subsection*{ConfirmationPageWidget}
-Das Widget, in dem die Suchvorlage und alle Parameter angezeigt werden, sodass der Benutzer diese überprüfen kann. Mit dem SearchButton wird die Suche gestartet.
+\subsection*{ConfirmationPageWidget : public PageWidget}
+Das PageWidget, in dem die Suchvorlage und alle Parameter angezeigt werden, sodass der Benutzer diese überprüfen kann. Mit dem SearchButton wird die Suche gestartet.
 
 Attribute
 \begin{itemize}
@@ -884,8 +883,8 @@ Methoden
 	\item\textit{public void signal\_search()}
 \end{itemize}
 
-\subsection*{ResultsPageWidget}
-Das ist das Widget, wo die Ergebnisse der Suche erscheinen. Man kann die Suche speichern und bewerten. Nach der Bewertung kann erneut gesucht werden.
+\subsection*{ResultsPageWidget : public PageWidget}
+Das ist das PageWidget, in dem die Ergebnisse der Suche dargestellt werden. Man kann die Suche speichern und bewerten. Nach der Bewertung kann erneut gesucht werden.
 
 Attribute
 \begin{itemize}
@@ -894,7 +893,7 @@ Attribute
 	\item\textit{private QPushButton mBookmarkButton()}
 	\item\textit{private QPushButton mNewSearchButton}
 	\item\textit{public int EXIT\_NEXT}  
-	\item\textit{public int EXIT\_NEW_SEARCH}  
+	\item\textit{public int EXIT\_NEW\_SEARCH}  
 \end{itemize}
 
 Methoden
@@ -905,8 +904,8 @@ Methoden
 	\item\textit{public void signal\_newSearch()}
 \end{itemize}
 
-\subsection*{SearchResultModel}
-Bildet die Grundlage für die Anzeige der Ergebnisse in ListView.
+\subsection*{SearchResultModel : public QAbstractListModel}
+Bildet die Grundlage für die Anzeige der Ergebnisse im ListView.
 
 Methoden
 \begin{itemize}
@@ -915,8 +914,8 @@ Methoden
 	\item\textit{public SearchFeedback getFeedback()}
 \end{itemize}
 
-\subsection*{ParameterModel}
-Bildet die Grundlage für die Anzeige der Parameter von QJsonObject in ListView.
+\subsection*{ParameterModel : public QAbstractItemModel}
+Bildet die Grundlage für die Anzeige der Parameter eines QJsonObjects im ListView.
 
 Methoden
 \begin{itemize}
@@ -925,8 +924,8 @@ Methoden
 	\item\textit{public QJsonObject toJsonObject()}
 \end{itemize}
 
-\subsection*{DatasetModel}
-Bildet die Grundlage für die Anzeige der Datensätze in ListView bei LibraryPageWidget und ParameterPageWidget.
+\subsection*{DatasetModel : public QAbstractListModel}
+Bildet die Grundlage für die Anzeige der Datensätze im ListView bei LibraryPageWidget und ParameterPageWidget.
 
 Methoden
 \begin{itemize}
@@ -934,8 +933,8 @@ Methoden
 	\item\textit{public void setDatasetList(QList<Dataset> *datasets)}
 \end{itemize}
 
-\subsection*{MediaModel}
-Bildet die Grundlage für die Anzeige der Media-Dateien in ListView bei ViewerPageWidget.
+\subsection*{MediaModel : public QAbstractListModel}
+Bildet die Grundlage für die Anzeige der Media-Dateien im ListView bei ViewerPageWidget.
 
 Methoden
 \begin{itemize}
@@ -943,24 +942,24 @@ Methoden
 	\item\textit{public void setDataset(Dataset *dataset)}
 \end{itemize}
 
-\subsection*{IconDelegate}
-Diese Klasse erbt von QStyledItemDelegate und ist ein clickable IconDelegate, das aus einem Bild und darunter Text besteht. Diese nutzt man um die Datensätze in LibraryPageWidget, ViewerPageWidget darzustellen und herauszufinden, welcher von denen selektiert ist.
+\subsection*{IconDelegate : public QStyledItemDelegate}
+Diese Klasse ist ein anklickbares IconDelegate, das aus einem Bild und darunter Text besteht. Diese nutzt man, um die Datensätze in LibraryPageWidget, ViewerPageWidget darzustellen und herauszufinden, welcher von denen ausgewählt wurde.
 
 Methoden
 \begin{itemize}
 	\item\textit{public IconDelegate()}
 \end{itemize}
 
-\subsection*{CheckableIconDelegate}
-Diese Klasse erbt von IconDelegate und fügt eine Checkbox hinzu. Damit werden die Datensätze im ParameterPageWidget dargestellt und man bekommt die Information, in welche von denen gesucht wird.
+\subsection*{CheckableIconDelegate : public IconDelegate}
+Diese Klasse fügt eine Checkbox hinzu. Damit werden die Datensätze im ParameterPageWidget dargestellt und man bekommt die Information, in welchen gesucht wird.
 
 Methoden
 \begin{itemize}
 	\item\textit{public CheckableIconDelegate()}
 \end{itemize} 
 
-\subsection*{FeedbackDelegate}
-Die Klasse erbt von IconDelegate und kann ein FeedbackEditor benutzen, um Feedback zu bekommen. Man nutzt diese Klasse, um die Resultate der Suche in ResultsPageWidget darzustellen, mit der Option, Feedback zu bekommen. 
+\subsection*{FeedbackDelegate : public IconDelegate}
+Die Klasse kann einen FeedbackEditor benutzen, um Feedback zu bekommen. Man nutzt diese Klasse, um die Resultate der Suche in ResultsPageWidget darzustellen, mit der Option, Feedback zu bekommen. 
 
 Methoden
 \begin{itemize}
@@ -969,7 +968,7 @@ Methoden
 \end{itemize}
 
 \subsection*{FeedbackEditor}
-Diese Klasse stellt Feedback graphisch dar und bekommt die Wert des Feedbacks abhängig vom Typ des Feedbacks.
+Diese Klasse stellt Feedback graphisch dar und bekommt die Werte des Feedbacks abhängig vom Typ des Feedbacks.
 
 Methoden
 \begin{itemize}
@@ -977,8 +976,8 @@ Methoden
 	\item\textit{public void changeFeedbackStatus(SearchResultElement *el)}
 \end{itemize}
 
-\subsection*{DualFeedbackEditor}
-Stellt duales Feedback (positive, neutral, negative) dar.
+\subsection*{DualFeedbackEditor : public FeedbackEditor}
+Stellt duales Feedback (positiv, neutral, negativ) dar.
 
 Methoden
 \begin{itemize}
@@ -987,7 +986,7 @@ Methoden
 	\item\textit{public void setFrameColor()}
 \end{itemize}
 
-\subsection*{ExtendedFeedbackEditor}
+\subsection*{ExtendedFeedbackEditor : public FeedbackEditor}
 Stellt erweitertes Feedback (Werte von 1 bis 10) dar.
 
 Methoden
