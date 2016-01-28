@@ -13,7 +13,7 @@ Die Klasse ConfigData speichert die Benutzereinstellungen Sprache und Benachrich
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/ConfigData}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/ConfigData}
 \label{fig:configData}
 \end{figure}
 
@@ -39,7 +39,7 @@ Language repräsentiert die verfügbaren Sprachen: Deutsch und Englisch.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Language}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/Language}
 \label{fig:language}
 \end{figure}
 
@@ -48,7 +48,7 @@ Eine Annotation ist ein in den Datensätzen vordefinierter Bereich eines Bildes 
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Annotation}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/Annotation}
 \label{fig:annotation}
 \end{figure}
 
@@ -74,7 +74,7 @@ Eine rechteckige Annotation.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/RectangleAnnotation}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/RectangleAnnotation}
 \label{fig:rectangleAnnotation}
 \end{figure}
 
@@ -90,7 +90,7 @@ Ein DataPacket ist eine Eingabe für den Algorithmus.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/DataPacket}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/DataPacket}
 \label{fig:dataPacket}
 \end{figure}
 
@@ -113,7 +113,7 @@ DataPacketType enthält die Typen von DataPackets, also die vorhandenen Kindklas
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/DataPacketType}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/DataPacketType}
 \label{fig:dataPacketType}
 \end{figure}
 
@@ -122,7 +122,7 @@ Eine SearchQuery ist eine Suchanfrage an den Algorithmus.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/SearchQuery}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/SearchQuery}
 \label{fig:searchQuery}
 \end{figure}
 
@@ -150,7 +150,7 @@ Ein SearchResult ist die Ausgabe eines Algorithmus. Allerdings kann es auch eine
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/SearchResult}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/SearchResult}
 \label{fig:searchResult}
 \end{figure}
 
@@ -175,7 +175,7 @@ Ein SearchResultElement ist ein Element von SearchResult. Abgesehen von einem Se
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/SearchResultElement}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/SearchResultElement}
 \label{fig:searchResultElement}
 \end{figure}
 
@@ -203,7 +203,7 @@ Das SearchObject repräsentiert eine Annotation oder ein Rechteck in einem Bild 
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/SearchObject}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/SearchObject}
 \label{fig:searchObject}
 \end{figure}
 
@@ -240,7 +240,7 @@ Das SearchFeedback gibt an, wie gut das vom Algorithmus erzeugte Suchergebnis is
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/SearchFeedback}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/SearchFeedback}
 \label{fig:searchFeedback}
 \end{figure}
 
@@ -267,7 +267,7 @@ Der FeedbackType kann dual (positiv, negativ, neutral) oder extended (Werte von 
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/FeedbackType}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/FeedbackType}
 \label{fig:feedbackType}
 \end{figure}
 
@@ -276,7 +276,7 @@ Das Interface Serializable ist dazu da, damit die implementierenden Klassen seri
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Serializable}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/Serializable}
 \label{fig:serializable}
 \end{figure}
 
@@ -291,7 +291,7 @@ Ein Bookmark speichert ein Suchergebnis, eine Suchanfrage und das Feedback, soda
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Bookmark}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/Bookmark}
 \label{fig:bookmark}
 \end{figure}
 
@@ -330,7 +330,7 @@ Die BookmarkList hält eine Liste von Bookmarks und speichert die Bookmarks.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/BookmarkList}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/BookmarkList}
 \label{fig:bookmarkList}
 \end{figure}
 
@@ -356,7 +356,7 @@ Ein Dataset hat einen Typ und enthält Medien von diesem Typ.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Dataset}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/Dataset}
 \label{fig:dataset}
 \end{figure}
 
@@ -386,7 +386,7 @@ Eine DatasetList hält eine Liste von Datensätzen und speichert sie.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/DatasetList}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/DatasetList}
 \label{fig:datasetList}
 \end{figure}
 
@@ -409,7 +409,7 @@ Der Datensatztyp kann Photo, Video oder SingleFrameVideo sein.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/DatasetType}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/DatasetType}
 \label{fig:datasetType}
 \end{figure}
 
@@ -418,7 +418,7 @@ Ein Medium wird durch einen Pfad charakterisiert. Außerdem hat ein Medium eine 
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Medium}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/Medium}
 \label{fig:medium}
 \end{figure}
 
@@ -441,7 +441,7 @@ Der MediumType gibt den Typ des Mediums an: photo, video oder single frame video
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/MediumType}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/MediumType}
 \label{fig:mediumType}
 \end{figure}
 
@@ -450,7 +450,7 @@ Ein Photo ist ein Bild, in dem Annotationen sein können.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Photo}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/Photo}
 \label{fig:photo}
 \end{figure}
 
@@ -464,7 +464,7 @@ Ein SingelFrameVideo ist ein Video aus Einzelbildern.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/SingleFrameVideo}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/SingleFrameVideo}
 \label{fig:singleFrameVideo}
 \end{figure}
 
@@ -486,7 +486,7 @@ Ein Video aus einer Videodatei.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Video}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/Video}
 \label{fig:video}
 \end{figure}
 
@@ -500,7 +500,7 @@ Die Algorithmen, die von CoBaB ausgeführt werden sollen, müssen mindestens die
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Algorithm}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/Algorithm}
 \label{fig:algorithm}
 \end{figure}
 
@@ -518,7 +518,7 @@ Die Implementierung dieser Schnittstelle ermöglicht CoBaB, genauere Angaben üb
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/SearchAlgorithm}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/SearchAlgorithm}
 \label{fig:searchAlgorithm}
 \end{figure}
 
@@ -538,7 +538,7 @@ Dieser Suchalgorithmus wird zu Testzwecken implementiert. Er generiert ein zufä
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/TestAlgorithm}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/TestAlgorithm}
 \label{fig:testAlgorithm}
 \end{figure}
 
@@ -574,7 +574,7 @@ Diese Liste verwaltet verfügbare Algorithmen.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/AlgorithmList}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/AlgorithmList}
 \label{fig:algorithmList}
 \end{figure}
 
@@ -1119,7 +1119,7 @@ Da die Manager und der Navigator nicht direkt kommunizieren, verbindet MainContr
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/MainControl}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Controller/MainControl}
 \label{fig:mainControl}
 \end{figure}
 
@@ -1128,7 +1128,7 @@ Der Navigator ist in der Lage, das aktuell im MainWindow angezeigte PageWidget d
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Navigator}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Controller/Navigator}
 \label{fig:navigator}
 \end{figure}
 
@@ -1137,7 +1137,7 @@ Der SearchManager startet einen Algorithmus in einem neuen Thread und leitet mö
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/SearchManager}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Controller/SearchManager}
 \label{fig:searchManager}
 \end{figure}
 
@@ -1146,7 +1146,7 @@ Der SearchResultManager besitzt ein SearchResult und benachrichtigt das ResultsP
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/SearchResultManager}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Controller/SearchResultManager}
 \label{fig:searchResultManager}
 \end{figure}
 
@@ -1155,7 +1155,7 @@ Der MainWindowManager stellt die Bookmarks und Chronikeinträge dem MainWindow z
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/MainWindowManager}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Controller/MainWindowManager}
 \label{fig:mainWindowManager}
 \end{figure}
 
@@ -1164,6 +1164,6 @@ Der BookmarkManager besitzt 2 Listen für die Chronik und die vom Benutzer erste
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/BookmarkManager}
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Controller/BookmarkManager}
 \label{fig:bookmarkManager}
 \end{figure}
