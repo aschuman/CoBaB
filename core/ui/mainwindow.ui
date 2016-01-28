@@ -13,18 +13,80 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar">
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QStackedWidget" name="mStackedWidget">
+      <widget class="QWidget" name="page"/>
+      <widget class="QWidget" name="page_2"/>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="mMenubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
      <width>629</width>
-     <height>26</height>
+     <height>27</height>
     </rect>
    </property>
+   <widget class="QMenu" name="mFileMenu">
+    <property name="title">
+     <string>Datei</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="mLanguageMenu">
+    <property name="title">
+     <string>Sprache</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="mBookmarkMenu">
+    <property name="title">
+     <string>Lesezeichen</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="mHistoryMenu">
+    <property name="title">
+     <string>Chronik</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="mHelpMenu">
+    <property name="title">
+     <string>Hilfe</string>
+    </property>
+   </widget>
+   <addaction name="mFileMenu"/>
+   <addaction name="mLanguageMenu"/>
+   <addaction name="mBookmarkMenu"/>
+   <addaction name="mHistoryMenu"/>
+   <addaction name="mHelpMenu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="mToolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>true</bool>
+   </attribute>
+   <addaction name="mHomeAction"/>
+   <addaction name="mBackAction"/>
+  </widget>
+  <action name="mHomeAction">
+   <property name="text">
+    <string>Anfang</string>
+   </property>
+  </action>
+  <action name="mBackAction">
+   <property name="text">
+    <string>Zurück</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
