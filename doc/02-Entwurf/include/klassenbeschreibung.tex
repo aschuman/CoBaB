@@ -1298,7 +1298,7 @@ Dieses Diagramm zeigt alle Klassen des Controllers. Die zugehörigen Attribute u
 
 \subsection*{MainControl}
 MainControl ist der Einstiegspunkt des Programms und verwaltet die Manager-Klassen sowie den Navigator. Insbesondere erstellt MainControl die PageWidgets und registriert sie beim Navigator.
-Da die Manager und der Navigator nicht direkt kommunizieren, verbindet MainControl ihre Signals und Slots.
+Der Navigator und die Manager kommuniziert über Signals und Slots. Die Verbindung erfolgt bei MainControl.
 
 \begin{figure}[H]
 \centering
@@ -1316,7 +1316,7 @@ Der Navigator ist in der Lage, das aktuell im MainWindow angezeigte PageWidget d
 \end{figure}
 
 \subsection*{SearchManager}
-Der SearchManager startet einen \glslink{Suchalgorithmus}{Algorithmus} in einem neuen Thread und leitet mögliche Informationen zum Fortschritt der Suche an das ResultsPageWidget weiter.
+Der SearchManager startet einen \glslink{Suchalgorithmus}{Algorithmus} in einem parallelen Thread und leitet Informationen zum Fortschritt der Suche an das ResultsPageWidget weiter.
 
 \begin{figure}[H]
 \centering
@@ -1334,7 +1334,7 @@ Der SearchResultManager besitzt ein SearchResult und benachrichtigt das ResultsP
 \end{figure}
 
 \subsection*{MainWindowManager}
-Der MainWindowManager stellt die Bookmarks und Chronikeinträge dem MainWindow zur Verfügung und gibt bekannt, welches Bookmark im MainWindow zuletzt ausgewählt wurde.
+Der MainWindowManager stellt dem MainWindow die Bookmarks und Chronikeinträge zur Verfügung und gibt bekannt, welches Bookmark im MainWindow zuletzt ausgewählt wurde.
 
 \begin{figure}[H]
 \centering
