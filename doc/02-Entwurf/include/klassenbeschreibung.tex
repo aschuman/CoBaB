@@ -109,6 +109,8 @@ Methoden
 \item \textit{public abstract void fromStream(QDataStream out)} Speichert das DataPacket, durch den Aufruf von operator>>, in einer Datei.
 \end{itemize}
 
+\pagebreak
+
 \subsection*{<<enumeration>> DataPacketType}
 DataPacketType enthält die Typen von DataPackets, also die vorhandenen Kindklassen.
 
@@ -118,7 +120,7 @@ DataPacketType enthält die Typen von DataPackets, also die vorhandenen Kindklas
 \label{fig:dataPacketType}
 \end{figure}
 
-\subsection*{SearchQuery : DataPacket}
+\subsection*{SearchQuery : public DataPacket}
 Eine SearchQuery ist eine Suchanfrage an den \glslink{Suchalgorithmus}{Algorithmus}.
 
 \begin{figure}[H]
@@ -146,7 +148,7 @@ Methoden
 \item \textit{public void fromStream(QDataStream out)} Lädt die SearchQuery, durch den Aufruf von operator>>, aus einer Datei.
 \end{itemize}
 
-\subsection*{SearchResult : DataPacket}
+\subsection*{SearchResult : public DataPacket}
 Ein SearchResult ist die Ausgabe eines \glslink{Suchalgorithmus}{Algorithmus}. Allerdings kann es auch eine Eingabe sein, wenn ein \glslink{Suchalgorithmus}{Algorithmus} auf einem bestehenden Suchergebnis weiterarbeitet.
 
 \begin{figure}[H]
@@ -236,7 +238,7 @@ Methoden
 \item \textit{public void fromStream(QDataStream out)} Lädt das SearchObject, durch den Aufruf von operator>>, aus einer Datei.
 \end{itemize}
 
-\subsection*{SearchFeedback : DataPacket}
+\subsection*{SearchFeedback : public DataPacket}
 Das SearchFeedback gibt an, wie gut das vom \glslink{Suchalgorithmus}{Algorithmus} erzeugte Suchergebnis ist.
 
 \begin{figure}[H]
@@ -247,15 +249,15 @@ Das SearchFeedback gibt an, wie gut das vom \glslink{Suchalgorithmus}{Algorithmu
 
 Attribute
 \begin{itemize}
-\item\textit{private QList<QPair<SearchObject, int>>} Der Integer-Wert beschreibt das zum SearchObject gehörende Feedback.
+\item\textit{private QList<QPair<SearchObject, int>}> Der Integer-Wert beschreibt das zum SearchObject gehörende Feedback.
 \item\textit{private FeedbackType mType} Der Typ des Feedbacks, entweder dual oder extended.
 \end{itemize}
 
 Methoden
 \begin{itemize}
 \item \textit{public SearchFeedback(FeedbackType type)} Erzeugt ein neues SearchFeedback Objekt. Der Typ kann entweder dual oder extended sein.
-\item \textit{public QList<QPair<SearchObject, int>>  getFeedbackList()} Gibt die FeedbackList  zurück.
-\item \textit{public void setFeedbackList(QList<QPair<SearchObject, int>> feedbackList)} Setzt die FeedbackList auf die übergebene Liste.
+\item \textit{public QList<QPair<SearchObject, int>}\textit{>  getFeedbackList()} Gibt die FeedbackList  zurück.
+\item \textit{public void setFeedbackList(QList<QPair<SearchObject, int>}\textit{> feedbackList)} Setzt die FeedbackList auf die übergebene Liste.
 \item \textit{public FeedbackType getFeedbackType()} Gibt den Feedback-Typ zurück.
 \item \textit{public friend QDataStream\& operator<<(QDataStream\& out, Feedback\& feedback)} Speichert das Feedback in einer Datei.
 \item \textit{public friend QDataStream\& operator>>(QDataStream\& in, Feedback\& feedback)} Lädt das Feedback aus einer Datei.
@@ -427,14 +429,14 @@ Attribute
 \begin{itemize}
 \item\textit{protected QString mRelativePath} Der Pfad zu diesem Medium.
 \item\textit{protected MediumType mType} Der Typ dieses Mediums.
-\item\textit{protected QList<QPair<int, Annotation>> mAnnotationList} Die Liste von \glslink{Annotation}{Annotationen} für dieses Medium.
+\item\textit{protected QList<QPair<int, Annotation>}\textit{> mAnnotationList} Die Liste von \glslink{Annotation}{Annotationen} für dieses Medium.
 \end{itemize}
 
 Methoden
 \begin{itemize}
-\item \textit{public Medium(QString path, QList<QPair<int, Annotation>> annotations)} Erzeugt ein Medium, das den übergebenen Pfad und die \glslink{Annotation}{Annotationsliste} hat.
+\item \textit{public Medium(QString path, QList<QPair<int, Annotation>}\textit{> annotations)} Erzeugt ein Medium, das den übergebenen Pfad und die \glslink{Annotation}{Annotationsliste} hat.
 \item \textit{public MediumType getType()} Gibt den Typ des Mediums zurück.
-\item \textit{public QList<QPair<int, Annotation>>} Gibt die Liste der \glslink{Annotation}{Annotationen} zurück.
+\item \textit{public QList<QPair<int, Annotation>}> Gibt die Liste der \glslink{Annotation}{Annotationen} zurück.
 \end{itemize}
 
 \subsection*{<<enumeration>> MediumType}
@@ -461,7 +463,7 @@ Methoden
 \end{itemize}
 
 \subsection*{SingleFrameVideo : public Medium}
-Ein SingelFrameVideo ist ein Video aus Einzelbildern.
+Ein SingleFrameVideo ist ein Video aus Einzelbildern.
 
 \begin{figure}[H]
 \centering
@@ -514,6 +516,8 @@ Methoden
 \item\textit{public QString getId()} Gibt eine für diesen \glslink{Suchalgorithmus}{Algorithmus} eindeutige Identifikation zurück.
 \end{itemize}
 
+\pagebreak
+
 \subsection*{<<interface>> \glslink{Suchalgorithmus}{SearchAlgorithm} : public Algorithm}
 Die Implementierung dieser Schnittstelle ermöglicht CoBaB, genauere Angaben über den \glslink{Suchalgorithmus}{Algorithmus} anzuzeigen.
 
@@ -533,6 +537,8 @@ Methoden
 \item\textit{public sendIntermediateResults(SearchResult searchResult)} Ist ein Signal, dass vom \glslink{Suchalgorithmus}{Algorithmus} gesendet wird, wenn Zwischenergebnisse verfügbar sind.
 \item\textit{public sendProgress(double progress, QString message)} Ist ein Signal, das den Fortschritt des \glslink{Suchalgorithmus}{Algorithmus} sendet.
 \end{itemize}
+
+\pagebreak
 
 \subsection*{TestAlgorithm : public SearchAlgorithm}
 Dieser \gls{Suchalgorithmus} wird zu Testzwecken implementiert. Er generiert ein zufälliges SearchResult.
@@ -569,6 +575,8 @@ Methoden
 \item\textit{public sendIntermediateResults(SearchResult searchResult)} Ist ein Signal, dass vom \glslink{Suchalgorithmus}{Algorithmus} gesendet wird, wenn Zwischenergebnisse verfügbar sind.
 \item\textit{public sendProgress(double progress, QString message)} Ist ein Signal, das den Fortschritt des \glslink{Suchalgorithmus}{Algorithmus} sendet.
 \end{itemize}
+
+\pagebreak
 
 \subsection*{AlgorithmList}
 Diese Liste verwaltet verfügbare \glslink{Suchalgorithmus}{Algorithmen}.
@@ -608,8 +616,9 @@ Dieses Diagramm zeigt alle Klassen des Views. Die zugehörigen Attribute und Met
 Ein PageWidget ist ein QWidget, das als eine Seite der grafischen Oberfläche im MainWindow dem Benutzer angezeigt wird. Die abstrakte Klasse PageWidget bietet dem erbenden Widget, das momentan im MainWindow angezeigt wird, die Möglichkeit ein PageWidget auszusuchen. Dieses wird dem Benutzer als nächstes angezeigt. Über den Stack des Navigators werden benötige Daten an das PageWidget übergeben.
 
 \begin{figure}[H]
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/PageWidget}
-\label{fig:pageWidget}
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/PageWidget}
+	\label{fig:pageWidget}
 \end{figure}
 
 \subsection*{MainWindow : public QMainWindow}
@@ -717,6 +726,7 @@ Attribute
 	???     
 \end{itemize}
 
+\pagebreak
 Methoden
 \begin{itemize}
 	\item\textit{public ViewerPageWidget()} 
@@ -852,7 +862,7 @@ Attribute
 	\item\textit{private ClickableGraphicsVideoItem mItem} 
 	Ein GraphicsItem für die Darstellung des Videos mit der Möglichkeit, Klicks abzufangen.     
 \end{itemize}
-
+\pagebreak
 Methoden
 \begin{itemize}
 	\item\textit{public VideoViewer()} 
@@ -1071,7 +1081,7 @@ Das ist das PageWidget, in dem die Ergebnisse der Suche dargestellt werden. Man 
 	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/ResultsPageWidget}
 	\label{fig:resultsPageWidget}
 \end{figure}
-
+\pagebreak
 Attribute
 \begin{itemize}
 	\item\textit{private QListView mResultMediaListView}
@@ -1180,7 +1190,7 @@ Diese Klasse ist ein anklickbares IconDelegate, das aus einem Bild und darunter 
 	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/IconDelegate}
 	\label{fig:iconDelegate}
 \end{figure}
-
+\pagebreak
 Methoden
 \begin{itemize}
 	\item\textit{public IconDelegate()}
@@ -1284,6 +1294,7 @@ Dieses Diagramm zeigt alle Klassen des Controllers. Die zugehörigen Attribute u
 \label{fig:controller}
 \end{figure}
 
+\pagebreak
 
 \subsection*{MainControl}
 MainControl ist der Einstiegspunkt des Programms und verwaltet die Manager-Klassen sowie den Navigator. Insbesondere erstellt MainControl die PageWidgets und registriert sie beim Navigator.
