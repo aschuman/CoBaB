@@ -175,7 +175,7 @@ Ein SearchResultElement ist ein Element von SearchResult. Abgesehen von einem Se
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Model/SearchResultElement}
+\includegraphics[width=\linewidth]{img/Klassendiagramm/Klassen/Model/SearchResultElement}
 \label{fig:searchResultElement}
 \end{figure}
 
@@ -603,6 +603,11 @@ Methoden
 
 \subsection*{<<abstract>> PageWidget}
 Ein PageWidget ist ein QWidget, das als eine Seite der grafischen Oberfläche im MainWindow dem Benutzer angezeigt wird. Die abstrakte Klasse PageWidget bietet dem erbenden Widget, das momentan im MainWindow angezeigt wird, die Möglichkeit ein PageWidget auszusuchen. Dieses wird dem Benutzer als nächstes angezeigt. Über den Stack des Navigators werden benötige Daten an das PageWidget übergeben.
+
+\begin{figure}[H]
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/PageWidget}
+\label{fig:pageWidget}
+\end{figure}
 
 \subsection*{<<enumeration>> PageType}
 PageWidgets lassen sich beim Navigator mit einem PageType registrieren, welcher fortan zur Referenzierung dieses PageWidgets dient.
