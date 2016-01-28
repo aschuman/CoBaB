@@ -613,6 +613,12 @@ Kapselt Signale, die zum Verwenden des Stacks des Navigators und dem Wechseln de
 \subsection*{MainWindow : public QMainWindow}
 Die Klasse stellt das Hauptfenster des Programms dar, auf dem die weiteren Seiten als PageWidgets angezeigt werden.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/MainWindow}
+	\label{fig:mainWindow}
+\end{figure}
+
 Attribute
 \begin{itemize}
 	\item\textit{private QMenuBar mMenubar}
@@ -652,6 +658,12 @@ Methoden
 \subsection*{LibraryPageWidget : public PageWidget}
 Das PageWidget, in dem alle Datensätze dargestellt werden. Man kann einen Datensatz für die Suche auswählen. Durch den ChooseDataSetButton kann man auch einen Datensatz wählen, der nicht in der Datenbank liegt. 
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/LibraryPageWidget}
+	\label{fig:libraryPageWidget}
+\end{figure}
+
 Attribute
 \begin{itemize}
 	\item\textit{private QListView mDatasetsListView} 
@@ -678,6 +690,12 @@ Methoden
 
 \subsection*{ViewerPageWidget : public PageWidget}
 Diese Klasse bildet die Basis für die PageWidgets, die den Inhalt eines Datensatzes in Form von Photoalbum oder Videoplayer darstellen.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/ViewerPageWidget}
+	\label{fig:viewerPageWidget}
+\end{figure}
 
 Attribute
 \begin{itemize}
@@ -716,6 +734,12 @@ Methoden
 \subsection*{PhotoViewer : public ViewerPageWidget}
 Seine Funktion ist das Darstellen der Bilder, die in einem Datensatz enthalten sind.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/PhotoViewer}
+	\label{fig:photoVIewer}
+\end{figure}
+
 Attribute
 \begin{itemize}
 	\item\textit{private ClickableGraphicsPixmapItem mItem} 
@@ -731,6 +755,12 @@ Methoden
 \subsection*{ClickableQGraphicsPixmapItem : public QGraphicsPixmapItem}
 Stellt das Bild dar, das bei CustomGraphicsView angezeigt wird und auf dem Annotationen gemacht werden können. Mit einem Rechtsklick kann man den Algorithmus für die Suche wählen.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/ClickableQGraphicsPixmapItem}
+	\label{fig:clickableQGraphicsPixmapItem}
+\end{figure}
+
 Methoden
 \begin{itemize}
 	\item\textit{public ClickableQGraphicsPixmapItem()} 
@@ -741,6 +771,12 @@ Methoden
 
 \subsection*{SingleFrameVideoViewer : public ViewerPageWidget}
 Seine Funktion ist das Darstellen von Videos aus einem Datensatz, die in Form von Einzelbildern vorliegen.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/SingleFrameVideoViewer}
+	\label{fig:singleFrameVideoViewer}
+\end{figure}
 
 Attribute
 \begin{itemize}
@@ -763,6 +799,12 @@ Methoden
 \subsection*{SingleFrameVideoPlayer} 
 Eine Komponente des SingleFrameVideoViewer, die das Video in Form von Einzelbildern in dem GraphicsView anzeigt.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/SingleFrameVideoPlayer}
+	\label{fig:singleFrameVideoPlayer}
+\end{figure}
+
 Methoden
 \begin{itemize}
 	\item\textit{public SingleFrameVideoPlayer()} 
@@ -776,6 +818,12 @@ Methoden
 \subsection*{GraphicsSingleFrameVideoItem : public ClickableQGraphicsPixmapItem}
 Stellt mithilfe des SingleFrameVideoPlayers ein Video aus Einzelbildern dar, wobei man Bereiche markieren, Annotationen auswählen und mit einem Rechtsklick den Algorithmus wählen kann.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/GraphicsSingleFrameVideoItem}
+	\label{fig:graphicsSingleFrameVideoItem}
+\end{figure}
+
 Methoden
 \begin{itemize}
 	\item\textit{public GraphicsSingleFrameVideoItem()} 
@@ -786,6 +834,12 @@ Methoden
 
 \subsection*{VideoViewer : public ViewerPageWidget}
 Seine Funktion ist das Darstellen und Abspielen der Videos aus Videodateien, die in einem Datensatz enthalten sind.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/VideoViewer}
+	\label{fig:videoViewer}
+\end{figure}
 
 Attribute
 \begin{itemize}
@@ -808,6 +862,12 @@ Methoden
 \subsection*{ClickableQGraphicsVideoItem : public QGraphicsVideoItem}
 Stellt das Video dar, das bei CustomGraphicsView angezeigt wird und auf dem man Bereiche markieren und Annotationen auswählen kann. Mit einem Rechtsklick kann man den Algorithmus für die Suche wählen.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/ClickableQGraphicsVideoItem}
+	\label{fig:clickableQGraphicsVideoItem}
+\end{figure}
+
 Methoden
 \begin{itemize}
 	\item\textit{public ClickableQGraphicsVideoItem()} 
@@ -818,6 +878,12 @@ Methoden
 
 \subsection*{CustomGraphicsView}
 Diese Klasse benutzt ein QGraphicsView um ein Bild darzustellen und einen AnnotationDrawer um die Annotationen, die zum Bild gehören, darzustellen. Außerdem fügt er die Möglichkeit hinzu, die Größe des Bildes durch die ZoomIn- und ZoomOutButtons zu verändern und eine ROI(\enquote{region of interest}) zu zeichnen, nach der dann gesucht werden kann. Hier werden auch die Klicks des Benutzers abgefangen und das Menü mit den Algorithmen angezeigt.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/CustomGraphicsView}
+	\label{fig:customGraphicsView}
+\end{figure}
 
 Attribute
 \begin{itemize}
@@ -856,6 +922,12 @@ Methoden
 \subsection*{AnnotationDrawer}
 Diese Klasse besitzt einen String, der den Typ der Annotation bestimmt. Der AnnotationDrawer benutzt die AnnotationGraphicsItemFactory, um ein korrespondierendes ClickableGraphicsItem zu erzeugen, das er im CustomGraphicsView anzeigt.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/AnnotationDrawer}
+	\label{fig:annotationDrawer}
+\end{figure}
+
 Attribute
 \begin{itemize}
 	\item\textit{private QString mVisualizer} 
@@ -871,6 +943,12 @@ Methoden
 \subsection*{AnnotationGraphicsItemFactory}
 Das ist eine Fabrik-Klasse, die unterschiedliche ClickableGraphicsItems bildet, damit man die Annotationen, abhängig von deren Typ, durch den AnnotationDrawer darstellen kann.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/AnnotationGraphicsItemFactory}
+	\label{fig:annotationGraphicsItemFactory}
+\end{figure}
+
 Methoden
 \begin{itemize}
 	\item\textit{public AnnotationGraphicsItemFactory()} 
@@ -882,6 +960,12 @@ Methoden
 \subsection*{ClickableGraphicsRectItem : public QGraphicsRectItem}
 Diese Klasse fügt die Möglichkeit hinzu, auf dieses Item klicken zu können.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/ClickableGraphicsRectItem}
+	\label{fig:clickableGraphicsRectItem}
+\end{figure}
+
 Methoden
 \begin{itemize}
 	\item\textit{public ClickableGraphicsRectItem()}
@@ -892,6 +976,12 @@ Methoden
 
 \subsection*{ClickableGraphicsIdRectItem : public QGraphicsRectItem}
 Diese Klasse fügt die Möglichkeit hinzu, auf dieses Item klicken zu können, und zeigt die Id der Annotation.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/ClickableGraphicsIdRectItem}
+	\label{fig:clickableGraphicsIdRectItem}
+\end{figure}
 
 Methoden
 \begin{itemize}
@@ -905,6 +995,12 @@ Methoden
 
 \subsection*{ParameterPageWidget : public PageWidget}
 Das ist das PageWidget, in dem die Parameter für den gewählten Suchalgorithmus angezeigt und bestimmt werden. Außerdem werden die Datensätze, in denen gesucht wird, bestimmt. Dann kann man zu ConfirmationPageWidget fortsetzen.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/ParameterPageWidget}
+	\label{fig:parameterPageWidget}
+\end{figure}
 
 Attribute
 \begin{itemize}
@@ -937,6 +1033,12 @@ Methoden
 \subsection*{ConfirmationPageWidget : public PageWidget}
 Das PageWidget, in dem die Suchvorlage und alle Parameter angezeigt werden, sodass der Benutzer diese überprüfen kann. Mit dem SearchButton wird die Suche gestartet.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/ConfirmationPageWidget}
+	\label{fig:confirmationPageWidget}
+\end{figure}
+
 Attribute
 \begin{itemize}
 	\item\textit{private QPushButton mSearchButton}
@@ -961,6 +1063,12 @@ Methoden
 
 \subsection*{ResultsPageWidget : public PageWidget}
 Das ist das PageWidget, in dem die Ergebnisse der Suche dargestellt werden. Man kann die Suche speichern und bewerten. Nach der Bewertung kann erneut gesucht werden.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/ResultsPageWidget}
+	\label{fig:resultsPageWidget}
+\end{figure}
 
 Attribute
 \begin{itemize}
@@ -993,6 +1101,12 @@ Methoden
 \subsection*{SearchResultModel : public QAbstractListModel}
 Bildet die Grundlage für die Anzeige der Ergebnisse im ListView.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/SearchResultModel}
+	\label{fig:searchResultModel}
+\end{figure}
+
 Methoden
 \begin{itemize}
 	\item\textit{public SearchResultModel()}
@@ -1005,6 +1119,12 @@ Methoden
 
 \subsection*{ParameterModel : public QAbstractItemModel}
 Bildet die Grundlage für die Anzeige der Parameter eines QJsonObjects im ListView.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/ParameterModel}
+	\label{fig:parameterModel}
+\end{figure}
 
 Methoden
 \begin{itemize}
@@ -1019,6 +1139,12 @@ Methoden
 \subsection*{DatasetModel : public QAbstractListModel}
 Bildet die Grundlage für die Anzeige der Datensätze im ListView bei LibraryPageWidget und ParameterPageWidget.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/DatasetModel}
+	\label{fig:datasetModel}
+\end{figure}
+
 Methoden
 \begin{itemize}
 	\item\textit{public DatasetModel()}
@@ -1029,6 +1155,12 @@ Methoden
 
 \subsection*{MediaModel : public QAbstractListModel}
 Bildet die Grundlage für die Anzeige der Media-Dateien im ListView bei ViewerPageWidget.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/MediaModel}
+	\label{fig:mediaModel}
+\end{figure}
 
 Methoden
 \begin{itemize}
@@ -1041,6 +1173,12 @@ Methoden
 \subsection*{IconDelegate : public QStyledItemDelegate}
 Diese Klasse ist ein anklickbares IconDelegate, das aus einem Bild und darunter Text besteht. Diese nutzt man, um die Datensätze in LibraryPageWidget, ViewerPageWidget darzustellen und herauszufinden, welcher von denen ausgewählt wurde.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/IconDelegate}
+	\label{fig:iconDelegate}
+\end{figure}
+
 Methoden
 \begin{itemize}
 	\item\textit{public IconDelegate()}
@@ -1050,6 +1188,12 @@ Methoden
 \subsection*{CheckableIconDelegate : public IconDelegate}
 Diese Klasse fügt eine Checkbox hinzu. Damit werden die Datensätze im ParameterPageWidget dargestellt und man bekommt die Information, in welchen gesucht wird.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/CheckableIconDelegate}
+	\label{fig:checkableIconDelegate}
+\end{figure}
+
 Methoden
 \begin{itemize}
 	\item\textit{public CheckableIconDelegate()}
@@ -1058,6 +1202,12 @@ Methoden
 
 \subsection*{FeedbackDelegate : public IconDelegate}
 Die Klasse kann einen FeedbackEditor benutzen, um Feedback zu bekommen. Man nutzt diese Klasse, um die Resultate der Suche in ResultsPageWidget darzustellen, mit der Option, Feedback zu bekommen. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/FeedbackDelegate}
+	\label{fig:feedbackDelegate}
+\end{figure}
 
 Methoden
 \begin{itemize}
@@ -1070,6 +1220,12 @@ Methoden
 \subsection*{FeedbackEditor}
 Diese Klasse stellt Feedback graphisch dar und bekommt die Werte des Feedbacks abhängig vom Typ des Feedbacks.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/FeedbackEditor}
+	\label{fig:feedbackEditor}
+\end{figure}
+
 Methoden
 \begin{itemize}
 	\item\textit{public FeedbackEditor()}
@@ -1080,6 +1236,12 @@ Methoden
 
 \subsection*{DualFeedbackEditor : public FeedbackEditor}
 Stellt duales Feedback (positiv, neutral, negativ) dar.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/DualFeedbackEditor}
+	\label{fig:dualFeedbackEditor}
+\end{figure}
 
 Methoden
 \begin{itemize}
@@ -1093,6 +1255,12 @@ Methoden
 
 \subsection*{ExtendedFeedbackEditor : public FeedbackEditor}
 Stellt erweitertes Feedback (Werte von 1 bis 10) dar.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/View/ExtendedFeedbackEditor}
+	\label{fig:ExtendedFeedbackEditor}
+\end{figure}
 
 Methoden
 \begin{itemize}
