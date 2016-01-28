@@ -609,12 +609,6 @@ Ein PageWidget ist ein QWidget, das als eine Seite der grafischen Oberfläche im
 \label{fig:pageWidget}
 \end{figure}
 
-\subsection*{<<enumeration>> PageType}
-PageWidgets lassen sich beim Navigator mit einem PageType registrieren, welcher fortan zur Referenzierung dieses PageWidgets dient.
-
-\subsection*{PageWidgetDispatcher}
-Kapselt Signale, die zum Verwenden des Stacks des Navigators und dem Wechseln des PageWidgets nötig sind. Ohne diese Kapselung ständen diese Signale den speziellen PageWidgets zur Verfügung.
-
 \subsection*{MainWindow : public QMainWindow}
 Die Klasse stellt das Hauptfenster des Programms dar, auf dem die weiteren Seiten als PageWidgets angezeigt werden.
 
@@ -1339,4 +1333,13 @@ Der BookmarkManager besitzt 2 Listen für die Chronik und die vom Benutzer erste
 \centering
 \includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Controller/BookmarkManager}
 \label{fig:bookmarkManager}
+\end{figure}
+
+\subsection*{<<enumeration>> PageType}
+PageWidgets lassen sich beim Navigator mit einem PageType registrieren, welcher fortan zur Referenzierung dieses PageWidgets dient.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Controller/PageType}
+\label{fig:pageType}
 \end{figure}
