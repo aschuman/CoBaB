@@ -534,8 +534,8 @@ Methoden
 \item\textit{public QString getName()} Gibt den Namen des \glslink{Suchalgorithmus}{Algorithmus} zurück.
 \item\textit{public void setName(QString name)} Setzt den Namen des \glslink{Suchalgorithmus}{Algorithmus} auf name.
 \item\textit{public bool supportsProgressInfo()} Gibt zurück, ob der \glslink{Suchalgorithmus}{Algorithmus} Fortschrittsinformationen senden kann.
-\item\textit{public sendIntermediateResults(SearchResult searchResult)} Ist ein Signal, dass vom \glslink{Suchalgorithmus}{Algorithmus} gesendet wird, wenn Zwischenergebnisse verfügbar sind.
-\item\textit{public sendProgress(double progress, QString message)} Ist ein Signal, das den Fortschritt des \glslink{Suchalgorithmus}{Algorithmus} sendet.
+\item\textit{public signal sendIntermediateResults(SearchResult searchResult)} Ist ein Signal, dass vom \glslink{Suchalgorithmus}{Algorithmus} gesendet wird, wenn Zwischenergebnisse verfügbar sind.
+\item\textit{public signal sendProgress(double progress, QString message)} Ist ein Signal, das den Fortschritt des \glslink{Suchalgorithmus}{Algorithmus} sendet.
 \end{itemize}
 
 \pagebreak
@@ -572,8 +572,8 @@ Methoden
 \item\textit{public void setName(QString name)} Setzt den Namen des \glslink{Suchalgorithmus}{Algorithmus} auf name.
 \item\textit{public QString getId()} Gibt die Id des \glslink{Suchalgorithmus}{Algorithmus} zurück.
 \item\textit{public bool supportsProgressInfo()} Gibt zurück, ob der \glslink{Suchalgorithmus}{Algorithmus} Fortschrittsinformationen senden kann.
-\item\textit{public sendIntermediateResults(SearchResult searchResult)} Ist ein Signal, dass vom \glslink{Suchalgorithmus}{Algorithmus} gesendet wird, wenn Zwischenergebnisse verfügbar sind.
-\item\textit{public sendProgress(double progress, QString message)} Ist ein Signal, das den Fortschritt des \glslink{Suchalgorithmus}{Algorithmus} sendet.
+\item\textit{public signal sendIntermediateResults(SearchResult searchResult)} Ist ein Signal, dass vom \glslink{Suchalgorithmus}{Algorithmus} gesendet wird, wenn Zwischenergebnisse verfügbar sind.
+\item\textit{public signal sendProgress(double progress, QString message)} Ist ein Signal, das den Fortschritt des \glslink{Suchalgorithmus}{Algorithmus} sendet.
 \end{itemize}
 
 \pagebreak
@@ -695,7 +695,7 @@ Methoden
 	Füllt ein DatasetModel mit den Datensätzen, die darzustellen sind.
 	\item\textit{public void reset()} 
 	Leert die Library.
-	\item\textit{public void signal\_clicked\_Dataset()} 
+	\item\textit{public signal clickedDataset()} 
 	Ein Signal an den Controller, wenn auf einen Datensatz geklickt wurde.
 \end{itemize}
 
@@ -735,11 +735,11 @@ Methoden
 	Füllt ein MediaModel mit den Media von einem gewählten Datensatz.
 	\item\textit{public void reset()} 
 	Leert den Viewer.
-	\item\textit{public void signal\_Fullscreen()} 
+	\item\textit{public signal fullscreen()} 
 	Ein Signal an den Controller, dass der FullscreenButton geklickt wurde.
-	\item\textit{public void signal\_Before()} 
+	\item\textit{public signal before()} 
 	Ein Signal an den Controller, dass der BeforeButton geklickt wurde.
-	\item\textit{public void signal\_Next()}
+	\item\textit{public signal next()}
 	Ein Signal an den Controller, dass der NextButton geklickt wurde.
 \end{itemize}
 
@@ -804,7 +804,7 @@ Methoden
 \begin{itemize}
 	\item\textit{public SingleFrameVideoViewer()} 
 	Erzeugt ein neues SingleFrameVideoViewer-Objekt.
-	\item\textit{public void signal\_PlayOrPause()} 
+	\item\textit{public void signa playOrPause()} 
 	Ein Signal an den Controller, wenn der PlayOrPauseButton geklickt wurde.
 \end{itemize} 
 
@@ -867,7 +867,7 @@ Methoden
 \begin{itemize}
 	\item\textit{public VideoViewer()} 
 	Erzeugt ein neues VideoViewer-Objekt.
-	\item\textit{public void signal\_PlayOrPause()} 
+	\item\textit{public signal playOrPause()} 
 	EIn Signal an den Controller, wenn der PlayOrPauseButton geklickt wurde.
 \end{itemize} 
 
@@ -921,13 +921,13 @@ Methoden
 	Setzt die Größe des Bildes/Frames.
 	\item\textit{public QGraphicsScene scene()} 
 	Erzeugt ein QGraphicsScene, in dem die Media gezeigt werden.
-	\item\textit{public void signal\_roi()} 
+	\item\textit{public signal roi()} 
 	Ein Signal, wenn der \glslink{ROI}{ROIButton} geklickt wurde.
-	\item\textit{public void slot\_roi()} 
-	Fängt das signal\_roi ab und wartet darauf, dass der Benutzer ein Rechteck zeichnet.
-	\item\textit{public void signal\_rightClick()} 
+	\item\textit{public slot void roi()} 
+	Fängt das Signal roi ab und wartet darauf, dass der Benutzer ein Rechteck zeichnet.
+	\item\textit{public signal rightClick()} 
 	Ein Signal mit Positionsinformationen für den Controller, wenn ein Rechtsklick erfolgt. 
-	\item\textit{public void signal\_algorithmChosen()} 
+	\item\textit{public signal algorithmChosen()} 
 	Ein Signal an den Controller mit der Information, welcher \glslink{Suchalgorithmus}{Algorithmus} gewählt wurde.
 \end{itemize}
 
@@ -1038,7 +1038,7 @@ Methoden
 	Füllt ein DatasetModel mit den Datensätzen, die darzustellen sind.
 	\item\textit{public void reset()}
 	Leert das ParameterPageWidget.
-	\item\textit{public void signal\_next()}
+	\item\textit{public signal next()}
 	Ein Signal an den Controller, wenn das mNextWindowButton gefordert wird. 
 \end{itemize}
 
@@ -1069,7 +1069,7 @@ Methoden
 	Erzeugt ein ConfirmationPageWidget-Objekt.
 	\item\textit{public void reset()}
 	Leert das ConfirmationPageWidget. 
-	\item\textit{public void signal\_search()}
+	\item\textit{public signal search()}
 	Ein Signal an den Controller, wenn man das mSearchButton klickt.
 \end{itemize}
 
@@ -1104,9 +1104,9 @@ Methoden
 	Erzeugt ein ResultsPageWidget-Objekt.
 	\item\textit{public void reset()}
 	Leert das ResultsPageWidget.
-	\item\textit{public void signal\_bookmark()}
+	\item\textit{public signal bookmark()}
 	Ein Signal an den Controller, wenn man das mBookmarkButton klickt.
-	\item\textit{public void signal\_newSearch()}
+	\item\textit{public signal newSearch()}
 	Ein Signal an den Controller, wenn man das mNewSearchButton klickt.
 \end{itemize}
 
