@@ -1334,19 +1334,19 @@ Attribute
 Methoden
 \begin{itemize}
 	\item\textit{public Navigator(MainWindow mainWindow)}
-	Erzeugt einen neuen Navigator mit Referenz zu MainWindow.
+	Erstellt einen neuen Navigator mit Referenz zu MainWindow.
 	\item\textit{public registerTransition(PageType origin, int exitCode, PageType target)}
 	Registriert eine Seitenwechsel (vom einem Page zu einem anderen).
 	\item\textit{public registerPage(PageType type, PageWidget widget)}
 	Registriert ein Mapping. Ein PageType wird auf ein PageWidget abgebildet.
 	\item\textit{public start(PageType type, QList<QVariant> data}
-	Starte den Navigator mit einer Anfangsseite und Daten (in einer Liste gegeben).
+	Startet den Navigator mit einer Anfangsseite und Daten (in einer Liste gegeben).
 	\item\textit{public slot tryPush(QVariant item)}
-	Füge eue Daten in den Stack hinzu.
+	Fügt neue Daten in den Stack hinzu.
 	\item\textit{public slot tryRead(size_t index, QVariant& value)}
-	Lese Daten mit index aus dem Stack in ein QVariant ein.
+	Liest Daten mit index aus dem Stack in ein QVariant ein.
 	\item\textit{public slot tryExit(int exitCode)}
-	Führe eine Seitewechsel mit exitCode aus.
+	Führt eine Seitewechsel mit exitCode aus.
 	
 \end{itemize}
 
@@ -1359,31 +1359,16 @@ Der SearchManager startet einen \glslink{Suchalgorithmus}{Algorithmus} in einem 
 \label{fig:searchManager}
 \end{figure}
 
-Attribute
-\begin{itemize}
-	\item\textit{private }
-	
-	\item\textit{private }
-	
-	\item\textit{private }
-	
-	\item\textit{private }
-	
-	\item\textit{public }  
-	
-	\item\textit{public }
-	
-\end{itemize}
-
 Methoden
 \begin{itemize}
-	\item\textit{public }
-	
-	\item\textit{public }
-	
-	\item\textit{public }
-	
-	\item\textit{public }
+	\item\textit{public SearchManager(ResultsWindow* resWind)}
+	Erstellt einen SearchManager mit Pointer auf ResultWindow
+	\item\textit{public slot startSearch(SearchAlgorithm algo)}
+	Startet eine Suche.
+	\item\textit{public slot terminateSearch()}
+	Terminiert die laufende Suche.
+	\item\textit{public slot updateProgress(float progress, QString message)}
+	Visualisiert den aktuellen Fortschritt der laufende Suche.
 
 \subsection*{SearchResultManager}
 Der SearchResultManager besitzt ein SearchResult und benachrichtigt das ResultsPageWidget über neue Suchergebnisse. Suchergebnisse können einzeln während der laufenden Suche hinzugefügt werden.
@@ -1396,30 +1381,18 @@ Der SearchResultManager besitzt ein SearchResult und benachrichtigt das ResultsP
 
 Attribute
 \begin{itemize}
-	\item\textit{private }
-	
-	\item\textit{private }
-	
-	\item\textit{private }
-	
-	\item\textit{private }
-	
-	\item\textit{public }  
-	
-	\item\textit{public }
-	
+	\item\textit{private SearchResult mResult}
+	Das Ergebnisse der aktuellen Suche.
 \end{itemize}
 
 Methoden
 \begin{itemize}
-	\item\textit{public }
-	
-	\item\textit{public }
-	
-	\item\textit{public }
-	
-	\item\textit{public }
-
+	\item\textit{public ResultManager(ResultsWindow* resWind)}
+	Erstellt einen ResultManager mit Referenz auf einen ResultsWindow
+	\item\textit{public slot addResult(SearchResultElement* newResult)}
+	Füge ein neues Element der Ergebnisliste hinzu.
+	\item\textit{public slot onSaveBookmark(Bookmark bookmark)}
+ 	Speichert das Suchergebnis als Bookmark.
 \subsection*{MainWindowManager}
 Der MainWindowManager stellt dem MainWindow die Bookmarks und Chronikeinträge zur Verfügung und gibt bekannt, welches Bookmark im MainWindow zuletzt ausgewählt wurde.
 
