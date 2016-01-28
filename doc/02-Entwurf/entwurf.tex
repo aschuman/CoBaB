@@ -28,6 +28,15 @@
 %\renewcommand{\glossarysection}[2][]{}
 %\makeglossaries
 
+\usepackage{glossaries}
+\renewcommand{\glossarysection}[2][]{}
+\makeglossaries
+
+\newglossaryentry{ROI}
+{
+	name=ROI,
+	description={"region of interest"; ist ein Bereich im Medium, den der Benutzer selbst einzeichnet.}
+}
 
 \begin{document}
 \begin{titlepage}
@@ -74,5 +83,6 @@ Auftraggeber: & Arne Schumann,\\
 \pagebreak
 
 \section{Glossar}
+\printglossaries
 
 \end{document}
