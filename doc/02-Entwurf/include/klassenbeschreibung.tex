@@ -1301,9 +1301,9 @@ MainControl ist der Einstiegspunkt des Programms und verwaltet die Manager-Kompo
 Der Navigator und die Manager kommuniziert über Signals und Slots. Die Verbindung erfolgt bei MainControl.
 
 \begin{itemize}
-	\item\textit{public <<slot>> run()}
+	\item\textit{public slot run()}
 	Starte die GUI nach erfolgreicher Initialisierung aller nötige Komponenten.
-	\item\textit{public <<signal>> finished()}
+	\item\textit{public signal finished()}
 	Ein Signal an die Manager, wenn der Benutzer das Programm beendet.
 \end{itemize}
 
@@ -1324,29 +1324,29 @@ Der Navigator ist in der Lage, das aktuell im MainWindow angezeigte PageWidget d
 
 Attribute
 \begin{itemize}
-	\item\textit{private }
-	
-	\item\textit{private }
-	
-	\item\textit{private }
-	
-	\item\textit{private }
-	
-	\item\textit{public }  
-	
-	\item\textit{public }
-	
+	\item\textit{private QStack<PageStackFrame> mPageStack}
+	Ein Stack, der PageStackFrame enthält. Unterstützt die zurück-Funktion.
+	\item\textit{private QList<QVariant> mDataStack}
+	Ein Stack, der als QVariant Daten für jede Page enthält. Wird parallel zu mPageStack zugegriffen.
+
 \end{itemize}
 
 Methoden
 \begin{itemize}
-	\item\textit{public }
-	
-	\item\textit{public }
-	
-	\item\textit{public }
-	
-	\item\textit{public }
+	\item\textit{public Navigator(MainWindow mainWindow)}
+	Erzeugt einen neuen Navigator mit Referenz zu MainWindow.
+	\item\textit{public registerTransition(PageType origin, int exitCode, PageType target)}
+	Registriert eine Seitenwechsel (vom einem Page zu einem anderen).
+	\item\textit{public registerPage(PageType type, PageWidget widget)}
+	Registriert ein Mapping. Ein PageType wird auf ein PageWidget abgebildet.
+	\item\textit{public start(PageType type, QList<QVariant> data}
+	Starte den Navigator mit einer Anfangsseite und Daten (in einer Liste gegeben).
+	\item\textit{public slot tryPush(QVariant item)}
+	Füge eue Daten in den Stack hinzu.
+	\item\textit{public slot tryRead(size_t index, QVariant& value)}
+	Lese Daten mit index aus dem Stack in ein QVariant ein.
+	\item\textit{public slot tryExit(int exitCode)}
+	Führe eine Seitewechsel mit exitCode aus.
 	
 \end{itemize}
 
