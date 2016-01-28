@@ -26,7 +26,7 @@ Attribute
 Methoden
 \begin{itemize}
 \item \textit{private ConfigData()} Erzeugt ein neues ConfigData Objekt.
-\item \textit{public ConfigData getInstance()} Liefert die ConfigData Instanz zurück. Dies stellt sicher, dass nur eine Instanz von ConfigData existiert.
+\item \textit{public static ConfigData getInstance()} Liefert die ConfigData Instanz zurück. Dies stellt sicher, dass nur eine Instanz von ConfigData existiert.
 \item \textit{public Language getLanguage()} Lädt die vom Benutzer gewählte Sprache.
 \item \textit{public void setLanguage(Language language)} Speichert die vom Benutzer gewählte Sprache.
 \item \textit{public bool getSoundOn()} Lädt die vom Benutzer gewählte Toneinstellung.
@@ -61,7 +61,7 @@ Attribute
 
 Methoden
 \begin{itemize}
-\item \textit{public Annotation(QString Id)} Gibt eine Instanz dieser Klasse zurück. Die übergebene Id identifiziert die \gls{Annotation} in einem Medium.
+\item \textit{public Annotation(QString Id, QString type)} Gibt eine Instanz dieser Klasse zurück. Die übergebene Id identifiziert die \gls{Annotation} in einem Medium.
 \item \textit{public QString getId()} Gibt die Id der \gls{Annotation} zurück.
 \item \textit{public AnnotationType getType()} Gibt den Typ der \gls{Annotation} zurück.
 \item \textit{public friend QDataStream\& operator<<(QDataStream\& out, Annotation\& annotation)} Speichert die \gls{Annotation} in einer Datei.
@@ -81,12 +81,12 @@ Eine rechteckige \gls{Annotation}.
 
 Methoden
 \begin{itemize}
-\item \textit{public RectangleAnnotation(QString id)} Erzeugt ein Objekt von RectangleAnnotation. Die übergebene Id Identifiziert die \gls{Annotation} in einem Medium.
+\item \textit{public RectangleAnnotation(QString id, QString type)} Erzeugt ein Objekt von RectangleAnnotation. Die übergebene Id identifiziert die \gls{Annotation} in einem Medium.
 \item \textit{public friend QDataStream\& operator<<(QDataStream\& out, RectangleAnnotation\& annotation)} Speichert die RectangleAnnotation in einer Datei.
 \item \textit{public friend QDataStream\& operator>>(QDataStream\& in, RectangleAnnotation\& annotation)} Lädt die RectangleAnnotation aus einer Datei.
 \end{itemize}
 
-\subsection*{DataPacket : public Serializable}
+\subsection*{<<abstract>> DataPacket : public Serializable}
 Ein DataPacket ist eine Eingabe für den \glslink{Suchalgorithmus}{Algorithmus}.
 
 \begin{figure}[H]
@@ -104,9 +104,9 @@ Attribute
 Methoden
 \begin{itemize}
 \item \textit{public DataPacketType getType()} Gibt den Typ des DataPackets zurück, abhängig von der Kindklasse.
-\item\textit{public QUuid getUuid} Gibt die eindeutige Id dieses DataPacktets zurück.
+\item\textit{public QUuid getUuid} Gibt die eindeutige Id dieses DataPackets zurück.
 \item \textit{public abstract void toStream(QDataStream in)} Speichert das DataPacket, durch den Aufruf von operator<<, in einer Datei.
-\item \textit{public abstract void fromStream(QDataStream out)} Speichert das DataPacket, durch den Aufruf von operator>>, in einer Datei.
+\item \textit{public abstract void fromStream(QDataStream out)} Lädt das DataPacket, durch den Aufruf von operator>>, in einer Datei.
 \end{itemize}
 
 \pagebreak
@@ -184,7 +184,7 @@ Ein SearchResultElement ist ein Element von SearchResult. Abgesehen von einem Se
 
 Attribute
 \begin{itemize}
-\item\textit{private int mScore} Vom \gls{Suchalgorithmus} zugewiesene Zahl, die die Übereinstimmung dieses SearchResultElements mit dem SearchObject der SearchQuery beschreibt.
+\item\textit{private int mScore} Vom \gls{Suchalgorithmus} zugewiesene Zahl, die die Ähnlichkeit dieses SearchResultElements mit der Suchanfrage beschreibt. 
 \item\textit{private SearchObject mSearchObject} Das zu diesem SearchResultElement gehörende SearchObject.
 \end{itemize}
 
@@ -196,7 +196,7 @@ Methoden
 \item \textit{public SearchObject getSearchObject()} Gibt das SearchObject zurück.
 \item \textit{public void setSearchObject(SearchObject searchObject)} Setzt das übergebene SearchObject für das Element.
 \item \textit{public friend QDataStream\& operator<<(QDataStream\& out, SearchResultElement\& searchResultElement)} Speichert das SearchResultElement in einer Datei.
-\item \textit{public friend QDataStream\& operator>>(QDataStream\& in, SearchResultElement\& searchResultElement)} Lädt das SearchResultElemnt aus einer Datei.
+\item \textit{public friend QDataStream\& operator>>(QDataStream\& in, SearchResultElement\& searchResultElement)} Lädt das SearchResultElement aus einer Datei.
 \item \textit{public void toStream(QDataStream in)} Speichert das SearchResultElement, durch den Aufruf von operator<<, in einer Datei.
 \item \textit{public void fromStream(QDataStream out)} Lädt das SearchResultElement, durch den Aufruf von operator>>, aus einer Datei.
 \end{itemize}
@@ -214,7 +214,7 @@ Attribute
 \begin{itemize}
 \item\textit{private QString mMedium} Der Pfad des zugehörigen Mediums.
 \item\textit{private Annotation mAnnotation} Die ausgewählte \gls{Annotation}.
-\item\textit{private QRect mROI} Die \glslink{ROI}{\enquote{region of interest}} im zugehörigem Medium.
+\item\textit{private QRect mROI} Die \glslink{ROI}{\enquote{region of interest}} im zugehörigen Medium.
 \item\textit{private QString mSourceDataset} Der Pfad des Datensatzes, in dem sich das Medium befindet.
 \item\textit{private int mMediumIndex} Beschreibt die Framenummer des Mediums in einem Video.
 \end{itemize}
@@ -228,9 +228,9 @@ Methoden
 \item \textit{public void setAnnotation(Annotation annotation)} Setzt eine \gls{Annotation} eines Mediums für das SearchObject.
 \item \textit{public QRect getROI()} Gibt ein QRect zurück, das die \glslink{ROI}{\enquote{region of interest}} im Medium repräsentiert.
 \item \textit{public void setROI(QRect ROI)} Setzt ein QRect als \gls{ROI}.
-\item \textit{public Dataset getSourceDataset} Gibt den Datensatz, in dem sich das Medium befindet zurück.
+\item \textit{public Dataset getSourceDataset} Gibt den Datensatz, in dem sich das Medium befindet, zurück.
 \item \textit{public void setSourceDataset(Dataset dataset)} Setzt den Datensatz, in dem sich das Medium befindet.
-\item \textit{public int getMediumIndex()} Gibt den Index eines Mediums, also den Frame in einem Video zurück.
+\item \textit{public int getMediumIndex()} Gibt den Index eines Mediums, also den Frame in einem Video, zurück.
 \item \textit{public void setMediumIndex(int index)} Setzt den MediumIndex.
 \item \textit{public friend QDataStream\& operator<<(QDataStream\& out, SearchObject\& searchObject)} Speichert das SearchObject in einer Datei.
 \item \textit{public friend QDataStream\& operator>>(QDataStream\& in, SearchObject\& searchObject)} Lädt das SearchObject aus einer Datei.
@@ -275,7 +275,7 @@ Der FeedbackType kann dual (positiv, negativ, neutral) oder extended (Werte von 
 \end{figure}
 
 \subsection*{<<interface>> Serializable}
-Das Interface Serializable ist dazu da, damit die implementierenden Klassen serialisierbar sind.
+Das Interface Serializable dient dazu, die implementierenden Klassen serialisierbar zu machen.
 
 \begin{figure}[H]
 \centering
@@ -312,7 +312,7 @@ Attribute
 
 Methoden
 \begin{itemize}
-\item \textit{public Bookmark(SearchResut result, QString algorithm, SearchQuery query} Erzeugt ein neues Bookmark.
+\item \textit{public Bookmark(SearchResult result, QString algorithm, SearchQuery query)} Erzeugt ein neues Bookmark.
 \item \textit{public friend QDataStream\& operator<<(QDataStream\& out, Bookmark\& bookmark)} Speichert das Bookmark in einer Datei.
 \item \textit{public friend QDataStream\& operator>>(QDataStream\& in, Bookmark\& bookmark)} Lädt das Bookmark aus einer Datei.
 \item \textit{public void toStream(QDataStream in)} Speichert das Bookmark, durch den Aufruf von operator<<, in einer Datei.
@@ -347,8 +347,8 @@ Methoden
 \item \textit{public BookmarkList()} Erzeugt eine BookmarkList.
 \item \textit{public void load(QString path)} Lädt die Bookmarks aus der Datei.
 \item \textit{public void save(QString path)} Speichert die Bookmark Liste in der Datei mit dem übergebenen Pfad.
-\item \textit{public void addBookmark(Bookmark bookmark)} Fügt ein Bookmark in die Liste hinzu.
-\item \textit{public void removeBookmark(const Bookmark* bookmark)} Entfernt bookmark aus der BookmarkListe.
+\item \textit{public void addBookmark(Bookmark bookmark)} Fügt ein Bookmark in die Liste ein.
+\item \textit{public void removeBookmark(const Bookmark* bookmark)} Entfernt das Bookmark aus der BookmarkList.
 \item \textit{public QList<Bookmark*> sortByName()} Gibt die nach Namen sortierte Bookmarkliste zurück.
 \item \textit{public QList<Bookmark*> sortByDate()} Gibt die nach Datum sortierte Bookmarkliste zurück.
 \item \textit{private void validateResult(SearchResult searchResult)} Überprüft, ob das übergebene SearchResult gültig ist, also noch alle Datensätze und Medien vorhanden sind.
@@ -367,7 +367,7 @@ Attribute
 \begin{itemize}
 \item\textit{protected QString mName} Der Name des Ordners.
 \item\textit{protected QImage mPreviewPhoto} Das Vorschaubild dieses Datensatzes.
-\item\textit{protected QList<Medium> mMediaList} Die Liste von Medium in diesem Datensatz.
+\item\textit{protected QList<Medium> mMediaList} Die Liste der Medien in diesem Datensatz.
 \item\textit{protected QString mPath} Der Pfad dieses Datensatzes.
 \item\textit{protected DatasetType mType} Der Typ dieses Datensatzes.
 \end{itemize}
@@ -395,7 +395,7 @@ Eine DatasetList hält eine Liste von Datensätzen und speichert sie.
 
 Attribute
 \begin{itemize}
-\item\textit{private QList<Dataset> mDatasetList} Die Liste von Datensätze.
+\item\textit{private QList<Dataset> mDatasetList} Die Liste von Datensätzen.
 \end{itemize}
 
 Methoden
@@ -440,7 +440,7 @@ Methoden
 \end{itemize}
 
 \subsection*{<<enumeration>> MediumType}
-Der MediumType gibt den Typ des Mediums an: photo, video oder single frame video.
+Der MediumType gibt den Typ des Mediums an: Photo, Video oder SingleFrameVideo.
 
 \begin{figure}[H]
 \centering
@@ -459,7 +459,7 @@ Ein Photo ist ein Bild, in dem \glslink{Annotation}{Annotationen} sein können.
 
 Methoden
 \begin{itemize}
-\item \textit{public Photo(QString path)} Erzeugt ein Photo, mit dem übergebenen Pfad.
+\item \textit{public Photo(QString path)} Erzeugt ein Photo mit dem übergebenen Pfad.
 \end{itemize}
 
 \subsection*{SingleFrameVideo : public Medium}
@@ -473,14 +473,14 @@ Ein SingleFrameVideo ist ein Video aus Einzelbildern.
 
 Attribute
 \begin{itemize}
-\item\textit{private int mFramerate} Die Framerate dieses Videos.
+\item\textit{private double mFramerate} Die Framerate dieses Videos.
 \item\textit{private QList<QString> mFrameList} Die Liste von Frames dieses Videos.
 \end{itemize}
 
 Methoden
 \begin{itemize}
 \item \textit{public SingleFrameVideo(QString path)} Erzeugt ein SingleFrameVideo.
-\item \textit{public int getFramerate()} Gibt die Framerate des Videos zurück.
+\item \textit{public double getFramerate()} Gibt die Framerate des Videos zurück.
 \item \textit{public QList<QString> getFrameList()} Gibt die Liste der Frames zurück.
 \end{itemize}
 
@@ -612,7 +612,7 @@ Dieses Diagramm zeigt alle Klassen des Views. Die zugehörigen Attribute und Met
 \end{figure}
 
 
-\subsection*{<<abstract>> PageWidget}
+\subsection*{<<abstract>> PageWidget : public QWidget}
 Ein PageWidget ist ein QWidget, das als eine Seite der grafischen Oberfläche im MainWindow dem Benutzer angezeigt wird. Die abstrakte Klasse PageWidget bietet dem erbenden Widget, das momentan im MainWindow angezeigt wird, die Möglichkeit ein PageWidget auszusuchen. Dieses wird dem Benutzer als nächstes angezeigt. Über den Stack des Navigators werden benötige Daten an das PageWidget übergeben.
 
 \begin{figure}[H]
@@ -1179,7 +1179,7 @@ Methoden
 	\item\textit{public MediaModel()}
 	Erzeugt ein MediaModel-Objekt.
 	\item\textit{public void setDataset(Dataset *dataset)}
-	Füllt ein MediaModel mit den Media von einem gewählten Datensatz.
+	Füllt ein MediaModel mit den Medien eines gewählten Datensatzes.
 \end{itemize}
 
 \subsection*{IconDelegate : public QStyledItemDelegate}
@@ -1226,7 +1226,7 @@ Methoden
 	\item\textit{public FeedbackDelegate()}
 	Erzeugt ein FeedbackDelegate-Objekt.
 	\item\textit{public FeedbackEditor getEditor()}
-	Erzeugt ein FeedbackEditor.
+	Erzeugt einen FeedbackEditor.
 \end{itemize}
 
 \subsection*{FeedbackEditor}
@@ -1243,7 +1243,7 @@ Methoden
 	\item\textit{public FeedbackEditor()}
 	Erzeugt ein FeedbackEditor-Objekt.
 	\item\textit{public void changeFeedbackStatus(SearchResultElement *el)}
-	Verändert das Feedback dem zugehörigen Suchelement.
+	Verändert das Feedback des zugehörigen Suchelements.
 \end{itemize}
 
 \subsection*{DualFeedbackEditor : public FeedbackEditor}
@@ -1260,9 +1260,9 @@ Methoden
 	\item\textit{public DualFeedbackEditor()}
 	Erzeugt ein DualFeedbackEditor-Objekt.
 	\item\textit{public void changeFeedbackStatus(SearchResultElement *el)}
-	Verändert das Feedback dem zugehörigen Suchelement.
+	Verändert das Feedback des zugehörigen Suchelements.
 	\item\textit{public void setFrameColor()}
-	Setzt die Farbe des Bildrahmens, die das Feedback zurückgibt. 
+	Setzt den Bildrahmen auf die Farbe, die das Feedback zurückgibt. 
 \end{itemize}
 
 \subsection*{ExtendedFeedbackEditor : public FeedbackEditor}
@@ -1279,7 +1279,7 @@ Methoden
 	\item\textit{public ExtendedFeedbackEditor()}
 	Erzeugt ein ExtendedFeedbackEditor-Objekt.
 	\item\textit{public void changeFeedbackStatus(SearchResultElement *el)}
-	Verändert das Feedback dem zugehörigen Suchelement.
+	Verändert das Feedback des zugehörigen Suchelements.
 \end{itemize}
 
 \pagebreak
