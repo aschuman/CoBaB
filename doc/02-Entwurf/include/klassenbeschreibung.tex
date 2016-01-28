@@ -43,8 +43,8 @@ Language repräsentiert die verfügbaren Sprachen: Deutsch und Englisch.
 \label{fig:language}
 \end{figure}
 
-\subsection*{Annotation : public Serializable}
-Eine Annotation ist ein in den Datensätzen vordefinierter Bereich eines Bildes oder Videos, der den Typ Face oder Person haben kann.
+\subsection*{\gls{Annotation} : public Serializable}
+Eine \gls{Annotation} ist ein in den Datensätzen vordefinierter Bereich eines Bildes oder Videos, der den Typ Face oder Person haben kann.
 
 \begin{figure}[H]
 \centering
@@ -54,23 +54,23 @@ Eine Annotation ist ein in den Datensätzen vordefinierter Bereich eines Bildes 
 
 Attribute
 \begin{itemize}
-\item\textit{protected QString mId} Diese Id identifiziert diese Annotation in einem  Medium.
-\item\textit{protected QString mType} Beschreibt den Typ dieser Annotation.
+\item\textit{protected QString mId} Diese Id identifiziert diese \gls{Annotation} in einem  Medium.
+\item\textit{protected QString mType} Beschreibt den Typ dieser \gls{Annotation}.
 \end{itemize}
 
 Methoden
 \begin{itemize}
-\item \textit{public Annotation(QString Id)} Gibt eine Instanz dieser Klasse zurück. Die übergebene Id identifiziert die Annotation in einem Medium.
-\item \textit{public QString getId()} Gibt die Id der Annotation zurück.
-\item \textit{public AnnotationType getType()} Gibt den Typ der Annotation zurück.
-\item \textit{public friend QDataStream\& operator<<(QDataStream\& out, Annotation\& annotation)} Speichert die Annotation in einer Datei.
-\item \textit{public friend QDataStream\& operator>>(QDataStream\& in, Annotation\& annotation)} Lädt die Annotation aus einer Datei.
-\item \textit{public void toStream(QDataStream in)} Speichert die Annotation, durch den Aufruf von operator<<, in einer Datei.
-\item \textit{public void fromStream(QDataStream out)} Lädt die Annotation, durch den Aufruf von operator>>, aus einer Datei.
+\item \textit{public Annotation(QString Id)} Gibt eine Instanz dieser Klasse zurück. Die übergebene Id identifiziert die \gls{Annotation} in einem Medium.
+\item \textit{public QString getId()} Gibt die Id der \gls{Annotation} zurück.
+\item \textit{public AnnotationType getType()} Gibt den Typ der \gls{Annotation} zurück.
+\item \textit{public friend QDataStream\& operator<<(QDataStream\& out, Annotation\& annotation)} Speichert die \gls{Annotation} in einer Datei.
+\item \textit{public friend QDataStream\& operator>>(QDataStream\& in, Annotation\& annotation)} Lädt die \gls{Annotation} aus einer Datei.
+\item \textit{public void toStream(QDataStream in)} Speichert die \gls{Annotation}, durch den Aufruf von operator<<, in einer Datei.
+\item \textit{public void fromStream(QDataStream out)} Lädt die \gls{Annotation}, durch den Aufruf von operator>>, aus einer Datei.
 \end{itemize}
 
 \subsection*{RectangleAnnotation : public Annotation, public QRect}
-Eine rechteckige Annotation.
+Eine rechteckige \gls{Annotation}.
 
 \begin{figure}[H]
 \centering
@@ -80,13 +80,13 @@ Eine rechteckige Annotation.
 
 Methoden
 \begin{itemize}
-\item \textit{public RectangleAnnotation(QString id)} Erzeugt ein Objekt von RectangleAnnotation. Die übergebene Id Identifiziert die Annotation in einem Medium.
+\item \textit{public RectangleAnnotation(QString id)} Erzeugt ein Objekt von RectangleAnnotation. Die übergebene Id Identifiziert die \gls{Annotation} in einem Medium.
 \item \textit{public friend QDataStream\& operator<<(QDataStream\& out, RectangleAnnotation\& annotation)} Speichert die RectangleAnnotation in einer Datei.
 \item \textit{public friend QDataStream\& operator>>(QDataStream\& in, RectangleAnnotation\& annotation)} Lädt die RectangleAnnotation aus einer Datei.
 \end{itemize}
 
 \subsection*{DataPacket : public Serializable}
-Ein DataPacket ist eine Eingabe für den Algorithmus.
+Ein DataPacket ist eine Eingabe für den \glslink{Suchalgorithmus}{Algorithmus}.
 
 \begin{figure}[H]
 \centering
@@ -118,7 +118,7 @@ DataPacketType enthält die Typen von DataPackets, also die vorhandenen Kindklas
 \end{figure}
 
 \subsection*{SearchQuery : DataPacket}
-Eine SearchQuery ist eine Suchanfrage an den Algorithmus.
+Eine SearchQuery ist eine Suchanfrage an den \glslink{Suchalgorithmus}{Algorithmus}.
 
 \begin{figure}[H]
 \centering
@@ -146,7 +146,7 @@ Methoden
 \end{itemize}
 
 \subsection*{SearchResult : DataPacket}
-Ein SearchResult ist die Ausgabe eines Algorithmus. Allerdings kann es auch eine Eingabe sein, wenn ein Algorithmus auf einem bestehenden Suchergebnis weiterarbeitet.
+Ein SearchResult ist die Ausgabe eines \glslink{Suchalgorithmus}{Algorithmus}. Allerdings kann es auch eine Eingabe sein, wenn ein \glslink{Suchalgorithmus}{Algorithmus} auf einem bestehenden Suchergebnis weiterarbeitet.
 
 \begin{figure}[H]
 \centering
@@ -171,7 +171,7 @@ Methoden
 \end{itemize}
 
 \subsubsection*{SearchResultElement : public Serializable}
-Ein SearchResultElement ist ein Element von SearchResult. Abgesehen von einem SearchObject enthält es einen Score für dieses, der durch den Algorithmus bestimmt und gesetzt wurde.
+Ein SearchResultElement ist ein Element von SearchResult. Abgesehen von einem SearchObject enthält es einen Score für dieses, der durch den \glslink{Suchalgorithmus}{Algorithmus} bestimmt und gesetzt wurde.
 
 \begin{figure}[H]
 \centering
@@ -181,7 +181,7 @@ Ein SearchResultElement ist ein Element von SearchResult. Abgesehen von einem Se
 
 Attribute
 \begin{itemize}
-\item\textit{private int mScore} Vom Suchalgorithmus zugewiesene Zahl, die die Übereinstimmung dieses SearchResultElements mit dem SearchObject der SearchQuery beschreibt.
+\item\textit{private int mScore} Vom \gls{Suchalgorithmus} zugewiesene Zahl, die die Übereinstimmung dieses SearchResultElements mit dem SearchObject der SearchQuery beschreibt.
 \item\textit{private SearchObject mSearchObject} Das zu diesem SearchResultElement gehörende SearchObject.
 \end{itemize}
 
@@ -199,7 +199,7 @@ Methoden
 \end{itemize}
 
 \subsection*{SearchObject : public Serializable}
-Das SearchObject repräsentiert eine Annotation oder ein Rechteck in einem Bild oder Frame eines Videos aus einem Datensatz.
+Das SearchObject repräsentiert eine \gls{Annotation} oder ein Rechteck in einem Bild oder Frame eines Videos aus einem Datensatz.
 
 \begin{figure}[H]
 \centering
@@ -210,8 +210,8 @@ Das SearchObject repräsentiert eine Annotation oder ein Rechteck in einem Bild 
 Attribute
 \begin{itemize}
 \item\textit{private QString mMedium} Der Pfad des zugehörigen Mediums.
-\item\textit{private Annotation mAnnotation} Die ausgewählte Annotation.
-\item\textit{private QRect mROI} Die \enquote{region of interest} im zugehörigem Medium.
+\item\textit{private Annotation mAnnotation} Die ausgewählte \gls{Annotation}.
+\item\textit{private QRect mROI} Die \glslink{ROI}{\enquote{region of interest}} im zugehörigem Medium.
 \item\textit{private QString mSourceDataset} Der Pfad des Datensatzes, in dem sich das Medium befindet.
 \item\textit{private int mMediumIndex} Beschreibt die Framenummer des Mediums in einem Video.
 \end{itemize}
@@ -221,10 +221,10 @@ Methoden
 \item \textit{public SearchObject} Erzeugt ein SearchObject.
 \item \textit{public QString getMedium()} Gibt den Dateipfad des Mediums zurück.
 \item \textit{public void setMedium(QString medium)} Setzt das Medium auf den gegebenen Dateipfad, relativ zum SourceDataset.
-\item \textit{public Annotation getAnnotation()} Gibt die Annotation im Medium zurück.
-\item \textit{public void setAnnotation(Annotation annotation)} Setzt eine Annotation eines Mediums für das SearchObject.
-\item \textit{public QRect getROI()} Gibt ein QRect zurück, das die \enquote{region of interest} im Medium repräsentiert.
-\item \textit{public void setROI(QRect ROI)} Setzt ein QRect als ROI.
+\item \textit{public Annotation getAnnotation()} Gibt die \gls{Annotation} im Medium zurück.
+\item \textit{public void setAnnotation(Annotation annotation)} Setzt eine \gls{Annotation} eines Mediums für das SearchObject.
+\item \textit{public QRect getROI()} Gibt ein QRect zurück, das die \glslink{ROI}{\enquote{region of interest}} im Medium repräsentiert.
+\item \textit{public void setROI(QRect ROI)} Setzt ein QRect als \gls{ROI}.
 \item \textit{public Dataset getSourceDataset} Gibt den Datensatz, in dem sich das Medium befindet zurück.
 \item \textit{public void setSourceDataset(Dataset dataset)} Setzt den Datensatz, in dem sich das Medium befindet.
 \item \textit{public int getMediumIndex()} Gibt den Index eines Mediums, also den Frame in einem Video zurück.
@@ -236,7 +236,7 @@ Methoden
 \end{itemize}
 
 \subsection*{SearchFeedback : DataPacket}
-Das SearchFeedback gibt an, wie gut das vom Algorithmus erzeugte Suchergebnis ist.
+Das SearchFeedback gibt an, wie gut das vom \glslink{Suchalgorithmus}{Algorithmus} erzeugte Suchergebnis ist.
 
 \begin{figure}[H]
 \centering
@@ -299,7 +299,7 @@ Attribute
 \begin{itemize}
 \item\textit{private QString mName} Der Name dieses Bookmarks.
 \item\textit{private QDateTime mDate} Die Zeit, zu der das Bookmark gespeichet wurde.
-\item\textit{private QString mAlgorithm} Der Name des Algorithmus, der für diese Suche eingesetzt wurde.
+\item\textit{private QString mAlgorithm} Der Name des \glslink{Suchalgorithmus}{Algorithmus}, der für diese Suche eingesetzt wurde.
 \item\textit{private SearchQuery mSearchQuery} Die Suchanfrage dieser Suche.
 \item\textit{private SearchResult mSearchResult} Das Suchergebnis dieser Suche.
 \item\textit{private QJsonObject mParameter} Die für diese Suche gesetzten Parameter.
@@ -319,7 +319,7 @@ Methoden
 \item\textit{public void setName(QString name)} Setzt den Namen des Bookmarks.
 \item\textit{public QString getName()} Gibt den Namen des Bookmarks zurück.
 \item\textit{public QDateTime getDate()} Gibt die Zeit, zu der das Bookmark erstellt wurde, zurück.
-\item\textit{public QString getAlgorithm()} Gibt den Namen des verwendeten Algorithmus zurück.
+\item\textit{public QString getAlgorithm()} Gibt den Namen des verwendeten \glslink{Suchalgorithmus}{Algorithmus} zurück.
 \item\textit{public SearchQuery getSearchQuery()} Gibt die Suchanfrage zurück.
 \item\textit{public SearchResult getSearchResult()} Gibt das Suchergebnis zurück.
 \item\textit{public QJsonObject getParameter()} Gibt die Parameter zurück.
@@ -414,7 +414,7 @@ Der Datensatztyp kann Photo, Video oder SingleFrameVideo sein.
 \end{figure}
 
 \subsection*{Medium}
-Ein Medium wird durch einen Pfad charakterisiert. Außerdem hat ein Medium eine Liste von Annotationen und den zugehörigen Index. Der Index ist bei Photos 0, in Videos gibt er an, in welchem Frame sich die Annotation befindet.
+Ein Medium wird durch einen Pfad charakterisiert. Außerdem hat ein Medium eine Liste von \glslink{Annotation}{Annotationen} und den zugehörigen Index. Der Index ist bei Photos 0, in Videos gibt er an, in welchem Frame sich die \gls{Annotation} befindet.
 
 \begin{figure}[H]
 \centering
@@ -426,14 +426,14 @@ Attribute
 \begin{itemize}
 \item\textit{protected QString mRelativePath} Der Pfad zu diesem Medium.
 \item\textit{protected MediumType mType} Der Typ dieses Mediums.
-\item\textit{protected QList<QPair<int, Annotation>> mAnnotationList} Die Liste von Annotationen für dieses Medium.
+\item\textit{protected QList<QPair<int, Annotation>> mAnnotationList} Die Liste von \glslink{Annotation}{Annotationen} für dieses Medium.
 \end{itemize}
 
 Methoden
 \begin{itemize}
-\item \textit{public Medium(QString path, QList<QPair<int, Annotation>> annotations)} Erzeugt ein Medium, das den übergebenen Pfad und die Annotationsliste hat.
+\item \textit{public Medium(QString path, QList<QPair<int, Annotation>> annotations)} Erzeugt ein Medium, das den übergebenen Pfad und die \glslink{Annotation}{Annotationsliste} hat.
 \item \textit{public MediumType getType()} Gibt den Typ des Mediums zurück.
-\item \textit{public QList<QPair<int, Annotation>>} Gibt die Liste der Annotationen zurück.
+\item \textit{public QList<QPair<int, Annotation>>} Gibt die Liste der \glslink{Annotation}{Annotationen} zurück.
 \end{itemize}
 
 \subsection*{<<enumeration>> MediumType}
@@ -446,7 +446,7 @@ Der MediumType gibt den Typ des Mediums an: photo, video oder single frame video
 \end{figure}
 
 \subsection*{Photo : public Medium}
-Ein Photo ist ein Bild, in dem Annotationen sein können.
+Ein Photo ist ein Bild, in dem \glslink{Annotation}{Annotationen} sein können.
 
 \begin{figure}[H]
 \centering
@@ -495,8 +495,8 @@ Methoden
 \item \textit{public Video(QString path)} Erzeugt ein Video aus dem übergebenen Pfad.
 \end{itemize}
 
-\subsection*{<<interface>> Algorithm}
-Die Algorithmen, die von CoBaB ausgeführt werden sollen, müssen mindestens diese Schnittstelle implementieren.
+\subsection*{<<interface>> \glslink{Suchalgorithmus}{Algorithm}}
+Die \glslink{Suchalgorithmus}{Algorithmen}, die von CoBaB ausgeführt werden sollen, müssen mindestens diese Schnittstelle implementieren.
 
 \begin{figure}[H]
 \centering
@@ -506,15 +506,15 @@ Die Algorithmen, die von CoBaB ausgeführt werden sollen, müssen mindestens die
 
 Methoden
 \begin{itemize}
-\item\textit{public QList<DataPacket> run()} Startet den Algorithmus. Die Liste von DataPackets sind die Ergebnisse des Algorithmus.
-\item\textit{public void cancel()} Bricht die Ausführung des Algorithmus ab.
-\item\textit{public bool setInputs(QList<DataPacket> inputDataList)} Übergibt die benötigten Daten an den Algorithmus. Der Algorithmus gibt zurück, ob diese Liste seinen Eingabeparametern entspricht und es somit möglich ist, ihn zu starten.
-\item\textit{public bool setParameters(QJsonObject parameters)} Übergibt die vom Benutzer festgelegten Parameterwerte an den Algorithmus. Der Algorithmus gibt zurück, ob diese Parameterdatei für ihn geeignet ist.
-\item\textit{public QString getId()} Gibt eine für diesen Algorithmus eindeutige Identifikation zurück.
+\item\textit{public QList<DataPacket> run()} Startet den \glslink{Suchalgorithmus}{Algorithmus}. Die Liste von DataPackets sind die Ergebnisse des \glslink{Suchalgorithmus}{Algorithmus}.
+\item\textit{public void cancel()} Bricht die Ausführung des \glslink{Suchalgorithmus}{Algorithmus} ab.
+\item\textit{public bool setInputs(QList<DataPacket> inputDataList)} Übergibt die benötigten Daten an den \glslink{Suchalgorithmus}{Algorithmus}. Der \glslink{Suchalgorithmus}{Algorithmus} gibt zurück, ob diese Liste seinen Eingabeparametern entspricht und es somit möglich ist, ihn zu starten.
+\item\textit{public bool setParameters(QJsonObject parameters)} Übergibt die vom Benutzer festgelegten Parameterwerte an den \glslink{Suchalgorithmus}{Algorithmus}. Der \glslink{Suchalgorithmus}{Algorithmus} gibt zurück, ob diese Parameterdatei für ihn geeignet ist.
+\item\textit{public QString getId()} Gibt eine für diesen \glslink{Suchalgorithmus}{Algorithmus} eindeutige Identifikation zurück.
 \end{itemize}
 
-\subsection*{<<interface>> SearchAlgorithm : public Algorithm}
-Die Implementierung dieser Schnittstelle ermöglicht CoBaB, genauere Angaben über den Algorithmus anzuzeigen.
+\subsection*{<<interface>> \glslink{Suchalgorithmus}{SearchAlgorithm} : public Algorithm}
+Die Implementierung dieser Schnittstelle ermöglicht CoBaB, genauere Angaben über den \glslink{Suchalgorithmus}{Algorithmus} anzuzeigen.
 
 \begin{figure}[H]
 \centering
@@ -524,17 +524,17 @@ Die Implementierung dieser Schnittstelle ermöglicht CoBaB, genauere Angaben üb
 
 Methoden
 \begin{itemize}
-\item\textit{public QString getDescription()} Gibt eine Beschreibung des Algorithmus zurück.
-\item\textit{public void setDescription(QString description)} Setzt die Beschreibung des Algorithmus.
-\item\textit{public QString getName()} Gibt den Namen des Algorithmus zurück.
-\item\textit{public void setName(QString name)} Setzt den Namen des Algorithmus auf name.
-\item\textit{public bool supportsProgressInfo()} Gibt zurück, ob der Algorithmus Fortschrittsinformationen senden kann.
-\item\textit{public sendIntermediateResults(SearchResult searchResult)} Ist ein Signal, dass vom Algorithmus gesendet wird, wenn Zwischenergebnisse verfügbar sind.
-\item\textit{public sendProgress(double progress, QString message)} Ist ein Signal, das den Fortschritt des Algorithmus sendet.
+\item\textit{public QString getDescription()} Gibt eine Beschreibung des \glslink{Suchalgorithmus}{Algorithmus} zurück.
+\item\textit{public void setDescription(QString description)} Setzt die Beschreibung des \glslink{Suchalgorithmus}{Algorithmus}.
+\item\textit{public QString getName()} Gibt den Namen des \glslink{Suchalgorithmus}{Algorithmus} zurück.
+\item\textit{public void setName(QString name)} Setzt den Namen des \glslink{Suchalgorithmus}{Algorithmus} auf name.
+\item\textit{public bool supportsProgressInfo()} Gibt zurück, ob der \glslink{Suchalgorithmus}{Algorithmus} Fortschrittsinformationen senden kann.
+\item\textit{public sendIntermediateResults(SearchResult searchResult)} Ist ein Signal, dass vom \glslink{Suchalgorithmus}{Algorithmus} gesendet wird, wenn Zwischenergebnisse verfügbar sind.
+\item\textit{public sendProgress(double progress, QString message)} Ist ein Signal, das den Fortschritt des \glslink{Suchalgorithmus}{Algorithmus} sendet.
 \end{itemize}
 
 \subsection*{TestAlgorithm : public SearchAlgorithm}
-Dieser Suchalgorithmus wird zu Testzwecken implementiert. Er generiert ein zufälliges SearchResult.
+Dieser \gls{Suchalgorithmus} wird zu Testzwecken implementiert. Er generiert ein zufälliges SearchResult.
 
 \begin{figure}[H]
 \centering
@@ -544,33 +544,33 @@ Dieser Suchalgorithmus wird zu Testzwecken implementiert. Er generiert ein zufä
 
 Attribute
 \begin{itemize}
-\item\textit{private DataPacket mInputData} Die Eingabedaten für den Algorithmus.
-\item\textit{private QString mDescription} Die Beschreibung für den Algorithmus.
+\item\textit{private DataPacket mInputData} Die Eingabedaten für den \glslink{Suchalgorithmus}{Algorithmus}.
+\item\textit{private QString mDescription} Die Beschreibung für den \glslink{Suchalgorithmus}{Algorithmus}.
 \item\textit{private QList<int> mParameterList} Mögliche Einträge für die Parameterliste: randomSeed, sleep time interval.
-\item\textit{private QString mName} Der Name des Algorithmus.
-\item\textit{private QString mId} Die Id des Algorithmus.
+\item\textit{private QString mName} Der Name des \glslink{Suchalgorithmus}{Algorithmus}.
+\item\textit{private QString mId} Die Id des \glslink{Suchalgorithmus}{Algorithmus}.
 \end{itemize}
 
 Methoden
 \begin{itemize}
-\item\textit{public TestAlgorithm(QString id)} Erstellt einen neuen Test-Algorithmus.
-\item\textit{public QList<DataPacket> run()} Startet den Algorithmus. Die Liste von DataPackets sind die Ergebnisse des Algorithmus.
-\item\textit{public void cancel()} Bricht die Ausführung des Algorithmus ab.
-\item\textit{public bool setInputs(QList<DataPacket> inputDataList)} Übergibt die benötigten Daten an den Algorithmus. Der Algorithmus gibt zurück, ob diese Liste seinen Eingabeparametern entspricht und es somit möglich ist, ihn zu starten.
+\item\textit{public TestAlgorithm(QString id)} Erstellt einen neuen \glslink{Suchalgorithmus}{Test-Algorithmus}.
+\item\textit{public QList<DataPacket> run()} Startet den \glslink{Suchalgorithmus}{Algorithmus}. Die Liste von DataPackets sind die Ergebnisse des \glslink{Suchalgorithmus}{Algorithmus}.
+\item\textit{public void cancel()} Bricht die Ausführung des \glslink{Suchalgorithmus}{Algorithmus} ab.
+\item\textit{public bool setInputs(QList<DataPacket> inputDataList)} Übergibt die benötigten Daten an den \glslink{Suchalgorithmus}{Algorithmus}. Der \glslink{Suchalgorithmus}{Algorithmus} gibt zurück, ob diese Liste seinen Eingabeparametern entspricht und es somit möglich ist, ihn zu starten.
 \item\textit{public bool setParameters(QJsonObject parameters)} Übergibt die vom Benutzer festgelegten Parameterwerte an den Algorithmus. Der Algorithmus gibt zurück, ob diese Parameterdatei für ihn geeignet ist.
-\item\textit{public QString getId()} Gibt eine für diesen Algorithmus eindeutige Identifikation zurück.
-\item\textit{public QString getDescription()} Gibt eine Beschreibung des Algorithmus zurück.
-\item\textit{public void setDescription(QString description)} Setzt die Beschreibung für den Algorithmus.
-\item\textit{public QString getName()} Gibt den Namen des Algorithmus zurück.
-\item\textit{public void setName(QString name)} Setzt den Namen des Algorithmus auf name.
-\item\textit{public QString getId()} Gibt die Id des Algorithmus zurück.
-\item\textit{public bool supportsProgressInfo()} Gibt zurück, ob der Algorithmus Fortschrittsinformationen senden kann.
-\item\textit{public sendIntermediateResults(SearchResult searchResult)} Ist ein Signal, dass vom Algorithmus gesendet wird, wenn Zwischenergebnisse verfügbar sind.
-\item\textit{public sendProgress(double progress, QString message)} Ist ein Signal, das den Fortschritt des Algorithmus sendet.
+\item\textit{public QString getId()} Gibt eine für diesen \glslink{Suchalgorithmus}{Algorithmus} eindeutige Identifikation zurück.
+\item\textit{public QString getDescription()} Gibt eine Beschreibung des \glslink{Suchalgorithmus}{Algorithmus} zurück.
+\item\textit{public void setDescription(QString description)} Setzt die Beschreibung für den \glslink{Suchalgorithmus}{Algorithmus}.
+\item\textit{public QString getName()} Gibt den Namen des \glslink{Suchalgorithmus}{Algorithmus} zurück.
+\item\textit{public void setName(QString name)} Setzt den Namen des \glslink{Suchalgorithmus}{Algorithmus} auf name.
+\item\textit{public QString getId()} Gibt die Id des \glslink{Suchalgorithmus}{Algorithmus} zurück.
+\item\textit{public bool supportsProgressInfo()} Gibt zurück, ob der \glslink{Suchalgorithmus}{Algorithmus} Fortschrittsinformationen senden kann.
+\item\textit{public sendIntermediateResults(SearchResult searchResult)} Ist ein Signal, dass vom \glslink{Suchalgorithmus}{Algorithmus} gesendet wird, wenn Zwischenergebnisse verfügbar sind.
+\item\textit{public sendProgress(double progress, QString message)} Ist ein Signal, das den Fortschritt des \glslink{Suchalgorithmus}{Algorithmus} sendet.
 \end{itemize}
 
 \subsection*{AlgorithmList}
-Diese Liste verwaltet verfügbare Algorithmen.
+Diese Liste verwaltet verfügbare \glslink{Suchalgorithmus}{Algorithmen}.
 
 \begin{figure}[H]
 \centering
@@ -580,14 +580,14 @@ Diese Liste verwaltet verfügbare Algorithmen.
 
 Attribute
 \begin{itemize}
-\item\textit{private QList<Algorithm> mAlgorithmList} Die Liste der verfügbaren Algorithmen.
+\item\textit{private QList<Algorithm> mAlgorithmList} Die Liste der verfügbaren \glslink{Suchalgorithmus}{Algorithmen}.
 \end{itemize}
 
 Methoden
 \begin{itemize}
-\item\textit{public AlgorithmList(QString file)} Erzeugt eine Liste der verfügbaren Algorithmen.
-\item\textit{public QList<Algorithm> findCompatibleAlgorithms(DataPacket packet)} Gibt das DataPacket als Eingabe an alle Algorithmen und gibt die Liste der Algorithmen zurück, die diese Eingabe akzeptiert haben.
-\item\textit{public QList<Algorithm> getAlgorithmList()} Gibt die Liste der verfügbaren Algorithmen zurück.
+\item\textit{public AlgorithmList(QString file)} Erzeugt eine Liste der verfügbaren \glslink{Suchalgorithmus}{Algorithmen}.
+\item\textit{public QList<Algorithm> findCompatibleAlgorithms(DataPacket packet)} Gibt das DataPacket als Eingabe an alle \glslink{Suchalgorithmus}{Algorithmen} und gibt die Liste der \glslink{Suchalgorithmus}{Algorithmen} zurück, die diese Eingabe akzeptiert haben.
+\item\textit{public QList<Algorithm> getAlgorithmList()} Gibt die Liste der verfügbaren \glslink{Suchalgorithmus}{Algorithmen} zurück.
 \end{itemize}
 
 \pagebreak
@@ -752,7 +752,7 @@ Methoden
 \end{itemize}
 
 \subsection*{ClickableQGraphicsPixmapItem : public QGraphicsPixmapItem}
-Stellt das Bild dar, das bei CustomGraphicsView angezeigt wird und auf dem Annotationen gemacht werden können. Mit einem Rechtsklick kann man den Algorithmus für die Suche wählen.
+Stellt das Bild dar, das bei CustomGraphicsView angezeigt wird und auf dem \glslink{Annotation}{Annotationen} gemacht werden können. Mit einem Rechtsklick kann man den \glslink{Suchalgorithmus}{Algorithmus} für die Suche wählen.
 
 \begin{figure}[H]
 	\centering
@@ -815,7 +815,7 @@ Methoden
 \end{itemize}
 
 \subsection*{GraphicsSingleFrameVideoItem : public ClickableQGraphicsPixmapItem}
-Stellt mithilfe des SingleFrameVideoPlayers ein Video aus Einzelbildern dar, wobei man Bereiche markieren, Annotationen auswählen und mit einem Rechtsklick den Algorithmus wählen kann.
+Stellt mithilfe des SingleFrameVideoPlayers ein Video aus Einzelbildern dar, wobei man Bereiche markieren, Annotationen auswählen und mit einem Rechtsklick den \glslink{Suchalgorithmus}{Algorithmus} wählen kann.
 
 \begin{figure}[H]
 	\centering
@@ -859,7 +859,7 @@ Methoden
 \end{itemize} 
 
 \subsection*{ClickableQGraphicsVideoItem : public QGraphicsVideoItem}
-Stellt das Video dar, das bei CustomGraphicsView angezeigt wird und auf dem man Bereiche markieren und Annotationen auswählen kann. Mit einem Rechtsklick kann man den Algorithmus für die Suche wählen.
+Stellt das Video dar, das bei CustomGraphicsView angezeigt wird und auf dem man Bereiche markieren und \glslink{Annotation}{Annotationen} auswählen kann. Mit einem Rechtsklick kann man den \glslink{Suchalgorithmus}{Algorithmus} für die Suche wählen.
 
 \begin{figure}[H]
 	\centering
@@ -876,7 +876,7 @@ Methoden
 \end{itemize}
 
 \subsection*{CustomGraphicsView}
-Diese Klasse benutzt ein QGraphicsView um ein Bild darzustellen und einen AnnotationDrawer um die Annotationen, die zum Bild gehören, darzustellen. Außerdem fügt er die Möglichkeit hinzu, die Größe des Bildes durch die ZoomIn- und ZoomOutButtons zu verändern und eine ROI(\enquote{region of interest}) zu zeichnen, nach der dann gesucht werden kann. Hier werden auch die Klicks des Benutzers abgefangen und das Menü mit den Algorithmen angezeigt.
+Diese Klasse benutzt ein QGraphicsView um ein Bild darzustellen und einen AnnotationDrawer um die \glslink{Annotation}{Annotationen}, die zum Bild gehören, darzustellen. Außerdem fügt er die Möglichkeit hinzu, die Größe des Bildes durch die ZoomIn- und ZoomOutButtons zu verändern und eine \gls{ROI}(\enquote{region of interest}) zu zeichnen, nach der dann gesucht werden kann. Hier werden auch die Klicks des Benutzers abgefangen und das Menü mit den \glslink{Suchalgorithmus}{Algorithmen} angezeigt.
 
 \begin{figure}[H]
 	\centering
@@ -889,15 +889,15 @@ Attribute
 	\item\textit{private QGraphicsView mView} 
 	Ein GraphicsView, in der das Medium angezeigt wird. 
 	\item\textit{private AnnotationDrawer mAnnotationDrawer} 
-	Ein AnnotationDrawer, der die Annotationen des Bildes/Frames hinzufügt. 
+	Ein AnnotationDrawer, der die \glslink{Annotation}{Annotationen} des Bildes/Frames hinzufügt. 
 	\item\textit{private QPushButton mZoomInButton} 
 	Ein PushButton für die ZoomIn Funktion. 
 	\item\textit{private QPushButton mZoomOutButton} 
 	Ein PushButton für die ZoomOut Funktion.
 	\item\textit{private QPushButton mROIButton} 
-	Ein PushButton für das Einzeichnen einer \enquote{region of interest}.
+	Ein PushButton für das Einzeichnen einer \glslink{ROI}{\enquote{region of interest}}.
 	\item\textit{private QGraphicsRectItem mROI} 
-	Ein QGraphicsRectItem, der die vom Benutzer gezeichnete \enquote{region of interest} darstellt.
+	Ein QGraphicsRectItem, der die vom Benutzer gezeichnete \glslink{ROI}{\enquote{region of interest}} darstellt.
 \end{itemize}
 
 Methoden
@@ -909,17 +909,17 @@ Methoden
 	\item\textit{public QGraphicsScene scene()} 
 	Erzeugt ein QGraphicsScene, in dem die Media gezeigt werden.
 	\item\textit{public void signal\_roi()} 
-	Ein Signal, wenn der ROIButton geklickt wurde.
+	Ein Signal, wenn der \glslink{ROI}{ROIButton} geklickt wurde.
 	\item\textit{public void slot\_roi()} 
 	Fängt das signal\_roi ab und wartet darauf, dass der Benutzer ein Rechteck zeichnet.
 	\item\textit{public void signal\_rightClick()} 
 	Ein Signal mit Positionsinformationen für den Controller, wenn ein Rechtsklick erfolgt. 
 	\item\textit{public void signal\_algorithmChosen()} 
-	Ein Signal an den Controller mit der Information, welcher Algorithmus gewählt wurde.
+	Ein Signal an den Controller mit der Information, welcher \glslink{Suchalgorithmus}{Algorithmus} gewählt wurde.
 \end{itemize}
 
 \subsection*{AnnotationDrawer}
-Diese Klasse besitzt einen String, der den Typ der Annotation bestimmt. Der AnnotationDrawer benutzt die AnnotationGraphicsItemFactory, um ein korrespondierendes ClickableGraphicsItem zu erzeugen, das er im CustomGraphicsView anzeigt.
+Diese Klasse besitzt einen String, der den Typ der \gls{Annotation} bestimmt. Der AnnotationDrawer benutzt die AnnotationGraphicsItemFactory, um ein korrespondierendes ClickableGraphicsItem zu erzeugen, das er im CustomGraphicsView anzeigt.
 
 \begin{figure}[H]
 	\centering
@@ -930,7 +930,7 @@ Diese Klasse besitzt einen String, der den Typ der Annotation bestimmt. Der Anno
 Attribute
 \begin{itemize}
 	\item\textit{private QString mVisualizer} 
-	Der Typ der Annotation.   
+	Der Typ der \gls{Annotation}.   
 \end{itemize}
 
 Methoden
@@ -940,7 +940,7 @@ Methoden
 \end{itemize}
   
 \subsection*{AnnotationGraphicsItemFactory}
-Das ist eine Fabrik-Klasse, die unterschiedliche ClickableGraphicsItems bildet, damit man die Annotationen, abhängig von deren Typ, durch den AnnotationDrawer darstellen kann.
+Das ist eine Fabrik-Klasse, die unterschiedliche ClickableGraphicsItems bildet, damit man die \glslink{Annotation}{Annotationen}, abhängig von deren Typ, durch den AnnotationDrawer darstellen kann.
 
 \begin{figure}[H]
 	\centering
@@ -974,7 +974,7 @@ Methoden
 \end{itemize}
 
 \subsection*{ClickableGraphicsIdRectItem : public QGraphicsRectItem}
-Diese Klasse fügt die Möglichkeit hinzu, auf dieses Item klicken zu können, und zeigt die Id der Annotation.
+Diese Klasse fügt die Möglichkeit hinzu, auf dieses Item klicken zu können, und zeigt die Id der \gls{Annotation}.
 
 \begin{figure}[H]
 	\centering
@@ -989,11 +989,11 @@ Methoden
 	\item\textit{public void mousePressEvent(QGraphicsSceneMouseEvent *event)}
 	Fängt die Bewegung der Maus nach einem Klick ab.
 	\item\textit{public void showID(Annotation *an)}
-	Zeigt die ID der Annotation an.
+	Zeigt die ID der \gls{Annotation} an.
 \end{itemize}
 
 \subsection*{ParameterPageWidget : public PageWidget}
-Das ist das PageWidget, in dem die Parameter für den gewählten Suchalgorithmus angezeigt und bestimmt werden. Außerdem werden die Datensätze, in denen gesucht wird, bestimmt. Dann kann man zu ConfirmationPageWidget fortsetzen.
+Das ist das PageWidget, in dem die Parameter für den gewählten \gls{Suchalgorithmus} angezeigt und bestimmt werden. Außerdem werden die Datensätze, in denen gesucht wird, bestimmt. Dann kann man zu ConfirmationPageWidget fortsetzen.
 
 \begin{figure}[H]
 	\centering
@@ -1300,7 +1300,7 @@ Der Navigator ist in der Lage, das aktuell im MainWindow angezeigte PageWidget d
 \end{figure}
 
 \subsection*{SearchManager}
-Der SearchManager startet einen Algorithmus in einem neuen Thread und leitet mögliche Informationen zum Fortschritt der Suche an das ResultsPageWidget weiter.
+Der SearchManager startet einen \glslink{Suchalgorithmus}{Algorithmus} in einem neuen Thread und leitet mögliche Informationen zum Fortschritt der Suche an das ResultsPageWidget weiter.
 
 \begin{figure}[H]
 \centering
@@ -1333,6 +1333,22 @@ Der BookmarkManager besitzt 2 Listen für die Chronik und die vom Benutzer erste
 \centering
 \includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Controller/BookmarkManager}
 \label{fig:bookmarkManager}
+\end{figure}
+
+\subsection*{PageStackFrame}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Controller/PageStackFrame}
+\label{fig:pageStackFrame}
+\end{figure}
+
+\subsection*{PageRegistration}
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Controller/PageRegistration}
+\label{fig:pageRegistration}
 \end{figure}
 
 \subsection*{<<enumeration>> PageType}
