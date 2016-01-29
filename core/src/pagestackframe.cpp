@@ -13,7 +13,7 @@ size_t PageStackFrame::getSize() const
     return size;
 }
 
-PageType PageStackFrame::getType()
+PageType PageStackFrame::getType() const
 {
     return type;
 }

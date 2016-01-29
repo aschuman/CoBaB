@@ -3,7 +3,7 @@
 #include <qwidget.h>
 #include <QVariant>
 
-class PageWidget : QWidget
+class PageWidget : public QWidget
 {
 public:
     virtual void reset() = 0;
