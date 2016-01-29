@@ -5,8 +5,14 @@ CONFIG += testcase
 QT += testlib
 INCLUDEPATH += include
 
+unix {
 LIBS += -L../core -lcore
 INCLUDEPATH += ../core/include
+}
+win32 {
+LIBS += -L../core/debug -lcore
+INCLUDEPATH += ../core/include
+}
 
 HEADERS += \
     include/pagestackframetester.h
