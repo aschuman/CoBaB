@@ -1,3 +1,34 @@
+\subsection{Initialisierung der Navigation}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{img/Sequenzdiagramme/Interaction}
+\label{fig:Navigation init}
+\end{figure}
+
+Dieses Sequenzdiagramm beschreibt die Abläufe beim Programmstart, wenn MainControl die verschiedenen Komponente initilisiert.
+
+\begin{itemize}
+	\item initNavigation() wird aufgerufe
+
+	\item MainControl erstellt LibraryPageWidget
+
+	\item MainControl registriert LibraryPageWidget und Übergang zum ViewerPageWidget
+
+	\item MainControl erstellt ViewerPageWidget und registriert beim Navigator
+
+	\item Startet Navigator mit LibraryView
+
+	\item Füge Suchdaten in DataStack ein
+
+	\item Erstellt ein PageStackFrame für Library und füge dies in PageStack hinzu
+
+	\item Zeige Library an.
+
+\end{itemize}
+
+\pagebreak
+
 \subsection{Seitenwechsel}
 
 \begin{figure}[H]
@@ -6,7 +37,24 @@
 \label{fig:seitenwechsel}
 \end{figure}
 
-Dieses Sequenzdiagramm beschreibt die Abläufe beim Seitenwechsel. Es wird der Übergang vom LibraryPageWidget zum ViewerPageWidget dargestellt. Das LibraryPageWidget übergibt dem Navigator über die Signal-Slot Verbindung den Pfad zum ausgewählten Datensatz. Der Navigator registriert das ViewerPageWidget als das PageWidget, das danach angezeigt werden soll. Danach erhält das MainWindow das ViewerPageWidget, um es anzuzeigen.
+Dieses Sequenzdiagramm beschreibt die Abläufe beim Seitenwechsel vom LibraryPageWidget zum ViewerPageWidget
+
+\begin{itemize}
+	\item Benutzer klickt auf 'weiter' (Library)
+
+	\item Datensatz wird an Navigator gesendet
+
+	\item LibraryPageWidget sendet Navigator einen Exit-Code, um die Seite zu wechseln
+
+	\item Als PageType wird LIBRARY zurückgegeben. Die entsprechenede PageRegistration wird ermittelt, aus der PageType der nächster Seite lesen läss
+
+	\item Aufruf der Funktion, ein PageWidget anhand PageType anzuzeigen
+
+	\item ViewerPageWidget wird wiederum aus PageRegistration abgelesen.
+
+	\item Der Navigator registriert das ViewerPageWidget als das PageWidget, das danach angezeigt werden soll. Das MainWindow erhält dies
+
+\end{itemize}
 
 \pagebreak
 
