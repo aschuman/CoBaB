@@ -1437,7 +1437,9 @@ Methoden
 	Gibt die Liste aller Bookmark-Einträge zurück.
 	\item\textit{public getChronicle(): BookmarkList}
 	Gibt die Liste aller Chronik-Einträge zurück.
+
 \subsection*{PageStackFrame}
+Element vom PageStack im Navigator. Über PageStackFrame kann man auf PageType bzw. PageWidget zugreifen.
 
 \begin{figure}[H]
 \centering
@@ -1447,23 +1449,25 @@ Methoden
 
 Attribute
 \begin{itemize}
-	\item\textit{private }
-	
-	\item\textit{private }
-	
+	\item\textit{private size_t mSize}
+	Größe des Frames
+	\item\textit{private PageType mType}
+	Typ des zugehörigen PageWidget
 \end{itemize}
 
 Methoden
 \begin{itemize}
-	\item\textit{public }
-	
-	\item\textit{public }
-	
-	\item\textit{public }
-	
-	\item\textit{public }
+	\item\textit{public PageStackFrame(PageType type)}
+	Erstellt neuen PageStackFrame.
+	\item\textit{public setSize(size_t size)}
+	Setzt die Größe auf size.
+	\item\textit{public getSize(): size_t}
+	Gibt die Größe zurück.
+	\item\textit{public getType(): PageType}
+	Gibt den Typ des PageWidget zurück.
 
 \subsection*{PageRegistration}
+Enthält alle beim Navigator registrierten Seitenwechseln. Diese Klase dient dazu, die Seite, zu der navigiert werden soll, abzufragen.
 
 \begin{figure}[H]
 \centering
@@ -1473,15 +1477,16 @@ Methoden
 
 Attribute
 \begin{itemize}
-	\item\textit{private }
-	
+	\item\textit{private QMap<int; PageType> transitions}
+	Ein Mapping von allen exitCode und den entsprechenden Zielseiten.
 \end{itemize}
 
 Methoden
 \begin{itemize}
-	\item\textit{public }
-	
-	\item\textit{public }
+	\item\textit{public getWidget()}
+	Gibt einen Null-Pointer zurück.
+	\item\textit{public getTarget(in exitCode:int): PageType}
+	Gibt den Typ der Seite, zu der navigiert werden sollte, zurück.
 
 \subsection*{<<enumeration>> PageType}
 PageWidgets lassen sich beim Navigator mit einem PageType registrieren, welcher fortan zur Referenzierung dieses PageWidgets dient.
