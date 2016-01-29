@@ -1362,7 +1362,7 @@ Der SearchManager startet einen \glslink{Suchalgorithmus}{Algorithmus} in einem 
 Methoden
 \begin{itemize}
 	\item\textit{public SearchManager(ResultsWindow* resWind)}
-	Erstellt einen SearchManager mit Pointer auf ResultWindow
+	Erstellt einen SearchManager mit Referenz zu ResultWindow
 	\item\textit{public slot startSearch(SearchAlgorithm algo)}
 	Startet eine Suche.
 	\item\textit{public slot terminateSearch()}
@@ -1388,7 +1388,7 @@ Attribute
 Methoden
 \begin{itemize}
 	\item\textit{public ResultManager(ResultsWindow* resWind)}
-	Erstellt einen ResultManager mit Referenz auf einen ResultsWindow
+	Erstellt einen ResultManager mit Referenz zu ResultsWindow
 	\item\textit{public slot addResult(SearchResultElement* newResult)}
 	Füge ein neues Element der Ergebnisliste hinzu.
 	\item\textit{public slot onSaveBookmark(Bookmark bookmark)}
@@ -1404,32 +1404,24 @@ Der MainWindowManager stellt dem MainWindow die Bookmarks und Chronikeinträge z
 
 Attribute
 \begin{itemize}
-	\item\textit{private }
-	
-	\item\textit{private }
-	
-	\item\textit{private }
-	
-	\item\textit{private }
-	
-	\item\textit{public }  
-	
-	\item\textit{public }
-	
+	\item\textit{private BookmarkList bookmarks}
+	Die Liste der Bookmark-Einträge
+	\item\textit{private BokmarkList chronicle}
+	Die Liste der Chronicle-Einträge
+
 \end{itemize}
 
 Methoden
 \begin{itemize}
-	\item\textit{public }
-	
-	\item\textit{public }
-	
-	\item\textit{public }
-	
-	\item\textit{public }
+	\item\textit{public MainWindowManager(MainWindow* mainWindow)}
+	Erstellt einen MainWindowManager mit Referenz zu MainWindow.
+	\item\textit{public setBookmarks(BookmarkList bookmarks)}
+	Setze Bookmark-Einträge auf die gegebene Liste.
+	\item\textit{public setChronicle(BookmarkList chronicle) }
+	Setze Chronik-Einträge auf die gegebene Liste.
 
 \subsection*{BookmarkManager}
-Der BookmarkManager besitzt 2 Listen für die Chronik und die vom Benutzer erstellten Bookmarks. Einträge für diese BookmarkLists werden über den BookmarkManager hinzugefügt und abgefragt.
+Verwaltet Bookmarks und Chronik. Über den BookmarkManager werden Bookmark-und Chronicle-Einträge hinzugefügt und abgefragt.
 
 \begin{figure}[H]
 \centering
@@ -1437,32 +1429,14 @@ Der BookmarkManager besitzt 2 Listen für die Chronik und die vom Benutzer erste
 \label{fig:bookmarkManager}
 \end{figure}
 
-Attribute
-\begin{itemize}
-	\item\textit{private }
-	
-	\item\textit{private }
-	
-	\item\textit{private }
-	
-	\item\textit{private }
-	
-	\item\textit{public }  
-	
-	\item\textit{public }
-	
-\end{itemize}
-
 Methoden
 \begin{itemize}
-	\item\textit{public }
-	
-	\item\textit{public }
-	
-	\item\textit{public }
-	
-	\item\textit{public }
-
+	\item\textit{public slot saveBookmark(Bookmark bookmak, bool permanently)}
+	Speichert einen Bookmark-oder Chronik-Eintrag.
+	\item\textit{public getBookmarks(): BookmarkList}
+	Gibt die Liste aller Bookmark-Einträge zurück.
+	\item\textit{public getChronicle(): BookmarkList}
+	Gibt die Liste aller Chronik-Einträge zurück.
 \subsection*{PageStackFrame}
 
 \begin{figure}[H]
@@ -1476,14 +1450,6 @@ Attribute
 	\item\textit{private }
 	
 	\item\textit{private }
-	
-	\item\textit{private }
-	
-	\item\textit{private }
-	
-	\item\textit{public }  
-	
-	\item\textit{public }
 	
 \end{itemize}
 
@@ -1509,24 +1475,10 @@ Attribute
 \begin{itemize}
 	\item\textit{private }
 	
-	\item\textit{private }
-	
-	\item\textit{private }
-	
-	\item\textit{private }
-	
-	\item\textit{public }  
-	
-	\item\textit{public }
-	
 \end{itemize}
 
 Methoden
 \begin{itemize}
-	\item\textit{public }
-	
-	\item\textit{public }
-	
 	\item\textit{public }
 	
 	\item\textit{public }
