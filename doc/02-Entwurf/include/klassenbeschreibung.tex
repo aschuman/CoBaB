@@ -1335,15 +1335,15 @@ Methoden
 \begin{itemize}
 	\item\textit{public Navigator(MainWindow mainWindow)}
 	Erstellt einen neuen Navigator mit Referenz zu MainWindow.
-	\item\textit{public registerTransition(PageType origin, int exitCode, PageType target)}
+	\item\textit{public registerTransition(PageType origin, int exitCode, PageType target}
 	Registriert eine Seitenwechsel (vom einem Page zu einem anderen).
 	\item\textit{public registerPage(PageType type, PageWidget widget)}
 	Registriert ein Mapping. Ein PageType wird auf ein PageWidget abgebildet.
 	\item\textit{public start(PageType type, QList<QVariant> data}
 	Startet den Navigator mit einer Anfangsseite und Daten (in einer Liste gegeben).
-	\item\textit{public slot tryPush(QVariant item)}
+	\item\textit{public slot tryPush(QVariant item) }
 	Fügt neue Daten in den Stack hinzu.
-	\item\textit{public slot tryRead(size_t index, QVariant& value)}
+	\item\textit{public slot tryRead(size\_t index, QVariant \&value) }
 	Liest Daten mit index aus dem Stack in ein QVariant ein.
 	\item\textit{public slot tryExit(int exitCode)}
 	Führt eine Seitewechsel mit exitCode aus.
@@ -1369,6 +1369,7 @@ Methoden
 	Terminiert die laufende Suche.
 	\item\textit{public slot updateProgress(float progress, QString message)}
 	Visualisiert den aktuellen Fortschritt der laufende Suche.
+\end{itemize}
 
 \subsection*{SearchResultManager}
 Der SearchResultManager besitzt ein SearchResult und benachrichtigt das ResultsPageWidget über neue Suchergebnisse. Suchergebnisse können einzeln während der laufenden Suche hinzugefügt werden.
@@ -1393,6 +1394,8 @@ Methoden
 	Füge ein neues Element der Ergebnisliste hinzu.
 	\item\textit{public slot onSaveBookmark(Bookmark bookmark)}
  	Speichert das Suchergebnis als Bookmark.
+\end{itemize}
+
 \subsection*{MainWindowManager}
 Der MainWindowManager stellt dem MainWindow die Bookmarks und Chronikeinträge zur Verfügung und gibt bekannt, welches Bookmark im MainWindow zuletzt ausgewählt wurde.
 
@@ -1419,6 +1422,7 @@ Methoden
 	Setze Bookmark-Einträge auf die gegebene Liste.
 	\item\textit{public setChronicle(BookmarkList chronicle) }
 	Setze Chronik-Einträge auf die gegebene Liste.
+\end{itemize}
 
 \subsection*{BookmarkManager}
 Verwaltet Bookmarks und Chronik. Über den BookmarkManager werden Bookmark-und Chronicle-Einträge hinzugefügt und abgefragt.
@@ -1437,6 +1441,7 @@ Methoden
 	Gibt die Liste aller Bookmark-Einträge zurück.
 	\item\textit{public getChronicle(): BookmarkList}
 	Gibt die Liste aller Chronik-Einträge zurück.
+\end{itemize}
 
 \subsection*{PageStackFrame}
 Element vom PageStack im Navigator. Über PageStackFrame kann man auf PageType bzw. PageWidget zugreifen.
@@ -1449,7 +1454,7 @@ Element vom PageStack im Navigator. Über PageStackFrame kann man auf PageType b
 
 Attribute
 \begin{itemize}
-	\item\textit{private size_t mSize}
+	\item\textit{private size\_t mSize}
 	Größe des Frames
 	\item\textit{private PageType mType}
 	Typ des zugehörigen PageWidget
@@ -1459,12 +1464,13 @@ Methoden
 \begin{itemize}
 	\item\textit{public PageStackFrame(PageType type)}
 	Erstellt neuen PageStackFrame.
-	\item\textit{public setSize(size_t size)}
+	\item\textit{public setSize(size\_t size)}
 	Setzt die Größe auf size.
-	\item\textit{public getSize(): size_t}
+	\item\textit{public getSize(): size\_t}
 	Gibt die Größe zurück.
 	\item\textit{public getType(): PageType}
 	Gibt den Typ des PageWidget zurück.
+\end{itemize}
 
 \subsection*{PageRegistration}
 Enthält alle beim Navigator registrierten Seitenwechseln. Diese Klase dient dazu, die Seite, zu der navigiert werden soll, abzufragen.
@@ -1487,6 +1493,7 @@ Methoden
 	Gibt einen Null-Pointer zurück.
 	\item\textit{public getTarget(in exitCode:int): PageType}
 	Gibt den Typ der Seite, zu der navigiert werden sollte, zurück.
+\end{itemize}
 
 \subsection*{<<enumeration>> PageType}
 PageWidgets lassen sich beim Navigator mit einem PageType registrieren, welcher fortan zur Referenzierung dieses PageWidgets dient.
