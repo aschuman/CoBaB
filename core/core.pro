@@ -16,7 +16,8 @@ HEADERS += \
     include/Video.h \
     include/pageregistration.h \
     include/pagewidget.h \
-    include/mainwindow.h
+    include/mainwindow.h \
+    include/navigator.h
 
 SOURCES += \
     src/main.cpp \
@@ -28,7 +29,8 @@ SOURCES += \
     src/Video.cpp \
     src/pageregistration.cpp \
     src/pagewidget.cpp \
-    src/mainwindow.cpp
+    src/mainwindow.cpp \
+    src/navigator.cpp
 
 FORMS += \
     ui/mainwindow.ui
