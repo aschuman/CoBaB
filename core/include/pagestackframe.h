@@ -13,7 +13,7 @@ public:
     PageStackFrame(PageType type);
     void setSize(size_t size);
     size_t getSize() const;
-    PageType getType();
+    PageType getType() const;
 };
 
 #endif // PAGESTACKFRAME_H

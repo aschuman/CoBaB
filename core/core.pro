@@ -16,7 +16,11 @@ HEADERS += \
     include/Video.h \
     include/pageregistration.h \
     include/pagewidget.h \
-    include/mainwindow.h
+    include/mainwindow.h \
+    include/navigator.h \
+    include/Dataset.h \
+    include/Annotation.h \
+    include/RectangleAnnotation.h
 
 SOURCES += \
     src/main.cpp \
@@ -28,7 +32,11 @@ SOURCES += \
     src/Video.cpp \
     src/pageregistration.cpp \
     src/pagewidget.cpp \
-    src/mainwindow.cpp
+    src/mainwindow.cpp \
+    src/navigator.cpp \
+    src/Dataset.cpp \
+    src/Annotation.cpp \
+    src/RectangleAnnotation.cpp
 
 FORMS += \
     ui/mainwindow.ui

@@ -15,6 +15,7 @@ public:
     PageRegistration(std::unique_ptr<PageWidget> widget);
     void addTransition(int exitCode, PageType type);
     const PageWidget& getWidget() const;
+    PageWidget& getWidget();
     PageType getTarget(int exitCode) const;
 };
 

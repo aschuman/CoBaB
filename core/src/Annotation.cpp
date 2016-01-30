@@ -13,7 +13,7 @@
 /**
  * @param id
  */
-Annotation::Annotation(QString id) {
+Annotation::Annotation(QString id, QString type) {
 
 }
 
@@ -37,6 +37,7 @@ AnnotationType Annotation::getType() {
  * @return QDataStream&
  */
 QDataStream& operator<<(QDataStream& out, Annotation& annotation) {
+    (void) annotation;
     return out;
 }
 
@@ -46,6 +47,7 @@ QDataStream& operator<<(QDataStream& out, Annotation& annotation) {
  * @return QDataStream&
  */
 QDataStream& operator>>(QDataStream& in, Annotation& annotation) {
+    (void) annotation;
     return in;
 }
 

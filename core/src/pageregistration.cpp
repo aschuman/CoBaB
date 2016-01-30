@@ -14,6 +14,11 @@ const PageWidget &PageRegistration::getWidget() const
     return *widget;
 }
 
+PageWidget &PageRegistration::getWidget()
+{
+    return *widget;
+}
+
 PageType PageRegistration::getTarget(int exitCode) const
 {
     return transitions[exitCode];

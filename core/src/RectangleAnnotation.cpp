@@ -13,7 +13,7 @@
 /**
  * @param id
  */
-RectangleAnnotation::RectangleAnnotation(QString id) {
+RectangleAnnotation::RectangleAnnotation(QString id, QString type) : Annotation(id, type) {
 
 }
 
@@ -22,7 +22,8 @@ RectangleAnnotation::RectangleAnnotation(QString id) {
  * @param annotation
  */
 QDataStream& operator<<(QDataStream& out, RectangleAnnotation& annotation){
-    return null;
+    (void) annotation;
+    return out;
 }
 
 /**
@@ -30,5 +31,6 @@ QDataStream& operator<<(QDataStream& out, RectangleAnnotation& annotation){
  * @param annotation
  */
 QDataStream& operator>>(QDataStream& in, RectangleAnnotation& annotation) {
-    return null;
+    (void) annotation;
+    return in;
 }
