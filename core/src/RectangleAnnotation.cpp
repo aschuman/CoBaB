@@ -13,7 +13,7 @@
 /**
  * @param id
  */
-RectangleAnnotation::RectangleAnnotation(QString id) {
+RectangleAnnotation::RectangleAnnotation(QString id, QString type) {
 
 }
 

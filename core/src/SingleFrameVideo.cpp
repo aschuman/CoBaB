@@ -14,9 +14,9 @@
  * SingleFrameVideo implementation
  */
 
-#define FRAMERATE_FILE "framerate.txt"
+#define FRAMERATE_FILE "cobab_config.json"
 #define DEFAULT_FRAMERATE 24
-#define VALID_FILE_TYPES "*.jpg|*.jpeg|*.bmp|*.png"
+#define VALID_FILE_TYPES {"*.jpg","*.jpeg","*.bmp","*.png"}
 
 /**
  * @param path
@@ -26,26 +26,18 @@ SingleFrameVideo::SingleFrameVideo(QString path, QList<QPair<int, Annotation>> a
     mMediumType = MediumType::SINGLE_FRAME_VIDEO;
 
     QDir dir(mRelativePath);
-    dir.setFilter(QDir::Files);
-    dir.setSorting(QDir::Type);
+
+    QStringList filters (VALID_FILE_TYPES);
+    dir.setNameFilters(filters);
+    dir.setFilter(QDir::Filter::Files);
+    dir.setSorting(QDir::SortFlag::Name);
+
     mFrameList = dir.entryList();
-    QListIterator<QString> iterator(mFrameList);
-    while (iterator.hasNext()) {
-        QString fileName = iterator.next();
-        if(fileName == FRAMERATE_FILE) {
-            mFrameList.removeOne(fileName);
-            mFramerate = readFramerateFromJson(fileName);
-            break;
-        }
+
+    if(dir.exists(FRAMERATE_FILE)) {
+        readFramerateFromJson(FRAMERATE_FILE);
     }
-    iterator.toFront();
-    while(iterator.hasNext()) {
-        QRegExp rx(VALID_FILE_TYPES);
-        QString file = iterator.next();
-        if(!rx.exactMatch(file)) {
-            mFrameList.removeOne(file);
-        }
-    }
+
 
     struct {
         bool operator()(QPair<int, Annotation> a, QPair<int, Annotation> b) {
@@ -72,14 +64,18 @@ QList<QString> SingleFrameVideo::getFrameList() {
 
 double readFramerateFromJson(QString path) {
     QFile loadFile(path);
-
     if (!loadFile.open(QIODevice::ReadOnly)) {
             return DEFAULT_FRAMERATE;
         }
 
     QByteArray saveData = loadFile.readAll();
-
-    QJsonDocument loadDoc(QJsonDocument::fromJson(saveData));
-
-    return loadDoc.object()["fps"].toDouble();
+    QJsonParseError *error = new QJsonParseError();
+    QJsonDocument loadDoc(QJsonDocument::fromJson(saveData, error));
+    if(error->error == QJsonParseError::NoError) {
+        QJsonValue fps = loadDoc.object()["fps"];
+        if(fps.isDouble()) {
+            return fps.toDouble();
+        }
+    }
+    return DEFAULT_FRAMERATE;
 }

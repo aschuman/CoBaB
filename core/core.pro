@@ -17,7 +17,10 @@ HEADERS += \
     include/pageregistration.h \
     include/pagewidget.h \
     include/mainwindow.h \
-    include/navigator.h
+    include/navigator.h \
+    include/Dataset.h \
+    include/Annotation.h \
+    include/RectangleAnnotation.h
 
 SOURCES += \
     src/main.cpp \
@@ -30,7 +33,10 @@ SOURCES += \
     src/pageregistration.cpp \
     src/pagewidget.cpp \
     src/mainwindow.cpp \
-    src/navigator.cpp
+    src/navigator.cpp \
+    src/Dataset.cpp \
+    src/Annotation.cpp \
+    src/RectangleAnnotation.cpp
 
 FORMS += \
     ui/mainwindow.ui

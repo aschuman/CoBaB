@@ -13,7 +13,7 @@
 /**
  * @param id
  */
-Annotation::Annotation(QString id) {
+Annotation::Annotation(QString id, QString type) {
 
 }
 

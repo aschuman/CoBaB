@@ -38,8 +38,12 @@ protected:
     QString mPath;
     DatasetType mDatasetType;
 private: 
-    
+    bool createSingleFrameVideoDataset();
+    bool createVideoDataset();
+    bool createPhotoDataset();
+    bool containsFps(QString filepath);
     void createPreviewPhoto();
+    QList<QPair<int, Annotation>> parse(QString filepath);
 };
 
 #endif //_DATASET_H

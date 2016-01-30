@@ -18,7 +18,7 @@ public:
     /**
      * @param id
      */
-    Annotation(QString id);
+    Annotation(QString id, QString type);
     
     QString getId();
     

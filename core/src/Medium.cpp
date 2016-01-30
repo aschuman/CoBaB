@@ -32,3 +32,10 @@ MediumType Medium::getType() {
 QList<QPair<int, Annotation>> Medium::getAnnotationList() {
     return mAnnotationList;
 }
+
+/**
+ * @return QString
+ */
+QString Medium::getPath() {
+    return mRelativePath;
+}

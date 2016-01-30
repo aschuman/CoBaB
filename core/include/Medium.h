@@ -21,6 +21,9 @@ public:
     MediumType getType();
     
     QList<QPair<int, Annotation>> getAnnotationList();
+
+    QString getPath();
+
 protected: 
     QString mRelativePath;
     MediumType mMediumType;

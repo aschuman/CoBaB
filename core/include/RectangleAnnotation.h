@@ -16,7 +16,7 @@ public:
     /**
      * @param id
      */
-    RectangleAnnotation(QString id);
+    RectangleAnnotation(QString id, QString type);
 
     /**
      * @param out
