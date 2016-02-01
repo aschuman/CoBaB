@@ -1,4 +1,4 @@
-#include "include/pageregistration.h"
+#include "include/PageRegistration.h"
 
 PageRegistration::PageRegistration(std::unique_ptr<PageWidget> widget) : widget(move(widget))
 {

@@ -2,7 +2,7 @@
 #define PAGESTACKFRAME_H
 
 #include <stddef.h>
-#include <pagetype.h>
+#include <PageType.h>
 
 
 class PageStackFrame

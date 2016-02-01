@@ -1,117 +1,108 @@
-/**
- * Project \
- */
-
-
 #include "CoBaB.h"
-
-/**
- * SearchObject implementation
- */
-
+#include <iostream>
+#include <fstream>
 
 SearchObject::SearchObject() {
 
 }
 
-/**
- * @return QString
- */
 QString SearchObject::getMedium() {
-    return null;
+    return mMedium;
 }
 
-/**
- * @param medium
- */
 void SearchObject::setMedium(QString medium) {
-
+    mMedium = medium;
 }
 
-/**
- * @return Annotation
- */
 Annotation SearchObject::getAnnotation() {
-    return null;
+    return mAnnotation;
 }
 
-/**
- * @param annotation
- */
 void SearchObject::setAnnotation(Annotation annotation) {
-
+    mAnnotation = annotation;
 }
 
-/**
- * @return QRect
- */
 QRect SearchObject::getROI() {
-    return null;
+    return mROI;
 }
 
-/**
- * @param ROI
- */
-void SearchObject::setROI(QRect ROI) {
-
+void SearchObject::setROI(QRect roi) {
+    mROI = roi;
 }
 
-/**
- * @return Dataset
- */
 Dataset SearchObject::getSourceDataset() {
-    return null;
+    return mSourceDataset;
 }
 
-/**
- * @param dataset
- */
 void SearchObject::setSourceDataset(Dataset dataset) {
-
+    mSourceDataset = dataset;
 }
 
-/**
- * @return int
- */
 int SearchObject::getMediumIndex() {
-    return 0;
+    return mMediumIndex;
 }
 
-/**
- * @param index
- */
 void SearchObject::setMediumIndex(int index) {
-
+    mMediumIndex = index;
 }
 
-/**
- * @param out
- * @param searchObject
- * @return QDataStream&
- */
-QDataStream& operator<<(QDataStream& out, SearchObject& searchObject) {
-    return null;
-}
-
-/**
- * @param in
- * @param searchObject
- * @return QDataStream&
- */
-QDataStream& operator>>(QDataStream& in, SearchObject& searchObject) {
-    return null;
-}
-
-/**
- * @param in
- */
 void SearchObject::toStream(QDataStream in) {
 
 }
 
-/**
- * @param out
- */
 void SearchObject::fromStream(QDataStream out) {
 
+}
+
+friend QDataStream& operator >>(QDataStream &in, SearchObject &searchObject) {
+
+    //read object from stream
+
+    Medium medium;
+    int mediumIndex;
+    Annotation ann;
+    QRect roi;
+    Dataset source;
+
+    //skip opening bracket
+    in.ignore(1);
+
+    in >> medium;
+    searchObject.setMedium(medium);
+
+    //skip coma
+    in.ignore(2);
+
+    in >> mediumIndex;
+    searchObject.setMediumIndex(mediumIndex);
+
+    in.ignore(2);
+
+    in >> ann;
+    searchObject.setAnnotation(ann);
+
+    in.ignore(2);
+
+    in >> roi;
+    searchObject.setROI(roi);
+
+    in.ignore(2);
+
+    in >> source;
+    searchObject.setSourceDataset(source);
+
+    in.ignore(1);
+
+    return in;
+}
+
+friend QDataStream& operator <<(QDataStream &out, const SearchObject &searchObject) {
+
+    //write object to stream
+    out << "(" << searchObject.getMedium() << ", "
+        << searchObject.getMediumIndex() << ", "
+        << searchObject.getAnnotation() << ", "
+        << searchObject.getROI() << ", "
+        << searchObject.getSourceDataset() << ")";
+    return out;
 }

@@ -1,4 +1,4 @@
-#include "include/pagestackframe.h"
+#include "include/PageStackFrame.h"
 
 PageStackFrame::PageStackFrame(PageType type) : size(0), type(type){
 }
