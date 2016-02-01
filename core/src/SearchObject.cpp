@@ -1,8 +1,6 @@
 #include "CoBaB.h"
-#include <iostream>
-#include <fstream>
 
-SearchObject::SearchObject() {
+SearchObject::SearchObject(){
 
 }
 
@@ -30,11 +28,11 @@ void SearchObject::setROI(QRect roi) {
     mROI = roi;
 }
 
-Dataset SearchObject::getSourceDataset() {
+QString SearchObject::getSourceDataset() {
     return mSourceDataset;
 }
 
-void SearchObject::setSourceDataset(Dataset dataset) {
+void SearchObject::setSourceDataset(QString dataset) {
     mSourceDataset = dataset;
 }
 
@@ -48,9 +46,12 @@ void SearchObject::setMediumIndex(int index) {
 
 void SearchObject::toStream(QDataStream in) {
 
+    operator <<(&in, this);
 }
 
 void SearchObject::fromStream(QDataStream out) {
+
+    operator >>(&out, this);
 
 }
 
@@ -58,11 +59,11 @@ friend QDataStream& operator >>(QDataStream &in, SearchObject &searchObject) {
 
     //read object from stream
 
-    Medium medium;
+    QString medium;
     int mediumIndex;
     Annotation ann;
     QRect roi;
-    Dataset source;
+    QString source;
 
     //skip opening bracket
     in.ignore(1);
@@ -96,7 +97,7 @@ friend QDataStream& operator >>(QDataStream &in, SearchObject &searchObject) {
     return in;
 }
 
-friend QDataStream& operator <<(QDataStream &out, const SearchObject &searchObject) {
+friend QDataStream& operator <<(QDataStream &out, SearchObject &searchObject) {
 
     //write object to stream
     out << "(" << searchObject.getMedium() << ", "

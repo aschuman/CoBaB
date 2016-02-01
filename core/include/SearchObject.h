@@ -18,8 +18,8 @@ public:
     void setAnnotation(Annotation annotation);
     QRect getROI();
     void setROI(QRect roi);
-    Dataset getSourceDataset();
-    void setSourceDataset(Dataset dataset);
+    QString getSourceDataset();
+    void setSourceDataset(QString dataset);
     int getMediumIndex();
     void setMediumIndex(int index);
     void toStream(QDataStream in);
