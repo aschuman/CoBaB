@@ -680,7 +680,7 @@ Attribute
 	\item\textit{private QListView mDatasetsListView} 
 	Ein ListView zur Darstellung der Datensätze.
 	\item\textit{private DatasetModel mDatasetModel}
-	Ein DatasetModel, das die darzustellende Datensätze enthält.
+	Ein DatasetModel, das die darzustellenden Datensätze enthält.
 	\item\textit{private QPushButton mChooseDatasetButton} 
 	Ein PushButton, der einen FileDialog öffnet, um einen neuen Datensatz zu wählen.
 	\item\textit{public int EXIT\_NEXT}
@@ -711,15 +711,15 @@ Diese Klasse bildet die Basis für die PageWidgets, die den Inhalt eines Datensa
 Attribute
 \begin{itemize}
 	\item\textit{private QListView mMediaListView}
-	Ein ListView zur Darstellung der Media in dem Datensatz.
+	Ein ListView zur Darstellung der Medien in dem Datensatz.
 	\item\textit{private MediaModel mMediaListModel} 
-	Ein MediaModel, das die darzustellende Media enthält.
+	Ein MediaModel, das die darzustellenden Medien enthält.
 	\item\textit{private QPushButton mNextButton}
-	Button, mit dem man zum nächsten Medium zu wechseln. 
+	Ein Button, mit dem man zum nächsten Medium wechselt. 
 	\item\textit{private QPushButton MBeforeButton}
-	Button, mit dem man zum vorherigen Medium zu wechseln.
+	Ein Button, mit dem man zum vorherigen Medium wechset.
 	\item\textit{private QPushButton mFullscreenButton}
-	Button für den Vollbild-Modus.
+	Ein Button für den Vollbild-Modus.
 	\item\textit{private CustomGraphicsView mGraphicsView} 
 	Die modifizierte GraphicsView, in der das gewählte Medium angezeigt bzw. abgespielt wird.  
 	\item\textit{public int EXIT\_NEXT} 
@@ -732,7 +732,7 @@ Methoden
 	\item\textit{public ViewerPageWidget()} 
 	Erzeugt ein neues ViewerPageWidget Objekt.
 	\item\textit{public void setDataset(Dataset *dataset)} 
-	Füllt ein MediaModel mit den Media von einem gewählten Datensatz.
+	Füllt ein MediaModel mit den Medien des gewählten Datensatzes.
 	\item\textit{public void reset()} 
 	Leert den Viewer.
 	\item\textit{public signal fullscreen()} 
@@ -804,7 +804,7 @@ Methoden
 \begin{itemize}
 	\item\textit{public SingleFrameVideoViewer()} 
 	Erzeugt ein neues SingleFrameVideoViewer-Objekt.
-	\item\textit{public void signa playOrPause()} 
+	\item\textit{public signal playOrPause()} 
 	Ein Signal an den Controller, wenn der PlayOrPauseButton geklickt wurde.
 \end{itemize} 
 
@@ -868,7 +868,7 @@ Methoden
 	\item\textit{public VideoViewer()} 
 	Erzeugt ein neues VideoViewer-Objekt.
 	\item\textit{public signal playOrPause()} 
-	EIn Signal an den Controller, wenn der PlayOrPauseButton geklickt wurde.
+	Ein Signal an den Controller, wenn der PlayOrPauseButton geklickt wurde.
 \end{itemize} 
 
 \subsection*{ClickableQGraphicsVideoItem : public QGraphicsVideoItem}
@@ -900,7 +900,7 @@ Diese Klasse benutzt ein QGraphicsView um ein Bild darzustellen und einen Annota
 Attribute
 \begin{itemize}
 	\item\textit{private QGraphicsView mView} 
-	Ein GraphicsView, in der das Medium angezeigt wird. 
+	Ein GraphicsView, in dem das Medium angezeigt wird. 
 	\item\textit{private AnnotationDrawer mAnnotationDrawer} 
 	Ein AnnotationDrawer, der die \glslink{Annotation}{Annotationen} des Bildes/Frames hinzufügt. 
 	\item\textit{private QPushButton mZoomInButton} 
@@ -920,10 +920,10 @@ Methoden
 	\item\textit{public void setZoom(float z)} 
 	Setzt die Größe des Bildes/Frames.
 	\item\textit{public QGraphicsScene scene()} 
-	Erzeugt ein QGraphicsScene, in dem die Media gezeigt werden.
+	Erzeugt eine QGraphicsScene, in der die Medien gezeigt werden.
 	\item\textit{public signal roi()} 
 	Ein Signal, wenn der \glslink{ROI}{ROIButton} geklickt wurde.
-	\item\textit{public slot void roi()} 
+	\item\textit{public slot roi()} 
 	Fängt das Signal roi ab und wartet darauf, dass der Benutzer ein Rechteck zeichnet.
 	\item\textit{public signal rightClick()} 
 	Ein Signal mit Positionsinformationen für den Controller, wenn ein Rechtsklick erfolgt. 
@@ -987,7 +987,7 @@ Methoden
 \end{itemize}
 
 \subsection*{ClickableGraphicsIdRectItem : public QGraphicsRectItem}
-Diese Klasse fügt die Möglichkeit hinzu, auf dieses Item klicken zu können, und zeigt die Id der \gls{Annotation}.
+Diese Klasse fügt die Möglichkeit hinzu, auf dieses Item klicken zu können, und zeigt die Id der \gls{Annotation} an.
 
 \begin{figure}[H]
 	\centering
@@ -1002,7 +1002,7 @@ Methoden
 	\item\textit{public void mousePressEvent(QGraphicsSceneMouseEvent *event)}
 	Fängt die Bewegung der Maus nach einem Klick ab.
 	\item\textit{public void showID(Annotation *an)}
-	Zeigt die ID der \gls{Annotation} an.
+	Zeigt die Id der \gls{Annotation} an.
 \end{itemize}
 
 \subsection*{ParameterPageWidget : public PageWidget}
@@ -1019,11 +1019,11 @@ Attribute
 	\item\textit{private QListView mSearchDatasetListView}
 	Ein ListView zur Darstellung der Datensätze, in denen gesucht werden kann.
 	\item\textit{private DatasetModel mSearchDatasetListModel}
-	Ein DatasetModel, das die darzustellende Datensätze enthält.
+	Ein DatasetModel, das die darzustellenden Datensätze enthält.
 	\item\textit{private ParameterModel mParameterModel}
-	Ein ParameterModel, das die darzustellende Parameter enthält.
+	Ein ParameterModel, das die darzustellenden Parameter enthält.
 	\item\textit{private QTreeView mParameterWidget}
-	Ein TreeView zur Darestellung der Parameter.
+	Ein TreeView zur Darstellung der Parameter.
 	\item\textit{private QPushButton mNextWindowButton}
 	Ein Button, mit dem zum nächsten Fenster gewechselt wird.
 	\item\textit{public int EXIT\_NEXT} 
@@ -1039,7 +1039,7 @@ Methoden
 	\item\textit{public void reset()}
 	Leert das ParameterPageWidget.
 	\item\textit{public signal next()}
-	Ein Signal an den Controller, wenn das mNextWindowButton gefordert wird. 
+	Ein Signal an den Controller, wenn der mNextWindowButton gefordert wird. 
 \end{itemize}
 
 \subsection*{ConfirmationPageWidget : public PageWidget}
@@ -1070,7 +1070,7 @@ Methoden
 	\item\textit{public void reset()}
 	Leert das ConfirmationPageWidget. 
 	\item\textit{public signal search()}
-	Ein Signal an den Controller, wenn man das mSearchButton klickt.
+	Ein Signal an den Controller, wenn der mSearchButton geklickt wurde.
 \end{itemize}
 
 \subsection*{ResultsPageWidget : public PageWidget}
@@ -1085,9 +1085,9 @@ Das ist das PageWidget, in dem die Ergebnisse der Suche dargestellt werden. Man 
 Attribute
 \begin{itemize}
 	\item\textit{private QListView mResultMediaListView}
-	Ein ListView zur Darstellung der Ergebnisse von der Suche.
+	Ein ListView zur Darstellung der Ergebnisse der Suche.
 	\item\textit{private SearchResultModel mResultMediaListModel}
-	Ein SearchResultModel, das die darzustellende Ergebnisse enthält.
+	Ein SearchResultModel, das die darzustellenden Ergebnisse enthält.
 	\item\textit{private QPushButton mBookmarkButton()}
 	Ein Button, mit dem man ein Bookmark setzt.
 	\item\textit{private QPushButton mNewSearchButton}
@@ -1105,9 +1105,9 @@ Methoden
 	\item\textit{public void reset()}
 	Leert das ResultsPageWidget.
 	\item\textit{public signal bookmark()}
-	Ein Signal an den Controller, wenn man das mBookmarkButton klickt.
+	Ein Signal an den Controller, wenn der mBookmarkButton geklickt wurde.
 	\item\textit{public signal newSearch()}
-	Ein Signal an den Controller, wenn man das mNewSearchButton klickt.
+	Ein Signal an den Controller, wenn der mNewSearchButton geklickt wurde.
 \end{itemize}
 
 \subsection*{SearchResultModel : public QAbstractListModel}
@@ -1183,7 +1183,7 @@ Methoden
 \end{itemize}
 
 \subsection*{IconDelegate : public QStyledItemDelegate}
-Diese Klasse ist ein anklickbares IconDelegate, das aus einem Bild und darunter Text besteht. Diese nutzt man, um die Datensätze in LibraryPageWidget, ViewerPageWidget darzustellen und herauszufinden, welcher von denen ausgewählt wurde.
+Diese Klasse ist ein anklickbares IconDelegate, das aus einem Bild und darunter Text besteht. Diese nutzt man, um die Datensätze im LibraryPageWidget und im ViewerPageWidget darzustellen und herauszufinden, welcher von denen ausgewählt wurde.
 
 \begin{figure}[H]
 	\centering
@@ -1300,18 +1300,18 @@ Dieses Diagramm zeigt alle Klassen des Controllers. Die zugehörigen Attribute u
 MainControl ist der Einstiegspunkt des Programms und verwaltet die Manager-Komponenten sowie den Navigator. Insbesondere erstellt MainControl die PageWidgets und registriert sie beim Navigator.
 Der Navigator und die Manager kommuniziert über Signals und Slots. Die Verbindung erfolgt bei MainControl.
 
-\begin{itemize}
-	\item\textit{public slot run()}
-	Starte die GUI nach erfolgreicher Initialisierung aller nötige Komponenten.
-	\item\textit{public signal finished()}
-	Ein Signal an die Manager, wenn der Benutzer das Programm beendet.
-\end{itemize}
-
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{img/Klassendiagramm/Klassen/Controller/MainControl}
 \label{fig:mainControl}
 \end{figure}
+
+\begin{itemize}
+	\item\textit{public slot run()}
+	Startet die GUI nach erfolgreicher Initialisierung aller nötige Komponenten.
+	\item\textit{public signal finished()}
+	Ein Signal an die Manager, wenn der Benutzer das Programm beendet.
+\end{itemize}
 
 \subsection*{Navigator}
 Der Navigator ist in der Lage, das aktuell im MainWindow angezeigte PageWidget durch ein anderes zu ersetzen. Des weiteren ist der Navigator für den Austausch von Daten zwischen den PageWidgets verantwortlich.
@@ -1322,12 +1322,14 @@ Der Navigator ist in der Lage, das aktuell im MainWindow angezeigte PageWidget d
 \label{fig:navigator}
 \end{figure}
 
+\pagebreak
+
 Attribute
 \begin{itemize}
 	\item\textit{private QStack<PageStackFrame> mPageStack}
-	Ein Stack, der PageStackFrame enthält. Unterstützt die zurück-Funktion.
+	Ein Stack, der PageStackFrames enthält. Unterstützt die zurück-Funktion.
 	\item\textit{private QList<QVariant> mDataStack}
-	Ein Stack, der als QVariant Daten für jede Page enthält. Wird parallel zu mPageStack zugegriffen.
+	Ein Stack, der als QVariant Daten für jede Page enthält. Auf diesen und auf mPageStack wird parallel zugegriffen.
 
 \end{itemize}
 
@@ -1335,18 +1337,18 @@ Methoden
 \begin{itemize}
 	\item\textit{public Navigator(MainWindow mainWindow)}
 	Erstellt einen neuen Navigator mit Referenz zu MainWindow.
-	\item\textit{public registerTransition(PageType origin, int exitCode, PageType target}
-	Registriert eine Seitenwechsel (vom einem Page zu einem anderen).
+	\item\textit{public registerTransition(PageType origin, int exitCode, PageType target)}
+	Registriert einen Seitenwechsel (vom einem PageWidget zu einem anderen).
 	\item\textit{public registerPage(PageType type, PageWidget widget)}
 	Registriert ein Mapping. Ein PageType wird auf ein PageWidget abgebildet.
-	\item\textit{public start(PageType type, QList<QVariant> data}
+	\item\textit{public start(PageType type, QList<QVariant> data)}
 	Startet den Navigator mit einer Anfangsseite und Daten (in einer Liste gegeben).
 	\item\textit{public slot tryPush(QVariant item) }
-	Fügt neue Daten in den Stack hinzu.
+	Fügt neue Daten zum Stack hinzu.
 	\item\textit{public slot tryRead(size\_t index, QVariant \&value) }
 	Liest Daten mit index aus dem Stack in ein QVariant ein.
 	\item\textit{public slot tryExit(int exitCode)}
-	Führt eine Seitewechsel mit exitCode aus.
+	Führt einen Seitenwechsel mit exitCode aus.
 	
 \end{itemize}
 
@@ -1362,7 +1364,7 @@ Der SearchManager startet einen \glslink{Suchalgorithmus}{Algorithmus} in einem 
 Methoden
 \begin{itemize}
 	\item\textit{public SearchManager(ResultsWindow* resWind)}
-	Erstellt einen SearchManager mit Referenz zu ResultWindow
+	Erstellt einen SearchManager mit Referenz zum ResultWindow.
 	\item\textit{public slot startSearch(SearchAlgorithm algo)}
 	Startet eine Suche.
 	\item\textit{public slot terminateSearch()}
@@ -1383,15 +1385,15 @@ Der SearchResultManager besitzt ein SearchResult und benachrichtigt das ResultsP
 Attribute
 \begin{itemize}
 	\item\textit{private SearchResult mResult}
-	Das Ergebnisse der aktuellen Suche.
+	Das Ergebnis der aktuellen Suche.
 \end{itemize}
 
 Methoden
 \begin{itemize}
 	\item\textit{public ResultManager(ResultsWindow* resWind)}
-	Erstellt einen ResultManager mit Referenz zu ResultsWindow
+	Erstellt einen ResultManager mit Referenz zu ResultsWindow.
 	\item\textit{public slot addResult(SearchResultElement* newResult)}
-	Füge ein neues Element der Ergebnisliste hinzu.
+	Fügt ein neues Element der Ergebnisliste hinzu.
 	\item\textit{public slot onSaveBookmark(Bookmark bookmark)}
  	Speichert das Suchergebnis als Bookmark.
 \end{itemize}
@@ -1408,9 +1410,9 @@ Der MainWindowManager stellt dem MainWindow die Bookmarks und Chronikeinträge z
 Attribute
 \begin{itemize}
 	\item\textit{private BookmarkList bookmarks}
-	Die Liste der Bookmark-Einträge
+	Die Liste der Bookmark-Einträge.
 	\item\textit{private BokmarkList chronicle}
-	Die Liste der Chronicle-Einträge
+	Die Liste der Chronik-Einträge.
 
 \end{itemize}
 
@@ -1419,13 +1421,13 @@ Methoden
 	\item\textit{public MainWindowManager(MainWindow* mainWindow)}
 	Erstellt einen MainWindowManager mit Referenz zu MainWindow.
 	\item\textit{public setBookmarks(BookmarkList bookmarks)}
-	Setze Bookmark-Einträge auf die gegebene Liste.
+	Setzt die Bookmark-Einträge auf die gegebene Liste.
 	\item\textit{public setChronicle(BookmarkList chronicle) }
-	Setze Chronik-Einträge auf die gegebene Liste.
+	Setzt die Chronik-Einträge auf die gegebene Liste.
 \end{itemize}
 
 \subsection*{BookmarkManager}
-Verwaltet Bookmarks und Chronik. Über den BookmarkManager werden Bookmark-und Chronicle-Einträge hinzugefügt und abgefragt.
+Verwaltet Bookmarks und Chronik. Über den BookmarkManager werden Bookmark- und Chronik-Einträge hinzugefügt und abgefragt.
 
 \begin{figure}[H]
 \centering
@@ -1436,7 +1438,7 @@ Verwaltet Bookmarks und Chronik. Über den BookmarkManager werden Bookmark-und C
 Methoden
 \begin{itemize}
 	\item\textit{public slot saveBookmark(Bookmark bookmak, bool permanently)}
-	Speichert einen Bookmark-oder Chronik-Eintrag.
+	Speichert einen Bookmark- oder Chronik-Eintrag.
 	\item\textit{public getBookmarks(): BookmarkList}
 	Gibt die Liste aller Bookmark-Einträge zurück.
 	\item\textit{public getChronicle(): BookmarkList}
@@ -1444,7 +1446,7 @@ Methoden
 \end{itemize}
 
 \subsection*{PageStackFrame}
-Element vom PageStack im Navigator. Über PageStackFrame kann man auf PageType bzw. PageWidget zugreifen.
+Ein Element vom PageStack im Navigator. Über PageStackFrame kann man auf PageType bzw. PageWidget zugreifen.
 
 \begin{figure}[H]
 \centering
@@ -1455,25 +1457,25 @@ Element vom PageStack im Navigator. Über PageStackFrame kann man auf PageType b
 Attribute
 \begin{itemize}
 	\item\textit{private size\_t mSize}
-	Größe des Frames
+	Die Größe des Frames.
 	\item\textit{private PageType mType}
-	Typ des zugehörigen PageWidget
+	Der Typ des zugehörigen PageWidgets.
 \end{itemize}
 
 Methoden
 \begin{itemize}
 	\item\textit{public PageStackFrame(PageType type)}
-	Erstellt neuen PageStackFrame.
+	Erstellt einen neuen PageStackFrame.
 	\item\textit{public setSize(size\_t size)}
 	Setzt die Größe auf size.
 	\item\textit{public getSize(): size\_t}
 	Gibt die Größe zurück.
 	\item\textit{public getType(): PageType}
-	Gibt den Typ des PageWidget zurück.
+	Gibt den Typ des PageWidgets zurück.
 \end{itemize}
 
 \subsection*{PageRegistration}
-Enthält alle beim Navigator registrierten Seitenwechseln. Diese Klase dient dazu, die Seite, zu der navigiert werden soll, abzufragen.
+Enthält alle beim Navigator registrierten Seitenwechsel. Diese Klase dient dazu, die Seite, zu der navigiert werden soll, abzufragen.
 
 \begin{figure}[H]
 \centering
@@ -1483,8 +1485,8 @@ Enthält alle beim Navigator registrierten Seitenwechseln. Diese Klase dient daz
 
 Attribute
 \begin{itemize}
-	\item\textit{private QMap<int; PageType> transitions}
-	Ein Mapping von allen exitCode und den entsprechenden Zielseiten.
+	\item\textit{private QMap<int, PageType> transitions}
+	Ein Mapping von allen exitCodes und den entsprechenden Zielseiten.
 \end{itemize}
 
 Methoden
@@ -1492,8 +1494,10 @@ Methoden
 	\item\textit{public getWidget()}
 	Gibt einen Null-Pointer zurück.
 	\item\textit{public getTarget(in exitCode:int): PageType}
-	Gibt den Typ der Seite, zu der navigiert werden sollte, zurück.
+	Gibt den Typ der Seite, zu der navigiert werden soll, zurück.
 \end{itemize}
+
+\pagebreak
 
 \subsection*{<<enumeration>> PageType}
 PageWidgets lassen sich beim Navigator mit einem PageType registrieren, welcher fortan zur Referenzierung dieses PageWidgets dient.

@@ -6,24 +6,24 @@
 \label{fig:Navigation init}
 \end{figure}
 
-Dieses Sequenzdiagramm beschreibt die Abläufe beim Programmstart, wenn MainControl die verschiedenen Komponente initilisiert.
+Dieses Sequenzdiagramm beschreibt die Abläufe beim Programmstart, wenn MainControl die verschiedenen Komponenten initialisiert.
 
 \begin{itemize}
-	\item initNavigation() wird aufgerufe
+	\item initNavigation() wird aufgerufen
 
-	\item MainControl erstellt LibraryPageWidget
+	\item MainControl erstellt das LibraryPageWidget
 
-	\item MainControl registriert LibraryPageWidget und Übergang zum ViewerPageWidget
+	\item MainControl registriert das LibraryPageWidget und den Übergang zum ViewerPageWidget
 
-	\item MainControl erstellt ViewerPageWidget und registriert beim Navigator
+	\item MainControl erstellt das ViewerPageWidget und registriert es beim Navigator
 
-	\item Startet Navigator mit LibraryView
+	\item Startet den Navigator mit LibraryView
 
-	\item Füge Suchdaten in DataStack ein
+	\item Fügt Suchdaten in den DataStack ein
 
-	\item Erstellt ein PageStackFrame für Library und füge dies in PageStack hinzu
+	\item Erstellt ein PageStackFrame für die Library und fügt dieses zum PageStack hinzu
 
-	\item Zeige Library an.
+	\item Zeigt die Library an
 
 \end{itemize}
 
@@ -37,22 +37,22 @@ Dieses Sequenzdiagramm beschreibt die Abläufe beim Programmstart, wenn MainCont
 \label{fig:seitenwechsel}
 \end{figure}
 
-Dieses Sequenzdiagramm beschreibt die Abläufe beim Seitenwechsel vom LibraryPageWidget zum ViewerPageWidget
+Dieses Sequenzdiagramm beschreibt die Abläufe beim Seitenwechsel vom LibraryPageWidget zum ViewerPageWidget.
 
 \begin{itemize}
-	\item Benutzer klickt auf 'weiter' (Library)
+	\item Benutzer klickt auf \enquote{weiter} (Library)
 
 	\item Datensatz wird an Navigator gesendet
 
 	\item LibraryPageWidget sendet Navigator einen Exit-Code, um die Seite zu wechseln
 
-	\item Als PageType wird LIBRARY zurückgegeben. Die entsprechenede PageRegistration wird ermittelt, aus der PageType der nächster Seite lesen läss
+	\item Als PageType wird LIBRARY zurückgegeben. Die entsprechende PageRegistration wird ermittelt, aus der PageType die nächste Seite lesen lässt
 
-	\item Aufruf der Funktion, ein PageWidget anhand PageType anzuzeigen
+	\item Aufruf der Funktion, ein PageWidget anhand von PageType anzuzeigen
 
-	\item ViewerPageWidget wird wiederum aus PageRegistration abgelesen.
+	\item ViewerPageWidget wird wiederum aus PageRegistration abgelesen
 
-	\item Der Navigator registriert das ViewerPageWidget als das PageWidget, das danach angezeigt werden soll. Das MainWindow erhält dies
+	\item Der Navigator registriert das ViewerPageWidget als das PageWidget, das danach angezeigt werden soll. Das MainWindow erhält dieses.
 
 \end{itemize}
 
