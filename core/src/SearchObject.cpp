@@ -1,6 +1,6 @@
 #include "CoBaB.h"
 
-SearchObject::SearchObject(){
+SearchObject::SearchObject() {
 
 }
 
