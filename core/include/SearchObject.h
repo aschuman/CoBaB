@@ -14,10 +14,10 @@ public:
     SearchObject();
     QString getMedium();
     void setMedium(QString medium);
-    Annotation getAnnotation();
-    void setAnnotation(Annotation annotation);
-    QRect getROI();
-    void setROI(QRect roi);
+    Annotation * getAnnotation();
+    void setAnnotation(Annotation *annotation);
+    QRect *getROI();
+    void setROI(QRect *roi);
     QString getSourceDataset();
     void setSourceDataset(QString dataset);
     int getMediumIndex();
@@ -25,18 +25,18 @@ public:
     void toStream(QDataStream in);
     void fromStream(QDataStream out);
 
-    friend QDataStream & operator >>(QDataStream &in, SearchObject &searchObject);
-    friend QDataStream & operator <<(QDataStream &out, SearchObject &searchObject);
+    friend QDataStream & operator >>(QDataStream &in, SearchObject searchObject);
+    friend QDataStream & operator <<(QDataStream &out, SearchObject searchObject);
 
 protected:
 
 private:
 
-    QString mMedium;
-    Annotation mAnnotation;
-    QRect mROI;
-    QString mSourceDataset;
-    int mMediumIndex;
+    QString mMedium = "";
+    Annotation *mAnnotation = new Annotation("", "");
+    QRect *mROI = new QRect();
+    QString mSourceDataset = "";
+    int mMediumIndex = 0;
 
 };
 

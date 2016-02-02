@@ -21,7 +21,8 @@ HEADERS += \
     include/PageStackFrame.h \
     include/PageType.h \
     include/PageWidget.h \
-    include/SearchObject.h
+    include/SearchObject.h \
+    include/SearchQuery.h
 
 SOURCES += \
     src/main.cpp \
@@ -38,7 +39,8 @@ SOURCES += \
     src/PageRegistration.cpp \
     src/PageStackFrame.cpp \
     src/PageWidget.cpp \
-    src/SearchObject.cpp
+    src/SearchObject.cpp \
+    src/SearchQuery.cpp
 
 FORMS += \
     ui/mainwindow.ui

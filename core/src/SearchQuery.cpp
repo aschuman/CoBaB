@@ -18,28 +18,28 @@ SearchQuery::SearchQuery() {
  * @return QList<Dataset>
  */
 QList<Dataset> SearchQuery::getDatasets() {
-    return null;
+    return mDatasets;
 }
 
 /**
  * @param datasets
  */
 void SearchQuery::setDatasets(QList<Dataset> datasets) {
-
+    mDatasets = datasets;
 }
 
 /**
  * @return SearchObject
  */
-SearchObject SearchQuery::getSearchObject() {
-    return null;
+SearchObject *SearchQuery::getSearchObject() {
+    return mSearchObject;
 }
 
 /**
  * @param searchObject
  */
-void SearchQuery::setSearchObject(SearchObject searchObject) {
-
+void SearchQuery::setSearchObject(SearchObject *searchObject) {
+    mSearchObject = searchObject;
 }
 
 /**

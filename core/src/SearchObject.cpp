@@ -12,19 +12,19 @@ void SearchObject::setMedium(QString medium) {
     mMedium = medium;
 }
 
-Annotation SearchObject::getAnnotation() {
+Annotation *SearchObject::getAnnotation() {
     return mAnnotation;
 }
 
-void SearchObject::setAnnotation(Annotation annotation) {
+void SearchObject::setAnnotation(Annotation *annotation) {
     mAnnotation = annotation;
 }
 
-QRect SearchObject::getROI() {
+QRect *SearchObject::getROI() {
     return mROI;
 }
 
-void SearchObject::setROI(QRect roi) {
+void SearchObject::setROI(QRect *roi) {
     mROI = roi;
 }
 
@@ -47,6 +47,7 @@ void SearchObject::setMediumIndex(int index) {
 void SearchObject::toStream(QDataStream in) {
 
     operator <<(&in, this);
+
 }
 
 void SearchObject::fromStream(QDataStream out) {
@@ -55,49 +56,49 @@ void SearchObject::fromStream(QDataStream out) {
 
 }
 
-friend QDataStream& operator >>(QDataStream &in, SearchObject &searchObject) {
+QDataStream& operator >>(QDataStream &in, SearchObject searchObject) {
 
     //read object from stream
 
     QString medium;
     int mediumIndex;
-    Annotation ann;
-    QRect roi;
+    Annotation *ann = new Annotation("", "");
+    QRect *roi;
     QString source;
 
     //skip opening bracket
-    in.ignore(1);
+    in.skipRawData(1);
 
     in >> medium;
     searchObject.setMedium(medium);
 
     //skip coma
-    in.ignore(2);
+    in.skipRawData(2);
 
     in >> mediumIndex;
     searchObject.setMediumIndex(mediumIndex);
 
-    in.ignore(2);
+    in.skipRawData(2);
 
-    in >> ann;
+    in >> *ann;
     searchObject.setAnnotation(ann);
 
-    in.ignore(2);
+    in.skipRawData(2);
 
-    in >> roi;
+    in >> *roi;
     searchObject.setROI(roi);
 
-    in.ignore(2);
+    in.skipRawData(2);
 
     in >> source;
     searchObject.setSourceDataset(source);
 
-    in.ignore(1);
+    in.skipRawData(1);
 
     return in;
 }
 
-friend QDataStream& operator <<(QDataStream &out, SearchObject &searchObject) {
+QDataStream& operator <<(QDataStream &out, SearchObject searchObject) {
 
     //write object to stream
     out << "(" << searchObject.getMedium() << ", "
