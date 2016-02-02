@@ -25,8 +25,8 @@ public:
     void toStream(QDataStream in);
     void fromStream(QDataStream out);
 
-    friend QDataStream & operator >>(QDataStream &in, SearchObject searchObject);
-    friend QDataStream & operator <<(QDataStream &out, SearchObject searchObject);
+    friend QDataStream & operator >>(QDataStream &in, SearchObject &searchObject);
+    friend QDataStream & operator <<(QDataStream &out, SearchObject &searchObject);
 
 protected:
 

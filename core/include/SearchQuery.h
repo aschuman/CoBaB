@@ -24,7 +24,7 @@ public:
      */
     void setDatasets(QList<Dataset> *datasets);
     
-    SearchObject *getSearchObject();
+    SearchObject * getSearchObject();
     
     /**
      * @param searchObject

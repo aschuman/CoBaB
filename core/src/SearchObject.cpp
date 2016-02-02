@@ -46,17 +46,17 @@ void SearchObject::setMediumIndex(int index) {
 
 void SearchObject::toStream(QDataStream in) {
 
-    operator <<(&in, this);
+    in << this;
 
 }
 
 void SearchObject::fromStream(QDataStream out) {
 
-    operator >>(&out, this);
+    out >> this;
 
 }
 
-QDataStream& operator >>(QDataStream &in, SearchObject searchObject) {
+QDataStream& operator >>(QDataStream &in, SearchObject &searchObject) {
 
     //read object from stream
 
@@ -98,7 +98,7 @@ QDataStream& operator >>(QDataStream &in, SearchObject searchObject) {
     return in;
 }
 
-QDataStream& operator <<(QDataStream &out, SearchObject searchObject) {
+QDataStream& operator <<(QDataStream &out, SearchObject &searchObject) {
 
     //write object to stream
     out << "(" << searchObject.getMedium() << ", "
