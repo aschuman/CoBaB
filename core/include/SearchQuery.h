@@ -57,6 +57,9 @@ private:
 
     QList<QString> *mDatasets = new QList<QString>;
     SearchObject *mSearchObject = new SearchObject();
+
+    QList<Dataset> * createDatasetList(QList<QString> *datasets);
+
 };
 
 #endif //_SEARCHQUERY_H
