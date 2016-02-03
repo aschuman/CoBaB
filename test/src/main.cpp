@@ -17,5 +17,5 @@ int main(int argc, char *argv[]){
     EXEC(PageStackFrameTester)
     EXEC(PageRegistrationTester)
 
-    return r | a.exec();
+    return r;
 }
