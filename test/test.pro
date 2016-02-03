@@ -16,9 +16,11 @@ INCLUDEPATH += ../core/include
 
 HEADERS += \
     include/pagestackframetester.h \
+    include/pageregistrationtester.h \
     include/pagewidgetmock.h
 
 SOURCES += \
     src/main.cpp \
     src/pagestackframetester.cpp \
+    src/pageregistrationtester.cpp \
     src/pagewidgetmock.cpp
