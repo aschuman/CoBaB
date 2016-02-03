@@ -1,10 +1,11 @@
 #ifndef PAGEWIDGET_H
 #define PAGEWIDGET_H
-#include <qwidget.h>
+#include <QWidget>
 #include <QVariant>
 
 class PageWidget : public QWidget
 {
+    Q_OBJECT
 public:
     virtual void reset() = 0;
 
