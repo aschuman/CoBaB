@@ -1,3 +1,4 @@
+include(../compileSettings.pri)
 TEMPLATE = app
 TARGET = test
 CONFIG += c++14

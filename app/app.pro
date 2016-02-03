@@ -1,3 +1,4 @@
+include(../compileSettings.pri)
 TEMPLATE = app
 TARGET = CoBaB
 CONFIG += c++14

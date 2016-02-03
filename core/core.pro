@@ -1,3 +1,4 @@
+include(../compileSettings.pri)
 TEMPLATE = lib
 TARGET = core
 CONFIG += staticlib c++14
