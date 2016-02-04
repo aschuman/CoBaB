@@ -15,7 +15,7 @@ script:
   - source /opt/qt55/bin/qt55-env.sh
   - g++-5 --version
   - qmake --version
-  - qmake "QMAKE_CXX=g++-5" "CC=gcc-5" "QMAKE_CXXFLAGS += -std=c++14" CoBaB.pro
+  - qmake "QMAKE_CXX=g++-5" "CC=gcc-5" "CONFIG+=travis" CoBaB.pro
   - make
   - test/test
   - cppcheck . -q --error-exitcode=31
