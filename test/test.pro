@@ -1,7 +1,7 @@
 include(../compileSettings.pri)
 TEMPLATE = app
 TARGET = test
-CONFIG += c++14 testcase
+CONFIG += testcase
 QT += testlib core widgets
 INCLUDEPATH += include
 
