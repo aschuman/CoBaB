@@ -1,6 +1,6 @@
 #include "include/pagestackframetester.h"
 #include <QtTest>
-#include <pagestackframe.h>
+#include <PageStackFrame.h>
 
 void PageStackFrameTester::testConstructor_data(){
     QTest::addColumn<PageType>("inType");
