@@ -39,7 +39,6 @@ SOURCES += \
     src/Navigator.cpp \
     src/PageRegistration.cpp \
     src/PageStackFrame.cpp \
-    src/PageWidget.cpp \
     src/SearchObject.cpp \
     src/SearchQuery.cpp
 
