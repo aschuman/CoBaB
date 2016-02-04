@@ -1,82 +1,43 @@
-/**
- * Project \
- */
+#ifndef SEARCHOBJECT_H
+#define SEARCHOBJECT_H
 
-
-#ifndef _SEARCHOBJECT_H
-#define _SEARCHOBJECT_H
-
-#include "Serializable.h"
 #include "Dataset.h"
+#include "Annotation.h"
+#include "Medium.h"
+#include "DataPacket.h"
 #include <QRect>
 
 class SearchObject: public Serializable {
-public: 
-    
+
+public:
+
     SearchObject();
-    
     QString getMedium();
-    
-    /**
-     * @param medium
-     */
     void setMedium(QString medium);
-    
-    Annotation getAnnotation();
-    
-    /**
-     * @param annotation
-     */
-    void setAnnotation(Annotation annotation);
-    
-    QRect getROI();
-    
-    /**
-     * @param ROI
-     */
-    void setROI(QRect ROI);
-    
-    Dataset getSourceDataset();
-    
-    /**
-     * @param dataset
-     */
-    void setSourceDataset(Dataset dataset);
-    
+    Annotation * getAnnotation();
+    void setAnnotation(Annotation *annotation);
+    QRect *getROI();
+    void setROI(QRect *roi);
+    QString getSourceDataset();
+    void setSourceDataset(QString dataset);
     int getMediumIndex();
-    
-    /**
-     * @param index
-     */
     void setMediumIndex(int index);
-    
-    /**
-     * @param out
-     * @param searchObject
-     */
-    friend QDataStream& operator<<(QDataStream& out, SearchObject& searchObject);
-    
-    /**
-     * @param in
-     * @param searchObject
-     */
-    friend QDataStream& operator>>(QDataStream& in, SearchObject& searchObject);
-    
-    /**
-     * @param in
-     */
     void toStream(QDataStream in);
-    
-    /**
-     * @param out
-     */
     void fromStream(QDataStream out);
-private: 
-    QString mMedium;
-    Annotation mAnnotation;
-    QRect mROI;
-    QString mSourceDataset;
-    int mMediumIndex;
+
+    friend QDataStream & operator >>(QDataStream &in, SearchObject &searchObject);
+    friend QDataStream & operator <<(QDataStream &out, SearchObject &searchObject);
+
+protected:
+
+private:
+
+    QString mMedium = "";
+    Annotation *mAnnotation = new Annotation("", "");
+    QRect *mROI = new QRect();
+    QString mSourceDataset = "";
+    int mMediumIndex = 0;
+
 };
 
-#endif //_SEARCHOBJECT_H
+#endif // SEARCHOBJECT_H

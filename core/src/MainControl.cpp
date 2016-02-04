@@ -1,4 +1,4 @@
-#include "include/maincontrol.h"
+#include "include/MainControl.h"
 
 void MainControl::run()
 {
