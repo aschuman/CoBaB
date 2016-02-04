@@ -26,7 +26,6 @@ HEADERS += \
     include/SearchQuery.h
 
 SOURCES += \
-    src/main.cpp \
     src/Medium.cpp \
     src/Photo.cpp \
     src/SingleFrameVideo.cpp \
