@@ -26,6 +26,9 @@
 Dataset::Dataset(QString path) {
     mPath = path;
     QDir dir(path);
+    if(!dir.exists()) {
+        return;
+    }
     mName = dir.dirName();
 
     if(!createSingleFrameVideoDataset()) {
