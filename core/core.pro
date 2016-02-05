@@ -1,6 +1,7 @@
+include(../compileSettings.pri)
 TEMPLATE = lib
 TARGET = core
-CONFIG += staticlib c++14
+CONFIG += staticlib
 QT += widgets core
 INCLUDEPATH = include
 
@@ -26,7 +27,6 @@ HEADERS += \
     include/DatasetList.h
 
 SOURCES += \
-    src/main.cpp \
     src/Medium.cpp \
     src/Photo.cpp \
     src/SingleFrameVideo.cpp \
@@ -39,7 +39,6 @@ SOURCES += \
     src/Navigator.cpp \
     src/PageRegistration.cpp \
     src/PageStackFrame.cpp \
-    src/PageWidget.cpp \
     src/SearchObject.cpp \
     src/SearchQuery.cpp \
     src/DatasetList.cpp
