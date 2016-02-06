@@ -11,6 +11,12 @@ install:
   - sudo apt-get install qt55base
   - sudo apt-get install cppcheck
 
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3
+
+
 script:
   - source /opt/qt55/bin/qt55-env.sh
   - g++-5 --version
