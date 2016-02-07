@@ -14,12 +14,12 @@
  * @return DataPacketType
  */
 DataPacketType DataPacket::getType() {
-    return null;
+    return mType;
 }
 
 /**
  * @return QUuid
  */
 QUuid DataPacket::getUuid() {
-    return null;
+    return mUuid;
 }
