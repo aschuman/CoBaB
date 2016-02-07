@@ -43,7 +43,8 @@ private:
     bool createPhotoDataset();
     bool containsFps(QString filepath);
     void createPreviewPhoto();
-    QList<QPair<int, Annotation>> parse(QString filepath);
+    QList<QPair<int, Annotation>> createVideoAnnotations(QString path);
+    QList<QPair<QString, Annotation>> parseAnnotations(QString filepath);
 };
 
 #endif //_DATASET_H
