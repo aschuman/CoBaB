@@ -30,10 +30,10 @@ private:
     void displayPage(PageType type);
     PageType getCurrentPageType() const;
 
+    std::unique_ptr<MainWindow> mMainWindow; // needs to be on top, as it takes ownership of associated objects
     std::stack<PageStackFrame> mPageStack;
     std::vector<QVariant> mDataStack;
     std::map<PageType, PageRegistration> mPageRegistrations;
-    std::unique_ptr<MainWindow> mMainWindow;
 
 
 };
