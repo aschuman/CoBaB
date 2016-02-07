@@ -1,4 +1,4 @@
-#include "include/pagestackframetester.h"
+#include "include/PageStackframeTester.h"
 #include <QtTest>
 #include "PageStackFrame.h"
 

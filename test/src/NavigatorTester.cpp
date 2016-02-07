@@ -1,4 +1,4 @@
-#include "include/navigatortester.h"
+#include "include/NavigatorTester.h"
 #include <QTest>
 
 

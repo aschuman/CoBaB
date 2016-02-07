@@ -1,6 +1,6 @@
-#include "include/pageregistrationtester.h"
+#include "include/PageRegistrationTester.h"
 #include <QtTest>
-#include <pagewidgetmock.h>
+#include "PageWidgetMock.h"
 
 void PageRegistrationTester::init()
 {

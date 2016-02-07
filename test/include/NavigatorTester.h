@@ -4,7 +4,7 @@
 #include <memory>
 #include <QObject>
 #include "Navigator.h"
-#include "pagewidgetmock.h"
+#include "PageWidgetMock.h"
 
 
 class NavigatorTester : public QObject

@@ -1,4 +1,4 @@
-#include "include/pagewidgetmock.h"
+#include "include/PageWidgetMock.h"
 
 PageWidgetMock::PageWidgetMock() : mReset(false)
 {

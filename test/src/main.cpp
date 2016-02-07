@@ -1,8 +1,8 @@
 #include <QtTest/QTest>
 
-#include "pagestackframetester.h"
-#include "pageregistrationtester.h"
-#include "navigatortester.h"
+#include "PageStackframeTester.h"
+#include "PageRegistrationTester.h"
+#include "NavigatorTester.h"
 
 #define EXEC(Tester) {Tester tester; r |= QTest::qExec(&tester);}
 

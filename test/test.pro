@@ -15,14 +15,14 @@ INCLUDEPATH += ../core/include
 }
 
 HEADERS += \
-    include/pagestackframetester.h \
-    include/pageregistrationtester.h \
-    include/pagewidgetmock.h \
-    include/navigatortester.h
+    include/NavigatorTester.h \
+    include/PageStackframeTester.h \
+    include/PageWidgetMock.h \
+    include/PageRegistrationTester.h
 
 SOURCES += \
     src/main.cpp \
-    src/pagestackframetester.cpp \
-    src/pageregistrationtester.cpp \
-    src/pagewidgetmock.cpp \
-    src/navigatortester.cpp
+    src/NavigatorTester.cpp \
+    src/PageRegistrationTester.cpp \
+    src/PageStackframeTester.cpp \
+    src/PageWidgetMock.cpp
