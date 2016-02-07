@@ -7,6 +7,10 @@ Navigator::Navigator(std::unique_ptr<MainWindow> mainWindow) : mMainWindow(move(
 
 void Navigator::registerPage(PageType type, std::unique_ptr<PageWidget> widget)
 {
+    QObject::connect((PageWidget*)widget.get(), SIGNAL(pushToStack(QVariant)), this, SLOT(tryPush(QVariant)));
+    QObject::connect((PageWidget*)widget.get(), SIGNAL(readFromStack(size_t, QVariant&)), this, SLOT(tryRead(size_t,QVariant&)));
+    QObject::connect((PageWidget*)widget.get(), SIGNAL(exit(int)), this, SLOT(tryExit(int)));
+
     mPageRegistrations.insert(std::map<PageType, PageRegistration>::value_type(type, PageRegistration(move(widget))));
 }
 
@@ -30,7 +34,7 @@ void Navigator::tryRead(size_t index, QVariant &value)
 {
     PageRegistration* registration = checkSender();
     if(registration){
-        value = mDataStack[index];
+        value = mDataStack[mDataStack.size() - 1 - index];
     }
 }
 

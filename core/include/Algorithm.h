@@ -16,14 +16,8 @@ public:
     
     void cancel();
     
-    /**
-     * @param inputDataList
-     */
     bool setInputs(QList<DataPacket> inputDataList);
     
-    /**
-     * @param parameters
-     */
     bool setParameters(QJsonObject parameters);
     
     QString getId();

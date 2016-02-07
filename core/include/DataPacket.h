@@ -18,14 +18,8 @@ public:
     
     QUuid getUuid();
     
-    /**
-     * @param in
-     */
     virtual void toStream(QDataStream in) = 0;
     
-    /**
-     * @param out
-     */
     virtual void fromStream(QDataStream out) = 0;
 protected: 
     DataPacketType mType;

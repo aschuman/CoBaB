@@ -24,7 +24,10 @@ HEADERS += \
     include/PageWidget.h \
     include/SearchObject.h \
     include/SearchQuery.h \
-    include/DatasetList.h
+    include/DatasetList.h \
+    include/Algorithm.h \
+    include/DataPacket.h \
+    include/DataPacketType.h
 
 SOURCES += \
     src/Medium.cpp \
@@ -41,7 +44,8 @@ SOURCES += \
     src/PageStackFrame.cpp \
     src/SearchObject.cpp \
     src/SearchQuery.cpp \
-    src/DatasetList.cpp
+    src/DatasetList.cpp \
+    src/DataPacket.cpp
 
 FORMS += \
     ui/mainwindow.ui

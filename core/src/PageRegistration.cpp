@@ -1,25 +1,25 @@
 #include "include/PageRegistration.h"
 
-PageRegistration::PageRegistration(std::unique_ptr<PageWidget> widget) : widget(move(widget))
+PageRegistration::PageRegistration(std::unique_ptr<PageWidget> widget) : mWidget(move(widget))
 {
 }
 
 void PageRegistration::addTransition(int exitCode, PageType type)
 {
-    transitions.insert(exitCode, type);
+    mTransitions.insert(exitCode, type);
 }
 
 const PageWidget &PageRegistration::getWidget() const
 {
-    return *widget;
+    return *mWidget;
 }
 
 PageWidget &PageRegistration::getWidget()
 {
-    return *widget;
+    return *mWidget;
 }
 
 PageType PageRegistration::getTarget(int exitCode) const
 {
-    return transitions[exitCode];
+    return mTransitions[exitCode];
 }
