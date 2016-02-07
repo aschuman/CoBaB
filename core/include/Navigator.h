@@ -11,8 +11,9 @@
 #include <PageRegistration.h>
 
 
-class Navigator
+class Navigator : public QObject
 {
+    Q_OBJECT
 public:
     Navigator(std::unique_ptr<MainWindow> mainWindow);
     void registerPage(PageType type, std::unique_ptr<PageWidget> widget);
