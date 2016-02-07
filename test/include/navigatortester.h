@@ -1,10 +1,10 @@
 #ifndef NAVIGATORTESTER_H
 #define NAVIGATORTESTER_H
 
-#include<memory>
-#include<QObject>
-#include<Navigator.h>
-#include <pagewidgetmock.h>
+#include <memory>
+#include <QObject>
+#include "Navigator.h"
+#include "pagewidgetmock.h"
 
 
 class NavigatorTester : public QObject

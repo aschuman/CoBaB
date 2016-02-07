@@ -1,7 +1,7 @@
 #ifndef PAGEWIDGETMOCK_H
 #define PAGEWIDGETMOCK_H
-#include <PageWidget.h>
 
+#include "PageWidget.h"
 
 class PageWidgetMock : public PageWidget
 {

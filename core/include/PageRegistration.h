@@ -2,8 +2,8 @@
 #define PAGEREGISTRATION_H
 #include <QMap>
 #include <memory>
-#include <PageType.h>
-#include <PageWidget.h>
+#include "PageType.h"
+#include "PageWidget.h"
 
 
 class PageRegistration

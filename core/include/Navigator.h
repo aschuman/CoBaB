@@ -6,9 +6,9 @@
 #include <vector>
 #include <stack>
 #include <qvariant.h>
-#include <MainWindow.h>
-#include <PageStackFrame.h>
-#include <PageRegistration.h>
+#include "MainWindow.h"
+#include "PageStackFrame.h"
+#include "PageRegistration.h"
 
 
 class Navigator : public QObject

@@ -3,7 +3,7 @@
 
 #include <memory>
 #include <QObject>
-#include <PageRegistration.h>
+#include "PageRegistration.h"
 
 class PageRegistrationTester : public QObject
 {
