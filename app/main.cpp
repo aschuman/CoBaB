@@ -1,6 +1,6 @@
 #include <QtCore>
 #include <QApplication>
-#include <maincontrol.h>
+#include <MainControl.h>
 
 int main(int argc, char *argv[])
 {

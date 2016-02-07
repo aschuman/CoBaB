@@ -11,11 +11,17 @@ install:
   - sudo apt-get install qt55base
   - sudo apt-get install cppcheck
 
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3
+
+
 script:
   - source /opt/qt55/bin/qt55-env.sh
   - g++-5 --version
   - qmake --version
-  - qmake "QMAKE_CXX=g++-5" "CC=gcc-5" "QMAKE_CXXFLAGS += -std=c++14" CoBaB.pro
+  - qmake "QMAKE_CXX=g++-5" "CC=gcc-5" "CONFIG+=travis" CoBaB.pro
   - make
   - test/test
   - cppcheck . -q --error-exitcode=31

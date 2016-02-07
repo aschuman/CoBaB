@@ -12,23 +12,24 @@
 
 
 class SearchQuery: public DataPacket {
+
 public: 
     
     SearchQuery();
     
-    QList<Dataset> getDatasets();
+    QList<Dataset> * getDatasets();
     
     /**
      * @param datasets
      */
-    void setDatasets(QList<Dataset> datasets);
+    void setDatasets(QList<Dataset> *datasets);
     
-    SearchObject getSearchObject();
+    SearchObject * getSearchObject();
     
     /**
      * @param searchObject
      */
-    void setSearchObject(SearchObject searchObject);
+    void setSearchObject(SearchObject *searchObject);
     
     /**
      * @param out
@@ -51,9 +52,14 @@ public:
      * @param out
      */
     void fromStream(QDataStream out);
-private: 
-    QList<QString> mDatasets;
-    SearchObject mSearchObject;
+
+private:
+
+    QList<QString> *mDatasets = new QList<QString>;
+    SearchObject *mSearchObject = new SearchObject();
+
+    QList<Dataset> * createDatasetList(QList<QString> *datasets);
+
 };
 
 #endif //_SEARCHQUERY_H
