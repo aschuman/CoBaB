@@ -34,7 +34,7 @@ void Navigator::tryRead(size_t index, QVariant &value)
 {
     PageRegistration* registration = checkSender();
     if(registration){
-        value = mDataStack[index];
+        value = mDataStack[mDataStack.size() - 1 - index];
     }
 }
 
