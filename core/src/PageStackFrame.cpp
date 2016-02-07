@@ -1,20 +1,20 @@
 #include "include/PageStackFrame.h"
 
-PageStackFrame::PageStackFrame(PageType type) : size(0), type(type){
+PageStackFrame::PageStackFrame(PageType type) : mSize(0), mType(type){
 }
 
 void PageStackFrame::setSize(size_t size)
 {
-    this->size = size;
+    mSize = size;
 }
 
 size_t PageStackFrame::getSize() const
 {
-    return size;
+    return mSize;
 }
 
 PageType PageStackFrame::getType() const
 {
-    return type;
+    return mType;
 }
 

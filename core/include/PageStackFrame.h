@@ -7,8 +7,8 @@
 
 class PageStackFrame
 {
-    size_t size;
-    PageType type;
+    size_t mSize;
+    PageType mType;
 public:
     PageStackFrame(PageType type);
     void setSize(size_t size);

@@ -8,8 +8,8 @@
 
 class PageRegistration
 {
-    std::unique_ptr<PageWidget> widget;
-    QMap<int, PageType> transitions;
+    std::unique_ptr<PageWidget> mWidget;
+    QMap<int, PageType> mTransitions;
 
 public:
     PageRegistration(std::unique_ptr<PageWidget> widget);
