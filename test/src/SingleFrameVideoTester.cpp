@@ -14,9 +14,9 @@ void SingleFrameVideoTester::testFramerate()
 
 void SingleFrameVideoTester::testFrameList()
 {
-    QList<QString> *list = new QList<QString>();
-    list->append("bigbangtheory_s1e1.vob_00000.png");
-    list->append("bigbangtheory_s1e1.vob_00250.png");
-    list->append("bigbangtheory_s1e1.vob_00500.png");
-    QCOMPARE(mSingleFrameVideo->getFrameList(), *list);
+    QList<QString> list;
+    list.append("bigbangtheory_s1e1.vob_00000.png");
+    list.append("bigbangtheory_s1e1.vob_00250.png");
+    list.append("bigbangtheory_s1e1.vob_00500.png");
+    QCOMPARE(mSingleFrameVideo->getFrameList(), list);
 }
