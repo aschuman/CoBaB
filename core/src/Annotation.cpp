@@ -22,7 +22,7 @@ Annotation::Annotation(QString id, QString type) {
  * @return QString
  */
 QString Annotation::getId() {
-    return "";
+    return mId;
 }
 
 /**
@@ -56,12 +56,12 @@ QDataStream& operator>>(QDataStream& in, Annotation& annotation) {
  * @param in
  */
 void Annotation::toStream(QDataStream in) {
-
+    in << *this;
 }
 
 /**
  * @param out
  */
 void Annotation::fromStream(QDataStream out) {
-
+    out >> *this;
 }
