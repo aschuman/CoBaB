@@ -29,7 +29,13 @@ QString Annotation::getId() {
  * @return AnnotationType
  */
 AnnotationType Annotation::getType() {
-    return AnnotationType::FACE;
+    QStringList types;
+    types << "Face" << "Person";
+    switch (types.indexOf(mId)) {
+        case 0  : return AnnotationType::PERSON;
+        case 1  : return AnnotationType::FACE;
+        default : return AnnotationType::FACE;
+    }
 }
 
 /**

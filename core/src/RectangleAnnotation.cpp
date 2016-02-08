@@ -31,6 +31,16 @@ QDataStream& operator<<(QDataStream& out, RectangleAnnotation& annotation){
  * @param annotation
  */
 QDataStream& operator>>(QDataStream& in, RectangleAnnotation& annotation) {
-    (void) annotation;
+
+    char *id, *type;
+    int x, y, width, height;
+    in >> id >> x >> y >> width >> height >> type;
+    annotation = RectangleAnnotation(QString(id), QString(type));
+    //set coordinates and size
+    annotation.setX(x);
+    annotation.setY(y);
+    annotation.setWidth(width);
+    annotation.setHeight(height);
+
     return in;
 }
