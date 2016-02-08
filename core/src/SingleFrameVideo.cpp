@@ -3,7 +3,7 @@
  */
 
 
-#include "CoBaB.h"
+#include "SingleFrameVideo.h"
 #include <QDir>
 #include <QTextStream>
 #include <algorithm>
@@ -35,17 +35,10 @@ SingleFrameVideo::SingleFrameVideo(QString path, QList<QPair<int, Annotation>> a
     mFrameList = dir.entryList();
 
     if(dir.exists(FRAMERATE_FILE)) {
-        readFramerateFromJson(FRAMERATE_FILE);
+        mFramerate = readFramerateFromJson(FRAMERATE_FILE);
     }
 
-
-    struct {
-        bool operator()(QPair<int, Annotation> a, QPair<int, Annotation> b) {
-            return a.first < b.first;
-        }
-    } customLess;
-    std::sort(mAnnotationList.begin(), mAnnotationList.end(), customLess);
-
+    std::sort(mFrameList.begin(), mFrameList.end());
 }
 
 /**

@@ -3,7 +3,7 @@
  */
 
 
-#include "CoBaB.h"
+#include "AlgorithmList.h"
 
 /**
  * AlgorithmList implementation

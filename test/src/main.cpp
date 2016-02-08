@@ -3,6 +3,7 @@
 #include "PageStackframeTester.h"
 #include "PageRegistrationTester.h"
 #include "NavigatorTester.h"
+#include "SingleFrameVideoTester.h"
 
 #define EXEC(Tester) {Tester tester; r |= QTest::qExec(&tester);}
 
@@ -18,6 +19,8 @@ int main(int argc, char *argv[]){
     EXEC(PageStackFrameTester)
     EXEC(PageRegistrationTester)
     EXEC(NavigatorTester)
+
+    EXEC(SingleFrameVideoTester)
 
     return r;
 }

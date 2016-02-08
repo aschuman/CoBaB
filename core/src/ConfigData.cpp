@@ -3,7 +3,7 @@
  */
 
 
-#include "CoBaB.h"
+#include "ConfigData.h"
 
 /**
  * ConfigData implementation

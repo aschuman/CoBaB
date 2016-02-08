@@ -3,7 +3,7 @@
  */
 
 
-#include "CoBaB.h"
+#include "Medium.h"
 
 /**
  * Medium implementation

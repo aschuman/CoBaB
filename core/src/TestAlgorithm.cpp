@@ -3,7 +3,7 @@
  */
 
 
-#include "CoBaB.h"
+#include "TestAlgorithm.h"
 
 /**
  * TestAlgorithm implementation
