@@ -22,7 +22,13 @@ RectangleAnnotation::RectangleAnnotation(QString id, QString type) : Annotation(
  * @param annotation
  */
 QDataStream& operator<<(QDataStream& out, RectangleAnnotation& annotation){
-    (void) annotation;
+    //convert QString to char array for output
+    const char *id = annotation.getId().toStdString().c_str();
+    const char *type = annotation.mType.toStdString().c_str();
+
+    out << id << " " << annotation.x() << " " << annotation.y() << " "
+        << annotation.width() << " " << annotation.height() << " " << type << " ";
+
     return out;
 }
 
@@ -36,6 +42,7 @@ QDataStream& operator>>(QDataStream& in, RectangleAnnotation& annotation) {
     int x, y, width, height;
     in >> id >> x >> y >> width >> height >> type;
     annotation = RectangleAnnotation(QString(id), QString(type));
+
     //set coordinates and size
     annotation.setX(x);
     annotation.setY(y);
