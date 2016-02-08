@@ -20,7 +20,7 @@ public:
     
     QList<SearchResultElement> * getSearchResultList();
     
-    QList<SearchResultElement> sortByScore();
+    QList<SearchResultElement> * sortByScore();
     
     /**
      * @param out
