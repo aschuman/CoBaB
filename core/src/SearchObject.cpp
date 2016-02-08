@@ -63,7 +63,7 @@ QDataStream& operator >>(QDataStream &in, SearchObject &searchObject) {
     QString medium;
     int mediumIndex;
     Annotation *ann = new Annotation("", "");
-    QRect *roi;
+    QRect *roi = new QRect();
     QString source;
 
     //skip opening bracket
