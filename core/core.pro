@@ -29,7 +29,9 @@ HEADERS += \
     interface/DataPacket.h \
     interface/DataPacketType.h \
     interface/SearchResultElement.h \
-    interface/SearchResult.h
+    interface/SearchResult.h \
+    include/LibraryPageWidget.h \
+    include/ViewerPageWidget.h
 
 SOURCES += \
     src/Medium.cpp \
@@ -49,7 +51,11 @@ SOURCES += \
     src/DatasetList.cpp \
     src/DataPacket.cpp \
     src/SearchResultElement.cpp \
-    src/SearchResult.cpp
+    src/SearchResult.cpp \
+    src/LibraryPageWidget.cpp \
+    src/ViewerPageWidget.cpp
 
 FORMS += \
-    ui/mainwindow.ui
+    ui/LibraryPageWidget.ui \
+    ui/MainWindow.ui \
+    ui/ViewerPageWidget.ui

@@ -16,10 +16,10 @@ void Navigator::registerPage(PageType type, std::unique_ptr<PageWidget> widget)
 
 void Navigator::start(PageType type, QList<QVariant> data)
 {
-    for(QVariant& datum : data){
+    for(QVariant datum : data){
         mDataStack.push_back(datum);
-        displayPage(type);
     }
+    displayPage(type);
 }
 
 void Navigator::tryPush(QVariant item)
