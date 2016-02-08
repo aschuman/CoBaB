@@ -13,23 +13,23 @@
 /**
  * @param list
  */
-SearchResult::SearchResult(QList<SearchResultElement> list) {
-
+SearchResult::SearchResult(QList<SearchResultElement> *list) {
+    mSearchResultElementList = list;
 }
 
 /**
  * @return QList<SearchResultElement>
  */
-QList<SearchResultElement> SearchResult::getSearchResultList() {
-    return null;
+QList<SearchResultElement> * SearchResult::getSearchResultList() {
+    return mSearchResultElementList;
 }
 
 /**
  * @return QList<SearchResultElement>
  */
-QList<SearchResultElement> SearchResult::sortByScore() {
-    return null;
-}
+/*QList<SearchResultElement> SearchResult::sortByScore() {
+    return ;
+}*/
 
 /**
  * @param out
@@ -37,7 +37,7 @@ QList<SearchResultElement> SearchResult::sortByScore() {
  * @return QDataStream&
  */
 QDataStream& operator<<(QDataStream& out, SearchResult& searchResult) {
-    return null;
+    return out;
 }
 
 /**
@@ -46,7 +46,7 @@ QDataStream& operator<<(QDataStream& out, SearchResult& searchResult) {
  * @return QDataStream&
  */
 QDataStream& operator>>(QDataStream& in, SearchResult& searchResult) {
-    return null;
+    return in;
 }
 
 /**

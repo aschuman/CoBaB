@@ -22,12 +22,12 @@ public:
      */
     void setScore(int score);
     
-    SearchObject getSearchObject();
+    SearchObject *getSearchObject();
     
     /**
      * @param searchObject
      */
-    void setSearchObject(SearchObject searchObject);
+    void setSearchObject(SearchObject *searchObject);
     
     /**
      * @param out
@@ -50,9 +50,12 @@ public:
      * @param out
      */
     void fromStream(QDataStream out);
-private: 
+
+private:
+
     int mScore;
-    SearchObject mSearchObject;
+    SearchObject *mSearchObject;
+
 };
 
 #endif //_SEARCHRESULTELEMENT_H

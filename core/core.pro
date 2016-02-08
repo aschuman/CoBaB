@@ -27,7 +27,9 @@ HEADERS += \
     include/DatasetList.h \
     include/Algorithm.h \
     include/DataPacket.h \
-    include/DataPacketType.h
+    include/DataPacketType.h \
+    include/SearchResultElement.h \
+    include/SearchResult.h
 
 SOURCES += \
     src/Medium.cpp \
@@ -45,7 +47,9 @@ SOURCES += \
     src/SearchObject.cpp \
     src/SearchQuery.cpp \
     src/DatasetList.cpp \
-    src/DataPacket.cpp
+    src/DataPacket.cpp \
+    src/SearchResultElement.cpp \
+    src/SearchResult.cpp
 
 FORMS += \
     ui/mainwindow.ui

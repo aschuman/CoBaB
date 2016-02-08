@@ -16,9 +16,9 @@ public:
     /**
      * @param list
      */
-    SearchResult(QList<SearchResultElement> list);
+    SearchResult(QList<SearchResultElement> *list);
     
-    QList<SearchResultElement> getSearchResultList();
+    QList<SearchResultElement> * getSearchResultList();
     
     QList<SearchResultElement> sortByScore();
     
@@ -43,8 +43,11 @@ public:
      * @param out
      */
     void fromStream(QDataStream out);
+
 private: 
-    QList<SearchResultElement> mSearchResultElementList;
+
+    QList<SearchResultElement> *mSearchResultElementList;
+
 };
 
 #endif //_SEARCHRESULT_H
