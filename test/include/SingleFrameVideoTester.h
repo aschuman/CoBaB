@@ -1,6 +1,7 @@
 #ifndef SINGLEFRAMEVIDEOTESTER_H
 #define SINGLEFRAMEVIDEOTESTER_H
 
+#include <memory>
 #include <QObject>
 #include "SingleFrameVideo.h"
 
@@ -14,7 +15,7 @@ private slots:
     void testFrameList();
 
 private:
-    SingleFrameVideo *mSingleFrameVideo;
+    std::unique_ptr<SingleFrameVideo> mSingleFrameVideo;
 };
 
 #endif // SINGLEFRAMEVIDEOTESTER_H
