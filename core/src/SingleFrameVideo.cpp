@@ -35,7 +35,7 @@ SingleFrameVideo::SingleFrameVideo(QString path, QList<QPair<int, Annotation>> a
     mFrameList = dir.entryList();
 
     if(dir.exists(FRAMERATE_FILE)) {
-        mFramerate = readFramerateFromJson(FRAMERATE_FILE);
+        mFramerate = readFramerateFromJson(mRelativePath+"/"+FRAMERATE_FILE);
     }
 
     std::sort(mFrameList.begin(), mFrameList.end());
@@ -55,7 +55,7 @@ QList<QString> SingleFrameVideo::getFrameList() {
     return mFrameList;
 }
 
-double readFramerateFromJson(QString path) {
+double SingleFrameVideo::readFramerateFromJson(QString path) {
     QFile loadFile(path);
     if (!loadFile.open(QIODevice::ReadOnly)) {
             return DEFAULT_FRAMERATE;

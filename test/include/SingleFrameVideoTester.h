@@ -2,7 +2,7 @@
 #define SINGLEFRAMEVIDEOTESTER_H
 
 #include <QObject>
-#include "SingleFrameVideo.h"
+#include "../interface/SingleFrameVideo.h"
 
 class SingleFrameVideoTester : public QObject
 {
