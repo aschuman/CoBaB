@@ -38,14 +38,7 @@ SingleFrameVideo::SingleFrameVideo(QString path, QList<QPair<int, Annotation>> a
         readFramerateFromJson(FRAMERATE_FILE);
     }
 
-
-    struct {
-        bool operator()(QPair<int, Annotation> a, QPair<int, Annotation> b) {
-            return a.first < b.first;
-        }
-    } customLess;
-    std::sort(mAnnotationList.begin(), mAnnotationList.end(), customLess);
-
+    std::sort(mFrameList.begin(), mFrameList.end());
 }
 
 /**

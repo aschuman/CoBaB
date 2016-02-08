@@ -20,6 +20,7 @@
 #define FRAMERATE_FILE "cobab_config.json"
 #define ANNOTATION_FILE "annotations"
 #define ANNOTATION_EXTENSION ".ann"
+#define VIDEO_ICON ""
 
 
 /**
@@ -200,11 +201,12 @@ void Dataset::createPreviewPhoto() {
             mPreviewPhoto = preview;
         } else if(mDatasetType == DatasetType::SINGLE_FRAME_VIDEO) {
             //first frame in the first single frame video
-            /*SingleFrameVideo sfvideo = (SingleFrameVideo)(mMediaList.first());
-            QImage preview(sfvideo.getFrameList().first());
-            mPreviewPhoto = preview;*/
+            SingleFrameVideo *sfvideo = (SingleFrameVideo*)(&mMediaList.first());
+            QImage preview(sfvideo->getFrameList().first());
+            mPreviewPhoto = preview;
         } else if(mDatasetType == DatasetType::VIDEO) {
-
+            QImage preview(VIDEO_ICON);
+            mPreviewPhoto = preview;
         }
     }
 }
