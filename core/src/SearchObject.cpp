@@ -1,4 +1,4 @@
-#include "CoBaB.h"
+#include "SearchObject.h"
 
 SearchObject::SearchObject() {
 

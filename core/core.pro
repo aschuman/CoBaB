@@ -3,18 +3,18 @@ TEMPLATE = lib
 TARGET = core
 CONFIG += staticlib
 QT += widgets core
-INCLUDEPATH = include
+INCLUDEPATH = include interface
 
 HEADERS += \
-    include/Medium.h \
-    include/MediumType.h \
-    include/Photo.h \
-    include/Serializable.h \
-    include/SingleFrameVideo.h \
-    include/Video.h \
-    include/Dataset.h \
-    include/Annotation.h \
-    include/RectangleAnnotation.h \
+    interface/Medium.h \
+    interface/MediumType.h \
+    interface/Photo.h \
+    interface/Serializable.h \
+    interface/SingleFrameVideo.h \
+    interface/Video.h \
+    interface/Dataset.h \
+    interface/Annotation.h \
+    interface/RectangleAnnotation.h \
     include/MainControl.h \
     include/MainWindow.h \
     include/Navigator.h \
@@ -22,14 +22,14 @@ HEADERS += \
     include/PageStackFrame.h \
     include/PageType.h \
     include/PageWidget.h \
-    include/SearchObject.h \
-    include/SearchQuery.h \
+    interface/SearchObject.h \
+    interface/SearchQuery.h \
     include/DatasetList.h \
-    include/Algorithm.h \
-    include/DataPacket.h \
-    include/DataPacketType.h \
-    include/SearchResultElement.h \
-    include/SearchResult.h
+    interface/Algorithm.h \
+    interface/DataPacket.h \
+    interface/DataPacketType.h \
+    interface/SearchResultElement.h \
+    interface/SearchResult.h
 
 SOURCES += \
     src/Medium.cpp \

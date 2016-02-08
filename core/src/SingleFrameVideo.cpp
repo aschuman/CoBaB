@@ -3,7 +3,7 @@
  */
 
 
-#include "CoBaB.h"
+#include "SingleFrameVideo.h"
 #include <QDir>
 #include <QTextStream>
 #include <algorithm>

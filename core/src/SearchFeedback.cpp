@@ -3,7 +3,7 @@
  */
 
 
-#include "CoBaB.h"
+#include "SearchFeedback.h"
 
 /**
  * SearchFeedback implementation

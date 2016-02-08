@@ -3,7 +3,7 @@
  */
 
 
-#include "CoBaB.h"
+#include "SearchResultElement.h"
 
 /**
  * SearchResultElement implementation

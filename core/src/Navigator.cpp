@@ -1,4 +1,4 @@
-#include "include/Navigator.h"
+#include "Navigator.h"
 #include <cassert>
 
 Navigator::Navigator(std::unique_ptr<MainWindow> mainWindow) : mMainWindow(move(mainWindow))

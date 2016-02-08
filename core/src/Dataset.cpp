@@ -3,12 +3,17 @@
  */
 
 
-#include "CoBaB.h"
+#include "Dataset.h"
 #include <QDirIterator>
 #include <QJsonDocument>
+#include <QJsonObject>
 #include <QJsonParseError>
 #include <QTextStream>
 #include <algorithm>
+#include "SingleFrameVideo.h"
+#include "Video.h"
+#include "Photo.h"
+#include "RectangleAnnotation.h"
 
 /**
  * Dataset implementation
