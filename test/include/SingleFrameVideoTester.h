@@ -14,7 +14,7 @@ private slots:
     void testFrameList();
 
 private:
-    SingleFrameVideo mSingleFrameVideo;
+    SingleFrameVideo *mSingleFrameVideo;
 };
 
 #endif // SINGLEFRAMEVIDEOTESTER_H

@@ -35,7 +35,7 @@ SingleFrameVideo::SingleFrameVideo(QString path, QList<QPair<int, Annotation>> a
     mFrameList = dir.entryList();
 
     if(dir.exists(FRAMERATE_FILE)) {
-        readFramerateFromJson(FRAMERATE_FILE);
+        mFramerate = readFramerateFromJson(FRAMERATE_FILE);
     }
 
     std::sort(mFrameList.begin(), mFrameList.end());
