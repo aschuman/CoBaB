@@ -79,7 +79,7 @@ bool Dataset::createSingleFrameVideoDataset() {
                 successful = true;
             }
             QFileInfo file(filepath);
-            QList<QPair<int, Annotation>> annotations = createVideoAnnotations(file.dir().path()+ANNOTATION_FILE+ANNOTATION_EXTENSION);
+            QList<QPair<int, Annotation>> annotations = createVideoAnnotations(file.dir().path()+"/"+ANNOTATION_FILE+ANNOTATION_EXTENSION);
             SingleFrameVideo sfvideo(file.dir().path(), annotations);
             mMediaList.append(sfvideo);
         }
@@ -107,7 +107,7 @@ bool Dataset::createVideoDataset() {
 
 // creates a list of photos, if possible
 bool Dataset::createPhotoDataset() {
-    QList<QPair<QString, Annotation>> annotationsWithName = parseAnnotations(mPath+ANNOTATION_FILE+ANNOTATION_EXTENSION);
+    QList<QPair<QString, Annotation>> annotationsWithName = parseAnnotations(mPath+"/"+ANNOTATION_FILE+ANNOTATION_EXTENSION);
     QList<QPair<int, Annotation>> *annotations = new QList<QPair<int, Annotation>>;
 
     QStringList photoFilter(VALID_PHOTO_TYPES);
