@@ -27,9 +27,29 @@ QList<SearchResultElement> * SearchResult::getSearchResultList() {
 /**
  * @return QList<SearchResultElement>
  */
-/*QList<SearchResultElement> SearchResult::sortByScore() {
-    return ;
-}*/
+QList<SearchResultElement> * SearchResult::sortByScore() {
+
+    SearchResultElement element = mSearchResultElementList->first();
+    QList<SearchResultElement> *sortedElements = new QList<SearchResultElement>;
+    QListIterator<SearchResultElement> it(*mSearchResultElementList);
+
+    for (int i = 0; i < mSearchResultElementList->size(); i++) {
+        int j = 0;
+        for (int i = 0; i < mSearchResultElementList->size() - 1; i++) {
+            j = i;
+            if(element.getScore() > mSearchResultElementList->takeAt(i + 1).getScore()) {
+                element = mSearchResultElementList->takeAt(i + 1);
+                j = i + 1;
+            }
+        }
+
+        mSearchResultElementList->removeAt(j);
+        sortedElements->push_back(element);
+        element = mSearchResultElementList->first();
+    }
+
+    return sortedElements;
+}
 
 /**
  * @param out
