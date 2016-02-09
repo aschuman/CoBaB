@@ -28,6 +28,9 @@ HEADERS += \
     interface/Algorithm.h \
     include/SearchAlgorithm.h \
     include/TestAlgorithm.h \
+    include/SearchFeedback.h \
+    include/Bookmark.h \
+    include/BookmarkList.h \
     interface/DataPacket.h \
     interface/DataPacketType.h \
     interface/SearchResultElement.h \
@@ -50,12 +53,14 @@ SOURCES += \
     src/PageStackFrame.cpp \
     src/SearchObject.cpp \
     src/SearchQuery.cpp \
+    src/SearchFeedback.cpp \
     src/DatasetList.cpp \
     src/DataPacket.cpp \
     src/SearchResultElement.cpp \
     src/SearchResult.cpp \
     src/LibraryPageWidget.cpp \
-    src/ViewerPageWidget.cpp
+    src/ViewerPageWidget.cpp \
+    src/Bookmark.cpp
     #src/TestAlgorithm.cpp
 
 FORMS += \

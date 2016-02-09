@@ -11,8 +11,10 @@
 
 
 class SearchResult: public DataPacket {
-public: 
+public:
     
+    SearchResult();
+
     /**
      * @param list
      */

@@ -9,11 +9,14 @@
 #include "DataPacket.h"
 #include "FeedbackType.h"
 #include "SearchFeedback.h"
+#include "SearchObject.h"
 #include <QDataStream>
 
 
 class SearchFeedback: public DataPacket {
-public: 
+public:
+
+    SearchFeedback();
     
     /**
      * @param type

@@ -9,6 +9,9 @@
  * SearchResult implementation
  */
 
+SearchResult::SearchResult() {
+
+}
 
 /**
  * @param list

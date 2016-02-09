@@ -9,33 +9,36 @@
  * SearchFeedback implementation
  */
 
+SearchFeedback::SearchFeedback() {
+
+}
 
 /**
  * @param type
  */
 SearchFeedback::SearchFeedback(FeedbackType type) {
-
+    mType = type;
 }
 
 /**
  * @return QList<QPair<SearchObject; int>>
  */
 QList<QPair<SearchObject, int>> SearchFeedback::getFeedbackList() {
-    return null;
+    return mFeedbackList;
 }
 
 /**
  * @param feedbackList
  */
 void SearchFeedback::setFeedbackList(QList<QPair<SearchObject, int>> feedbackList) {
-
+    mFeedbackList = feedbackList;
 }
 
 /**
  * @return FeedbackType
  */
 FeedbackType SearchFeedback::getFeedbackType() {
-    return null;
+    return mType;
 }
 
 /**
@@ -44,7 +47,8 @@ FeedbackType SearchFeedback::getFeedbackType() {
  * @return QDataStream&
  */
 QDataStream& operator<<(QDataStream& out, SearchFeedback& feedback) {
-    return null;
+    (void)feedback;
+    return out;
 }
 
 /**
@@ -53,19 +57,20 @@ QDataStream& operator<<(QDataStream& out, SearchFeedback& feedback) {
  * @return QDataStream&
  */
 QDataStream& operator>>(QDataStream& in, SearchFeedback& feedback) {
-    return null;
+    (void)feedback;
+    return in;
 }
 
 /**
  * @param in
  */
 void SearchFeedback::toStream(QDataStream in) {
-
+    in << *this;
 }
 
 /**
  * @param out
  */
 void SearchFeedback::fromStream(QDataStream out) {
-
+    out >> *this;
 }
