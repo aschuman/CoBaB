@@ -68,7 +68,7 @@ void Navigator::displayPage(PageType type)
     if(itRegistration != mPageRegistrations.end()){
         PageWidget& targetWidget = itRegistration->second.getWidget();
         targetWidget.reset();
-        mMainWindow->setCentralWidget(&targetWidget);
+        mMainWindow->display(&targetWidget);
         mPageStack.push(PageStackFrame(type));
     }else{
             // ToDo: write to log

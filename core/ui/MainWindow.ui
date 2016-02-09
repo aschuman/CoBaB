@@ -16,10 +16,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <widget class="QStackedWidget" name="mStackedWidget">
-      <widget class="QWidget" name="page"/>
-      <widget class="QWidget" name="page_2"/>
-     </widget>
+     <layout class="QVBoxLayout" name="verticalLayout"/>
     </item>
    </layout>
   </widget>
@@ -39,17 +36,17 @@
    </widget>
    <widget class="QMenu" name="mLanguageMenu">
     <property name="title">
-     <string>Sprache</string>
+     <string>Sp&amp;rache</string>
     </property>
    </widget>
    <widget class="QMenu" name="mBookmarkMenu">
     <property name="title">
-     <string>Lesezeichen</string>
+     <string>&amp;Lesezeichen</string>
     </property>
    </widget>
    <widget class="QMenu" name="mHistoryMenu">
     <property name="title">
-     <string>Chronik</string>
+     <string>&amp;Chronik</string>
     </property>
    </widget>
    <widget class="QMenu" name="mHelpMenu">
@@ -72,10 +69,21 @@
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
    <addaction name="mHomeAction"/>
    <addaction name="mBackAction"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
   </widget>
   <action name="mHomeAction">
    <property name="text">

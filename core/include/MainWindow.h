@@ -15,8 +15,11 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void display(QWidget* widget);
+
 private:
     Ui::MainWindow *ui;
+    QWidget* currentWidget;
 };
 
 #endif // MAINWINDOW_H
