@@ -19,20 +19,11 @@
  * Dataset implementation
  */
 
-#define PREVIEW_PHOTO {"preview.png","preview.jpg"}
-#define VALID_PHOTO_TYPES {"*.jpg", "*.jpeg", "*.bmp", "*.png"}
-#define VALID_VIDEO_TYPES {"*.mp4", "*.avi", "*.flv", "*.mkv"}
-#define FRAMERATE_FILE "cobab_config.json"
-#define ANNOTATION_FILE "annotations"
-#define ANNOTATION_EXTENSION ".ann"
-#define VIDEO_ICON ""
-
 
 /**
  * @param path
  */
-Dataset::Dataset(QString path) {
-    mPath = path;
+Dataset::Dataset(const QString path) : mPath(path) {
     QDir dir(path);
     if(!dir.exists()) {
         return;
@@ -75,7 +66,7 @@ bool Dataset::createSingleFrameVideoDataset() {
         QString filepath = iter.next();
         if(containsFps(filepath)) {
             if(!successful) {
-                mDatasetType = DatasetType::SINGLE_FRAME_VIDEO;
+                mType = Type::SINGLE_FRAME_VIDEO;
                 successful = true;
             }
             QFileInfo file(filepath);
@@ -92,7 +83,7 @@ bool Dataset::createVideoDataset() {
     QStringList videoFilter(VALID_VIDEO_TYPES);
     QDirIterator videoIter(mPath, videoFilter, QDir::Filter::Files, QDirIterator::Subdirectories);
     if(videoIter.hasNext()) {
-        mDatasetType = DatasetType::VIDEO;
+        mType = Type::VIDEO;
         while(videoIter.hasNext()) {
             QString filepath = videoIter.next();
             QFileInfo file(filepath);
@@ -120,7 +111,7 @@ bool Dataset::createPhotoDataset() {
         if(!preview.contains(photoPath)){
             // the dataset doesn't just contain preview photos, so it's a real photo dataset
             if(!isPhotoDir) {
-                mDatasetType = DatasetType::PHOTO;
+                mType = Type::PHOTO;
                 isPhotoDir = true;
             }
             annotations->clear();
@@ -155,43 +146,43 @@ bool Dataset::containsFps(QString filepath) {
 /**
  * @return QString
  */
-QString Dataset::getName() {
+QString Dataset::getName() const {
     return mName;
 }
 
 /**
  * @return int
  */
-int Dataset::getNumberOfMedia() {
+int Dataset::getNumberOfMedia() const {
     return mMediaList.size();
 }
 
 /**
  * @return QImage
  */
-QImage Dataset::getPreviewPhoto() {
+QImage Dataset::getPreviewPhoto() const {
     return mPreviewPhoto;
 }
 
 /**
  * @return QList<Medium>
  */
-QList<Medium> Dataset::getMediaList() {
+QList<Medium> Dataset::getMediaList() const {
     return mMediaList;
 }
 
 /**
  * @return QString
  */
-QString Dataset::getPath() {
+QString Dataset::getPath() const {
     return mPath;
 }
 
 /**
- * @return DatasetType
+ * @return Type
  */
-DatasetType Dataset::getType() {
-    return mDatasetType;
+Dataset::Type Dataset::getType() const {
+    return mType;
 }
 
 void Dataset::createPreviewPhoto() {
@@ -200,16 +191,16 @@ void Dataset::createPreviewPhoto() {
     if(iter.hasNext()) {
        mPreviewPhoto = QImage(iter.next());
     } else {
-        if(mDatasetType == DatasetType::PHOTO) {
+        if(mType == Type::PHOTO) {
             //first photo in the list
             QImage preview(mMediaList.first().getPath());
             mPreviewPhoto = preview;
-        } else if(mDatasetType == DatasetType::SINGLE_FRAME_VIDEO) {
+        } else if(mType == Type::SINGLE_FRAME_VIDEO) {
             //first frame in the first single frame video
             SingleFrameVideo *sfvideo = (SingleFrameVideo*)(&mMediaList.first());
             QImage preview(sfvideo->getFrameList().first());
             mPreviewPhoto = preview;
-        } else if(mDatasetType == DatasetType::VIDEO) {
+        } else if(mType == Type::VIDEO) {
             QImage preview(VIDEO_ICON);
             mPreviewPhoto = preview;
         }

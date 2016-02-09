@@ -10,26 +10,14 @@
 
 
 class DatasetList {
+
 public: 
-    
     DatasetList();
-    
-    QList<Dataset> getDatasetList();
-    
-    /**
-     * @param dataset
-     */
+    QList<Dataset> getDatasetList() const;
     void addDataset(Dataset dataset);
-    
-    /**
-     * @param path
-     */
-    void load(QString path);
-    
-    /**
-     * @param path
-     */
-    void store(QString path);
+    void load(const QString path);
+    void store(const QString path) const;
+
 private: 
     QList<Dataset> mDatasetList;
 };

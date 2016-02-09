@@ -7,14 +7,13 @@
 #define _DATAPACKET_H
 
 #include "Serializable.h"
-#include "DataPacketType.h"
 #include <QUuid>
 
 
 class DataPacket: public Serializable {
 public: 
-    
-    DataPacketType getType();
+    enum Type { SEARCHRESULT, SEARCHQUERY, FEEDBACK };
+    Type getType();
     
     QUuid getUuid();
     
@@ -22,7 +21,7 @@ public:
     
     virtual void fromStream(QDataStream out) = 0;
 protected: 
-    DataPacketType mType;
+    Type mType;
     QUuid mUuid;
 };
 

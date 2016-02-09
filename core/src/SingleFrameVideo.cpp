@@ -14,20 +14,17 @@
  * SingleFrameVideo implementation
  */
 
-#define FRAMERATE_FILE "cobab_config.json"
-#define DEFAULT_FRAMERATE 24
-#define VALID_FILE_TYPES {"*.jpg","*.jpeg","*.bmp","*.png"}
 
 /**
  * @param path
  */
-SingleFrameVideo::SingleFrameVideo(QString path, QList<QPair<int, Annotation>> annotations)
+SingleFrameVideo::SingleFrameVideo(const QString path, const QList<QPair<int, Annotation>> annotations)
     : Medium(path, annotations) {
-    mMediumType = MediumType::SINGLE_FRAME_VIDEO;
+    mType = Type::SINGLE_FRAME_VIDEO;
 
     QDir dir(mRelativePath);
 
-    QStringList filters (VALID_FILE_TYPES);
+    QStringList filters (VALID_PHOTO_TYPES);
     dir.setNameFilters(filters);
     dir.setFilter(QDir::Filter::Files);
     dir.setSorting(QDir::SortFlag::Name);
@@ -44,18 +41,18 @@ SingleFrameVideo::SingleFrameVideo(QString path, QList<QPair<int, Annotation>> a
 /**
  * @return int
  */
-double SingleFrameVideo::getFramerate() {
+double SingleFrameVideo::getFramerate() const {
     return mFramerate;
 }
 
 /**
  * @return QList<QString>
  */
-QList<QString> SingleFrameVideo::getFrameList() {
+QList<QString> SingleFrameVideo::getFrameList() const {
     return mFrameList;
 }
 
-double SingleFrameVideo::readFramerateFromJson(QString path) {
+double SingleFrameVideo::readFramerateFromJson(const QString path) {
     QFile loadFile(path);
     if (!loadFile.open(QIODevice::ReadOnly)) {
             return DEFAULT_FRAMERATE;

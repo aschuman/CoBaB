@@ -11,9 +11,9 @@
 
 
 /**
- * @return DataPacketType
+ * @return Type
  */
-DataPacketType DataPacket::getType() {
+DataPacket::Type DataPacket::getType() {
     return mType;
 }
 

@@ -13,7 +13,7 @@
 /**
  * @param path
  */
-Photo::Photo(QString path, QList<QPair<int, Annotation>> annotations)
+Photo::Photo(const QString path, const QList<QPair<int, Annotation>> annotations)
     : Medium(path, annotations) {
-    mMediumType = MediumType::PHOTO;
+    mType = Medium::Type::PHOTO;
 }

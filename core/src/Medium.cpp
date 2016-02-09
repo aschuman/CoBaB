@@ -14,28 +14,27 @@
  * @param path
  * @param annotations
  */
-Medium::Medium(QString path, QList<QPair<int, Annotation>> annotations) {
-    mAnnotationList = annotations;
-    mRelativePath = path;
+Medium::Medium(const QString path, const QList<QPair<int, Annotation>> annotations)
+    : mRelativePath(path), mAnnotationList(annotations) {
 }
 
 /**
- * @return MediumType
+ * @return Type
  */
-MediumType Medium::getType() {
-    return mMediumType;
+Medium::Type Medium::getType() const {
+    return mType;
 }
 
 /**
  * @return QList<QPair<int, Annotation>>
  */
-QList<QPair<int, Annotation>> Medium::getAnnotationList() {
+QList<QPair<int, Annotation>> Medium::getAnnotationList() const {
     return mAnnotationList;
 }
 
 /**
  * @return QString
  */
-QString Medium::getPath() {
+QString Medium::getPath() const {
     return mRelativePath;
 }

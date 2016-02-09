@@ -19,7 +19,7 @@ DatasetList::DatasetList() {
 /**
  * @return QList<Dataset>
  */
-QList<Dataset> DatasetList::getDatasetList() {
+QList<Dataset> DatasetList::getDatasetList() const {
     return mDatasetList;
 }
 
@@ -33,7 +33,7 @@ void DatasetList::addDataset(Dataset dataset) {
 /**
  * @param path
  */
-void DatasetList::load(QString path) {
+void DatasetList::load(const QString path) {
     QFile file(path);
     file.open(QFile::ReadOnly);
     QTextStream stream(&file);
@@ -50,7 +50,7 @@ void DatasetList::load(QString path) {
 /**
  * @param path
  */
-void DatasetList::store(QString path) {
+void DatasetList::store(const QString path) const {
     QFile file(path);
     file.open(QFile::WriteOnly);
     QTextStream stream(&file);

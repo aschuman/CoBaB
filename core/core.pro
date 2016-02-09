@@ -7,7 +7,6 @@ INCLUDEPATH = include interface
 
 HEADERS += \
     interface/Medium.h \
-    interface/MediumType.h \
     interface/Photo.h \
     interface/Serializable.h \
     interface/SingleFrameVideo.h \
@@ -32,11 +31,11 @@ HEADERS += \
     include/Bookmark.h \
     include/BookmarkList.h \
     interface/DataPacket.h \
-    interface/DataPacketType.h \
     interface/SearchResultElement.h \
     interface/SearchResult.h \
     include/LibraryPageWidget.h \
-    include/ViewerPageWidget.h
+    include/ViewerPageWidget.h \
+    interface/Configuration.h
 
 SOURCES += \
     src/Medium.cpp \

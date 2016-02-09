@@ -7,26 +7,19 @@
 #define _MEDIUM_H
 
 #include "Annotation.h"
-#include "MediumType.h"
 
 class Medium {
-public: 
-    
-    /**
-     * @param path
-     * @param annotations
-     */
-    Medium(QString path, QList<QPair<int, Annotation>> annotations);
-    
-    MediumType getType();
-    
-    QList<QPair<int, Annotation>> getAnnotationList();
 
-    QString getPath();
+public: 
+    enum Type { PHOTO, VIDEO, SINGLE_FRAME_VIDEO };
+    Medium(const QString path, const QList<QPair<int, Annotation>> annotations);
+    Type getType() const;
+    QList<QPair<int, Annotation>> getAnnotationList() const;
+    QString getPath() const;
 
 protected: 
     QString mRelativePath;
-    MediumType mMediumType;
+    Type mType;
     QList<QPair<int, Annotation>> mAnnotationList;
 };
 

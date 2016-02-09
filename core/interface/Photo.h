@@ -10,12 +10,9 @@
 
 
 class Photo: public Medium {
+
 public: 
-    
-    /**
-     * @param path
-     */
-    Photo(QString path, QList<QPair<int, Annotation> > annotations);
+    Photo(const QString path, const QList<QPair<int, Annotation> > annotations);
 };
 
 #endif //_PHOTO_H

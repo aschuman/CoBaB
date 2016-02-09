@@ -10,11 +10,8 @@
 
 
 class Video: public Medium {
+
 public: 
-    
-    /**
-     * @param path
-     */
     Video(QString path, QList<QPair<int, Annotation> > annotations);
 };
 
