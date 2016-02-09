@@ -26,6 +26,8 @@ HEADERS += \
     interface/SearchQuery.h \
     include/DatasetList.h \
     interface/Algorithm.h \
+    include/SearchAlgorithm.h \
+    include/TestAlgorithm.h \
     interface/DataPacket.h \
     interface/DataPacketType.h \
     interface/SearchResultElement.h \
@@ -54,6 +56,7 @@ SOURCES += \
     src/SearchResult.cpp \
     src/LibraryPageWidget.cpp \
     src/ViewerPageWidget.cpp
+    #src/TestAlgorithm.cpp
 
 FORMS += \
     ui/LibraryPageWidget.ui \

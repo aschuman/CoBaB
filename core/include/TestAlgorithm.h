@@ -9,11 +9,10 @@
 #include <memory>
 #include "SearchAlgorithm.h"
 
-
 class TestAlgorithm: public SearchAlgorithm {
 public: 
     
-    TestAlgorithm();
+    TestAlgorithm(QString id);
     
     QList<DataPacket> run();
     
@@ -60,6 +59,7 @@ private:
     QString mDescription;
     QList<int> mParameterList;
     QString mName;
+    QString mId;
 };
 
 #endif //_TESTALGORITHM_H

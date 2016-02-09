@@ -7,7 +7,7 @@
 #define _SEARCHALGORITHM_H
 
 #include "Algorithm.h"
-
+#include "SearchResult.h"
 
 class SearchAlgorithm: public Algorithm {
 public: 

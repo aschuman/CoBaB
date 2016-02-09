@@ -10,15 +10,15 @@
  */
 
 
-TestAlgorithm::TestAlgorithm() {
-
+TestAlgorithm::TestAlgorithm(QString id) {
+	mId = id;
 }
 
 /**
  * @return QList<DataPacket>
  */
 QList<DataPacket> TestAlgorithm::run() {
-    return null;
+
 }
 
 void TestAlgorithm::cancel() {
@@ -45,28 +45,28 @@ bool TestAlgorithm::setParameters(QJsonObject parameters) {
  * @return QString
  */
 QString TestAlgorithm::getDescription() {
-    return null;
+    return mDescription;
 }
 
 /**
  * @param description
  */
 void TestAlgorithm::setDescription(QString description) {
-
+	mDescription = description;
 }
 
 /**
  * @return QString
  */
 QString TestAlgorithm::getName() {
-    return null;
+    return mName;
 }
 
 /**
  * @param name
  */
 void TestAlgorithm::setName(QString name) {
-
+	mName = name;
 }
 
 /**
