@@ -16,45 +16,26 @@ public:
     SearchResultElement();
     
     int getScore();
-    
-    /**
-     * @param score
-     */
+
     void setScore(int score);
     
-    SearchObject *getSearchObject();
-    
-    /**
-     * @param searchObject
-     */
-    void setSearchObject(SearchObject *searchObject);
-    
-    /**
-     * @param out
-     * @param searchResultElement
-     */
+    SearchObject* getSearchObject();
+
+    void setSearchObject(SearchObject* searchObject);
+
     friend QDataStream& operator<<(QDataStream& out, SearchResultElement& searchResultElement);
-    
-    /**
-     * @param in
-     * @param searchResultElement
-     */
+
     friend QDataStream& operator>>(QDataStream& in, SearchResultElement& searchResultElement);
-    
-    /**
-     * @param in
-     */
+
     void toStream(QDataStream in);
-    
-    /**
-     * @param out
-     */
+
     void fromStream(QDataStream out);
 
 private:
 
     int mScore;
-    SearchObject *mSearchObject;
+
+    SearchObject* mSearchObject;
 
 };
 

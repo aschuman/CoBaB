@@ -1,69 +1,109 @@
 #include "SearchObject.h"
-
+/**
+ * @brief SearchObject::SearchObject
+ */
 SearchObject::SearchObject() {
 
 }
-
+/**
+ * @brief SearchObject::getMedium
+ * @return
+ */
 QString SearchObject::getMedium() {
     return mMedium;
 }
-
+/**
+ * @brief SearchObject::setMedium
+ * @param medium
+ */
 void SearchObject::setMedium(QString medium) {
     mMedium = medium;
 }
-
-Annotation *SearchObject::getAnnotation() {
+/**
+ * @brief SearchObject::getAnnotation
+ * @return
+ */
+Annotation* SearchObject::getAnnotation() {
     return mAnnotation;
 }
-
-void SearchObject::setAnnotation(Annotation *annotation) {
+/**
+ * @brief SearchObject::setAnnotation
+ * @param annotation
+ */
+void SearchObject::setAnnotation(Annotation* annotation) {
     mAnnotation = annotation;
 }
-
-QRect *SearchObject::getROI() {
+/**
+ * @brief SearchObject::getROI
+ * @return
+ */
+QRect* SearchObject::getROI() {
     return mROI;
 }
 
-void SearchObject::setROI(QRect *roi) {
+void SearchObject::setROI(QRect* roi) {
     mROI = roi;
 }
-
+/**
+ * @brief SearchObject::getSourceDataset
+ * @return
+ */
 QString SearchObject::getSourceDataset() {
     return mSourceDataset;
 }
-
+/**
+ * @brief SearchObject::setSourceDataset
+ * @param dataset
+ */
 void SearchObject::setSourceDataset(QString dataset) {
     mSourceDataset = dataset;
 }
-
+/**
+ * @brief SearchObject::getMediumIndex
+ * @return
+ */
 int SearchObject::getMediumIndex() {
     return mMediumIndex;
 }
-
+/**
+ * @brief SearchObject::setMediumIndex
+ * @param index
+ */
 void SearchObject::setMediumIndex(int index) {
     mMediumIndex = index;
 }
-
+/**
+ * @brief SearchObject::toStream
+ * @param in
+ */
 void SearchObject::toStream(QDataStream in) {
 
     in << *this;
 
 }
-
+/**
+ * @brief SearchObject::fromStream
+ * @param out
+ */
 void SearchObject::fromStream(QDataStream out) {
 
     out >> *this;
 
 }
-
-QDataStream& operator >>(QDataStream &in, SearchObject &searchObject) {
+/**
+ * @brief operator >>
+ * @param in
+ * @param searchObject
+ * @return
+ */
+QDataStream& operator >>(QDataStream& in, SearchObject& searchObject) {
 
     //read object from stream
 
     QString medium;
     int mediumIndex;
-    Annotation *ann = new Annotation("", "");
-    QRect *roi = new QRect();
+    Annotation* ann = new Annotation("", "");
+    QRect* roi = new QRect();
     QString source;
 
     //skip opening bracket
@@ -80,12 +120,12 @@ QDataStream& operator >>(QDataStream &in, SearchObject &searchObject) {
 
     in.skipRawData(2);
 
-    in >> *ann;
+    in >> ann;
     searchObject.setAnnotation(ann);
 
     in.skipRawData(2);
 
-    in >> *roi;
+    in >> roi;
     searchObject.setROI(roi);
 
     in.skipRawData(2);
@@ -97,8 +137,13 @@ QDataStream& operator >>(QDataStream &in, SearchObject &searchObject) {
 
     return in;
 }
-
-QDataStream& operator <<(QDataStream &out, SearchObject &searchObject) {
+/**
+ * @brief operator <<
+ * @param out
+ * @param searchObject
+ * @return
+ */
+QDataStream& operator <<(QDataStream& out, SearchObject& searchObject) {
 
     //write object to stream
     out << "(" << searchObject.getMedium() << ", "
