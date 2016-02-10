@@ -120,12 +120,12 @@ QDataStream& operator >>(QDataStream& in, SearchObject& searchObject) {
 
     in.skipRawData(2);
 
-    in >> ann;
+    in >> *ann;
     searchObject.setAnnotation(ann);
 
     in.skipRawData(2);
 
-    in >> roi;
+    in >> *roi;
     searchObject.setROI(roi);
 
     in.skipRawData(2);
