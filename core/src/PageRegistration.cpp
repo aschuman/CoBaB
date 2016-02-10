@@ -34,5 +34,6 @@ PageWidget &PageRegistration::getWidget()
 
 PageType PageRegistration::getTarget(int exitCode) const
 {
-    return mTransitions.at(exitCode);
+    auto it = mTransitions.find(exitCode);
+    return it != mTransitions.end() ? it->second : PageType();
 }
