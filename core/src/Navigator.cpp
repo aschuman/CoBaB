@@ -1,6 +1,9 @@
 #include "Navigator.h"
 #include <cassert>
 
+#define LOGGING_LEVEL_1
+#include "log.h"
+
 Navigator::Navigator(std::unique_ptr<MainWindow> mainWindow) : mMainWindow(move(mainWindow))
 {
 }
@@ -65,6 +68,7 @@ PageRegistration *Navigator::checkSender()
 
 void Navigator::displayPage(PageType type)
 {
+    LOG("displaying ", to_String(type), " page..");
     if(type == PageType::NONE){
         mMainWindow->display(nullptr);
     } else {
