@@ -4,6 +4,7 @@
 #include "PageRegistrationTester.h"
 #include "NavigatorTester.h"
 #include "SingleFrameVideoTester.h"
+#include "DatasetTester.h"
 
 #define EXEC(Tester) {Tester tester; r |= QTest::qExec(&tester);}
 
@@ -21,6 +22,7 @@ int main(int argc, char *argv[]){
     EXEC(NavigatorTester)
 
     EXEC(SingleFrameVideoTester)
+    EXEC(DatasetTester)
 
     return r;
 }

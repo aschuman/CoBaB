@@ -1,37 +1,25 @@
-/**
- * Project \
- */
-
-
 #include "DatasetList.h"
 #include <QTextStream>
 
-
 /**
- * DatasetList implementation
- */
-
-
-DatasetList::DatasetList() {
-
-}
-
-/**
- * @return QList<Dataset>
+ * @brief DatasetList::getDatasetList Returns the list of Dataset.
+ * @return The list of Dataset.
  */
 QList<Dataset> DatasetList::getDatasetList() const {
     return mDatasetList;
 }
 
 /**
- * @param dataset
+ * @brief DatasetList::addDataset Adds the given Dataset to the list.
+ * @param dataset The Dataset which is added to the list.
  */
 void DatasetList::addDataset(Dataset dataset) {
     mDatasetList.append(dataset);
 }
 
 /**
- * @param path
+ * @brief DatasetList::load Loads the list of Dataset from the file with the given path.
+ * @param path The path of the file in which the Dataset list is stored.
  */
 void DatasetList::load(const QString path) {
     QFile file(path);
@@ -48,7 +36,8 @@ void DatasetList::load(const QString path) {
 }
 
 /**
- * @param path
+ * @brief DatasetList::store Stores the Dataset list in the file with the given path.
+ * @param path The path of the file in which the Dataset list is stored.
  */
 void DatasetList::store(const QString path) const {
     QFile file(path);

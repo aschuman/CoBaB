@@ -1,8 +1,3 @@
-/**
- * Project \
- */
-
-
 #include "SingleFrameVideo.h"
 #include <QDir>
 #include <QTextStream>
@@ -11,14 +6,11 @@
 #include <QJsonDocument>
 
 /**
- * SingleFrameVideo implementation
+ * @brief SingleFrameVideo::SingleFrameVideo Creates a SingleFrameVideo.
+ * @param path The path to the SingleFrameVideo.
+ * @param annotations The Annotations which belong to the SingleFrameVideo.
  */
-
-
-/**
- * @param path
- */
-SingleFrameVideo::SingleFrameVideo(const QString path, const QList<QPair<int, Annotation>> annotations)
+SingleFrameVideo::SingleFrameVideo(const QString path, const QList<QPair<int, Annotation*>> annotations)
     : Medium(path, annotations) {
     mType = Type::SINGLE_FRAME_VIDEO;
 
@@ -39,19 +31,26 @@ SingleFrameVideo::SingleFrameVideo(const QString path, const QList<QPair<int, An
 }
 
 /**
- * @return int
+ * @brief SingleFrameVideo::getFramerate Returns the framerate of the SingleFrameVideo.
+ * @return The framerate of the SingleFrameVideo.
  */
 double SingleFrameVideo::getFramerate() const {
     return mFramerate;
 }
 
 /**
- * @return QList<QString>
+ * @brief SingleFrameVideo::getFrameList Returns the list of frames.
+ * @return The list of frames.
  */
 QList<QString> SingleFrameVideo::getFrameList() const {
     return mFrameList;
 }
 
+/**
+ * @brief SingleFrameVideo::readFramerateFromJson Reads the framerate from the configuration file.
+ * @param path The path to the configuration file.
+ * @return The framerate which was specified in the configuration file. Returns the default framerate if the configuration file does not contain the framerate.
+ */
 double SingleFrameVideo::readFramerateFromJson(const QString path) {
     QFile loadFile(path);
     if (!loadFile.open(QIODevice::ReadOnly)) {

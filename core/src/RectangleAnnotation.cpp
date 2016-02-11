@@ -23,7 +23,7 @@ RectangleAnnotation::RectangleAnnotation(QString id, QString type) : Annotation(
  */
 QDataStream& operator<<(QDataStream& out, RectangleAnnotation& annotation){
     //convert QString to char array for output
-    const char *id = annotation.getId().toStdString().c_str();
+    const char * id= annotation.getId().toStdString().c_str();
     const char *type = annotation.mType.toStdString().c_str();
 
     out << id << " " << annotation.x() << " " << annotation.y() << " "

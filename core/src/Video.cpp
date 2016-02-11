@@ -1,19 +1,11 @@
-/**
- * Project \
- */
-
-
 #include "Video.h"
 
 /**
- * Video implementation
+ * @brief Video::Video Creates a Video with the given path and Annotations.
+ * @param path The path to the Video.
+ * @param annotations The Annotations which belong to this Video.
  */
-
-
-/**
- * @param path
- */
-Video::Video(QString path, QList<QPair<int, Annotation>> annotations)
+Video::Video(QString path, QList<QPair<int, Annotation*>> annotations)
     : Medium(path, annotations) {
     mType = Type::VIDEO;
 }
