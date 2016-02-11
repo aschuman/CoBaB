@@ -6,6 +6,8 @@
 
 Navigator::Navigator(std::unique_ptr<MainWindow> mainWindow) : mMainWindow(move(mainWindow))
 {
+    QObject::connect(mMainWindow.get(), SIGNAL(requestedPreviousPage()), this, SLOT(toPreviousPage()));
+    QObject::connect(mMainWindow.get(), SIGNAL(requestedHomePage()), this, SLOT(toHomePage()));
 }
 
 void Navigator::registerPage(PageType type, std::unique_ptr<PageWidget> widget)
@@ -21,7 +23,8 @@ void Navigator::registerPage(PageType type, std::unique_ptr<PageWidget> widget)
 void Navigator::start(PageType type, std::vector<QVariant> data)
 {
     mDataStack = move(data);
-    displayPage(type);
+    mPageStack.push_back(PageStackFrame(type));
+    tryDisplayTopPage();
 }
 
 void Navigator::tryPush(QVariant item)
@@ -29,6 +32,7 @@ void Navigator::tryPush(QVariant item)
     PageRegistration* registration = checkSender();
     if(registration){
         mDataStack.push_back(item);
+        mPageStack.back().incrementSize();
     }
 }
 
@@ -36,7 +40,10 @@ void Navigator::tryRead(size_t index, QVariant &value)
 {
     PageRegistration* registration = checkSender();
     if(registration){
-        value = mDataStack[mDataStack.size() - 1 - index];
+        if(mDataStack.size() > index)
+            value = mDataStack[mDataStack.size() - 1 - index];
+        else
+            LOG_ERR("tried to read data stack out of range");
     }
 }
 
@@ -45,8 +52,28 @@ void Navigator::tryExit(int exitCode)
     PageRegistration* registration = checkSender();
     if(registration){
         PageType targetType = registration->getTarget(exitCode);
-        displayPage(targetType);
+        mPageStack.push_back(PageStackFrame(targetType));
+        tryDisplayTopPage();
     }
+}
+
+void Navigator::toPreviousPage()
+{
+    LOG("going to previous page");
+    mDataStack.resize(mDataStack.size() - mPageStack.back().getSize());
+    mPageStack.pop_back();
+
+    tryDisplayTopPage();
+}
+
+void Navigator::toHomePage()
+{
+    LOG("going to home page");
+    for(int i=0; i < mPageStack.size() - 1; ++i)
+        mPageStack.pop_back();
+    mDataStack.resize(mPageStack.back().getSize());
+
+    tryDisplayTopPage();
 }
 
 PageRegistration *Navigator::checkSender()
@@ -66,27 +93,34 @@ PageRegistration *Navigator::checkSender()
     return registration;
 }
 
-void Navigator::displayPage(PageType type)
+bool Navigator::tryDisplayTopPage()
 {
-    LOG("displaying ", to_String(type), " page..");
-    if(type == PageType::NONE){
-        mMainWindow->display(nullptr);
-    } else {
+    bool success = false;
+    if(!mPageStack.empty()){
+        PageType type = mPageStack.back().getType();
+
+        LOG("displaying ", to_String(type), " page..");
         auto itRegistration = mPageRegistrations.find(type);
         if(itRegistration != mPageRegistrations.end()){
             PageWidget& targetWidget = itRegistration->second.getWidget();
             targetWidget.reset();
             mMainWindow->display(&targetWidget);
-            mPageStack.push(PageStackFrame(type));
+            success = true;
         }else{
-                // ToDo: write to log
+            LOG_ERR("could not display unregistered page ", to_String(type));
         }
     }
+    return success;
 }
 
 PageType Navigator::getCurrentPageType() const
 {
-    return mPageStack.empty() ? PageType::NONE : mPageStack.top().getType();
+    return mPageStack.empty() ? PageType::NONE : mPageStack.back().getType();
+}
+
+void Navigator::reducePageStack(size_t n)
+{
+
 }
 
 void Navigator::registerTransition(PageType origin, int exitCode, PageType target)
@@ -95,6 +129,6 @@ void Navigator::registerTransition(PageType origin, int exitCode, PageType targe
     if(it != mPageRegistrations.end()){
         it->second.addTransition(exitCode, target);
     } else {
-        // ToDo: write to log
+        LOG_ERR("could not register transition from unregistered page ", to_String(origin));
     }
 }

@@ -17,6 +17,10 @@ public:
 
     void display(QWidget* widget);
 
+signals:
+    void requestedPreviousPage();
+    void requestedHomePage();
+
 private:
     Ui::MainWindow *ui;
     QWidget* currentWidget;

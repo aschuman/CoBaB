@@ -12,6 +12,7 @@ class PageStackFrame
 public:
     PageStackFrame(PageType type);
     void setSize(size_t size);
+    void incrementSize();
     size_t getSize() const;
     PageType getType() const;
 };

@@ -20,22 +20,26 @@ public:
     void registerTransition(PageType origin, int exitCode, PageType target);
     void start(PageType type, std::vector<QVariant> data);
 
+signals:
+    void finished();
+
 private slots:
     void tryPush(QVariant item);
     void tryRead(size_t index, QVariant& value);
     void tryExit(int exitCode);
+    void toPreviousPage();
+    void toHomePage();
 
 private:
     PageRegistration* checkSender();
-    void displayPage(PageType type);
+    bool tryDisplayTopPage();
     PageType getCurrentPageType() const;
+    void reducePageStack(size_t n);
 
     std::unique_ptr<MainWindow> mMainWindow;
-    std::stack<PageStackFrame> mPageStack;
+    std::vector<PageStackFrame> mPageStack;
     std::vector<QVariant> mDataStack;
     std::map<PageType, PageRegistration> mPageRegistrations;
-
-
 };
 
 #endif // NAVIGATOR_H
