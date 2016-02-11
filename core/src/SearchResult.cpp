@@ -16,24 +16,24 @@ SearchResult::SearchResult() {
 /**
  * @param list
  */
-SearchResult::SearchResult(QList<SearchResultElement> *list) {
+SearchResult::SearchResult(QList<SearchResultElement>* list) {
     mSearchResultElementList = list;
 }
 
 /**
  * @return QList<SearchResultElement>
  */
-QList<SearchResultElement> * SearchResult::getSearchResultList() {
+QList<SearchResultElement>* SearchResult::getSearchResultList() {
     return mSearchResultElementList;
 }
 
 /**
  * @return QList<SearchResultElement>
  */
-QList<SearchResultElement> * SearchResult::sortByScore() {
+QList<SearchResultElement>* SearchResult::sortByScore() {
 
     SearchResultElement element = mSearchResultElementList->first();
-    QList<SearchResultElement> *sortedElements = new QList<SearchResultElement>;
+    QList<SearchResultElement>* sortedElements = new QList<SearchResultElement>;
     QListIterator<SearchResultElement> it(*mSearchResultElementList);
 
     for (int i = 0; i < mSearchResultElementList->size(); i++) {

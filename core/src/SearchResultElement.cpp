@@ -9,7 +9,6 @@
  * SearchResultElement implementation
  */
 
-
 SearchResultElement::SearchResultElement() {
 
 }

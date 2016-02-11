@@ -4,9 +4,22 @@ PageRegistration::PageRegistration(std::unique_ptr<PageWidget> widget) : mWidget
 {
 }
 
+PageRegistration::PageRegistration(PageRegistration&& p)
+    : mWidget(move(p.mWidget)),
+      mTransitions(move(p.mTransitions))
+{
+}
+
+PageRegistration& PageRegistration::operator=(PageRegistration&& p)
+{
+    mWidget = move(p.mWidget);
+    mTransitions = move(p.mTransitions);
+    return *this;
+}
+
 void PageRegistration::addTransition(int exitCode, PageType type)
 {
-    mTransitions.insert(exitCode, type);
+    mTransitions[exitCode] = type;
 }
 
 const PageWidget &PageRegistration::getWidget() const
@@ -21,5 +34,6 @@ PageWidget &PageRegistration::getWidget()
 
 PageType PageRegistration::getTarget(int exitCode) const
 {
-    return mTransitions[exitCode];
+    auto it = mTransitions.find(exitCode);
+    return it != mTransitions.end() ? it->second : PageType();
 }

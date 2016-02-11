@@ -12,30 +12,47 @@ class SearchObject: public Serializable {
 public:
 
     SearchObject();
+
     QString getMedium();
+
     void setMedium(QString medium);
-    Annotation * getAnnotation();
+
+    Annotation* getAnnotation();
+
     void setAnnotation(Annotation *annotation);
-    QRect *getROI();
-    void setROI(QRect *roi);
+
+    QRect* getROI();
+
+    void setROI(QRect* roi);
+
     QString getSourceDataset();
+
     void setSourceDataset(QString dataset);
+
     int getMediumIndex();
+
     void setMediumIndex(int index);
+
     void toStream(QDataStream in);
+
     void fromStream(QDataStream out);
 
-    friend QDataStream & operator >>(QDataStream &in, SearchObject &searchObject);
-    friend QDataStream & operator <<(QDataStream &out, SearchObject &searchObject);
+    friend QDataStream& operator >>(QDataStream& in, SearchObject& searchObject);
+
+    friend QDataStream& operator <<(QDataStream& out, SearchObject& searchObject);
 
 protected:
 
 private:
 
     QString mMedium = "";
-    Annotation *mAnnotation = new Annotation("", "");
-    QRect *mROI = new QRect();
+
+    Annotation* mAnnotation = new Annotation("", "");
+
+    QRect* mROI = new QRect();
+
     QString mSourceDataset = "";
+
     int mMediumIndex = 0;
 
 };

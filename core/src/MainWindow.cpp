@@ -21,4 +21,5 @@ void MainWindow::display(QWidget* widget)
     if(currentWidget)
         ui->verticalLayout->removeWidget(currentWidget);
     ui->verticalLayout->addWidget(widget);
+    currentWidget = widget;
 }

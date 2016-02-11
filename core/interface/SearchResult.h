@@ -15,40 +15,23 @@ public:
     
     SearchResult();
 
-    /**
-     * @param list
-     */
-    SearchResult(QList<SearchResultElement> *list);
+    SearchResult(QList<SearchResultElement>* list);
     
-    QList<SearchResultElement> * getSearchResultList();
+    QList<SearchResultElement>* getSearchResultList();
     
-    QList<SearchResultElement> * sortByScore();
-    
-    /**
-     * @param out
-     * @param searchResult
-     */
+    QList<SearchResultElement>* sortByScore();
+
     friend QDataStream& operator<<(QDataStream& out, SearchResult& searchResult);
-    
-    /**
-     * @param in
-     * @param searchResult
-     */
+
     friend QDataStream& operator>>(QDataStream& in, SearchResult& searchResult);
-    
-    /**
-     * @param in
-     */
+
     void toStream(QDataStream in);
-    
-    /**
-     * @param out
-     */
+
     void fromStream(QDataStream out);
 
 private: 
 
-    QList<SearchResultElement> *mSearchResultElementList;
+    QList<SearchResultElement>* mSearchResultElementList;
 
 };
 

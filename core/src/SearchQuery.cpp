@@ -17,28 +17,28 @@ SearchQuery::SearchQuery() {
 /**
  * @return QList<Dataset>
  */
-QList<Dataset> * SearchQuery::getDatasets() {
+QList<Dataset>* SearchQuery::getDatasets() {
     return createDatasetList(mDatasets);
 }
 
 /**
  * @param datasets
  */
-void SearchQuery::setDatasets(QList<Dataset> *datasets) {
+void SearchQuery::setDatasets(QList<Dataset>* datasets) {
     datasets = createDatasetList(mDatasets);
 }
 
 /**
  * @return SearchObject
  */
-SearchObject *SearchQuery::getSearchObject() {
+SearchObject* SearchQuery::getSearchObject() {
     return mSearchObject;
 }
 
 /**
  * @param searchObject
  */
-void SearchQuery::setSearchObject(SearchObject *searchObject) {
+void SearchQuery::setSearchObject(SearchObject* searchObject) {
     mSearchObject = searchObject;
 }
 
@@ -96,9 +96,13 @@ void SearchQuery::toStream(QDataStream in) {
 void SearchQuery::fromStream(QDataStream out) {
     out >> *this;
 }
-
-QList<Dataset> * createDatasetList(QList<QString> *stringDatasets) {
-    QList<Dataset> *datasets = new QList<Dataset>;
+/**
+ * @brief createDatasetList
+ * @param stringDatasets
+ * @return
+ */
+QList<Dataset>* createDatasetList(QList<QString>* stringDatasets) {
+    QList<Dataset>* datasets = new QList<Dataset>;
     QListIterator<QString> it(*stringDatasets);
     while (it.hasNext()) {
        datasets->push_back(*new Dataset(it.next()));
