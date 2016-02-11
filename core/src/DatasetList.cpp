@@ -22,6 +22,7 @@ void DatasetList::addDataset(Dataset dataset) {
  * @param path The path of the file in which the Dataset list is stored.
  */
 void DatasetList::load(const QString path) {
+    mDatasetList.clear();
     QFile file(path);
     file.open(QFile::ReadOnly);
     QTextStream stream(&file);
@@ -33,6 +34,7 @@ void DatasetList::load(const QString path) {
             mDatasetList.append(dataset);
         }
     }
+    file.close();
 }
 
 /**
@@ -44,6 +46,7 @@ void DatasetList::store(const QString path) const {
     file.open(QFile::WriteOnly);
     QTextStream stream(&file);
     for(Dataset iter: mDatasetList) {
-        stream << iter.getPath();
+        stream << iter.getPath() << endl;
     }
+    file.close();
 }

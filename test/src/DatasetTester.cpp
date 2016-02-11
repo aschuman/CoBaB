@@ -9,9 +9,9 @@ void DatasetTester::testType_data()
     QTest::addColumn<QString>("path");
     QTest::addColumn<Dataset::Type>("type");
 
-    QTest::newRow("single frame video dataset") << "testdata/SingleFrameVideo" << Dataset::Type::SINGLE_FRAME_VIDEO;
-    QTest::newRow("video dataset")     << "testdata/Video" << Dataset::Type::VIDEO;
-    QTest::newRow("photo dataset") << "testdata/Fotos" << Dataset::Type::PHOTO;
+    QTest::newRow("single frame video dataset") << "../../test/testdata/SingleFrameVideo" << Dataset::Type::SINGLE_FRAME_VIDEO;
+    QTest::newRow("video dataset") << "../../test/testdata/Video" << Dataset::Type::VIDEO;
+    QTest::newRow("photo dataset") << "../../test/testdata/Fotos" << Dataset::Type::PHOTO;
 
 }
 
@@ -30,9 +30,9 @@ void DatasetTester::testName_data()
     QTest::addColumn<QString>("path");
     QTest::addColumn<QString>("name");
 
-    QTest::newRow("single frame video dataset") << "testdata/SingleFrameVideo" << "SingleFrameVideo";
-    QTest::newRow("video dataset") << "testdata/Video" << "Video";
-    QTest::newRow("photo dataset") << "testdata/Fotos" << "Fotos";
+    QTest::newRow("single frame video dataset") << "../../test/testdata/SingleFrameVideo" << "SingleFrameVideo";
+    QTest::newRow("video dataset") << "../../test/testdata/Video" << "Video";
+    QTest::newRow("photo dataset") << "../../test/testdata/Fotos" << "Fotos";
 
 }
 
@@ -52,8 +52,9 @@ void DatasetTester::testPreviewImage_data()
     QTest::addColumn<QString>("path");
     QTest::addColumn<QString>("image");
 
-    QTest::newRow("single frame video dataset") << "testdata/SingleFrameVideo" << "testdata/SingleFrameVideo/bigbangtheory_s1e1.vob_00000.png";
-    QTest::newRow("photo dataset") << "testdata/Fotos" << "testdata/Fotos/preview.png";
+    QTest::newRow("single frame video dataset") << "../../test/testdata/SingleFrameVideo"
+                                                << "../../test/testdata/SingleFrameVideo/SingleFrameVideo/bigbangtheory_s1e1.vob_00000.png";
+    QTest::newRow("photo dataset") << "../../test/testdata/Fotos" << "../../test/testdata/Fotos/preview.png";
 
 }
 
@@ -75,18 +76,18 @@ void DatasetTester::testMediaList_data()
     QTest::addColumn<QList<QString>>("list");
 
     QList<QString> list;
-    list.append("testdata/SingleFrameVideo");
-    QTest::newRow("single frame video dataset") << "testdata/SingleFrameVideo" << list;
+    list.append("test/testdata/SingleFrameVideo");
+    QTest::newRow("single frame video dataset") << "SingleFrameVideo" << list;
 
     list.clear();
-    list.append("testdata/Video/Titanic in 10 Sekunden.mp4");
-    QTest::newRow("video dataset") << "testdata/Video" << list;
+    list.append("test/testdata/Video/Titanic in 10 Sekunden.mp4");
+    QTest::newRow("video dataset") << "Video" << list;
 
     list.clear();
-    list.append("testdata/Fotos/000_45.bmp");
-    list.append("testdata/Fotos/001_45.bmp");
-    list.append("testdata/Fotos/002_45.bmp");
-    QTest::newRow("photo dataset") << "testdata/Fotos" << list;
+    list.append("test/testdata/Fotos/000_45.bmp");
+    list.append("test/testdata/Fotos/001_45.bmp");
+    list.append("test/testdata/Fotos/002_45.bmp");
+    QTest::newRow("photo dataset") << "Fotos" << list;
 
 }
 
@@ -96,12 +97,9 @@ void DatasetTester::testMediaList()
     QFETCH(QList<QString>, list);
 
     Dataset dataset(path);
-    QList<QString> mediaList;
     for(int i= 0; i < dataset.getMediaList().size(); i++) {
-        mediaList.append(dataset.getMediaList().at(i)->getPath());
+        QVERIFY(dataset.getMediaList().at(i)->getPath().endsWith(list.at(i)));
     }
-    QCOMPARE(mediaList, list);
-
 }
 
 
@@ -110,9 +108,9 @@ void DatasetTester::testPath_data()
     QTest::addColumn<QString>("path");
     QTest::addColumn<QString>("resultPath");
 
-    QTest::newRow("single frame video dataset") << "testdata/SingleFrameVideo" << "testdata/SingleFrameVideo";
-    QTest::newRow("video dataset") << "testdata/Video" << "testdata/Video";
-    QTest::newRow("photo dataset") << "testdata/Fotos" << "testdata/Fotos";
+    QTest::newRow("single frame video dataset") << "../../test/testdata/SingleFrameVideo" << "test/testdata/SingleFrameVideo";
+    QTest::newRow("video dataset") << "../../test/testdata/Video" << "test/testdata/Video";
+    QTest::newRow("photo dataset") << "../../test/testdata/Fotos" << "test/testdata/Fotos";
 
 }
 
@@ -122,17 +120,20 @@ void DatasetTester::testPath()
     QFETCH(QString, resultPath);
 
     Dataset dataset(path);
-
-    QCOMPARE(dataset.getPath(), resultPath);
+    QVERIFY(dataset.getPath().endsWith(resultPath));
 }
 
 
-void DatasetTester::testAnnotations()
+void DatasetTester::testAnnotationsSFVideo()
 {
-    QString path = "testdata/SingleFrameVideo";
+    QString path = "../../test/testdata/SingleFrameVideo";
 
     Dataset dataset(path);
+    if(dataset.getMediaList().isEmpty()) {
+        QFAIL("Media list is empty.");
+    }
     QList<QPair<int, Annotation*>> list = dataset.getMediaList().first()->getAnnotationList();
+    QCOMPARE(list.size(), 4);
 
     QCOMPARE(list.at(0).first, 1);
     QRect rect(315, 53, 169, 570);
@@ -149,7 +150,43 @@ void DatasetTester::testAnnotations()
     QCOMPARE(list.at(3).first, 2);
     rect.setRect(431, 98, 107, 351);
     QCOMPARE((static_cast<RectangleAnnotation*>(list.at(3).second))->normalized(), rect);
+}
 
+void DatasetTester::testAnnotationsVideo()
+{
+    QString path = "../../test/testdata/Video";
 
+    Dataset dataset(path);
+    if(dataset.getMediaList().isEmpty()) {
+        QFAIL("Media list is empty.");
+    }
+    QList<QPair<int, Annotation*>> list = dataset.getMediaList().first()->getAnnotationList();
+    QVERIFY(list.isEmpty());
+}
 
+void DatasetTester::testAnnotationsPhoto()
+{
+    QString path = "../../test/testdata/Fotos";
+
+    Dataset dataset(path);
+    if(dataset.getMediaList().isEmpty()) {
+        QFAIL("Media list is empty.");
+    }
+    QList<QPair<int, Annotation*>> list = dataset.getMediaList().at(0)->getAnnotationList();
+    QCOMPARE(list.size(), 1);
+    QCOMPARE(list.at(0).first, 0);
+    QRect rect(0, 0, 48, 128);
+    QCOMPARE((static_cast<RectangleAnnotation*>(list.at(0).second))->normalized(), rect);
+
+    list = dataset.getMediaList().at(1)->getAnnotationList();
+    QCOMPARE(list.size(), 1);
+    QCOMPARE(list.at(0).first, 0);
+    rect.setRect(0, 0, 48, 128);
+    QCOMPARE((static_cast<RectangleAnnotation*>(list.at(0).second))->normalized(), rect);
+
+    list = dataset.getMediaList().at(2)->getAnnotationList();
+    QCOMPARE(list.size(), 1);
+    QCOMPARE(list.at(0).first, 0);
+    rect.setRect(0, 0, 48, 128);
+    QCOMPARE((static_cast<RectangleAnnotation*>(list.at(0).second))->normalized(), rect);
 }

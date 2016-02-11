@@ -10,12 +10,12 @@
  * @brief Dataset::Dataset Creates a new Dataset with the given path.
  * @param path The path of the Dataset.
  */
-Dataset::Dataset(const QString path) : mPath(path) {
-    QTextStream s(stdout);
+Dataset::Dataset(const QString path) {
     QDir dir(path);
     if(!dir.exists()) {
         return;
     }
+    mPath = dir.absolutePath();
     mName = dir.dirName();
 
     if(!createSingleFrameVideoDataset()) {
@@ -46,20 +46,21 @@ bool isLess(QPair<QString,Annotation*> firstPair, QPair<QString,Annotation*> sec
 QList<QPair<int, Annotation*>> Dataset::createVideoAnnotations(QString path) {
     QList<QPair<QString, Annotation*>> annotationsWithName = parseAnnotations(path);
     QList<QPair<int, Annotation*>> *annotations = new QList<QPair<int, Annotation*>>;
+    if(annotationsWithName.isEmpty()) {
+        return *annotations;
+    }
     std::sort(annotationsWithName.begin(), annotationsWithName.end(), isLess);
 
-    if(annotationsWithName.size() > 0) {
-        int j = 0;
-        QString frame = annotationsWithName.at(0).first;
-        for(int i = 0; i < annotationsWithName.size(); i++) {
-            if (annotationsWithName.at(i).first != frame) {
-                frame = annotationsWithName.at(i).first;
-                j++;
-            }
-            QPair<int,Annotation*> pair(j, annotationsWithName.at(i).second);
-            if(pair.second != nullptr) {
-                annotations->append(pair);
-            }
+    int j = 0;
+    QString frame = annotationsWithName.at(0).first;
+    for(int i = 0; i < annotationsWithName.size(); i++) {
+        if (annotationsWithName.at(i).first != frame) {
+            frame = annotationsWithName.at(i).first;
+            j++;
+        }
+        QPair<int,Annotation*> pair(j, annotationsWithName.at(i).second);
+        if(pair.second != nullptr) {
+            annotations->append(pair);
         }
     }
     return *annotations;
@@ -72,6 +73,7 @@ QList<QPair<int, Annotation*>> Dataset::createVideoAnnotations(QString path) {
 bool Dataset::createSingleFrameVideoDataset() {   
     bool successful = false;
     QStringList filters(FRAMERATE_FILE);
+    QTextStream s(stdout);
     QDirIterator iter(mPath, filters, QDir::Filter::Files, QDirIterator::Subdirectories);
     while(iter.hasNext()) {
         QString filepath = iter.next();
@@ -124,9 +126,10 @@ bool Dataset::createPhotoDataset() {
     QString photoPath;
     QStringList preview(PREVIEW_PHOTO);
     while(photoIter.hasNext()) {
-        QFileInfo file(photoIter.next());
-        photoPath = file.fileName();
-        if(!preview.contains(photoPath)){
+        photoPath = photoIter.next();
+        QFileInfo file(photoPath);
+        QString fileName = file.fileName();
+        if(!preview.contains(fileName)){
             // the dataset doesn't just contain preview photos, so it's a real photo dataset
             if(!isPhotoDir) {
                 mType = Type::PHOTO;
@@ -134,7 +137,7 @@ bool Dataset::createPhotoDataset() {
             }
             annotations->clear();
             for(int i = 0; i < annotationsWithName.size(); i++) {
-                if(annotationsWithName.at(i).first == photoPath){
+                if(annotationsWithName.at(i).first == fileName){
                     QPair<int, Annotation*> pair(0, annotationsWithName.at(i).second);
                     annotations->append(pair);
                 }
@@ -158,7 +161,7 @@ bool Dataset::containsFps(QString filepath) {
         QJsonParseError *error = new QJsonParseError();
         QJsonDocument loadDoc(QJsonDocument::fromJson(saveData, error));
         if(error->error == QJsonParseError::NoError) {
-            if(!(loadDoc.object()["fps"].isUndefined())) {
+            if(loadDoc.object()["fps"].isDouble()) {
                 loadFile.close();
                 return true;
             }
@@ -232,6 +235,9 @@ void Dataset::createPreviewPhoto() {
         } else if(mType == Type::SINGLE_FRAME_VIDEO) {
             //first frame in the first single frame video
             SingleFrameVideo *sfvideo = (SingleFrameVideo*)mMediaList.first();
+            if(sfvideo->getFrameList().isEmpty()) {
+                return;
+            }
             QImage preview(sfvideo->getPath() + "/" + sfvideo->getFrameList().first());
             mPreviewPhoto = preview;
         } else if(mType == Type::VIDEO) {
@@ -271,6 +277,9 @@ QList<QPair<QString, Annotation*>> Dataset::parseAnnotations(QString filepath) {
 
             QString imagePath = list.at(0);
             int quantity = list.at(1).toInt(); // number of annotations
+            if(2+quantity*count > list.size()) {
+                continue;
+            }
             for(int i = 0; i < quantity; i++) {
                 QString id = list.at(idPos+i*count);
                 int x = list.at(xPos+i*count).toDouble();

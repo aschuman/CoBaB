@@ -22,7 +22,8 @@ HEADERS += \
     include/PageWidgetMock.h \
     include/PageRegistrationTester.h \
     include/SingleFrameVideoTester.h \
-    include/DatasetTester.h
+    include/DatasetTester.h \
+    include/DatasetListTester.h
 
 SOURCES += \
     src/main.cpp \
@@ -31,4 +32,5 @@ SOURCES += \
     src/PageStackframeTester.cpp \
     src/PageWidgetMock.cpp \
     src/SingleFrameVideoTester.cpp \
-    src/DatasetTester.cpp
+    src/DatasetTester.cpp \
+    src/DatasetListTester.cpp

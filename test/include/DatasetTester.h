@@ -22,7 +22,9 @@ private slots:
     void testPath_data();
     void testPath();
 
-    void testAnnotations();
+    void testAnnotationsSFVideo();
+    void testAnnotationsVideo();
+    void testAnnotationsPhoto();
 
 };
 
