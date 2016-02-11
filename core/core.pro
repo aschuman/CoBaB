@@ -35,7 +35,9 @@ HEADERS += \
     interface/SearchResult.h \
     include/LibraryPageWidget.h \
     include/ViewerPageWidget.h \
-    interface/Configuration.h
+    interface/Configuration.h \
+    interface/logger.h \
+    interface/log.h
 
 SOURCES += \
     src/Medium.cpp \
@@ -59,7 +61,8 @@ SOURCES += \
     src/SearchResult.cpp \
     src/LibraryPageWidget.cpp \
     src/ViewerPageWidget.cpp \
-    src/Bookmark.cpp
+    src/Bookmark.cpp \
+    src/log.cpp
     #src/TestAlgorithm.cpp
 
 FORMS += \
