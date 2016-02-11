@@ -7,18 +7,17 @@ Navigator::Navigator(std::unique_ptr<MainWindow> mainWindow) : mMainWindow(move(
 
 void Navigator::registerPage(PageType type, std::unique_ptr<PageWidget> widget)
 {
-    QObject::connect((PageWidget*)widget.get(), SIGNAL(pushToStack(QVariant)), this, SLOT(tryPush(QVariant)));
-    QObject::connect((PageWidget*)widget.get(), SIGNAL(readFromStack(size_t, QVariant&)), this, SLOT(tryRead(size_t,QVariant&)));
-    QObject::connect((PageWidget*)widget.get(), SIGNAL(exit(int)), this, SLOT(tryExit(int)));
+    assert(type != PageType::NONE);
+    QObject::connect(widget.get(), SIGNAL(pushToStack(QVariant)), this, SLOT(tryPush(QVariant)));
+    QObject::connect(widget.get(), SIGNAL(readFromStack(size_t, QVariant&)), this, SLOT(tryRead(size_t,QVariant&)));
+    QObject::connect(widget.get(), SIGNAL(exit(int)), this, SLOT(tryExit(int)));
 
     mPageRegistrations.insert(std::map<PageType, PageRegistration>::value_type(type, PageRegistration(move(widget))));
 }
 
-void Navigator::start(PageType type, QList<QVariant> data)
+void Navigator::start(PageType type, std::vector<QVariant> data)
 {
-    for(QVariant datum : data){
-        mDataStack.push_back(datum);
-    }
+    mDataStack = move(data);
     displayPage(type);
 }
 
@@ -50,34 +49,40 @@ void Navigator::tryExit(int exitCode)
 PageRegistration *Navigator::checkSender()
 {
     auto itRegistration = mPageRegistrations.find(getCurrentPageType());
-    assert(itRegistration != mPageRegistrations.end());
-    PageRegistration& registration = itRegistration->second;
-    //PageWidget& widget = registration->getWidget();
+    PageRegistration* registration = nullptr;
 
-    bool fail = false;
-    /*if(&widget != QObject::sender()){ ToDo: find out sender
-        // ToDo: write to log
-        fail = true;
-    }*/
-    return fail ? nullptr : &registration;
+    if(itRegistration != mPageRegistrations.end()){
+        registration = &itRegistration->second;
+        //PageWidget& widget = registration->getWidget();
+
+        /*if(&widget != QObject::sender()){ ToDo: find out sender
+            // ToDo: write to log
+            registration = nullptr;
+        }*/
+    }
+    return registration;
 }
 
 void Navigator::displayPage(PageType type)
 {
-    auto itRegistration = mPageRegistrations.find(type);
-    if(itRegistration != mPageRegistrations.end()){
-        PageWidget& targetWidget = itRegistration->second.getWidget();
-        targetWidget.reset();
-        mMainWindow->display(&targetWidget);
-        mPageStack.push(PageStackFrame(type));
-    }else{
-            // ToDo: write to log
+    if(type == PageType::NONE){
+        mMainWindow->display(nullptr);
+    } else {
+        auto itRegistration = mPageRegistrations.find(type);
+        if(itRegistration != mPageRegistrations.end()){
+            PageWidget& targetWidget = itRegistration->second.getWidget();
+            targetWidget.reset();
+            mMainWindow->display(&targetWidget);
+            mPageStack.push(PageStackFrame(type));
+        }else{
+                // ToDo: write to log
+        }
     }
 }
 
 PageType Navigator::getCurrentPageType() const
 {
-    return mPageStack.top().getType();
+    return mPageStack.empty() ? PageType::NONE : mPageStack.top().getType();
 }
 
 void Navigator::registerTransition(PageType origin, int exitCode, PageType target)

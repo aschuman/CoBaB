@@ -13,7 +13,7 @@ void MainControl::run()
     mainWindow->show();
     mNavi = std::make_unique<Navigator>(move(mainWindow));
     initNavigation();
-    mNavi->start(PageType::LIBRARY, QList<QVariant>());
+    mNavi->start(PageType::LIBRARY, std::vector<QVariant>());
 }
 
 void MainControl::initNavigation()
