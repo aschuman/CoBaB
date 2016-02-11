@@ -5,3 +5,9 @@ travis{
 }else{
     CONFIG += c++14
 }
+
+gcc{
+    QMAKE_CXXFLAGS += \
+        -Wsuggest-override \
+        -Wsuggest-attribute=const
+}
