@@ -63,7 +63,7 @@ SOURCES += \
     src/ViewerPageWidget.cpp \
     src/Bookmark.cpp \
     src/log.cpp
-    #src/TestAlgorithm.cpp
+    //src/TestAlgorithm.cpp
 
 FORMS += \
     ui/LibraryPageWidget.ui \

@@ -17,43 +17,25 @@ public:
     QList<DataPacket> run();
     
     void cancel();
-    
-    /**
-     * @param inputDataList
-     */
+
     bool setInputs(QList<DataPacket> inputDataList);
-    
-    /**
-     * @param parameters
-     */
+     
     bool setParameters(QJsonObject parameters);
     
     QString getDescription();
-    
-    /**
-     * @param description
-     */
+
     void setDescription(QString description);
     
     QString getName();
-    
-    /**
-     * @param name
-     */
+
     void setName(QString name);
     
     bool supportsProgressInfo();
     
-    /**
-     * @param searchResult
-     */
     void sendIntermediateResults(SearchResult searchResult);
-    
-    /**
-     * @param progress
-     * @param message
-     */
+
     void sendProgress(double progress, QString message);
+
 private: 
     std::unique_ptr<DataPacket> mInputData;
     QString mDescription;

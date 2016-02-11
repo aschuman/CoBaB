@@ -15,23 +15,13 @@ public:
     QString getDescription();
     
     QString getName();
-    
-    /**
-     * @param name
-     */
+
     void setName(QString name);
     
     bool supportsProgressInfo();
-    
-    /**
-     * @param searchResult
-     */
+
     void sendIntermediateResults(SearchResult searchResult);
     
-    /**
-     * @param progress
-     * @param message
-     */
     void sendProgress(double progress, QString message);
 };
 

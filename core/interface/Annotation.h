@@ -25,9 +25,9 @@ public:
 
     friend QDataStream& operator>>(QDataStream& in, Annotation& annotation);
     
-    void toStream(QDataStream in);
+    void toStream(QDataStream in) override;
     
-    void fromStream(QDataStream out);
+    void fromStream(QDataStream out) override;
 
 protected: 
     QString mId;
