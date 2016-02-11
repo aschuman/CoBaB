@@ -3,17 +3,21 @@
 #include "LibraryPageWidget.h"
 #include "ViewerPageWidget.h"
 
+#define LOGGING_LEVEL_1
+#include "log.h"
+
 MainControl::MainControl()
 {
 }
 
 void MainControl::run()
 {
+    LOG("Start CoBaB..");
     std::unique_ptr<MainWindow> mainWindow = std::make_unique<MainWindow>();
     mainWindow->show();
     mNavi = std::make_unique<Navigator>(move(mainWindow));
     initNavigation();
-    mNavi->start(PageType::LIBRARY, QList<QVariant>());
+    mNavi->start(PageType::LIBRARY, std::vector<QVariant>());
 }
 
 void MainControl::initNavigation()

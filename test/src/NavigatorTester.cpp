@@ -22,7 +22,7 @@ void NavigatorTester::init()
     mNavigator->registerTransition(PageType::LIBRARY, -1, PageType::PARAMETER);
     mNavigator->registerTransition(PageType::VIEWER, 0, PageType::PARAMETER);
 
-    QList<QVariant> initialStack;
+    std::vector<QVariant> initialStack;
     initialStack.push_back(QVariant(123));
     initialStack.push_back("What is your major malfunction?");
 
