@@ -10,7 +10,13 @@
 #include "PageStackFrame.h"
 #include "PageRegistration.h"
 
-
+/**
+ * @brief The Navigator decides which PageWidget will be displayed in the MainWindow.
+ *          It contains PageWidgets and information on to which PageWidget will be transitioned in case a PageWidget exits
+ *          taking account of the current PageWidget and the its exitCode.
+ *          It also contains data that is needed to be shared by PageWidgets (i.e. produced by one PageWidget, used by another).
+ *          PageWidgets and data are organized as a stack.
+ */
 class Navigator : public QObject
 {
     Q_OBJECT
@@ -21,6 +27,9 @@ public:
     void start(PageType type, std::vector<QVariant> data);
 
 signals:
+    /**
+     * @brief Emitted when this Navigator has no pages left to display.
+     */
     void finished();
 
 private slots:
