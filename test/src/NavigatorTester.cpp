@@ -4,7 +4,9 @@
 
 void NavigatorTester::init()
 {
-    mNavigator = std::make_unique<Navigator>(std::make_unique<MainWindow>());
+    auto mainWnd = std::make_unique<MainWindow>();
+    mMainWindow = mainWnd.get();
+    mNavigator = std::make_unique<Navigator>(move(mainWnd));
 
     auto lib = std::make_unique<PageWidgetMock>();
     mLibraryMock = lib.get();
@@ -44,6 +46,13 @@ void NavigatorTester::testReadStackTop()
     QCOMPARE(item.toString(), QString("What is your major malfunction?"));
 }
 
+void NavigatorTester::testReadStackOutOfRange()
+{
+    QVariant item;
+    mLibraryMock->emitRead(2, item);
+    QCOMPARE(item.type(), QVariant::Type::Invalid);
+}
+
 void NavigatorTester::testReadStackSecondFromTop()
 {
     QVariant item;
@@ -54,8 +63,10 @@ void NavigatorTester::testReadStackSecondFromTop()
 
 void NavigatorTester::testLibraryViewerTransition()
 {
+    mLibraryMock->setReset(false);
     mLibraryMock->emitExit(0);
     QCOMPARE(mViewerMock->isReset(), true);
+    QCOMPARE(mLibraryMock->isReset(), false);
 }
 
 void NavigatorTester::testPushToStack()
@@ -65,4 +76,19 @@ void NavigatorTester::testPushToStack()
     mLibraryMock->emitRead(0, item);
     QCOMPARE(item.type(), QVariant::Type::Double);
     QCOMPARE(item.toDouble(), 3.141592);
+}
+
+void NavigatorTester::testHomePage()
+{
+    mLibraryMock->setReset(false);
+    mMainWindow->requestedHomePage();
+    QCOMPARE(mLibraryMock->isReset(), true);
+}
+
+void NavigatorTester::testPreviousPage()
+{
+    mLibraryMock->setReset(false);
+    mLibraryMock->emitExit(0);
+    mMainWindow->requestedPreviousPage();
+    QCOMPARE(mLibraryMock->isReset(), true);
 }
