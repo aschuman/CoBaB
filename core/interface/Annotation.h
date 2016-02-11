@@ -8,18 +8,19 @@
 
 #include "Serializable.h"
 #include "Annotation.h"
-#include "AnnotationType.h"
 #include <QDataStream>
 
 
 class Annotation: public Serializable {
 public: 
 
+    enum Type { FACE, PERSON, UNKNOWN };
+
     Annotation(QString id, QString type);
     
     QString getId();
     
-    AnnotationType getType();
+    Type getType();
 
     friend QDataStream& operator<<(QDataStream& out, Annotation& annotation);
 
@@ -31,7 +32,10 @@ public:
 
 protected: 
     QString mId;
-    QString mType = "unknown";
+    QString mType;
+
+private:
+    QStringList mTypes = (QStringList() << "Face" << "Person");
 };
 
 #endif //_ANNOTATION_H

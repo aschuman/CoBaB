@@ -32,13 +32,11 @@ QString Annotation::getId() {
  * @brief Annotation::getType
  * @return
  */
-AnnotationType Annotation::getType() {
-    QStringList types;
-    types << "Face" << "Person";
-    switch (types.indexOf(mId)) {
-        case 0  : return AnnotationType::PERSON;
-        case 1  : return AnnotationType::FACE;
-        default : return AnnotationType::FACE;
+Annotation::Type Annotation::getType() {
+    switch (mTypes.indexOf(mType)) {
+        case 0:     return FACE;
+        case 1:     return PERSON;
+        default:    return UNKNOWN;
     }
 }
 
@@ -49,7 +47,7 @@ AnnotationType Annotation::getType() {
  * @return
  */
 QDataStream& operator<<(QDataStream& out, Annotation& annotation) {
-    Q_UNUSED(annotation);
+    out << annotation.mId << annotation.mType;
     return out;
 }
 
@@ -60,7 +58,7 @@ QDataStream& operator<<(QDataStream& out, Annotation& annotation) {
  * @return
  */
 QDataStream& operator>>(QDataStream& in, Annotation& annotation) {
-    Q_UNUSED(annotation);
+    in >> annotation.mId >> annotation.mType;
     return in;
 }
 
