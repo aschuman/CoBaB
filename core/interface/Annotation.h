@@ -14,36 +14,19 @@
 
 class Annotation: public Serializable {
 public: 
-    
-    /**
-     * @param id
-     */
+
     Annotation(QString id, QString type);
     
     QString getId();
     
     AnnotationType getType();
-    
-    /**
-     * @param out
-     * @param annotation
-     */
+
     friend QDataStream& operator<<(QDataStream& out, Annotation& annotation);
-    
-    /**
-     * @param in
-     * @param annotation
-     */
+
     friend QDataStream& operator>>(QDataStream& in, Annotation& annotation);
     
-    /**
-     * @param in
-     */
     void toStream(QDataStream in);
     
-    /**
-     * @param out
-     */
     void fromStream(QDataStream out);
 
 protected: 

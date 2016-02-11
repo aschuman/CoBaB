@@ -11,7 +11,9 @@
 
 
 /**
+ * @brief Annotation::Annotation
  * @param id
+ * @param type
  */
 Annotation::Annotation(QString id, QString type) {
     mId = id;
@@ -19,14 +21,16 @@ Annotation::Annotation(QString id, QString type) {
 }
 
 /**
- * @return QString
+ * @brief Annotation::getId
+ * @return
  */
 QString Annotation::getId() {
     return mId;
 }
 
 /**
- * @return AnnotationType
+ * @brief Annotation::getType
+ * @return
  */
 AnnotationType Annotation::getType() {
     QStringList types;
@@ -39,26 +43,29 @@ AnnotationType Annotation::getType() {
 }
 
 /**
+ * @brief operator <<
  * @param out
  * @param annotation
- * @return QDataStream&
+ * @return
  */
 QDataStream& operator<<(QDataStream& out, Annotation& annotation) {
-    (void) annotation;
+    Q_UNUSED(annotation);
     return out;
 }
 
 /**
+ * @brief operator >>
  * @param in
  * @param annotation
- * @return QDataStream&
+ * @return
  */
 QDataStream& operator>>(QDataStream& in, Annotation& annotation) {
-    (void) annotation;
+    Q_UNUSED(annotation);
     return in;
 }
 
 /**
+ * @brief Annotation::toStream
  * @param in
  */
 void Annotation::toStream(QDataStream in) {
@@ -66,6 +73,7 @@ void Annotation::toStream(QDataStream in) {
 }
 
 /**
+ * @brief Annotation::fromStream
  * @param out
  */
 void Annotation::fromStream(QDataStream out) {

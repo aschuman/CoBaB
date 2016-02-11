@@ -12,22 +12,11 @@
 
 class RectangleAnnotation: public Annotation, public QRect {
 public: 
-    
-    /**
-     * @param id
-     */
+
     RectangleAnnotation(QString id, QString type);
 
-    /**
-     * @param out
-     * @param annotation
-     */
     friend QDataStream& operator<<(QDataStream& out, RectangleAnnotation& annotation);
 
-    /**
-     * @param in
-     * @param annotation
-     */
     friend QDataStream& operator>>(QDataStream& in, RectangleAnnotation& annotation);
 };
 
