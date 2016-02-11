@@ -11,6 +11,7 @@
 
 
 /**
+ * @brief Bookmark::Bookmark
  * @param result
  * @param algorithm
  * @param query
@@ -22,9 +23,10 @@ Bookmark::Bookmark(SearchResult result, QString algorithm, SearchQuery query) {
 }
 
 /**
+ * @brief operator <<
  * @param out
  * @param bookmark
- * @return QDataStream&
+ * @return
  */
 QDataStream& operator<<(QDataStream& out, Bookmark& bookmark) {
     (void)bookmark;
@@ -32,9 +34,10 @@ QDataStream& operator<<(QDataStream& out, Bookmark& bookmark) {
 }
 
 /**
+ * @brief operator >>
  * @param in
  * @param bookmark
- * @return QDataStream&
+ * @return
  */
 QDataStream& operator>>(QDataStream& in, Bookmark& bookmark) {
     (void)bookmark;
@@ -42,6 +45,7 @@ QDataStream& operator>>(QDataStream& in, Bookmark& bookmark) {
 }
 
 /**
+ * @brief Bookmark::toStream
  * @param in
  */
 void Bookmark::toStream(QDataStream in) {
@@ -49,6 +53,7 @@ void Bookmark::toStream(QDataStream in) {
 }
 
 /**
+ * @brief Bookmark::fromStream
  * @param out
  */
 void Bookmark::fromStream(QDataStream out) {
@@ -56,6 +61,7 @@ void Bookmark::fromStream(QDataStream out) {
 }
 
 /**
+ * @brief Bookmark::setFeedback
  * @param feedback
  */
 void Bookmark::setFeedback(SearchFeedback feedback) {
@@ -63,13 +69,15 @@ void Bookmark::setFeedback(SearchFeedback feedback) {
 }
 
 /**
- * @return SearchFeedback
+ * @brief Bookmark::getFeedback
+ * @return
  */
 SearchFeedback Bookmark::getFeedback() {
     return mSearchFeedback;
 }
 
 /**
+ * @brief Bookmark::setName
  * @param name
  */
 void Bookmark::setName(QString name) {
@@ -77,42 +85,48 @@ void Bookmark::setName(QString name) {
 }
 
 /**
- * @return QString
+ * @brief Bookmark::getName
+ * @return
  */
 QString Bookmark::getName() {
     return mName;
 }
 
 /**
- * @return QDateTime
+ * @brief Bookmark::getDate
+ * @return
  */
 QDateTime Bookmark::getDate() {
     return mDate;
 }
 
 /**
- * @return QString
+ * @brief Bookmark::getAlgorithm
+ * @return
  */
 QString Bookmark::getAlgorithm() {
     return mAlgorithm;
 }
 
 /**
- * @return SearchQuery
+ * @brief Bookmark::getSearchQuery
+ * @return
  */
 SearchQuery Bookmark::getSearchQuery() {
     return mSearchQuery;
 }
 
 /**
- * @return SearchResult
+ * @brief Bookmark::getSearchResult
+ * @return
  */
 SearchResult Bookmark::getSearchResult() {
     return mSearchResult;
 }
 
 /**
- * @return QJsonObject
+ * @brief Bookmark::getParameter
+ * @return
  */
 QJsonObject Bookmark::getParameter() {
     return mParameter;

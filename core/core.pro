@@ -62,6 +62,7 @@ SOURCES += \
     src/LibraryPageWidget.cpp \
     src/ViewerPageWidget.cpp \
     src/Bookmark.cpp \
+    src/BookmarkList.cpp \
     src/log.cpp
     //src/TestAlgorithm.cpp
 

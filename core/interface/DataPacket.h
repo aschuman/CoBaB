@@ -17,9 +17,9 @@ public:
     
     QUuid getUuid();
     
-    virtual void toStream(QDataStream in) = 0;
+    virtual void toStream(QDataStream in) override = 0;
     
-    virtual void fromStream(QDataStream out) = 0;
+    virtual void fromStream(QDataStream out) override = 0;
 protected: 
     Type mType;
     QUuid mUuid;

@@ -9,33 +9,40 @@
  * SearchQuery implementation
  */
 
-
+/**
+ * @brief SearchQuery::SearchQuery
+ */
 SearchQuery::SearchQuery() {
 
 }
 
 /**
- * @return QList<Dataset>
+ * @brief SearchQuery::getDatasets
+ * @return
  */
 QList<Dataset>* SearchQuery::getDatasets() {
     return createDatasetList(mDatasets);
 }
 
 /**
+ * @brief SearchQuery::setDatasets
  * @param datasets
  */
 void SearchQuery::setDatasets(QList<Dataset>* datasets) {
+    Q_UNUSED(datasets);
     datasets = createDatasetList(mDatasets);
 }
 
 /**
- * @return SearchObject
+ * @brief SearchQuery::getSearchObject
+ * @return
  */
 SearchObject* SearchQuery::getSearchObject() {
     return mSearchObject;
 }
 
 /**
+ * @brief SearchQuery::setSearchObject
  * @param searchObject
  */
 void SearchQuery::setSearchObject(SearchObject* searchObject) {
@@ -43,9 +50,10 @@ void SearchQuery::setSearchObject(SearchObject* searchObject) {
 }
 
 /**
+ * @brief operator <<
  * @param out
  * @param searchQuery
- * @return QDataStream&
+ * @return
  */
 QDataStream& operator<<(QDataStream& out, SearchQuery& searchQuery) {
 
@@ -56,9 +64,10 @@ QDataStream& operator<<(QDataStream& out, SearchQuery& searchQuery) {
 }
 
 /**
+ * @brief operator >>
  * @param in
  * @param searchQuery
- * @return QDataStream&
+ * @return
  */
 QDataStream& operator>>(QDataStream& in, SearchQuery& searchQuery) {
     //read object from stream
@@ -84,6 +93,7 @@ QDataStream& operator>>(QDataStream& in, SearchQuery& searchQuery) {
 }
 
 /**
+ * @brief SearchQuery::toStream
  * @param in
  */
 void SearchQuery::toStream(QDataStream in) {
@@ -91,6 +101,7 @@ void SearchQuery::toStream(QDataStream in) {
 }
 
 /**
+ * @brief SearchQuery::fromStream
  * @param out
  */
 void SearchQuery::fromStream(QDataStream out) {

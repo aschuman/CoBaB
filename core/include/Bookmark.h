@@ -16,45 +16,20 @@
 class Bookmark: public Serializable {
 public: 
     
-    /**
-     * @param result
-     * @param algorithm
-     * @param query
-     */
     Bookmark(SearchResult result, QString algorithm, SearchQuery query);
     
-    /**
-     * @param out
-     * @param bookmark
-     */
     friend QDataStream& operator<<(QDataStream& out, Bookmark& bookmark);
-    
-    /**
-     * @param in
-     * @param bookmark
-     */
+
     friend QDataStream& operator>>(QDataStream& in, Bookmark& bookmark);
     
-    /**
-     * @param in
-     */
-    void toStream(QDataStream in);
+    void toStream(QDataStream in) override;
     
-    /**
-     * @param out
-     */
-    void fromStream(QDataStream out);
-    
-    /**
-     * @param feedback
-     */
+    void fromStream(QDataStream out) override;
+
     void setFeedback(SearchFeedback feedback);
     
     SearchFeedback getFeedback();
-    
-    /**
-     * @param name
-     */
+       
     void setName(QString name);
     
     QString getName();
@@ -68,6 +43,7 @@ public:
     SearchResult getSearchResult();
     
     QJsonObject getParameter();
+
 private: 
     QString mName;
     QDateTime mDate;

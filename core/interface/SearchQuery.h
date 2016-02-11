@@ -29,9 +29,9 @@ public:
     
     friend QDataStream& operator>>(QDataStream& in, SearchQuery& searchQuery);
     
-    void toStream(QDataStream in);
+    void toStream(QDataStream in) override;
     
-    void fromStream(QDataStream out);
+    void fromStream(QDataStream out) override;
 
 private:
 
