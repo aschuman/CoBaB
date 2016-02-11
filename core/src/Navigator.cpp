@@ -156,11 +156,6 @@ PageType Navigator::getCurrentPageType() const
     return mPageStack.empty() ? PageType::NONE : mPageStack.back().getType();
 }
 
-void Navigator::reducePageStack(size_t n)
-{
-
-}
-
 /**
  * @brief Registers a transition. If during navigation origin exits with exitCode,
  *          target will be displayed.
