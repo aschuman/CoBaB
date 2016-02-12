@@ -1,80 +1,84 @@
 #include "SearchObject.h"
 /**
  * @brief SearchObject::SearchObject
+ * @author Georgi
  */
 SearchObject::SearchObject() {
 
 }
 /**
- * @brief SearchObject::getMedium
- * @return
+ * @brief gets the medium
+ * @return the medium
  */
 QString SearchObject::getMedium() {
     return mMedium;
 }
 /**
- * @brief SearchObject::setMedium
- * @param medium
+ * @brief sets the medium
+ * @param medium to be set
  */
 void SearchObject::setMedium(QString medium) {
     mMedium = medium;
 }
 /**
- * @brief SearchObject::getAnnotation
- * @return
+ * @brief gets the annotation
+ * @return the annotation
  */
 Annotation* SearchObject::getAnnotation() {
     return mAnnotation;
 }
 /**
- * @brief SearchObject::setAnnotation
- * @param annotation
+ * @brief sets the annotation
+ * @param annotation to be set
  */
 void SearchObject::setAnnotation(Annotation* annotation) {
     mAnnotation = annotation;
 }
 /**
- * @brief SearchObject::getROI
- * @return
+ * @brief gets the region of interest
+ * @return the region of interest
  */
 QRect* SearchObject::getROI() {
     return mROI;
 }
-
+/**
+ * @brief sets the region of interest
+ * @param roi - the region of interest
+ */
 void SearchObject::setROI(QRect* roi) {
     mROI = roi;
 }
 /**
- * @brief SearchObject::getSourceDataset
- * @return
+ * @brief gets the source dataset
+ * @return the source dataset
  */
 QString SearchObject::getSourceDataset() {
     return mSourceDataset;
 }
 /**
- * @brief SearchObject::setSourceDataset
- * @param dataset
+ * @brief sets the souce dataset
+ * @param dataset to be set as source
  */
 void SearchObject::setSourceDataset(QString dataset) {
     mSourceDataset = dataset;
 }
 /**
- * @brief SearchObject::getMediumIndex
- * @return
+ * @brief gets the index of the medium
+ * @return the index
  */
 int SearchObject::getMediumIndex() {
     return mMediumIndex;
 }
 /**
- * @brief SearchObject::setMediumIndex
- * @param index
+ * @brief sets the index of the medium
+ * @param index to be set
  */
 void SearchObject::setMediumIndex(int index) {
     mMediumIndex = index;
 }
 /**
- * @brief SearchObject::toStream
- * @param in
+ * @brief calls the << operator
+ * @param in - the datastream
  */
 void SearchObject::toStream(QDataStream in) {
 
@@ -82,8 +86,8 @@ void SearchObject::toStream(QDataStream in) {
 
 }
 /**
- * @brief SearchObject::fromStream
- * @param out
+ * @brief calls the >> operator
+ * @param out - the datastream
  */
 void SearchObject::fromStream(QDataStream out) {
 
@@ -91,10 +95,10 @@ void SearchObject::fromStream(QDataStream out) {
 
 }
 /**
- * @brief operator >>
- * @param in
- * @param searchObject
- * @return
+ * @brief override >> the operator
+ * @param in - the datastream
+ * @param searchObject to be changed
+ * @return in - the datastream
  */
 QDataStream& operator >>(QDataStream& in, SearchObject& searchObject) {
 
@@ -106,51 +110,43 @@ QDataStream& operator >>(QDataStream& in, SearchObject& searchObject) {
     QRect* roi = new QRect();
     QString source;
 
-    //skip opening bracket
-    in.skipRawData(1);
 
     in >> medium;
     searchObject.setMedium(medium);
 
-    //skip coma
-    in.skipRawData(2);
 
     in >> mediumIndex;
     searchObject.setMediumIndex(mediumIndex);
 
-    in.skipRawData(2);
 
     in >> *ann;
     searchObject.setAnnotation(ann);
 
-    in.skipRawData(2);
 
     in >> *roi;
     searchObject.setROI(roi);
 
-    in.skipRawData(2);
 
     in >> source;
     searchObject.setSourceDataset(source);
 
-    in.skipRawData(1);
 
     return in;
 }
 /**
- * @brief operator <<
- * @param out
- * @param searchObject
- * @return
+ * @brief override << the operator
+ * @param out - the datastream
+ * @param searchObject whose data will be sent
+ * @return out - the datastream
  */
 QDataStream& operator <<(QDataStream& out, const SearchObject& searchObject) {
 
     //write object to stream
-    out << "(" << searchObject.mMedium << ", "
-        << searchObject.mMediumIndex << ", "
-        << searchObject.mAnnotation << ", "
-        << searchObject.mROI << ", "
-        << searchObject.mSourceDataset << ")";
+    out << searchObject.mMedium
+        << searchObject.mMediumIndex
+        << searchObject.mAnnotation
+        << searchObject.mROI
+        << searchObject.mSourceDataset;
     return out;
 }
 

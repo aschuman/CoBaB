@@ -7,6 +7,7 @@
 
 /**
  * SearchResultElement implementation
+ * @author Violina
  */
 
 SearchResultElement::SearchResultElement() {
@@ -14,50 +15,56 @@ SearchResultElement::SearchResultElement() {
 }
 
 /**
- * @return int
+ * @brief gets the score of the element
+ * @return the score
  */
 int SearchResultElement::getScore() {
     return mScore;
 }
 
 /**
- * @param score
+ * @brief sets the score of the element
+ * @param score to be set
  */
 void SearchResultElement::setScore(int score) {
     mScore = score;
 }
 
 /**
- * @return SearchObject
+ * @brief gets the searchobject
+ * @return the searchobject
  */
 SearchObject * SearchResultElement::getSearchObject() {
     return mSearchObject;
 }
 
 /**
- * @param searchObject
+ * @brief sets the searchobject
+ * @param searchObject to be set
  */
 void SearchResultElement::setSearchObject(SearchObject *searchObject) {
     mSearchObject = searchObject;
 }
 
 /**
- * @param out
- * @param searchResultElement
- * @return QDataStream&
+ * @brief override << the operator
+ * @param out - the datastream
+ * @param SearchResultElement whose data will be sent
+ * @return out - the datastream
  */
 QDataStream& operator<<(QDataStream& out, const SearchResultElement& searchResultElement) {
 
     //write object to stream
-    out << "(" << searchResultElement.mScore <<
-        ", " << *searchResultElement.mSearchObject << ")";
+    out << searchResultElement.mScore
+        << *searchResultElement.mSearchObject;
     return out;
 }
 
 /**
- * @param in
- * @param searchResultElement
- * @return QDataStream&
+ * @brief override >> the operator
+ * @param in - the datastream
+ * @param SearchResultElement to be changed
+ * @return in - the datastream
  */
 QDataStream& operator>>(QDataStream& in, SearchResultElement& searchResultElement) {
     //read object from stream
@@ -65,25 +72,20 @@ QDataStream& operator>>(QDataStream& in, SearchResultElement& searchResultElemen
     int score;
     SearchObject *searchObject = new SearchObject();
 
-    //skip opening bracket
-    in.skipRawData(1);
-
     in >> score;
     searchResultElement.setScore(score);
 
-    //skip coma
-    in.skipRawData(2);
 
     in >> *searchObject;
     searchResultElement.setSearchObject(searchObject);
 
-    in.skipRawData(1);
 
     return in;
 }
 
 /**
- * @param in
+ * @brief calls the << operator
+ * @param in - the datastream
  */
 void SearchResultElement::toStream(QDataStream in) {
 
@@ -91,7 +93,8 @@ void SearchResultElement::toStream(QDataStream in) {
 }
 
 /**
- * @param out
+ * @brief calls the >> operator
+ * @param out - the datastream
  */
 void SearchResultElement::fromStream(QDataStream out) {
 
