@@ -5,6 +5,12 @@
 #include "PageType.h"
 
 
+/**
+ * @brief Holds information on displayed PageWidgets.
+ *
+ * A PageStackFrame can be used by the Navigator to keep track of which
+ * PageWidget has been displayed and how many items it has pushed to the data stack.
+ */
 class PageStackFrame
 {
     size_t mSize;
