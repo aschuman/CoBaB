@@ -21,7 +21,7 @@ public:
     
     QList<SearchResultElement>* sortByScore();
 
-    friend QDataStream& operator<<(QDataStream& out, SearchResult& searchResult);
+    friend QDataStream& operator<<(QDataStream& out, const SearchResult& searchResult);
 
     friend QDataStream& operator>>(QDataStream& in, SearchResult& searchResult);
 

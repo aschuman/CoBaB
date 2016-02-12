@@ -16,10 +16,11 @@
 
 class Bookmark: public Serializable {
 public: 
+    Bookmark();
     
     Bookmark(SearchResult result, QString algorithm, SearchQuery query);
     
-    friend QDataStream& operator<<(QDataStream& out, Bookmark& bookmark);
+    friend QDataStream& operator<<(QDataStream& out, const Bookmark& bookmark);
 
     friend QDataStream& operator>>(QDataStream& in, Bookmark& bookmark);
     

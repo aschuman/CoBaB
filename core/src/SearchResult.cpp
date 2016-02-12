@@ -66,8 +66,8 @@ QList<SearchResultElement>* SearchResult::sortByScore() {
  * @param searchResult
  * @return
  */
-QDataStream& operator<<(QDataStream& out, SearchResult& searchResult) {
-    out << *(searchResult.getSearchResultList());
+QDataStream& operator<<(QDataStream& out, const SearchResult& searchResult) {
+    out << *(searchResult.mSearchResultElementList);
     return out;
 }
 

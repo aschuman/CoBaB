@@ -9,6 +9,13 @@
  * Bookmark implementation
  */
 
+/**
+ * @brief Bookmark::Bookmark
+ */
+
+Bookmark::Bookmark() {
+
+}
 
 /**
  * @brief Bookmark::Bookmark
@@ -28,7 +35,7 @@ Bookmark::Bookmark(SearchResult result, QString algorithm, SearchQuery query) {
  * @param bookmark
  * @return
  */
-QDataStream& operator<<(QDataStream& out, Bookmark& bookmark) {
+QDataStream& operator<<(QDataStream& out, const Bookmark& bookmark) {
     //convert mParameter to QString
     QJsonDocument doc(bookmark.mParameter);
     QString parameters(doc.toJson(QJsonDocument::Compact));
