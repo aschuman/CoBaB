@@ -29,7 +29,15 @@ Bookmark::Bookmark(SearchResult result, QString algorithm, SearchQuery query) {
  * @return
  */
 QDataStream& operator<<(QDataStream& out, Bookmark& bookmark) {
-    (void)bookmark;
+    //convert mParameter to QString
+    QJsonDocument doc(bookmark.mParameter);
+    QString parameters(doc.toJson(QJsonDocument::Compact));
+
+    //write to stream
+    out << bookmark.mName << bookmark.mDate << bookmark.mAlgorithm
+        << bookmark.mSearchQuery << parameters
+        << bookmark.mSearchResult << bookmark.mSearchFeedback;
+
     return out;
 }
 
@@ -40,7 +48,19 @@ QDataStream& operator<<(QDataStream& out, Bookmark& bookmark) {
  * @return
  */
 QDataStream& operator>>(QDataStream& in, Bookmark& bookmark) {
-    (void)bookmark;
+    QString parameters;
+    in >> bookmark.mName >> bookmark.mDate >> bookmark.mAlgorithm
+       >> bookmark.mSearchQuery >> parameters
+       >> bookmark.mSearchResult >> bookmark.mSearchFeedback;
+
+    //create mParameter from parameters-Strings
+    QJsonDocument doc = QJsonDocument::fromJson(parameters.toUtf8());
+    if (!doc.isNull() && doc.isObject()) {
+        bookmark.mParameter = doc.object();
+    }
+    else {
+        bookmark.mParameter = QJsonObject();
+    }
     return in;
 }
 

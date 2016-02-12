@@ -12,6 +12,7 @@
 #include "SearchFeedback.h"
 #include <QDateTime>
 #include <QJsonObject>
+#include <QJsonDocument>
 
 class Bookmark: public Serializable {
 public: 
