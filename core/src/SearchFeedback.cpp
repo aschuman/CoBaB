@@ -20,7 +20,7 @@ SearchFeedback::SearchFeedback() {
  * @brief SearchFeedback::SearchFeedback
  * @param type
  */
-SearchFeedback::SearchFeedback(FeedbackType type) {
+SearchFeedback::SearchFeedback(SearchFeedback::Type type) {
     mType = type;
 }
 
@@ -44,7 +44,7 @@ void SearchFeedback::setFeedbackList(QList<QPair<SearchObject, int>> feedbackLis
  * @brief SearchFeedback::getFeedbackType
  * @return
  */
-FeedbackType SearchFeedback::getFeedbackType() {
+SearchFeedback::Type SearchFeedback::getFeedbackType() {
     return mType;
 }
 

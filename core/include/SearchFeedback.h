@@ -7,7 +7,6 @@
 #define _SEARCHFEEDBACK_H
 
 #include "DataPacket.h"
-#include "FeedbackType.h"
 #include "SearchFeedback.h"
 #include "SearchObject.h"
 #include <QDataStream>
@@ -16,15 +15,17 @@
 class SearchFeedback: public DataPacket {
 public:
 
+    enum Type { DUAL, EXTENDED };
+
     SearchFeedback();
 
-    SearchFeedback(FeedbackType type);
+    SearchFeedback(Type type);
     
     QList<QPair<SearchObject, int>> getFeedbackList();
 
     void setFeedbackList(QList<QPair<SearchObject, int>> feedbackList);
     
-    FeedbackType getFeedbackType();
+    Type getFeedbackType();
 
     friend QDataStream& operator<<(QDataStream& out, SearchFeedback& feedback);
     
@@ -36,7 +37,7 @@ public:
 
 private: 
     QList<QPair<SearchObject, int>> mFeedbackList;
-    FeedbackType mType;
+    Type mType;
 };
 
 #endif //_SEARCHFEEDBACK_H
