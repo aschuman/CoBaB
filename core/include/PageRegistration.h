@@ -8,6 +8,7 @@
 
 /**
  * @brief A PageRegistration holds a PageWidget and all transitions from it.
+ * @author Vincent Winkler
  */
 class PageRegistration
 {

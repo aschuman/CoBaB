@@ -5,6 +5,7 @@
 
 /**
  * @brief An abstract base class for widgets that can be handled by the Navigator.
+ * @author Vincent Winkler
  */
 class PageWidget : public QWidget
 {

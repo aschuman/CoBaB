@@ -13,10 +13,12 @@
 /**
  * @brief The Navigator decides which PageWidget will be displayed in the MainWindow.
  *
- *          It contains PageWidgets and information on to which PageWidget will be transitioned in case a PageWidget exits
- *          taking account of the current PageWidget and the its exitCode.
- *          It also contains data that is needed to be shared by PageWidgets (i.e. produced by one PageWidget, used by another).
- *          PageWidgets and data are organized as a stack.
+ * It contains PageWidgets and information on to which PageWidget will be transitioned in case a PageWidget exits
+ * taking account of the current PageWidget and the its exitCode.
+ * It also contains data that is needed to be shared by PageWidgets (i.e. produced by one PageWidget, used by another).
+ * PageWidgets and data are organized as a stack.
+ *
+ * @author Vincent Winkler
  */
 class Navigator : public QObject
 {
