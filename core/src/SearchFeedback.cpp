@@ -59,7 +59,7 @@ SearchFeedback::Type SearchFeedback::getType() {
  * @param feedback
  * @return
  */
-QDataStream& operator<<(QDataStream& out, SearchFeedback& feedback) {
+QDataStream& operator<<(QDataStream& out, const SearchFeedback& feedback) {
     out << feedback.mType << feedback.mFeedbackList;
     return out;
 }

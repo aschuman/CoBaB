@@ -21,7 +21,10 @@ BookmarkList::BookmarkList() {
  * @param path
  */
 void BookmarkList::load(QString path) {
-    Q_UNUSED(path);
+    QFile file(path);
+    QDataStream in(&file);
+    in >> mBookmarkList;
+    file.close();
 }
 
 /**
@@ -29,7 +32,10 @@ void BookmarkList::load(QString path) {
  * @param path
  */
 void BookmarkList::save(QString path) {
-    Q_UNUSED(path);
+    QFile file(path);
+    QDataStream out(&file);
+    out << mBookmarkList;
+    file.close();
 }
 
 /**

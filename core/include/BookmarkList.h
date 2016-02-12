@@ -8,6 +8,8 @@
 
 #include "Bookmark.h"
 #include "SearchResult.h"
+#include <QFile>
+#include <QDataStream>
 
 class BookmarkList {
 public: 

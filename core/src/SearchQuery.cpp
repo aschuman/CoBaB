@@ -55,11 +55,11 @@ void SearchQuery::setSearchObject(SearchObject* searchObject) {
  * @param searchQuery
  * @return
  */
-QDataStream& operator<<(QDataStream& out, SearchQuery& searchQuery) {
+QDataStream& operator<<(QDataStream& out, const SearchQuery& searchQuery) {
 
     //write object to stream
-    out << "(" << searchQuery.getDatasets() << ", "
-        << searchQuery.getSearchObject() << ")";
+    out << "(" << searchQuery.mDatasets << ", "
+        << searchQuery.mSearchObject << ")";
     return out;
 }
 

@@ -25,7 +25,7 @@ public:
 
     void setSearchObject(SearchObject* searchObject);
     
-    friend QDataStream& operator<<(QDataStream& out, SearchQuery& searchQuery);
+    friend QDataStream& operator<<(QDataStream& out, const SearchQuery& searchQuery);
     
     friend QDataStream& operator>>(QDataStream& in, SearchQuery& searchQuery);
     
