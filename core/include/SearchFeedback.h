@@ -25,7 +25,7 @@ public:
 
     void setFeedbackList(QList<QPair<SearchObject, int>> feedbackList);
     
-    Type getFeedbackType();
+    Type getType();
 
     friend QDataStream& operator<<(QDataStream& out, SearchFeedback& feedback);
     

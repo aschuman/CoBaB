@@ -44,7 +44,7 @@ void SearchFeedback::setFeedbackList(QList<QPair<SearchObject, int>> feedbackLis
  * @brief SearchFeedback::getFeedbackType
  * @return
  */
-SearchFeedback::Type SearchFeedback::getFeedbackType() {
+SearchFeedback::Type SearchFeedback::getType() {
     return mType;
 }
 
@@ -55,7 +55,7 @@ SearchFeedback::Type SearchFeedback::getFeedbackType() {
  * @return
  */
 QDataStream& operator<<(QDataStream& out, SearchFeedback& feedback) {
-    (void)feedback;
+    Q_UNUSED(feedback);
     return out;
 }
 
@@ -66,7 +66,7 @@ QDataStream& operator<<(QDataStream& out, SearchFeedback& feedback) {
  * @return
  */
 QDataStream& operator>>(QDataStream& in, SearchFeedback& feedback) {
-    (void)feedback;
+    Q_UNUSED(feedback);
     return in;
 }
 
