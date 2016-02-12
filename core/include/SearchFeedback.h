@@ -10,7 +10,7 @@
 #include "SearchFeedback.h"
 #include "SearchObject.h"
 #include <QDataStream>
-
+#include <QStringList>
 
 class SearchFeedback: public DataPacket {
 public:
@@ -19,7 +19,7 @@ public:
 
     SearchFeedback();
 
-    SearchFeedback(Type type);
+    SearchFeedback(QString type);
     
     QList<QPair<SearchObject, int>> getFeedbackList();
 
@@ -37,7 +37,8 @@ public:
 
 private: 
     QList<QPair<SearchObject, int>> mFeedbackList;
-    Type mType;
+    QString mType;
+    QStringList mTypes = QStringList() << "Dual" << "Extended";
 };
 
 #endif //_SEARCHFEEDBACK_H

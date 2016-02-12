@@ -143,14 +143,14 @@ QDataStream& operator >>(QDataStream& in, SearchObject& searchObject) {
  * @param searchObject
  * @return
  */
-QDataStream& operator <<(QDataStream& out, SearchObject& searchObject) {
+QDataStream& operator <<(QDataStream& out, const SearchObject& searchObject) {
 
     //write object to stream
-    out << "(" << searchObject.getMedium() << ", "
-        << searchObject.getMediumIndex() << ", "
-        << searchObject.getAnnotation() << ", "
-        << searchObject.getROI() << ", "
-        << searchObject.getSourceDataset() << ")";
+    out << "(" << searchObject.mMedium << ", "
+        << searchObject.mMediumIndex << ", "
+        << searchObject.mAnnotation << ", "
+        << searchObject.mROI << ", "
+        << searchObject.mSourceDataset << ")";
     return out;
 }
 

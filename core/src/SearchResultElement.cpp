@@ -46,11 +46,11 @@ void SearchResultElement::setSearchObject(SearchObject *searchObject) {
  * @param searchResultElement
  * @return QDataStream&
  */
-QDataStream& operator<<(QDataStream& out, SearchResultElement& searchResultElement) {
+QDataStream& operator<<(QDataStream& out, const SearchResultElement& searchResultElement) {
 
     //write object to stream
-    out << "(" << searchResultElement.getScore() <<
-        ", " << searchResultElement.getSearchObject() << ")";
+    out << "(" << searchResultElement.mScore <<
+        ", " << *searchResultElement.mSearchObject << ")";
     return out;
 }
 

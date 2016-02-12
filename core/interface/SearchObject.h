@@ -39,7 +39,7 @@ public:
 
     friend QDataStream& operator >>(QDataStream& in, SearchObject& searchObject);
 
-    friend QDataStream& operator <<(QDataStream& out, SearchObject& searchObject);
+    friend QDataStream& operator <<(QDataStream& out, const SearchObject& searchObject);
 
 protected:
 

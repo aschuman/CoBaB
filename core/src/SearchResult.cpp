@@ -9,11 +9,15 @@
  * SearchResult implementation
  */
 
+/**
+ * @brief SearchResult::SearchResult
+ */
 SearchResult::SearchResult() {
 
 }
 
 /**
+ * @brief SearchResult::SearchResult
  * @param list
  */
 SearchResult::SearchResult(QList<SearchResultElement>* list) {
@@ -21,14 +25,16 @@ SearchResult::SearchResult(QList<SearchResultElement>* list) {
 }
 
 /**
- * @return QList<SearchResultElement>
+ * @brief SearchResult::getSearchResultList
+ * @return
  */
 QList<SearchResultElement>* SearchResult::getSearchResultList() {
     return mSearchResultElementList;
 }
 
 /**
- * @return QList<SearchResultElement>
+ * @brief SearchResult::sortByScore
+ * @return
  */
 QList<SearchResultElement>* SearchResult::sortByScore() {
 
@@ -55,33 +61,39 @@ QList<SearchResultElement>* SearchResult::sortByScore() {
 }
 
 /**
+ * @brief operator <<
  * @param out
  * @param searchResult
- * @return QDataStream&
+ * @return
  */
 QDataStream& operator<<(QDataStream& out, SearchResult& searchResult) {
+    out << *(searchResult.getSearchResultList());
     return out;
 }
 
 /**
+ * @brief operator >>
  * @param in
  * @param searchResult
- * @return QDataStream&
+ * @return
  */
 QDataStream& operator>>(QDataStream& in, SearchResult& searchResult) {
+    in >> *(searchResult.mSearchResultElementList);
     return in;
 }
 
 /**
+ * @brief SearchResult::toStream
  * @param in
  */
 void SearchResult::toStream(QDataStream in) {
-
+    in << *this;
 }
 
 /**
+ * @brief SearchResult::fromStream
  * @param out
  */
 void SearchResult::fromStream(QDataStream out) {
-
+    out >> *this;
 }
