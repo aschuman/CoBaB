@@ -6,6 +6,10 @@
 #include "Navigator.h"
 
 
+/**
+ * @brief Entry point of the core library of this program.
+ * @author Vincent Winkler
+ */
 class MainControl : public QObject
 {
     Q_OBJECT
@@ -17,6 +21,9 @@ public slots:
     void run();
 
 signals:
+    /**
+     * @brief Emitted when the core has finished execution.
+     */
     void finished();
 
 private:

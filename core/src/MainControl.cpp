@@ -6,10 +6,16 @@
 #define LOGGING_LEVEL_1
 #include "log.h"
 
+/**
+ * @brief Constructs a MainControl.
+ */
 MainControl::MainControl()
 {
 }
 
+/**
+ * @brief Starts the core.
+ */
 void MainControl::run()
 {
     LOG("Start CoBaB..");
