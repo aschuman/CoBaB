@@ -4,10 +4,22 @@
 #define LOGGING_LEVEL_1
 #include "log.h"
 
+/**
+ * @brief Consturcts the Navigator and connects it to mainWindow.
+ * @param mainWindow MainWindow in which the Navigator will display PageWidgets.
+ */
 Navigator::Navigator(std::unique_ptr<MainWindow> mainWindow) : mMainWindow(move(mainWindow))
 {
+    QObject::connect(mMainWindow.get(), SIGNAL(requestedPreviousPage()), this, SLOT(toPreviousPage()));
+    QObject::connect(mMainWindow.get(), SIGNAL(requestedHomePage()), this, SLOT(toHomePage()));
 }
 
+/**
+ * @brief Enables a PageWidget to be inserted into the respective MainWindow by this Navigator.
+ * @param type Type that will identify the PageWidget. Can not be PageWidget::None.
+ *          An already registered Type will be overridden by this registration.
+ * @param widget PageWidget that will be registered.
+ */
 void Navigator::registerPage(PageType type, std::unique_ptr<PageWidget> widget)
 {
     assert(type != PageType::NONE);
@@ -18,35 +30,88 @@ void Navigator::registerPage(PageType type, std::unique_ptr<PageWidget> widget)
     mPageRegistrations.insert(std::map<PageType, PageRegistration>::value_type(type, PageRegistration(move(widget))));
 }
 
+/**
+ * @brief Starts the Navigation.
+ * @param type First page that will be registered.
+ * @param data Initial data stack.
+ */
 void Navigator::start(PageType type, std::vector<QVariant> data)
 {
     mDataStack = move(data);
-    displayPage(type);
+    mPageStack.push_back(PageStackFrame(type));
+    tryDisplayTopPage();
 }
 
+/**
+ * @brief Pushes to data stack.
+ * @param item Value to be pushed to the stack
+ */
 void Navigator::tryPush(QVariant item)
 {
     PageRegistration* registration = checkSender();
     if(registration){
         mDataStack.push_back(item);
+        mPageStack.back().incrementSize();
     }
 }
 
+/**
+ * @brief Reads from data stack.
+ * @param index Position to be read from. (0 referes to the top of te stack)
+ * @param value Reference to a valid QVariant object that will be equipped with the desired stack element.
+ */
 void Navigator::tryRead(size_t index, QVariant &value)
 {
     PageRegistration* registration = checkSender();
     if(registration){
-        value = mDataStack[mDataStack.size() - 1 - index];
+        if(mDataStack.size() > index)
+            value = mDataStack[mDataStack.size() - 1 - index];
+        else
+            LOG_ERR("tried to read data stack out of range");
     }
 }
 
+/**
+ * @brief Lets the current page exit and displays its successor
+ *          according to the exit code and the registered transitions.
+ * @param exitCode Arbitrary exit code.
+ */
 void Navigator::tryExit(int exitCode)
 {
     PageRegistration* registration = checkSender();
     if(registration){
         PageType targetType = registration->getTarget(exitCode);
-        displayPage(targetType);
+        mPageStack.push_back(PageStackFrame(targetType));
+        tryDisplayTopPage();
     }
+}
+
+/**
+ * @brief Returns to the previously displayed page
+ *          and removes the elements from the data stack the current page has pushed.
+ */
+void Navigator::toPreviousPage()
+{
+    LOG("going to previous page");
+    mDataStack.resize(mDataStack.size() - mPageStack.back().getSize());
+    mPageStack.pop_back();
+
+    tryDisplayTopPage();
+}
+
+/**
+ * @brief Returns to the initial page given by Navigator::start.
+ *          Clears the data stack except the initial elements given by Navigator::start
+ *          and elements added by the initial page.
+ */
+void Navigator::toHomePage()
+{
+    LOG("going to home page");
+    for(int i=0; i < mPageStack.size() - 1; ++i)
+        mPageStack.pop_back();
+    mDataStack.resize(mPageStack.back().getSize());
+
+    tryDisplayTopPage();
 }
 
 PageRegistration *Navigator::checkSender()
@@ -66,35 +131,44 @@ PageRegistration *Navigator::checkSender()
     return registration;
 }
 
-void Navigator::displayPage(PageType type)
+bool Navigator::tryDisplayTopPage()
 {
-    LOG("displaying ", to_String(type), " page..");
-    if(type == PageType::NONE){
-        mMainWindow->display(nullptr);
-    } else {
+    bool success = false;
+    if(!mPageStack.empty()){
+        PageType type = mPageStack.back().getType();
+
+        LOG("displaying ", to_String(type), " page..");
         auto itRegistration = mPageRegistrations.find(type);
         if(itRegistration != mPageRegistrations.end()){
             PageWidget& targetWidget = itRegistration->second.getWidget();
             targetWidget.reset();
             mMainWindow->display(&targetWidget);
-            mPageStack.push(PageStackFrame(type));
+            success = true;
         }else{
-                // ToDo: write to log
+            LOG_ERR("could not display unregistered page ", to_String(type));
         }
     }
+    return success;
 }
 
 PageType Navigator::getCurrentPageType() const
 {
-    return mPageStack.empty() ? PageType::NONE : mPageStack.top().getType();
+    return mPageStack.empty() ? PageType::NONE : mPageStack.back().getType();
 }
 
+/**
+ * @brief Registers a transition. If during navigation origin exits with exitCode,
+ *          target will be displayed.
+ * @param origin PageWidget that during navigation has to be displayed for this transition to take effect.
+ * @param exitCode Exit code that has to be emmited by origin for this transition to take effect.
+ * @param target PageWidget that will be displayed as effect of this transition.
+ */
 void Navigator::registerTransition(PageType origin, int exitCode, PageType target)
 {
     auto it = mPageRegistrations.find(origin);
     if(it != mPageRegistrations.end()){
         it->second.addTransition(exitCode, target);
     } else {
-        // ToDo: write to log
+        LOG_ERR("could not register transition from unregistered page ", to_String(origin));
     }
 }
