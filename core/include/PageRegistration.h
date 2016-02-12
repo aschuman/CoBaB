@@ -6,6 +6,9 @@
 #include "PageWidget.h"
 
 
+/**
+ * @brief A PageRegistration holds a PageWidget and all transitions from it.
+ */
 class PageRegistration
 {
 public:
