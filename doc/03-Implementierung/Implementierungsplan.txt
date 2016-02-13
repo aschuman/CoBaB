@@ -15,7 +15,7 @@ Annotation, RectangleAnnotation, BookmarkList, Bookmark, SearchFeedback
 
 Klassen, an denen gearbeitet wird:
 Dataset, Anja
-MainControl, Vincent
+MainControl, MainWindow Vincent
 Testalgorithmus, Tung
 SearchObject, SearchQuery, SearchResult, SearchResultElement, Violina, Georgi
 DataPacket, Violina, Georgi
@@ -32,5 +32,4 @@ ResultsPageWidget, Vincent
 ListView, Anja, Marie
 Models/Delegates
 VideoViewer, PhotoViewer, SingleFrameVideoViewer
-MainWindow
 SearchManager, BookmarkManager, SearchResultManager, MainWindowManager

@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
     currentWidget(nullptr)
 {
     ui->setupUi(this);
+    QObject::connect(ui->mHomeAction, SIGNAL(triggered(bool)), this, SIGNAL(requestedHomePage()));
+    QObject::connect(ui->mBackAction, SIGNAL(triggered(bool)), this, SIGNAL(requestedPreviousPage()));
 }
 
 /**
@@ -30,9 +32,12 @@ MainWindow::~MainWindow()
 void MainWindow::display(QWidget* widget)
 {
     if(widget){
-        if(currentWidget)
+        if(currentWidget){
+            currentWidget->hide();
             ui->verticalLayout->removeWidget(currentWidget);
+        }
         ui->verticalLayout->addWidget(widget);
         currentWidget = widget;
+        currentWidget->show();
     }
 }
