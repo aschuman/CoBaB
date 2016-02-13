@@ -92,11 +92,13 @@ void Navigator::tryExit(int exitCode)
  */
 void Navigator::toPreviousPage()
 {
-    LOG("going to previous page");
-    mDataStack.resize(mDataStack.size() - mPageStack.back().getSize());
-    mPageStack.pop_back();
+    if(mPageStack.size() > 1){
+        LOG("going to previous page");
+        mDataStack.resize(mDataStack.size() - mPageStack.back().getSize());
+        mPageStack.pop_back();
 
-    tryDisplayTopPage();
+        tryDisplayTopPage();
+    }
 }
 
 /**
