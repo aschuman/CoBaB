@@ -50,6 +50,7 @@ private:
     std::unique_ptr<MainWindow> mMainWindow;
     std::vector<PageStackFrame> mPageStack;
     std::vector<QVariant> mDataStack;
+    size_t mInitialStackSize;
     std::map<PageType, PageRegistration> mPageRegistrations;
 };
 

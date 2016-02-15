@@ -20,6 +20,8 @@ private slots:
     void testPushToStack();
     void testHomePage();
     void testPreviousPage();
+    void testRemainingInitialStackAfterReturnHome();
+    void testRemainingInitialStackAfterReturnBack();
 
 private:
     std::unique_ptr<Navigator> mNavigator;

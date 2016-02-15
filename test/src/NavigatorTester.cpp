@@ -92,3 +92,21 @@ void NavigatorTester::testPreviousPage()
     mMainWindow->requestedPreviousPage();
     QCOMPARE(mLibraryMock->isReset(), true);
 }
+
+void NavigatorTester::testRemainingInitialStackAfterReturnHome()
+{
+    mMainWindow->requestedHomePage();
+    QVariant item;
+    mLibraryMock->emitRead(1, item);
+    QCOMPARE(item.type(), QVariant::Type::Int);
+    QCOMPARE(item.toInt(), 123);
+}
+
+void NavigatorTester::testRemainingInitialStackAfterReturnBack()
+{
+    mMainWindow->requestedPreviousPage();
+    QVariant item;
+    mLibraryMock->emitRead(1, item);
+    QCOMPARE(item.type(), QVariant::Type::Int);
+    QCOMPARE(item.toInt(), 123);
+}

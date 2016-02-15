@@ -8,7 +8,9 @@
  * @brief Consturcts the Navigator and connects it to mainWindow.
  * @param mainWindow MainWindow in which the Navigator will display PageWidgets.
  */
-Navigator::Navigator(std::unique_ptr<MainWindow> mainWindow) : mMainWindow(move(mainWindow))
+Navigator::Navigator(std::unique_ptr<MainWindow> mainWindow)
+    : mMainWindow(move(mainWindow)),
+      mInitialStackSize(0)
 {
     QObject::connect(mMainWindow.get(), SIGNAL(requestedPreviousPage()), this, SLOT(toPreviousPage()));
     QObject::connect(mMainWindow.get(), SIGNAL(requestedHomePage()), this, SLOT(toHomePage()));
@@ -37,6 +39,7 @@ void Navigator::registerPage(PageType type, std::unique_ptr<PageWidget> widget)
  */
 void Navigator::start(PageType type, std::vector<QVariant> data)
 {
+    mInitialStackSize = data.size();
     mDataStack = move(data);
     mPageStack.push_back(PageStackFrame(type));
     tryDisplayTopPage();
@@ -96,6 +99,8 @@ void Navigator::toPreviousPage()
         LOG("going to previous page");
         mDataStack.resize(mDataStack.size() - mPageStack.back().getSize());
         mPageStack.pop_back();
+        mDataStack.resize(mDataStack.size() - mPageStack.back().getSize());
+        mPageStack.back().setSize(0);
 
         tryDisplayTopPage();
     }
@@ -111,7 +116,8 @@ void Navigator::toHomePage()
     LOG("going to home page");
     for(int i=0; i < mPageStack.size() - 1; ++i)
         mPageStack.pop_back();
-    mDataStack.resize(mPageStack.back().getSize());
+    mDataStack.resize(mInitialStackSize);
+    mPageStack.back().setSize(0);
 
     tryDisplayTopPage();
 }
