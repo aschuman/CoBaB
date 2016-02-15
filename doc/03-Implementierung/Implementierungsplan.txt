@@ -15,14 +15,14 @@ Annotation, RectangleAnnotation, BookmarkList, Bookmark, SearchFeedback
 
 Klassen, an denen gearbeitet wird:
 Dataset -> Anja
-MainControl, MainWindow -> Vincent
+MainControl, MainWindow, DatasetModel, LibraryPageWidget -> Vincent
 Testalgorithmus -> Tung
 ConfigData, Marie
 ParameterPageWidget, ParameterModel -> Violina, Georgi
 
 
 noch ausstehende Klassen:
-LibraryPageWidget -> Tung
+ResultsPageWidget -> Tung
 ViewerPageWidget -> Anja
 ConfirmationPageWidget -> Marie
 ResultsPageWidget -> Vincent
