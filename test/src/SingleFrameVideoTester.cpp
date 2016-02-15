@@ -4,7 +4,7 @@
 void SingleFrameVideoTester::init()
 {
     QList<QPair<int, Annotation*>> *annotations = new QList<QPair<int, Annotation*>>();
-    mSingleFrameVideo = std::make_unique<SingleFrameVideo>("../../test/testdata/SingleFrameVideo/SingleFrameVideo", *annotations);
+    mSingleFrameVideo = std::make_unique<SingleFrameVideo>("../test/testdata/SingleFrameVideo/SingleFrameVideo", *annotations);
 }
 
 void SingleFrameVideoTester::testFramerate()
