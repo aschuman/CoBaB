@@ -39,6 +39,7 @@ HEADERS += \
     interface/logger.h \
     interface/log.h \
     include/ConfigData.h
+    include/DatasetModel.h
 
 SOURCES += \
     src/Medium.cpp \
@@ -66,6 +67,7 @@ SOURCES += \
     src/BookmarkList.cpp \
     src/log.cpp \
     src/ConfigData.cpp
+    src/DatasetModel.cpp
     //src/TestAlgorithm.cpp
 
 FORMS += \

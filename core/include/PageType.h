@@ -2,6 +2,10 @@
 #define PAGETYPE
 #include <QMetaType>
 
+/**
+ * @brief Identifies a PageWidget class in context of the Navigator.
+ * @author Vincent Winkler
+ */
 enum class PageType {
     NONE,
     LIBRARY,
@@ -13,6 +17,12 @@ enum class PageType {
 
 Q_DECLARE_METATYPE(PageType)
 
+/**
+ * @brief Returns a string of the name of the given PageType.
+ * @param type The PageType whose name will be returned.
+ * @return The string of the name of type.
+ * @author Vincent Winkler
+ */
 inline std::string to_String(PageType type){
     std::string r;
     switch(type){

@@ -19,7 +19,7 @@ public:
 
     Annotation* getAnnotation();
 
-    void setAnnotation(Annotation *annotation);
+    void setAnnotation(Annotation* annotation);
 
     QRect* getROI();
 

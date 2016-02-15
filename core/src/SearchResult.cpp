@@ -11,30 +11,31 @@
 
 /**
  * @brief SearchResult::SearchResult
+ * @author Violina
  */
 SearchResult::SearchResult() {
 
 }
 
 /**
- * @brief SearchResult::SearchResult
- * @param list
+ * @brief a constructor for the class
+ * @param list of SearchResultElements
  */
 SearchResult::SearchResult(QList<SearchResultElement>* list) {
     mSearchResultElementList = list;
 }
 
 /**
- * @brief SearchResult::getSearchResultList
- * @return
+ * @brief gets the list of SearchResultElements
+ * @return the list of SearchResultElements
  */
 QList<SearchResultElement>* SearchResult::getSearchResultList() {
     return mSearchResultElementList;
 }
 
 /**
- * @brief SearchResult::sortByScore
- * @return
+ * @brief sorts the SearchResultElements by score
+ * @return the sorted list
  */
 QList<SearchResultElement>* SearchResult::sortByScore() {
 
@@ -61,10 +62,10 @@ QList<SearchResultElement>* SearchResult::sortByScore() {
 }
 
 /**
- * @brief operator <<
- * @param out
- * @param searchResult
- * @return
+ * @brief override << the operator
+ * @param out - the datastream
+ * @param SearchResult whose data will be sent
+ * @return out - the datastream
  */
 QDataStream& operator<<(QDataStream& out, const SearchResult& searchResult) {
     out << *(searchResult.mSearchResultElementList);
@@ -72,10 +73,10 @@ QDataStream& operator<<(QDataStream& out, const SearchResult& searchResult) {
 }
 
 /**
- * @brief operator >>
- * @param in
- * @param searchResult
- * @return
+ * @brief override >> the operator
+ * @param in - the datastream
+ * @param SearchResult to be changed
+ * @return in - the datastream
  */
 QDataStream& operator>>(QDataStream& in, SearchResult& searchResult) {
     in >> *(searchResult.mSearchResultElementList);
@@ -83,16 +84,16 @@ QDataStream& operator>>(QDataStream& in, SearchResult& searchResult) {
 }
 
 /**
- * @brief SearchResult::toStream
- * @param in
+ * @brief calls the << operator
+ * @param in - the datastream
  */
 void SearchResult::toStream(QDataStream in) {
     in << *this;
 }
 
 /**
- * @brief SearchResult::fromStream
- * @param out
+ * @brief calls the >> operator
+ * @param out - the datastream
  */
 void SearchResult::fromStream(QDataStream out) {
     out >> *this;

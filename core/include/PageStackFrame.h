@@ -10,6 +10,8 @@
  *
  * A PageStackFrame can be used by the Navigator to keep track of which
  * PageWidget has been displayed and how many items it has pushed to the data stack.
+ *
+ * @author Vincent Winkler
  */
 class PageStackFrame
 {
