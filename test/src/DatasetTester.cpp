@@ -9,9 +9,9 @@ void DatasetTester::testType_data()
     QTest::addColumn<QString>("path");
     QTest::addColumn<Dataset::Type>("type");
 
-    QTest::newRow("single frame video dataset") << "../../test/testdata/SingleFrameVideo" << Dataset::Type::SINGLE_FRAME_VIDEO;
-    QTest::newRow("video dataset") << "../../test/testdata/Video" << Dataset::Type::VIDEO;
-    QTest::newRow("photo dataset") << "../../test/testdata/Fotos" << Dataset::Type::PHOTO;
+    QTest::newRow("single frame video dataset") << "../test/testdata/SingleFrameVideo" << Dataset::Type::SINGLE_FRAME_VIDEO;
+    QTest::newRow("video dataset") << "../test/testdata/Video" << Dataset::Type::VIDEO;
+    QTest::newRow("photo dataset") << "../test/testdata/Fotos" << Dataset::Type::PHOTO;
 
 }
 
@@ -30,9 +30,9 @@ void DatasetTester::testName_data()
     QTest::addColumn<QString>("path");
     QTest::addColumn<QString>("name");
 
-    QTest::newRow("single frame video dataset") << "../../test/testdata/SingleFrameVideo" << "SingleFrameVideo";
-    QTest::newRow("video dataset") << "../../test/testdata/Video" << "Video";
-    QTest::newRow("photo dataset") << "../../test/testdata/Fotos" << "Fotos";
+    QTest::newRow("single frame video dataset") << "../test/testdata/SingleFrameVideo" << "SingleFrameVideo";
+    QTest::newRow("video dataset") << "../test/testdata/Video" << "Video";
+    QTest::newRow("photo dataset") << "../test/testdata/Fotos" << "Fotos";
 
 }
 
@@ -52,9 +52,9 @@ void DatasetTester::testPreviewImage_data()
     QTest::addColumn<QString>("path");
     QTest::addColumn<QString>("image");
 
-    QTest::newRow("single frame video dataset") << "../../test/testdata/SingleFrameVideo"
-                                                << "../../test/testdata/SingleFrameVideo/SingleFrameVideo/bigbangtheory_s1e1.vob_00000.png";
-    QTest::newRow("photo dataset") << "../../test/testdata/Fotos" << "../../test/testdata/Fotos/preview.png";
+    QTest::newRow("single frame video dataset") << "../test/testdata/SingleFrameVideo"
+                                                << "../test/testdata/SingleFrameVideo/SingleFrameVideo/bigbangtheory_s1e1.vob_00000.png";
+    QTest::newRow("photo dataset") << "../test/testdata/Fotos" << "../test/testdata/Fotos/preview.png";
 
 }
 
@@ -108,9 +108,9 @@ void DatasetTester::testPath_data()
     QTest::addColumn<QString>("path");
     QTest::addColumn<QString>("resultPath");
 
-    QTest::newRow("single frame video dataset") << "../../test/testdata/SingleFrameVideo" << "test/testdata/SingleFrameVideo";
-    QTest::newRow("video dataset") << "../../test/testdata/Video" << "test/testdata/Video";
-    QTest::newRow("photo dataset") << "../../test/testdata/Fotos" << "test/testdata/Fotos";
+    QTest::newRow("single frame video dataset") << "../test/testdata/SingleFrameVideo" << "test/testdata/SingleFrameVideo";
+    QTest::newRow("video dataset") << "../test/testdata/Video" << "test/testdata/Video";
+    QTest::newRow("photo dataset") << "../test/testdata/Fotos" << "test/testdata/Fotos";
 
 }
 
@@ -126,7 +126,7 @@ void DatasetTester::testPath()
 
 void DatasetTester::testAnnotationsSFVideo()
 {
-    QString path = "../../test/testdata/SingleFrameVideo";
+    QString path = "../test/testdata/SingleFrameVideo";
 
     Dataset dataset(path);
     if(dataset.getMediaList().isEmpty()) {
@@ -154,7 +154,7 @@ void DatasetTester::testAnnotationsSFVideo()
 
 void DatasetTester::testAnnotationsVideo()
 {
-    QString path = "../../test/testdata/Video";
+    QString path = "../test/testdata/Video";
 
     Dataset dataset(path);
     if(dataset.getMediaList().isEmpty()) {
@@ -166,7 +166,7 @@ void DatasetTester::testAnnotationsVideo()
 
 void DatasetTester::testAnnotationsPhoto()
 {
-    QString path = "../../test/testdata/Fotos";
+    QString path = "../test/testdata/Fotos";
 
     Dataset dataset(path);
     if(dataset.getMediaList().isEmpty()) {

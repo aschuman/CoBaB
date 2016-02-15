@@ -15,13 +15,6 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <widget class="QPushButton" name="mRandomButton">
-     <property name="text">
-      <string>use random dataset</string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QListView" name="mLibraryListView"/>
    </item>
   </layout>
