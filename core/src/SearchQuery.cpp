@@ -108,9 +108,8 @@ void SearchQuery::fromStream(QDataStream out) {
  */
 QList<Dataset>* createDatasetList(QList<QString>* stringDatasets) {
     QList<Dataset>* datasets = new QList<Dataset>;
-    QListIterator<QString> it(*stringDatasets);
-    while (it.hasNext()) {
-       datasets->push_back(*new Dataset(it.next()));
+    for(auto it = stringDatasets->begin(); it != stringDatasets->end(); ++it) {
+       datasets->push_back(Dataset(*it));
     }
     return datasets;
 }
