@@ -16,6 +16,12 @@ INCLUDEPATH += ../core/include \
     ../core/interface
 }
 
+testdata.commands = $(COPY_DIR) $$PWD/testdata $$OUT_PWD
+first.depends = $(first) testdata
+export(first.depends)
+export(testdata.commands)
+QMAKE_EXTRA_TARGETS += first testdata
+
 HEADERS += \
     include/NavigatorTester.h \
     include/PageStackframeTester.h \
