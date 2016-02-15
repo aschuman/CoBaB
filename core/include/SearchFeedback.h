@@ -37,8 +37,8 @@ public:
 
 private: 
     QList<QPair<SearchObject, int>> mFeedbackList;
-    QString mType;
-    QStringList mTypes = QStringList() << "Dual" << "Extended";
+    QString mType;      //type
+    QStringList mTypes = QStringList() << "Dual" << "Extended"; //all types
 };
 
 #endif //_SEARCHFEEDBACK_H

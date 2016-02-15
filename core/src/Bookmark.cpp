@@ -7,6 +7,7 @@
 
 /**
  * Bookmark implementation
+ * @author Tung
  */
 
 /**
@@ -102,10 +103,10 @@ QJsonObject Bookmark::getParameter() {
 }
 
 /**
- * @brief operator <<
- * @param out
- * @param bookmark
- * @return
+ * @brief override the operator <<
+ * @param out - the datastream
+ * @param bookmark data to write
+ * @return out - the data stream after write
  */
 QDataStream& operator<<(QDataStream& out, const Bookmark& bookmark) {
     //convert mParameter to QString
@@ -121,10 +122,10 @@ QDataStream& operator<<(QDataStream& out, const Bookmark& bookmark) {
 }
 
 /**
- * @brief operator >>
- * @param in
- * @param bookmark
- * @return
+ * @brief override the operator >>
+ * @param out - the datastream
+ * @param bookmark save new bookmark here
+ * @return out - the data stream after read
  */
 QDataStream& operator>>(QDataStream& in, Bookmark& bookmark) {
     QString parameters;
