@@ -58,7 +58,7 @@ void Bookmark::setName(QString name) {
  * @brief Bookmark::getName get bookmark name
  * @return name
  */
-QString Bookmark::getName() {
+QString Bookmark::getName() const {
     return mName;
 }
 
@@ -66,7 +66,7 @@ QString Bookmark::getName() {
  * @brief Bookmark::getDate get bookmark date
  * @return date
  */
-QDateTime Bookmark::getDate() {
+QDateTime Bookmark::getDate() const {
     return mDate;
 }
 
@@ -100,6 +100,36 @@ SearchResult Bookmark::getSearchResult() {
  */
 QJsonObject Bookmark::getParameter() {
     return mParameter;
+}
+
+/**
+ * @brief returns true if 2 bookmarks are same (same name)
+ * @param A first bookmark
+ * @param B second bookmark
+ */
+bool operator==(const Bookmark& A, const Bookmark& B) {
+    return (A.getName().compare(B.getName()) == 0);
+}
+
+/**
+ * @brief compareByName compares 2 bookmarks by name
+ * @param A first bookmark
+ * @param B second bookmark
+ * @return true if first bookmark is lexicographically smaller than b
+ */
+
+bool compareByName(Bookmark A, Bookmark B) {
+    return (A.getName().compare(B.getName()) < 0);
+}
+
+/**
+ * @brief compareByDate compares 2 bookmarks by creation date
+ * @param A first bookmark
+ * @param B second bookmark
+ * @return true if A is created before B
+ */
+bool compareByDate(Bookmark A, Bookmark B) {
+    return (A.getDate() < B.getDate());
 }
 
 /**

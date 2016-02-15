@@ -28,11 +28,15 @@ public:
     
     QList<Bookmark*> sortByDate();
 
+    QList<Bookmark*> getBookmarkPointerList();
+
 private: 
 
     QList<Bookmark> mBookmarkList;
 
-    void validateResult(SearchResult searchResult);
+    bool validateResult(SearchResult searchResult);
+
+
 };
 
 #endif //_BOOKMARKLIST_H
