@@ -11,7 +11,7 @@
 
 
 /**
- * @brief Annotation::Annotation
+ * @brief Annotation::Annotation create new Annotation
  * @param id
  * @param type
  */
@@ -21,16 +21,16 @@ Annotation::Annotation(QString id, QString type) {
 }
 
 /**
- * @brief Annotation::getId
- * @return
+ * @brief Annotation::getId gets Id
+ * @return annotation Id
  */
 QString Annotation::getId() {
     return mId;
 }
 
 /**
- * @brief Annotation::getType
- * @return
+ * @brief Annotation::getType gets type
+ * @return annotation type
  */
 Annotation::Type Annotation::getType() {
     switch (mTypes.indexOf(mType)) {
@@ -41,10 +41,10 @@ Annotation::Type Annotation::getType() {
 }
 
 /**
- * @brief operator <<
- * @param out
- * @param annotation
- * @return
+ * @brief override the operator <<
+ * @param out - the datastream
+ * @param annotation data to write
+ * @return out - the data stream after write
  */
 QDataStream& operator<<(QDataStream& out, Annotation& annotation) {
     out << annotation.mId << annotation.mType;
@@ -52,10 +52,10 @@ QDataStream& operator<<(QDataStream& out, Annotation& annotation) {
 }
 
 /**
- * @brief operator >>
- * @param in
- * @param annotation
- * @return
+ * @brief override the operator >>
+ * @param out - the datastream
+ * @param annotation save new annotation
+ * @return out - the data stream after read
  */
 QDataStream& operator>>(QDataStream& in, Annotation& annotation) {
     in >> annotation.mId >> annotation.mType;
@@ -63,16 +63,16 @@ QDataStream& operator>>(QDataStream& in, Annotation& annotation) {
 }
 
 /**
- * @brief Annotation::toStream
- * @param in
+ * @brief calls the << operator
+ * @param in - the data stream
  */
 void Annotation::toStream(QDataStream& in) {
     in << *this;
 }
 
 /**
- * @brief Annotation::fromStream
- * @param out
+ * @brief calls the >> operator
+ * @param out - the data stream
  */
 void Annotation::fromStream(QDataStream& out) {
     out >> *this;

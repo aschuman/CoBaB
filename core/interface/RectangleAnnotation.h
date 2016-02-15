@@ -18,6 +18,10 @@ public:
     friend QDataStream& operator<<(QDataStream& out, RectangleAnnotation& annotation);
 
     friend QDataStream& operator>>(QDataStream& in, RectangleAnnotation& annotation);
+
+    void toStream(QDataStream& in) override;
+
+    void fromStream(QDataStream& out) override;
 };
 
 #endif //_RECTANGLEANNOTATION_H

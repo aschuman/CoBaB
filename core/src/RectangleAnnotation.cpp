@@ -11,9 +11,9 @@
 
 
 /**
- * @brief RectangleAnnotation::RectangleAnnotation
- * @param id
- * @param type
+ * @brief RectangleAnnotation::RectangleAnnotation creates a new RectangleAnnotation with ID and type
+ * @param id annotation ID
+ * @param type annotation type
  */
 RectangleAnnotation::RectangleAnnotation(QString id, QString type) : Annotation(id, type) {
     mId = id;
@@ -21,10 +21,10 @@ RectangleAnnotation::RectangleAnnotation(QString id, QString type) : Annotation(
 }
 
 /**
- * @brief operator <<
- * @param out
- * @param annotation
- * @return
+ * @brief override the operator <<
+ * @param out - the datastream
+ * @param annotation data to write
+ * @return out - the data stream after write
  */
 QDataStream& operator<<(QDataStream& out, RectangleAnnotation& annotation){
     out << annotation.mId << annotation.x() << annotation.y() << annotation.width()
@@ -34,10 +34,10 @@ QDataStream& operator<<(QDataStream& out, RectangleAnnotation& annotation){
 }
 
 /**
- * @brief operator >>
- * @param in
- * @param annotation
- * @return
+ * @brief override the operator >>
+ * @param out - the datastream
+ * @param annotation save new annotation
+ * @return out - the data stream after read
  */
 QDataStream& operator>>(QDataStream& in, RectangleAnnotation& annotation) {
 
@@ -51,4 +51,20 @@ QDataStream& operator>>(QDataStream& in, RectangleAnnotation& annotation) {
     annotation.setHeight((int)floor(height));
 
     return in;
+}
+
+/**
+ * @brief calls the << operator
+ * @param in - the data stream
+ */
+void Annotation::toStream(QDataStream& in) {
+    in << *this;
+}
+
+/**
+ * @brief calls the >> operator
+ * @param out - the data stream
+ */
+void Annotation::fromStream(QDataStream& out) {
+    out >> *this;
 }
