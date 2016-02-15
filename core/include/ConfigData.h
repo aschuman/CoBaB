@@ -1,41 +1,32 @@
-/**
- * Project \
- */
-
-
 #ifndef _CONFIGDATA_H
 #define _CONFIGDATA_H
 
-#include "Language.h"
 #include <QSettings>
 
+/**
+ * @brief The ConfigData class stores the user settings language and notitification sound.
+ * The help and about files are read.
+ * @author Marie
+ */
+class ConfigData : public QSettings{
 
-class ConfigData: public QSettings {
 public: 
-    
-    static ConfigData getInstance();
-    
+    static ConfigData* getInstance();
+    enum Language { GERMAN, ENGLISH };
     Language getLanguage();
-    
-    /**
-     * @param language
-     */
     void setLanguage(Language language);
-    
     bool getSoundOn();
-    
-    /**
-     * @param soundOn
-     */
     void setSoundOn(bool soundOn);
-    
     QString getHelp();
-    
     QString getAbout();
+
 private: 
-    static ConfigData instance;
-    
+    static ConfigData* instance;
     ConfigData();
+    QString readFile(QString path);
+    ConfigData(const ConfigData&);
+    ConfigData& operator=(const ConfigData&);
+
 };
 
 #endif //_CONFIGDATA_H

@@ -6,6 +6,7 @@ Medium
 SingleFrameVideo, Photo, Video
 (Logger)
 Serializable
+ConfigData
 
 
 Fertige Klassen ohne Unit Tests:
@@ -19,7 +20,6 @@ MainControl, Vincent
 Testalgorithmus, Tung
 SearchObject, SearchQuery, SearchResult, SearchResultElement, Violina, Georgi
 DataPacket, Violina, Georgi
-ConfigData, Marie
 
 
 noch ausstehende Klassen:

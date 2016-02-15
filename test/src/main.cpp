@@ -6,6 +6,7 @@
 #include "SingleFrameVideoTester.h"
 #include "DatasetTester.h"
 #include "DatasetListTester.h"
+#include "ConfigDataTester.h"
 
 #define EXEC(Tester) {Tester tester; r |= QTest::qExec(&tester);}
 
@@ -25,6 +26,7 @@ int main(int argc, char *argv[]){
     EXEC(SingleFrameVideoTester)
     EXEC(DatasetTester)
     EXEC(DatasetListTester)
+    EXEC(ConfigDataTester)
 
     return r;
 }

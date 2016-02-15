@@ -37,7 +37,8 @@ HEADERS += \
     include/ViewerPageWidget.h \
     interface/Configuration.h \
     interface/logger.h \
-    interface/log.h
+    interface/log.h \
+    include/ConfigData.h
 
 SOURCES += \
     src/Medium.cpp \
@@ -63,7 +64,8 @@ SOURCES += \
     src/ViewerPageWidget.cpp \
     src/Bookmark.cpp \
     src/BookmarkList.cpp \
-    src/log.cpp
+    src/log.cpp \
+    src/ConfigData.cpp
     //src/TestAlgorithm.cpp
 
 FORMS += \
