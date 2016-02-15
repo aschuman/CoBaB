@@ -5,7 +5,7 @@
  * @brief DatasetList::getDatasetList Returns the list of Dataset.
  * @return The list of Dataset.
  */
-QList<Dataset> DatasetList::getDatasetList() const {
+const QList<Dataset>& DatasetList::getDatasetList() const {
     return mDatasetList;
 }
 

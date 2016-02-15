@@ -1,10 +1,12 @@
 #include "include/LibraryPageWidget.h"
 #include "ui_LibraryPageWidget.h"
+#include <QVariant>
 
 LibraryPageWidget::LibraryPageWidget() :
     ui(new Ui::LibraryPageWidget)
 {
     ui->setupUi(this);
+    ui->mLibraryListView->setModel(&mModel);
 }
 
 LibraryPageWidget::~LibraryPageWidget()
@@ -14,6 +16,17 @@ LibraryPageWidget::~LibraryPageWidget()
 
 void LibraryPageWidget::reset()
 {
+    QVariant var;
+    emit readFromStack(0, var);
+    if(var.canConvert<std::shared_ptr<DatasetList>>()){
+        mModel.setDatasetList(var.value<std::shared_ptr<DatasetList>>()->getDatasetList());
+    }
+
+    /*mDatasetList = new DatasetList();
+    mDatasetList->addDataset(Dataset("oiajsd"));
+    mDatasetList->addDataset(Dataset("rest"));*/
+
+    //mModel.setDatasetList(mDatasetList->getDatasetList());
 
 }
 
