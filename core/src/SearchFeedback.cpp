@@ -80,7 +80,7 @@ QDataStream& operator>>(QDataStream& in, SearchFeedback& feedback) {
  * @brief SearchFeedback::toStream
  * @param in
  */
-void SearchFeedback::toStream(QDataStream in) {
+void SearchFeedback::toStream(QDataStream& in) {
     in << *this;
 }
 
@@ -88,6 +88,6 @@ void SearchFeedback::toStream(QDataStream in) {
  * @brief SearchFeedback::fromStream
  * @param out
  */
-void SearchFeedback::fromStream(QDataStream out) {
+void SearchFeedback::fromStream(QDataStream& out) {
     out >> *this;
 }

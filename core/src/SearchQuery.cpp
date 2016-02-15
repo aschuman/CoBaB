@@ -90,7 +90,7 @@ QDataStream& operator>>(QDataStream& in, SearchQuery& searchQuery) {
  * @brief calls the << operator
  * @param in - the datastream
  */
-void SearchQuery::toStream(QDataStream in) {
+void SearchQuery::toStream(QDataStream& in) {
     in << *this;
 }
 
@@ -98,7 +98,7 @@ void SearchQuery::toStream(QDataStream in) {
  * @brief calls the >> operator
  * @param out - the datastream
  */
-void SearchQuery::fromStream(QDataStream out) {
+void SearchQuery::fromStream(QDataStream& out) {
     out >> *this;
 }
 /**

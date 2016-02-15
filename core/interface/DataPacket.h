@@ -22,9 +22,9 @@ public:
     
     QUuid getUuid();
     
-    virtual void toStream(QDataStream in) override = 0;
+    virtual void toStream(QDataStream& in) override = 0;
     
-    virtual void fromStream(QDataStream out) override = 0;
+    virtual void fromStream(QDataStream& out) override = 0;
 
 protected: 
 

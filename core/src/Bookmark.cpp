@@ -75,7 +75,7 @@ QDataStream& operator>>(QDataStream& in, Bookmark& bookmark) {
  * @brief Bookmark::toStream
  * @param in
  */
-void Bookmark::toStream(QDataStream in) {
+void Bookmark::toStream(QDataStream& in) {
 	in << *this;
 }
 
@@ -83,7 +83,7 @@ void Bookmark::toStream(QDataStream in) {
  * @brief Bookmark::fromStream
  * @param out
  */
-void Bookmark::fromStream(QDataStream out) {
+void Bookmark::fromStream(QDataStream& out) {
 	out >> *this;
 }
 

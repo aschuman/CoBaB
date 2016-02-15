@@ -66,7 +66,7 @@ QDataStream& operator>>(QDataStream& in, Annotation& annotation) {
  * @brief Annotation::toStream
  * @param in
  */
-void Annotation::toStream(QDataStream in) {
+void Annotation::toStream(QDataStream& in) {
     in << *this;
 }
 
@@ -74,6 +74,6 @@ void Annotation::toStream(QDataStream in) {
  * @brief Annotation::fromStream
  * @param out
  */
-void Annotation::fromStream(QDataStream out) {
+void Annotation::fromStream(QDataStream& out) {
     out >> *this;
 }

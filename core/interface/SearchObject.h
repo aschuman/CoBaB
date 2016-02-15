@@ -33,9 +33,9 @@ public:
 
     void setMediumIndex(int index);
 
-    void toStream(QDataStream in) override;
+    void toStream(QDataStream& in) override;
 
-    void fromStream(QDataStream out) override;
+    void fromStream(QDataStream& out) override;
 
     friend QDataStream& operator >>(QDataStream& in, SearchObject& searchObject);
 
