@@ -9,27 +9,24 @@ Serializable
 
 
 Fertige Klassen ohne Unit Tests:
-SearchObject, SearchQuery, SearchResult, SearchResultElement
+SearchObject, SearchQuery, SearchResult, SearchResultElement, DataPacket
 Annotation, RectangleAnnotation, BookmarkList, Bookmark, SearchFeedback
 
 
 Klassen, an denen gearbeitet wird:
-Dataset, Anja
-MainControl, MainWindow Vincent
-Testalgorithmus, Tung
-SearchObject, SearchQuery, SearchResult, SearchResultElement, Violina, Georgi
-DataPacket, Violina, Georgi
+Dataset -> Anja
+MainControl, MainWindow -> Vincent
+Testalgorithmus -> Tung
 ConfigData, Marie
+ParameterPageWidget, ParameterModel -> Violina, Georgi
 
 
 noch ausstehende Klassen:
-LibraryPageWidget, Tung
-ViewerPageWidget, Anja
-ParameterPageWidget, Violina, Georgi
-Parameter-Bearbeitung, Violina, Georgi
-ConfirmationPageWidget, Marie
-ResultsPageWidget, Vincent
-ListView, Anja, Marie
+LibraryPageWidget -> Tung
+ViewerPageWidget -> Anja
+ConfirmationPageWidget -> Marie
+ResultsPageWidget -> Vincent
+ListView -> Anja, Marie
 Models/Delegates
 VideoViewer, PhotoViewer, SingleFrameVideoViewer
 SearchManager, BookmarkManager, SearchResultManager, MainWindowManager
