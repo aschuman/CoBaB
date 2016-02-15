@@ -4,6 +4,7 @@
 #include <memory>
 #include<qobject.h>
 #include "Navigator.h"
+#include "DatasetList.h"
 
 
 /**
@@ -28,6 +29,7 @@ signals:
 
 private:
     void initNavigation();
+    DatasetList findDatasets() const;
 
 
     std::unique_ptr<Navigator> mNavi;
