@@ -43,6 +43,6 @@ SOURCES += \
     src/SingleFrameVideoTester.cpp \
     src/DatasetTester.cpp \
     src/DatasetListTester.cpp \
-    src/ConfigDataTester.cpp
+    src/ConfigDataTester.cpp \
     src/AnnotationTester.cpp \
     src/RectangleAnnotationTester.cpp
