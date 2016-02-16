@@ -22,7 +22,7 @@ public:
     static const int EXIT_NEXT;
 
 private slots:
-    void on_pushButton_clicked();
+    void on_mLibraryListView_doubleClicked(const QModelIndex &index);
 
 private:
     Ui::LibraryPageWidget *ui;
