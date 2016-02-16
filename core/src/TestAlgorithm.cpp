@@ -7,8 +7,8 @@
 
 /**
  * TestAlgorithm implementation
+ * @author Tung
  */
-
 
 /**
  * @brief TestAlgorithm::TestAlgorithm
@@ -23,11 +23,13 @@ TestAlgorithm::TestAlgorithm(QString id) {
  * @return
  */
 QList<DataPacket> TestAlgorithm::run() {
-    SearchResult res;
+    /*SearchResult res;
     QList<SearchResult> list;
     list.append(res);
+    return list;*/
+
+    QList<DataPacket> list;
     return list;
-    //return (QList<DataPacket>)list;
 }
 
 /**
@@ -66,6 +68,7 @@ QString TestAlgorithm::getDescription() {
 }
 
 /**
+ * @brief TestAlgorithm::setDescription
  * @param description
  */
 void TestAlgorithm::setDescription(QString description) {
@@ -73,7 +76,8 @@ void TestAlgorithm::setDescription(QString description) {
 }
 
 /**
- * @return QString
+ * @brief TestAlgorithm::getName
+ * @return
  */
 QString TestAlgorithm::getName() {
     return mName;

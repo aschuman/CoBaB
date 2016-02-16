@@ -68,7 +68,7 @@ SOURCES += \
     src/log.cpp \
     src/ConfigData.cpp \
     src/DatasetModel.cpp \
-    #src/TestAlgorithm.cpp
+    src/TestAlgorithm.cpp
 
 FORMS += \
     ui/LibraryPageWidget.ui \
