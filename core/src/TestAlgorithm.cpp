@@ -11,16 +11,16 @@
  */
 
 /**
- * @brief TestAlgorithm::TestAlgorithm
- * @param id
+ * @brief TestAlgorithm::TestAlgorithm create new algorithm with given ID
+ * @param id algorithm ID
  */
 TestAlgorithm::TestAlgorithm(QString id) {
 	mId = id;
 }
 
 /**
- * @brief TestAlgorithm::run
- * @return
+ * @brief TestAlgorithm::run start the search
+ * @return a list of data packets containing results
  */
 QList<DataPacket> TestAlgorithm::run() {
     /*SearchResult res;
@@ -40,52 +40,52 @@ void TestAlgorithm::cancel() {
 }
 
 /**
- * @brief TestAlgorithm::setInputs
- * @param inputDataList
- * @return
+ * @brief TestAlgorithm::setInputs set input for algorithm
+ * @param inputDataList input data
+ * @return true if input data is accepted
  */
 bool TestAlgorithm::setInputs(QList<DataPacket> inputDataList) {
     Q_UNUSED(inputDataList);
-    return false;
+    return true;
 }
 
 /**
- * @brief TestAlgorithm::setParameters
- * @param parameters
- * @return
+ * @brief TestAlgorithm::setParameters set algorithm parameters
+ * @param parameters the parameters
+ * @return true if the algorithm accepts the parameters
  */
 bool TestAlgorithm::setParameters(QJsonObject parameters) {
     Q_UNUSED(parameters);
-    return false;
+    return true;
 }
 
 /**
- * @brief TestAlgorithm::getDescription
- * @return
+ * @brief TestAlgorithm::getDescription show algorithm description
+ * @return a QString that describes the algorithm
  */
 QString TestAlgorithm::getDescription() {
     return mDescription;
 }
 
 /**
- * @brief TestAlgorithm::setDescription
- * @param description
+ * @brief TestAlgorithm::setDescription set algorithm description
+ * @param description a text which explains what the algorith does
  */
 void TestAlgorithm::setDescription(QString description) {
 	mDescription = description;
 }
 
 /**
- * @brief TestAlgorithm::getName
- * @return
+ * @brief TestAlgorithm::getName get name of the algorithm
+ * @return algorithm name (must be unique)
  */
 QString TestAlgorithm::getName() {
     return mName;
 }
 
 /**
- * @brief TestAlgorithm::setName
- * @param name
+ * @brief TestAlgorithm::setName give the algorithm a new name
+ * @param name new name
  */
 void TestAlgorithm::setName(QString name) {
 	mName = name;
@@ -93,24 +93,24 @@ void TestAlgorithm::setName(QString name) {
 
 /**
  * @brief TestAlgorithm::supportsProgressInfo
- * @return
+ * @return true if progress information will be sent to application when the search runs
  */
 bool TestAlgorithm::supportsProgressInfo() {
     return false;
 }
 
 /**
- * @brief TestAlgorithm::sendIntermediateResults
- * @param searchResult
+ * @brief TestAlgorithm::sendIntermediateResults send a number of new search results
+ * @param searchResult new output
  */
 void TestAlgorithm::sendIntermediateResults(SearchResult searchResult) {
     Q_UNUSED(searchResult);
 }
 
 /**
- * @brief TestAlgorithm::sendProgress
- * @param progress
- * @param message
+ * @brief TestAlgorithm::sendProgress send progress information
+ * @param progress a real number between 0 and 1 show the progress
+ * @param message warning message if available
  */
 void TestAlgorithm::sendProgress(double progress, QString message) {
     Q_UNUSED(progress);
