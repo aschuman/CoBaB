@@ -96,7 +96,7 @@ QString ConfigData::getAbout() {
 QString ConfigData::readFile(QString path) {
     QFile file(path);
     if (!file.exists() || !file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        return "no file avaliable";
+        return "no file available";
     }
     QTextStream in(&file);
     return in.readAll();

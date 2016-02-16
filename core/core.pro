@@ -39,7 +39,8 @@ HEADERS += \
     interface/logger.h \
     interface/log.h \
     include/ConfigData.h \
-    include/DatasetModel.h
+    include/DatasetModel.h \
+    include/ConfirmationPageWidget.h
 
 SOURCES += \
     src/Medium.cpp \
@@ -68,9 +69,11 @@ SOURCES += \
     src/log.cpp \
     src/ConfigData.cpp \
     src/DatasetModel.cpp \
-    src/TestAlgorithm.cpp
+    src/TestAlgorithm.cpp \
+    src/ConfirmationPageWidget.cpp
 
 FORMS += \
     ui/LibraryPageWidget.ui \
     ui/MainWindow.ui \
-    ui/ViewerPageWidget.ui
+    ui/ViewerPageWidget.ui \
+    ui/ConfirmationPageWidget.ui
