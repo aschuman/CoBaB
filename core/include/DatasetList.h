@@ -9,7 +9,7 @@
 class DatasetList {
 
 public:
-    QList<Dataset> getDatasetList() const;
+    const QList<Dataset>& getDatasetList() const;
     void addDataset(Dataset dataset);
     void load(const QString path);
     void store(const QString path) const;
@@ -17,5 +17,8 @@ public:
 private:
     QList<Dataset> mDatasetList;            ///< The list of Dataset.
 };
+
+#include <memory>
+Q_DECLARE_METATYPE(std::shared_ptr<DatasetList>)
 
 #endif //_DATASETLIST_H

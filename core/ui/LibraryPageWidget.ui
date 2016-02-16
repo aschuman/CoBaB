@@ -13,19 +13,11 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPushButton" name="pushButton">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>130</y>
-     <width>151</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>use random dataset</string>
-   </property>
-  </widget>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <widget class="QListView" name="mLibraryListView"/>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

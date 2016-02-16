@@ -26,13 +26,13 @@ public:
 
     friend QDataStream& operator>>(QDataStream& in, Annotation& annotation);
     
-    void toStream(QDataStream in) override;
+    virtual void toStream(QDataStream& in) override;
     
-    void fromStream(QDataStream out) override;
+    virtual void fromStream(QDataStream& out) override;
 
 protected: 
-    QString mId;
-    QString mType;
+    QString mId;    //Id
+    QString mType;  //Type
 
 private:
     QStringList mTypes = (QStringList() << "Face" << "Person");

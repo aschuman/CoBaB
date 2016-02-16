@@ -3,7 +3,7 @@ TEMPLATE = lib
 TARGET = core
 CONFIG += staticlib
 QT += widgets core
-INCLUDEPATH = include interface
+INCLUDEPATH += include interface
 
 HEADERS += \
     interface/Medium.h \
@@ -37,7 +37,9 @@ HEADERS += \
     include/ViewerPageWidget.h \
     interface/Configuration.h \
     interface/logger.h \
-    interface/log.h
+    interface/log.h \
+    include/ConfigData.h \
+    include/DatasetModel.h
 
 SOURCES += \
     src/Medium.cpp \
@@ -63,8 +65,10 @@ SOURCES += \
     src/ViewerPageWidget.cpp \
     src/Bookmark.cpp \
     src/BookmarkList.cpp \
-    src/log.cpp
-    //src/TestAlgorithm.cpp
+    src/log.cpp \
+    src/ConfigData.cpp \
+    src/DatasetModel.cpp \
+    src/TestAlgorithm.cpp
 
 FORMS += \
     ui/LibraryPageWidget.ui \

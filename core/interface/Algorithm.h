@@ -12,7 +12,7 @@
 class Algorithm {
 public: 
     
-    QList<DataPacket> run();
+    virtual QList<DataPacket> run();
     
     void cancel();
     

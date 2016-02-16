@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include "PageWidget.h"
+#include "DatasetList.h"
+#include "DatasetModel.h"
 
 namespace Ui {
 class LibraryPageWidget;
@@ -24,6 +26,8 @@ private slots:
 
 private:
     Ui::LibraryPageWidget *ui;
+    DatasetList* mDatasetList;
+    DatasetModel mModel;
 };
 
 #endif // LIBRARYPAGEWIDGET_H

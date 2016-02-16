@@ -90,7 +90,7 @@ QDataStream& operator>>(QDataStream& in, SearchQuery& searchQuery) {
  * @brief calls the << operator
  * @param in - the datastream
  */
-void SearchQuery::toStream(QDataStream in) {
+void SearchQuery::toStream(QDataStream& in) {
     in << *this;
 }
 
@@ -98,7 +98,7 @@ void SearchQuery::toStream(QDataStream in) {
  * @brief calls the >> operator
  * @param out - the datastream
  */
-void SearchQuery::fromStream(QDataStream out) {
+void SearchQuery::fromStream(QDataStream& out) {
     out >> *this;
 }
 /**
@@ -108,9 +108,8 @@ void SearchQuery::fromStream(QDataStream out) {
  */
 QList<Dataset>* createDatasetList(QList<QString>* stringDatasets) {
     QList<Dataset>* datasets = new QList<Dataset>;
-    QListIterator<QString> it(*stringDatasets);
-    while (it.hasNext()) {
-       datasets->push_back(*new Dataset(it.next()));
+    for(auto it = stringDatasets->begin(); it != stringDatasets->end(); ++it) {
+       datasets->push_back(Dataset(*it));
     }
     return datasets;
 }

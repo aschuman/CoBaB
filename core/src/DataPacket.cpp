@@ -2,13 +2,29 @@
  * Project \
  */
 
+#include <QUuid>
+#include <typeinfo>
 
 #include "DataPacket.h"
 
 /**
- * DataPacket implementation
+ * @brief DataPacket implementation
+ *
  */
 
+DataPacket::DataPacket() {
+
+    QString type = typeid(DataPacket).name();
+    if (type == "SearchResult") {
+        mType = Type::SEARCHRESULT;
+    } else if (type == "SearchQuery") {
+        mType = Type::SEARCHQUERY;
+    } else {
+        mType = Type::SEARCHFEEDBACK;
+    }
+
+    mUuid = QUuid::createUuid();
+}
 
 /**
  * @return Type

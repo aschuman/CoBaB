@@ -11,18 +11,25 @@
 
 
 class DataPacket: public Serializable {
+
 public: 
-    enum Type { SEARCHRESULT, SEARCHQUERY, FEEDBACK };
+
+    enum Type { SEARCHRESULT, SEARCHQUERY, SEARCHFEEDBACK };
+
+    DataPacket();
+
     Type getType();
     
     QUuid getUuid();
     
-    virtual void toStream(QDataStream in) override = 0;
+    virtual void toStream(QDataStream& in) override;
     
-    virtual void fromStream(QDataStream out) override = 0;
+    virtual void fromStream(QDataStream& out) override;
+
 protected: 
+
     Type mType;
-    QUuid mUuid;
+    static QUuid mUuid;
 };
 
 #endif //_DATAPACKET_H

@@ -2,9 +2,9 @@
 #include <QTest>
 
 void DatasetListTester::initTestCase() {
-    Dataset photos("../../test/testdata/Fotos");
-    Dataset videos("../../test/testdata/Video");
-    Dataset singleFrameVideos("../../test/testdata/SingleFrameVideo");
+    Dataset photos("../test/testdata/Fotos");
+    Dataset videos("../test/testdata/Video");
+    Dataset singleFrameVideos("../test/testdata/SingleFrameVideo");
     mList.addDataset(photos);
     mList.addDataset(videos);
     mList.addDataset(singleFrameVideos);

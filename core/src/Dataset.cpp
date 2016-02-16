@@ -70,7 +70,7 @@ QList<QPair<int, Annotation*>> Dataset::createVideoAnnotations(QString path) {
  * @brief Dataset::createSingleFrameVideoDataset Creates a SingleFrameVideo Dataset.
  * @return True if the creation was successful.
  */
-bool Dataset::createSingleFrameVideoDataset() {   
+bool Dataset::createSingleFrameVideoDataset() {
     bool successful = false;
     QStringList filters(FRAMERATE_FILE);
     QTextStream s(stdout);

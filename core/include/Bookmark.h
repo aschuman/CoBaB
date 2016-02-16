@@ -24,9 +24,9 @@ public:
 
     friend QDataStream& operator>>(QDataStream& in, Bookmark& bookmark);
     
-    void toStream(QDataStream in) override;
+    void toStream(QDataStream& in) override;
     
-    void fromStream(QDataStream out) override;
+    void fromStream(QDataStream& out) override;
 
     void setFeedback(SearchFeedback feedback);
     
@@ -34,9 +34,9 @@ public:
        
     void setName(QString name);
     
-    QString getName();
+    QString getName() const;
     
-    QDateTime getDate();
+    QDateTime getDate() const;
     
     QString getAlgorithm();
     
@@ -45,6 +45,12 @@ public:
     SearchResult getSearchResult();
     
     QJsonObject getParameter();
+
+    friend bool operator==(const Bookmark& A, const Bookmark& B);
+
+    static bool compareByName(Bookmark A, Bookmark B);
+
+    static bool compareByDate(Bookmark A, Bookmark B);
 
 private: 
     QString mName;

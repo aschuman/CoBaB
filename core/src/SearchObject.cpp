@@ -80,7 +80,7 @@ void SearchObject::setMediumIndex(int index) {
  * @brief calls the << operator
  * @param in - the datastream
  */
-void SearchObject::toStream(QDataStream in) {
+void SearchObject::toStream(QDataStream& in) {
 
     in << *this;
 
@@ -89,7 +89,7 @@ void SearchObject::toStream(QDataStream in) {
  * @brief calls the >> operator
  * @param out - the datastream
  */
-void SearchObject::fromStream(QDataStream out) {
+void SearchObject::fromStream(QDataStream& out) {
 
     out >> *this;
 

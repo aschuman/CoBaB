@@ -7,42 +7,43 @@
 
 /**
  * SearchFeedback implementation
+ * @author Tung
  */
 
 /**
- * @brief SearchFeedback::SearchFeedback
+ * @brief SearchFeedback::SearchFeedback default constructor
  */
 SearchFeedback::SearchFeedback() {
 
 }
 
 /**
- * @brief SearchFeedback::SearchFeedback
- * @param type
+ * @brief SearchFeedback::SearchFeedback create new feedback with given type
+ * @param type feedback type
  */
 SearchFeedback::SearchFeedback(QString type) {
     mType = type;
 }
 
 /**
- * @brief SearchFeedback::getFeedbackList
- * @return
+ * @brief SearchFeedback::getFeedbackList get the list of feedbacks
+ * @return feedback list
  */
 QList<QPair<SearchObject, int>> SearchFeedback::getFeedbackList() {
     return mFeedbackList;
 }
 
 /**
- * @brief SearchFeedback::setFeedbackList
- * @param feedbackList
+ * @brief SearchFeedback::setFeedbackList set the list of feedbaks
+ * @param feedbackList new list
  */
 void SearchFeedback::setFeedbackList(QList<QPair<SearchObject, int>> feedbackList) {
     mFeedbackList = feedbackList;
 }
 
 /**
- * @brief SearchFeedback::getFeedbackType
- * @return
+ * @brief SearchFeedback::getFeedbackType gets type of all feedbacks in this list
+ * @return feedback type
  */
 SearchFeedback::Type SearchFeedback::getType() {
     switch (mTypes.indexOf(mType)) {
@@ -54,10 +55,10 @@ SearchFeedback::Type SearchFeedback::getType() {
 }
 
 /**
- * @brief operator <<
- * @param out
- * @param feedback
- * @return
+ * @brief override the operator <<
+ * @param out - the datastream
+ * @param feedback data to write
+ * @return out - the data stream after write
  */
 QDataStream& operator<<(QDataStream& out, const SearchFeedback& feedback) {
     out << feedback.mType << feedback.mFeedbackList;
@@ -65,10 +66,10 @@ QDataStream& operator<<(QDataStream& out, const SearchFeedback& feedback) {
 }
 
 /**
- * @brief operator >>
- * @param in
- * @param feedback
- * @return
+ * @brief override the operator >>
+ * @param out - the datastream
+ * @param feedback save new feedback here
+ * @return out - the data stream after read
  */
 QDataStream& operator>>(QDataStream& in, SearchFeedback& feedback) {
     in >> feedback.mType;
@@ -77,17 +78,17 @@ QDataStream& operator>>(QDataStream& in, SearchFeedback& feedback) {
 }
 
 /**
- * @brief SearchFeedback::toStream
- * @param in
+ * @brief calls the << operator
+ * @param in - the data stream
  */
-void SearchFeedback::toStream(QDataStream in) {
+void SearchFeedback::toStream(QDataStream& in) {
     in << *this;
 }
 
 /**
- * @brief SearchFeedback::fromStream
- * @param out
+ * @brief calls the >> operator
+ * @param out - the data stream
  */
-void SearchFeedback::fromStream(QDataStream out) {
+void SearchFeedback::fromStream(QDataStream& out) {
     out >> *this;
 }

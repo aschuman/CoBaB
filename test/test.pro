@@ -16,6 +16,12 @@ INCLUDEPATH += ../core/include \
     ../core/interface
 }
 
+testdata.commands = $(COPY_DIR) $$PWD/testdata $$OUT_PWD
+first.depends = $(first) testdata
+export(first.depends)
+export(testdata.commands)
+QMAKE_EXTRA_TARGETS += first testdata
+
 HEADERS += \
     include/NavigatorTester.h \
     include/PageStackframeTester.h \
@@ -23,7 +29,9 @@ HEADERS += \
     include/PageRegistrationTester.h \
     include/SingleFrameVideoTester.h \
     include/DatasetTester.h \
-    include/DatasetListTester.h
+    include/DatasetListTester.h \
+    include/ConfigDataTester.h \
+    include/ConfigDataTester.h
 
 SOURCES += \
     src/main.cpp \
@@ -33,4 +41,5 @@ SOURCES += \
     src/PageWidgetMock.cpp \
     src/SingleFrameVideoTester.cpp \
     src/DatasetTester.cpp \
-    src/DatasetListTester.cpp
+    src/DatasetListTester.cpp \
+    src/ConfigDataTester.cpp

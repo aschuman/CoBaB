@@ -14,7 +14,7 @@ public:
     
     TestAlgorithm(QString id);
     
-    QList<DataPacket> run();
+    QList<DataPacket> run() override;
     
     void cancel();
 
