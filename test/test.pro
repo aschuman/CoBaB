@@ -16,11 +16,25 @@ INCLUDEPATH += ../core/include \
     ../core/interface
 }
 
+unix{
 testdata.commands = $(COPY_DIR) $$PWD/testdata $$OUT_PWD
 first.depends = $(first) testdata
 export(first.depends)
 export(testdata.commands)
 QMAKE_EXTRA_TARGETS += first testdata
+}
+win32{
+PWD_WIN = $${PWD}
+DESTDIR_WIN = $${OUT_PWD}
+PWD_WIN ~= s,/,\,g
+DESTDIR_WIN ~= s,/,\,g
+
+testdata.commands = $(COPY_DIR) \"$${PWD_WIN}\testdata\" \"$${DESTDIR_WIN}\testdata\"
+first.depends = $(first) testdata
+export(first.depends)
+export(testdata.commands)
+QMAKE_EXTRA_TARGETS += first testdata
+}
 
 HEADERS += \
     include/NavigatorTester.h \

@@ -8,6 +8,7 @@
 
 /**
  * @brief Dataset::Dataset Creates a new Dataset with the given path.
+ * @author Anja
  * @param path The path of the Dataset.
  */
 Dataset::Dataset(const QString path) {
