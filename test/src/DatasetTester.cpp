@@ -52,9 +52,10 @@ void DatasetTester::testPreviewImage_data()
     QTest::addColumn<QString>("path");
     QTest::addColumn<QString>("image");
 
-    QTest::newRow("single frame video dataset") << "../test/testdata/SingleFrameVideo"
-                                                << "../test/testdata/SingleFrameVideo/SingleFrameVideo/bigbangtheory_s1e1.vob_00000.png";
-    QTest::newRow("photo dataset") << "../test/testdata/Fotos" << "../test/testdata/Fotos/preview.png";
+    QTest::newRow("single frame video dataset") << "../../test/testdata/SingleFrameVideo"
+                                                << "../../test/testdata/SingleFrameVideo/SingleFrameVideo/bigbangtheory_s1e1.vob_00000.png";
+    QTest::newRow("video dataset") << "../test/testdata/Video" << "../../resources/images/videoIcon.png";
+    QTest::newRow("photo dataset") << "../../test/testdata/Fotos" << "../../test/testdata/Fotos/preview.png";
 
 }
 
@@ -68,7 +69,6 @@ void DatasetTester::testPreviewImage()
     QCOMPARE(dataset.getPreviewPhoto(), preview);
 
 }
-
 
 void DatasetTester::testMediaList_data()
 {

@@ -6,6 +6,7 @@ Medium
 SingleFrameVideo, Photo, Video
 (Logger)
 Serializable
+Dataset
 ConfigData
 
 
@@ -15,7 +16,7 @@ Annotation, RectangleAnnotation, BookmarkList, Bookmark, SearchFeedback
 
 
 Klassen, an denen gearbeitet wird:
-Dataset -> Anja
+ViewerPageWidget -> Anja
 MainControl, MainWindow, DatasetModel, LibraryPageWidget -> Vincent
 Testalgorithmus -> Tung
 ParameterPageWidget, ParameterModel -> Violina, Georgi
@@ -24,7 +25,6 @@ ConfirmationPageWidget -> Marie
 
 noch ausstehende Klassen:
 ResultsPageWidget -> Tung
-ViewerPageWidget -> Anja
 ResultsPageWidget -> Vincent
 ListView -> Anja, Marie
 Models/Delegates

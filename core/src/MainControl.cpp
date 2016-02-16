@@ -1,4 +1,6 @@
 #include "MainControl.h"
+
+#include <QDir>
 #include "MainWindow.h"
 #include "LibraryPageWidget.h"
 #include "ViewerPageWidget.h"
@@ -42,8 +44,11 @@ void MainControl::initNavigation()
 DatasetList MainControl::findDatasets() const
 {
     DatasetList list;
-    list.addDataset(Dataset("../test/testdata/SingleFrameVideo"));
-    list.addDataset(Dataset("../test/testdata/Video"));
-    list.addDataset(Dataset("../test/testdata/Fotos"));
+    QDir dir("../test/testdata");
+    for(const QFileInfo& file : dir.entryList(QDir::Filter::Dirs)){
+        list.addDataset(Dataset("../test/testdata/SingleFrameVideo"));
+        list.addDataset(Dataset("../test/testdata/Video"));
+        list.addDataset(Dataset("../test/testdata/Fotos"));
+    }
     return list;
 }
