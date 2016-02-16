@@ -2,6 +2,8 @@
 #include "ui_LibraryPageWidget.h"
 #include <QVariant>
 
+const int LibraryPageWidget::EXIT_NEXT = 0;
+
 LibraryPageWidget::LibraryPageWidget() :
     ui(new Ui::LibraryPageWidget)
 {
@@ -21,18 +23,10 @@ void LibraryPageWidget::reset()
     if(var.canConvert<std::shared_ptr<DatasetList>>()){
         mModel.setDatasetList(var.value<std::shared_ptr<DatasetList>>()->getDatasetList());
     }
-
-    /*mDatasetList = new DatasetList();
-    mDatasetList->addDataset(Dataset("oiajsd"));
-    mDatasetList->addDataset(Dataset("rest"));*/
-
-    //mModel.setDatasetList(mDatasetList->getDatasetList());
-
 }
 
-void LibraryPageWidget::on_pushButton_clicked()
+void LibraryPageWidget::on_mLibraryListView_doubleClicked(const QModelIndex &index)
 {
-    emit exit(EXIT_NEXT);
+    pushToStack(index.row());
+    exit(EXIT_NEXT);
 }
-
-const int LibraryPageWidget::EXIT_NEXT = 0;

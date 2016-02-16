@@ -45,7 +45,8 @@ HEADERS += \
     include/DatasetTester.h \
     include/DatasetListTester.h \
     include/ConfigDataTester.h \
-    include/ConfigDataTester.h
+    include/AnnotationTester.h \
+    include/RectangleAnnotationTester.h
 
 SOURCES += \
     src/main.cpp \
@@ -56,4 +57,6 @@ SOURCES += \
     src/SingleFrameVideoTester.cpp \
     src/DatasetTester.cpp \
     src/DatasetListTester.cpp \
-    src/ConfigDataTester.cpp
+    src/ConfigDataTester.cpp \
+    src/AnnotationTester.cpp \
+    src/RectangleAnnotationTester.cpp
