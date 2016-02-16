@@ -25,6 +25,10 @@ QVariant DatasetModel::data(const QModelIndex &index, int role) const
         if(mDatasets && index.row() < mDatasets->size())
             result = mDatasets->at(index.row()).getName();
         break;
+    case Qt::DecorationRole:
+        if(mDatasets && index.row() < mDatasets->size())
+            result = mDatasets->at(index.row()).getPreviewPhoto();
+        break;
     default:
         break;
     }
