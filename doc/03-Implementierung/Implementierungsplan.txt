@@ -19,12 +19,12 @@ Dataset -> Anja
 MainControl, MainWindow, DatasetModel, LibraryPageWidget -> Vincent
 Testalgorithmus -> Tung
 ParameterPageWidget, ParameterModel -> Violina, Georgi
+ConfirmationPageWidget -> Marie
 
 
 noch ausstehende Klassen:
 ResultsPageWidget -> Tung
 ViewerPageWidget -> Anja
-ConfirmationPageWidget -> Marie
 ResultsPageWidget -> Vincent
 ListView -> Anja, Marie
 Models/Delegates
