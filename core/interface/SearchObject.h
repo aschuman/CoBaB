@@ -7,53 +7,53 @@
 #include "DataPacket.h"
 #include <QRect>
 
+
+/**
+ * @brief A SearchObject is a medium or annotation, on which the searchalgorithm operates
+ * @author Georgi
+ */
 class SearchObject: public Serializable {
 
 public:
 
     SearchObject();
 
-    QString getMedium();
+    QString getMedium() const;
 
-    void setMedium(QString medium);
+    void setMedium(const QString medium);
 
-    Annotation* getAnnotation();
+    Annotation getAnnotation() const;
 
-    void setAnnotation(Annotation* annotation);
+    void setAnnotation(const Annotation annotation);
 
-    QRect* getROI();
+    QRect getROI() const;
 
-    void setROI(QRect* roi);
+    void setROI(const QRect roi);
 
-    QString getSourceDataset();
+    QString getSourceDataset() const;
 
-    void setSourceDataset(QString dataset);
+    void setSourceDataset(const QString dataset);
 
-    int getMediumIndex();
+    int getMediumIndex() const;
 
-    void setMediumIndex(int index);
+    void setMediumIndex(const int index);
 
-    void toStream(QDataStream& in) override;
+    void toStream(QDataStream& in) const override;
 
     void fromStream(QDataStream& out) override;
 
-    friend QDataStream& operator >>(QDataStream& in, SearchObject& searchObject);
-
-    friend QDataStream& operator <<(QDataStream& out, const SearchObject& searchObject);
-
-protected:
 
 private:
 
-    QString mMedium = "";
+    QString mMedium;            ///< Medium as the serachobject
 
-    Annotation* mAnnotation = new Annotation("", "");
+    Annotation mAnnotation;     ///< Annotation as the searchobject
 
-    QRect* mROI = new QRect();
+    QRect mROI;                 ///< The annotation as rectangle with coordinates ("region of ineterest")
 
-    QString mSourceDataset = "";
+    QString mSourceDataset;     ///< The source dataset, where the searchobject is to be found
 
-    int mMediumIndex = 0;
+    int mMediumIndex;           ///< The index of the medium, which specifies if it is a video or photo
 
 };
 

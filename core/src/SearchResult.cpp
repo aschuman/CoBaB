@@ -15,6 +15,7 @@
  */
 SearchResult::SearchResult() {
 
+    mType = Type::SEARCHRESULT;
 }
 
 /**
