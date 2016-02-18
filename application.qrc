@@ -1,5 +1,9 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
     <file alias="videoIcon.png">resources/images/videoIcon.png</file>
+	<file>CoBaB.qm</file>
 </qresource>
+	<qresource lang="de">
+		<file>CoBaB_de.qm</file>
+	</qresource>
 </RCC>

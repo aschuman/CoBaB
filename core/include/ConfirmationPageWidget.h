@@ -2,6 +2,9 @@
 #define CONFIRMATIONPAGEWIDGET_H
 
 #include <QWidget>
+#include <QPushButton>
+#include <QLabel>
+#include <QTableWidget>
 #include "PageWidget.h"
 
 namespace Ui {
@@ -20,7 +23,7 @@ public:
     static const int EXIT_NEXT;
 
 private slots:
-    void on_pushButton_clicked();
+    void on_startSearchButton_clicked();
 
 
 private:

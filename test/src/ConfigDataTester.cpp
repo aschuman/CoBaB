@@ -2,7 +2,6 @@
 #include <QTest>
 #include <QTextStream>
 
-Q_DECLARE_METATYPE(ConfigData::Language)
 
 void ConfigDataTester::initTestCase() {
     ConfigData* first = ConfigData::getInstance();
@@ -22,16 +21,16 @@ void ConfigDataTester::testSoundOn() {
 }
 
 void ConfigDataTester::testLanguage_data() {
-    QTest::addColumn<ConfigData::Language>("setLanguage");
-    QTest::addColumn<ConfigData::Language>("resultLanguage");
+    QTest::addColumn<QString>("setLanguage");
+    QTest::addColumn<QString>("resultLanguage");
 
-    QTest::newRow("English") << ConfigData::ENGLISH << ConfigData::ENGLISH;
-    QTest::newRow("German") << ConfigData::GERMAN << ConfigData::GERMAN;
+    QTest::newRow("English") << "English" << "English";
+    QTest::newRow("German") << "German" << "German";
 }
 
 void ConfigDataTester::testLanguage() {
-    QFETCH(ConfigData::Language, setLanguage);
-    QFETCH(ConfigData::Language, resultLanguage);
+    QFETCH(QString, setLanguage);
+    QFETCH(QString, resultLanguage);
 
     ConfigData* data = ConfigData::getInstance();
     data->setLanguage(setLanguage);
@@ -40,15 +39,15 @@ void ConfigDataTester::testLanguage() {
 }
 
 void ConfigDataTester::testHelp_data() {
-    QTest::addColumn<ConfigData::Language>("language");
+    QTest::addColumn<QString>("language");
     QTest::addColumn<QString>("help");
 
-    QTest::newRow("English") << ConfigData::ENGLISH << "Help";
-    QTest::newRow("German") << ConfigData::GERMAN << "Hilfe";
+    QTest::newRow("English") << "English" << "Help";
+    QTest::newRow("German") << "German" << "Hilfe";
 }
 
 void ConfigDataTester::testHelp() {
-    QFETCH(ConfigData::Language, language);
+    QFETCH(QString, language);
     QFETCH(QString, help);
 
     ConfigData* data = ConfigData::getInstance();
@@ -57,15 +56,15 @@ void ConfigDataTester::testHelp() {
 }
 
 void ConfigDataTester::testAbout_data() {
-    QTest::addColumn<ConfigData::Language>("language");
+    QTest::addColumn<QString>("language");
     QTest::addColumn<QString>("about");
 
-    QTest::newRow("English") << ConfigData::ENGLISH << "About CoBaB";
-    QTest::newRow("German") << ConfigData::GERMAN << "Über CoBaB";
+    QTest::newRow("English") << "English" << "About CoBaB";
+    QTest::newRow("German") << "German" << "Über CoBaB";
 }
 
 void ConfigDataTester::testAbout() {
-    QFETCH(ConfigData::Language, language);
+    QFETCH(QString, language);
     QFETCH(QString, about);
 
     ConfigData* data = ConfigData::getInstance();
