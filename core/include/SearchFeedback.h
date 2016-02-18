@@ -23,7 +23,7 @@ public:
 
     void setFeedbackList(QList<QPair<SearchObject, int>>& feedbackList);
 
-    const QList<QPair<SearchObject, int>>& getFeedbackList();
+    const QList<QPair<SearchObject, int>>& getFeedbackList() const;
     
     Type getType() const;
 

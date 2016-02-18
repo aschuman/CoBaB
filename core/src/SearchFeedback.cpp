@@ -27,7 +27,7 @@ void SearchFeedback::setFeedbackList(QList<QPair<SearchObject, int>>& feedbackLi
  * @brief SearchFeedback::getFeedbackList get the list of feedbacks
  * @return feedback list
  */
-const QList<QPair<SearchObject, int>>& SearchFeedback::getFeedbackList() {
+const QList<QPair<SearchObject, int>>& SearchFeedback::getFeedbackList() const {
     return mFeedbackList;
 }
 

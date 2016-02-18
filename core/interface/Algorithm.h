@@ -15,11 +15,11 @@ public:
     
     virtual QList<DataPacket*> run();
     
-    void cancel();
+    virtual void cancel();
     
-    bool setInputs(QList<DataPacket> inputDataList);
+    virtual bool setInputs(QList<DataPacket*> inputDataList);
     
-    bool setParameters(QJsonObject parameters);
+    virtual bool setParameters(QJsonObject& parameters);
 
     virtual QString getName() const;
 

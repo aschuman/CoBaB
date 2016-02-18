@@ -4,7 +4,7 @@
  * @brief TestAlgorithm::TestAlgorithm create new algorithm with given ID
  * @param id algorithm ID
  */
-TestAlgorithm::TestAlgorithm(QString id) {
+TestAlgorithm::TestAlgorithm(QString& id) {
 	mId = id;
 }
 
@@ -30,7 +30,7 @@ void TestAlgorithm::cancel() {
  * @param inputDataList input data
  * @return true if input data is accepted
  */
-bool TestAlgorithm::setInputs(QList<DataPacket> inputDataList) {
+bool TestAlgorithm::setInputs(QList<DataPacket*>& inputDataList) {
     Q_UNUSED(inputDataList);
     return true;
 }
@@ -40,7 +40,7 @@ bool TestAlgorithm::setInputs(QList<DataPacket> inputDataList) {
  * @param parameters the parameters
  * @return true if the algorithm accepts the parameters
  */
-bool TestAlgorithm::setParameters(QJsonObject parameters) {
+bool TestAlgorithm::setParameters(QJsonObject& parameters) {
     Q_UNUSED(parameters);
     return true;
 }
@@ -49,7 +49,7 @@ bool TestAlgorithm::setParameters(QJsonObject parameters) {
  * @brief TestAlgorithm::setName give the algorithm a new name
  * @param name new name
  */
-void TestAlgorithm::setName(QString name) {
+void TestAlgorithm::setName(QString& name) {
     mName = name;
 }
 
@@ -57,7 +57,7 @@ void TestAlgorithm::setName(QString name) {
  * @brief TestAlgorithm::setDescription set algorithm description
  * @param description a text which explains what the algorith does
  */
-void TestAlgorithm::setDescription(QString description) {
+void TestAlgorithm::setDescription(QString& description) {
     mDescription = description;
 }
 
@@ -89,7 +89,7 @@ bool TestAlgorithm::supportsProgressInfo() {
  * @brief TestAlgorithm::sendIntermediateResults send a number of new search results
  * @param searchResult new output
  */
-void TestAlgorithm::sendIntermediateResults(SearchResult searchResult) {
+void TestAlgorithm::sendIntermediateResults(SearchResult& searchResult) {
     Q_UNUSED(searchResult);
 }
 

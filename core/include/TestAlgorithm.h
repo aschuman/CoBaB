@@ -11,29 +11,29 @@
 
 class TestAlgorithm: public SearchAlgorithm {
 public: 
-    TestAlgorithm(QString id);
+    TestAlgorithm(QString& id);
     
     QList<DataPacket*> run() override;
     
-    void cancel();
+    void cancel() override;
 
-    bool setInputs(QList<DataPacket> inputDataList);
+    bool setInputs(QList<DataPacket*>& inputDataList);
      
-    bool setParameters(QJsonObject parameters);
+    bool setParameters(QJsonObject& parameters) override;
 
-    void setName(QString name);
+    void setName(QString& name) override;
 
-    void setDescription(QString description);
+    void setDescription(QString& description);
 
     QString getName() const override;
 
     QString getDescription() const override;
     
-    bool supportsProgressInfo();
+    bool supportsProgressInfo() override;
     
-    void sendIntermediateResults(SearchResult searchResult);
+    void sendIntermediateResults(SearchResult& searchResult) override;
 
-    void sendProgress(double progress, QString message);    
+    void sendProgress(double progress, QString message) override;
 
 private: 
     std::unique_ptr<DataPacket> mInputData;
