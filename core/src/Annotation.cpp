@@ -48,7 +48,7 @@ Annotation::Type Annotation::getType() {
  * @return out - the data stream after write
  */
 QDataStream& operator<<(QDataStream& out, Annotation& annotation) {
-    out << annotation.mId << annotation.mType;
+    annotation.toStream(out);
     return out;
 }
 
@@ -59,7 +59,7 @@ QDataStream& operator<<(QDataStream& out, Annotation& annotation) {
  * @return out - the data stream after read
  */
 QDataStream& operator>>(QDataStream& in, Annotation& annotation) {
-    in >> annotation.mId >> annotation.mType;
+    annotation.fromStream(in);
     return in;
 }
 
@@ -67,8 +67,8 @@ QDataStream& operator>>(QDataStream& in, Annotation& annotation) {
  * @brief calls the << operator
  * @param in - the data stream
  */
-void Annotation::toStream(QDataStream& in) {
-    in << *this;
+void Annotation::toStream(QDataStream& in) const {
+    in << this->mId << this->mType;
 }
 
 /**
@@ -76,5 +76,5 @@ void Annotation::toStream(QDataStream& in) {
  * @param out - the data stream
  */
 void Annotation::fromStream(QDataStream& out) {
-    out >> *this;
+    out >> this->mId >> this->mType;
 }

@@ -14,7 +14,7 @@ public:
      * Saves the serializable object in a file.
      * @param in The QDataStream has the file set as device.
      */
-    virtual void toStream(QDataStream& in) = 0;
+    virtual void toStream(QDataStream& in) const = 0;
     
     /**
      * Loads the serializable object from a file.

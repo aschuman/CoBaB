@@ -2,14 +2,16 @@
  * Project \
  */
 
-
 #ifndef _DATAPACKET_H
 #define _DATAPACKET_H
 
 #include "Serializable.h"
 #include <QUuid>
 
-
+/**
+ * @brief DataPacket implementation
+ * @author Violina, Georgi
+ */
 class DataPacket: public Serializable {
 
 public: 
@@ -18,18 +20,22 @@ public:
 
     DataPacket();
 
-    Type getType();
+    Type getType() const;
     
-    QUuid getUuid();
+    QUuid getUuid() const;
     
-    virtual void toStream(QDataStream& in) override;
+    void toStream(QDataStream& in) const override;
     
-    virtual void fromStream(QDataStream& out) override;
+    void fromStream(QDataStream& out) override;
+
+    friend QDataStream& operator >>(QDataStream& in, DataPacket& datapacket);
+
+    friend QDataStream& operator <<(QDataStream& out, const DataPacket& datapacket);
 
 protected: 
 
-    Type mType;
-    static QUuid mUuid;
+    Type mType;             ///< The type of the datapacket
+    static QUuid mUuid;     ///< Unique identifier for the datapacket
 };
 
 #endif //_DATAPACKET_H

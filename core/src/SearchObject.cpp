@@ -1,152 +1,141 @@
 #include "SearchObject.h"
-/**
- * @brief SearchObject::SearchObject
- * @author Georgi
- */
+
 SearchObject::SearchObject() {
+
+    mMedium = "";
+
+    mAnnotation = new Annotation("", "");
+
+    mROI = new QRect();
+
+    mSourceDataset = "";
+
+    mMediumIndex = 0;
 
 }
 /**
  * @brief gets the medium
  * @return the medium
  */
-QString SearchObject::getMedium() {
+QString SearchObject::getMedium() const {
     return mMedium;
 }
 /**
  * @brief sets the medium
  * @param medium to be set
  */
-void SearchObject::setMedium(QString medium) {
+void SearchObject::setMedium(const QString medium) {
     mMedium = medium;
 }
 /**
  * @brief gets the annotation
  * @return the annotation
  */
-Annotation* SearchObject::getAnnotation() {
+Annotation SearchObject::getAnnotation() const {
     return mAnnotation;
 }
 /**
  * @brief sets the annotation
  * @param annotation to be set
  */
-void SearchObject::setAnnotation(Annotation* annotation) {
+void SearchObject::setAnnotation(const Annotation annotation) {
     mAnnotation = annotation;
 }
 /**
  * @brief gets the region of interest
  * @return the region of interest
  */
-QRect* SearchObject::getROI() {
+QRect SearchObject::getROI() const {
     return mROI;
 }
 /**
  * @brief sets the region of interest
  * @param roi - the region of interest
  */
-void SearchObject::setROI(QRect* roi) {
+void SearchObject::setROI(const QRect roi) {
     mROI = roi;
 }
 /**
  * @brief gets the source dataset
  * @return the source dataset
  */
-QString SearchObject::getSourceDataset() {
+QString SearchObject::getSourceDataset() const {
     return mSourceDataset;
 }
 /**
  * @brief sets the souce dataset
  * @param dataset to be set as source
  */
-void SearchObject::setSourceDataset(QString dataset) {
+void SearchObject::setSourceDataset(const QString dataset) {
     mSourceDataset = dataset;
 }
 /**
  * @brief gets the index of the medium
  * @return the index
  */
-int SearchObject::getMediumIndex() {
+int SearchObject::getMediumIndex() const {
     return mMediumIndex;
 }
 /**
  * @brief sets the index of the medium
  * @param index to be set
  */
-void SearchObject::setMediumIndex(int index) {
+void SearchObject::setMediumIndex(const int index) {
     mMediumIndex = index;
 }
 /**
  * @brief calls the << operator
- * @param in - the datastream
+ * @param in the datastream
  */
-void SearchObject::toStream(QDataStream& in) {
+void SearchObject::toStream(QDataStream& in) const {
 
-    in << *this;
+    //write object to stream
+
+    in  << this->mMedium
+        << this->mMediumIndex
+        << this->mAnnotation
+        << this->mROI
+        << this->mSourceDataset;
+
+   // in << *this;
 
 }
 /**
  * @brief calls the >> operator
- * @param out - the datastream
+ * @param out the datastream
  */
 void SearchObject::fromStream(QDataStream& out) {
 
-    out >> *this;
-
-}
-/**
- * @brief override >> the operator
- * @param in - the datastream
- * @param searchObject to be changed
- * @return in - the datastream
- */
-QDataStream& operator >>(QDataStream& in, SearchObject& searchObject) {
 
     //read object from stream
 
     QString medium;
     int mediumIndex;
-    Annotation* ann = new Annotation("", "");
-    QRect* roi = new QRect();
+    Annotation ann = new Annotation("", "");
+    QRect roi = new QRect();
     QString source;
 
 
-    in >> medium;
-    searchObject.setMedium(medium);
+    out >> medium;
+    this->setMedium(medium);
 
 
-    in >> mediumIndex;
-    searchObject.setMediumIndex(mediumIndex);
+    out >> mediumIndex;
+    this->setMediumIndex(mediumIndex);
 
 
-    in >> *ann;
-    searchObject.setAnnotation(ann);
+    out >> ann;
+    this->setAnnotation(ann);
 
 
-    in >> *roi;
-    searchObject.setROI(roi);
+    out >> roi;
+    this->setROI(roi);
 
 
-    in >> source;
-    searchObject.setSourceDataset(source);
+    out >> source;
+    this->setSourceDataset(source);
 
+  //  out >> *this;
 
-    return in;
-}
-/**
- * @brief override << the operator
- * @param out - the datastream
- * @param searchObject whose data will be sent
- * @return out - the datastream
- */
-QDataStream& operator <<(QDataStream& out, const SearchObject& searchObject) {
-
-    //write object to stream
-    out << searchObject.mMedium
-        << searchObject.mMediumIndex
-        << searchObject.mAnnotation
-        << searchObject.mROI
-        << searchObject.mSourceDataset;
-    return out;
 }
 
