@@ -1,14 +1,4 @@
-/**
- * Project \
- */
-
-
 #include "TestAlgorithm.h"
-
-/**
- * TestAlgorithm implementation
- * @author Tung
- */
 
 /**
  * @brief TestAlgorithm::TestAlgorithm create new algorithm with given ID

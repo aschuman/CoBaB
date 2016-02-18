@@ -25,15 +25,15 @@ public:
 
     void setDescription(QString description);
 
-    QString getName() const;
-    
-    QString getDescription() const;
+    QString getName() const override;
+
+    QString getDescription() const override;
     
     bool supportsProgressInfo();
     
     void sendIntermediateResults(SearchResult searchResult);
 
-    void sendProgress(double progress, QString message);
+    void sendProgress(double progress, QString message);    
 
 private: 
     std::unique_ptr<DataPacket> mInputData;

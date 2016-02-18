@@ -20,8 +20,10 @@ public:
     bool setInputs(QList<DataPacket> inputDataList);
     
     bool setParameters(QJsonObject parameters);
-    
-    QString getId() const;
+
+    virtual QString getName() const;
+
+    virtual QString getDescription() const;
 };
 
 #endif //_ALGORITHM_H
