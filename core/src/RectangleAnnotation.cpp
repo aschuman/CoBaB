@@ -36,8 +36,8 @@ QDataStream& operator>>(QDataStream& in, RectangleAnnotation& annotation) {
  * @brief calls the << operator
  * @param in - the data stream
  */
-void RectangleAnnotation::toStream(QDataStream& in) const {
-    in << this->mId << this->x() << this->y() << this->width()
+void RectangleAnnotation::toStream(QDataStream& out) const {
+    out << this->mId << this->x() << this->y() << this->width()
         << this->height() << this->mType;
 }
 
@@ -45,9 +45,9 @@ void RectangleAnnotation::toStream(QDataStream& in) const {
  * @brief calls the >> operator
  * @param out - the data stream
  */
-void RectangleAnnotation::fromStream(QDataStream& out) {
+void RectangleAnnotation::fromStream(QDataStream& in) {
     double x, y, width, height;
-    out >> this->mId >> x >> y >> width >> height >> this->mType;
+    in >> this->mId >> x >> y >> width >> height >> this->mType;
 
     //set coordinates and size
     this->setX((int)ceil(x));

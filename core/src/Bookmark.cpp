@@ -108,7 +108,7 @@ bool operator==(const Bookmark& A, const Bookmark& B) {
  * @return true if first bookmark is lexicographically smaller than b
  */
 
-bool smallerByName(Bookmark A, Bookmark B) {
+bool smallerByName(const Bookmark& A, const Bookmark& B) {
     return (A.getName().compare(B.getName()) < 0);
 }
 
@@ -118,11 +118,11 @@ bool smallerByName(Bookmark A, Bookmark B) {
  * @param B second bookmark
  * @return true if A is created before B
  */
-bool smallerByDate(Bookmark A, Bookmark B) {
+bool smallerByDate(const Bookmark& A, const Bookmark& B) {
     return (A.getDate() < B.getDate());
 }
 
-bool Bookmark::validate(Bookmark bookmark) {
+bool Bookmark::validate(Bookmark& bookmark) {
     Q_UNUSED(bookmark);
 
     return true;
@@ -154,13 +154,13 @@ QDataStream& operator>>(QDataStream& in, Bookmark& bookmark) {
  * @brief calls the << operator
  * @param in - the data stream
  */
-void Bookmark::toStream(QDataStream& in) const {
+void Bookmark::toStream(QDataStream& out) const {
     //convert mParameter to QString
     QJsonDocument doc(mParameter);
     QString parameters(doc.toJson(QJsonDocument::Compact));
 
     //write to stream
-    in << mName << mDate << mAlgorithm
+    out << mName << mDate << mAlgorithm
         << mSearchQuery << parameters
         << mSearchResult << mSearchFeedback;
 
@@ -170,9 +170,9 @@ void Bookmark::toStream(QDataStream& in) const {
  * @brief calls the >> operator
  * @param out - the data stream
  */
-void Bookmark::fromStream(QDataStream& out) {
+void Bookmark::fromStream(QDataStream& in) {
     QString parameters;
-    out >> mName >> mDate >> mAlgorithm
+    in >> mName >> mDate >> mAlgorithm
        >> mSearchQuery >> parameters
        >> mSearchResult >> mSearchFeedback;
 

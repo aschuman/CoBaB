@@ -65,14 +65,14 @@ QDataStream& operator>>(QDataStream& in, Annotation& annotation) {
  * @brief calls the << operator
  * @param in - the data stream
  */
-void Annotation::toStream(QDataStream& in) const {
-    in << mId << mType;
+void Annotation::toStream(QDataStream& out) const {
+    out << mId << mType;
 }
 
 /**
  * @brief calls the >> operator
  * @param out - the data stream
  */
-void Annotation::fromStream(QDataStream& out) {
-    out >> mId >> mType;
+void Annotation::fromStream(QDataStream& in) {
+    in >> mId >> mType;
 }

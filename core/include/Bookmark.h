@@ -40,19 +40,19 @@ public:
 
     friend bool operator==(const Bookmark& A, const Bookmark& B);
 
-    static bool smallerByName(Bookmark A, Bookmark B);
+    static bool smallerByName(const Bookmark& A, const Bookmark& B);
 
-    static bool smallerByDate(Bookmark A, Bookmark B);
+    static bool smallerByDate(const Bookmark& A, const Bookmark& B);
 
-    static bool validate(Bookmark bookmark);
+    static bool validate(Bookmark& bookmark);
 
     friend QDataStream& operator<<(QDataStream& out, const Bookmark& bookmark);
 
     friend QDataStream& operator>>(QDataStream& in, Bookmark& bookmark);
 
-    void toStream(QDataStream& in) const override;
+    void toStream(QDataStream& out) const override;
 
-    void fromStream(QDataStream& out) override;
+    void fromStream(QDataStream& in) override;
 
 private: 
     QString mName;
