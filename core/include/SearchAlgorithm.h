@@ -1,20 +1,20 @@
-/**
- * Project \
- */
-
-
 #ifndef _SEARCHALGORITHM_H
 #define _SEARCHALGORITHM_H
 
 #include "Algorithm.h"
 #include "SearchResult.h"
 
+/**
+ * SearchAlgorithm interface
+ * @author Tung
+ */
+
 class SearchAlgorithm: public Algorithm {
 public: 
     
-    QString getDescription();
+    QString getDescription() const;
     
-    QString getName();
+    QString getName() const;
 
     void setName(QString name);
     

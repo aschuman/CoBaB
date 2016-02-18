@@ -5,10 +5,15 @@
 #include <QList>
 #include <QJsonObject>
 
+/**
+ * Algorithm interface
+ * @author Tung
+ */
+
 class Algorithm {
 public: 
     
-    virtual QList<DataPacket> run();
+    virtual QList<DataPacket*> run();
     
     void cancel();
     
@@ -16,7 +21,7 @@ public:
     
     bool setParameters(QJsonObject parameters);
     
-    QString getId();
+    QString getId() const;
 };
 
 #endif //_ALGORITHM_H

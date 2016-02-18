@@ -22,13 +22,9 @@ TestAlgorithm::TestAlgorithm(QString id) {
  * @brief TestAlgorithm::run start the search
  * @return a list of data packets containing results
  */
-QList<DataPacket> TestAlgorithm::run() {
-    /*SearchResult res;
-    QList<SearchResult> list;
-    list.append(res);
-    return list;*/
+QList<DataPacket*> TestAlgorithm::run() {
 
-    QList<DataPacket> list;
+    QList<DataPacket*> list;
     return list;
 }
 
@@ -60,11 +56,11 @@ bool TestAlgorithm::setParameters(QJsonObject parameters) {
 }
 
 /**
- * @brief TestAlgorithm::getDescription show algorithm description
- * @return a QString that describes the algorithm
+ * @brief TestAlgorithm::setName give the algorithm a new name
+ * @param name new name
  */
-QString TestAlgorithm::getDescription() {
-    return mDescription;
+void TestAlgorithm::setName(QString name) {
+    mName = name;
 }
 
 /**
@@ -72,23 +68,23 @@ QString TestAlgorithm::getDescription() {
  * @param description a text which explains what the algorith does
  */
 void TestAlgorithm::setDescription(QString description) {
-	mDescription = description;
+    mDescription = description;
+}
+
+/**
+ * @brief TestAlgorithm::getDescription show algorithm description
+ * @return a QString that describes the algorithm
+ */
+QString TestAlgorithm::getDescription() const {
+    return mDescription;
 }
 
 /**
  * @brief TestAlgorithm::getName get name of the algorithm
  * @return algorithm name (must be unique)
  */
-QString TestAlgorithm::getName() {
+QString TestAlgorithm::getName() const {
     return mName;
-}
-
-/**
- * @brief TestAlgorithm::setName give the algorithm a new name
- * @param name new name
- */
-void TestAlgorithm::setName(QString name) {
-	mName = name;
 }
 
 /**

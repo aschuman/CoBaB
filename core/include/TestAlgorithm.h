@@ -1,34 +1,33 @@
-/**
- * Project \
- */
-
-
 #ifndef _TESTALGORITHM_H
 #define _TESTALGORITHM_H
 
 #include <memory>
 #include "SearchAlgorithm.h"
 
+/**
+ * The TestAlgorithm implementation
+ * @author Tung
+ */
+
 class TestAlgorithm: public SearchAlgorithm {
 public: 
-    
     TestAlgorithm(QString id);
     
-    QList<DataPacket> run() override;
+    QList<DataPacket*> run() override;
     
     void cancel();
 
     bool setInputs(QList<DataPacket> inputDataList);
      
     bool setParameters(QJsonObject parameters);
-    
-    QString getDescription();
-
-    void setDescription(QString description);
-    
-    QString getName();
 
     void setName(QString name);
+
+    void setDescription(QString description);
+
+    QString getName() const;
+    
+    QString getDescription() const;
     
     bool supportsProgressInfo();
     
