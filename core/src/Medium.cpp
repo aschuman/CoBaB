@@ -6,7 +6,17 @@
  * @param annotations The list of Annotation which belong to this Medium.
  */
 Medium::Medium(const QString path, const QList<QPair<int, Annotation*>> annotations)
-    : mRelativePath(path), mAnnotationList(annotations) {
+    : mPath(path), mAnnotationList(annotations) {
+    mType = Medium::Type::PHOTO;
+}
+
+/**
+ * @brief Medium::~Medium Deletes the Medium.
+ */
+Medium::~Medium() {
+    for(QPair<int, Annotation*> iter: mAnnotationList) {
+        delete iter.second;
+    }
 }
 
 /**
@@ -30,5 +40,5 @@ QList<QPair<int, Annotation*>> Medium::getAnnotationList() const {
  * @return The path to the Medium.
  */
 QString Medium::getPath() const {
-    return mRelativePath;
+    return mPath;
 }

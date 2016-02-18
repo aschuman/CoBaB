@@ -17,7 +17,7 @@ public:
     enum Type { FACE, PERSON, UNKNOWN };
 
     Annotation(QString id, QString type);
-    
+
     QString getId();
     
     Type getType();

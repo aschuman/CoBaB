@@ -1,13 +1,12 @@
-/**
- * Project \
- */
-
-#include <QDataStream>
 #ifndef _SERIALIZABLE_H
 #define _SERIALIZABLE_H
 
 #include <QDataStream>
 
+/**
+ * @brief The Serializable class provides the function to serialize objects.
+ * @author Anja
+ */
 class Serializable {
 public: 
     

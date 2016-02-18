@@ -6,6 +6,7 @@
 
 /**
  * @brief The SingleFrameVideo is a video which consists of single pictures.
+ * @author Anja
  */
 class SingleFrameVideo: public Medium {
 
@@ -17,6 +18,7 @@ public:
 private: 
     double mFramerate;                                      ///< The framerate of the SingleFrameVideo.
     QList<QString> mFrameList;                              ///< The list of frames of the SingleFrameVideo.
+
     double readFramerateFromJson(const QString path);
 };
 

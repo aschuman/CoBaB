@@ -5,6 +5,7 @@
 
 /**
  * @brief A Video from a Video file.
+ * @author Marie
  */
 class Video: public Medium {
 
