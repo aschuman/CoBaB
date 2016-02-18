@@ -17,9 +17,9 @@ public:
     
     virtual void cancel();
     
-    virtual bool setInputs(QList<DataPacket*> inputDataList);
+    virtual bool setInputs(const QList<DataPacket*>& inputDataList);
     
-    virtual bool setParameters(QJsonObject& parameters);
+    virtual bool setParameters(const QJsonObject& parameters);
 
     virtual QString getName() const;
 

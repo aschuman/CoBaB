@@ -16,11 +16,11 @@ public:
     
     BookmarkList();
 
-    void load(QString path);
+    void load(const QString path);
 
-    void save(QString path) const;
+    void save(const QString path) const;
     
-    void addBookmark(Bookmark& bookmark);
+    void addBookmark(const Bookmark& bookmark);
     
     void removeBookmark(const Bookmark& bookmark);
     

@@ -14,7 +14,7 @@ Bookmark::Bookmark() {
  * @param algorithm used algorithm
  * @param query search query
  */
-Bookmark::Bookmark(SearchResult& result, QString& algorithm, SearchQuery& query) {
+Bookmark::Bookmark(const SearchResult& result, const QString& algorithm, const SearchQuery& query) {
     mSearchResult = result;
     mAlgorithm = algorithm;
     mSearchQuery = query;
@@ -24,7 +24,7 @@ Bookmark::Bookmark(SearchResult& result, QString& algorithm, SearchQuery& query)
  * @brief Bookmark::setName set bookmark name
  * @param name new name
  */
-void Bookmark::setName(QString& name) {
+void Bookmark::setName(const QString& name) {
     mName = name;
 }
 
@@ -32,7 +32,7 @@ void Bookmark::setName(QString& name) {
  * @brief Bookmark::setFeedback set new feedback
  * @param feedback new value
  */
-void Bookmark::setFeedback(SearchFeedback& feedback) {
+void Bookmark::setFeedback(const SearchFeedback& feedback) {
 	mSearchFeedback = feedback;
 }
 
@@ -41,7 +41,7 @@ void Bookmark::setFeedback(SearchFeedback& feedback) {
  * @param parameter new parameters
  */
 
-void Bookmark::setParameter(QJsonObject& parameter) {
+void Bookmark::setParameter(const QJsonObject& parameter) {
     mParameter = parameter;
 }
 

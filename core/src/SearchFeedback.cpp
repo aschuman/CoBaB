@@ -11,7 +11,7 @@ SearchFeedback::SearchFeedback() {
  * @brief SearchFeedback::SearchFeedback create new feedback with given type
  * @param type feedback type
  */
-SearchFeedback::SearchFeedback(QString& type) {
+SearchFeedback::SearchFeedback(const QString& type) {
     mType = type;
 }
 
@@ -19,7 +19,7 @@ SearchFeedback::SearchFeedback(QString& type) {
  * @brief SearchFeedback::setFeedbackList set the list of feedbaks
  * @param feedbackList new list
  */
-void SearchFeedback::setFeedbackList(QList<QPair<SearchObject, int>>& feedbackList) {
+void SearchFeedback::setFeedbackList(const QList<QPair<SearchObject, int>>& feedbackList) {
     mFeedbackList = feedbackList;
 }
 

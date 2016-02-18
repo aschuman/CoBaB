@@ -11,19 +11,19 @@
 
 class TestAlgorithm: public SearchAlgorithm {
 public: 
-    TestAlgorithm(QString& id);
+    TestAlgorithm(const QString& id);
     
     QList<DataPacket*> run() override;
     
     void cancel() override;
 
-    bool setInputs(QList<DataPacket*>& inputDataList);
+    bool setInputs(const QList<DataPacket*>& inputDataList);
      
-    bool setParameters(QJsonObject& parameters) override;
+    bool setParameters(const QJsonObject& parameters) override;
 
-    void setName(QString& name) override;
+    void setName(const QString& name) override;
 
-    void setDescription(QString& description);
+    void setDescription(const QString& description);
 
     QString getName() const override;
 

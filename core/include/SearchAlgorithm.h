@@ -12,7 +12,7 @@
 class SearchAlgorithm: public Algorithm {
 public: 
     
-    virtual void setName(QString& name);
+    virtual void setName(const QString& name);
     
     virtual bool supportsProgressInfo();
 

@@ -5,7 +5,7 @@
  * @param id annotation ID
  * @param type annotation type
  */
-RectangleAnnotation::RectangleAnnotation(QString& id, QString& type) : Annotation(id, type) {
+RectangleAnnotation::RectangleAnnotation(const QString& id, const QString& type) : Annotation(id, type) {
 
 }
 
@@ -15,7 +15,7 @@ RectangleAnnotation::RectangleAnnotation(QString& id, QString& type) : Annotatio
  * @param annotation data to write
  * @return out - the data stream after write
  */
-QDataStream& operator<<(QDataStream& out, RectangleAnnotation& annotation){
+QDataStream& operator<<(QDataStream& out, const RectangleAnnotation& annotation){
     annotation.toStream(out);
     return out;
 }

@@ -14,7 +14,7 @@ Annotation::Annotation() {
  * @param id
  * @param type
  */
-Annotation::Annotation(QString& id, QString& type) {
+Annotation::Annotation(const QString& id, const QString& type) {
     mId = id;
     mType = type;
 }

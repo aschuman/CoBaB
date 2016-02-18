@@ -4,8 +4,10 @@
  * @brief TestAlgorithm::TestAlgorithm create new algorithm with given ID
  * @param id algorithm ID
  */
-TestAlgorithm::TestAlgorithm(QString& id) {
+TestAlgorithm::TestAlgorithm(const QString& id) {
 	mId = id;
+    mName = "Test algorithm";
+    mDescription = "an dummy algorithm that returns all search objects in the correct input order";
 }
 
 /**
@@ -30,7 +32,7 @@ void TestAlgorithm::cancel() {
  * @param inputDataList input data
  * @return true if input data is accepted
  */
-bool TestAlgorithm::setInputs(QList<DataPacket*>& inputDataList) {
+bool TestAlgorithm::setInputs(const QList<DataPacket*>& inputDataList) {
     Q_UNUSED(inputDataList);
     return true;
 }
@@ -40,7 +42,7 @@ bool TestAlgorithm::setInputs(QList<DataPacket*>& inputDataList) {
  * @param parameters the parameters
  * @return true if the algorithm accepts the parameters
  */
-bool TestAlgorithm::setParameters(QJsonObject& parameters) {
+bool TestAlgorithm::setParameters(const QJsonObject& parameters) {
     Q_UNUSED(parameters);
     return true;
 }
@@ -49,7 +51,7 @@ bool TestAlgorithm::setParameters(QJsonObject& parameters) {
  * @brief TestAlgorithm::setName give the algorithm a new name
  * @param name new name
  */
-void TestAlgorithm::setName(QString& name) {
+void TestAlgorithm::setName(const QString& name) {
     mName = name;
 }
 
@@ -57,7 +59,7 @@ void TestAlgorithm::setName(QString& name) {
  * @brief TestAlgorithm::setDescription set algorithm description
  * @param description a text which explains what the algorith does
  */
-void TestAlgorithm::setDescription(QString& description) {
+void TestAlgorithm::setDescription(const QString& description) {
     mDescription = description;
 }
 
