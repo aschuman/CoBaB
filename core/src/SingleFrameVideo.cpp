@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include "log.h"
 
 /**
  * @brief SingleFrameVideo::SingleFrameVideo Creates a SingleFrameVideo.
@@ -14,7 +15,7 @@ SingleFrameVideo::SingleFrameVideo(const QString path, const QList<QPair<int, An
     : Medium(path, annotations) {
     mType = Type::SINGLE_FRAME_VIDEO;
 
-    QDir dir(mRelativePath);
+    QDir dir(mPath);
 
     QStringList filters (VALID_PHOTO_TYPES);
     dir.setNameFilters(filters);
@@ -23,11 +24,11 @@ SingleFrameVideo::SingleFrameVideo(const QString path, const QList<QPair<int, An
 
     mFrameList = dir.entryList();
 
-    if(dir.exists(FRAMERATE_FILE)) {
-        mFramerate = readFramerateFromJson(mRelativePath+"/"+FRAMERATE_FILE);
+    if(!dir.exists(FRAMERATE_FILE)) {
+        mFramerate = -1;
+        LOG_ERR("The framerate file does not exists.");
     }
-
-    std::sort(mFrameList.begin(), mFrameList.end());
+    mFramerate = readFramerateFromJson(mPath+"/"+FRAMERATE_FILE);
 }
 
 /**
@@ -54,6 +55,7 @@ QList<QString> SingleFrameVideo::getFrameList() const {
 double SingleFrameVideo::readFramerateFromJson(const QString path) {
     QFile loadFile(path);
     if (!loadFile.open(QIODevice::ReadOnly)) {
+            LOG_ERR("The framerate file couldn't be opened.");
             return DEFAULT_FRAMERATE;
         }
 
@@ -63,8 +65,13 @@ double SingleFrameVideo::readFramerateFromJson(const QString path) {
     if(error->error == QJsonParseError::NoError) {
         QJsonValue fps = loadDoc.object()["fps"];
         if(fps.isDouble()) {
-            return fps.toDouble();
+            if(fps.toDouble() >= 0.0) {
+                return fps.toDouble();
+            }
         }
+        LOG_ERR("The framerate is no positive number.");
+    } else {
+        LOG_ERR(error->errorString());
     }
-    return DEFAULT_FRAMERATE;
+    return -1;
 }

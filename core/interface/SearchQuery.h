@@ -10,36 +10,38 @@
 #include "Dataset.h"
 #include "SearchObject.h"
 
-
+/**
+ * @brief SearchQuery class
+ * @author Georgi
+ */
 class SearchQuery: public DataPacket {
 
 public: 
     
     SearchQuery();
     
-    QList<Dataset>* getDatasets();
+    QList<QString> getDatasets() const;
 
-    void setDatasets(QList<Dataset>* datasets);
+    void setDatasets(const QList<QString> datasets);
     
-    SearchObject* getSearchObject();
+    SearchObject getSearchObject() const;
 
-    void setSearchObject(SearchObject* searchObject);
+    void setSearchObject(const SearchObject searchObject);
     
     friend QDataStream& operator<<(QDataStream& out, const SearchQuery& searchQuery);
     
     friend QDataStream& operator>>(QDataStream& in, SearchQuery& searchQuery);
     
-    void toStream(QDataStream& in) override;
+    void toStream(QDataStream& in) const override;
     
     void fromStream(QDataStream& out) override;
 
 private:
 
-    QList<QString>* mDatasets = new QList<QString>;
+    QList<QString> mDatasets;      ///< The list of datasets
 
-    SearchObject* mSearchObject = new SearchObject();
+    SearchObject mSearchObject;        ///< The searchobject
 
-    QList<Dataset>* createDatasetList(QList<QString>* datasets);
 
 };
 

@@ -52,10 +52,10 @@ void DatasetTester::testPreviewImage_data()
     QTest::addColumn<QString>("path");
     QTest::addColumn<QString>("image");
 
-    QTest::newRow("single frame video dataset") << "../../test/testdata/SingleFrameVideo"
-                                                << "../../test/testdata/SingleFrameVideo/SingleFrameVideo/bigbangtheory_s1e1.vob_00000.png";
-    QTest::newRow("video dataset") << "../test/testdata/Video" << "../../resources/images/videoIcon.png";
-    QTest::newRow("photo dataset") << "../../test/testdata/Fotos" << "../../test/testdata/Fotos/preview.png";
+    QTest::newRow("single frame video dataset") << "../test/testdata/SingleFrameVideo"
+                                                << "../test/testdata/SingleFrameVideo/SingleFrameVideo/bigbangtheory_s1e1.vob_00000.png";
+    QTest::newRow("video dataset") << "../test/testdata/Video" << "../test/testdata/videoIcon.png";
+    QTest::newRow("photo dataset") << "../test/testdata/Fotos" << "../test/testdata/Fotos/preview.png";
 
 }
 
@@ -66,7 +66,8 @@ void DatasetTester::testPreviewImage()
 
     Dataset dataset(path);
     QImage preview(image);
-    QCOMPARE(dataset.getPreviewPhoto(), preview);
+    QVERIFY(!preview.isNull());
+    QCOMPARE(dataset.getPreviewPhoto(), preview.scaled(100, 100, Qt::KeepAspectRatio));
 
 }
 
@@ -189,4 +190,5 @@ void DatasetTester::testAnnotationsPhoto()
     QCOMPARE(list.at(0).first, 0);
     rect.setRect(0, 0, 48, 128);
     QCOMPARE((static_cast<RectangleAnnotation*>(list.at(0).second))->normalized(), rect);
+
 }

@@ -13,7 +13,7 @@ const QList<Dataset>& DatasetList::getDatasetList() const {
  * @brief DatasetList::addDataset Adds the given Dataset to the list.
  * @param dataset The Dataset which is added to the list.
  */
-void DatasetList::addDataset(Dataset dataset) {
+void DatasetList::addDataset(const Dataset& dataset) {
     mDatasetList.append(dataset);
 }
 
@@ -21,7 +21,7 @@ void DatasetList::addDataset(Dataset dataset) {
  * @brief DatasetList::load Loads the list of Dataset from the file with the given path.
  * @param path The path of the file in which the Dataset list is stored.
  */
-void DatasetList::load(const QString path) {
+void DatasetList::load(const QString& path) {
     mDatasetList.clear();
     QFile file(path);
     file.open(QFile::ReadOnly);
@@ -45,7 +45,7 @@ void DatasetList::store(const QString path) const {
     QFile file(path);
     file.open(QFile::WriteOnly);
     QTextStream stream(&file);
-    for(Dataset iter: mDatasetList) {
+    for(const Dataset& iter: mDatasetList) {
         stream << iter.getPath() << endl;
     }
     file.close();

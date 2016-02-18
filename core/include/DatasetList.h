@@ -5,13 +5,14 @@
 
 /**
  * @brief The DatasetList keeps a list of Dataset and stores it.
+ * @author Marie
  */
 class DatasetList {
 
 public:
     const QList<Dataset>& getDatasetList() const;
-    void addDataset(Dataset dataset);
-    void load(const QString path);
+    void addDataset(const Dataset& dataset);
+    void load(const QString& path);
     void store(const QString path) const;
 
 private:

@@ -5,11 +5,12 @@
 
 /**
  * @brief A Photo is a picture which may contain Annotations.
+ * @author Marie
  */
 class Photo: public Medium {
 
 public: 
-    Photo(const QString path, const QList<QPair<int, Annotation*> > annotations);
+    Photo(const QString& path, const QList<QPair<int, Annotation*>> annotations);
 };
 
 #endif //_PHOTO_H

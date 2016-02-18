@@ -5,20 +5,20 @@
 
 #include "SearchResultElement.h"
 
+
 /**
- * SearchResultElement implementation
- * @author Violina
+ * @brief SearchResultElement::SearchResultElement
  */
-
 SearchResultElement::SearchResultElement() {
-
+    mScore = 0;
+    mSearchObject = new SearchObject();
 }
 
 /**
  * @brief gets the score of the element
  * @return the score
  */
-int SearchResultElement::getScore() {
+int SearchResultElement::getScore() const {
     return mScore;
 }
 
@@ -26,7 +26,7 @@ int SearchResultElement::getScore() {
  * @brief sets the score of the element
  * @param score to be set
  */
-void SearchResultElement::setScore(int score) {
+void SearchResultElement::setScore(const int score) {
     mScore = score;
 }
 
@@ -34,7 +34,7 @@ void SearchResultElement::setScore(int score) {
  * @brief gets the searchobject
  * @return the searchobject
  */
-SearchObject * SearchResultElement::getSearchObject() {
+SearchObject SearchResultElement::getSearchObject() const {
     return mSearchObject;
 }
 
@@ -42,61 +42,68 @@ SearchObject * SearchResultElement::getSearchObject() {
  * @brief sets the searchobject
  * @param searchObject to be set
  */
-void SearchResultElement::setSearchObject(SearchObject *searchObject) {
+void SearchResultElement::setSearchObject(const SearchObject searchObject) {
     mSearchObject = searchObject;
 }
 
 /**
  * @brief override << the operator
- * @param out - the datastream
+ * @param out the datastream
  * @param SearchResultElement whose data will be sent
- * @return out - the datastream
+ * @return out the datastream
  */
 QDataStream& operator<<(QDataStream& out, const SearchResultElement& searchResultElement) {
 
-    //write object to stream
-    out << searchResultElement.mScore
-        << *searchResultElement.mSearchObject;
-    return out;
+
 }
 
 /**
  * @brief override >> the operator
- * @param in - the datastream
+ * @param in the datastream
  * @param SearchResultElement to be changed
- * @return in - the datastream
+ * @return in the datastream
  */
 QDataStream& operator>>(QDataStream& in, SearchResultElement& searchResultElement) {
-    //read object from stream
 
-    int score;
-    SearchObject *searchObject = new SearchObject();
-
-    in >> score;
-    searchResultElement.setScore(score);
-
-
-    in >> *searchObject;
-    searchResultElement.setSearchObject(searchObject);
-
-
-    return in;
 }
 
 /**
  * @brief calls the << operator
- * @param in - the datastream
+ * @param in the datastream
  */
-void SearchResultElement::toStream(QDataStream& in) {
+void SearchResultElement::toStream(QDataStream& in) const {
 
-    in << *this;
+    //read object from stream
+
+    int score;
+    SearchObject searchObject;
+
+    in >> score;
+    this->setScore(score);
+
+
+    in >> searchObject;
+    this->setSearchObject(searchObject);
+
 }
 
 /**
  * @brief calls the >> operator
- * @param out - the datastream
+ * @param out the datastream
  */
 void SearchResultElement::fromStream(QDataStream& out) {
 
-    out >> *this;
+    //write object to stream
+    out << this->getScore()
+        << this->getSearchObject();
+
+}
+/**
+ * @brief compareByScore compares 2 elements by score
+ * @param A first element
+ * @param B second element
+ * @return true if A is smaller than B
+ */
+bool compareByScore(SearchResultElement A, SearchResultElement B) {
+    return (A.getScore() < B.getScore());
 }

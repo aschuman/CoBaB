@@ -4,6 +4,7 @@ TARGET = core
 CONFIG += staticlib
 QT += widgets core
 INCLUDEPATH += include interface
+RESOURCES = ../application.qrc
 
 HEADERS += \
     interface/Medium.h \

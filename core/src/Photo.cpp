@@ -5,7 +5,7 @@
  * @param path The path to the Photo.
  * @param annotations The Annotations which belong to the Photo.
  */
-Photo::Photo(const QString path, const QList<QPair<int, Annotation*>> annotations)
+Photo::Photo(const QString& path, const QList<QPair<int, Annotation*>> annotations)
     : Medium(path, annotations) {
     mType = Medium::Type::PHOTO;
 }

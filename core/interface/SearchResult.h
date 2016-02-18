@@ -9,29 +9,32 @@
 #include "DataPacket.h"
 #include "SearchResultElement.h"
 
-
+/**
+ * @brief SearchResult class
+ * @author Violina
+ */
 class SearchResult: public DataPacket {
 public:
     
     SearchResult();
 
-    SearchResult(QList<SearchResultElement>* list);
+    SearchResult(const QList<SearchResultElement> list);
     
-    QList<SearchResultElement>* getSearchResultList();
+    QList<SearchResultElement> getSearchResultList() const;
     
-    QList<SearchResultElement>* sortByScore();
+    QList<SearchResultElement> sortByScore();
 
     friend QDataStream& operator<<(QDataStream& out, const SearchResult& searchResult);
 
     friend QDataStream& operator>>(QDataStream& in, SearchResult& searchResult);
 
-    void toStream(QDataStream& in) override;
+    void toStream(QDataStream& in) const override;
 
     void fromStream(QDataStream& out) override;
 
 private: 
 
-    QList<SearchResultElement>* mSearchResultElementList;
+    QList<SearchResultElement> mSearchResultElementList;        ///< The list of searchresults
 
 };
 

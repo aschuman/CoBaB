@@ -5,15 +5,18 @@
 #include <QJsonParseError>
 #include <QTextStream>
 #include <algorithm>
+#include "log.h"
 
 /**
  * @brief Dataset::Dataset Creates a new Dataset with the given path.
- * @author Anja
  * @param path The path of the Dataset.
  */
-Dataset::Dataset(const QString path) {
+Dataset::Dataset(const QString& path) {
+    Q_INIT_RESOURCE(application);
+    mValid = false;
     QDir dir(path);
     if(!dir.exists()) {
+        LOG_ERR("The Dataset with the given path does not exists.");
         return;
     }
     mPath = dir.absolutePath();
@@ -22,21 +25,30 @@ Dataset::Dataset(const QString path) {
     if(!createSingleFrameVideoDataset()) {
         if(!createPhotoDataset()) {
             if(!createVideoDataset()) {
+                LOG_ERR("The dataset doesn't contains photos, videos or single frame videos.");
                 return;
             }
         }
     }
-    createPreviewPhoto();
+    mValid = createPreviewPhoto();
 }
 
 /**
- * @brief isLess Compares two annotations.
- * @param firstPair The first Annotation with its path.
- * @param secondPair The second Annotation with its path.
- * @return True if the path of the first Annotation is less than the path of the second Annotation.
+ * @brief Dataset::~Dataset Deletes the Dataset.
  */
-bool isLess(QPair<QString,Annotation*> firstPair, QPair<QString,Annotation*> secondPair) {
-    return firstPair.first < secondPair.first;
+Dataset::~Dataset() {
+    for(Medium* iter: mMediaList) {
+        Q_UNUSED(iter);
+        //delete iter;
+    }
+}
+
+/**
+ * @brief Dataset::isValid Returns, if the dataset is valid.
+ * @return If the dataset is valid.
+ */
+bool Dataset::isValid() {
+    return mValid;
 }
 
 /**
@@ -46,11 +58,15 @@ bool isLess(QPair<QString,Annotation*> firstPair, QPair<QString,Annotation*> sec
  */
 QList<QPair<int, Annotation*>> Dataset::createVideoAnnotations(QString path) {
     QList<QPair<QString, Annotation*>> annotationsWithName = parseAnnotations(path);
-    QList<QPair<int, Annotation*>> *annotations = new QList<QPair<int, Annotation*>>;
+    QList<QPair<int, Annotation*>> annotations;
     if(annotationsWithName.isEmpty()) {
-        return *annotations;
+        return annotations;
     }
-    std::sort(annotationsWithName.begin(), annotationsWithName.end(), isLess);
+    std::sort(annotationsWithName.begin(), annotationsWithName.end(),
+        [](const QPair<QString,Annotation*> a, const QPair<QString,Annotation*> b) {
+            return (a.first < b.first);
+        }
+    );
 
     int j = 0;
     QString frame = annotationsWithName.at(0).first;
@@ -61,10 +77,10 @@ QList<QPair<int, Annotation*>> Dataset::createVideoAnnotations(QString path) {
         }
         QPair<int,Annotation*> pair(j, annotationsWithName.at(i).second);
         if(pair.second != nullptr) {
-            annotations->append(pair);
+            annotations.append(pair);
         }
     }
-    return *annotations;
+    return annotations;
 }
 
 /**
@@ -119,7 +135,7 @@ bool Dataset::createVideoDataset() {
  */
 bool Dataset::createPhotoDataset() {
     QList<QPair<QString, Annotation*>> annotationsWithName = parseAnnotations(mPath+"/"+ANNOTATION_FILE+ANNOTATION_EXTENSION);
-    QList<QPair<int, Annotation*>> *annotations = new QList<QPair<int, Annotation*>>;
+    QList<QPair<int, Annotation*>> annotations;
 
     QStringList photoFilter(VALID_PHOTO_TYPES);
     QDirIterator photoIter(mPath, photoFilter, QDir::Filter::Files, QDirIterator::Subdirectories);
@@ -136,14 +152,14 @@ bool Dataset::createPhotoDataset() {
                 mType = Type::PHOTO;
                 isPhotoDir = true;
             }
-            annotations->clear();
+            annotations.clear();
             for(int i = 0; i < annotationsWithName.size(); i++) {
                 if(annotationsWithName.at(i).first == fileName){
                     QPair<int, Annotation*> pair(0, annotationsWithName.at(i).second);
-                    annotations->append(pair);
+                    annotations.append(pair);
                 }
             }
-            Photo* photo = new Photo(photoPath, *annotations);
+            Photo* photo = new Photo(photoPath, annotations);
             mMediaList.append(photo);
         }
     }
@@ -155,7 +171,7 @@ bool Dataset::createPhotoDataset() {
  * @param filepath The path of the configuration file.
  * @return True if the configuration file contains an entry for frames per second.
  */
-bool Dataset::containsFps(QString filepath) {
+bool Dataset::containsFps(QString filepath) const {
     QFile loadFile(filepath);
     if (loadFile.open(QIODevice::ReadOnly)) {
         QByteArray saveData = loadFile.readAll();
@@ -223,83 +239,88 @@ Dataset::Type Dataset::getType() const {
 /**
  * @brief Dataset::createPreviewPhoto Creates a preview photo for the Dataset.
  */
-void Dataset::createPreviewPhoto() {
+bool Dataset::createPreviewPhoto() {
     QStringList filters(PREVIEW_PHOTO);
     QDirIterator iter(mPath, filters, QDir::Filter::Files, QDirIterator::Subdirectories);
     if(iter.hasNext()) {
-       mPreviewPhoto = QImage(iter.next());
+       mPreviewPhoto = QImage(iter.next()).scaled(100, 100, Qt::KeepAspectRatio);
     } else {
         if(mType == Type::PHOTO) {
             //first photo in the list
             QImage preview(mMediaList.first()->getPath());
-            mPreviewPhoto = preview;
+            mPreviewPhoto = preview.scaled(100, 100, Qt::KeepAspectRatio);
         } else if(mType == Type::SINGLE_FRAME_VIDEO) {
             //first frame in the first single frame video
             SingleFrameVideo *sfvideo = (SingleFrameVideo*)mMediaList.first();
             if(sfvideo->getFrameList().isEmpty()) {
-                return;
+                LOG_ERR("There are no frames in this single frame video.");
+                return false;
             }
             QImage preview(sfvideo->getPath() + "/" + sfvideo->getFrameList().first());
-            mPreviewPhoto = preview;
+            mPreviewPhoto = preview.scaled(100, 100, Qt::KeepAspectRatio);
         } else if(mType == Type::VIDEO) {
-            QImage preview(VIDEO_ICON);
-            mPreviewPhoto = preview;
+            QImage preview(":/videoIcon.png");
+            mPreviewPhoto = preview.scaled(100, 100, Qt::KeepAspectRatio);
         }
     }
+    return true;
 }
 
 /**
  * @brief Dataset::parseAnnotations Parses the Annotations from the Annotation file.
  * @param filepath The path to the Annotation file.
- * @return The list of Annotation for this Dataset.
+ * @return The list of Annotation for this Dataset. The first entry in the pair is the name of the photo/frame in the video,
+ * the second is the Annotation in this photo/frame.
  */
-QList<QPair<QString, Annotation*>> Dataset::parseAnnotations(QString filepath) {
-    QList<QPair<QString, Annotation*>> *annotations = new QList<QPair<QString, Annotation*>>;
+QList<QPair<QString, Annotation*>> Dataset::parseAnnotations(const QString& filepath) {
+    QList<QPair<QString, Annotation*>> annotations;
     QFile file(filepath);
-    if(file.exists() && file.open(QFile::ReadOnly)) {
-        QTextStream stream(&file);
-        QString line;
-        stream.readLine(); // first line
-
-        stream.readLineInto(&line); //header line
-        QStringList list = line.split(" ", QString::SkipEmptyParts);
-        //the positions in the line (so it's no problem, if the positions change)
-        int count = list.first().toInt(); // number of arguments
-        int idPos = list.indexOf("id")+1;
-        int xPos = list.indexOf("x")+1;
-        int yPos = list.indexOf("y")+1;
-        int widthPos = list.indexOf("width")+1;
-        int heightPos = list.indexOf("height")+1;
-        int typePos = list.indexOf("class")+1;
-
-        // read in the annotations
-        while (stream.readLineInto(&line)) {
-            QStringList list = line.split(" ", QString::SkipEmptyParts);
-
-            QString imagePath = list.at(0);
-            int quantity = list.at(1).toInt(); // number of annotations
-            if(2+quantity*count > list.size()) {
-                continue;
-            }
-            for(int i = 0; i < quantity; i++) {
-                QString id = list.at(idPos+i*count);
-                int x = list.at(xPos+i*count).toDouble();
-                int y = list.at(yPos+i*count).toDouble();
-                int width = list.at(widthPos+i*count).toDouble();
-                int height = list.at(heightPos+i*count).toDouble();
-                QString type = list.at(typePos+i*count);
-
-                RectangleAnnotation* annotation = new RectangleAnnotation(id, type);
-                annotation->setRect(x, y, width, height);
-                QPair<QString, Annotation*> pair(imagePath, annotation);
-                annotations->append(pair);
-            }
-            if(quantity == 0) {
-                QPair<QString, Annotation*> pair(imagePath, nullptr);
-                annotations->append(pair);
-            }
-        }
-        file.close();
+    if(!file.exists() || !file.open(QFile::ReadOnly)) {
+        LOG_ERR("The annotation file doesn't exists or couldn't be opened.");
+        return annotations;
     }
-    return *annotations;
+    QTextStream stream(&file);
+    QString line;
+    stream.readLine(); // first line
+
+    stream.readLineInto(&line); //header line
+    QStringList list = line.split(" ", QString::SkipEmptyParts);
+    //the positions in the line (so it's no problem, if the positions change)
+    int count = list.first().toInt(); // number of arguments
+    int idPos = list.indexOf("id")+1;
+    int xPos = list.indexOf("x")+1;
+    int yPos = list.indexOf("y")+1;
+    int widthPos = list.indexOf("width")+1;
+    int heightPos = list.indexOf("height")+1;
+    int typePos = list.indexOf("class")+1;
+
+    // read in the annotations
+    while (stream.readLineInto(&line)) {
+        QStringList list = line.split(" ", QString::SkipEmptyParts);
+
+        QString imagePath = list.at(0);
+        int quantity = list.at(1).toInt(); // number of annotations
+        if(2+quantity*count > list.size()) {
+            continue;
+        }
+        for(int i = 0; i < quantity; i++) {
+            QString id = list.at(idPos+i*count);
+            int x = list.at(xPos+i*count).toDouble();
+            int y = list.at(yPos+i*count).toDouble();
+            int width = list.at(widthPos+i*count).toDouble();
+            int height = list.at(heightPos+i*count).toDouble();
+            QString type = list.at(typePos+i*count);
+
+            RectangleAnnotation* annotation = new RectangleAnnotation(id, type);
+            annotation->setRect(x, y, width, height);
+            QPair<QString, Annotation*> pair(imagePath, annotation);
+            annotations.append(pair);
+        }
+        if(quantity == 0) {
+            QPair<QString, Annotation*> pair(imagePath, nullptr);
+            annotations.append(pair);
+        }
+    }
+    file.close();
+    return annotations;
 }

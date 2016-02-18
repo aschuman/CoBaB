@@ -19,7 +19,7 @@ public:
 
     friend QDataStream& operator>>(QDataStream& in, RectangleAnnotation& annotation);
 
-    void toStream(QDataStream& in) override;
+    void toStream(QDataStream& in) const override;
 
     void fromStream(QDataStream& out) override;
 };
