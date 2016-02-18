@@ -18,21 +18,21 @@ public:
 
     void load(QString path);
 
-    void save(QString path);
+    void save(QString path) const;
     
-    void addBookmark(Bookmark bookmark);
+    void addBookmark(Bookmark& bookmark);
     
-    void removeBookmark(const Bookmark* bookmark);
+    void removeBookmark(const Bookmark& bookmark);
     
     QList<Bookmark*> sortByName();
     
     QList<Bookmark*> sortByDate();
 
-    QList<Bookmark*> getBookmarkPointerList();
-
 private: 
 
     QList<Bookmark> mBookmarkList;
+
+    QList<Bookmark*> getBookmarkList();
 };
 
 #endif //_BOOKMARKLIST_H

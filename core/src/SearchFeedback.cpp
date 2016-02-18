@@ -4,31 +4,31 @@
  * @brief SearchFeedback::SearchFeedback default constructor
  */
 SearchFeedback::SearchFeedback() {
-
+    mType = "Dual";
 }
 
 /**
  * @brief SearchFeedback::SearchFeedback create new feedback with given type
  * @param type feedback type
  */
-SearchFeedback::SearchFeedback(QString type) {
+SearchFeedback::SearchFeedback(QString& type) {
     mType = type;
-}
-
-/**
- * @brief SearchFeedback::getFeedbackList get the list of feedbacks
- * @return feedback list
- */
-QList<QPair<SearchObject, int>> SearchFeedback::getFeedbackList() const {
-    return mFeedbackList;
 }
 
 /**
  * @brief SearchFeedback::setFeedbackList set the list of feedbaks
  * @param feedbackList new list
  */
-void SearchFeedback::setFeedbackList(QList<QPair<SearchObject, int>> feedbackList) {
+void SearchFeedback::setFeedbackList(QList<QPair<SearchObject, int>>& feedbackList) {
     mFeedbackList = feedbackList;
+}
+
+/**
+ * @brief SearchFeedback::getFeedbackList get the list of feedbacks
+ * @return feedback list
+ */
+const QList<QPair<SearchObject, int>>& SearchFeedback::getFeedbackList() {
+    return mFeedbackList;
 }
 
 /**

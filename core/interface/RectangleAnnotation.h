@@ -12,7 +12,7 @@
 class RectangleAnnotation: public Annotation, public QRect {
 public: 
 
-    RectangleAnnotation(QString id, QString type);
+    RectangleAnnotation(QString& id, QString& type);
 
     friend QDataStream& operator<<(QDataStream& out, RectangleAnnotation& annotation);
 

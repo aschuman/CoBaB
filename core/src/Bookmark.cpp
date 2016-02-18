@@ -5,7 +5,7 @@
  */
 
 Bookmark::Bookmark() {
-
+    mName = "new bookmark";
 }
 
 /**
@@ -14,33 +14,42 @@ Bookmark::Bookmark() {
  * @param algorithm used algorithm
  * @param query search query
  */
-Bookmark::Bookmark(SearchResult result, QString algorithm, SearchQuery query) {
+Bookmark::Bookmark(SearchResult& result, QString& algorithm, SearchQuery& query) {
     mSearchResult = result;
     mAlgorithm = algorithm;
     mSearchQuery = query;
 }
 
 /**
+ * @brief Bookmark::setName set bookmark name
+ * @param name new name
+ */
+void Bookmark::setName(QString& name) {
+    mName = name;
+}
+
+/**
  * @brief Bookmark::setFeedback set new feedback
  * @param feedback new value
  */
-void Bookmark::setFeedback(SearchFeedback feedback) {
+void Bookmark::setFeedback(SearchFeedback& feedback) {
 	mSearchFeedback = feedback;
 }
 
 /**
- * @brief Bookmark::setName set bookmark name
- * @param name new name
+ * @brief setParameter set the parameters
+ * @param parameter new parameters
  */
-void Bookmark::setName(QString name) {
-    mName = name;
+
+void Bookmark::setParameter(QJsonObject& parameter) {
+    mParameter = parameter;
 }
 
 /**
  * @brief Bookmark::getFeedback get feedback
  * @return feedback
  */
-SearchFeedback Bookmark::getFeedback() const {
+const SearchFeedback& Bookmark::getFeedback() {
     return mSearchFeedback;
 }
 
@@ -72,7 +81,7 @@ QString Bookmark::getAlgorithm() const {
  * @brief Bookmark::getSearchQuery get search query
  * @return search query
  */
-SearchQuery Bookmark::getSearchQuery() const {
+const SearchQuery& Bookmark::getSearchQuery() {
     return mSearchQuery;
 }
 
@@ -80,7 +89,7 @@ SearchQuery Bookmark::getSearchQuery() const {
  * @brief Bookmark::getSearchResult get search result
  * @return search result
  */
-SearchResult Bookmark::getSearchResult() const {
+const SearchResult& Bookmark::getSearchResult() {
     return mSearchResult;
 }
 
@@ -126,6 +135,28 @@ bool Bookmark::validate(Bookmark& bookmark) {
     Q_UNUSED(bookmark);
 
     return true;
+}
+
+/**
+ * @brief Bookmark::load load bookmark from a file
+ * @param path absolute file path
+ */
+void Bookmark::load(QString path) {
+    QFile file(path);
+    QDataStream in(&file);
+    in >> *this;
+    file.close();
+}
+
+/**
+ * @brief save save bookmark to file
+ * @param path absolute file path
+ */
+void Bookmark::save(QString path) const {
+    QFile file(path);
+    QDataStream out(&file);
+    out << *this;
+    file.close();
 }
 
 /**

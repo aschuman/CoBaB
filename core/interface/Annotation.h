@@ -17,7 +17,7 @@ public:
 
     Annotation();
 
-    Annotation(QString id, QString type);
+    Annotation(QString& id, QString& type);
 
     QString getId() const;
     

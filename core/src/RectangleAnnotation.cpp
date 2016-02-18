@@ -5,9 +5,8 @@
  * @param id annotation ID
  * @param type annotation type
  */
-RectangleAnnotation::RectangleAnnotation(QString id, QString type) : Annotation(id, type) {
-    mId = id;
-    mType = type;
+RectangleAnnotation::RectangleAnnotation(QString& id, QString& type) : Annotation(id, type) {
+
 }
 
 /**

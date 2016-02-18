@@ -18,13 +18,13 @@ class Bookmark: public Serializable {
 public: 
     Bookmark();
     
-    Bookmark(SearchResult result, QString algorithm, SearchQuery query);
+    Bookmark(SearchResult& result, QString& algorithm, SearchQuery& query);
 
-    void setFeedback(SearchFeedback feedback);
+    void setFeedback(SearchFeedback& feedback);
 
-    void setName(QString name);
-    
-    SearchFeedback getFeedback() const;
+    void setName(QString& name);
+
+    void setParameter(QJsonObject& parameter);
     
     QString getName() const;
     
@@ -32,9 +32,11 @@ public:
     
     QString getAlgorithm() const;
     
-    SearchQuery getSearchQuery() const;
+    const SearchQuery& getSearchQuery();
     
-    SearchResult getSearchResult() const;
+    const SearchResult& getSearchResult();
+
+    const SearchFeedback& getFeedback();
     
     QJsonObject getParameter() const;
 
@@ -45,6 +47,10 @@ public:
     static bool smallerByDate(const Bookmark& A, const Bookmark& B);
 
     static bool validate(Bookmark& bookmark);
+
+    void load(QString path);
+
+    void save(QString path) const;
 
     friend QDataStream& operator<<(QDataStream& out, const Bookmark& bookmark);
 

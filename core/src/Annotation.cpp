@@ -14,7 +14,7 @@ Annotation::Annotation() {
  * @param id
  * @param type
  */
-Annotation::Annotation(QString id, QString type) {
+Annotation::Annotation(QString& id, QString& type) {
     mId = id;
     mType = type;
 }

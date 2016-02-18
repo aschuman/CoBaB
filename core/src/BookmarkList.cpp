@@ -22,7 +22,7 @@ void BookmarkList::load(QString path) {
  * @brief BookmarkList::save save bookmark list to binary file
  * @param path file path
  */
-void BookmarkList::save(QString path) {
+void BookmarkList::save(QString path) const {
     QFile file(path);
     QDataStream out(&file);
     out << mBookmarkList;
@@ -33,7 +33,7 @@ void BookmarkList::save(QString path) {
  * @brief BookmarkList::addBookmark add a new bookmark to end of list
  * @param bookmark new bookmark
  */
-void BookmarkList::addBookmark(Bookmark bookmark) {
+void BookmarkList::addBookmark(Bookmark& bookmark) {
     mBookmarkList.append(bookmark);
 }
 
@@ -41,15 +41,15 @@ void BookmarkList::addBookmark(Bookmark bookmark) {
  * @brief BookmarkList::removeBookmark remove a bookmark if it exists in the list
  * @param bookmark pointer to the to-be-removed bookmark
  */
-void BookmarkList::removeBookmark(const Bookmark* bookmark) {
-    mBookmarkList.removeOne(*bookmark);
+void BookmarkList::removeBookmark(const Bookmark& bookmark) {
+    mBookmarkList.removeOne(bookmark);
 }
 
 /**
  * @brief getBookmarkPointerList return the pointers to bookmarks
  * @return list of bookmark pointers
  */
-QList<Bookmark*> BookmarkList::getBookmarkPointerList() {
+QList<Bookmark*> BookmarkList::getBookmarkList() {
     QList<Bookmark*> list;
     int length = mBookmarkList.size();
     for (int i = 0; i < length; i++) {
@@ -65,7 +65,7 @@ QList<Bookmark*> BookmarkList::getBookmarkPointerList() {
  */
 QList<Bookmark*> BookmarkList::sortByName() {
     std::sort(mBookmarkList.begin(), mBookmarkList.end(), Bookmark::smallerByName);
-    return getBookmarkPointerList();
+    return getBookmarkList();
 }
 
 /**
@@ -74,5 +74,5 @@ QList<Bookmark*> BookmarkList::sortByName() {
  */
 QList<Bookmark*> BookmarkList::sortByDate() {
     std::sort(mBookmarkList.begin(), mBookmarkList.end(), Bookmark::smallerByDate);
-    return getBookmarkPointerList();
+    return getBookmarkList();
 }

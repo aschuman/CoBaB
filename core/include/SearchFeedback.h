@@ -19,11 +19,11 @@ public:
 
     SearchFeedback();
 
-    SearchFeedback(QString type);
-    
-    QList<QPair<SearchObject, int>> getFeedbackList() const;
+    SearchFeedback(QString& type);
 
-    void setFeedbackList(QList<QPair<SearchObject, int>> feedbackList);
+    void setFeedbackList(QList<QPair<SearchObject, int>>& feedbackList);
+
+    const QList<QPair<SearchObject, int>>& getFeedbackList();
     
     Type getType() const;
 
