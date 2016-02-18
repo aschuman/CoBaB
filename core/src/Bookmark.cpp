@@ -9,6 +9,18 @@ Bookmark::Bookmark() {
 }
 
 /**
+ * @brief Bookmark::Bookmark load bookmark from a file
+ * @param path absolute file path
+ */
+Bookmark::Bookmark(const QString& path) {
+    mPath = path;
+    QFile file(path);
+    QDataStream in(&file);
+    in >> *this;
+    file.close();
+}
+
+/**
  * @brief Bookmark::Bookmark construct new bookmark
  * @param result search result
  * @param algorithm used algorithm
@@ -149,25 +161,24 @@ bool Bookmark::validate(const Bookmark& bookmark) {
 }
 
 /**
- * @brief Bookmark::load load bookmark from a file
- * @param path absolute file path
- */
-void Bookmark::load(QString path) {
-    QFile file(path);
-    QDataStream in(&file);
-    in >> *this;
-    file.close();
-}
-
-/**
  * @brief save save bookmark to file
  * @param path absolute file path
  */
-void Bookmark::save(QString path) const {
+void Bookmark::save(const QString path) {
     QFile file(path);
     QDataStream out(&file);
     out << *this;
     file.close();
+
+    mPath = path;
+}
+
+/**
+ * @brief Bookmark::deleteFile
+ */
+void Bookmark::deleteFile() const {
+    QFile file(mPath);
+    file.remove();
 }
 
 /**

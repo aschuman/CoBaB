@@ -4,6 +4,8 @@
 #include "Bookmark.h"
 #include "SearchResult.h"
 #include <QFile>
+#include <QFileInfo>
+#include <QFileInfoList>
 #include <QDataStream>
 
 /**
@@ -22,7 +24,7 @@ public:
     
     void addBookmark(const Bookmark& bookmark);
     
-    void removeBookmark(const Bookmark& bookmark);
+    bool removeBookmark(const Bookmark& bookmark);
     
     QList<const Bookmark*> sortByName();
     

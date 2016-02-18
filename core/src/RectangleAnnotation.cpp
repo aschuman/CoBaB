@@ -37,7 +37,7 @@ QDataStream& operator>>(QDataStream& in, RectangleAnnotation& annotation) {
  */
 void RectangleAnnotation::toStream(QDataStream& out) const {
     out << *(Annotation*)this;      //write ID + type
-    out << *(QRect*)this;            //write coordinates
+    out << *(QRect*)this;           //write coordinates
 }
 
 /**
@@ -45,6 +45,6 @@ void RectangleAnnotation::toStream(QDataStream& out) const {
  * @param out - the data stream
  */
 void RectangleAnnotation::fromStream(QDataStream& in) {
-    in >> *(Annotation*)this;
-    in >> *(QRect*)this;
+    in >> *(Annotation*)this;   //read ID + type
+    in >> *(QRect*)this;        //read coordinates
 }

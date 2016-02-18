@@ -12,10 +12,21 @@ BookmarkList::BookmarkList() {
  * @param path absolute file path
  */
 void BookmarkList::load(const QString path) {
-    QFile file(path);
+    /*QFile file(path);
     QDataStream in(&file);
     in >> mBookmarkList;
-    file.close();
+    file.close();*/
+
+    QDir dir(path);
+    QFileInfoList filesList = dir.entryInfoList();
+    for(QFileInfo& f : filesList) {
+        if (f.isFile()) {
+            Bookmark bookmark(f.absoluteFilePath());
+            if (Bookmark::validate(bookmark)) {
+                mBookmarkList.append(bookmark);
+            }
+        }
+    }
 }
 
 /**
@@ -23,10 +34,7 @@ void BookmarkList::load(const QString path) {
  * @param path file path
  */
 void BookmarkList::save(const QString path) const {
-    QFile file(path);
-    QDataStream out(&file);
-    out << mBookmarkList;
-    file.close();
+    Q_UNUSED(path);
 }
 
 /**
@@ -41,8 +49,14 @@ void BookmarkList::addBookmark(const Bookmark& bookmark) {
  * @brief BookmarkList::removeBookmark remove a bookmark if it exists in the list
  * @param bookmark pointer to the to-be-removed bookmark
  */
-void BookmarkList::removeBookmark(const Bookmark& bookmark) {
-    mBookmarkList.removeOne(bookmark);
+bool BookmarkList::removeBookmark(const Bookmark& bookmark) {
+    if (mBookmarkList.removeOne(bookmark)) {
+        bookmark.deleteFile();
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 /**

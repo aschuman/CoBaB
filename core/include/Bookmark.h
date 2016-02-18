@@ -17,6 +17,8 @@
 class Bookmark: public Serializable {
 public: 
     Bookmark();
+
+    Bookmark(const QString& path);
     
     Bookmark(const SearchResult& result, const QString& algorithm, const SearchQuery& query);
 
@@ -48,9 +50,9 @@ public:
 
     static bool validate(const Bookmark& bookmark);
 
-    void load(const QString path);
+    void save(const QString path);
 
-    void save(const QString path) const;
+    void deleteFile() const;
 
     friend QDataStream& operator<<(QDataStream& out, const Bookmark& bookmark);
 
@@ -61,6 +63,7 @@ public:
     void fromStream(QDataStream& in) override;
 
 private: 
+    QString mPath;
     QString mName;
     QDateTime mDate;
     QString mAlgorithm;
