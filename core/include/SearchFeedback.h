@@ -19,7 +19,7 @@ public:
 
     SearchFeedback();
 
-    SearchFeedback(QString& type);
+    explicit SearchFeedback(QString& type);
 
     void setFeedbackList(QList<QPair<SearchObject, int>>& feedbackList);
 

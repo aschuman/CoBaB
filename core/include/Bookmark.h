@@ -31,14 +31,14 @@ public:
     QDateTime getDate() const;
     
     QString getAlgorithm() const;
-    
-    const SearchQuery& getSearchQuery();
-    
-    const SearchResult& getSearchResult();
 
-    const SearchFeedback& getFeedback();
-    
     QJsonObject getParameter() const;
+    
+    const SearchQuery& getSearchQuery() const;
+    
+    const SearchResult& getSearchResult() const;
+
+    const SearchFeedback& getFeedback() const;
 
     friend bool operator==(const Bookmark& A, const Bookmark& B);
 
@@ -46,7 +46,7 @@ public:
 
     static bool smallerByDate(const Bookmark& A, const Bookmark& B);
 
-    static bool validate(Bookmark& bookmark);
+    static bool validate(const Bookmark& bookmark);
 
     void load(QString path);
 

@@ -46,14 +46,6 @@ void Bookmark::setParameter(QJsonObject& parameter) {
 }
 
 /**
- * @brief Bookmark::getFeedback get feedback
- * @return feedback
- */
-const SearchFeedback& Bookmark::getFeedback() {
-    return mSearchFeedback;
-}
-
-/**
  * @brief Bookmark::getName get bookmark name
  * @return name
  */
@@ -81,16 +73,8 @@ QString Bookmark::getAlgorithm() const {
  * @brief Bookmark::getSearchQuery get search query
  * @return search query
  */
-const SearchQuery& Bookmark::getSearchQuery() {
+const SearchQuery& Bookmark::getSearchQuery() const {
     return mSearchQuery;
-}
-
-/**
- * @brief Bookmark::getSearchResult get search result
- * @return search result
- */
-const SearchResult& Bookmark::getSearchResult() {
-    return mSearchResult;
 }
 
 /**
@@ -99,6 +83,22 @@ const SearchResult& Bookmark::getSearchResult() {
  */
 QJsonObject Bookmark::getParameter() const {
     return mParameter;
+}
+
+/**
+ * @brief Bookmark::getSearchResult get search result
+ * @return search result
+ */
+const SearchResult& Bookmark::getSearchResult() const {
+    return mSearchResult;
+}
+
+/**
+ * @brief Bookmark::getFeedback get feedback
+ * @return feedback
+ */
+const SearchFeedback& Bookmark::getFeedback() const {
+    return mSearchFeedback;
 }
 
 /**
@@ -131,9 +131,20 @@ bool smallerByDate(const Bookmark& A, const Bookmark& B) {
     return (A.getDate() < B.getDate());
 }
 
-bool Bookmark::validate(Bookmark& bookmark) {
-    Q_UNUSED(bookmark);
-
+/**
+ * @brief Bookmark::validate check if a bookmark is valid, i.e all the datasets are available
+ * @param bookmark to be checked
+ * @return {@code true} if bookmark is valid, {@code false} otherwise
+ */
+bool Bookmark::validate(const Bookmark& bookmark) {
+    QList<QString> datasetPaths = bookmark.getSearchQuery().getDatasets();
+    QDir dir;
+    for (QString& path : datasetPaths) {
+        dir.setPath(path);
+        if (!dir.exists()) {    //dataset not exist
+            return false;
+        }
+    }
     return true;
 }
 

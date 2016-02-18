@@ -53,11 +53,8 @@ QList<const Bookmark*> BookmarkList::getBookmarkList() {
     QList<const Bookmark*> list;
     int length = mBookmarkList.size();
     for (int i = 0; i < length; i++) {
-        //Bookmark bookmark = mBookmarkList.at(i);
-        //list.append(&bookmark);
-
-        const Bookmark* bm = &mBookmarkList.at(i);
-        list.append(bm);
+        const Bookmark* bookmark = &mBookmarkList.at(i);
+        list.append(bookmark);
     }
     return list;
 }
