@@ -1,15 +1,13 @@
-/**
- * Project \
- */
-
-
 #include "Annotation.h"
 
 /**
- * Annotation implementation
- * @author Tung
+ * @brief Annotation::Annotation default constructor
  */
 
+Annotation::Annotation() {
+    mId = "";
+    mType = "Unknown";
+}
 
 /**
  * @brief Annotation::Annotation create new Annotation
@@ -21,15 +19,11 @@ Annotation::Annotation(QString id, QString type) {
     mType = type;
 }
 
-Annotation::Annotation() {
-
-}
-
 /**
  * @brief Annotation::getId gets Id
  * @return annotation Id
  */
-QString Annotation::getId() {
+QString Annotation::getId() const {
     return mId;
 }
 
@@ -37,7 +31,7 @@ QString Annotation::getId() {
  * @brief Annotation::getType gets type
  * @return annotation type
  */
-Annotation::Type Annotation::getType() {
+Annotation::Type Annotation::getType() const {
     switch (mTypes.indexOf(mType)) {
         case 0:     return FACE;
         case 1:     return PERSON;

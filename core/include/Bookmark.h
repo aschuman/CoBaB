@@ -1,8 +1,3 @@
-/**
- * Project \
- */
-
-
 #ifndef _BOOKMARK_H
 #define _BOOKMARK_H
 
@@ -14,43 +9,50 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 
+/**
+ * Bookmark implementation
+ * @author Tung
+ */
+
 class Bookmark: public Serializable {
 public: 
     Bookmark();
     
     Bookmark(SearchResult result, QString algorithm, SearchQuery query);
-    
-    friend QDataStream& operator<<(QDataStream& out, const Bookmark& bookmark);
-
-    friend QDataStream& operator>>(QDataStream& in, Bookmark& bookmark);
-    
-    void toStream(QDataStream& in) const override;
-    
-    void fromStream(QDataStream& out) override;
 
     void setFeedback(SearchFeedback feedback);
-    
-    SearchFeedback getFeedback();
-       
+
     void setName(QString name);
+    
+    SearchFeedback getFeedback() const;
     
     QString getName() const;
     
     QDateTime getDate() const;
     
-    QString getAlgorithm();
+    QString getAlgorithm() const;
     
-    SearchQuery getSearchQuery();
+    SearchQuery getSearchQuery() const;
     
-    SearchResult getSearchResult();
+    SearchResult getSearchResult() const;
     
-    QJsonObject getParameter();
+    QJsonObject getParameter() const;
 
     friend bool operator==(const Bookmark& A, const Bookmark& B);
 
-    static bool compareByName(Bookmark A, Bookmark B);
+    static bool smallerByName(Bookmark A, Bookmark B);
 
-    static bool compareByDate(Bookmark A, Bookmark B);
+    static bool smallerByDate(Bookmark A, Bookmark B);
+
+    static bool validate(Bookmark bookmark);
+
+    friend QDataStream& operator<<(QDataStream& out, const Bookmark& bookmark);
+
+    friend QDataStream& operator>>(QDataStream& in, Bookmark& bookmark);
+
+    void toStream(QDataStream& in) const override;
+
+    void fromStream(QDataStream& out) override;
 
 private: 
     QString mName;

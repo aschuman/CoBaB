@@ -1,8 +1,3 @@
-/**
- * Project \
- */
-
-
 #ifndef _BOOKMARKLIST_H
 #define _BOOKMARKLIST_H
 
@@ -10,6 +5,11 @@
 #include "SearchResult.h"
 #include <QFile>
 #include <QDataStream>
+
+/**
+ * BookmarkList implementation
+ * @author Tung
+ */
 
 class BookmarkList {
 public: 

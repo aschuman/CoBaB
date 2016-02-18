@@ -1,14 +1,13 @@
-/**
- * Project \
- */
-
-
 #ifndef _RECTANGLEANNOTATION_H
 #define _RECTANGLEANNOTATION_H
 
 #include "Annotation.h"
 #include <QRect>
 
+/**
+ * RectangleAnnotation implementation
+ * @author Tung
+ */
 
 class RectangleAnnotation: public Annotation, public QRect {
 public: 

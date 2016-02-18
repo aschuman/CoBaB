@@ -1,14 +1,4 @@
-/**
- * Project \
- */
-
-
 #include "Bookmark.h"
-
-/**
- * Bookmark implementation
- * @author Tung
- */
 
 /**
  * @brief Bookmark::Bookmark default constructor
@@ -39,19 +29,19 @@ void Bookmark::setFeedback(SearchFeedback feedback) {
 }
 
 /**
- * @brief Bookmark::getFeedback get feedback
- * @return feedback
- */
-SearchFeedback Bookmark::getFeedback() {
-    return mSearchFeedback;
-}
-
-/**
  * @brief Bookmark::setName set bookmark name
  * @param name new name
  */
 void Bookmark::setName(QString name) {
-	mName = name;
+    mName = name;
+}
+
+/**
+ * @brief Bookmark::getFeedback get feedback
+ * @return feedback
+ */
+SearchFeedback Bookmark::getFeedback() const {
+    return mSearchFeedback;
 }
 
 /**
@@ -74,7 +64,7 @@ QDateTime Bookmark::getDate() const {
  * @brief Bookmark::getAlgorithm get used algorithm
  * @return search algorithm
  */
-QString Bookmark::getAlgorithm() {
+QString Bookmark::getAlgorithm() const {
     return mAlgorithm;
 }
 
@@ -82,7 +72,7 @@ QString Bookmark::getAlgorithm() {
  * @brief Bookmark::getSearchQuery get search query
  * @return search query
  */
-SearchQuery Bookmark::getSearchQuery() {
+SearchQuery Bookmark::getSearchQuery() const {
     return mSearchQuery;
 }
 
@@ -90,7 +80,7 @@ SearchQuery Bookmark::getSearchQuery() {
  * @brief Bookmark::getSearchResult get search result
  * @return search result
  */
-SearchResult Bookmark::getSearchResult() {
+SearchResult Bookmark::getSearchResult() const {
     return mSearchResult;
 }
 
@@ -98,7 +88,7 @@ SearchResult Bookmark::getSearchResult() {
  * @brief Bookmark::getParameter get search parameters (QJsonObject)
  * @return parameters
  */
-QJsonObject Bookmark::getParameter() {
+QJsonObject Bookmark::getParameter() const {
     return mParameter;
 }
 
@@ -118,7 +108,7 @@ bool operator==(const Bookmark& A, const Bookmark& B) {
  * @return true if first bookmark is lexicographically smaller than b
  */
 
-bool compareByName(Bookmark A, Bookmark B) {
+bool smallerByName(Bookmark A, Bookmark B) {
     return (A.getName().compare(B.getName()) < 0);
 }
 
@@ -128,8 +118,14 @@ bool compareByName(Bookmark A, Bookmark B) {
  * @param B second bookmark
  * @return true if A is created before B
  */
-bool compareByDate(Bookmark A, Bookmark B) {
+bool smallerByDate(Bookmark A, Bookmark B) {
     return (A.getDate() < B.getDate());
+}
+
+bool Bookmark::validate(Bookmark bookmark) {
+    Q_UNUSED(bookmark);
+
+    return true;
 }
 
 /**

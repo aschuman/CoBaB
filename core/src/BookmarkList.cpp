@@ -1,14 +1,4 @@
-/**
- * Project \
- */
-
-
 #include "BookmarkList.h"
-
-/**
- * BookmarkList implementation
- * @author Tung
- */
 
 /**
  * @brief BookmarkList::BookmarkList default constructor : create empty list
@@ -74,7 +64,7 @@ QList<Bookmark*> BookmarkList::getBookmarkPointerList() {
  * @return a list of sorted-bookmarks-pointers
  */
 QList<Bookmark*> BookmarkList::sortByName() {
-    std::sort(mBookmarkList.begin(), mBookmarkList.end(), Bookmark::compareByName);
+    std::sort(mBookmarkList.begin(), mBookmarkList.end(), Bookmark::smallerByName);
     return getBookmarkPointerList();
 }
 
@@ -83,16 +73,6 @@ QList<Bookmark*> BookmarkList::sortByName() {
  * @return a list of sorted-bookmarks-pointers
  */
 QList<Bookmark*> BookmarkList::sortByDate() {
-    std::sort(mBookmarkList.begin(), mBookmarkList.end(), Bookmark::compareByDate);
+    std::sort(mBookmarkList.begin(), mBookmarkList.end(), Bookmark::smallerByDate);
     return getBookmarkPointerList();
-}
-
-/**
- * @brief BookmarkList::validateResult
- * @param searchResult
- */
-bool BookmarkList::validateResult(SearchResult searchResult) {
-    Q_UNUSED(searchResult);
-
-    return true;
 }

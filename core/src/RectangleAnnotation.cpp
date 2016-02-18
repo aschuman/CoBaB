@@ -1,14 +1,4 @@
-/**
- * Project \
- */
-
-
 #include "RectangleAnnotation.h"
-
-/**
- * RectangleAnnotation implementation
- */
-
 
 /**
  * @brief RectangleAnnotation::RectangleAnnotation creates a new RectangleAnnotation with ID and type

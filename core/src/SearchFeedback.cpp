@@ -1,14 +1,4 @@
-/**
- * Project \
- */
-
-
 #include "SearchFeedback.h"
-
-/**
- * SearchFeedback implementation
- * @author Tung
- */
 
 /**
  * @brief SearchFeedback::SearchFeedback default constructor
@@ -29,7 +19,7 @@ SearchFeedback::SearchFeedback(QString type) {
  * @brief SearchFeedback::getFeedbackList get the list of feedbacks
  * @return feedback list
  */
-QList<QPair<SearchObject, int>> SearchFeedback::getFeedbackList() {
+QList<QPair<SearchObject, int>> SearchFeedback::getFeedbackList() const {
     return mFeedbackList;
 }
 
@@ -45,13 +35,8 @@ void SearchFeedback::setFeedbackList(QList<QPair<SearchObject, int>> feedbackLis
  * @brief SearchFeedback::getFeedbackType gets type of all feedbacks in this list
  * @return feedback type
  */
-SearchFeedback::Type SearchFeedback::getType() {
-    switch (mTypes.indexOf(mType)) {
-        case 0:
-            return DUAL;
-        default :
-            return EXTENDED;
-    }
+SearchFeedback::Type SearchFeedback::getType() const {
+    return (mType == "Dual") ? DUAL : EXTENDED;
 }
 
 /**
