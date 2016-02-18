@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.1" language="en_US">
 <context>
     <name>ConfigData</name>
     <message>
         <location filename="core/src/ConfigData.cpp" line="74"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Help</translation>
     </message>
     <message>
         <location filename="core/src/ConfigData.cpp" line="84"/>
         <source>About CoBaB</source>
-        <translation type="unfinished"></translation>
+        <translation>About CoBaB</translation>
     </message>
 </context>
 <context>
