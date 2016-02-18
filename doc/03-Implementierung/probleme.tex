@@ -8,6 +8,7 @@ Durch die verwendung von C++14 (siehe Abschnitt 11.1 des Pflichtenhefts) ist die
 \subsection{Logger}
 Der verwendete Logger ist aus dem Artikel \enquote{A Lightweight Logger for C++} von Filip Janiszewski entnommen.
 Dieser ist zu finden unter http://www.drdobbs.com/cpp/a-lightweight-logger-for-c/240147505.
+Er verwendet keine externen Bibliotheken und ist Threadsicher, weshalb die wahl auf ihn gefallen ist.
 
 \subsection{Move-Konstruktoren}
 Die Verwendung von unique\_ptr in Komponenten, die beispielsweise durch Haltung von Instanzen in einem Container die Möglichkeit haben müssen verschoben (move) zu werden, macht die Implementierung eines Move-Konstruktors und eines Move-Zuweisungsoperators notwendig. In C++14 (im Speziellen C++11) ist die automatische Generierung solcher Funktionen vorgesehen, falls dies durch attributweise Durchführung möglich ist. Die auf der Plattform Windows verwendete Version 2013 des Visual Studio Compilers unterstützt dies jedoch nicht. (siehe https://msdn.microsoft.com/en-us/library/dn457344.aspx)

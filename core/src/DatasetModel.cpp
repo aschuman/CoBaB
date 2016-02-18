@@ -1,11 +1,18 @@
 #include "DatasetModel.h"
 
+/**
+ * @brief Constructs a DatasetModel.
+ */
 DatasetModel::DatasetModel()
     : QAbstractListModel(nullptr),
       mDatasets(nullptr)
 {
 }
 
+/**
+ * @brief Sets the list of datasets.
+ * @param datasets The list of datasets.
+ */
 void DatasetModel::setDatasetList(const QList<Dataset>& datasets)
 {
     mDatasets = &datasets;
