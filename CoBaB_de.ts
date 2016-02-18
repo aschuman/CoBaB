@@ -6,12 +6,12 @@
     <message>
         <location filename="core/src/ConfigData.cpp" line="73"/>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <location filename="core/src/ConfigData.cpp" line="82"/>
         <source>About CoBaB</source>
-        <translation type="unfinished"></translation>
+        <translation>Über CoBaB</translation>
     </message>
 </context>
 <context>
@@ -34,22 +34,22 @@
     <message>
         <location filename="core/src/ConfirmationPageWidget.cpp" line="8"/>
         <source>start search</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche starten</translation>
     </message>
     <message>
         <location filename="core/src/ConfirmationPageWidget.cpp" line="13"/>
         <source>datasets</source>
-        <translation type="unfinished"></translation>
+        <translation>Datensätze</translation>
     </message>
     <message>
         <location filename="core/src/ConfirmationPageWidget.cpp" line="14"/>
         <source>algorithm</source>
-        <translation type="unfinished"></translation>
+        <translation>Algorithmus</translation>
     </message>
     <message>
         <location filename="core/src/ConfirmationPageWidget.cpp" line="15"/>
         <source>parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Parameter</translation>
     </message>
 </context>
 <context>
