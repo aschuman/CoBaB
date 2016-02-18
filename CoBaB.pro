@@ -4,3 +4,4 @@ SUBDIRS = core \
     app \
 
 CONFIG += ordered
+TRANSLATIONS += CoBaB_de.ts

@@ -2,6 +2,8 @@
 #define _CONFIGDATA_H
 
 #include <QSettings>
+#include <QLocale>
+#include <QHash>
 
 /**
  * @brief The ConfigData class stores the user settings language and notitification sound.
@@ -9,21 +11,21 @@
  * @author Marie
  */
 class ConfigData : public QSettings{
+    Q_OBJECT
 
 public: 
     static ConfigData* getInstance();
-    enum Language { GERMAN, ENGLISH };
-    Language getLanguage();
-    void setLanguage(Language language);
+    QString getLanguage();
+    void setLanguage(QString language);
     bool getSoundOn();
     void setSoundOn(bool soundOn);
     QString getHelp();
     QString getAbout();
 
-private: 
+private:
+    QHash<QString, QLocale> languages;    ///< A map which contains the avaliable languages and corresponding QLocales for the translator.
     static ConfigData* instance;
     ConfigData();
-    QString readFile(QString path);
     ConfigData(const ConfigData&);
     ConfigData& operator=(const ConfigData&);
 

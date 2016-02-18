@@ -1,11 +1,13 @@
 #include "ConfigData.h"
-#include <QFile>
-#include <QTextStream>
+#include <QTranslator>
+#include <QApplication>
 
 /**
  * @brief ConfigData::ConfigData Creates the ConfigData object.
  */
-ConfigData::ConfigData() : QSettings("KIT", "CoBaB"){
+ConfigData::ConfigData() : QSettings("IOSB", "CoBaB"){
+    languages.insert("German", QLocale(QLocale::German));
+    languages.insert("English", QLocale(QLocale::English));
 }
 
 /**
@@ -28,16 +30,23 @@ ConfigData* ConfigData::getInstance() {
  * @brief ConfigData::getLanguage Loads the language chosen by the user.
  * @return The language chosen by the user.
  */
-ConfigData::Language ConfigData::getLanguage() {
-    return (Language)QSettings::value("language", GERMAN).toInt();
+QString ConfigData::getLanguage() {
+    return QSettings::value("language", "German").toString();
 }
 
 /**
- * @brief ConfigData::setLanguage Stores the language and the help and about files in this language.
+ * @brief ConfigData::setLanguage Stores the language and sets the translator.
  * @param language The language chosen by the user.
  */
-void ConfigData::setLanguage(Language language) {
+void ConfigData::setLanguage(QString language) {
     QSettings::setValue("language", language);
+
+    QTranslator translator;
+    if(languages.contains(language)) {
+        if(translator.load(languages.value(language), QLatin1String("CoBaB"), QLatin1String("_"), QLatin1String(":/resources/translations"))) {
+            QApplication::installTranslator(&translator);
+        }
+    }
 }
 
 /**
@@ -57,47 +66,20 @@ void ConfigData::setSoundOn(bool soundOn) {
 }
 
 /**
- * @brief ConfigData::getHelp Reads the help file in the chosen language.
- * @return The contents of the help file.
+ * @brief ConfigData::getHelp Returns the help string in the chosen language.
+ * @return The help string.
  */
 QString ConfigData::getHelp() {
-    Language language = getLanguage();
-    switch(language) {
-    case GERMAN:
-        return readFile("../../help files/help_de.txt");
-    case ENGLISH:
-        return readFile("../../help files/help_en.txt");
-    default:
-        return "";
-    }
+    QString help = tr("Help");
+    return help;
 }
 
 /**
- * @brief ConfigData::getAbout Reads the about file in the chosen language.
- * @return The contents of the about file.
+ * @brief ConfigData::getAbout Returns the about string in the chosen language.
+ * @return The about string.
  */
 QString ConfigData::getAbout() {
-    Language language = getLanguage();
-    switch(language) {
-    case GERMAN:
-        return readFile("../../help files/about_de.txt");
-    case ENGLISH:
-        return readFile("../../help files/about_en.txt");
-    default:
-        return "";
-    }
+    QString about = tr("About CoBaB");
+    return about;
 }
 
-/**
- * @brief ConfigData::readFile Reads the contents of the file with the given path.
- * @param path The path to the file.
- * @return The contents of the file.
- */
-QString ConfigData::readFile(QString path) {
-    QFile file(path);
-    if (!file.exists() || !file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        return "no file available";
-    }
-    QTextStream in(&file);
-    return in.readAll();
-}
