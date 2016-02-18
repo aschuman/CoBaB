@@ -65,17 +65,16 @@ QDataStream& operator>>(QDataStream& in, SearchFeedback& feedback) {
  * @brief calls the << operator
  * @param in - the data stream
  */
-void SearchFeedback::toStream(QDataStream& in) const {
-    DataPacket::toStream(in);
-    in << mType << mFeedbackList;
+void SearchFeedback::toStream(QDataStream& out) const {
+    DataPacket::toStream(out);
+    out << mType << mFeedbackList;
 }
 
 /**
  * @brief calls the >> operator
  * @param out - the data stream
  */
-void SearchFeedback::fromStream(QDataStream& out) {
-    DataPacket::fromStream(out);
-    out >> mType;
-    out >> mFeedbackList;
+void SearchFeedback::fromStream(QDataStream& in) {
+    DataPacket::fromStream(in);
+    in >> mType >> mFeedbackList;
 }

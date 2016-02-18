@@ -33,10 +33,6 @@ public:
 private: 
 
     QList<Bookmark> mBookmarkList;
-
-    bool validateResult(SearchResult searchResult);
-
-
 };
 
 #endif //_BOOKMARKLIST_H

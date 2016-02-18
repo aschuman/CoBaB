@@ -31,9 +31,9 @@ public:
     
     friend QDataStream& operator>>(QDataStream& in, SearchFeedback& feedback);
 
-    void toStream(QDataStream& in) const override;
+    void toStream(QDataStream& out) const override;
 
-    void fromStream(QDataStream& out) override;
+    void fromStream(QDataStream& in) override;
 
 private: 
     QList<QPair<SearchObject, int>> mFeedbackList;
