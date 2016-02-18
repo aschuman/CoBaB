@@ -24,15 +24,15 @@ public:
     
     void removeBookmark(const Bookmark& bookmark);
     
-    QList<Bookmark*> sortByName();
+    QList<const Bookmark*> sortByName();
     
-    QList<Bookmark*> sortByDate();
+    QList<const Bookmark*> sortByDate();
 
 private: 
 
     QList<Bookmark> mBookmarkList;
 
-    QList<Bookmark*> getBookmarkList();
+    QList<const Bookmark*> getBookmarkList();
 };
 
 #endif //_BOOKMARKLIST_H

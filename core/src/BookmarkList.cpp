@@ -49,12 +49,15 @@ void BookmarkList::removeBookmark(const Bookmark& bookmark) {
  * @brief getBookmarkPointerList return the pointers to bookmarks
  * @return list of bookmark pointers
  */
-QList<Bookmark*> BookmarkList::getBookmarkList() {
-    QList<Bookmark*> list;
+QList<const Bookmark*> BookmarkList::getBookmarkList() {
+    QList<const Bookmark*> list;
     int length = mBookmarkList.size();
     for (int i = 0; i < length; i++) {
-        Bookmark bm = mBookmarkList.at(i);
-        list.append(&bm);
+        //Bookmark bookmark = mBookmarkList.at(i);
+        //list.append(&bookmark);
+
+        const Bookmark* bm = &mBookmarkList.at(i);
+        list.append(bm);
     }
     return list;
 }
@@ -63,7 +66,7 @@ QList<Bookmark*> BookmarkList::getBookmarkList() {
  * @brief BookmarkList::sortByName sort all bookmarks by name
  * @return a list of sorted-bookmarks-pointers
  */
-QList<Bookmark*> BookmarkList::sortByName() {
+QList<const Bookmark*> BookmarkList::sortByName() {
     std::sort(mBookmarkList.begin(), mBookmarkList.end(), Bookmark::smallerByName);
     return getBookmarkList();
 }
@@ -72,7 +75,7 @@ QList<Bookmark*> BookmarkList::sortByName() {
  * @brief BookmarkList::sortByDate sort all bookmarks by date
  * @return a list of sorted-bookmarks-pointers
  */
-QList<Bookmark*> BookmarkList::sortByDate() {
+QList<const Bookmark*> BookmarkList::sortByDate() {
     std::sort(mBookmarkList.begin(), mBookmarkList.end(), Bookmark::smallerByDate);
     return getBookmarkList();
 }
