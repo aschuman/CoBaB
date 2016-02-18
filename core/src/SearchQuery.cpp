@@ -10,10 +10,6 @@
  */
 SearchQuery::SearchQuery() {
     mType = Type::SEARCHQUERY;
-
-    QList<QString> mDatasets = new QList<QString>;
-
-    SearchObject mSearchObject = new SearchObject();
 }
 
 /**
@@ -55,7 +51,8 @@ void SearchQuery::setSearchObject(const SearchObject searchObject) {
  * @return out the datastream
  */
 QDataStream& operator<<(QDataStream& out, const SearchQuery& searchQuery) {
-
+    searchQuery.toStream(out);
+    return out;
 }
 
 /**
@@ -65,7 +62,8 @@ QDataStream& operator<<(QDataStream& out, const SearchQuery& searchQuery) {
  * @return in the datastream
  */
 QDataStream& operator>>(QDataStream& in, SearchQuery& searchQuery) {
-
+    searchQuery.fromStream(in);
+    return in;
 }
 
 /**
@@ -73,20 +71,10 @@ QDataStream& operator>>(QDataStream& in, SearchQuery& searchQuery) {
  * @param in the datastream
  */
 void SearchQuery::toStream(QDataStream& in) const {
-
-    //read object from stream
-
-    QList<QString> datasets;
-    SearchObject searchobject;
-
-    in >> datasets;
-    this->setDatasets(datasets);
-
-
-    in >> searchobject;
-    this->setSearchObject(searchobject);
-
-
+    //write object to stream
+    DataPacket::toStream(in); //write uuid and type
+    in << mDatasets
+        << mSearchObject;
 }
 
 /**
@@ -94,8 +82,10 @@ void SearchQuery::toStream(QDataStream& in) const {
  * @param out the datastream
  */
 void SearchQuery::fromStream(QDataStream& out) {
-    //write object to stream
-    out << this->mDatasets
-        << this->mSearchObject;
+
+    //read object from stream
+    DataPacket::fromStream(out); //write uuid and type
+    out >> mDatasets;
+    out >> mSearchObject;
 
 }

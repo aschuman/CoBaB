@@ -139,15 +139,7 @@ bool compareByDate(Bookmark A, Bookmark B) {
  * @return out - the data stream after write
  */
 QDataStream& operator<<(QDataStream& out, const Bookmark& bookmark) {
-    //convert mParameter to QString
-    QJsonDocument doc(bookmark.mParameter);
-    QString parameters(doc.toJson(QJsonDocument::Compact));
-
-    //write to stream
-    out << bookmark.mName << bookmark.mDate << bookmark.mAlgorithm
-        << bookmark.mSearchQuery << parameters
-        << bookmark.mSearchResult << bookmark.mSearchFeedback;
-
+    bookmark.toStream(out);
     return out;
 }
 
@@ -158,19 +150,7 @@ QDataStream& operator<<(QDataStream& out, const Bookmark& bookmark) {
  * @return out - the data stream after read
  */
 QDataStream& operator>>(QDataStream& in, Bookmark& bookmark) {
-    QString parameters;
-    in >> bookmark.mName >> bookmark.mDate >> bookmark.mAlgorithm
-       >> bookmark.mSearchQuery >> parameters
-       >> bookmark.mSearchResult >> bookmark.mSearchFeedback;
-
-    //create mParameter from parameters-Strings
-    QJsonDocument doc = QJsonDocument::fromJson(parameters.toUtf8());
-    if (!doc.isNull() && doc.isObject()) {
-        bookmark.mParameter = doc.object();
-    }
-    else {
-        bookmark.mParameter = QJsonObject();
-    }
+    bookmark.fromStream(in);
     return in;
 }
 
@@ -178,8 +158,16 @@ QDataStream& operator>>(QDataStream& in, Bookmark& bookmark) {
  * @brief calls the << operator
  * @param in - the data stream
  */
-void Bookmark::toStream(QDataStream& in) {
-    in << *this;
+void Bookmark::toStream(QDataStream& in) const {
+    //convert mParameter to QString
+    QJsonDocument doc(mParameter);
+    QString parameters(doc.toJson(QJsonDocument::Compact));
+
+    //write to stream
+    in << mName << mDate << mAlgorithm
+        << mSearchQuery << parameters
+        << mSearchResult << mSearchFeedback;
+
 }
 
 /**
@@ -187,5 +175,17 @@ void Bookmark::toStream(QDataStream& in) {
  * @param out - the data stream
  */
 void Bookmark::fromStream(QDataStream& out) {
-    out >> *this;
+    QString parameters;
+    out >> mName >> mDate >> mAlgorithm
+       >> mSearchQuery >> parameters
+       >> mSearchResult >> mSearchFeedback;
+
+    //create mParameter from parameters-Strings
+    QJsonDocument doc = QJsonDocument::fromJson(parameters.toUtf8());
+    if (!doc.isNull() && doc.isObject()) {
+        mParameter = doc.object();
+    }
+    else {
+        mParameter = QJsonObject();
+    }
 }

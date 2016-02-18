@@ -11,7 +11,6 @@
  */
 SearchResultElement::SearchResultElement() {
     mScore = 0;
-    mSearchObject = new SearchObject();
 }
 
 /**
@@ -53,8 +52,8 @@ void SearchResultElement::setSearchObject(const SearchObject searchObject) {
  * @return out the datastream
  */
 QDataStream& operator<<(QDataStream& out, const SearchResultElement& searchResultElement) {
-
-
+    searchResultElement.toStream(out);
+    return out;
 }
 
 /**
@@ -64,7 +63,8 @@ QDataStream& operator<<(QDataStream& out, const SearchResultElement& searchResul
  * @return in the datastream
  */
 QDataStream& operator>>(QDataStream& in, SearchResultElement& searchResultElement) {
-
+    searchResultElement.fromStream(in);
+    return in;
 }
 
 /**
@@ -73,18 +73,9 @@ QDataStream& operator>>(QDataStream& in, SearchResultElement& searchResultElemen
  */
 void SearchResultElement::toStream(QDataStream& in) const {
 
-    //read object from stream
-
-    int score;
-    SearchObject searchObject;
-
-    in >> score;
-    this->setScore(score);
-
-
-    in >> searchObject;
-    this->setSearchObject(searchObject);
-
+    //write object to stream
+    in << mScore
+        << mSearchObject;
 }
 
 /**
@@ -93,9 +84,10 @@ void SearchResultElement::toStream(QDataStream& in) const {
  */
 void SearchResultElement::fromStream(QDataStream& out) {
 
-    //write object to stream
-    out << this->getScore()
-        << this->getSearchObject();
+    //read object from stream
+    out >> mScore;
+    out >> mSearchObject;
+
 
 }
 /**

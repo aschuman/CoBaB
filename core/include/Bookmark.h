@@ -24,7 +24,7 @@ public:
 
     friend QDataStream& operator>>(QDataStream& in, Bookmark& bookmark);
     
-    void toStream(QDataStream& in) override;
+    void toStream(QDataStream& in) const override;
     
     void fromStream(QDataStream& out) override;
 

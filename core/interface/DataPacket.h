@@ -32,6 +32,8 @@ public:
 
     friend QDataStream& operator <<(QDataStream& out, const DataPacket& datapacket);
 
+    friend QDataStream& operator >>(QDataStream& in, DataPacket::Type& e);
+
 protected: 
 
     Type mType;             ///< The type of the datapacket

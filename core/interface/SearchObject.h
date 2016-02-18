@@ -42,6 +42,9 @@ public:
 
     void fromStream(QDataStream& out) override;
 
+    friend QDataStream& operator<<(QDataStream& in, const SearchObject& searchObject);
+
+    friend QDataStream& operator>>(QDataStream& out, SearchObject& searchObject);
 
 private:
 

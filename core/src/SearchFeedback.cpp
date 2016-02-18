@@ -61,7 +61,7 @@ SearchFeedback::Type SearchFeedback::getType() {
  * @return out - the data stream after write
  */
 QDataStream& operator<<(QDataStream& out, const SearchFeedback& feedback) {
-    out << feedback.mType << feedback.mFeedbackList;
+    feedback.toStream(out);
     return out;
 }
 
@@ -72,8 +72,7 @@ QDataStream& operator<<(QDataStream& out, const SearchFeedback& feedback) {
  * @return out - the data stream after read
  */
 QDataStream& operator>>(QDataStream& in, SearchFeedback& feedback) {
-    in >> feedback.mType;
-    in >> feedback.mFeedbackList;
+    feedback.fromStream(in);
     return in;
 }
 
@@ -81,8 +80,9 @@ QDataStream& operator>>(QDataStream& in, SearchFeedback& feedback) {
  * @brief calls the << operator
  * @param in - the data stream
  */
-void SearchFeedback::toStream(QDataStream& in) {
-    in << *this;
+void SearchFeedback::toStream(QDataStream& in) const {
+    DataPacket::toStream(in);
+    in << mType << mFeedbackList;
 }
 
 /**
@@ -90,5 +90,7 @@ void SearchFeedback::toStream(QDataStream& in) {
  * @param out - the data stream
  */
 void SearchFeedback::fromStream(QDataStream& out) {
-    out >> *this;
+    DataPacket::fromStream(out);
+    out >> mType;
+    out >> mFeedbackList;
 }

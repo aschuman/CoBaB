@@ -38,7 +38,7 @@ public:
 
 private:
 
-    QList<QString> mDatasets;      ///< The list of datasets
+    QList<QString> mDatasets;          ///< The list of datasets
 
     SearchObject mSearchObject;        ///< The searchobject
 

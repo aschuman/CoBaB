@@ -18,11 +18,13 @@ public:
 
     Annotation(QString id, QString type);
 
+    Annotation();
+
     QString getId();
     
     Type getType();
 
-    friend QDataStream& operator<<(QDataStream& out, Annotation& annotation);
+    friend QDataStream& operator<<(QDataStream& out, const Annotation& annotation);
 
     friend QDataStream& operator>>(QDataStream& in, Annotation& annotation);
 

@@ -38,7 +38,8 @@ QList<SearchResultElement> SearchResult::sortByScore() {
  * @return out the datastream
  */
 QDataStream& operator<<(QDataStream& out, const SearchResult& searchResult) {
-
+    searchResult.toStream(out);
+    return out;
 
 }
 
@@ -49,7 +50,8 @@ QDataStream& operator<<(QDataStream& out, const SearchResult& searchResult) {
  * @return in the datastream
  */
 QDataStream& operator>>(QDataStream& in, SearchResult& searchResult) {
-
+    searchResult.fromStream(in);
+    return in;
 
 }
 
@@ -58,8 +60,8 @@ QDataStream& operator>>(QDataStream& in, SearchResult& searchResult) {
  * @param in the datastream
  */
 void SearchResult::toStream(QDataStream& in) const  {
-
-    in >> mSearchResultElementList;
+    DataPacket::toStream(in);
+    in << mSearchResultElementList;
 
 }
 
@@ -68,5 +70,6 @@ void SearchResult::toStream(QDataStream& in) const  {
  * @param out the datastream
  */
 void SearchResult::fromStream(QDataStream& out) {
-    out << this->getSearchResultList();
+    DataPacket::fromStream(out);
+    out >> mSearchResultElementList;
 }
