@@ -10,6 +10,10 @@ namespace Ui {
 class LibraryPageWidget;
 }
 
+/**
+ * @brief Displays a library.
+ * @author Vincent Winkler
+ */
 class LibraryPageWidget : public PageWidget
 {
     Q_OBJECT

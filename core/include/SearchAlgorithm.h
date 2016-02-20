@@ -1,28 +1,24 @@
-/**
- * Project \
- */
-
-
 #ifndef _SEARCHALGORITHM_H
 #define _SEARCHALGORITHM_H
 
 #include "Algorithm.h"
 #include "SearchResult.h"
 
+/**
+ * SearchAlgorithm interface
+ * @author Tung
+ */
+
 class SearchAlgorithm: public Algorithm {
 public: 
     
-    QString getDescription();
+    virtual void setName(const QString& name);
     
-    QString getName();
+    virtual bool supportsProgressInfo();
 
-    void setName(QString name);
+    virtual void sendIntermediateResults(SearchResult& searchResult);
     
-    bool supportsProgressInfo();
-
-    void sendIntermediateResults(SearchResult searchResult);
-    
-    void sendProgress(double progress, QString message);
+    virtual void sendProgress(double progress, QString message);
 };
 
 #endif //_SEARCHALGORITHM_H

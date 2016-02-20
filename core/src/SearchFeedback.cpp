@@ -1,57 +1,42 @@
-/**
- * Project \
- */
-
-
 #include "SearchFeedback.h"
-
-/**
- * SearchFeedback implementation
- * @author Tung
- */
 
 /**
  * @brief SearchFeedback::SearchFeedback default constructor
  */
 SearchFeedback::SearchFeedback() {
-
+    mType = "Dual";
 }
 
 /**
  * @brief SearchFeedback::SearchFeedback create new feedback with given type
  * @param type feedback type
  */
-SearchFeedback::SearchFeedback(QString type) {
+SearchFeedback::SearchFeedback(const QString& type) {
     mType = type;
-}
-
-/**
- * @brief SearchFeedback::getFeedbackList get the list of feedbacks
- * @return feedback list
- */
-QList<QPair<SearchObject, int>> SearchFeedback::getFeedbackList() {
-    return mFeedbackList;
 }
 
 /**
  * @brief SearchFeedback::setFeedbackList set the list of feedbaks
  * @param feedbackList new list
  */
-void SearchFeedback::setFeedbackList(QList<QPair<SearchObject, int>> feedbackList) {
+void SearchFeedback::setFeedbackList(const QList<QPair<SearchObject, int>>& feedbackList) {
     mFeedbackList = feedbackList;
+}
+
+/**
+ * @brief SearchFeedback::getFeedbackList get the list of feedbacks
+ * @return feedback list
+ */
+const QList<QPair<SearchObject, int>>& SearchFeedback::getFeedbackList() const {
+    return mFeedbackList;
 }
 
 /**
  * @brief SearchFeedback::getFeedbackType gets type of all feedbacks in this list
  * @return feedback type
  */
-SearchFeedback::Type SearchFeedback::getType() {
-    switch (mTypes.indexOf(mType)) {
-        case 0:
-            return DUAL;
-        default :
-            return EXTENDED;
-    }
+SearchFeedback::Type SearchFeedback::getType() const {
+    return (mType == "Dual") ? DUAL : EXTENDED;
 }
 
 /**
@@ -80,17 +65,16 @@ QDataStream& operator>>(QDataStream& in, SearchFeedback& feedback) {
  * @brief calls the << operator
  * @param in - the data stream
  */
-void SearchFeedback::toStream(QDataStream& in) const {
-    DataPacket::toStream(in);
-    in << mType << mFeedbackList;
+void SearchFeedback::toStream(QDataStream& out) const {
+    DataPacket::toStream(out);
+    out << mType << mFeedbackList;
 }
 
 /**
  * @brief calls the >> operator
  * @param out - the data stream
  */
-void SearchFeedback::fromStream(QDataStream& out) {
-    DataPacket::fromStream(out);
-    out >> mType;
-    out >> mFeedbackList;
+void SearchFeedback::fromStream(QDataStream& in) {
+    DataPacket::fromStream(in);
+    in >> mType >> mFeedbackList;
 }

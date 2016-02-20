@@ -1,0 +1,10 @@
+Dieser Abschnitt beschäftigt sich mit Erweiterungen, die während des Entwurfs und der Implementierung der Erstversion von CoBaB bedacht wurden.
+
+\subsection{PageWidgets}
+Die Benutzeroberfläche von CoBaB ist in sogenannte PageWidgets, von denen zu jeder Zeit genau eines angezeigt wird, zerteilt.
+Daten, auf die von mehreren PageWidgets zugegriffen wird, werden von über einen vom Navigator verwalteten Stack ausgetauscht.
+Dadurch sind die PageWidgets im objektorientierten Sinne voneinander unabhängig, es können also Änderungen an einem PageWidget vorgenommen werden ohne dabei ein anderes zu betreffen.
+Bei Änderungen ist jedoch zu beachten, dass ein aktives PageWidget bestimmte Daten in einer bestimmten Reihenfolge im Stack erwartet.
+Unbedachte Änderungen an den den Operationen, die den Stack betreffen, können die Funktionalität anderer PageWidgets beeinträchtigen.
+
+Ein neues PageWidget muss beim Navigator registriert werden. Um es anzuzeigen, muss es entweder beim Start des Navigators als initiales PageWidget angegeben werden oder es muss beim Navigator eine Transition, die das neue PageWidget als Ziel hat, registriert werden, damit es im Laufe des Programms eingeblendet wird. Auch hier ist zu beachten, dass PageWidgets, die auf das neue PageWidget folgen, den Stack in einem bestimmten Zustand erwarten.

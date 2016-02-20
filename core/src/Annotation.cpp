@@ -1,35 +1,29 @@
-/**
- * Project \
- */
-
-
 #include "Annotation.h"
 
 /**
- * Annotation implementation
- * @author Tung
+ * @brief Annotation::Annotation default constructor
  */
 
+Annotation::Annotation() {
+    mId = "";
+    mType = "Unknown";
+}
 
 /**
  * @brief Annotation::Annotation create new Annotation
  * @param id
  * @param type
  */
-Annotation::Annotation(QString id, QString type) {
+Annotation::Annotation(const QString& id, const QString& type) {
     mId = id;
     mType = type;
-}
-
-Annotation::Annotation() {
-
 }
 
 /**
  * @brief Annotation::getId gets Id
  * @return annotation Id
  */
-QString Annotation::getId() {
+QString Annotation::getId() const {
     return mId;
 }
 
@@ -37,7 +31,7 @@ QString Annotation::getId() {
  * @brief Annotation::getType gets type
  * @return annotation type
  */
-Annotation::Type Annotation::getType() {
+Annotation::Type Annotation::getType() const {
     switch (mTypes.indexOf(mType)) {
         case 0:     return FACE;
         case 1:     return PERSON;
@@ -71,14 +65,14 @@ QDataStream& operator>>(QDataStream& in, Annotation& annotation) {
  * @brief calls the << operator
  * @param in - the data stream
  */
-void Annotation::toStream(QDataStream& in) const {
-    in << mId << mType;
+void Annotation::toStream(QDataStream& out) const {
+    out << mId << mType;
 }
 
 /**
  * @brief calls the >> operator
  * @param out - the data stream
  */
-void Annotation::fromStream(QDataStream& out) {
-    out >> mId >> mType;
+void Annotation::fromStream(QDataStream& in) {
+    in >> mId >> mType;
 }

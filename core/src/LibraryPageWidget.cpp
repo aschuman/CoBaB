@@ -4,6 +4,9 @@
 
 const int LibraryPageWidget::EXIT_NEXT = 0;
 
+/**
+ * @brief Constructs a LibraryPageWidget.
+ */
 LibraryPageWidget::LibraryPageWidget() :
     ui(new Ui::LibraryPageWidget)
 {
@@ -11,6 +14,9 @@ LibraryPageWidget::LibraryPageWidget() :
     ui->mLibraryListView->setModel(&mModel);
 }
 
+/**
+ * @brief Destructs a LibraryPageWidget.
+ */
 LibraryPageWidget::~LibraryPageWidget()
 {
     delete ui;

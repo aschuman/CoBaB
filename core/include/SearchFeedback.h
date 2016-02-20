@@ -1,8 +1,3 @@
-/**
- * Project \
- */
-
-
 #ifndef _SEARCHFEEDBACK_H
 #define _SEARCHFEEDBACK_H
 
@@ -12,6 +7,11 @@
 #include <QDataStream>
 #include <QStringList>
 
+/**
+ * SearchFeedback implementation
+ * @author Tung
+ */
+
 class SearchFeedback: public DataPacket {
 public:
 
@@ -19,26 +19,25 @@ public:
 
     SearchFeedback();
 
-    SearchFeedback(QString type);
-    
-    QList<QPair<SearchObject, int>> getFeedbackList();
+    explicit SearchFeedback(const QString& type);
 
-    void setFeedbackList(QList<QPair<SearchObject, int>> feedbackList);
+    void setFeedbackList(const QList<QPair<SearchObject, int>>& feedbackList);
+
+    const QList<QPair<SearchObject, int>>& getFeedbackList() const;
     
-    Type getType();
+    Type getType() const;
 
     friend QDataStream& operator<<(QDataStream& out, const SearchFeedback& feedback);
     
     friend QDataStream& operator>>(QDataStream& in, SearchFeedback& feedback);
 
-    void toStream(QDataStream& in) const override;
+    void toStream(QDataStream& out) const override;
 
-    void fromStream(QDataStream& out) override;
+    void fromStream(QDataStream& in) override;
 
 private: 
     QList<QPair<SearchObject, int>> mFeedbackList;
     QString mType;      //type
-    QStringList mTypes = QStringList() << "Dual" << "Extended"; //all types
 };
 
 #endif //_SEARCHFEEDBACK_H

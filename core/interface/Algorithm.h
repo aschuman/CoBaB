@@ -1,7 +1,3 @@
-/**
- * Project \
- */
-
 #ifndef _ALGORITHM_H
 #define _ALGORITHM_H
 
@@ -9,18 +5,25 @@
 #include <QList>
 #include <QJsonObject>
 
+/**
+ * Algorithm interface
+ * @author Tung
+ */
+
 class Algorithm {
 public: 
     
-    virtual QList<DataPacket> run();
+    virtual QList<DataPacket*> run();
     
-    void cancel();
+    virtual void cancel();
     
-    bool setInputs(QList<DataPacket> inputDataList);
+    virtual bool setInputs(const QList<DataPacket*>& inputDataList);
     
-    bool setParameters(QJsonObject parameters);
-    
-    QString getId();
+    virtual bool setParameters(const QJsonObject& parameters);
+
+    virtual QString getName() const;
+
+    virtual QString getDescription() const;
 };
 
 #endif //_ALGORITHM_H
