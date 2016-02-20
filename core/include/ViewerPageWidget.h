@@ -13,6 +13,10 @@ namespace Ui {
 class ViewerPageWidget;
 }
 
+/**
+ * @brief The ViewerPageWidget class
+ * @author Anja
+ */
 class ViewerPageWidget : public PageWidget
 {
     Q_OBJECT
@@ -29,7 +33,8 @@ public slots:
     void next();
     void before();
     void clicked(const QModelIndex& index);
-    void nextWidget();
+    void nextWidget(QAction* action);
+    void contextMenu(const QPoint& pos);
 
 private:
     Ui::ViewerPageWidget *ui;

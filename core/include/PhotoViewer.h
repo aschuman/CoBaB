@@ -8,6 +8,10 @@ namespace Ui {
 class PhotoViewer;
 }
 
+/**
+ * @brief The PhotoViewer class
+ * @author Anja
+ */
 class PhotoViewer : public ViewerPageWidget
 {
     Q_OBJECT

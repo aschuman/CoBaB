@@ -1,6 +1,7 @@
 #include "ConfirmationPageWidget.h"
 #include "ui_ConfirmationPageWidget.h"
 #include "DatasetList.h"
+#include "log.h"
 
 ConfirmationPageWidget::ConfirmationPageWidget() :
     ui(new Ui::ConfirmationPageWidget)
@@ -37,9 +38,9 @@ ConfirmationPageWidget::~ConfirmationPageWidget()
 void ConfirmationPageWidget::reset()
 {
     std::shared_ptr<DatasetList> list = nullptr;
-    int indexOfChosenDataset;
+    int indexOfChosenDataset = -1;
     const Dataset* chosenDataset;
-    int indexOfChosenMedium;
+    int indexOfChosenMedium = -1;
     const Medium* chosenMedium;
 
     //read names of datasets
@@ -54,10 +55,14 @@ void ConfirmationPageWidget::reset()
     emit readFromStack(0, varChosenDataset);
     if(varChosenDataset.canConvert<int>()) {
         indexOfChosenDataset = varChosenDataset.value<int>();
-    }
 
-    if((list != nullptr) && (indexOfChosenDataset < list->getDatasetList().size())) {
-        chosenDataset = &(list->getDatasetList().at(indexOfChosenDataset));
+        if((list != nullptr) && (indexOfChosenDataset < list->getDatasetList().size())) {
+            chosenDataset = &(list->getDatasetList().at(indexOfChosenDataset));
+        }
+    } 
+    if(chosenDataset == nullptr) {
+        LOG_ERR("no chosen dataset");
+        return;
     }
 
     //read number of chosen medium
@@ -68,12 +73,15 @@ void ConfirmationPageWidget::reset()
     emit readFromStack(0, varChosenMedium);
     if(varChosenMedium.canConvert<int>()) {
         indexOfChosenMedium = varChosenMedium.value<int>();
-    }
 
-    if(indexOfChosenMedium < chosenDataset->getMediaList().size()) {
-        chosenMedium = chosenDataset->getMediaList().at(indexOfChosenMedium);
+        if(indexOfChosenMedium < chosenDataset->getMediaList().size()) {
+            chosenMedium = chosenDataset->getMediaList().at(indexOfChosenMedium);
+        }
+    }  
+    if(chosenMedium == nullptr) {
+        LOG_ERR("no chosen medium");
+        return;
     }
-
 
     //ToDo display correct search object (annotation/roi/medium)
     QImage chosenImage(chosenMedium->getPath());

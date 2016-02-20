@@ -5,6 +5,7 @@
 #include "LibraryPageWidget.h"
 #include "ViewerPageWidget.h"
 #include "ConfirmationPageWidget.h"
+#include "ParameterPageWidget.h"
 
 #define LOGGING_LEVEL_1
 #include "log.h"
@@ -40,7 +41,13 @@ void MainControl::initNavigation()
     mNavi->registerPage(PageType::LIBRARY, std::make_unique<LibraryPageWidget>());
     mNavi->registerPage(PageType::VIEWER, std::make_unique<ViewerPageWidget>());
     mNavi->registerTransition(PageType::LIBRARY, LibraryPageWidget::EXIT_NEXT, PageType::VIEWER);
+
+    mNavi->registerPage(PageType::PARAMETER, std::make_unique<ParameterPageWidget>());
+    mNavi->registerTransition(PageType::VIEWER, ViewerPageWidget::EXIT_NEXT, PageType::PARAMETER);
+
     mNavi->registerPage(PageType::CONFIRMATION, std::make_unique<ConfirmationPageWidget>());
+    mNavi->registerTransition(PageType::PARAMETER, ParameterPageWidget::EXIT_NEXT, PageType::CONFIRMATION);
+
     mNavi->registerTransition(PageType::CONFIRMATION, ConfirmationPageWidget::EXIT_NEXT, PageType::RESULTS);
 }
 

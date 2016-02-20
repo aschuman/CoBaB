@@ -43,7 +43,8 @@ HEADERS += \
     include/DatasetModel.h \
     include/ConfirmationPageWidget.h \
     include/PhotoViewer.h \
-    include/MediaModel.h
+    include/MediaModel.h \
+    include/ParameterPageWidget.h
 
 SOURCES += \
     src/Medium.cpp \
@@ -75,11 +76,13 @@ SOURCES += \
     src/TestAlgorithm.cpp \
     src/ConfirmationPageWidget.cpp \
     src/PhotoViewer.cpp \
-    src/MediaModel.cpp
+    src/MediaModel.cpp \
+    src/ParameterPageWidget.cpp
 
 FORMS += \
     ui/LibraryPageWidget.ui \
     ui/MainWindow.ui \
     ui/ViewerPageWidget.ui \
     ui/ConfirmationPageWidget.ui \
-    ui/PhotoViewer.ui
+    ui/PhotoViewer.ui \
+    ui/ParameterPageWidget.ui

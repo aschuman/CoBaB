@@ -1,6 +1,7 @@
 #include "include/ViewerPageWidget.h"
 #include "ui_ViewerPageWidget.h"
 #include "SearchQuery.h"
+#include <QMenu>
 
 const int ViewerPageWidget::EXIT_NEXT = 0;
 
@@ -12,11 +13,21 @@ ViewerPageWidget::ViewerPageWidget() :
     ui->mGraphicsView->setScene(&mGraphicsScene);
     ui->mViewerListView->setModel(&mModel);
     connect(ui->mViewerListView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(clicked(const QModelIndex&)));
-    connect(ui->mNextButton, SIGNAL(clicked(bool)), this, SLOT(next()));
-    connect(ui->mBeforeButton, SIGNAL(clicked(bool)), this, SLOT(before()));
+    connect(ui->mNextButton, SIGNAL(clicked()), this, SLOT(next()));
+    connect(ui->mBeforeButton, SIGNAL(clicked()), this, SLOT(before()));
 
-    //just while the graphics view isn't fully implemented
-    connect(ui->nextWidget, SIGNAL(clicked(bool)), this, SLOT(nextWidget()));
+    connect(ui->mGraphicsView, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(contextMenu(const QPoint&)));
+}
+
+void ViewerPageWidget::contextMenu(const QPoint &pos) {
+    Q_UNUSED(pos);
+    QMenu contextMenu(this);
+    QAction action1("algorithm 1", this);
+    contextMenu.addAction(&action1);
+    QAction action2("algorithm 2", this);
+    contextMenu.addAction(&action2);
+    connect(&contextMenu, SIGNAL(triggered(QAction*)), this, SLOT(nextWidget(QAction*)));
+    contextMenu.exec(QCursor::pos());
 }
 
 void ViewerPageWidget::clicked(const QModelIndex& index) {
@@ -68,13 +79,16 @@ void ViewerPageWidget::displayImage() {
     mGraphicsScene.addItem(mGraphicsItem);
 }
 
-void ViewerPageWidget::nextWidget() {
+void ViewerPageWidget::nextWidget(QAction* action) {
     delete mGraphicsItem;
     SearchObject searchObject;
     searchObject.setMedium(mDataset->getMediaList().at(mIndex)->getPath());
     searchObject.setSourceDataset(mDataset->getPath());
+
     SearchQuery searchQuery;
     searchQuery.setSearchObject(searchObject);
+
+    QString algorithm = action->text();
 
     QVariant query;
     query.setValue(std::make_shared<SearchQuery>(searchQuery));
