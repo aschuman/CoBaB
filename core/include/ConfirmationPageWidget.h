@@ -23,7 +23,7 @@ public:
     static const int EXIT_NEXT;
 
 private slots:
-    void on_startSearchButton_clicked();
+    void on_mSearchButton_clicked();
 
 
 private:
