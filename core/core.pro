@@ -44,7 +44,9 @@ HEADERS += \
     include/ConfirmationPageWidget.h \
     include/PhotoViewer.h \
     include/MediaModel.h \
-    include/ParameterPageWidget.h
+    include/ParameterPageWidget.h \
+    QJsonModel.h \
+    QJsonItem.h
 
 SOURCES += \
     src/Medium.cpp \
@@ -77,7 +79,9 @@ SOURCES += \
     src/ConfirmationPageWidget.cpp \
     src/PhotoViewer.cpp \
     src/MediaModel.cpp \
-    src/ParameterPageWidget.cpp
+    src/ParameterPageWidget.cpp \
+    QJsonModel.cpp \
+    QJsonItem.cpp
 
 FORMS += \
     ui/LibraryPageWidget.ui \

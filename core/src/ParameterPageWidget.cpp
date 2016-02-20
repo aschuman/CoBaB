@@ -7,6 +7,9 @@ ParameterPageWidget::ParameterPageWidget() :
     ui(new Ui::ParameterPageWidget)
 {
     ui->setupUi(this);
+    ui->mSearchDatasetListView->setModel(&mModel);
+    ui->mParameterWidget->setModel(&mParameterModel);
+
     connect(ui->mNext, SIGNAL(clicked()), this, SLOT(nextButtonClicked()));
 }
 
@@ -17,8 +20,17 @@ ParameterPageWidget::~ParameterPageWidget()
 
 void ParameterPageWidget::reset() {
 
+    QVariant var;
+    emit readFromStack(0, var);
+    if(var.canConvert<std::shared_ptr<DatasetList>>()){
+        mModel.setDatasetList(var.value<std::shared_ptr<DatasetList>>()->getDatasetList());
+        // save the parameters
+    }
+
 }
 
 void ParameterPageWidget::nextButtonClicked() {
+
+ //   pushToStack();
     exit(EXIT_NEXT);
 }

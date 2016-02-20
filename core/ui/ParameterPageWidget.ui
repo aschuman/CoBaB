@@ -13,19 +13,21 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPushButton" name="mNext">
-   <property name="geometry">
-    <rect>
-     <x>140</x>
-     <y>130</y>
-     <width>93</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>next</string>
-   </property>
-  </widget>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QTreeView" name="mParameterWidget"/>
+   </item>
+   <item>
+    <widget class="QListView" name="mSearchDatasetListView"/>
+   </item>
+   <item>
+    <widget class="QPushButton" name="mNext">
+     <property name="text">
+      <string>next</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>
