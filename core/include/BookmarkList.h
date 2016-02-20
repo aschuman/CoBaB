@@ -1,42 +1,40 @@
-/**
- * Project \
- */
-
-
 #ifndef _BOOKMARKLIST_H
 #define _BOOKMARKLIST_H
 
 #include "Bookmark.h"
 #include "SearchResult.h"
 #include <QFile>
+#include <QFileInfo>
+#include <QFileInfoList>
 #include <QDataStream>
+
+/**
+ * BookmarkList implementation
+ * @author Tung
+ */
 
 class BookmarkList {
 public: 
     
     BookmarkList();
 
-    void load(QString path);
+    void load(const QString path);
 
-    void save(QString path);
+    void save(const QString path) const;
     
-    void addBookmark(Bookmark bookmark);
+    void addBookmark(const Bookmark& bookmark);
     
-    void removeBookmark(const Bookmark* bookmark);
+    bool removeBookmark(const Bookmark& bookmark);
     
-    QList<Bookmark*> sortByName();
+    QList<const Bookmark*> sortByName();
     
-    QList<Bookmark*> sortByDate();
-
-    QList<Bookmark*> getBookmarkPointerList();
+    QList<const Bookmark*> sortByDate();
 
 private: 
 
     QList<Bookmark> mBookmarkList;
 
-    bool validateResult(SearchResult searchResult);
-
-
+    QList<const Bookmark*> getBookmarkList();
 };
 
 #endif //_BOOKMARKLIST_H

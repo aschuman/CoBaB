@@ -1,21 +1,23 @@
-/**
- * Project \
- */
-
-
 #include "Bookmark.h"
-
-/**
- * Bookmark implementation
- * @author Tung
- */
 
 /**
  * @brief Bookmark::Bookmark default constructor
  */
 
 Bookmark::Bookmark() {
+    mName = "new bookmark";
+}
 
+/**
+ * @brief Bookmark::Bookmark load bookmark from a file
+ * @param path absolute file path
+ */
+Bookmark::Bookmark(const QString& path) {
+    mPath = path;
+    QFile file(path);
+    QDataStream in(&file);
+    in >> *this;
+    file.close();
 }
 
 /**
@@ -24,34 +26,35 @@ Bookmark::Bookmark() {
  * @param algorithm used algorithm
  * @param query search query
  */
-Bookmark::Bookmark(SearchResult result, QString algorithm, SearchQuery query) {
+Bookmark::Bookmark(const SearchResult& result, const QString& algorithm, const SearchQuery& query) {
     mSearchResult = result;
     mAlgorithm = algorithm;
     mSearchQuery = query;
 }
 
 /**
+ * @brief Bookmark::setName set bookmark name
+ * @param name new name
+ */
+void Bookmark::setName(const QString& name) {
+    mName = name;
+}
+
+/**
  * @brief Bookmark::setFeedback set new feedback
  * @param feedback new value
  */
-void Bookmark::setFeedback(SearchFeedback feedback) {
+void Bookmark::setFeedback(const SearchFeedback& feedback) {
 	mSearchFeedback = feedback;
 }
 
 /**
- * @brief Bookmark::getFeedback get feedback
- * @return feedback
+ * @brief setParameter set the parameters
+ * @param parameter new parameters
  */
-SearchFeedback Bookmark::getFeedback() {
-    return mSearchFeedback;
-}
 
-/**
- * @brief Bookmark::setName set bookmark name
- * @param name new name
- */
-void Bookmark::setName(QString name) {
-	mName = name;
+void Bookmark::setParameter(const QJsonObject& parameter) {
+    mParameter = parameter;
 }
 
 /**
@@ -74,7 +77,7 @@ QDateTime Bookmark::getDate() const {
  * @brief Bookmark::getAlgorithm get used algorithm
  * @return search algorithm
  */
-QString Bookmark::getAlgorithm() {
+QString Bookmark::getAlgorithm() const {
     return mAlgorithm;
 }
 
@@ -82,24 +85,32 @@ QString Bookmark::getAlgorithm() {
  * @brief Bookmark::getSearchQuery get search query
  * @return search query
  */
-SearchQuery Bookmark::getSearchQuery() {
+const SearchQuery& Bookmark::getSearchQuery() const {
     return mSearchQuery;
-}
-
-/**
- * @brief Bookmark::getSearchResult get search result
- * @return search result
- */
-SearchResult Bookmark::getSearchResult() {
-    return mSearchResult;
 }
 
 /**
  * @brief Bookmark::getParameter get search parameters (QJsonObject)
  * @return parameters
  */
-QJsonObject Bookmark::getParameter() {
+QJsonObject Bookmark::getParameter() const {
     return mParameter;
+}
+
+/**
+ * @brief Bookmark::getSearchResult get search result
+ * @return search result
+ */
+const SearchResult& Bookmark::getSearchResult() const {
+    return mSearchResult;
+}
+
+/**
+ * @brief Bookmark::getFeedback get feedback
+ * @return feedback
+ */
+const SearchFeedback& Bookmark::getFeedback() const {
+    return mSearchFeedback;
 }
 
 /**
@@ -118,7 +129,7 @@ bool operator==(const Bookmark& A, const Bookmark& B) {
  * @return true if first bookmark is lexicographically smaller than b
  */
 
-bool compareByName(Bookmark A, Bookmark B) {
+bool smallerByName(const Bookmark& A, const Bookmark& B) {
     return (A.getName().compare(B.getName()) < 0);
 }
 
@@ -128,8 +139,46 @@ bool compareByName(Bookmark A, Bookmark B) {
  * @param B second bookmark
  * @return true if A is created before B
  */
-bool compareByDate(Bookmark A, Bookmark B) {
+bool smallerByDate(const Bookmark& A, const Bookmark& B) {
     return (A.getDate() < B.getDate());
+}
+
+/**
+ * @brief Bookmark::validate check if a bookmark is valid, i.e all the datasets are available
+ * @param bookmark to be checked
+ * @return {@code true} if bookmark is valid, {@code false} otherwise
+ */
+bool Bookmark::validate(const Bookmark& bookmark) {
+    QList<QString> datasetPaths = bookmark.getSearchQuery().getDatasets();
+    QDir dir;
+    for (QString& path : datasetPaths) {
+        dir.setPath(path);
+        if (!dir.exists()) {    //dataset not exist
+            return false;
+        }
+    }
+    return true;
+}
+
+/**
+ * @brief save save bookmark to file
+ * @param path absolute file path
+ */
+void Bookmark::save(const QString path) {
+    QFile file(path);
+    QDataStream out(&file);
+    out << *this;
+    file.close();
+
+    mPath = path;
+}
+
+/**
+ * @brief Bookmark::deleteFile
+ */
+void Bookmark::deleteFile() const {
+    QFile file(mPath);
+    file.remove();
 }
 
 /**
@@ -158,13 +207,13 @@ QDataStream& operator>>(QDataStream& in, Bookmark& bookmark) {
  * @brief calls the << operator
  * @param in - the data stream
  */
-void Bookmark::toStream(QDataStream& in) const {
+void Bookmark::toStream(QDataStream& out) const {
     //convert mParameter to QString
     QJsonDocument doc(mParameter);
     QString parameters(doc.toJson(QJsonDocument::Compact));
 
     //write to stream
-    in << mName << mDate << mAlgorithm
+    out << mName << mDate << mAlgorithm
         << mSearchQuery << parameters
         << mSearchResult << mSearchFeedback;
 
@@ -174,9 +223,9 @@ void Bookmark::toStream(QDataStream& in) const {
  * @brief calls the >> operator
  * @param out - the data stream
  */
-void Bookmark::fromStream(QDataStream& out) {
+void Bookmark::fromStream(QDataStream& in) {
     QString parameters;
-    out >> mName >> mDate >> mAlgorithm
+    in >> mName >> mDate >> mAlgorithm
        >> mSearchQuery >> parameters
        >> mSearchResult >> mSearchFeedback;
 

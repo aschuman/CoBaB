@@ -1,23 +1,12 @@
-/**
- * Project \
- */
-
-
 #include "RectangleAnnotation.h"
-
-/**
- * RectangleAnnotation implementation
- */
-
 
 /**
  * @brief RectangleAnnotation::RectangleAnnotation creates a new RectangleAnnotation with ID and type
  * @param id annotation ID
  * @param type annotation type
  */
-RectangleAnnotation::RectangleAnnotation(QString id, QString type) : Annotation(id, type) {
-    mId = id;
-    mType = type;
+RectangleAnnotation::RectangleAnnotation(const QString& id, const QString& type) : Annotation(id, type) {
+
 }
 
 /**
@@ -26,7 +15,7 @@ RectangleAnnotation::RectangleAnnotation(QString id, QString type) : Annotation(
  * @param annotation data to write
  * @return out - the data stream after write
  */
-QDataStream& operator<<(QDataStream& out, RectangleAnnotation& annotation){
+QDataStream& operator<<(QDataStream& out, const RectangleAnnotation& annotation){
     annotation.toStream(out);
     return out;
 }
@@ -46,22 +35,16 @@ QDataStream& operator>>(QDataStream& in, RectangleAnnotation& annotation) {
  * @brief calls the << operator
  * @param in - the data stream
  */
-void RectangleAnnotation::toStream(QDataStream& in) const {
-    in << this->mId << this->x() << this->y() << this->width()
-        << this->height() << this->mType;
+void RectangleAnnotation::toStream(QDataStream& out) const {
+    out << *(Annotation*)this;      //write ID + type
+    out << *(QRect*)this;           //write coordinates
 }
 
 /**
  * @brief calls the >> operator
  * @param out - the data stream
  */
-void RectangleAnnotation::fromStream(QDataStream& out) {
-    double x, y, width, height;
-    out >> this->mId >> x >> y >> width >> height >> this->mType;
-
-    //set coordinates and size
-    this->setX((int)ceil(x));
-    this->setY((int)ceil(y));
-    this->setWidth((int)floor(width));
-    this->setHeight((int)floor(height));
+void RectangleAnnotation::fromStream(QDataStream& in) {
+    in >> *(Annotation*)this;   //read ID + type
+    in >> *(QRect*)this;        //read coordinates
 }

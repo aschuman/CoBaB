@@ -1,7 +1,5 @@
 #include "ConfigDataTester.h"
 #include <QTest>
-#include <QTextStream>
-
 
 void ConfigDataTester::initTestCase() {
     ConfigData* first = ConfigData::getInstance();
@@ -34,7 +32,7 @@ void ConfigDataTester::testLanguage() {
 
     ConfigData* data = ConfigData::getInstance();
     data->setLanguage(setLanguage);
-    QCOMPARE(setLanguage, resultLanguage);
+    QCOMPARE(data->getLanguage(), resultLanguage);
 
 }
 

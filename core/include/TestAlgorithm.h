@@ -1,40 +1,39 @@
-/**
- * Project \
- */
-
-
 #ifndef _TESTALGORITHM_H
 #define _TESTALGORITHM_H
 
 #include <memory>
 #include "SearchAlgorithm.h"
 
+/**
+ * The TestAlgorithm implementation
+ * @author Tung
+ */
+
 class TestAlgorithm: public SearchAlgorithm {
 public: 
+    TestAlgorithm(const QString& id);
     
-    TestAlgorithm(QString id);
+    QList<DataPacket*> run() override;
     
-    QList<DataPacket> run() override;
-    
-    void cancel();
+    void cancel() override;
 
-    bool setInputs(QList<DataPacket> inputDataList);
+    bool setInputs(const QList<DataPacket*>& inputDataList);
      
-    bool setParameters(QJsonObject parameters);
-    
-    QString getDescription();
+    bool setParameters(const QJsonObject& parameters) override;
 
-    void setDescription(QString description);
-    
-    QString getName();
+    void setName(const QString& name) override;
 
-    void setName(QString name);
-    
-    bool supportsProgressInfo();
-    
-    void sendIntermediateResults(SearchResult searchResult);
+    void setDescription(const QString& description);
 
-    void sendProgress(double progress, QString message);
+    QString getName() const override;
+
+    QString getDescription() const override;
+    
+    bool supportsProgressInfo() override;
+    
+    void sendIntermediateResults(SearchResult& searchResult) override;
+
+    void sendProgress(double progress, QString message) override;
 
 private: 
     std::unique_ptr<DataPacket> mInputData;

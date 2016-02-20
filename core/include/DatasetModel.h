@@ -5,6 +5,10 @@
 #include <QAbstractListModel>
 #include "Dataset.h"
 
+/**
+ * @brief DatasetModel is a QAbstractListModel that can expose a list of Datasets to a ListView.
+ * @author Vincent Winkler
+ */
 class DatasetModel : public QAbstractListModel
 {
     Q_OBJECT

@@ -1,11 +1,12 @@
 #include "ConfigData.h"
 #include <QTranslator>
-#include <QApplication>
+
 
 /**
  * @brief ConfigData::ConfigData Creates the ConfigData object.
  */
 ConfigData::ConfigData() : QSettings("IOSB", "CoBaB"){
+    Q_INIT_RESOURCE(application);
     languages.insert("German", QLocale(QLocale::German));
     languages.insert("English", QLocale(QLocale::English));
 }
@@ -40,12 +41,8 @@ QString ConfigData::getLanguage() {
  */
 void ConfigData::setLanguage(QString language) {
     QSettings::setValue("language", language);
-
-    QTranslator translator;
     if(languages.contains(language)) {
-        if(translator.load(languages.value(language), QLatin1String("CoBaB"), QLatin1String("_"), QLatin1String(":/resources/translations"))) {
-            QApplication::installTranslator(&translator);
-        }
+        mTranslator.load(languages.value(language), QLatin1String("CoBaB"), QLatin1String("_"), QLatin1String(":/resources/translations"));
     }
 }
 
@@ -70,8 +67,7 @@ void ConfigData::setSoundOn(bool soundOn) {
  * @return The help string.
  */
 QString ConfigData::getHelp() {
-    QString help = tr("Help");
-    return help;
+    return mTranslator.translate("ConfigData", "Help");
 }
 
 /**
@@ -79,7 +75,9 @@ QString ConfigData::getHelp() {
  * @return The about string.
  */
 QString ConfigData::getAbout() {
-    QString about = tr("About CoBaB");
-    return about;
+    return mTranslator.translate("ConfigData", "About CoBaB");
 }
 
+QString ConfigData::translate(const char* className, const char* text) {
+    return mTranslator.translate(className, text);
+}

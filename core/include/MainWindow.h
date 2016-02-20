@@ -9,6 +9,7 @@ class MainWindow;
 
 /**
  * @brief The main window of this application.
+ * @author Vincent Winkler
  *
  * MainWindow provides space for a page (a QWidget), a menu and buttons to return to a previous page and the home page.
  */

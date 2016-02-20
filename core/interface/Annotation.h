@@ -1,8 +1,3 @@
-/**
- * Project \
- */
-
-
 #ifndef _ANNOTATION_H
 #define _ANNOTATION_H
 
@@ -10,34 +5,38 @@
 #include "Annotation.h"
 #include <QDataStream>
 
+/**
+ * Annotation implementation
+ * @author Tung
+ */
 
 class Annotation: public Serializable {
 public: 
 
     enum Type { FACE, PERSON, UNKNOWN };
 
-    Annotation(QString id, QString type);
-
     Annotation();
 
-    QString getId();
+    Annotation(const QString& id, const QString& type);
+
+    QString getId() const;
     
-    Type getType();
+    Type getType() const;
 
     friend QDataStream& operator<<(QDataStream& out, const Annotation& annotation);
 
     friend QDataStream& operator>>(QDataStream& in, Annotation& annotation);
 
-    virtual void toStream(QDataStream& in) const override;
+    virtual void toStream(QDataStream& out) const override;
     
-    virtual void fromStream(QDataStream& out) override;
+    virtual void fromStream(QDataStream& in) override;
 
 protected: 
     QString mId;    //Id
     QString mType;  //Type
 
 private:
-    QStringList mTypes = (QStringList() << "Face" << "Person");
+    QStringList mTypes = (QStringList() << "Face" << "Person" << "Unknown");
 };
 
 #endif //_ANNOTATION_H
