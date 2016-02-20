@@ -16,7 +16,7 @@ Annotation, RectangleAnnotation, BookmarkList, Bookmark, SearchFeedback
 
 
 Klassen, an denen gearbeitet wird:
-ViewerPageWidget -> Anja
+ViewerPageWidget, PhotoViewer, SingleFrameVideoViewer -> Anja
 MainControl, MainWindow, DatasetModel, LibraryPageWidget -> Vincent
 Testalgorithmus -> Tung
 ParameterPageWidget, ParameterModel -> Violina, Georgi
@@ -26,7 +26,6 @@ ConfirmationPageWidget -> Marie
 noch ausstehende Klassen:
 ResultsPageWidget -> Tung
 ResultsPageWidget -> Vincent
-ListView -> Anja, Marie
 Models/Delegates
-VideoViewer, PhotoViewer, SingleFrameVideoViewer
+VideoViewer
 SearchManager, BookmarkManager, SearchResultManager, MainWindowManager

@@ -45,4 +45,7 @@ private:
 
 };
 
+#include <memory>
+Q_DECLARE_METATYPE(std::shared_ptr<SearchQuery>)
+
 #endif //_SEARCHQUERY_H

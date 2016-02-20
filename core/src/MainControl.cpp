@@ -45,10 +45,11 @@ DatasetList MainControl::findDatasets() const
 {
     DatasetList list;
     QDir dir("../test/testdata");
-    for(const QFileInfo& file : dir.entryList(QDir::Filter::Dirs)){
-        list.addDataset(Dataset("../test/testdata/SingleFrameVideo"));
-        list.addDataset(Dataset("../test/testdata/Video"));
-        list.addDataset(Dataset("../test/testdata/Fotos"));
+    for(const QFileInfo& file : dir.entryInfoList(QDir::Filter::Dirs|QDir::Filter::NoDotAndDotDot)){
+        list.addDataset(Dataset(file.absoluteFilePath()));
+        //list.addDataset(Dataset("../test/testdata/SingleFrameVideo"));
+        //list.addDataset(Dataset("../test/testdata/Video"));
+        //list.addDataset(Dataset("../test/testdata/Fotos"));
     }
     return list;
 }
