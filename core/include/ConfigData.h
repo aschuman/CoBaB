@@ -14,7 +14,7 @@
 class ConfigData : public QSettings{
     Q_OBJECT
 
-public: 
+public:
     static ConfigData* getInstance();
     QString getLanguage();
     void setLanguage(QString language);
