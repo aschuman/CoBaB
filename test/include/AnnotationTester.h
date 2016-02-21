@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QTest>
+#include <QtTest/QtTest>
 #include "Annotation.h"
 
 class AnnotationTester : public QObject
