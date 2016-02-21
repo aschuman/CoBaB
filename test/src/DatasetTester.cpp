@@ -174,10 +174,13 @@ void DatasetTester::testAnnotationsPhoto()
         QFAIL("Media list is empty.");
     }
     QList<QPair<int, Annotation*>> list = dataset.getMediaList().at(0)->getAnnotationList();
-    QCOMPARE(list.size(), 1);
+    QCOMPARE(list.size(), 2);
     QCOMPARE(list.at(0).first, 0);
     QRect rect(0, 0, 48, 128);
     QCOMPARE((static_cast<RectangleAnnotation*>(list.at(0).second))->normalized(), rect);
+    QCOMPARE(list.at(1).first, 0);
+    rect.setRect(17, 0, 16, 17);
+    QCOMPARE((static_cast<RectangleAnnotation*>(list.at(1).second))->normalized(), rect);
 
     list = dataset.getMediaList().at(1)->getAnnotationList();
     QCOMPARE(list.size(), 1);
