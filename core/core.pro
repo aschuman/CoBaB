@@ -47,7 +47,10 @@ HEADERS += \
     include/ParameterPageWidget.h \
     include/AnnotationDrawer.h \
     include/AnnotationGraphicsItemFactory.h \
-    include/ClickableGraphicsRectItem.h
+    include/ClickableGraphicsRectItem.h \
+    QJsonModel.h \
+    QJsonItem.h
+
 
 SOURCES += \
     src/Medium.cpp \
@@ -83,7 +86,10 @@ SOURCES += \
     src/ParameterPageWidget.cpp \
     src/AnnotationDrawer.cpp \
     src/AnnotationGraphicsItemFactory.cpp \
-    src/ClickableGraphicsRectItem.cpp
+    src/ClickableGraphicsRectItem.cpp \
+    QJsonModel.cpp \
+    QJsonItem.cpp
+
 
 FORMS += \
     ui/LibraryPageWidget.ui \
