@@ -3,8 +3,13 @@
 
 #include <QWidget>
 #include "PageWidget.h"
+#include "DatasetList.h"
+#include "DatasetModel.h"
+#include "QJsonModel.h"
 
 namespace Ui {
+
+
 class ParameterPageWidget;
 }
 
@@ -25,6 +30,9 @@ public slots:
 
 private:
     Ui::ParameterPageWidget *ui;
+    DatasetList* mSearchDatasetList;
+    DatasetModel mModel;
+    QJsonModel mParameterModel;
 };
 
 #endif // PARAMETERPAGEWIDGET_H
