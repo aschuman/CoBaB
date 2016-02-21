@@ -1,7 +1,12 @@
 #include "ConfirmationPageWidget.h"
 #include "ui_ConfirmationPageWidget.h"
 #include "DatasetList.h"
+#include "SearchQuery.h"
+#include "Algorithm.h"
 #include "log.h"
+
+#include <memory>
+Q_DECLARE_METATYPE(std::shared_ptr<Algorithm>)
 
 ConfirmationPageWidget::ConfirmationPageWidget() :
     ui(new Ui::ConfirmationPageWidget)
@@ -10,23 +15,23 @@ ConfirmationPageWidget::ConfirmationPageWidget() :
     ui->mSearchButton->setText(tr("start search"));
 
 
-    ui->mParameters->setRowCount(2);
+    ui->mParameters->setRowCount(1);
     ui->mParameters->setColumnCount(3);
-    QTableWidgetItem* datasets = new QTableWidgetItem(tr("datasets"));
-    datasets->setFlags(datasets->flags() ^ Qt::ItemIsEditable);
+
+    ui->mParameters->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("datasets")));
+    ui->mParameters->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("algorithm")));
+    ui->mParameters->setHorizontalHeaderItem(2, new QTableWidgetItem(tr("parameters")));
+
     QTableWidgetItem* datasetNames = new QTableWidgetItem("no dataset chosen");
     datasetNames->setFlags(datasetNames->flags() ^ Qt::ItemIsEditable);
-    QTableWidgetItem* algorithm = new QTableWidgetItem(tr("algorithm"));
-    algorithm->setFlags(algorithm->flags() ^ Qt::ItemIsEditable);
     QTableWidgetItem* algorithmName = new QTableWidgetItem("no algo chosen");
     algorithmName->setFlags(algorithmName->flags() ^ Qt::ItemIsEditable);
-    QTableWidgetItem* parameters = new QTableWidgetItem(tr("parameters"));
+    QTableWidgetItem* parameters = new QTableWidgetItem("no parameters set");
     parameters->setFlags(parameters->flags() ^ Qt::ItemIsEditable);
-    ui->mParameters->setItem(0, 0, datasets);
-    ui->mParameters->setItem(0, 1, algorithm);
+
+    ui->mParameters->setItem(0, 0, datasetNames);
+    ui->mParameters->setItem(0, 1, algorithmName);
     ui->mParameters->setItem(0, 2, parameters);
-    ui->mParameters->setItem(1, 0, datasetNames);
-    ui->mParameters->setItem(1, 1, algorithmName);
 
 }
 
@@ -39,25 +44,26 @@ void ConfirmationPageWidget::reset()
 {
     std::shared_ptr<DatasetList> list = nullptr;
     int indexOfChosenDataset = -1;
-    const Dataset* chosenDataset;
-    int indexOfChosenMedium = -1;
-    const Medium* chosenMedium;
+    const Dataset* chosenDataset = nullptr;
 
-    //read names of datasets
+    //read datasets
     QVariant varDatasets;
-    emit readFromStack(1, varDatasets);
+    emit readFromStack(2, varDatasets);
     if(varDatasets.canConvert<std::shared_ptr<DatasetList>>()){
         list = varDatasets.value<std::shared_ptr<DatasetList>>();
+    } else {
+        LOG_ERR("no datasets");
     }
 
     //read number of chosen dataset
     QVariant varChosenDataset;
-    emit readFromStack(0, varChosenDataset);
+    emit readFromStack(1, varChosenDataset);
     if(varChosenDataset.canConvert<int>()) {
         indexOfChosenDataset = varChosenDataset.value<int>();
 
         if((list != nullptr) && (indexOfChosenDataset < list->getDatasetList().size())) {
             chosenDataset = &(list->getDatasetList().at(indexOfChosenDataset));
+            ui->mParameters->item(0, 0)->setText(chosenDataset->getName());
         }
     } 
     if(chosenDataset == nullptr) {
@@ -65,42 +71,42 @@ void ConfirmationPageWidget::reset()
         return;
     }
 
-    //read number of chosen medium
+    //read searchobject
+    QVariant varSearchQuery;
+    emit readFromStack(0, varSearchQuery);
+    if(varSearchQuery.canConvert<std::shared_ptr<SearchQuery>>()) {
+        std::shared_ptr<SearchQuery> searchQuery = varSearchQuery.value<std::shared_ptr<SearchQuery>>();
+        QImage chosenImage(searchQuery->getSearchObject().getMedium());
+        QPixmap pixmap;
+        pixmap.convertFromImage(chosenImage);
+        ui->mImageToSearchLabel->setPixmap(pixmap);
 
-    pushToStack(0);
-
-    QVariant varChosenMedium;
-    emit readFromStack(0, varChosenMedium);
-    if(varChosenMedium.canConvert<int>()) {
-        indexOfChosenMedium = varChosenMedium.value<int>();
-
-        if(indexOfChosenMedium < chosenDataset->getMediaList().size()) {
-            chosenMedium = chosenDataset->getMediaList().at(indexOfChosenMedium);
-        }
-    }  
-    if(chosenMedium == nullptr) {
-        LOG_ERR("no chosen medium");
-        return;
+    } else {
+        LOG_ERR("no searchQuery");
     }
 
-    //ToDo display correct search object (annotation/roi/medium)
-    QImage chosenImage(chosenMedium->getPath());
-    QPixmap pixmap;
-    pixmap.convertFromImage(chosenImage);
-    ui->mImageToSearchLabel->setPixmap(pixmap);
-
-
-    //ToDo add names of other chosen datasets
-    ui->mParameters->item(1, 0)->setText(chosenDataset->getName());
+    // add names of chosen datasets
+    QVariant varDatasetIndices;
+    emit readFromStack(0, varDatasetIndices);
+    if(varDatasetIndices.canConvert<QList<int>>()) {
+        QList<int> indices = varDatasetIndices.value<QList<int>>();
+        for(int i = 0; i < indices.size(); i++) {
+            QString name = list->getDatasetList().at(i).getName();
+            if(name != chosenDataset->getName()) {
+                ui->mParameters->insertRow(i);
+                ui->mParameters->setItem(i, 0, new QTableWidgetItem(name));
+            }
+        }
+    }
 
     //read name of algorithm
-    pushToStack("Testalgorithm");
-
     QVariant chosenAlgorithm;
     emit readFromStack(0, chosenAlgorithm);
-    if(chosenAlgorithm.canConvert<QString>()){
-        QString algo = chosenAlgorithm.value<QString>();
-        ui->mParameters->item(1, 1)->setText(algo);
+    if(chosenAlgorithm.canConvert<std::shared_ptr<Algorithm>>()){
+        std::shared_ptr<Algorithm> algo = chosenAlgorithm.value<std::shared_ptr<Algorithm>>();
+        ui->mParameters->item(0, 1)->setText(algo->getName());
+    } else {
+        LOG_ERR("no algorithm");
     }
 
     //ToDo read parameters and their values
