@@ -58,15 +58,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="mFullscreenButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
+        <widget class="QPushButton" name="mROIButton">
          <property name="text">
-          <string>fullscreen</string>
+          <string>select ROI</string>
          </property>
         </widget>
        </item>
@@ -106,13 +100,16 @@
           <enum>Qt::CustomContextMenu</enum>
          </property>
          <property name="verticalScrollBarPolicy">
-          <enum>Qt::ScrollBarAlwaysOff</enum>
+          <enum>Qt::ScrollBarAsNeeded</enum>
          </property>
          <property name="horizontalScrollBarPolicy">
-          <enum>Qt::ScrollBarAlwaysOff</enum>
+          <enum>Qt::ScrollBarAsNeeded</enum>
          </property>
          <property name="sizeAdjustPolicy">
           <enum>QAbstractScrollArea::AdjustToContents</enum>
+         </property>
+         <property name="dragMode">
+          <enum>QGraphicsView::NoDrag</enum>
          </property>
         </widget>
        </item>

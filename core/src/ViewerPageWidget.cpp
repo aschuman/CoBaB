@@ -6,30 +6,38 @@
 const int ViewerPageWidget::EXIT_NEXT = 0;
 
 ViewerPageWidget::ViewerPageWidget() :
-    ui(new Ui::ViewerPageWidget), mIndex(0), mGraphicsItem(nullptr)
+    ui(new Ui::ViewerPageWidget), mIndex(0), mImage(nullptr), mSelectionPen(QColor(0,255,230)),
+    mCurrentSelection(nullptr), mAnnotationDrawer(&mGraphicsScene)
 {
     ui->setupUi(this);
     ui->mViewerListView->setResizeMode(QListView::Adjust);
     ui->mGraphicsView->setScene(&mGraphicsScene);
     ui->mViewerListView->setModel(&mModel);
+
     connect(ui->mViewerListView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(clicked(const QModelIndex&)));
     connect(ui->mNextButton, SIGNAL(clicked()), this, SLOT(next()));
     connect(ui->mBeforeButton, SIGNAL(clicked()), this, SLOT(before()));
-
+    connect(ui->mROIButton, SIGNAL(clicked()), this, SLOT(roiClicked()));
     connect(ui->mGraphicsView, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(contextMenu(const QPoint&)));
+}
+
+ViewerPageWidget::~ViewerPageWidget()
+{
+    delete ui;
 }
 
 void ViewerPageWidget::contextMenu(const QPoint &pos) {
     Q_UNUSED(pos);
     QMenu contextMenu(this);
     QAction action1("algorithm 1", this);
+    action1.setToolTip("description 1");
     contextMenu.addAction(&action1);
     QAction action2("algorithm 2", this);
+    action2.setToolTip("description 2");
     contextMenu.addAction(&action2);
     connect(&contextMenu, SIGNAL(triggered(QAction*)), this, SLOT(nextWidget(QAction*)));
     contextMenu.exec(QCursor::pos());
 }
-
 void ViewerPageWidget::clicked(const QModelIndex& index) {
     mIndex = index.row();
     displayImage();
@@ -49,11 +57,6 @@ void ViewerPageWidget::before() {
     displayImage();
 }
 
-ViewerPageWidget::~ViewerPageWidget()
-{
-    delete ui;
-}
-
 void ViewerPageWidget::reset()
 {
     QVariant var;
@@ -71,16 +74,26 @@ void ViewerPageWidget::reset()
 }
 
 void ViewerPageWidget::displayImage() {
-    if(mGraphicsItem != nullptr) {
-        mGraphicsScene.removeItem(mGraphicsItem);
-        delete mGraphicsItem;
+    if(mImage != nullptr) {
+        mGraphicsScene.removeItem(mImage);
+        delete mImage;
+        mImage = nullptr;
+        mAnnotationDrawer.removeAnnotations();
+
     }
-    mGraphicsItem = new QGraphicsPixmapItem(QPixmap::fromImage(QImage(mDataset->getMediaList().at(mIndex)->getPath())));
-    mGraphicsScene.addItem(mGraphicsItem);
+    if(mCurrentSelection != nullptr){
+        mGraphicsScene.removeItem(mCurrentSelection);
+        delete mCurrentSelection;
+        mCurrentSelection = nullptr;
+    }
+    Medium* medium = mDataset->getMediaList().at(mIndex);
+    mImage = mGraphicsScene.addPixmap(QPixmap::fromImage(QImage(medium->getPath())));
+    mGraphicsScene.setSceneRect(0,0, mImage->boundingRect().width(), mImage->boundingRect().height());
+    mAnnotationDrawer.setAnnotations(medium->getAnnotationList());
 }
 
 void ViewerPageWidget::nextWidget(QAction* action) {
-    delete mGraphicsItem;
+    delete mImage;
     SearchObject searchObject;
     searchObject.setMedium(mDataset->getMediaList().at(mIndex)->getPath());
     searchObject.setSourceDataset(mDataset->getPath());
@@ -96,4 +109,44 @@ void ViewerPageWidget::nextWidget(QAction* action) {
     exit(EXIT_NEXT);
 }
 
+void ViewerPageWidget::on_mGraphicsView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint,
+                                                          const QPointF &toScenePoint)
+{
+    Q_UNUSED(viewportRect);
+    if(fromScenePoint.x() == 0 && fromScenePoint.y() == 0){
+        if(mCurrentSelection != nullptr){
+            mGraphicsScene.removeItem(mCurrentSelection);
+            delete mCurrentSelection;
+        }
+        mCurrentSelection = mGraphicsScene.addRect(mCurrentRubberBand, mSelectionPen);
+    } else {
+        int width = mImage->boundingRect().width();
+        int height = mImage->boundingRect().height();
 
+        if(fromScenePoint.x() >= 0 && fromScenePoint.x() < width
+                && toScenePoint.x() >= 0 && toScenePoint.x() < width
+                && fromScenePoint.y() >= 0 && fromScenePoint.y() < height
+                && toScenePoint.y() >= 0 && toScenePoint.y() < height) {
+            mCurrentRubberBand.setLeft(fromScenePoint.x());
+            mCurrentRubberBand.setTop(fromScenePoint.y());
+            mCurrentRubberBand.setRight(toScenePoint.x());
+            mCurrentRubberBand.setBottom(toScenePoint.y());
+            mCurrentRubberBand = mCurrentRubberBand.normalized();
+        }
+    }
+}
+
+void ViewerPageWidget::roiClicked() {
+    if(ui->mROIButton->text() == "select ROI") {
+        ui->mGraphicsView->setDragMode(QGraphicsView::DragMode::RubberBandDrag);
+        ui->mROIButton->setText("remove ROI");
+    } else {
+        ui->mGraphicsView->setDragMode(QGraphicsView::DragMode::NoDrag);
+        ui->mROIButton->setText("select ROI");
+        if(mCurrentSelection != nullptr) {
+            mGraphicsScene.removeItem(mCurrentSelection);
+            mCurrentSelection = nullptr;
+            mCurrentRubberBand.setRect(0,0,0,0);
+        }
+    }
+}

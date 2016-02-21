@@ -44,7 +44,10 @@ HEADERS += \
     include/ConfirmationPageWidget.h \
     include/PhotoViewer.h \
     include/MediaModel.h \
-    include/ParameterPageWidget.h
+    include/ParameterPageWidget.h \
+    include/AnnotationDrawer.h \
+    include/AnnotationGraphicsItemFactory.h \
+    include/ClickableGraphicsRectItem.h
 
 SOURCES += \
     src/Medium.cpp \
@@ -77,7 +80,10 @@ SOURCES += \
     src/ConfirmationPageWidget.cpp \
     src/PhotoViewer.cpp \
     src/MediaModel.cpp \
-    src/ParameterPageWidget.cpp
+    src/ParameterPageWidget.cpp \
+    src/AnnotationDrawer.cpp \
+    src/AnnotationGraphicsItemFactory.cpp \
+    src/ClickableGraphicsRectItem.cpp
 
 FORMS += \
     ui/LibraryPageWidget.ui \

@@ -16,21 +16,21 @@ void MediaModel::setDataset(const Dataset& dataset)
 int MediaModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return mDataset ? mDataset->getMediaList().size() : 0;
+    return mDataset ? mDataset->getNumberOfMedia() : 0;
 }
 
 QVariant MediaModel::data(const QModelIndex &index, int role) const
-{
+{  
     QVariant result;
     switch (role) {
     case Qt::DisplayRole:
-        if(mDataset && index.row() < mDataset->getMediaList().size()) {
+        if(mDataset && index.row() < mDataset->getNumberOfMedia()) {
             QFileInfo file(mDataset->getMediaList().at(index.row())->getPath());
             result = file.baseName();
         }
         break;
     case Qt::DecorationRole:
-        if(mDataset && index.row() < mDataset->getMediaList().size()) {
+        if(mDataset && index.row() < mDataset->getNumberOfMedia()) {
             Medium* medium = mDataset->getMediaList().at(index.row());
             switch(mDataset->getType()) {
                 case Dataset::Type::PHOTO:

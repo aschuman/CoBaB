@@ -7,6 +7,9 @@
 #include "MediaModel.h"
 #include <QGraphicsView>
 #include <QGraphicsPixmapItem>
+#include <QGraphicsRectItem>
+#include <QPen>
+#include "AnnotationDrawer.h"
 
 
 namespace Ui {
@@ -35,6 +38,8 @@ public slots:
     void clicked(const QModelIndex& index);
     void nextWidget(QAction* action);
     void contextMenu(const QPoint& pos);
+    void on_mGraphicsView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint);
+    void roiClicked();
 
 private:
     Ui::ViewerPageWidget *ui;
@@ -42,8 +47,15 @@ private:
     MediaModel mModel;
     QGraphicsView mGraphicsView;
     QGraphicsScene mGraphicsScene;
-    QGraphicsPixmapItem* mGraphicsItem;
+    QGraphicsPixmapItem* mImage;
     int mIndex;
+
+    QPen mSelectionPen;
+    QGraphicsRectItem* mCurrentSelection;
+    QRect mCurrentRubberBand;
+
+    AnnotationDrawer mAnnotationDrawer;
+
     void displayImage();
 
 };
