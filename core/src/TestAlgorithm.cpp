@@ -7,7 +7,7 @@
 TestAlgorithm::TestAlgorithm(const QString& id) {
 	mId = id;
     mName = "Test algorithm";
-    mDescription = "an dummy algorithm that returns all search objects in the correct input order";
+    mDescription = "an dummy algorithm that scores randomly";
 }
 
 /**
@@ -15,8 +15,9 @@ TestAlgorithm::TestAlgorithm(const QString& id) {
  * @return a list of data packets containing results
  */
 QList<DataPacket*> TestAlgorithm::run() {
-
     QList<DataPacket*> list;
+
+
     return list;
 }
 

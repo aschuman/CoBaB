@@ -12,10 +12,6 @@ BookmarkList::BookmarkList() {
  * @param path absolute file path
  */
 void BookmarkList::load(const QString path) {
-    /*QFile file(path);
-    QDataStream in(&file);
-    in >> mBookmarkList;
-    file.close();*/
 
     QDir dir(path);
     QFileInfoList filesList = dir.entryInfoList();
@@ -30,19 +26,12 @@ void BookmarkList::load(const QString path) {
 }
 
 /**
- * @brief BookmarkList::save save bookmark list to binary file
- * @param path file path
- */
-void BookmarkList::save(const QString path) const {
-    Q_UNUSED(path);
-}
-
-/**
  * @brief BookmarkList::addBookmark add a new bookmark to end of list
  * @param bookmark new bookmark
  */
 void BookmarkList::addBookmark(const Bookmark& bookmark) {
     mBookmarkList.append(bookmark);
+    bookmark.saveFile();
 }
 
 /**
