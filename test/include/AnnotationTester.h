@@ -2,6 +2,7 @@
 #define ANNOTATIONTESTER_H
 
 #include <QObject>
+#include <QTest>
 #include "Annotation.h"
 
 class AnnotationTester : public QObject
@@ -9,10 +10,8 @@ class AnnotationTester : public QObject
     Q_OBJECT
 private slots:
     void initTestCase();
-    
-
-private:
-    int x;
+    void testGetters();
+    void testSaveLoad();
 
 };
 
