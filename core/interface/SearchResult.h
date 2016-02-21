@@ -19,6 +19,8 @@ public:
     SearchResult();
 
     SearchResult(const QList<SearchResultElement> list);
+
+    void addResultElement(const SearchResultElement& newElement);
     
     QList<SearchResultElement> getSearchResultList() const;
     

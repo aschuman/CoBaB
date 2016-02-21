@@ -15,6 +15,14 @@ SearchResult::SearchResult(const QList<SearchResultElement> list) {
 }
 
 /**
+ * @brief SearchResult::addResultElement
+ * @param newElement
+ */
+void SearchResult::addResultElement(const SearchResultElement &newElement) {
+   mSearchResultElementList.append(newElement);
+}
+
+/**
  * @brief gets the list of SearchResultElements
  * @return the list of SearchResultElements
  */

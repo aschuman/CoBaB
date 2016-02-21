@@ -3,6 +3,7 @@
 
 #include <memory>
 #include "SearchAlgorithm.h"
+#include "SearchQuery.h"
 
 /**
  * The TestAlgorithm implementation
@@ -17,7 +18,7 @@ public:
     
     void cancel() override;
 
-    bool setInputs(const QList<DataPacket*>& inputDataList);
+    bool setInputs(const QList<DataPacket*>& inputDataList) override;
      
     bool setParameters(const QJsonObject& parameters) override;
 
@@ -36,7 +37,7 @@ public:
     void sendProgress(double progress, QString message) override;
 
 private: 
-    std::unique_ptr<DataPacket> mInputData;
+    SearchQuery mQuery;
     QString mDescription;
     QList<int> mParameterList;
     QString mName;
