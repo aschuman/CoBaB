@@ -68,11 +68,13 @@ void SearchResultTester::testStreamMethods()
     file.open(QIODevice::WriteOnly);
     QDataStream out(&file);
     out << s;
+    file.close();
 
     file.open(QIODevice::ReadOnly);
     QDataStream in(&file);
     SearchResult newS(list);
     in >> newS;
+    file.close();
 
     QCOMPARE(s.getSearchResultList().takeFirst().getScore(), newS.getSearchResultList().takeFirst().getScore());
     QCOMPARE(s.getSearchResultList().takeLast().getScore(), newS.getSearchResultList().takeLast().getScore());
