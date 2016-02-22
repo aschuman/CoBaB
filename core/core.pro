@@ -43,7 +43,8 @@ HEADERS += \
     include/DatasetModel.h \
     include/ConfirmationPageWidget.h \
     include/FeedbackEditor.h \
-    include/DualFeedbackEditor.h
+    include/DualFeedbackEditor.h \
+    include/SearchResultElementFeedback.h
 
 SOURCES += \
     src/Medium.cpp \
