@@ -13,17 +13,19 @@
 class Algorithm {
 public: 
     
-    virtual QList<DataPacket*> run();
+    virtual QList<DataPacket*> run() = 0;
     
-    virtual void cancel();
+    virtual void cancel() = 0;
     
-    virtual bool setInputs(const QList<DataPacket*>& inputDataList);
+    virtual bool setInputs(const QList<DataPacket*>& inputDataList) = 0;
     
-    virtual bool setParameters(const QJsonObject& parameters);
+    virtual bool setParameters(const QJsonObject& parameters) = 0;
 
-    virtual QString getName() const;
+    virtual QString getId() const = 0;
 
-    virtual QString getDescription() const;
+    virtual QString getName() const = 0;
+
+    virtual QString getDescription() const = 0;
 };
 
 #include <memory>

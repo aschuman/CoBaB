@@ -47,7 +47,7 @@ int main(int argc, char *argv[]){
 
     EXEC(AnnotationTester)
     EXEC(RectangleAnnotationTester)
-    EXEC(SearchFeedbackTester)*/
+    EXEC(SearchFeedbackTester)
     EXEC(BookmarkTester)
     EXEC(BookmarkListTester)
     EXEC(TestAlgorithmTester)

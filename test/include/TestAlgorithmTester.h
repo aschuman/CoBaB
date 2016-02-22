@@ -2,14 +2,18 @@
 #define TESTALGORITHMTESTER_H
 
 #include <QObject>
-#include "SearchFeedback.h"
+#include <QTest>
+#include "TestAlgorithm.h"
 
 class TestAlgorithmTester : public QObject
 {
     Q_OBJECT
 private slots:
-
-
+    void initTest();
+    void testGetters();
+    void testSetInputs();
+    void testSetParameters();
+    void testRun();
 };
 
 #endif // TESTALGORITHMTESTER_H

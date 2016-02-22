@@ -11,7 +11,8 @@
  */
 
 class TestAlgorithm: public SearchAlgorithm {
-public: 
+public:
+
     TestAlgorithm(const QString& id);
     
     QList<DataPacket*> run() override;
@@ -24,7 +25,9 @@ public:
 
     void setName(const QString& name) override;
 
-    void setDescription(const QString& description);
+    void setDescription(const QString& description) override;
+
+    QString getId() const override;
 
     QString getName() const override;
 
