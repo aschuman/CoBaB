@@ -24,11 +24,11 @@ HEADERS += \
     include/PageWidget.h \
     interface/SearchObject.h \
     interface/SearchQuery.h \
-    interface/DatasetList.h \
+    include/DatasetList.h \
     interface/Algorithm.h \
     interface/SearchAlgorithm.h \
     interface/TestAlgorithm.h \
-    interface/SearchFeedback.h \
+    include/SearchFeedback.h \
     include/Bookmark.h \
     include/BookmarkList.h \
     interface/DataPacket.h \
@@ -36,7 +36,7 @@ HEADERS += \
     interface/SearchResult.h \
     include/LibraryPageWidget.h \
     include/ViewerPageWidget.h \
-    include/Configuration.h \
+    interface/Configuration.h \
     interface/logger.h \
     interface/log.h \
     include/ConfigData.h \
