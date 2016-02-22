@@ -56,7 +56,8 @@ HEADERS += \
     include/SearchResultElementFeedback.h \
     include/FeedbackDelegate.h \
     include/SearchResultModel.h \
-    include/ResultsPageWidget.h
+    include/ResultsPageWidget.h \
+    include/SearchManager.h
 
 SOURCES += \
     src/Medium.cpp \
@@ -99,7 +100,8 @@ SOURCES += \
     src/DualFeedbackEditor.cpp \
     src/FeedbackDelegate.cpp \
     src/ResultsPageWidget.cpp \
-    src/SearchResultModel.cpp
+    src/SearchResultModel.cpp \
+    src/SearchManager.cpp
 
 FORMS += \
     ui/LibraryPageWidget.ui \
