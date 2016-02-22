@@ -49,8 +49,13 @@ HEADERS += \
     include/AnnotationGraphicsItemFactory.h \
     include/ClickableGraphicsRectItem.h \
     QJsonModel.h \
-    QJsonItem.h
-
+    QJsonItem.h \
+    include/FeedbackEditor.h \
+    include/DualFeedbackEditor.h \
+    include/SearchResultElementFeedback.h \
+    include/FeedbackDelegate.h \
+    include/SearchResultModel.h \
+    include/ResultsPageWidget.h
 
 SOURCES += \
     src/Medium.cpp \
@@ -88,8 +93,11 @@ SOURCES += \
     src/AnnotationGraphicsItemFactory.cpp \
     src/ClickableGraphicsRectItem.cpp \
     QJsonModel.cpp \
-    QJsonItem.cpp
-
+    QJsonItem.cpp \
+    src/DualFeedbackEditor.cpp \
+    src/FeedbackDelegate.cpp \
+    src/SearchResultModel.cpp \
+    src/ResultsPageWidget.cpp
 
 FORMS += \
     ui/LibraryPageWidget.ui \
@@ -98,3 +106,4 @@ FORMS += \
     ui/ConfirmationPageWidget.ui \
     ui/PhotoViewer.ui \
     ui/ParameterPageWidget.ui
+    ui/ResultsPageWidget.ui

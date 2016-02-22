@@ -2,7 +2,6 @@
 #define _SEARCHFEEDBACK_H
 
 #include "DataPacket.h"
-#include "SearchFeedback.h"
 #include "SearchObject.h"
 #include <QDataStream>
 #include <QStringList>

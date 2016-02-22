@@ -34,7 +34,7 @@ public:
 
     void fromStream(QDataStream& out) override;
 
-    static bool compareByScore(SearchResultElement A, SearchResultElement B);
+    static bool compareByScore(const SearchResultElement& A, const SearchResultElement& B);
 
 private:
 
