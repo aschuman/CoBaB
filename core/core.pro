@@ -41,7 +41,8 @@ HEADERS += \
     interface/log.h \
     include/ConfigData.h \
     include/DatasetModel.h \
-    include/ConfirmationPageWidget.h
+    include/ConfirmationPageWidget.h \
+    include/FeedbackEditor.h
 
 SOURCES += \
     src/Medium.cpp \
