@@ -26,4 +26,7 @@ public:
     virtual QString getDescription() const;
 };
 
+#include <memory>
+Q_DECLARE_METATYPE(std::shared_ptr<Algorithm>)
+
 #endif //_ALGORITHM_H

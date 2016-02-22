@@ -5,6 +5,7 @@
 #include "PageWidget.h"
 #include "SearchResultModel.h"
 #include "FeedbackDelegate.h"
+#include "Algorithm.h"
 
 namespace Ui {
 class ResultsPageWidget;
@@ -23,11 +24,16 @@ public:
     ~ResultsPageWidget();
     void reset() override;
 
+    void setResults(SearchResult result);
+
+signals:
+    void startAlgorithm(Algorithm* algo);
+
 private:
     Ui::ResultsPageWidget *ui;
     SearchResultModel mModel;
     FeedbackDelegate mDelegate;
-    std::unique_ptr<SearchResult> mResult;
+    SearchResult mResult;
 };
 
 #endif // RESULTSPAGEWIDGET_H

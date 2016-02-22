@@ -6,9 +6,6 @@
 #include "log.h"
 #include <QJsonDocument>
 
-#include <memory>
-Q_DECLARE_METATYPE(std::shared_ptr<Algorithm>)
-
 ConfirmationPageWidget::ConfirmationPageWidget() :
     ui(new Ui::ConfirmationPageWidget)
 {
