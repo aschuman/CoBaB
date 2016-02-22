@@ -1,9 +1,8 @@
 #include "BookmarkTester.h"
 
-Bookmark fB, sB;
-QString fPath = QDir::currentPath().append("/bookmark.tmp");
-
 void BookmarkTester::initTest() {
+    fPath = QDir::currentPath().append("/bookmark.tmp");
+
     //init query
     SearchQuery query;
     QList<QString> datasets;

@@ -16,6 +16,10 @@ private slots:
     void testSearchFeedback();
     void testSaveLoad();
     void testDelete();
+
+private:
+    Bookmark fB, sB;
+    QString fPath;
 };
 
 #endif // BOOKMARKTESTER_H

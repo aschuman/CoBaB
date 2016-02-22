@@ -1,17 +1,25 @@
 #include "BookmarkListTester.h"
 
 void BookmarkListTester::initTest() {
+    //create new temporary directory
+    QDir dir(QDir::currentPath());
+    dir.mkdir("temp_dir");
+    dir.cd("temp_dir");
+
     Bookmark bm1;
     bm1.setName("3rd bm");
     bm1.setDate(QDateTime(QDate(2015,1,1)));
+    bm1.setPath(dir.path().append("/bookmark.01"));
 
     Bookmark bm2;
     bm2.setName("1st bm");
     bm2.setDate(QDateTime(QDate(2015,3,1)));
+    bm2.setPath(dir.path().append("/bookmark.02"));
 
     Bookmark bm3;
     bm3.setName("2nd bm");
     bm3.setDate(QDateTime(QDate(2015,2,1)));
+    bm3.setPath(dir.path().append("/bookmark.03"));
 
     list.addBookmark(bm1);
     list.addBookmark(bm2);
@@ -59,10 +67,9 @@ void BookmarkListTester::testSortByDate() {
 }
 
 void BookmarkListTester::testLoad() {
-    QDir dir = QDir::currentPath();
-    dir.mkdir("temp_dir");
-    dir.cd("temp_dir");
+    QString path = QDir::currentPath().append("/temp_dir");
+    BookmarkList fList;
+    fList.load(path);
 
-
-
+    QCOMPARE(fList.sortByName().size(), 3);
 }
