@@ -1,9 +1,6 @@
 #include "AnnotationTester.h"
-#include <iostream>
 
-void AnnotationTester::initTestCase() {
-
-	
+void AnnotationTester::initTestCase() {	
 }
 
 void AnnotationTester::testGetters() {
