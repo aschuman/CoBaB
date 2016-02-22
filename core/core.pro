@@ -10,11 +10,11 @@ HEADERS += \
     interface/Medium.h \
     interface/Photo.h \
     interface/Serializable.h \
-    include/SingleFrameVideo.h \
-    include/Video.h \
-    include/Dataset.h \
-    include/Annotation.h \
-    include/RectangleAnnotation.h \
+    interface/SingleFrameVideo.h \
+    interface/Video.h \
+    interface/Dataset.h \
+    interface/Annotation.h \
+    interface/RectangleAnnotation.h \
     include/MainControl.h \
     include/MainWindow.h \
     include/Navigator.h \
@@ -22,18 +22,18 @@ HEADERS += \
     include/PageStackFrame.h \
     include/PageType.h \
     include/PageWidget.h \
-    include/SearchObject.h \
-    include/SearchQuery.h \
-    include/DatasetList.h \
+    interface/SearchObject.h \
+    interface/SearchQuery.h \
+    interface/DatasetList.h \
     interface/Algorithm.h \
     interface/SearchAlgorithm.h \
-    include/TestAlgorithm.h \
-    include/SearchFeedback.h \
+    interface/TestAlgorithm.h \
+    interface/SearchFeedback.h \
     include/Bookmark.h \
     include/BookmarkList.h \
     interface/DataPacket.h \
-    include/SearchResultElement.h \
-    include/SearchResult.h \
+    interface/SearchResultElement.h \
+    interface/SearchResult.h \
     include/LibraryPageWidget.h \
     include/ViewerPageWidget.h \
     include/Configuration.h \
