@@ -8,6 +8,7 @@
 #include "DatasetListTester.h"
 #include "ConfigDataTester.h"
 #include "DataPacketTester.h"
+#include "SearchObjectTester.h"
 
 #define EXEC(Tester) {Tester tester; r |= QTest::qExec(&tester);}
 
@@ -30,6 +31,7 @@ int main(int argc, char *argv[]){
     EXEC(ConfigDataTester)
 
     EXEC(DataPacketTester)
+    EXEC(SearchObjectTester)
 
     return r;
 }
