@@ -10,6 +10,8 @@
 #include "DataPacketTester.h"
 #include "SearchObjectTester.h"
 #include "SearchQueryTester.h"
+#include "SearchResultElementTester.h"
+#include "SearchResultTester.h"
 #include "AnnotationTester.h"
 #include "RectangleAnnotationTester.h"
 #include "SearchFeedbackTester.h"
@@ -40,6 +42,8 @@ int main(int argc, char *argv[]){
     EXEC(DataPacketTester)
     EXEC(SearchObjectTester)
     EXEC(SearchQueryTester)
+    EXEC(SearchResultElementTester)
+    EXEC(SearchResultTester)
 
     EXEC(AnnotationTester)
     EXEC(RectangleAnnotationTester)
