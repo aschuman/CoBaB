@@ -1,5 +1,8 @@
 #include "SearchFeedbackTester.h"
 
+SearchFeedback fb((QString)"Dual");
+QList<pair> list;
+
 void SearchFeedbackTester::initTestCase() {
     SearchObject obj1;
     obj1.setMedium("picture");

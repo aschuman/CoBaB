@@ -19,7 +19,4 @@ private slots:
 
 };
 
-SearchFeedback fb((QString)"Dual");
-QList<pair> list;
-
 #endif // SEARCHFEEDBACKTESTER_H

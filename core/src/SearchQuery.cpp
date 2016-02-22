@@ -9,7 +9,7 @@
  * @brief SearchQuery standart constructor
  */
 SearchQuery::SearchQuery() {
-    mType = Type::SEARCHQUERY;
+    mType = DataPacket::Type::SEARCHQUERY;
 }
 
 /**

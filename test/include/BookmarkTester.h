@@ -2,16 +2,20 @@
 #define BOOKMARKTESTER_H
 
 #include <QObject>
+#include <QTest>
 #include "Bookmark.h"
 
 class BookmarkTester : public QObject
 {
     Q_OBJECT
 private slots:
-    void initTestcase();
-
+    void initTest();
+    void testGetters();
+    void testSearchQuery();
+    void testSearchResult();
+    void testSearchFeedback();
+    void testSaveLoad();
+    void testDelete();
 };
-
-Bookmark fBookmark, sBookmark;
 
 #endif // BOOKMARKTESTER_H

@@ -1,9 +1,11 @@
-/**
- * Project \
- */
-
-
 #include "SearchResult.h"
+
+/**
+ * @brief SearchResult::SearchResult default constructor
+ */
+SearchResult::SearchResult() {
+    mType = DataPacket::Type::SEARCHRESULT;
+}
 
 /**
  * @brief a constructor for the class

@@ -15,6 +15,7 @@ Bookmark::Bookmark() {
 Bookmark::Bookmark(const QString& path) {
     mPath = path;
     QFile file(path);
+    file.open(QIODevice::ReadOnly);
     QDataStream in(&file);
     in >> *this;
     file.close();
@@ -182,6 +183,7 @@ bool Bookmark::validate(const Bookmark& bookmark) {
  */
 void Bookmark::saveFile() const {
     QFile file(mPath);
+    file.open(QIODevice::WriteOnly);
     QDataStream out(&file);
     out << *this;
     file.close();
