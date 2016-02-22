@@ -48,7 +48,8 @@ HEADERS += \
     include/AnnotationTester.h \
     include/RectangleAnnotationTester.h \
     include/DataPacketTester.h \
-    include/SearchObjectTester.h
+    include/SearchObjectTester.h \
+    include/SearchQueryTester.h
 
 SOURCES += \
     src/main.cpp \
@@ -63,4 +64,5 @@ SOURCES += \
     src/AnnotationTester.cpp \
     src/RectangleAnnotationTester.cpp \
     src/DataPacketTester.cpp \
-    src/SearchObjectTester.cpp
+    src/SearchObjectTester.cpp \
+    src/SearchQueryTester.cpp
