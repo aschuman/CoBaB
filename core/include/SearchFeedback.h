@@ -2,7 +2,6 @@
 #define _SEARCHFEEDBACK_H
 
 #include "DataPacket.h"
-#include "SearchFeedback.h"
 #include "SearchObject.h"
 #include <QDataStream>
 #include <QStringList>
@@ -19,9 +18,9 @@ public:
 
     SearchFeedback();
 
-    explicit SearchFeedback(QString& type);
+    explicit SearchFeedback(const QString& type);
 
-    void setFeedbackList(QList<QPair<SearchObject, int>>& feedbackList);
+    void setFeedbackList(const QList<QPair<SearchObject, int>>& feedbackList);
 
     const QList<QPair<SearchObject, int>>& getFeedbackList();
     

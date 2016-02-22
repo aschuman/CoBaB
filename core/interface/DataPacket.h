@@ -37,7 +37,7 @@ public:
 protected: 
 
     Type mType;             ///< The type of the datapacket
-    static QUuid mUuid;     ///< Unique identifier for the datapacket
+    QUuid mUuid;     ///< Unique identifier for the datapacket
 };
 
 #endif //_DATAPACKET_H
