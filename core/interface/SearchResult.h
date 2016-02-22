@@ -30,9 +30,9 @@ public:
 
     friend QDataStream& operator>>(QDataStream& in, SearchResult& searchResult);
 
-    void toStream(QDataStream& in) const override;
+    void toStream(QDataStream& out) const override;
 
-    void fromStream(QDataStream& out) override;
+    void fromStream(QDataStream& in) override;
 
 private: 
 

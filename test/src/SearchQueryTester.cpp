@@ -32,14 +32,14 @@ void SearchQueryTester::testStreamMethods()
 
     QFile file("file.dat");
     file.open(QIODevice::WriteOnly);
-    QDataStream in(&file);
-    in << squery;
+    QDataStream out(&file);
+    out << squery;
     file.close();
 
     file.open(QIODevice::ReadOnly);
-    QDataStream out(&file);
+    QDataStream in(&file);
     SearchQuery newSquery;
-    out >> newSquery;
+    in >> newSquery;
     file.close();
 
     QCOMPARE(squery.getDatasets(), newSquery.getDatasets());

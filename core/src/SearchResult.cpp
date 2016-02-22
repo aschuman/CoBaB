@@ -67,9 +67,9 @@ QDataStream& operator>>(QDataStream& in, SearchResult& searchResult) {
  * @brief calls the << operator
  * @param in the datastream
  */
-void SearchResult::toStream(QDataStream& in) const  {
-    DataPacket::toStream(in);
-    in << mSearchResultElementList;
+void SearchResult::toStream(QDataStream& out) const  {
+    DataPacket::toStream(out);
+    out << mSearchResultElementList;
 
 }
 
@@ -77,7 +77,7 @@ void SearchResult::toStream(QDataStream& in) const  {
  * @brief calls the >> operator
  * @param out the datastream
  */
-void SearchResult::fromStream(QDataStream& out) {
-    DataPacket::fromStream(out);
-    out >> mSearchResultElementList;
+void SearchResult::fromStream(QDataStream& in) {
+    DataPacket::fromStream(in);
+    in >> mSearchResultElementList;
 }
