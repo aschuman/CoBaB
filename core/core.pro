@@ -105,5 +105,5 @@ FORMS += \
     ui/ViewerPageWidget.ui \
     ui/ConfirmationPageWidget.ui \
     ui/PhotoViewer.ui \
-    ui/ParameterPageWidget.ui
+    ui/ParameterPageWidget.ui \
     ui/ResultsPageWidget.ui
