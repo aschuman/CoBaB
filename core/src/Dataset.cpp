@@ -37,10 +37,8 @@ Dataset::Dataset(const QString& path) {
  * @brief Dataset::~Dataset Deletes the Dataset.
  */
 Dataset::~Dataset() {
-    for(Medium* iter: mMediaList) {
-        Q_UNUSED(iter);
-        //delete iter;
-    }
+    //qDeleteAll(mMediaList);
+    mMediaList.clear();
 }
 
 /**

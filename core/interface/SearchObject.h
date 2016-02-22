@@ -38,13 +38,13 @@ public:
 
     void setMediumIndex(const int index);
 
-    void toStream(QDataStream& in) const override;
+    void toStream(QDataStream& out) const override;
 
-    void fromStream(QDataStream& out) override;
+    void fromStream(QDataStream& in) override;
 
-    friend QDataStream& operator<<(QDataStream& in, const SearchObject& searchObject);
+    friend QDataStream& operator<<(QDataStream& out, const SearchObject& searchObject);
 
-    friend QDataStream& operator>>(QDataStream& out, SearchObject& searchObject);
+    friend QDataStream& operator>>(QDataStream& in, SearchObject& searchObject);
 
 private:
 

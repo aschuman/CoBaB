@@ -45,11 +45,17 @@ HEADERS += \
     include/DatasetTester.h \
     include/DatasetListTester.h \
     include/ConfigDataTester.h \
-    include/AnnotationTester.h \
-    include/RectangleAnnotationTester.h \
     include/DataPacketTester.h \
     include/SearchObjectTester.h \
-    include/SearchQueryTester.h
+    include/SearchQueryTester.h \
+    include/SearchResultTester.h \
+    include/SearchResultElementTester.h \
+    include/AnnotationTester.h \
+    include/RectangleAnnotationTester.h \
+    include/BookmarkTester.h \
+    include/BookmarkListTester.h \
+    include/TestAlgorithmTester.h \
+    include/SearchFeedbackTester.h
 
 SOURCES += \
     src/main.cpp \
@@ -61,8 +67,16 @@ SOURCES += \
     src/DatasetTester.cpp \
     src/DatasetListTester.cpp \
     src/ConfigDataTester.cpp \
-    src/AnnotationTester.cpp \
-    src/RectangleAnnotationTester.cpp \
     src/DataPacketTester.cpp \
     src/SearchObjectTester.cpp \
-    src/SearchQueryTester.cpp
+    src/SearchQueryTester.cpp \
+    src/SearchResultTester.cpp \
+    src/SearchResultElementTester.cpp \
+    src/AnnotationTester.cpp \
+    src/RectangleAnnotationTester.cpp \
+    src/SearchFeedbackTester.cpp \
+    src/BookmarkTester.cpp \
+    src/BookmarkListTester.cpp \
+    src/TestAlgorithmTester.cpp
+
+

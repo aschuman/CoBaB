@@ -4,15 +4,17 @@
  * @brief SearchFeedback::SearchFeedback default constructor
  */
 SearchFeedback::SearchFeedback() {
-    mType = "Dual";
+    mType = DataPacket::Type::SEARCHFEEDBACK;
+    mFeedbackType = "Dual";
 }
 
 /**
  * @brief SearchFeedback::SearchFeedback create new feedback with given type
  * @param type feedback type
  */
-SearchFeedback::SearchFeedback(const QString& type) {
-    mType = type;
+SearchFeedback::SearchFeedback(const QString& feedbackType) {
+    mType = DataPacket::Type::SEARCHFEEDBACK;
+    mFeedbackType = feedbackType;
 }
 
 /**
@@ -35,8 +37,8 @@ const QList<QPair<SearchObject, int>>& SearchFeedback::getFeedbackList() const {
  * @brief SearchFeedback::getFeedbackType gets type of all feedbacks in this list
  * @return feedback type
  */
-SearchFeedback::Type SearchFeedback::getType() const {
-    return (mType == "Dual") ? DUAL : EXTENDED;
+SearchFeedback::Type SearchFeedback::getFeedbackType() const {
+    return (mFeedbackType == "Dual") ? DUAL : EXTENDED;
 }
 
 /**
@@ -67,7 +69,7 @@ QDataStream& operator>>(QDataStream& in, SearchFeedback& feedback) {
  */
 void SearchFeedback::toStream(QDataStream& out) const {
     DataPacket::toStream(out);
-    out << mType << mFeedbackList;
+    out << mFeedbackType << mFeedbackList;
 }
 
 /**
@@ -76,5 +78,5 @@ void SearchFeedback::toStream(QDataStream& out) const {
  */
 void SearchFeedback::fromStream(QDataStream& in) {
     DataPacket::fromStream(in);
-    in >> mType >> mFeedbackList;
+    in >> mFeedbackType >> mFeedbackList;
 }

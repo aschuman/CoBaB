@@ -26,8 +26,8 @@ HEADERS += \
     interface/SearchQuery.h \
     include/DatasetList.h \
     interface/Algorithm.h \
-    include/SearchAlgorithm.h \
-    include/TestAlgorithm.h \
+    interface/SearchAlgorithm.h \
+    interface/TestAlgorithm.h \
     include/SearchFeedback.h \
     include/Bookmark.h \
     include/BookmarkList.h \
@@ -47,9 +47,10 @@ HEADERS += \
     include/ParameterPageWidget.h \
     include/AnnotationDrawer.h \
     include/AnnotationGraphicsItemFactory.h \
-    include/ClickableGraphicsRectItem.h \
     QJsonModel.h \
     QJsonItem.h \
+    include/ClickableGraphicsRectItem.h \
+    include/ClickableGraphicsPixmapItem.h \
     include/FeedbackEditor.h \
     include/DualFeedbackEditor.h \
     include/SearchResultElementFeedback.h \
@@ -91,13 +92,14 @@ SOURCES += \
     src/ParameterPageWidget.cpp \
     src/AnnotationDrawer.cpp \
     src/AnnotationGraphicsItemFactory.cpp \
-    src/ClickableGraphicsRectItem.cpp \
     QJsonModel.cpp \
     QJsonItem.cpp \
+    src/ClickableGraphicsRectItem.cpp \
+    src/ClickableGraphicsPixmapItem.cpp \
     src/DualFeedbackEditor.cpp \
     src/FeedbackDelegate.cpp \
-    src/SearchResultModel.cpp \
-    src/ResultsPageWidget.cpp
+    src/ResultsPageWidget.cpp \
+    src/SearchResultModel.cpp
 
 FORMS += \
     ui/LibraryPageWidget.ui \

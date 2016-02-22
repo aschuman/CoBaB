@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QTest>
+#include <QtTest/QtTest>
 #include "Annotation.h"
 
 class AnnotationTester : public QObject
@@ -12,7 +13,6 @@ private slots:
     void initTestCase();
     void testGetters();
     void testSaveLoad();
-
 };
 
 #endif // ANNOTATIONTESTER_H

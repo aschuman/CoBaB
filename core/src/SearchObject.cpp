@@ -83,41 +83,41 @@ void SearchObject::setMediumIndex(const int index) {
  * @brief calls the << operator
  * @param in the datastream
  */
-void SearchObject::toStream(QDataStream& in) const {
+void SearchObject::toStream(QDataStream& out) const {
 
     //write object to stream
 
-    in  << mMedium
+    out  << mMedium
         << mMediumIndex
         << mAnnotation
         << mROI
         << mSourceDataset;
 
-   // in << *this;
+
 
 }
 /**
  * @brief calls the >> operator
  * @param out the datastream
  */
-void SearchObject::fromStream(QDataStream& out) {
+void SearchObject::fromStream(QDataStream& in) {
 
     //read object from stream
-    out >> mMedium;
-    out >> mMediumIndex;
-    out >> mAnnotation;
-    out >> mROI;
-    out >> mSourceDataset;
+    in >> mMedium;
+    in >> mMediumIndex;
+    in >> mAnnotation;
+    in >> mROI;
+    in >> mSourceDataset;
 
 }
 
-QDataStream& operator<<(QDataStream& in, const SearchObject& searchObject) {
-    searchObject.toStream(in);
-    return in;
-}
-
-QDataStream& operator>>(QDataStream& out, SearchObject& searchObject) {
-    searchObject.fromStream(out);
+QDataStream& operator<<(QDataStream& out, const SearchObject& searchObject) {
+    searchObject.toStream(out);
     return out;
+}
+
+QDataStream& operator>>(QDataStream& in, SearchObject& searchObject) {
+    searchObject.fromStream(in);
+    return in;
 }
 

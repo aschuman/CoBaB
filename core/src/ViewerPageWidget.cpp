@@ -7,7 +7,7 @@ const int ViewerPageWidget::EXIT_NEXT = 0;
 
 ViewerPageWidget::ViewerPageWidget() :
     ui(new Ui::ViewerPageWidget), mIndex(0), mImage(nullptr), mSelectionPen(QColor(0,255,230)),
-    mCurrentSelection(nullptr), mAnnotationDrawer(&mGraphicsScene)
+    mCurrentSelection(nullptr), mAnnotationDrawer(&mGraphicsScene), mSelectedAnnotation(nullptr)
 {
     ui->setupUi(this);
     ui->mViewerListView->setResizeMode(QListView::Adjust);
@@ -18,16 +18,27 @@ ViewerPageWidget::ViewerPageWidget() :
     connect(ui->mNextButton, SIGNAL(clicked()), this, SLOT(next()));
     connect(ui->mBeforeButton, SIGNAL(clicked()), this, SLOT(before()));
     connect(ui->mROIButton, SIGNAL(clicked()), this, SLOT(roiClicked()));
-    connect(ui->mGraphicsView, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(contextMenu(const QPoint&)));
+    connect(&mAnnotationDrawer, SIGNAL(selected(Annotation*, const QPointF&)), this, SLOT(annotationSelected(Annotation*, const QPointF&)));
 }
 
 ViewerPageWidget::~ViewerPageWidget()
 {
     delete ui;
 }
+void ViewerPageWidget::annotationSelected(Annotation* annotation, const QPointF& pos) {
+    mSelectedAnnotation = annotation;
+    contextMenu(pos);
+}
 
-void ViewerPageWidget::contextMenu(const QPoint &pos) {
-    Q_UNUSED(pos);
+void ViewerPageWidget::contextMenu(const QPointF &pos) {
+    if(mCurrentSelection != nullptr) {
+        if(mCurrentSelection->contains(pos)) {
+            mROI = mCurrentSelection->rect().toRect();
+            mSelectedAnnotation = nullptr;
+        } else {
+            mROI.setRect(0,0,0,0);
+        }
+    }
     QMenu contextMenu(this);
     QAction action1("algorithm 1", this);
     action1.setToolTip("description 1");
@@ -87,16 +98,25 @@ void ViewerPageWidget::displayImage() {
         mCurrentSelection = nullptr;
     }
     Medium* medium = mDataset->getMediaList().at(mIndex);
-    mImage = mGraphicsScene.addPixmap(QPixmap::fromImage(QImage(medium->getPath())));
+    mImage = new ClickableGraphicsPixmapItem(QPixmap::fromImage(QImage(medium->getPath())));
+    mGraphicsScene.addItem(mImage);
+    connect(mImage, SIGNAL(selected(const QPointF&)), this, SLOT(contextMenu(const QPointF&)));
     mGraphicsScene.setSceneRect(0,0, mImage->boundingRect().width(), mImage->boundingRect().height());
     mAnnotationDrawer.setAnnotations(medium->getAnnotationList());
 }
 
 void ViewerPageWidget::nextWidget(QAction* action) {
-    delete mImage;
     SearchObject searchObject;
     searchObject.setMedium(mDataset->getMediaList().at(mIndex)->getPath());
+    if(!mROI.isNull()) {
+        searchObject.setROI(mROI);
+    } else if(mSelectedAnnotation != nullptr) {
+        searchObject.setAnnotation(*mSelectedAnnotation);
+    }
     searchObject.setSourceDataset(mDataset->getPath());
+    delete mSelectedAnnotation;
+    delete mCurrentSelection;
+    delete mImage;
 
     SearchQuery searchQuery;
     searchQuery.setSearchObject(searchObject);
