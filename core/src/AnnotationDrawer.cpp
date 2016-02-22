@@ -4,12 +4,14 @@ AnnotationDrawer::AnnotationDrawer(QGraphicsScene* scene) : mScene(scene)
 {
 
 }
-#include <QDebug>
+
 void AnnotationDrawer::setAnnotations(QList<QPair<int, Annotation*>> annotations) {
     for(QPair<int, Annotation*> iter: annotations) {
         QGraphicsItem* item = mFactory.getAnnotationVisualizer(iter.second);
         mAnnotations.append(item);
         mScene->addItem(item);
+        connect((ClickableGraphicsRectItem*)item, SIGNAL(selected(Annotation*, const QPointF&)),
+                this, SIGNAL(selected(Annotation*, const QPointF&)));
     }
 }
 void AnnotationDrawer::removeAnnotations() {

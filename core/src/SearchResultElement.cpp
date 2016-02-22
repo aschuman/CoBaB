@@ -96,6 +96,6 @@ void SearchResultElement::fromStream(QDataStream& out) {
  * @param B second element
  * @return true if A is smaller than B
  */
-bool compareByScore(SearchResultElement A, SearchResultElement B) {
+bool SearchResultElement::compareByScore(const SearchResultElement& A, const SearchResultElement& B) {
     return (A.getScore() < B.getScore());
 }

@@ -15,6 +15,7 @@
 DataPacket::DataPacket() {
 
     mUuid = QUuid::createUuid();
+    mType = DataPacket::Type::UNKNOWN;
 }
 
 /**

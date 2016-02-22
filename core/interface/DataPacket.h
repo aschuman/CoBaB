@@ -16,7 +16,7 @@ class DataPacket: public Serializable {
 
 public: 
 
-    enum Type { SEARCHRESULT, SEARCHQUERY, SEARCHFEEDBACK };
+    enum Type { SEARCHRESULT, SEARCHQUERY, SEARCHFEEDBACK, UNKNOWN };
 
     DataPacket();
 

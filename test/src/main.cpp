@@ -7,6 +7,9 @@
 #include "DatasetTester.h"
 #include "DatasetListTester.h"
 #include "ConfigDataTester.h"
+#include "DataPacketTester.h"
+#include "SearchObjectTester.h"
+#include "SearchQueryTester.h"
 #include "AnnotationTester.h"
 #include "RectangleAnnotationTester.h"
 
@@ -30,7 +33,12 @@ int main(int argc, char *argv[]){
     EXEC(DatasetListTester)
     EXEC(ConfigDataTester)
 
+    EXEC(DataPacketTester)
+    EXEC(SearchObjectTester)
+    EXEC(SearchQueryTester)
+
     EXEC(AnnotationTester)
     EXEC(RectangleAnnotationTester)
+
     return r;
 }

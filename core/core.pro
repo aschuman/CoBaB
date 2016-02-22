@@ -47,10 +47,16 @@ HEADERS += \
     include/ParameterPageWidget.h \
     include/AnnotationDrawer.h \
     include/AnnotationGraphicsItemFactory.h \
-    include/ClickableGraphicsRectItem.h \
     QJsonModel.h \
-    QJsonItem.h
-
+    QJsonItem.h \
+    include/ClickableGraphicsRectItem.h \
+    include/ClickableGraphicsPixmapItem.h \
+    include/FeedbackEditor.h \
+    include/DualFeedbackEditor.h \
+    include/SearchResultElementFeedback.h \
+    include/FeedbackDelegate.h \
+    include/SearchResultModel.h \
+    include/ResultsPageWidget.h
 
 SOURCES += \
     src/Medium.cpp \
@@ -86,10 +92,14 @@ SOURCES += \
     src/ParameterPageWidget.cpp \
     src/AnnotationDrawer.cpp \
     src/AnnotationGraphicsItemFactory.cpp \
-    src/ClickableGraphicsRectItem.cpp \
     QJsonModel.cpp \
-    QJsonItem.cpp
-
+    QJsonItem.cpp \
+    src/ClickableGraphicsRectItem.cpp \
+    src/ClickableGraphicsPixmapItem.cpp \
+    src/DualFeedbackEditor.cpp \
+    src/FeedbackDelegate.cpp \
+    src/ResultsPageWidget.cpp \
+    src/SearchResultModel.cpp
 
 FORMS += \
     ui/LibraryPageWidget.ui \
@@ -97,4 +107,5 @@ FORMS += \
     ui/ViewerPageWidget.ui \
     ui/ConfirmationPageWidget.ui \
     ui/PhotoViewer.ui \
-    ui/ParameterPageWidget.ui
+    ui/ParameterPageWidget.ui \
+    ui/ResultsPageWidget.ui
