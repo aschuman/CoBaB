@@ -41,6 +41,14 @@ void Bookmark::setName(const QString& name) {
 }
 
 /**
+ * @brief Bookmark::setDate set bookmark date
+ * @param date new date
+ */
+void Bookmark::setDate(const QDateTime& date) {
+    mDate = date;
+}
+
+/**
  * @brief Bookmark::setFeedback set new feedback
  * @param feedback new value
  */

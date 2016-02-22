@@ -8,8 +8,10 @@ class BookmarkTester : public QObject
 {
     Q_OBJECT
 private slots:
-
+    void initTestcase();
 
 };
+
+Bookmark fBookmark, sBookmark;
 
 #endif // BOOKMARKTESTER_H
