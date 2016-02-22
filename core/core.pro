@@ -46,7 +46,8 @@ HEADERS += \
     include/DualFeedbackEditor.h \
     include/SearchResultElementFeedback.h \
     include/FeedbackDelegate.h \
-    include/SearchResultModel.h
+    include/SearchResultModel.h \
+    include/ResultsPageWidget.h
 
 SOURCES += \
     src/Medium.cpp \
@@ -79,10 +80,12 @@ SOURCES += \
     src/ConfirmationPageWidget.cpp \
     src/DualFeedbackEditor.cpp \
     src/FeedbackDelegate.cpp \
-    src/SearchResultModel.cpp
+    src/SearchResultModel.cpp \
+    src/ResultsPageWidget.cpp
 
 FORMS += \
     ui/LibraryPageWidget.ui \
     ui/MainWindow.ui \
     ui/ViewerPageWidget.ui \
-    ui/ConfirmationPageWidget.ui
+    ui/ConfirmationPageWidget.ui \
+    ui/ResultsPageWidget.ui
