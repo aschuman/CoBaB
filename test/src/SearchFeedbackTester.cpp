@@ -1,7 +1,8 @@
 #include "SearchFeedbackTester.h"
 
-SearchFeedback fb((QString)"Dual");
-QList<pair> list;
+SearchFeedbackTester::SearchFeedbackTester() : fb("Dual")
+{
+}
 
 void SearchFeedbackTester::initTestCase() {
     SearchObject obj1;
