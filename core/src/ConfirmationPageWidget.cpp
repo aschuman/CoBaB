@@ -4,6 +4,7 @@
 #include "SearchQuery.h"
 #include "Algorithm.h"
 #include "log.h"
+#include <QJsonDocument>
 
 #include <memory>
 Q_DECLARE_METATYPE(std::shared_ptr<Algorithm>)
@@ -79,6 +80,17 @@ void ConfirmationPageWidget::reset()
         QImage chosenImage(searchQuery->getSearchObject().getMedium());
         QPixmap pixmap;
         pixmap.convertFromImage(chosenImage);
+
+        if(!(searchQuery->getSearchObject().getROI().isNull())) {
+            pixmap = pixmap.copy(searchQuery->getSearchObject().getROI());
+        } /*else if(searchQuery->getSearchObject().getAnnotation() != nullptr) {
+            Annotation* annotation = &(searchQuery->getSearchObject().getAnnotation());
+            if(annotation->getType() == Annotation::FACE || annotation->getType() == Annotation::PERSON) {
+                RectangleAnnotation* rectAnnotation = static_cast<RectangleAnnotation*> (annotation);
+                QRect rect = static_cast<QRect> (*rectAnnotation);
+                pixmap = pixmap.copy(rect);
+            }
+        }*/
         ui->mImageToSearchLabel->setPixmap(pixmap);
 
     } else {
@@ -109,7 +121,25 @@ void ConfirmationPageWidget::reset()
         LOG_ERR("no algorithm");
     }
 
-    //ToDo read parameters and their values
+    //read parameters and their values
+    QVariant parameterFile;
+    emit readFromStack(0, parameterFile);
+    if (parameterFile.canConvert<QString>()) {
+        QString fileName = parameterFile.value<QString>();
+        QFile file(fileName);
+        if(!file.open(QFile::ReadOnly)) {
+            LOG_ERR("cannot open parameter file");
+        }
+        QJsonObject object = QJsonDocument::fromJson(file.readAll()).object();
+        QStringList keys = object.keys();
+        ui->mParameters->setRowCount(std::max(keys.size(), ui->mParameters->rowCount()));
+        for (int i = 0; i < keys.size(); i++) {
+            QString value = object.value(keys.at(i)).toString();
+            ui->mParameters->setItem(i, 2, new QTableWidgetItem(keys.at(i) + " = " + value));
+        }
+    } else {
+        LOG_ERR("no parameter file");
+    }
 }
 
 void ConfirmationPageWidget::on_mSearchButton_clicked()
