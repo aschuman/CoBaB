@@ -27,7 +27,7 @@ int main(int argc, char *argv[]){
     // add test class 'ExampleTester' like this
     // (do not forget to include header):
     // EXEC(ExampleTester)
-    /*
+
     EXEC(PageStackFrameTester)
     EXEC(PageRegistrationTester)
     EXEC(NavigatorTester)
@@ -42,7 +42,7 @@ int main(int argc, char *argv[]){
     EXEC(SearchQueryTester)
 
     EXEC(AnnotationTester)
-    EXEC(RectangleAnnotationTester) */
+    EXEC(RectangleAnnotationTester)
     EXEC(SearchFeedbackTester)
     EXEC(BookmarkTester)
     EXEC(BookmarkListTester)

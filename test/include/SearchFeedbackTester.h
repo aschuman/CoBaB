@@ -6,6 +6,8 @@
 #include <QtTest/QtTest>
 #include "SearchFeedback.h"
 
+typedef QPair<SearchObject, int> pair;
+
 class SearchFeedbackTester : public QObject
 {
     Q_OBJECT
@@ -16,5 +18,8 @@ private slots:
     void testSaveLoad();
 
 };
+
+SearchFeedback fb((QString)"Dual");
+QList<pair> list;
 
 #endif // SEARCHFEEDBACKTESTER_H
