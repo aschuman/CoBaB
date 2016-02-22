@@ -42,7 +42,8 @@ HEADERS += \
     include/ConfigData.h \
     include/DatasetModel.h \
     include/ConfirmationPageWidget.h \
-    include/FeedbackEditor.h
+    include/FeedbackEditor.h \
+    include/DualFeedbackEditor.h
 
 SOURCES += \
     src/Medium.cpp \
@@ -72,7 +73,8 @@ SOURCES += \
     src/ConfigData.cpp \
     src/DatasetModel.cpp \
     src/TestAlgorithm.cpp \
-    src/ConfirmationPageWidget.cpp
+    src/ConfirmationPageWidget.cpp \
+    src/DualFeedbackEditor.cpp
 
 FORMS += \
     ui/LibraryPageWidget.ui \
