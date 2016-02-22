@@ -9,9 +9,17 @@
  * @brief a constructor for the class
  * @param list of SearchResultElements
  */
-SearchResult::SearchResult(const QList<SearchResultElement> list) {
+SearchResult::SearchResult(QList<SearchResultElement> list) {
     mType = Type::SEARCHRESULT;
-    mSearchResultElementList = list;
+    mSearchResultElementList = std::move(list);
+}
+
+/**
+ * @brief SearchResult::addResultElement
+ * @param newElement
+ */
+void SearchResult::addResultElement(const SearchResultElement &newElement) {
+   mSearchResultElementList.append(newElement);
 }
 
 /**

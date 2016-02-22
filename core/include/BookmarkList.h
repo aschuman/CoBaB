@@ -19,8 +19,6 @@ public:
     BookmarkList();
 
     void load(const QString path);
-
-    void save(const QString path) const;
     
     void addBookmark(const Bookmark& bookmark);
     

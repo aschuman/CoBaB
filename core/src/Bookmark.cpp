@@ -58,6 +58,14 @@ void Bookmark::setParameter(const QJsonObject& parameter) {
 }
 
 /**
+ * @brief Bookmark::setPath set the absolute path
+ * @param path new absolute path
+ */
+void Bookmark::setPath(const QString &path) {
+    mPath = path;
+}
+
+/**
  * @brief Bookmark::getName get bookmark name
  * @return name
  */
@@ -164,13 +172,11 @@ bool Bookmark::validate(const Bookmark& bookmark) {
  * @brief save save bookmark to file
  * @param path absolute file path
  */
-void Bookmark::save(const QString path) {
-    QFile file(path);
+void Bookmark::saveFile() const {
+    QFile file(mPath);
     QDataStream out(&file);
     out << *this;
     file.close();
-
-    mPath = path;
 }
 
 /**

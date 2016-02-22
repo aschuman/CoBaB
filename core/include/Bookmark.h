@@ -27,6 +27,8 @@ public:
     void setName(const QString& name);
 
     void setParameter(const QJsonObject& parameter);
+
+    void setPath(const QString& path);
     
     QString getName() const;
     
@@ -50,7 +52,7 @@ public:
 
     static bool validate(const Bookmark& bookmark);
 
-    void save(const QString path);
+    void saveFile() const;
 
     void deleteFile() const;
 

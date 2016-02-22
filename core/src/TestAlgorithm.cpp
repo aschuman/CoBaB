@@ -7,7 +7,7 @@
 TestAlgorithm::TestAlgorithm(const QString& id) {
 	mId = id;
     mName = "Test algorithm";
-    mDescription = "an dummy algorithm that returns all search objects in the correct input order";
+    mDescription = "an dummy algorithm that scores randomly";
 }
 
 /**
@@ -15,8 +15,27 @@ TestAlgorithm::TestAlgorithm(const QString& id) {
  * @return a list of data packets containing results
  */
 QList<DataPacket*> TestAlgorithm::run() {
-
     QList<DataPacket*> list;
+    SearchResult* result = new SearchResult();
+
+    for (QString& datasetPath : mQuery.getDatasets()) {
+        Dataset dataset(datasetPath);
+
+        for (Medium* medium : dataset.getMediaList()) {
+            SearchObject* object = new SearchObject();
+            object->setMedium(medium->getPath());
+
+            //new result element
+            SearchResultElement* resultElement = new SearchResultElement();
+            resultElement->setSearchObject(*object);
+            resultElement->setScore(std::rand() % 20);
+
+            //add to result list
+            result->addResultElement(*resultElement);
+        }
+    }
+
+    list.append((DataPacket*)result);
     return list;
 }
 
@@ -33,7 +52,16 @@ void TestAlgorithm::cancel() {
  * @return true if input data is accepted
  */
 bool TestAlgorithm::setInputs(const QList<DataPacket*>& inputDataList) {
-    Q_UNUSED(inputDataList);
+    if (inputDataList.length() != 1) {  //illegal number of parameters
+        return false;
+    }
+
+    DataPacket* packet = inputDataList.value(0);
+    if (packet->getType() != DataPacket::Type::SEARCHQUERY) {   //invalid query
+        return false;
+    }
+
+    mQuery = *(SearchQuery*)packet;
     return true;
 }
 

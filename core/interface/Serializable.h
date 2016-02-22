@@ -8,7 +8,9 @@
  * @author Anja
  */
 class Serializable {
-public: 
+public:
+
+    virtual ~Serializable() = default;
     
     /**
      * Saves the serializable object in a file.
