@@ -146,7 +146,7 @@ bool operator==(const Bookmark& A, const Bookmark& B) {
  * @return true if first bookmark is lexicographically smaller than b
  */
 
-bool smallerByName(const Bookmark& A, const Bookmark& B) {
+bool Bookmark::smallerByName(const Bookmark& A, const Bookmark& B) {
     return (A.getName().compare(B.getName()) < 0);
 }
 
@@ -156,7 +156,7 @@ bool smallerByName(const Bookmark& A, const Bookmark& B) {
  * @param B second bookmark
  * @return true if A is created before B
  */
-bool smallerByDate(const Bookmark& A, const Bookmark& B) {
+bool Bookmark::smallerByDate(const Bookmark& A, const Bookmark& B) {
     return (A.getDate() < B.getDate());
 }
 

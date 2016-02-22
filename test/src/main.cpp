@@ -30,7 +30,7 @@ int main(int argc, char *argv[]){
     // (do not forget to include header):
     // EXEC(ExampleTester)
 
-    EXEC(PageStackFrameTester)
+    /*EXEC(PageStackFrameTester)
     EXEC(PageRegistrationTester)
     EXEC(NavigatorTester)
 
@@ -47,10 +47,10 @@ int main(int argc, char *argv[]){
 
     EXEC(AnnotationTester)
     EXEC(RectangleAnnotationTester)
-    EXEC(SearchFeedbackTester)
+    EXEC(SearchFeedbackTester)*/
     EXEC(BookmarkTester)
     EXEC(BookmarkListTester)
-    EXEC(TestAlgorithmTester)
+    //EXEC(TestAlgorithmTester)
 
     return r;
 }
