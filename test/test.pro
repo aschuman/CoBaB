@@ -74,8 +74,9 @@ SOURCES += \
     src/SearchResultElementTester.cpp \
     src/AnnotationTester.cpp \
     src/RectangleAnnotationTester.cpp \
+    src/SearchFeedbackTester.cpp \
     src/BookmarkTester.cpp \
     src/BookmarkListTester.cpp \
-    src/TestAlgorithmTester.cpp \
-    src/SearchFeedbackTester.cpp
+    src/TestAlgorithmTester.cpp
+
 

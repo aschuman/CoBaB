@@ -2,13 +2,18 @@
 #define SEARCHFEEDBACKTESTER_H
 
 #include <QObject>
+#include <QTest>
+#include <QtTest/QtTest>
 #include "SearchFeedback.h"
 
 class SearchFeedbackTester : public QObject
 {
     Q_OBJECT
 private slots:
-
+    void initTestCase();
+    void testGetType();
+    void testGetList();
+    void testSaveLoad();
 
 };
 
