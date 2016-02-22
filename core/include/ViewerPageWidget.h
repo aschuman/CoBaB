@@ -10,6 +10,7 @@
 #include <QGraphicsRectItem>
 #include <QPen>
 #include "AnnotationDrawer.h"
+#include <ClickableGraphicsPixmapItem.h>
 
 
 namespace Ui {
@@ -37,17 +38,17 @@ public slots:
     void before();
     void clicked(const QModelIndex& index);
     void nextWidget(QAction* action);
-    void contextMenu(const QPoint& pos);
+    void contextMenu(const QPointF &pos);
     void on_mGraphicsView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint);
     void roiClicked();
+    void annotationSelected(Annotation *annotation, const QPointF &pos);
 
 private:
     Ui::ViewerPageWidget *ui;
     const Dataset* mDataset;
     MediaModel mModel;
-    QGraphicsView mGraphicsView;
     QGraphicsScene mGraphicsScene;
-    QGraphicsPixmapItem* mImage;
+    ClickableGraphicsPixmapItem* mImage;
     int mIndex;
 
     QPen mSelectionPen;
@@ -55,6 +56,9 @@ private:
     QRect mCurrentRubberBand;
 
     AnnotationDrawer mAnnotationDrawer;
+    Annotation* mSelectedAnnotation;
+
+    QRect mROI;
 
     void displayImage();
 

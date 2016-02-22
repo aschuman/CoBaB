@@ -7,3 +7,8 @@ ClickableGraphicsRectItem::ClickableGraphicsRectItem(RectangleAnnotation* annota
     setRect(annotation->x(), annotation->y(), annotation->width(), annotation->height());
 }
 
+void ClickableGraphicsRectItem::contextMenuEvent(QGraphicsSceneContextMenuEvent * event) {
+    emit selected(mAnnotation, event->pos());
+}
+
+
