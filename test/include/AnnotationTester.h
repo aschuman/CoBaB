@@ -13,7 +13,6 @@ private slots:
     void initTestCase();
     void testGetters();
     void testSaveLoad();
-
 };
 
 #endif // ANNOTATIONTESTER_H

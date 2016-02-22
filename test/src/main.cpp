@@ -31,6 +31,6 @@ int main(int argc, char *argv[]){
     EXEC(ConfigDataTester)
 
     EXEC(AnnotationTester)
-
+    EXEC(RectangleAnnotationTester)
     return r;
 }

@@ -2,6 +2,8 @@
 #define RECTANGLEANNOTATIONTESTER_H
 
 #include <QObject>
+#include <QTest>
+#include <QtTest/QtTest>
 #include "RectangleAnnotation.h"
 
 class RectangleAnnotationTester : public QObject
@@ -9,11 +11,8 @@ class RectangleAnnotationTester : public QObject
     Q_OBJECT
 private slots:
     void initTestCase();
-    
-
-private:
-    int x;
-
+    void testGetters();
+    void testSaveLoad();
 };
 
 #endif // RECTANGLEANNOTATIONTESTER_H
