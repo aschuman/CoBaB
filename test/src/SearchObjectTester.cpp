@@ -52,14 +52,14 @@ void SearchObjectTester::testStreamMethods()
 
     QFile file("file.dat");
     file.open(QIODevice::WriteOnly);
-    QDataStream in(&file);
-    in << sobject;
+    QDataStream out(&file);
+    out << sobject;
     file.close();
 
     file.open(QIODevice::ReadOnly);
-    QDataStream out(&file);
+    QDataStream in(&file);
     SearchObject newSobject;
-    out >> newSobject;
+    in >> newSobject;
     file.close();
 
     QCOMPARE(sobject.getMedium(), newSobject.getMedium());
