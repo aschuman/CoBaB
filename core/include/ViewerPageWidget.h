@@ -38,12 +38,12 @@ public slots:
     void before();
     void clicked(const QModelIndex& index);
     void nextWidget(QAction* action);
-    void contextMenu(const QPointF &pos);
+    virtual void contextMenu(const QPointF &pos);
     void on_mGraphicsView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint);
     void roiClicked();
     void annotationSelected(Annotation *annotation, const QPointF &pos);
 
-private:
+protected:
     Ui::ViewerPageWidget *ui;
     const Dataset* mDataset;
     MediaModel mModel;
@@ -60,8 +60,7 @@ private:
 
     QRect mROI;
 
-    void displayImage();
-
+    virtual void display() = 0;
 };
 
 #endif // VIEWERPAGEWIDGET_H

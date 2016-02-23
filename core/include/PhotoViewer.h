@@ -4,10 +4,6 @@
 #include <QWidget>
 #include "ViewerPageWidget.h"
 
-namespace Ui {
-class PhotoViewer;
-}
-
 /**
  * @brief The PhotoViewer class
  * @author Anja
@@ -19,9 +15,7 @@ class PhotoViewer : public ViewerPageWidget
 public:
     explicit PhotoViewer();
     ~PhotoViewer();
-
-private:
-    Ui::PhotoViewer *ui;
+    void display() override;
 };
 
 #endif // PHOTOVIEWER_H

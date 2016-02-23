@@ -4,6 +4,8 @@
 #include "MainWindow.h"
 #include "LibraryPageWidget.h"
 #include "ViewerPageWidget.h"
+#include "PhotoViewer.h"
+#include "SingleFrameVideoViewer.h"
 #include "ConfirmationPageWidget.h"
 #include "ParameterPageWidget.h"
 
@@ -39,7 +41,7 @@ void MainControl::run()
 void MainControl::initNavigation()
 {
     mNavi->registerPage(PageType::LIBRARY, std::make_unique<LibraryPageWidget>());
-    mNavi->registerPage(PageType::VIEWER, std::make_unique<ViewerPageWidget>());
+    mNavi->registerPage(PageType::VIEWER, std::make_unique<PhotoViewer>());
     mNavi->registerTransition(PageType::LIBRARY, LibraryPageWidget::EXIT_NEXT, PageType::VIEWER);
 
     mNavi->registerPage(PageType::PARAMETER, std::make_unique<ParameterPageWidget>());

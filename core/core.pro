@@ -56,7 +56,8 @@ HEADERS += \
     include/SearchResultElementFeedback.h \
     include/FeedbackDelegate.h \
     include/SearchResultModel.h \
-    include/ResultsPageWidget.h
+    include/ResultsPageWidget.h \
+    include/SingleFrameVideoViewer.h
 
 SOURCES += \
     src/Medium.cpp \
@@ -99,13 +100,13 @@ SOURCES += \
     src/DualFeedbackEditor.cpp \
     src/FeedbackDelegate.cpp \
     src/ResultsPageWidget.cpp \
-    src/SearchResultModel.cpp
+    src/SearchResultModel.cpp \
+    src/SingleFrameVideoViewer.cpp
 
 FORMS += \
     ui/LibraryPageWidget.ui \
     ui/MainWindow.ui \
     ui/ViewerPageWidget.ui \
     ui/ConfirmationPageWidget.ui \
-    ui/PhotoViewer.ui \
     ui/ParameterPageWidget.ui \
     ui/ResultsPageWidget.ui

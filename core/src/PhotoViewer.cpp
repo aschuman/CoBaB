@@ -1,15 +1,34 @@
 #include "PhotoViewer.h"
-#include "ui_PhotoViewer.h"
+#include "ui_ViewerPageWidget.h"
 
 PhotoViewer::PhotoViewer() :
     ViewerPageWidget()
 {
-    /*ui->setupUi(this);
-    ui->listWidget->setFlow(QListWidget::LeftToRight);
-    ui->listWidget->setWrapping(true);*/
+    ViewerPageWidget::ui->mPlayOrPauseButton->hide();
 }
 
 PhotoViewer::~PhotoViewer()
 {
-    delete ui;
+
+}
+
+void PhotoViewer::display() {
+    if(mImage != nullptr) {
+        mGraphicsScene.removeItem(mImage);
+        delete mImage;
+        mImage = nullptr;
+        mAnnotationDrawer.removeAnnotations();
+
+    }
+    if(mCurrentSelection != nullptr){
+        mGraphicsScene.removeItem(mCurrentSelection);
+        delete mCurrentSelection;
+        mCurrentSelection = nullptr;
+    }
+    Medium* medium = mDataset->getMediaList().at(mIndex);
+    mImage = new ClickableGraphicsPixmapItem(QPixmap::fromImage(QImage(medium->getPath())));
+    mGraphicsScene.addItem(mImage);
+    connect(mImage, SIGNAL(selected(const QPointF&)), this, SLOT(contextMenu(const QPointF&)));
+    mGraphicsScene.setSceneRect(0,0, mImage->boundingRect().width(), mImage->boundingRect().height());
+    mAnnotationDrawer.setAnnotations(medium->getAnnotationList());
 }

@@ -51,21 +51,21 @@ void ViewerPageWidget::contextMenu(const QPointF &pos) {
 }
 void ViewerPageWidget::clicked(const QModelIndex& index) {
     mIndex = index.row();
-    displayImage();
+    display();
 }
 void ViewerPageWidget::next() {
     mIndex++;
     if(mIndex >= mDataset->getNumberOfMedia()) {
         mIndex = mDataset->getNumberOfMedia()-1;
     }
-    displayImage();
+    display();
 }
 void ViewerPageWidget::before() {
     mIndex--;
     if(mIndex <= -1) {
         mIndex = 0;
     }
-    displayImage();
+    display();
 }
 
 void ViewerPageWidget::reset()
@@ -79,30 +79,9 @@ void ViewerPageWidget::reset()
             mDataset = &(var2.value<std::shared_ptr<DatasetList>>()->getDatasetList().at(var.value<int>()));
             mModel.setDataset(*mDataset);
             mIndex = 0;
-            displayImage();
+            display();
         }
     }
-}
-
-void ViewerPageWidget::displayImage() {
-    if(mImage != nullptr) {
-        mGraphicsScene.removeItem(mImage);
-        delete mImage;
-        mImage = nullptr;
-        mAnnotationDrawer.removeAnnotations();
-
-    }
-    if(mCurrentSelection != nullptr){
-        mGraphicsScene.removeItem(mCurrentSelection);
-        delete mCurrentSelection;
-        mCurrentSelection = nullptr;
-    }
-    Medium* medium = mDataset->getMediaList().at(mIndex);
-    mImage = new ClickableGraphicsPixmapItem(QPixmap::fromImage(QImage(medium->getPath())));
-    mGraphicsScene.addItem(mImage);
-    connect(mImage, SIGNAL(selected(const QPointF&)), this, SLOT(contextMenu(const QPointF&)));
-    mGraphicsScene.setSceneRect(0,0, mImage->boundingRect().width(), mImage->boundingRect().height());
-    mAnnotationDrawer.setAnnotations(medium->getAnnotationList());
 }
 
 void ViewerPageWidget::nextWidget(QAction* action) {
@@ -133,6 +112,9 @@ void ViewerPageWidget::on_mGraphicsView_rubberBandChanged(const QRect &viewportR
                                                           const QPointF &toScenePoint)
 {
     Q_UNUSED(viewportRect);
+    if(mImage == nullptr) {
+        return;
+    }
     if(fromScenePoint.x() == 0 && fromScenePoint.y() == 0){
         if(mCurrentSelection != nullptr){
             mGraphicsScene.removeItem(mCurrentSelection);
