@@ -8,11 +8,11 @@ SingleFrameVideo, Photo, Video
 Serializable
 Dataset
 ConfigData
+SearchObject, SearchQuery, SearchResult, SearchResultElement, DataPacket
+Annotation, RectangleAnnotation, BookmarkList, Bookmark, SearchFeedback
 
 
 Fertige Klassen ohne Unit Tests:
-SearchObject, SearchQuery, SearchResult, SearchResultElement, DataPacket
-Annotation, RectangleAnnotation, BookmarkList, Bookmark, SearchFeedback
 
 
 Klassen, an denen gearbeitet wird:
