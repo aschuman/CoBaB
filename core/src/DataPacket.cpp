@@ -36,8 +36,8 @@ QUuid DataPacket::getUuid() const {
  * @brief writes the datapacket to stream
  * @param in the stream
  */
-void DataPacket::toStream(QDataStream& in) const {
-    in << mType
+void DataPacket::toStream(QDataStream& out) const {
+    out << mType
        << mUuid;
 
 }
@@ -46,14 +46,14 @@ void DataPacket::toStream(QDataStream& in) const {
  * @brief calls the datapacket from stream
  * @param out the stream
  */
-void DataPacket::fromStream(QDataStream& out) {
+void DataPacket::fromStream(QDataStream& in) {
     DataPacket::Type type;
     QUuid uuid;
 
-    out >> type;
+    in >> type;
     mType = type;
 
-    out >> uuid;
+    in >> uuid;
     mUuid = uuid;
 }
 

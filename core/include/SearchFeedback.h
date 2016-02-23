@@ -24,7 +24,7 @@ public:
 
     const QList<QPair<SearchObject, int>>& getFeedbackList() const;
     
-    Type getType() const;
+    Type getFeedbackType() const;
 
     friend QDataStream& operator<<(QDataStream& out, const SearchFeedback& feedback);
     
@@ -36,7 +36,7 @@ public:
 
 private: 
     QList<QPair<SearchObject, int>> mFeedbackList;
-    QString mType;      //type
+    QString mFeedbackType;      //feedback type
 };
 
 #endif //_SEARCHFEEDBACK_H

@@ -9,7 +9,7 @@
  * @brief SearchQuery standart constructor
  */
 SearchQuery::SearchQuery() {
-    mType = Type::SEARCHQUERY;
+    mType = DataPacket::Type::SEARCHQUERY;
 }
 
 /**
@@ -70,10 +70,10 @@ QDataStream& operator>>(QDataStream& in, SearchQuery& searchQuery) {
  * @brief calls the << operator
  * @param in the datastream
  */
-void SearchQuery::toStream(QDataStream& in) const {
+void SearchQuery::toStream(QDataStream& out) const {
     //write object to stream
-    DataPacket::toStream(in); //write uuid and type
-    in << mDatasets
+    DataPacket::toStream(out); //write uuid and type
+    out << mDatasets
         << mSearchObject;
 }
 
@@ -81,11 +81,11 @@ void SearchQuery::toStream(QDataStream& in) const {
  * @brief calls the >> operator
  * @param out the datastream
  */
-void SearchQuery::fromStream(QDataStream& out) {
+void SearchQuery::fromStream(QDataStream& in) {
 
     //read object from stream
-    DataPacket::fromStream(out); //write uuid and type
-    out >> mDatasets;
-    out >> mSearchObject;
+    DataPacket::fromStream(in); //write uuid and type
+    in >> mDatasets;
+    in >> mSearchObject;
 
 }

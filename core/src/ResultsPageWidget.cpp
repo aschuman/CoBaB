@@ -3,6 +3,9 @@
 
 #include "SearchResult.h"
 
+#define LOGGING_LEVEL_1
+#include "log.h"
+
 /**
  * @brief temporary
  * @return
@@ -81,6 +84,17 @@ ResultsPageWidget::~ResultsPageWidget()
 
 void ResultsPageWidget::reset()
 {
-    mResult = std::make_unique<SearchResult>(generateReslut());
-    mModel.setSearchResult(mResult.get());
+    QVariant var;
+    emit readFromStack(0, var);
+    if(var.canConvert<std::shared_ptr<Algorithm>>()){
+        emit startAlgorithm(var.value<std::shared_ptr<Algorithm>>().get());
+    } else {
+        LOG_ERR("could not find algorithm on stack");
+    }
+}
+
+void ResultsPageWidget::setResults(SearchResult result)
+{
+    mResult = std::move(result);
+    mModel.setSearchResult(&mResult);
 }

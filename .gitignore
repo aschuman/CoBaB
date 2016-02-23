@@ -48,3 +48,6 @@
 
 # build directory
 build-*/
+
+# temporary test files
+*.tmp

@@ -26,6 +26,8 @@ public:
 
     void setName(const QString& name);
 
+    void setDate(const QDateTime& date);
+
     void setParameter(const QJsonObject& parameter);
 
     void setPath(const QString& path);

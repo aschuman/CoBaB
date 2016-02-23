@@ -26,8 +26,8 @@ HEADERS += \
     interface/SearchQuery.h \
     include/DatasetList.h \
     interface/Algorithm.h \
-    include/SearchAlgorithm.h \
-    include/TestAlgorithm.h \
+    interface/SearchAlgorithm.h \
+    interface/TestAlgorithm.h \
     include/SearchFeedback.h \
     include/Bookmark.h \
     include/BookmarkList.h \
@@ -58,6 +58,7 @@ HEADERS += \
     include/SearchResultModel.h \
     include/ResultsPageWidget.h \
     include/SingleFrameVideoViewer.h
+    include/SearchManager.h
 
 SOURCES += \
     src/Medium.cpp \
@@ -102,6 +103,7 @@ SOURCES += \
     src/ResultsPageWidget.cpp \
     src/SearchResultModel.cpp \
     src/SingleFrameVideoViewer.cpp
+    src/SearchManager.cpp
 
 FORMS += \
     ui/LibraryPageWidget.ui \

@@ -15,6 +15,7 @@ Bookmark::Bookmark() {
 Bookmark::Bookmark(const QString& path) {
     mPath = path;
     QFile file(path);
+    file.open(QIODevice::ReadOnly);
     QDataStream in(&file);
     in >> *this;
     file.close();
@@ -38,6 +39,14 @@ Bookmark::Bookmark(const SearchResult& result, const QString& algorithm, const S
  */
 void Bookmark::setName(const QString& name) {
     mName = name;
+}
+
+/**
+ * @brief Bookmark::setDate set bookmark date
+ * @param date new date
+ */
+void Bookmark::setDate(const QDateTime& date) {
+    mDate = date;
 }
 
 /**
@@ -137,7 +146,7 @@ bool operator==(const Bookmark& A, const Bookmark& B) {
  * @return true if first bookmark is lexicographically smaller than b
  */
 
-bool smallerByName(const Bookmark& A, const Bookmark& B) {
+bool Bookmark::smallerByName(const Bookmark& A, const Bookmark& B) {
     return (A.getName().compare(B.getName()) < 0);
 }
 
@@ -147,7 +156,7 @@ bool smallerByName(const Bookmark& A, const Bookmark& B) {
  * @param B second bookmark
  * @return true if A is created before B
  */
-bool smallerByDate(const Bookmark& A, const Bookmark& B) {
+bool Bookmark::smallerByDate(const Bookmark& A, const Bookmark& B) {
     return (A.getDate() < B.getDate());
 }
 
@@ -174,6 +183,7 @@ bool Bookmark::validate(const Bookmark& bookmark) {
  */
 void Bookmark::saveFile() const {
     QFile file(mPath);
+    file.open(QIODevice::WriteOnly);
     QDataStream out(&file);
     out << *this;
     file.close();

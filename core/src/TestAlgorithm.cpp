@@ -5,9 +5,10 @@
  * @param id algorithm ID
  */
 TestAlgorithm::TestAlgorithm(const QString& id) {
-	mId = id;
+    //TestAlgorithm();
+    mId = id;
     mName = "Test algorithm";
-    mDescription = "an dummy algorithm that scores randomly";
+    mDescription = "dummy algorithm that scores randomly";
 }
 
 /**
@@ -92,11 +93,11 @@ void TestAlgorithm::setDescription(const QString& description) {
 }
 
 /**
- * @brief TestAlgorithm::getDescription show algorithm description
- * @return a QString that describes the algorithm
+ * @brief TestAlgorithm::getId get the algorithm ID
+ * @return algorithm ID
  */
-QString TestAlgorithm::getDescription() const {
-    return mDescription;
+QString TestAlgorithm::getId() const {
+    return mId;
 }
 
 /**
@@ -105,6 +106,14 @@ QString TestAlgorithm::getDescription() const {
  */
 QString TestAlgorithm::getName() const {
     return mName;
+}
+
+/**
+ * @brief TestAlgorithm::getDescription show algorithm description
+ * @return a QString that describes the algorithm
+ */
+QString TestAlgorithm::getDescription() const {
+    return mDescription;
 }
 
 /**

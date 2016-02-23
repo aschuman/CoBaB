@@ -71,10 +71,10 @@ QDataStream& operator>>(QDataStream& in, SearchResultElement& searchResultElemen
  * @brief calls the << operator
  * @param in the datastream
  */
-void SearchResultElement::toStream(QDataStream& in) const {
+void SearchResultElement::toStream(QDataStream& out) const {
 
     //write object to stream
-    in << mScore
+    out << mScore
         << mSearchObject;
 }
 
@@ -82,11 +82,11 @@ void SearchResultElement::toStream(QDataStream& in) const {
  * @brief calls the >> operator
  * @param out the datastream
  */
-void SearchResultElement::fromStream(QDataStream& out) {
+void SearchResultElement::fromStream(QDataStream& in) {
 
     //read object from stream
-    out >> mScore;
-    out >> mSearchObject;
+    in >> mScore;
+    in >> mSearchObject;
 
 
 }

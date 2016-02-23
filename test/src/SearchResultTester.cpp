@@ -66,13 +66,15 @@ void SearchResultTester::testStreamMethods()
 
     QFile file("file.dat");
     file.open(QIODevice::WriteOnly);
-    QDataStream in(&file); //serialize the data into the file
-    in << s; //serialize the datapacket
+    QDataStream out(&file);
+    out << s;
+    file.close();
 
     file.open(QIODevice::ReadOnly);
-    QDataStream out(&file); //read the data serialized from the file
+    QDataStream in(&file);
     SearchResult newS(list);
-    out >> newS; //extract the datapacket
+    in >> newS;
+    file.close();
 
     QCOMPARE(s.getSearchResultList().takeFirst().getScore(), newS.getSearchResultList().takeFirst().getScore());
     QCOMPARE(s.getSearchResultList().takeLast().getScore(), newS.getSearchResultList().takeLast().getScore());
