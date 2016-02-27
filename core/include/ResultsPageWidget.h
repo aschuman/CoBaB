@@ -20,7 +20,7 @@ class ResultsPageWidget : public PageWidget
     Q_OBJECT
 
 public:
-    explicit ResultsPageWidget();
+    ResultsPageWidget();
     ~ResultsPageWidget();
     void reset() override;
 
