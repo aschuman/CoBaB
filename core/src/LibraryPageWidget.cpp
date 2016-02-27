@@ -25,7 +25,7 @@ LibraryPageWidget::~LibraryPageWidget()
 void LibraryPageWidget::reset()
 {
     QVariant var;
-    emit readFromStack(0, var);
+    emit readFromStack(-2, var);
     if(var.canConvert<std::shared_ptr<DatasetList>>()){
         mModel.setDatasetList(var.value<std::shared_ptr<DatasetList>>()->getDatasetList());
     }

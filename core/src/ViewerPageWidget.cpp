@@ -75,7 +75,7 @@ void ViewerPageWidget::reset()
     emit readFromStack(0, var);
     if(var.canConvert<int>()){
         QVariant var2;
-        emit readFromStack(1, var2);
+        emit readFromStack(-2, var2);
         if(var2.canConvert<std::shared_ptr<DatasetList>>()) {
             mDataset = &(var2.value<std::shared_ptr<DatasetList>>()->getDatasetList().at(var.value<int>()));
             mModel.setDataset(*mDataset);

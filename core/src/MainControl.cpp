@@ -35,9 +35,9 @@ void MainControl::run()
 
     std::vector<QVariant> initialStack;
 
-    //QVariant algoList;
+    QVariant algoList;
     //algoList.setValue(std::make_shared<AlgorithmList>("plugins"));
-    //initialStack.push_back(algoList);
+    initialStack.push_back(algoList);
 
     QVariant dsList;
     dsList.setValue(std::make_shared<DatasetList>(findDatasets()));
