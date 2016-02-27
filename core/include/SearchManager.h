@@ -3,13 +3,15 @@
 
 #include "ResultsPageWidget.h"
 #include "Algorithm.h"
+#include "QObject"
 
 /**
  * @brief Handles an algorithm that will return a SearchResult during the algorithms runtime.
  * @author Vincent Winkler
  */
-class SearchManager
+class SearchManager : public QObject
 {
+    Q_OBJECT
 public:
     SearchManager(ResultsPageWidget* resultsPageWidget);
 

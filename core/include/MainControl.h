@@ -5,6 +5,7 @@
 #include<qobject.h>
 #include "Navigator.h"
 #include "DatasetList.h"
+#include "SearchManager.h"
 
 
 /**
@@ -33,6 +34,7 @@ private:
 
 
     std::unique_ptr<Navigator> mNavi;
+    std::unique_ptr<SearchManager> mSearchManager;
 };
 
 #endif // MAINCONTROL_H

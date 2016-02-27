@@ -9,6 +9,7 @@
  */
 SearchManager::SearchManager(ResultsPageWidget *resultsPageWidget) : mResultsPageWidget(resultsPageWidget)
 {
+    QObject::connect(resultsPageWidget, SIGNAL(startAlgorithm(Algorithm*)), this, SLOT(startSearch(Algorithm*)));
 }
 
 /**
