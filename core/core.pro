@@ -57,8 +57,9 @@ HEADERS += \
     include/FeedbackDelegate.h \
     include/SearchResultModel.h \
     include/ResultsPageWidget.h \
-    include/SingleFrameVideoViewer.h
-    include/SearchManager.h
+    include/SingleFrameVideoViewer.h \
+    include/SearchManager.h \
+    interface/AlgorithmList.h
 
 SOURCES += \
     src/Medium.cpp \
@@ -102,8 +103,9 @@ SOURCES += \
     src/FeedbackDelegate.cpp \
     src/ResultsPageWidget.cpp \
     src/SearchResultModel.cpp \
-    src/SingleFrameVideoViewer.cpp
-    src/SearchManager.cpp
+    src/SingleFrameVideoViewer.cpp \
+    src/SearchManager.cpp \
+    src/AlgorithmList.cpp
 
 FORMS += \
     ui/LibraryPageWidget.ui \
