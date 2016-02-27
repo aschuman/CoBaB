@@ -26,7 +26,7 @@ void Navigator::registerPage(PageType type, std::unique_ptr<PageWidget> widget)
 {
     assert(type != PageType::NONE);
     QObject::connect(widget.get(), SIGNAL(pushToStack(QVariant)), this, SLOT(tryPush(QVariant)));
-    QObject::connect(widget.get(), SIGNAL(readFromStack(size_t, QVariant&)), this, SLOT(tryRead(size_t,QVariant&)));
+    QObject::connect(widget.get(), SIGNAL(readFromStack(int, QVariant&)), this, SLOT(tryRead(int,QVariant&)));
     QObject::connect(widget.get(), SIGNAL(exit(int)), this, SLOT(tryExit(int)));
 
     mPageRegistrations.insert(std::map<PageType, PageRegistration>::value_type(type, PageRegistration(move(widget))));
@@ -63,12 +63,17 @@ void Navigator::tryPush(QVariant item)
  * @param index Position to be read from. (0 referes to the top of te stack)
  * @param value Reference to a valid QVariant object that will be equipped with the desired stack element.
  */
-void Navigator::tryRead(size_t index, QVariant &value)
+void Navigator::tryRead(int index, QVariant &value)
 {
     PageRegistration* registration = checkSender();
     if(registration){
-        if(mDataStack.size() > index)
-            value = mDataStack[mDataStack.size() - 1 - index];
+        if(index >= 0)
+            index = mDataStack.size() - 1 - index;
+        else
+            index = -index - 1;
+
+        if(index < mDataStack.size())
+            value = mDataStack[index];
         else
             LOG_ERR("tried to read data stack out of range");
     }

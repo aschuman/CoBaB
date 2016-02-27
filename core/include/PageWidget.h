@@ -25,10 +25,10 @@ signals:
 
     /**
      * @brief Emitted when this widget wants to read from the stack.
-     * @param index Position at which will be read (0 is referes to the top of the stack).
+     * @param index Position at which will be read (0 is referes to the top of the stack, -1 to the bottom).
      * @param value Valid QVariant which will be equipped with the appripriate stack item after return.
      */
-    void readFromStack(size_t index, QVariant& value);
+    void readFromStack(int index, QVariant& value);
 
     /**
      * @brief Emtted when this widget wants to exit.

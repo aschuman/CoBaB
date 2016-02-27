@@ -16,6 +16,9 @@ private slots:
     void testReadStackTop();
     void testReadStackOutOfRange();
     void testReadStackSecondFromTop();
+    void testReadStackBottom();
+    void testReadSecondFromBottom();
+    void testReadStackFromBottomOutOfRange();
     void testLibraryViewerTransition();
     void testPushToStack();
     void testHomePage();

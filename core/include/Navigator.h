@@ -37,7 +37,7 @@ signals:
 
 private slots:
     void tryPush(QVariant item);
-    void tryRead(size_t index, QVariant& value);
+    void tryRead(int index, QVariant& value);
     void tryExit(int exitCode);
     void toPreviousPage();
     void toHomePage();
