@@ -119,8 +119,7 @@ void Navigator::toPreviousPage()
 void Navigator::toHomePage()
 {
     LOG("going to home page");
-    for(int i=0; i < mPageStack.size() - 1; ++i)
-        mPageStack.pop_back();
+    mPageStack.resize(1);
     mDataStack.resize(mInitialStackSize);
     mPageStack.back().setSize(0);
 
