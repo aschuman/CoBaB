@@ -10,10 +10,15 @@
  * @author Tung
  */
 
-class TestAlgorithm: public SearchAlgorithm {
+class TestAlgorithm : public QObject, public SearchAlgorithm {
+
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.CoBaC.Algorithm" "testalgorithm.json")
+    Q_INTERFACES(Algorithm)
+
 public:
 
-    TestAlgorithm(const QString& id);
+    TestAlgorithm(const QString& id = "default");
     
     QList<DataPacket*> run() override;
     
