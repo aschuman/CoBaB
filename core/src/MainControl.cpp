@@ -9,6 +9,7 @@
 #include "ConfirmationPageWidget.h"
 #include "ParameterPageWidget.h"
 #include "ResultsPageWidget.h"
+#include "AlgorithmList.h"
 
 #define LOGGING_LEVEL_1
 #include "log.h"
@@ -31,11 +32,17 @@ void MainControl::run()
     mNavi = std::make_unique<Navigator>(move(mainWindow));
     initNavigation();
 
-    QVariant dsList;
-    dsList.setValue(std::make_shared<DatasetList>(findDatasets()));
 
     std::vector<QVariant> initialStack;
+
+    QVariant algoList;
+    algoList.setValue(std::make_shared<AlgorithmList>("../plugins"));
+    initialStack.push_back(algoList);
+
+    QVariant dsList;
+    dsList.setValue(std::make_shared<DatasetList>(findDatasets()));
     initialStack.push_back(dsList);
+
     mNavi->start(PageType::LIBRARY, initialStack);
 }
 
@@ -51,7 +58,9 @@ void MainControl::initNavigation()
     mNavi->registerPage(PageType::CONFIRMATION, std::make_unique<ConfirmationPageWidget>());
     mNavi->registerTransition(PageType::PARAMETER, ParameterPageWidget::EXIT_NEXT, PageType::CONFIRMATION);
 
-    mNavi->registerPage(PageType::RESULTS, std::make_unique<ResultsPageWidget>());
+    auto resultsPageWidget = std::make_unique<ResultsPageWidget>();
+    mSearchManager = std::make_unique<SearchManager>(resultsPageWidget.get());
+    mNavi->registerPage(PageType::RESULTS, move(resultsPageWidget));
     mNavi->registerTransition(PageType::CONFIRMATION, ConfirmationPageWidget::EXIT_NEXT, PageType::RESULTS);
 }
 

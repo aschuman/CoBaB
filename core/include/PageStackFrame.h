@@ -18,7 +18,7 @@ class PageStackFrame
     size_t mSize;
     PageType mType;
 public:
-    PageStackFrame(PageType type);
+    explicit PageStackFrame(PageType type = PageType::NONE);
     void setSize(size_t size);
     void incrementSize();
     size_t getSize() const;

@@ -18,6 +18,7 @@
 #include "BookmarkTester.h"
 #include "BookmarkListTester.h"
 #include "TestAlgorithmTester.h"
+#include "AlgorithmListTester.h"
 
 #define EXEC(Tester) {Tester tester; r |= QTest::qExec(&tester);}
 
@@ -51,6 +52,7 @@ int main(int argc, char *argv[]){
     EXEC(BookmarkTester)
     EXEC(BookmarkListTester)
     EXEC(TestAlgorithmTester)
+    EXEC(AlgorithmListTester)
 
     return r;
 }

@@ -16,6 +16,8 @@ class SearchObject: public Serializable {
 
 public:
 
+    enum Type { MEDIUM, ROI, ANNOTATION };
+
     SearchObject();
 
     QString getMedium() const;
@@ -38,6 +40,8 @@ public:
 
     void setMediumIndex(const int index);
 
+    Type getType() const;
+
     void toStream(QDataStream& out) const override;
 
     void fromStream(QDataStream& in) override;
@@ -48,7 +52,7 @@ public:
 
 private:
 
-    QString mMedium;            ///< Medium as the serachobject
+    QString mMedium;            ///< Medium as the searchobject
 
     Annotation mAnnotation;     ///< Annotation as the searchobject
 
@@ -57,6 +61,8 @@ private:
     QString mSourceDataset;     ///< The source dataset, where the searchobject is to be found
 
     int mMediumIndex;           ///< The index of the medium, which specifies if it is a video or photo
+
+    Type mType;                 ///< The type of the searchobject
 
 };
 

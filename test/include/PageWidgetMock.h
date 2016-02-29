@@ -9,7 +9,7 @@ public:
     PageWidgetMock();
     virtual void reset();
     void emitPush(QVariant item);
-    void emitRead(size_t index, QVariant& value);
+    void emitRead(int index, QVariant& value);
     void emitExit(int exitCode);
     void setReset(bool shown);
     bool isReset() const;

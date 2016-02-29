@@ -1,6 +1,7 @@
 #include "include/ViewerPageWidget.h"
 #include "ui_ViewerPageWidget.h"
 #include "SearchQuery.h"
+#include "TestAlgorithm.h"
 #include <QMenu>
 
 const int ViewerPageWidget::EXIT_NEXT = 0;
@@ -72,7 +73,7 @@ void ViewerPageWidget::reset()
     emit readFromStack(0, var);
     if(var.canConvert<int>()){
         QVariant var2;
-        emit readFromStack(1, var2);
+        emit readFromStack(-2, var2);
         if(var2.canConvert<std::shared_ptr<DatasetList>>()) {
             mDataset = &(var2.value<std::shared_ptr<DatasetList>>()->getDatasetList().at(var.value<int>()));
             mModel.setDataset(*mDataset);
@@ -97,12 +98,22 @@ void ViewerPageWidget::nextWidget(QAction* action) {
 
     SearchQuery searchQuery;
     searchQuery.setSearchObject(searchObject);
+    QList<QString> datasetList;
+    datasetList.push_back(mDataset->getName());
+    searchQuery.setDatasets(datasetList);
 
     QString algorithm = action->text();
 
     QVariant query;
     query.setValue(std::make_shared<SearchQuery>(searchQuery));
     pushToStack(query);
+
+    // todo: push actual, user-chosen algorithm
+    std::shared_ptr<Algorithm> algo = std::make_shared<TestAlgorithm>("id123");
+    QVariant varAlgo;
+    varAlgo.setValue(algo);
+    pushToStack(varAlgo);
+
     exit(EXIT_NEXT);
 }
 

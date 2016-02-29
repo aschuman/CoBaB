@@ -12,6 +12,7 @@
 
 class Algorithm {
 public: 
+    virtual ~Algorithm() = default;
     
     virtual QList<DataPacket*> run() = 0;
     
@@ -28,7 +29,11 @@ public:
     virtual QString getDescription() const = 0;
 };
 
+#define Algorithm_iid "org.CoBaB.Algorithm"
+Q_DECLARE_INTERFACE(Algorithm, Algorithm_iid)
+
 #include <memory>
 Q_DECLARE_METATYPE(std::shared_ptr<Algorithm>)
+
 
 #endif //_ALGORITHM_H

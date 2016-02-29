@@ -23,6 +23,7 @@ public:
      * @param out The QDataStream has the file set as device.
      */
     virtual void fromStream(QDataStream& in) = 0;
+
 };
 
 #endif //_SERIALIZABLE_H

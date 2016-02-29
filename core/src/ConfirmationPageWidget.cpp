@@ -46,7 +46,7 @@ void ConfirmationPageWidget::reset()
 
     //read datasets
     QVariant varDatasets;
-    emit readFromStack(2, varDatasets);
+    emit readFromStack(-2, varDatasets);
     if(varDatasets.canConvert<std::shared_ptr<DatasetList>>()){
         list = varDatasets.value<std::shared_ptr<DatasetList>>();
     } else {

@@ -9,7 +9,6 @@ MediaModel::MediaModel()
 
 void MediaModel::setDataset(const Dataset& dataset)
 {
-    delete mDataset;
     mDataset = &dataset;
     emit dataChanged(createIndex(0,0), createIndex(mDataset->getNumberOfMedia(), 0));
 }

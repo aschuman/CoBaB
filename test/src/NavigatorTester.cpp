@@ -61,6 +61,29 @@ void NavigatorTester::testReadStackSecondFromTop()
     QCOMPARE(item.toInt(), 123);
 }
 
+void NavigatorTester::testReadStackBottom()
+{
+    QVariant item;
+    mLibraryMock->emitRead(-1, item);
+    QCOMPARE(item.type(), QVariant::Type::Int);
+    QCOMPARE(item.toInt(), 123);
+}
+
+void NavigatorTester::testReadSecondFromBottom()
+{
+    QVariant item;
+    mLibraryMock->emitRead(-2, item);
+    QCOMPARE(item.type(), QVariant::Type::String);
+    QCOMPARE(item.toString(), QString("What is your major malfunction?"));
+}
+
+void NavigatorTester::testReadStackFromBottomOutOfRange()
+{
+    QVariant item;
+    mLibraryMock->emitRead(-3, item);
+    QCOMPARE(item.type(), QVariant::Type::Invalid);
+}
+
 void NavigatorTester::testLibraryViewerTransition()
 {
     mLibraryMock->setReset(false);
