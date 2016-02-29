@@ -55,7 +55,8 @@ HEADERS += \
     include/BookmarkTester.h \
     include/BookmarkListTester.h \
     include/TestAlgorithmTester.h \
-    include/SearchFeedbackTester.h
+    include/SearchFeedbackTester.h \
+    include/AlgorithmListTester.h
 
 SOURCES += \
     src/main.cpp \
@@ -77,6 +78,7 @@ SOURCES += \
     src/SearchFeedbackTester.cpp \
     src/BookmarkTester.cpp \
     src/BookmarkListTester.cpp \
-    src/TestAlgorithmTester.cpp
+    src/TestAlgorithmTester.cpp \
+    src/AlgorithmListTester.cpp
 
 
