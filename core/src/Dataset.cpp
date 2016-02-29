@@ -33,11 +33,23 @@ Dataset::Dataset(const QString& path) {
     mValid = createPreviewPhoto();
 }
 
+Dataset::Dataset(const Dataset& other) {
+    mName = other.getName();
+    mPreviewPhoto = other.getPreviewPhoto();
+    mPath = other.getPath();
+    mType = other.getType();
+    mValid = other.isValid();
+    for(Medium* iter: other.getMediaList()) {
+        Medium* medium = new Medium(*iter);
+        mMediaList.append(medium);
+    }
+}
+
 /**
  * @brief Dataset::~Dataset Deletes the Dataset.
  */
 Dataset::~Dataset() {
-    //qDeleteAll(mMediaList);
+    qDeleteAll(mMediaList);
     mMediaList.clear();
 }
 
@@ -45,7 +57,7 @@ Dataset::~Dataset() {
  * @brief Dataset::isValid Returns, if the dataset is valid.
  * @return If the dataset is valid.
  */
-bool Dataset::isValid() {
+bool Dataset::isValid() const {
     return mValid;
 }
 
