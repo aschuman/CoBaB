@@ -17,7 +17,7 @@ public:
     /**
      * @param file
      */
-    AlgorithmList(QString file);
+    explicit AlgorithmList(const QString& file);
     AlgorithmList(AlgorithmList&& a);
     AlgorithmList& operator=(AlgorithmList&& a);
     

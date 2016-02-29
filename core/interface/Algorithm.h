@@ -29,7 +29,7 @@ public:
     virtual QString getDescription() const = 0;
 };
 
-#define Algorithm_iid "org.CoBaC.Algorithm"
+#define Algorithm_iid "org.CoBaB.Algorithm"
 Q_DECLARE_INTERFACE(Algorithm, Algorithm_iid)
 
 #include <memory>

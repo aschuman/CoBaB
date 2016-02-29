@@ -36,7 +36,7 @@ void MainControl::run()
     std::vector<QVariant> initialStack;
 
     QVariant algoList;
-    //algoList.setValue(std::make_shared<AlgorithmList>("plugins"));
+    algoList.setValue(std::make_shared<AlgorithmList>("../plugins"));
     initialStack.push_back(algoList);
 
     QVariant dsList;

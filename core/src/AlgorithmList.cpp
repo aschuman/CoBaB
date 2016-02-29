@@ -18,7 +18,7 @@
 /**
  * @param file
  */
-AlgorithmList::AlgorithmList(QString file) {
+AlgorithmList::AlgorithmList(const QString& file) {
     QDir pluginsDir(file);
 
     for(const QString& fileName : pluginsDir.entryList(QDir::Files))
@@ -28,7 +28,7 @@ AlgorithmList::AlgorithmList(QString file) {
         QObject* plugin = loader.instance();
         if(plugin){
             LOG("loading plugin ", fileName.toStdString(), " ..");
-            Algorithm* algo = dynamic_cast<Algorithm*>(plugin);
+            Algorithm* algo = qobject_cast<Algorithm*>(plugin);
             if(algo){
                 LOG("sucessfully loaded plugin");
                 mAlgorithmList.push_back(std::unique_ptr<Algorithm>(algo));

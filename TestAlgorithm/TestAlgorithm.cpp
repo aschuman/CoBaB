@@ -4,9 +4,9 @@
  * @brief TestAlgorithm::TestAlgorithm create new algorithm with given ID
  * @param id algorithm ID
  */
-TestAlgorithm::TestAlgorithm(const QString& id) {
+TestAlgorithm::TestAlgorithm() {
     //TestAlgorithm();
-    mId = id;
+    mId = "default";
     mName = "Test algorithm";
     mDescription = "dummy algorithm that scores randomly";
 }

@@ -13,12 +13,12 @@
 class TestAlgorithm : public QObject, public SearchAlgorithm {
 
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.CoBaC.Algorithm" "testalgorithm.json")
+    Q_PLUGIN_METADATA(IID "org.CoBaB.Algorithm" "TestAlgorithm.json")
     Q_INTERFACES(Algorithm)
 
 public:
 
-    TestAlgorithm(const QString& id = "default");
+    TestAlgorithm();
     
     QList<DataPacket*> run() override;
     
