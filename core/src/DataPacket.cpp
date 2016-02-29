@@ -57,31 +57,31 @@ void DataPacket::fromStream(QDataStream& in) {
     mUuid = uuid;
 }
 
-/**
- * @brief overrides the operator >>
- * @param in the stream, where the datapcket is written
- * @param datapacket which is written in the stream
- * @return
- */
-QDataStream& operator >>(QDataStream& in, DataPacket& datapacket) {
+///**
+// * @brief overrides the operator >>
+// * @param in the stream, where the datapcket is written
+// * @param datapacket which is written in the stream
+// * @return
+// */
+//QDataStream& operator >>(QDataStream& in, DataPacket& datapacket) {
 
-    datapacket.fromStream(in);
+//    datapacket.fromStream(in);
 
-    return in;
-}
+//    return in;
+//}
 
-/**
- * @brief overrides the operator <<
- * @param out the stream from which the datapacket is called
- * @param datapacket which is called
- * @return
- */
-QDataStream& operator <<(QDataStream& out, const DataPacket& datapacket) {
+///**
+// * @brief overrides the operator <<
+// * @param out the stream from which the datapacket is called
+// * @param datapacket which is called
+// * @return
+// */
+//QDataStream& operator <<(QDataStream& out, const DataPacket& datapacket) {
 
-    datapacket.toStream(out);
+//    datapacket.toStream(out);
 
-    return out;
-}
+//    return out;
+//}
 
 QDataStream& operator >>(QDataStream& in, DataPacket::Type& e)
 {

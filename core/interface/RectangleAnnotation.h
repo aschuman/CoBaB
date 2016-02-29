@@ -14,9 +14,9 @@ public:
 
     RectangleAnnotation(const QString& id, const QString& type);
 
-    friend QDataStream& operator<<(QDataStream& out, const RectangleAnnotation& annotation);
+//    friend QDataStream& operator<<(QDataStream& out, const RectangleAnnotation& annotation);
 
-    friend QDataStream& operator>>(QDataStream& in, RectangleAnnotation& annotation);
+  //  friend QDataStream& operator>>(QDataStream& in, RectangleAnnotation& annotation);
 
     void toStream(QDataStream& out) const override;
 

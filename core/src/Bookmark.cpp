@@ -197,27 +197,27 @@ void Bookmark::deleteFile() const {
     file.remove();
 }
 
-/**
- * @brief override the operator <<
- * @param out - the datastream
- * @param bookmark data to write
- * @return out - the data stream after write
- */
-QDataStream& operator<<(QDataStream& out, const Bookmark& bookmark) {
-    bookmark.toStream(out);
-    return out;
-}
+///**
+// * @brief override the operator <<
+// * @param out - the datastream
+// * @param bookmark data to write
+// * @return out - the data stream after write
+// */
+//QDataStream& operator<<(QDataStream& out, const Bookmark& bookmark) {
+//    bookmark.toStream(out);
+//    return out;
+//}
 
-/**
- * @brief override the operator >>
- * @param out - the datastream
- * @param bookmark save new bookmark here
- * @return out - the data stream after read
- */
-QDataStream& operator>>(QDataStream& in, Bookmark& bookmark) {
-    bookmark.fromStream(in);
-    return in;
-}
+///**
+// * @brief override the operator >>
+// * @param out - the datastream
+// * @param bookmark save new bookmark here
+// * @return out - the data stream after read
+// */
+//QDataStream& operator>>(QDataStream& in, Bookmark& bookmark) {
+//    bookmark.fromStream(in);
+//    return in;
+//}
 
 /**
  * @brief calls the << operator

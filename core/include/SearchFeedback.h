@@ -26,9 +26,9 @@ public:
     
     Type getFeedbackType() const;
 
-    friend QDataStream& operator<<(QDataStream& out, const SearchFeedback& feedback);
+//    friend QDataStream& operator<<(QDataStream& out, const SearchFeedback& feedback);
     
-    friend QDataStream& operator>>(QDataStream& in, SearchFeedback& feedback);
+  //  friend QDataStream& operator>>(QDataStream& in, SearchFeedback& feedback);
 
     void toStream(QDataStream& out) const override;
 

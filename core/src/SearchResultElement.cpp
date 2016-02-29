@@ -45,27 +45,27 @@ void SearchResultElement::setSearchObject(const SearchObject searchObject) {
     mSearchObject = searchObject;
 }
 
-/**
- * @brief override << the operator
- * @param out the datastream
- * @param SearchResultElement whose data will be sent
- * @return out the datastream
- */
-QDataStream& operator<<(QDataStream& out, const SearchResultElement& searchResultElement) {
-    searchResultElement.toStream(out);
-    return out;
-}
+///**
+// * @brief override << the operator
+// * @param out the datastream
+// * @param SearchResultElement whose data will be sent
+// * @return out the datastream
+// */
+//QDataStream& operator<<(QDataStream& out, const SearchResultElement& searchResultElement) {
+//    searchResultElement.toStream(out);
+//    return out;
+//}
 
-/**
- * @brief override >> the operator
- * @param in the datastream
- * @param SearchResultElement to be changed
- * @return in the datastream
- */
-QDataStream& operator>>(QDataStream& in, SearchResultElement& searchResultElement) {
-    searchResultElement.fromStream(in);
-    return in;
-}
+///**
+// * @brief override >> the operator
+// * @param in the datastream
+// * @param SearchResultElement to be changed
+// * @return in the datastream
+// */
+//QDataStream& operator>>(QDataStream& in, SearchResultElement& searchResultElement) {
+//    searchResultElement.fromStream(in);
+//    return in;
+//}
 
 /**
  * @brief calls the << operator
@@ -94,8 +94,8 @@ void SearchResultElement::fromStream(QDataStream& in) {
  * @brief compareByScore compares 2 elements by score
  * @param A first element
  * @param B second element
- * @return true if A is smaller than B
+ * @return true if A's score is smaller than B's
  */
 bool SearchResultElement::compareByScore(const SearchResultElement& A, const SearchResultElement& B) {
-    return (A.getScore() < B.getScore());
+    return (A.getScore() <= B.getScore());
 }

@@ -28,9 +28,9 @@ public:
     
     void fromStream(QDataStream& in) override;
 
-    friend QDataStream& operator >>(QDataStream& in, DataPacket& datapacket);
+  //  friend QDataStream& operator >>(QDataStream& in, DataPacket& datapacket);
 
-    friend QDataStream& operator <<(QDataStream& out, const DataPacket& datapacket);
+    //friend QDataStream& operator <<(QDataStream& out, const DataPacket& datapacket);
 
     friend QDataStream& operator >>(QDataStream& in, DataPacket::Type& e);
 

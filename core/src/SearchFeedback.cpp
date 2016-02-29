@@ -41,27 +41,27 @@ SearchFeedback::Type SearchFeedback::getFeedbackType() const {
     return (mFeedbackType == "Dual") ? DUAL : EXTENDED;
 }
 
-/**
- * @brief override the operator <<
- * @param out - the datastream
- * @param feedback data to write
- * @return out - the data stream after write
- */
-QDataStream& operator<<(QDataStream& out, const SearchFeedback& feedback) {
-    feedback.toStream(out);
-    return out;
-}
+///**
+// * @brief override the operator <<
+// * @param out - the datastream
+// * @param feedback data to write
+// * @return out - the data stream after write
+// */
+//QDataStream& operator<<(QDataStream& out, const SearchFeedback& feedback) {
+//    feedback.toStream(out);
+//    return out;
+//}
 
-/**
- * @brief override the operator >>
- * @param out - the datastream
- * @param feedback save new feedback here
- * @return out - the data stream after read
- */
-QDataStream& operator>>(QDataStream& in, SearchFeedback& feedback) {
-    feedback.fromStream(in);
-    return in;
-}
+///**
+// * @brief override the operator >>
+// * @param out - the datastream
+// * @param feedback save new feedback here
+// * @return out - the data stream after read
+// */
+//QDataStream& operator>>(QDataStream& in, SearchFeedback& feedback) {
+//    feedback.fromStream(in);
+//    return in;
+//}
 
 /**
  * @brief calls the << operator

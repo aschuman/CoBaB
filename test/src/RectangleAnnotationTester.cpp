@@ -26,14 +26,15 @@ void RectangleAnnotationTester::testSaveLoad() {
 
     //write to file
     file.open(QIODevice::WriteOnly);
-    QDataStream stream(&file);
-    stream << a;
+    QDataStream out(&file);
+    out << a;
     file.close();
 
     //read from file
     file.open(QIODevice::ReadOnly);
+    QDataStream in(&file);
     RectangleAnnotation b("", "");
-    stream >> b;
+    in >> b;
     file.close();
 
     //QCOMPARE(a,b);

@@ -44,27 +44,27 @@ void SearchQuery::setSearchObject(const SearchObject searchObject) {
     mSearchObject = searchObject;
 }
 
-/**
- * @brief override << the operator so it calls fromStream
- * @param out the datastream
- * @param SearchQuery whose data will be sent
- * @return out the datastream
- */
-QDataStream& operator<<(QDataStream& out, const SearchQuery& searchQuery) {
-    searchQuery.toStream(out);
-    return out;
-}
+///**
+// * @brief override << the operator so it calls fromStream
+// * @param out the datastream
+// * @param SearchQuery whose data will be sent
+// * @return out the datastream
+// */
+//QDataStream& operator<<(QDataStream& out, const SearchQuery& searchQuery) {
+//    searchQuery.toStream(out);
+//    return out;
+//}
 
-/**
- * @brief override >> the operator so it calls toStream
- * @param in the datastream
- * @param searchObject to be changed
- * @return in the datastream
- */
-QDataStream& operator>>(QDataStream& in, SearchQuery& searchQuery) {
-    searchQuery.fromStream(in);
-    return in;
-}
+///**
+// * @brief override >> the operator so it calls toStream
+// * @param in the datastream
+// * @param searchObject to be changed
+// * @return in the datastream
+// */
+//QDataStream& operator>>(QDataStream& in, SearchQuery& searchQuery) {
+//    searchQuery.fromStream(in);
+//    return in;
+//}
 
 /**
  * @brief calls the << operator

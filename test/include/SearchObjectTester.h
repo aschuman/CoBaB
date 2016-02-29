@@ -13,6 +13,7 @@ private slots:
     void testROI();
     void testSourceDataset();
     void testMediumIndex();
+    void testType();
     void testStreamMethods();
 
 };

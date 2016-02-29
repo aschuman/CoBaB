@@ -22,6 +22,8 @@ QString SearchObject::getMedium() const {
  */
 void SearchObject::setMedium(const QString medium) {
     mMedium = medium;
+    mType = SearchObject::Type::MEDIUM;
+
 }
 /**
  * @brief gets the annotation
@@ -36,6 +38,7 @@ Annotation SearchObject::getAnnotation() const {
  */
 void SearchObject::setAnnotation(const Annotation annotation) {
     mAnnotation = annotation;
+    mType = SearchObject::Type::ANNOTATION;
 }
 /**
  * @brief gets the region of interest
@@ -50,6 +53,7 @@ QRect SearchObject::getROI() const {
  */
 void SearchObject::setROI(const QRect roi) {
     mROI = roi;
+    mType = SearchObject::Type::ROI;
 }
 /**
  * @brief gets the source dataset
@@ -80,6 +84,13 @@ void SearchObject::setMediumIndex(const int index) {
     mMediumIndex = index;
 }
 /**
+ * @brief gets the type of the searchobject
+ * @return the type
+ */
+SearchObject::Type SearchObject::getType() const {
+    return mType;
+}
+/**
  * @brief calls the << operator
  * @param in the datastream
  */
@@ -87,13 +98,11 @@ void SearchObject::toStream(QDataStream& out) const {
 
     //write object to stream
 
-    out  << mMedium
+    out << mMedium
         << mMediumIndex
         << mAnnotation
         << mROI
         << mSourceDataset;
-
-
 
 }
 /**
@@ -111,13 +120,13 @@ void SearchObject::fromStream(QDataStream& in) {
 
 }
 
-QDataStream& operator<<(QDataStream& out, const SearchObject& searchObject) {
-    searchObject.toStream(out);
-    return out;
-}
+//QDataStream& operator<<(QDataStream& out, const SearchObject& searchObject) {
+//    searchObject.toStream(out);
+//    return out;
+//}
 
-QDataStream& operator>>(QDataStream& in, SearchObject& searchObject) {
-    searchObject.fromStream(in);
-    return in;
-}
+//QDataStream& operator>>(QDataStream& in, SearchObject& searchObject) {
+//    searchObject.fromStream(in);
+//    return in;
+//}
 

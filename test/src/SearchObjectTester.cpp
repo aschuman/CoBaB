@@ -47,6 +47,23 @@ void SearchObjectTester::testMediumIndex()
     QCOMPARE(sobject.getMediumIndex(), mediumindex);
 }
 
+void SearchObjectTester::testType()
+{
+
+    QString medium = "../../test/testdata/Fotos/000_45.bmp";
+    sobject.setMedium(medium);
+    QCOMPARE(sobject.getType(), SearchObject::Type::MEDIUM);
+
+    Annotation annotation;
+    sobject.setAnnotation(annotation);
+    QCOMPARE(sobject.getType(), SearchObject::Type::ANNOTATION);
+
+    QRect roi;
+    sobject.setROI(roi);
+    QCOMPARE(sobject.getType(), SearchObject::Type::ROI);
+
+}
+
 void SearchObjectTester::testStreamMethods()
 {
 
@@ -68,6 +85,5 @@ void SearchObjectTester::testStreamMethods()
     QCOMPARE(sobject.getROI(), newSobject.getROI());
     QCOMPARE(sobject.getSourceDataset(), newSobject.getSourceDataset());
     QCOMPARE(sobject.getMediumIndex(), newSobject.getMediumIndex());
-
 
 }

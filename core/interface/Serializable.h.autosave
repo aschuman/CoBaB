@@ -10,7 +10,7 @@
 class Serializable {
 public:
 
-    explicit Serializable();
+    Serializable();
     
     /**
      * Saves the serializable object in a file.

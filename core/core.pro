@@ -105,7 +105,8 @@ SOURCES += \
     src/SearchResultModel.cpp \
     src/SingleFrameVideoViewer.cpp \
     src/SearchManager.cpp \
-    src/AlgorithmList.cpp
+    src/AlgorithmList.cpp \
+    src/Serializable.cpp
 
 FORMS += \
     ui/LibraryPageWidget.ui \
