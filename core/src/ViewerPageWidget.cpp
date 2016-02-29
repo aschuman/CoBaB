@@ -55,16 +55,14 @@ void ViewerPageWidget::clicked(const QModelIndex& index) {
 }
 void ViewerPageWidget::next() {
     mIndex++;
-    if(mIndex >= mDataset->getNumberOfMedia()) {
-        mIndex = mDataset->getNumberOfMedia()-1;
-    }
+    mIndex%=mDataset->getNumberOfMedia();
     display();
 }
-void ViewerPageWidget::before() {
-    mIndex--;
-    if(mIndex <= -1) {
-        mIndex = 0;
+void ViewerPageWidget::before() {  
+    if(mIndex <= 0) {
+        mIndex = mDataset->getNumberOfMedia();
     }
+    mIndex--;
     display();
 }
 
