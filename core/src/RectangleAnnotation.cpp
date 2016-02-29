@@ -9,27 +9,27 @@ RectangleAnnotation::RectangleAnnotation(const QString& id, const QString& type)
 
 }
 
-///**
-// * @brief override the operator <<
-// * @param out - the datastream
-// * @param annotation data to write
-// * @return out - the data stream after write
-// */
-//QDataStream& operator<<(QDataStream& out, const RectangleAnnotation& annotation){
-//    annotation.toStream(out);
-//    return out;
-//}
+/**
+ * @brief override the operator <<
+ * @param out - the datastream
+ * @param annotation data to write
+ * @return out - the data stream after write
+ */
+QDataStream& operator<<(QDataStream& out, const RectangleAnnotation& annotation){
+    annotation.toStream(out);
+    return out;
+}
 
-///**
-// * @brief override the operator >>
-// * @param out - the datastream
-// * @param annotation save new annotation
-// * @return out - the data stream after read
-// */
-//QDataStream& operator>>(QDataStream& in, RectangleAnnotation& annotation) {
-//    annotation.fromStream(in);
-//    return in;
-//}
+/**
+ * @brief override the operator >>
+ * @param out - the datastream
+ * @param annotation save new annotation
+ * @return out - the data stream after read
+ */
+QDataStream& operator>>(QDataStream& in, RectangleAnnotation& annotation) {
+    annotation.fromStream(in);
+    return in;
+}
 
 /**
  * @brief calls the << operator

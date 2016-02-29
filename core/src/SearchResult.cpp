@@ -41,29 +41,29 @@ QList<SearchResultElement> SearchResult::sortByScore() {
     return mSearchResultElementList;
 }
 
-///**
-// * @brief override << the operator
-// * @param out the datastream
-// * @param SearchResult whose data will be sent
-// * @return out the datastream
-// */
-//QDataStream& operator<<(QDataStream& out, const SearchResult& searchResult) {
-//    searchResult.toStream(out);
-//    return out;
+/**
+ * @brief override << the operator
+ * @param out the datastream
+ * @param SearchResult whose data will be sent
+ * @return out the datastream
+ */
+QDataStream& operator<<(QDataStream& out, const SearchResult& searchResult) {
+    searchResult.toStream(out);
+    return out;
 
-//}
+}
 
-///**
-// * @brief override >> the operator
-// * @param in the datastream
-// * @param SearchResult to be changed
-// * @return in the datastream
-// */
-//QDataStream& operator>>(QDataStream& in, SearchResult& searchResult) {
-//    searchResult.fromStream(in);
-//    return in;
+/**
+ * @brief override >> the operator
+ * @param in the datastream
+ * @param SearchResult to be changed
+ * @return in the datastream
+ */
+QDataStream& operator>>(QDataStream& in, SearchResult& searchResult) {
+    searchResult.fromStream(in);
+    return in;
 
-//}
+}
 
 /**
  * @brief calls the << operator

@@ -120,13 +120,13 @@ void SearchObject::fromStream(QDataStream& in) {
 
 }
 
-//QDataStream& operator<<(QDataStream& out, const SearchObject& searchObject) {
-//    searchObject.toStream(out);
-//    return out;
-//}
+QDataStream& operator<<(QDataStream& out, const SearchObject& searchObject) {
+    searchObject.toStream(out);
+    return out;
+}
 
-//QDataStream& operator>>(QDataStream& in, SearchObject& searchObject) {
-//    searchObject.fromStream(in);
-//    return in;
-//}
+QDataStream& operator>>(QDataStream& in, SearchObject& searchObject) {
+    searchObject.fromStream(in);
+    return in;
+}
 

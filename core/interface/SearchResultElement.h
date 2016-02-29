@@ -26,9 +26,9 @@ public:
 
     void setSearchObject(const SearchObject searchObject);
 
-  //  friend QDataStream& operator<<(QDataStream& out, const SearchResultElement& searchResultElement);
+    friend QDataStream& operator<<(QDataStream& out, const SearchResultElement& searchResultElement);
 
-    //friend QDataStream& operator>>(QDataStream& in, SearchResultElement& searchResultElement);
+    friend QDataStream& operator>>(QDataStream& in, SearchResultElement& searchResultElement);
 
     void toStream(QDataStream& out) const override;
 

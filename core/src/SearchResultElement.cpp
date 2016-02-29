@@ -45,27 +45,27 @@ void SearchResultElement::setSearchObject(const SearchObject searchObject) {
     mSearchObject = searchObject;
 }
 
-///**
-// * @brief override << the operator
-// * @param out the datastream
-// * @param SearchResultElement whose data will be sent
-// * @return out the datastream
-// */
-//QDataStream& operator<<(QDataStream& out, const SearchResultElement& searchResultElement) {
-//    searchResultElement.toStream(out);
-//    return out;
-//}
+/**
+ * @brief override << the operator
+ * @param out the datastream
+ * @param SearchResultElement whose data will be sent
+ * @return out the datastream
+ */
+QDataStream& operator<<(QDataStream& out, const SearchResultElement& searchResultElement) {
+    searchResultElement.toStream(out);
+    return out;
+}
 
-///**
-// * @brief override >> the operator
-// * @param in the datastream
-// * @param SearchResultElement to be changed
-// * @return in the datastream
-// */
-//QDataStream& operator>>(QDataStream& in, SearchResultElement& searchResultElement) {
-//    searchResultElement.fromStream(in);
-//    return in;
-//}
+/**
+ * @brief override >> the operator
+ * @param in the datastream
+ * @param SearchResultElement to be changed
+ * @return in the datastream
+ */
+QDataStream& operator>>(QDataStream& in, SearchResultElement& searchResultElement) {
+    searchResultElement.fromStream(in);
+    return in;
+}
 
 /**
  * @brief calls the << operator

@@ -10,24 +10,20 @@
 class Serializable {
 public:
 
-    explicit Serializable();
+    virtual ~Serializable() = default;
     
     /**
      * Saves the serializable object in a file.
      * @param in The QDataStream has the file set as device.
      */
-    virtual void toStream(QDataStream& out) const;
+    virtual void toStream(QDataStream& out) const = 0;
     
     /**
      * Loads the serializable object from a file.
      * @param out The QDataStream has the file set as device.
      */
-    virtual void fromStream(QDataStream& in);
+    virtual void fromStream(QDataStream& in) = 0;
 
-
-    friend QDataStream& operator<<(QDataStream& out, const Serializable& ser);
-
-    friend QDataStream& operator>>(QDataStream& in, Serializable ser);
 };
 
 #endif //_SERIALIZABLE_H

@@ -26,9 +26,9 @@ public:
     
     QList<SearchResultElement> sortByScore();
 
- //   friend QDataStream& operator<<(QDataStream& out, const SearchResult& searchResult);
+    friend QDataStream& operator<<(QDataStream& out, const SearchResult& searchResult);
 
-   // friend QDataStream& operator>>(QDataStream& in, SearchResult& searchResult);
+    friend QDataStream& operator>>(QDataStream& in, SearchResult& searchResult);
 
     void toStream(QDataStream& out) const override;
 

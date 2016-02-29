@@ -58,9 +58,9 @@ public:
 
     void deleteFile() const;
 
-//    friend QDataStream& operator<<(QDataStream& out, const Bookmark& bookmark);
+    friend QDataStream& operator<<(QDataStream& out, const Bookmark& bookmark);
 
-//    friend QDataStream& operator>>(QDataStream& in, Bookmark& bookmark);
+    friend QDataStream& operator>>(QDataStream& in, Bookmark& bookmark);
 
     void toStream(QDataStream& out) const override;
 

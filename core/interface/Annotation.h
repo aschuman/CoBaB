@@ -23,9 +23,9 @@ public:
     
     Type getType() const;
 
-  //  friend QDataStream& operator<<(QDataStream& out, const Annotation& annotation);
+    friend QDataStream& operator<<(QDataStream& out, const Annotation& annotation);
 
-    //friend QDataStream& operator>>(QDataStream& in, Annotation& annotation);
+    friend QDataStream& operator>>(QDataStream& in, Annotation& annotation);
 
     virtual void toStream(QDataStream& out) const override;
     
