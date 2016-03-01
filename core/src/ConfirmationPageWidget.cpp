@@ -78,16 +78,16 @@ void ConfirmationPageWidget::reset()
         QPixmap pixmap;
         pixmap.convertFromImage(chosenImage);
 
-        if(!(searchQuery->getSearchObject().getROI().isNull())) {
+        if(searchQuery->getSearchObject().getType() == SearchObject::ROI) {
             pixmap = pixmap.copy(searchQuery->getSearchObject().getROI());
-        } /*else if(searchQuery->getSearchObject().getAnnotation() != nullptr) {
+        } else if(searchQuery->getSearchObject().getType() == SearchObject::ANNOTATION) {
             Annotation* annotation = &(searchQuery->getSearchObject().getAnnotation());
-            if(annotation->getType() == Annotation::FACE || annotation->getType() == Annotation::PERSON) {
-                RectangleAnnotation* rectAnnotation = static_cast<RectangleAnnotation*> (annotation);
+            RectangleAnnotation* rectAnnotation = dynamic_cast<RectangleAnnotation*> (annotation);
+            if(rectAnnotation != nullptr) {
                 QRect rect = static_cast<QRect> (*rectAnnotation);
                 pixmap = pixmap.copy(rect);
             }
-        }*/
+        }
         ui->mImageToSearchLabel->setPixmap(pixmap);
 
     } else {
