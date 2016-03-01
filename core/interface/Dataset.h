@@ -24,6 +24,7 @@ public:
      */
     enum Type { PHOTO, VIDEO, SINGLE_FRAME_VIDEO };
     explicit Dataset(const QString& path);
+    Dataset(const Dataset& other);
     ~Dataset();
     QString getName() const;
     int getNumberOfMedia() const;
@@ -31,7 +32,7 @@ public:
     QList<Medium*> getMediaList() const;
     QString getPath() const;
     Type getType() const;
-    bool isValid();
+    bool isValid() const;
 
 private:
     QString mName;                  ///< The name of the dataset.

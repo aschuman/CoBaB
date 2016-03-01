@@ -53,7 +53,7 @@ HEADERS += \
     include/ClickableGraphicsPixmapItem.h \
     include/FeedbackEditor.h \
     include/DualFeedbackEditor.h \
-    include/SearchResultElementFeedback.h \
+    interface/SearchResultElementFeedback.h \
     include/FeedbackDelegate.h \
     include/SearchResultModel.h \
     include/ResultsPageWidget.h \

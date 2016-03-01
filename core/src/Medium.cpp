@@ -10,6 +10,15 @@ Medium::Medium(const QString path, const QList<QPair<int, Annotation*>> annotati
     mType = Medium::Type::PHOTO;
 }
 
+Medium::Medium(const Medium& other) {
+    mPath = other.getPath();
+    mType = other.getType();
+    for(QPair<int, Annotation*> iter: other.getAnnotationList()) {
+        Annotation* annotation = new RectangleAnnotation(*(RectangleAnnotation*)iter.second);
+        mAnnotationList.append(QPair<int, Annotation*>(iter.first, annotation));
+    }
+}
+
 /**
  * @brief Medium::~Medium Deletes the Medium.
  */

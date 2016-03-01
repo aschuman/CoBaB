@@ -1,5 +1,6 @@
 #include "DatasetList.h"
 #include <QTextStream>
+#include "log.h"
 
 /**
  * @brief DatasetList::getDatasetList Returns the list of Dataset.
@@ -24,7 +25,10 @@ void DatasetList::addDataset(const Dataset& dataset) {
 void DatasetList::load(const QString& path) {
     mDatasetList.clear();
     QFile file(path);
-    file.open(QFile::ReadOnly);
+    if(!file.open(QFile::ReadOnly)) {
+        LOG_ERR("couldn't open file");
+        return;
+    }
     QTextStream stream(&file);
     QString line;
     while (stream.readLineInto(&line)) {
@@ -43,7 +47,10 @@ void DatasetList::load(const QString& path) {
  */
 void DatasetList::store(const QString path) const {
     QFile file(path);
-    file.open(QFile::WriteOnly);
+    if(!file.open(QFile::WriteOnly)) {
+        LOG_ERR("couldn't open file");
+        return;
+    }
     QTextStream stream(&file);
     for(const Dataset& iter: mDatasetList) {
         stream << iter.getPath() << endl;

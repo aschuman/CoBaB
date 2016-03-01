@@ -1,7 +1,7 @@
 #ifndef _MEDIUM_H
 #define _MEDIUM_H
 
-#include "Annotation.h"
+#include "RectangleAnnotation.h"
 
 /**
  * @brief A Medium is an element of a Dataset.
@@ -18,6 +18,7 @@ public:
      */
     enum Type { PHOTO, VIDEO, SINGLE_FRAME_VIDEO };
     Medium(const QString path, const QList<QPair<int, Annotation*>> annotations);
+    Medium(const Medium& other);
     ~Medium();
     Type getType() const;
     QList<QPair<int, Annotation *>> getAnnotationList() const;
