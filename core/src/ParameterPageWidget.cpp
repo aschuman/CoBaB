@@ -40,6 +40,11 @@ void ParameterPageWidget::nextButtonClicked() {
     exit(EXIT_NEXT);
 }
 
+void ParameterPageWidget::on_mSearchDatasetListView_indexesMoved(const QModelIndexList &indexes)
+{
+
+}
+
 void ParameterPageWidget::retranslateUi() {
 
 }
