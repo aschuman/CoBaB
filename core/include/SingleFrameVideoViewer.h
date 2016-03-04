@@ -20,9 +20,11 @@ public slots:
     void playOrPause();
     void contextMenu(const QPointF &pos);
     void showFrame();
+    void showTime();
 private:
     SingleFrameVideo mSFVideo;
     QTimer mTimer;
+    QTimer mVideoTime;
     QList<QPixmap> mFrameList;
     int mFrameIndex;
     bool mIsPlaying;
