@@ -13,7 +13,7 @@
 class TestAlgorithm : public QObject, public SearchAlgorithm {
 
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.CoBaB.Algorithm" "TestAlgorithm.json")
+    Q_PLUGIN_METADATA(IID "org.CoBaB.Algorithm" FILE "TestAlgorithm.json")
     Q_INTERFACES(Algorithm)
 
 public:

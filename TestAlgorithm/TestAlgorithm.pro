@@ -14,3 +14,6 @@ SOURCES += \
 HEADERS += \
     TestAlgorithm.h
 
+DISTFILES += \
+    TestAlgorithm.json
+
