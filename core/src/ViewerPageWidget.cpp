@@ -10,7 +10,8 @@ const int ViewerPageWidget::EXIT_NEXT = 0;
 
 ViewerPageWidget::ViewerPageWidget() :
     ui(new Ui::ViewerPageWidget), mIndex(0), mImage(nullptr), mSelectionPen(QColor(0,255,230)),
-    mCurrentSelection(nullptr), mAnnotationDrawer(&mGraphicsScene), mSelectedAnnotation(nullptr), mAlgorithmList("")
+    mCurrentSelection(nullptr), mAnnotationDrawer(&mGraphicsScene), mSelectedAnnotation(nullptr),
+    mAlgorithmList(""), mDataset(nullptr)
 {
     ui->setupUi(this);
     ui->mViewerListView->setResizeMode(QListView::Adjust);
@@ -47,7 +48,7 @@ void ViewerPageWidget::zoomOut() {
 }
 
 void ViewerPageWidget::annotationSelected(Annotation* annotation, const QPointF& pos) {
-    mSelectedAnnotation = annotation;
+    mSelectedAnnotation = annotation->copy();
     contextMenu(pos);
 }
 
@@ -130,9 +131,25 @@ void ViewerPageWidget::reset()
         QVariant var2;
         emit readFromStack(-2, var2);
         if(var2.canConvert<std::shared_ptr<DatasetList>>()) {
-            mDataset = &(var2.value<std::shared_ptr<DatasetList>>()->getDatasetList().at(var.value<int>()));
+            if(mDataset != nullptr) {
+                delete mDataset;
+            }
+            mDataset = new Dataset(var2.value<std::shared_ptr<DatasetList>>()->getDatasetList().at(var.value<int>()));
             mModel.setDataset(*mDataset);
             mIndex = 0;
+            if(mImage != nullptr) {
+                delete mImage;
+                mImage = nullptr;
+            }
+            if(mCurrentSelection != nullptr) {
+                delete mCurrentSelection;
+                mCurrentSelection = nullptr;
+            }
+            if(mSelectedAnnotation != nullptr) {
+                delete mSelectedAnnotation;
+                mSelectedAnnotation = nullptr;
+            }
+
             display();
         }
     }
@@ -148,14 +165,19 @@ void ViewerPageWidget::nextWidget(QAction* action) {
     }
     searchObject.setSourceDataset(mDataset->getPath());
     delete mSelectedAnnotation;
+    mSelectedAnnotation = nullptr;
     delete mCurrentSelection;
+    mCurrentSelection = nullptr;
     delete mImage;
+    mImage = nullptr;
 
     SearchQuery searchQuery;
     searchQuery.setSearchObject(searchObject);
     QList<QString> datasetList;
     datasetList.push_back(mDataset->getName());
     searchQuery.setDatasets(datasetList);
+    delete mDataset;
+    mDataset = nullptr;
 
     QVariant query;
     query.setValue(std::make_shared<SearchQuery>(searchQuery));

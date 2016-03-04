@@ -14,6 +14,8 @@ public:
 
     RectangleAnnotation(const QString& id, const QString& type);
 
+    Annotation* copy();
+
     friend QDataStream& operator<<(QDataStream& out, const RectangleAnnotation& annotation);
 
     friend QDataStream& operator>>(QDataStream& in, RectangleAnnotation& annotation);

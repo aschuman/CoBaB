@@ -9,6 +9,10 @@ RectangleAnnotation::RectangleAnnotation(const QString& id, const QString& type)
 
 }
 
+Annotation* RectangleAnnotation::copy() {
+    return new RectangleAnnotation(*this);
+}
+
 /**
  * @brief override the operator <<
  * @param out - the datastream
