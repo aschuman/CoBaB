@@ -15,6 +15,7 @@ public:
      * @brief Resets this widget to its initial state.
      */
     virtual void reset() = 0;
+    virtual void retranslateUi() = 0;
 
 signals:
     /**
@@ -35,6 +36,7 @@ signals:
      * @param exitCode Code noting the type of exit.
      */
     void exit(int exitCode);
+
 };
 
 #endif // PAGEWIDGET_H

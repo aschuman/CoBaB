@@ -98,3 +98,7 @@ void ResultsPageWidget::setResults(SearchResult result)
     mResult = std::move(result);
     mModel.setSearchResult(&mResult);
 }
+
+void ResultsPageWidget::retranslateUi() {
+
+}

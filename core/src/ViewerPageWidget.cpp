@@ -161,3 +161,7 @@ void ViewerPageWidget::roiClicked() {
         }
     }
 }
+
+void ViewerPageWidget::retranslateUi() {
+
+}

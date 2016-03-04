@@ -31,6 +31,10 @@ void LibraryPageWidget::reset()
     }
 }
 
+void LibraryPageWidget::retranslateUi() {
+
+}
+
 void LibraryPageWidget::on_mLibraryListView_doubleClicked(const QModelIndex &index)
 {
     pushToStack(index.row());

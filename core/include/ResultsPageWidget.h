@@ -23,6 +23,7 @@ public:
     ResultsPageWidget();
     ~ResultsPageWidget();
     void reset() override;
+    void retranslateUi() override;
 
     void setResults(SearchResult result);
 

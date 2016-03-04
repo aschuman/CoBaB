@@ -33,3 +33,8 @@ bool PageWidgetMock::isReset() const
 {
     return mReset;
 }
+
+void PageWidgetMock::retranslateUi()
+{
+
+}

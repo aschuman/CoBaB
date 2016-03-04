@@ -12,6 +12,7 @@
 class SearchResultModel : public QAbstractListModel
 {
 public:
+    SearchResultModel();
     void setSearchResult(const SearchResult* searchResult);
     SearchFeedback getFeedback() const;
 

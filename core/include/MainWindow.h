@@ -21,6 +21,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     void display(QWidget* widget);
+    void retranslate();
+
+public slots:
+    void showAboutDialog();
+    void showHelpDialog();
+    void changeLanguageToGerman();
+    void changeLanguageToEnglish();
 
 signals:
     /**

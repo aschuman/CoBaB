@@ -8,6 +8,7 @@ class PageWidgetMock : public PageWidget
 public:
     PageWidgetMock();
     virtual void reset();
+    virtual void retranslateUi();
     void emitPush(QVariant item);
     void emitRead(int index, QVariant& value);
     void emitExit(int exitCode);
