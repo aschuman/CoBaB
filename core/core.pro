@@ -59,7 +59,8 @@ HEADERS += \
     include/ResultsPageWidget.h \
     include/SingleFrameVideoViewer.h \
     include/SearchManager.h \
-    interface/AlgorithmList.h
+    interface/AlgorithmList.h \
+    include/CustomGraphicsView.h
 
 SOURCES += \
     src/Medium.cpp \
@@ -105,7 +106,8 @@ SOURCES += \
     src/SearchResultModel.cpp \
     src/SingleFrameVideoViewer.cpp \
     src/SearchManager.cpp \
-    src/AlgorithmList.cpp
+    src/AlgorithmList.cpp \
+    src/CustomGraphicsView.cpp
 
 FORMS += \
     ui/LibraryPageWidget.ui \

@@ -3,12 +3,14 @@
 #include "SearchQuery.h"
 #include "TestAlgorithm.h"
 #include <QMenu>
+#include <QToolTip>
+#include <QMessageBox>
 
 const int ViewerPageWidget::EXIT_NEXT = 0;
 
 ViewerPageWidget::ViewerPageWidget() :
     ui(new Ui::ViewerPageWidget), mIndex(0), mImage(nullptr), mSelectionPen(QColor(0,255,230)),
-    mCurrentSelection(nullptr), mAnnotationDrawer(&mGraphicsScene), mSelectedAnnotation(nullptr)
+    mCurrentSelection(nullptr), mAnnotationDrawer(&mGraphicsScene), mSelectedAnnotation(nullptr), mAlgorithmList("")
 {
     ui->setupUi(this);
     ui->mViewerListView->setResizeMode(QListView::Adjust);
@@ -20,12 +22,30 @@ ViewerPageWidget::ViewerPageWidget() :
     connect(ui->mBeforeButton, SIGNAL(clicked()), this, SLOT(before()));
     connect(ui->mROIButton, SIGNAL(clicked()), this, SLOT(roiClicked()));
     connect(&mAnnotationDrawer, SIGNAL(selected(Annotation*, const QPointF&)), this, SLOT(annotationSelected(Annotation*, const QPointF&)));
+    connect(ui->mZoomIn, SIGNAL(clicked()), this, SLOT(zoomIn()));
+    connect(ui->mZoomOut, SIGNAL(clicked()), this, SLOT(zoomOut()));
+    connect(ui->mGraphicsView, SIGNAL(resize()), this, SLOT(resize()));
 }
 
 ViewerPageWidget::~ViewerPageWidget()
 {
     delete ui;
 }
+
+void ViewerPageWidget::resizeEvent(QResizeEvent *event) {
+    resize();
+}
+void ViewerPageWidget::resize() {
+    ui->mGraphicsView->fitInView(mImage, Qt::KeepAspectRatio);
+}
+
+void ViewerPageWidget::zoomIn() {
+    ui->mGraphicsView->scale(2,2);
+}
+void ViewerPageWidget::zoomOut() {
+    ui->mGraphicsView->scale(0.5,0.5);
+}
+
 void ViewerPageWidget::annotationSelected(Annotation* annotation, const QPointF& pos) {
     mSelectedAnnotation = annotation;
     contextMenu(pos);
@@ -40,16 +60,51 @@ void ViewerPageWidget::contextMenu(const QPointF &pos) {
             mROI.setRect(0,0,0,0);
         }
     }
+
+    SearchObject searchObject;
+    searchObject.setMedium(mDataset->getMediaList().at(mIndex)->getPath());
+    if(!mROI.isNull()) {
+        searchObject.setROI(mROI);
+    } else if(mSelectedAnnotation != nullptr) {
+        searchObject.setAnnotation(*mSelectedAnnotation);
+    }
+    searchObject.setSourceDataset(mDataset->getPath());
+    SearchQuery searchQuery;
+    searchQuery.setSearchObject(searchObject);
+    QList<QString> datasetList;
+    datasetList.push_back(mDataset->getName());
+    searchQuery.setDatasets(datasetList);
+
+    QList<Algorithm*> algoList = mAlgorithmList.findCompatibleAlgorithms(searchQuery);
+
     QMenu contextMenu(this);
+    if(algoList.isEmpty()) {
+        QMessageBox msgBox(QMessageBox::Information, "", "Found no fitting algorithm.", QMessageBox::Ok, this);
+        msgBox.exec();
+        //return;
+    }
+    for(Algorithm* iter: algoList) {
+        mAlgorithms.insert(iter->getName(), iter);
+        QAction action(iter->getName(), this);
+        action.setToolTip(iter->getDescription());
+        contextMenu.addAction(&action);
+    }
+    //for testing
     QAction action1("algorithm 1", this);
     action1.setToolTip("description 1");
     contextMenu.addAction(&action1);
     QAction action2("algorithm 2", this);
     action2.setToolTip("description 2");
     contextMenu.addAction(&action2);
+
     connect(&contextMenu, SIGNAL(triggered(QAction*)), this, SLOT(nextWidget(QAction*)));
+    connect(&contextMenu, SIGNAL(hovered(QAction*)), this, SLOT(showToolTip(QAction*)));
     contextMenu.exec(QCursor::pos());
 }
+void ViewerPageWidget::showToolTip(QAction* action) {
+    QToolTip::showText(QCursor::pos(), action->toolTip());
+}
+
 void ViewerPageWidget::clicked(const QModelIndex& index) {
     mIndex = index.row();
     display();
@@ -102,14 +157,13 @@ void ViewerPageWidget::nextWidget(QAction* action) {
     datasetList.push_back(mDataset->getName());
     searchQuery.setDatasets(datasetList);
 
-    QString algorithm = action->text();
-
     QVariant query;
     query.setValue(std::make_shared<SearchQuery>(searchQuery));
     pushToStack(query);
 
     // todo: push actual, user-chosen algorithm
-    std::shared_ptr<Algorithm> algo = std::make_shared<TestAlgorithm>("id123");
+    std::shared_ptr<Algorithm> algo(mAlgorithms.value(action->text()));
+    //std::shared_ptr<Algorithm> algo = std::make_shared<TestAlgorithm>("id123");
     QVariant varAlgo;
     varAlgo.setValue(algo);
     pushToStack(varAlgo);
@@ -160,4 +214,8 @@ void ViewerPageWidget::roiClicked() {
             mCurrentRubberBand.setRect(0,0,0,0);
         }
     }
+}
+
+void ViewerPageWidget::display() {
+    ui->mPhotoCount->setText("Foto "+QString::number(mIndex+1)+" von "+QString::number(mDataset->getNumberOfMedia()));
 }
