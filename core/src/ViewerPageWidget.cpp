@@ -219,3 +219,7 @@ void ViewerPageWidget::roiClicked() {
 void ViewerPageWidget::display() {
     ui->mPhotoCount->setText("Foto "+QString::number(mIndex+1)+" von "+QString::number(mDataset->getNumberOfMedia()));
 }
+
+void ViewerPageWidget::retranslateUi() {
+
+}

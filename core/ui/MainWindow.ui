@@ -26,7 +26,7 @@
      <x>0</x>
      <y>0</y>
      <width>629</width>
-     <height>27</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="mFileMenu">
@@ -38,6 +38,8 @@
     <property name="title">
      <string>Sp&amp;rache</string>
     </property>
+    <addaction name="mActionDeutsch"/>
+    <addaction name="mActionEnglish"/>
    </widget>
    <widget class="QMenu" name="mBookmarkMenu">
     <property name="title">
@@ -53,6 +55,8 @@
     <property name="title">
      <string>Hilfe</string>
     </property>
+    <addaction name="mHelpAction"/>
+    <addaction name="mAboutAction"/>
    </widget>
    <addaction name="mFileMenu"/>
    <addaction name="mLanguageMenu"/>
@@ -93,6 +97,26 @@
   <action name="mBackAction">
    <property name="text">
     <string>Zurück</string>
+   </property>
+  </action>
+  <action name="mHelpAction">
+   <property name="text">
+    <string>Hilfe</string>
+   </property>
+  </action>
+  <action name="mAboutAction">
+   <property name="text">
+    <string>Über CoBaB</string>
+   </property>
+  </action>
+  <action name="mActionDeutsch">
+   <property name="text">
+    <string>Deutsch</string>
+   </property>
+  </action>
+  <action name="mActionEnglish">
+   <property name="text">
+    <string>English</string>
    </property>
   </action>
  </widget>

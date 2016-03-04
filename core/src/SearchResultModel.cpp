@@ -4,6 +4,10 @@
 #include <QBrush>
 #include "SearchResultElementFeedback.h"
 
+SearchResultModel::SearchResultModel() {
+    mSearchResult = nullptr;
+}
+
 /**
  * @brief Sets the SearchResult to be prepared by this model for a view.
  *

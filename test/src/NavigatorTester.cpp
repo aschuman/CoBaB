@@ -14,15 +14,15 @@ void NavigatorTester::init()
 
     auto viewer = std::make_unique<PageWidgetMock>();
     mViewerMock = viewer.get();
-    mNavigator->registerPage(PageType::VIEWER, move(viewer));
+    mNavigator->registerPage(PageType::PHOTO_VIEWER, move(viewer));
 
     auto parameters = std::make_unique<PageWidgetMock>();
     mParametersMock = parameters.get();
     mNavigator->registerPage(PageType::PARAMETER, move(parameters));
 
-    mNavigator->registerTransition(PageType::LIBRARY, 0, PageType::VIEWER);
+    mNavigator->registerTransition(PageType::LIBRARY, 0, PageType::PHOTO_VIEWER);
     mNavigator->registerTransition(PageType::LIBRARY, -1, PageType::PARAMETER);
-    mNavigator->registerTransition(PageType::VIEWER, 0, PageType::PARAMETER);
+    mNavigator->registerTransition(PageType::PHOTO_VIEWER, 0, PageType::PARAMETER);
 
     std::vector<QVariant> initialStack;
     initialStack.push_back(QVariant(123));

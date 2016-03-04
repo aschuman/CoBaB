@@ -11,7 +11,7 @@ void PageStackFrameTester::testConstructor_data(){
     QTest::newRow("none") << PageType::NONE << PageType::NONE;
     QTest::newRow("parameter") << PageType::PARAMETER << PageType::PARAMETER;
     QTest::newRow("results") << PageType::RESULTS << PageType::RESULTS;
-    QTest::newRow("viewer") << PageType::VIEWER << PageType::VIEWER;
+    QTest::newRow("viewer") << PageType::PHOTO_VIEWER << PageType::PHOTO_VIEWER;
 }
 
 void PageStackFrameTester::testConstructor()

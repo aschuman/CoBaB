@@ -34,3 +34,7 @@ void ParameterPageWidget::nextButtonClicked() {
  //   pushToStack();
     exit(EXIT_NEXT);
 }
+
+void ParameterPageWidget::retranslateUi() {
+
+}

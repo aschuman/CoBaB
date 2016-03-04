@@ -49,11 +49,16 @@ void MainControl::run()
 void MainControl::initNavigation()
 {
     mNavi->registerPage(PageType::LIBRARY, std::make_unique<LibraryPageWidget>());
-    mNavi->registerPage(PageType::VIEWER, std::make_unique<PhotoViewer>());
-    mNavi->registerTransition(PageType::LIBRARY, LibraryPageWidget::EXIT_NEXT, PageType::VIEWER);
+
+    mNavi->registerPage(PageType::PHOTO_VIEWER, std::make_unique<PhotoViewer>());
+    mNavi->registerTransition(PageType::LIBRARY, LibraryPageWidget::EXIT_PHOTO, PageType::PHOTO_VIEWER);
+
+    mNavi->registerPage(PageType::SINGLE_FRAME_VIDEO_VIEWER, std::make_unique<SingleFrameVideoViewer>());
+    mNavi->registerTransition(PageType::LIBRARY, LibraryPageWidget::EXIT_SINGLE_FRAME_VIDEO, PageType::SINGLE_FRAME_VIDEO_VIEWER);
 
     mNavi->registerPage(PageType::PARAMETER, std::make_unique<ParameterPageWidget>());
-    mNavi->registerTransition(PageType::VIEWER, ViewerPageWidget::EXIT_NEXT, PageType::PARAMETER);
+    mNavi->registerTransition(PageType::PHOTO_VIEWER, ViewerPageWidget::EXIT_NEXT, PageType::PARAMETER);
+    mNavi->registerTransition(PageType::SINGLE_FRAME_VIDEO_VIEWER, ViewerPageWidget::EXIT_NEXT, PageType::PARAMETER);
 
     mNavi->registerPage(PageType::CONFIRMATION, std::make_unique<ConfirmationPageWidget>());
     mNavi->registerTransition(PageType::PARAMETER, ParameterPageWidget::EXIT_NEXT, PageType::CONFIRMATION);

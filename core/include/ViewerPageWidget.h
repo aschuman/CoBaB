@@ -32,6 +32,7 @@ public:
     ~ViewerPageWidget();
 
     void reset() override;
+    void retranslateUi() override;
 
     static const int EXIT_NEXT;
 

@@ -40,8 +40,8 @@ void ConfigDataTester::testHelp_data() {
     QTest::addColumn<QString>("language");
     QTest::addColumn<QString>("help");
 
-    QTest::newRow("English") << "English" << "Help";
-    QTest::newRow("German") << "German" << "Hilfe";
+    QTest::newRow("English") << "English" << "Instructions for using CoBaB";
+    QTest::newRow("German") << "German" << "Hinweise zur Benutzung von CoBaB";
 }
 
 void ConfigDataTester::testHelp() {
@@ -50,15 +50,15 @@ void ConfigDataTester::testHelp() {
 
     ConfigData* data = ConfigData::getInstance();
     data->setLanguage(language);
-    QCOMPARE(data->getHelp(), help);
+    QVERIFY(data->getHelp().contains(help));
 }
 
 void ConfigDataTester::testAbout_data() {
     QTest::addColumn<QString>("language");
     QTest::addColumn<QString>("about");
 
-    QTest::newRow("English") << "English" << "About CoBaB";
-    QTest::newRow("German") << "German" << "Über CoBaB";
+    QTest::newRow("English") << "English" << "content based search";
+    QTest::newRow("German") << "German" << "inhaltsbasierte Suche";
 }
 
 void ConfigDataTester::testAbout() {
@@ -67,5 +67,5 @@ void ConfigDataTester::testAbout() {
 
     ConfigData* data = ConfigData::getInstance();
     data->setLanguage(language);
-    QCOMPARE(data->getAbout(), about);
+    QVERIFY(data->getAbout().contains(about));
 }

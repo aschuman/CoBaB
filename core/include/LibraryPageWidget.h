@@ -22,8 +22,11 @@ public:
     explicit LibraryPageWidget();
     ~LibraryPageWidget();
     void reset() override;
+    void retranslateUi() override;
 
-    static const int EXIT_NEXT;
+    static const int EXIT_PHOTO;
+    static const int EXIT_SINGLE_FRAME_VIDEO;
+    static const int EXIT_VIDEO;
 
 private slots:
     void on_mLibraryListView_doubleClicked(const QModelIndex &index);
