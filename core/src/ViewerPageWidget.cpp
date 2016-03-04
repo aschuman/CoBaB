@@ -162,8 +162,8 @@ void ViewerPageWidget::nextWidget(QAction* action) {
     pushToStack(query);
 
     // todo: push actual, user-chosen algorithm
-    std::shared_ptr<Algorithm> algo(mAlgorithms.value(action->text()));
-    //std::shared_ptr<Algorithm> algo = std::make_shared<TestAlgorithm>("id123");
+    //std::shared_ptr<Algorithm> algo(mAlgorithms.value(action->text()));
+    std::shared_ptr<Algorithm> algo = std::make_shared<TestAlgorithm>("id123");
     QVariant varAlgo;
     varAlgo.setValue(algo);
     pushToStack(varAlgo);
@@ -189,13 +189,20 @@ void ViewerPageWidget::on_mGraphicsView_rubberBandChanged(const QRect &viewportR
         int height = mImage->boundingRect().height();
 
         if(fromScenePoint.x() >= 0 && fromScenePoint.x() < width
-                && toScenePoint.x() >= 0 && toScenePoint.x() < width
-                && fromScenePoint.y() >= 0 && fromScenePoint.y() < height
-                && toScenePoint.y() >= 0 && toScenePoint.y() < height) {
+                && fromScenePoint.y() >= 0 && fromScenePoint.y() < height) {
             mCurrentRubberBand.setLeft(fromScenePoint.x());
             mCurrentRubberBand.setTop(fromScenePoint.y());
             mCurrentRubberBand.setRight(toScenePoint.x());
             mCurrentRubberBand.setBottom(toScenePoint.y());
+
+            if(toScenePoint.x() < 0)
+                mCurrentRubberBand.setRight(0);
+            if(toScenePoint.x() >= width)
+                mCurrentRubberBand.setRight(width-1);
+            if(toScenePoint.y() < 0)
+                mCurrentRubberBand.setBottom(0);
+            if(toScenePoint.y() >= height)
+                mCurrentRubberBand.setBottom(height-1);
             mCurrentRubberBand = mCurrentRubberBand.normalized();
         }
     }
