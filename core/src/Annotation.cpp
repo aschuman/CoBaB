@@ -19,6 +19,10 @@ Annotation::Annotation(const QString& id, const QString& type) {
     mType = type;
 }
 
+Annotation* Annotation::copy() {
+    return new Annotation(*this);
+}
+
 /**
  * @brief Annotation::getId gets Id
  * @return annotation Id

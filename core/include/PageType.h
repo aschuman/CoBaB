@@ -9,7 +9,9 @@
 enum class PageType {
     NONE,
     LIBRARY,
-    VIEWER,
+    PHOTO_VIEWER,
+    SINGLE_FRAME_VIDEO_VIEWER,
+    VIDEO_VIEWER,
     PARAMETER,
     CONFIRMATION,
     RESULTS
@@ -32,8 +34,14 @@ inline std::string to_String(PageType type){
     case PageType::LIBRARY:
         r = "Library";
         break;
-    case PageType::VIEWER:
-        r = "Viewer";
+    case PageType::PHOTO_VIEWER:
+        r = "Photo Viewer";
+        break;
+    case PageType::SINGLE_FRAME_VIDEO_VIEWER:
+        r = "Single Frame Video Viewer";
+        break;
+    case PageType::VIDEO_VIEWER:
+        r = "Video Viewer";
         break;
     case PageType::PARAMETER:
         r = "Parameter";

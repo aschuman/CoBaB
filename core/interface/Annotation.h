@@ -19,6 +19,8 @@ public:
 
     Annotation(const QString& id, const QString& type);
 
+    virtual Annotation* copy();
+
     QString getId() const;
     
     Type getType() const;

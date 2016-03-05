@@ -7,7 +7,7 @@ void PageRegistrationTester::init()
     std::unique_ptr<PageWidget> widget = std::make_unique<PageWidgetMock>();
     mPageRegistration = std::make_unique<PageRegistration>(move(widget));
     mPageRegistration->addTransition(0, PageType::CONFIRMATION);
-    mPageRegistration->addTransition(-2, PageType::VIEWER);
+    mPageRegistration->addTransition(-2, PageType::PHOTO_VIEWER);
     mPageRegistration->addTransition(1, PageType::LIBRARY);
     mPageRegistration->addTransition(32, PageType::NONE);
 }
@@ -19,7 +19,7 @@ void PageRegistrationTester::testGetTransition0()
 
 void PageRegistrationTester::testGetTransitionNeg2()
 {
-    QCOMPARE(mPageRegistration->getTarget(-2), PageType::VIEWER);
+    QCOMPARE(mPageRegistration->getTarget(-2), PageType::PHOTO_VIEWER);
 }
 
 void PageRegistrationTester::testGetTransition32()

@@ -11,6 +11,8 @@
 #include <QPen>
 #include "AnnotationDrawer.h"
 #include <ClickableGraphicsPixmapItem.h>
+#include "AlgorithmList.h"
+#include <QHash>
 
 
 namespace Ui {
@@ -43,6 +45,10 @@ public slots:
     void on_mGraphicsView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint);
     void roiClicked();
     void annotationSelected(Annotation *annotation, const QPointF &pos);
+    void showToolTip(QAction* action);
+    void zoomIn();
+    void zoomOut();
+    void resize();
 
 protected:
     Ui::ViewerPageWidget *ui;
@@ -61,7 +67,11 @@ protected:
 
     QRect mROI;
 
-    virtual void display() = 0;
+    AlgorithmList mAlgorithmList;
+    QHash<QString, Algorithm*> mAlgorithms;
+
+    virtual void display();
+    void resizeEvent(QResizeEvent* event);
 };
 
 #endif // VIEWERPAGEWIDGET_H

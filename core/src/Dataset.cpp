@@ -40,7 +40,7 @@ Dataset::Dataset(const Dataset& other) {
     mType = other.getType();
     mValid = other.isValid();
     for(Medium* iter: other.getMediaList()) {
-        Medium* medium = new Medium(*iter);
+        Medium* medium = iter->copy();
         mMediaList.append(medium);
     }
 }

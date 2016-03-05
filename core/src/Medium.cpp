@@ -19,6 +19,10 @@ Medium::Medium(const Medium& other) {
     }
 }
 
+Medium* Medium::copy() {
+    return new Medium(*this);
+}
+
 /**
  * @brief Medium::~Medium Deletes the Medium.
  */

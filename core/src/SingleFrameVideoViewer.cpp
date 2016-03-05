@@ -4,11 +4,20 @@
 
 SingleFrameVideoViewer::SingleFrameVideoViewer() : ViewerPageWidget(), mIsPlaying(false), mSFVideo("", QList<QPair<int, Annotation*>>()), mFrameIndex(-1)
 {
+    ViewerPageWidget::ui->mZoomIn->hide();
+    ViewerPageWidget::ui->mZoomOut->hide();
     connect(ViewerPageWidget::ui->mPlayOrPauseButton, SIGNAL(clicked()), this, SLOT(playOrPause()));
     connect(&mTimer, SIGNAL(timeout()), this, SLOT(showFrame()));
+    mVideoTime.setInterval(1000);
+    connect(&mVideoTime, SIGNAL(timeout()), this, SLOT(showTime()));
+}
+
+void SingleFrameVideoViewer::showTime() {
+    ViewerPageWidget::ui->mTime->setText(QString::number(mFrameIndex*mTimer.interval()/1000));
 }
 
 void SingleFrameVideoViewer::display() {
+    ViewerPageWidget::display();
     mSFVideo = *(SingleFrameVideo*)mDataset->getMediaList().at(mIndex);
     mTimer.setInterval(1000/mSFVideo.getFramerate()); //time interval in milliseconds per frame
     mFrameList.clear();
@@ -49,6 +58,7 @@ void SingleFrameVideoViewer::contextMenu(const QPointF &pos) {
 }
 
 void SingleFrameVideoViewer::pause() {
+    mVideoTime.stop();
     mTimer.stop();
     mIsPlaying = false;
     ViewerPageWidget::ui->mPlayOrPauseButton->setText("play");
@@ -56,6 +66,7 @@ void SingleFrameVideoViewer::pause() {
 void SingleFrameVideoViewer::play() {
     mIsPlaying = true;
     ViewerPageWidget::ui->mPlayOrPauseButton->setText("pause");
+    mVideoTime.start();
     mTimer.start();
 }
 

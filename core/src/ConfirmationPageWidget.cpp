@@ -59,7 +59,6 @@ void ConfirmationPageWidget::reset()
     QVariant varDatasets;
     emit readFromStack(-2, varDatasets);
     if(varDatasets.canConvert<std::shared_ptr<DatasetList>>()){
-        qDebug() << "dataset list";
         list = varDatasets.value<std::shared_ptr<DatasetList>>();
     } else {
         LOG_ERR("no datasets");
@@ -69,7 +68,6 @@ void ConfirmationPageWidget::reset()
     QVariant varChosenDataset;
     emit readFromStack(2, varChosenDataset);
     if(varChosenDataset.canConvert<int>()) {
-        qDebug() << "index of dataset";
         indexOfChosenDataset = varChosenDataset.value<int>();
 
         if((list != nullptr) && (indexOfChosenDataset < list->getDatasetList().size())) {
@@ -87,7 +85,6 @@ void ConfirmationPageWidget::reset()
     QVariant varSearchQuery;
     emit readFromStack(1, varSearchQuery);
     if(varSearchQuery.canConvert<std::shared_ptr<SearchQuery>>()) {
-        qDebug() << "search query";
         std::shared_ptr<SearchQuery> searchQuery = varSearchQuery.value<std::shared_ptr<SearchQuery>>();
         QImage chosenImage(searchQuery->getSearchObject().getMedium());
         QPixmap pixmap;
@@ -96,7 +93,6 @@ void ConfirmationPageWidget::reset()
         if(searchQuery->getSearchObject().getType() == SearchObject::ROI) {
             pixmap = pixmap.copy(searchQuery->getSearchObject().getROI());
         } else if(searchQuery->getSearchObject().getType() == SearchObject::ANNOTATION) {
-            qDebug() << "annotation";
             /*RectangleAnnotation* rectAnnotation = new RectangleAnnotation(searchQuery->getSearchObject().getAnnotation());
             //RectangleAnnotation* rectAnnotation = dynamic_cast<RectangleAnnotation*> (annotation);
             if(rectAnnotation != nullptr) {
@@ -120,7 +116,6 @@ void ConfirmationPageWidget::reset()
     QVariant varDatasetIndices;
     emit readFromStack(0, varDatasetIndices);
     if(varDatasetIndices.canConvert<QList<int>>()) {
-        qDebug() << "names of chosen datasets";
         QList<int> indices = varDatasetIndices.value<QList<int>>();
         for(int i = 0; i < indices.size(); i++) {
             QString name = list->getDatasetList().at(i).getName();
@@ -136,7 +131,6 @@ void ConfirmationPageWidget::reset()
     QVariant chosenAlgorithm;
     emit readFromStack(0, chosenAlgorithm);
     if(chosenAlgorithm.canConvert<std::shared_ptr<Algorithm>>()){
-        qDebug() << "algo";
         std::shared_ptr<Algorithm> algo = chosenAlgorithm.value<std::shared_ptr<Algorithm>>();
         ui->mParameters->item(0, 1)->setText(algo->getName());
         ui->mParameters->item(0, 1)->setTextAlignment(Qt::AlignCenter);
@@ -148,7 +142,6 @@ void ConfirmationPageWidget::reset()
     QVariant parameterFile;
     emit readFromStack(0, parameterFile);
     if (parameterFile.canConvert<QString>()) {
-        qDebug() << "parameters";
         QString fileName = parameterFile.value<QString>();
         QFile file(fileName);
         if(!file.open(QFile::ReadOnly)) {

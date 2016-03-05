@@ -31,6 +31,16 @@ SingleFrameVideo::SingleFrameVideo(const QString path, const QList<QPair<int, An
     mFramerate = readFramerateFromJson(mPath+"/"+FRAMERATE_FILE);
 }
 
+SingleFrameVideo::SingleFrameVideo(const SingleFrameVideo& other)
+    : Medium(other) {
+    mFramerate = other.getFramerate();
+    mFrameList = other.getFrameList();
+}
+
+Medium* SingleFrameVideo::copy() {
+    return new SingleFrameVideo(*this);
+}
+
 /**
  * @brief SingleFrameVideo::getFramerate Returns the framerate of the SingleFrameVideo.
  * @return The framerate of the SingleFrameVideo.

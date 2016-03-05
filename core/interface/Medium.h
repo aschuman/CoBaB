@@ -19,6 +19,7 @@ public:
     enum Type { PHOTO, VIDEO, SINGLE_FRAME_VIDEO };
     Medium(const QString path, const QList<QPair<int, Annotation*>> annotations);
     Medium(const Medium& other);
+    virtual Medium* copy();
     ~Medium();
     Type getType() const;
     QList<QPair<int, Annotation *>> getAnnotationList() const;
