@@ -61,5 +61,9 @@ QList<Algorithm*> AlgorithmList::findCompatibleAlgorithms(const DataPacket& pack
  * @return QList<Algorithm>
  */
 QList<Algorithm*> AlgorithmList::getAlgorithmList() {
-    return QList<Algorithm*>();
+    QList<Algorithm*> algos;
+    for(const auto& uniqueAlgo : mAlgorithmList){
+        algos.push_back(uniqueAlgo.get());
+    }
+    return algos;
 }
