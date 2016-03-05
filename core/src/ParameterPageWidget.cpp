@@ -36,5 +36,5 @@ void ParameterPageWidget::nextButtonClicked() {
 }
 
 void ParameterPageWidget::retranslateUi() {
-
+    ui->mNext->setText(tr("Weiter"));
 }

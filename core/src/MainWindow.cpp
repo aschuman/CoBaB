@@ -23,6 +23,9 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->mActionDeutsch, SIGNAL(triggered(bool)), this, SLOT(changeLanguageToGerman()));
     QObject::connect(ui->mActionEnglish, SIGNAL(triggered(bool)), this, SLOT(changeLanguageToEnglish()));
 
+    //load config data with previously chosen language
+    ConfigData* data = ConfigData::getInstance();
+    data->setLanguage(data->getLanguage());
     retranslate();
 }
 
@@ -50,20 +53,21 @@ void MainWindow::display(QWidget* widget)
         ui->verticalLayout->addWidget(widget);
         currentWidget = widget;
         currentWidget->show();
+        retranslate();
     }
 }
 
 void MainWindow::showAboutDialog() {
     ConfigData* data = ConfigData::getInstance();
-    QMessageBox msgBox(QMessageBox::Information, data->translate("MainWindow", "Über CoBaB"), data->getAbout(), QMessageBox::NoButton, this);
-    msgBox.addButton(data->translate("MainWindow", "Schließen"), QMessageBox::DestructiveRole);
+    QMessageBox msgBox(QMessageBox::Information, tr("Über CoBaB"), data->getAbout(), QMessageBox::NoButton, this);
+    msgBox.addButton(tr("Schließen"), QMessageBox::DestructiveRole);
     msgBox.exec();
 }
 
 void MainWindow::showHelpDialog() {
     ConfigData* data = ConfigData::getInstance();
-    QMessageBox msgBox(QMessageBox::Information, data->translate("MainWindow", "CoBaB - Hilfe"), data->getHelp(), QMessageBox::NoButton, this);
-    msgBox.addButton(data->translate("MainWindow", "Schließen"), QMessageBox::DestructiveRole);
+    QMessageBox msgBox(QMessageBox::Information, tr("Hilfe für CoBaB"), data->getHelp(), QMessageBox::NoButton, this);
+    msgBox.addButton(tr("Schließen"), QMessageBox::DestructiveRole);
     msgBox.exec();
 }
 
@@ -80,18 +84,17 @@ void MainWindow::changeLanguageToEnglish() {
 }
 
 void MainWindow::retranslate() {
-    ConfigData* data = ConfigData::getInstance();
-    ui->mAboutAction->setText(data->translate("MainWindow", "Über CoBaB"));
-    ui->mHelpAction->setText(data->translate("MainWindow", "CoBaB - Hilfe"));
-    ui->mBackAction->setText(data->translate("MainWindow", "Zurück"));
-    ui->mHomeAction->setText(data->translate("MainWindow", "Anfang"));
-    ui->mBookmarkMenu->setTitle(data->translate("MainWindow", "Lesezeichen"));
-    ui->mFileMenu->setTitle(data->translate("MainWindow", "Datei"));
-    ui->mHelpMenu->setTitle(data->translate("MainWindow", "Hilfe"));
-    ui->mHistoryMenu->setTitle(data->translate("MainWindow", "Chronik"));
-    ui->mLanguageMenu->setTitle(data->translate("MainWindow", "Sprache"));
-    ui->mActionDeutsch->setText(data->translate("MainWindow", "Deutsch"));
-    ui->mActionEnglish->setText(data->translate("MainWindow", "Englisch"));
+    ui->mAboutAction->setText(tr("Über CoBaB"));
+    ui->mHelpAction->setText(tr("Hilfe für CoBaB"));
+    ui->mBackAction->setText(tr("Zurück"));
+    ui->mHomeAction->setText(tr("Anfang"));
+    ui->mBookmarkMenu->setTitle(tr("Lesezeichen"));
+    ui->mFileMenu->setTitle(tr("Datei"));
+    ui->mHelpMenu->setTitle(tr("Hilfe"));
+    ui->mHistoryMenu->setTitle(tr("Chronik"));
+    ui->mLanguageMenu->setTitle(tr("Sprache"));
+    ui->mActionDeutsch->setText(tr("Deutsch"));
+    ui->mActionEnglish->setText(tr("Englisch"));
 
     PageWidget* pageWidget = dynamic_cast<PageWidget*> (currentWidget);
     if (pageWidget != nullptr) {
