@@ -1,8 +1,8 @@
 TEMPLATE = subdirs
 SUBDIRS = \
-    #TestAlgorithmLinkTester \
     core \
     TestAlgorithm \
+    TestAlgorithmLinkTester \
     test \
     app
 

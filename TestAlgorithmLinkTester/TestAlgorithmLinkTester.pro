@@ -4,6 +4,5 @@ CONFIG -= app_bundle
 
 SOURCES += main.cpp
 
-LIBS += ../plugins/libTestAlgorithm.so \
-    ../core/libcore.a
+LIBS += -L../plugins -lTestAlgorithm
 
