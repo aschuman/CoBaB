@@ -4,7 +4,6 @@
 #include "SearchQuery.h"
 #include "Algorithm.h"
 #include "log.h"
-#include "ConfigData.h"
 #include <QJsonDocument>
 #include <QDebug>
 
@@ -39,11 +38,10 @@ ConfirmationPageWidget::ConfirmationPageWidget() :
 }
 
 void ConfirmationPageWidget::retranslateUi() {
-    ConfigData* data = ConfigData::getInstance();
-    ui->mSearchButton->setText(data->translate("ConfirmationPageWidget", "Suche starten"));
-    ui->mParameters->horizontalHeaderItem(0)->setText(data->translate("ConfirmationPageWidget", "Datenordner"));
-    ui->mParameters->horizontalHeaderItem(1)->setText(data->translate("ConfirmationPageWidget", "Algorithmus"));
-    ui->mParameters->horizontalHeaderItem(2)->setText(data->translate("ConfirmationPageWidget", "Parameter"));
+    ui->mSearchButton->setText(tr("Suche starten"));
+    ui->mParameters->horizontalHeaderItem(0)->setText(tr("Datenordner"));
+    ui->mParameters->horizontalHeaderItem(1)->setText(tr("Algorithmus"));
+    ui->mParameters->horizontalHeaderItem(2)->setText(tr("Parameter"));
 }
 
 ConfirmationPageWidget::~ConfirmationPageWidget()
@@ -104,7 +102,11 @@ void ConfirmationPageWidget::reset()
                 qDebug() << rect.height() << rect.width() << rect.x() << rect.y();
             }*/
         }
+        QSize pixSize = pixmap.size();
+        pixSize.scale(size(), Qt::KeepAspectRatio);
+        pixmap = pixmap.scaled(pixSize, Qt::KeepAspectRatio);
         ui->mImageToSearchLabel->setPixmap(pixmap);
+        ui->mImageToSearchLabel->setFixedSize(pixSize);
 
     } else {
         LOG_ERR("no searchQuery");

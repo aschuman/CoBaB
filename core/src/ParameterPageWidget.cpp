@@ -10,6 +10,10 @@ ParameterPageWidget::ParameterPageWidget() :
     ui->mSearchDatasetListView->setModel(&mModel);
     ui->mParameterWidget->setModel(&mParameterModel);
 
+ //   mParameterModel.load("/home/vzh/Documents/PSE/CoBaB/resources/PluginDepthEstimator.json");
+
+ //   ui->mSearchDatasetListView->setSelectionMode(QAbstractItemView::MultiSelection);
+
     connect(ui->mNext, SIGNAL(clicked()), this, SLOT(nextButtonClicked()));
 }
 
@@ -23,18 +27,24 @@ void ParameterPageWidget::reset() {
     QVariant var;
     emit readFromStack(-2, var);
     if(var.canConvert<std::shared_ptr<DatasetList>>()){
-        mModel.setDatasetList(var.value<std::shared_ptr<DatasetList>>()->getDatasetList());
-        // save the parameters
+        mSearchDatasetList = var.value<std::shared_ptr<DatasetList>>().get();
+        mModel.setDatasetList(mSearchDatasetList->getDatasetList());
     }
 
 }
 
 void ParameterPageWidget::nextButtonClicked() {
 
- //   pushToStack();
+  //  QModelIndexList listOfDatasetIndexes = *ui->mSearchDatasetListView->selectionMode().selectedIndexes();
+  //  pushToStack(listOfDatasetIndexes);
     exit(EXIT_NEXT);
 }
 
-void ParameterPageWidget::retranslateUi() {
+void ParameterPageWidget::on_mSearchDatasetListView_indexesMoved(const QModelIndexList &indexes)
+{
 
+}
+
+void ParameterPageWidget::retranslateUi() {
+    ui->mNext->setText(tr("Weiter"));
 }

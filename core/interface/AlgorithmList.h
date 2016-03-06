@@ -10,6 +10,7 @@
 #include "Algorithm.h"
 #include <vector>
 #include <QList>
+#include <QPluginLoader>
 
 class AlgorithmList {
 public: 
@@ -18,6 +19,7 @@ public:
      * @param file
      */
     explicit AlgorithmList(const QString& file);
+    ~AlgorithmList();
     AlgorithmList(AlgorithmList&& a);
     AlgorithmList& operator=(AlgorithmList&& a);
     
@@ -28,7 +30,9 @@ public:
     
     QList<Algorithm*> getAlgorithmList();
 private:
-    std::vector<std::unique_ptr<Algorithm>> mAlgorithmList;
+    Algorithm* loadAlgorithm(QPluginLoader* loader);
+
+    std::vector<std::unique_ptr<QPluginLoader>> mPluginLoaders;
 };
 
 #include <memory>

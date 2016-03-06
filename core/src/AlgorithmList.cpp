@@ -5,7 +5,6 @@
 
 #include "AlgorithmList.h"
 #include <QDir>
-#include <QPluginLoader>
 
 #define LOGGING_LEVEL_1
 #include "log.h"
@@ -24,28 +23,24 @@ AlgorithmList::AlgorithmList(const QString& file) {
     for(const QString& fileName : pluginsDir.entryList(QDir::Files))
     {
         QString filePath = pluginsDir.absoluteFilePath(fileName);
-        QPluginLoader loader(filePath);
-        QObject* plugin = loader.instance();
-        if(plugin){
-            LOG("loading plugin ", fileName.toStdString(), " ..");
-            Algorithm* algo = qobject_cast<Algorithm*>(plugin);
-            if(algo){
-                LOG("sucessfully loaded plugin");
-                mAlgorithmList.push_back(std::unique_ptr<Algorithm>(algo));
-            } else {
-                LOG("plugin does not implement Algorithm-interface");
-            }
-        }
+        mPluginLoaders.push_back(std::make_unique<QPluginLoader>(filePath));
     }
 }
 
-AlgorithmList::AlgorithmList(AlgorithmList&& a) : mAlgorithmList(std::move(a.mAlgorithmList))
+AlgorithmList::~AlgorithmList()
+{
+    for(auto& loader : mPluginLoaders){
+        loader->unload();
+    }
+}
+
+AlgorithmList::AlgorithmList(AlgorithmList&& a) : mPluginLoaders(std::move(a.mPluginLoaders))
 {
 }
 
 AlgorithmList& AlgorithmList::operator=(AlgorithmList &&a)
 {
-    mAlgorithmList = std::move(a.mAlgorithmList);
+    mPluginLoaders = std::move(a.mPluginLoaders);
     return *this;
 }
 
@@ -61,5 +56,27 @@ QList<Algorithm*> AlgorithmList::findCompatibleAlgorithms(const DataPacket& pack
  * @return QList<Algorithm>
  */
 QList<Algorithm*> AlgorithmList::getAlgorithmList() {
-    return QList<Algorithm*>();
+    QList<Algorithm*> algos;
+    for(auto& loader : mPluginLoaders){
+        auto algo = loadAlgorithm(loader.get());
+        if(algo)
+            algos.push_back(std::move(algo));
+    }
+    return algos;
+}
+
+Algorithm *AlgorithmList::loadAlgorithm(QPluginLoader* loader)
+{
+    Algorithm* loadedAlgorithm = nullptr;
+    QObject* plugin = loader->instance();
+     if(plugin){
+         LOG("loading plugin ",  loader->fileName().toStdString(), " ..");
+         loadedAlgorithm = qobject_cast<Algorithm*>(plugin);
+         if(loadedAlgorithm){
+             LOG("sucessfully loaded algorithm ", loadedAlgorithm->getName().toStdString());
+         } else {
+             LOG("plugin does not implement Algorithm-interface");
+         }
+     }
+     return loadedAlgorithm;
 }

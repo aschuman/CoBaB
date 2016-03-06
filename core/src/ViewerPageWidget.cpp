@@ -250,5 +250,6 @@ void ViewerPageWidget::display() {
 }
 
 void ViewerPageWidget::retranslateUi() {
-
+    ui->mBeforeButton->setText(tr("vorheriges"));
+    ui->mNextButton->setText(tr("nächstes"));
 }

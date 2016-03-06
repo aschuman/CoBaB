@@ -55,8 +55,8 @@
     <property name="title">
      <string>Hilfe</string>
     </property>
-    <addaction name="mHelpAction"/>
     <addaction name="mAboutAction"/>
+    <addaction name="mHelpAction"/>
    </widget>
    <addaction name="mFileMenu"/>
    <addaction name="mLanguageMenu"/>

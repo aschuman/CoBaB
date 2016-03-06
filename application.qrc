@@ -2,8 +2,7 @@
 <qresource>
     <file alias="videoIcon.png">resources/images/videoIcon.png</file>
 </qresource>
-	<qresource>
-		<file>resources/translations/CoBaB_de.qm</file>
-		<file>resources/translations/CoBaB_en.qm</file>
-	</qresource>
+<qresource>
+	<file>resources/translations/CoBaB_en.qm</file>
+</qresource>
 </RCC>

@@ -40,8 +40,8 @@ void ConfigDataTester::testHelp_data() {
     QTest::addColumn<QString>("language");
     QTest::addColumn<QString>("help");
 
-    QTest::newRow("English") << "English" << "Instructions for using CoBaB";
-    QTest::newRow("German") << "German" << "Hinweise zur Benutzung von CoBaB";
+    QTest::newRow("English") << "English" << "Library";
+    QTest::newRow("German") << "German" << "Bibliothek";
 }
 
 void ConfigDataTester::testHelp() {

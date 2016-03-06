@@ -1,10 +1,10 @@
 TEMPLATE = subdirs
 SUBDIRS = \
-    TestAlgorithm \
-    #TestAlgorithmLinkTester \
     core \
+    TestAlgorithm \
+    TestAlgorithmLinkTester \
     test \
     app
 
 CONFIG += ordered
-TRANSLATIONS += CoBaB_de.ts CoBaB_en.ts
+TRANSLATIONS += CoBaB_en.ts

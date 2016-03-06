@@ -22,7 +22,6 @@ public:
     void setSoundOn(bool soundOn);
     QString getHelp();
     QString getAbout();
-    QString translate(const char *className, const char *text);
 
 private:
     QHash<QString, QLocale> languages;    ///< A map which contains the avaliable languages and corresponding QLocales for the translator.
@@ -30,7 +29,8 @@ private:
     ConfigData();
     ConfigData(const ConfigData&);
     ConfigData& operator=(const ConfigData&);
-    QTranslator mTranslator;
+    QTranslator* mTranslator;
+
 
 };
 

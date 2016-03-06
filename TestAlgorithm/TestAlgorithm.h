@@ -10,7 +10,7 @@
  * @author Tung
  */
 
-class TestAlgorithm : public QObject, public SearchAlgorithm {
+class TestAlgorithm : public SearchAlgorithm {
 
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.CoBaB.Algorithm" FILE "TestAlgorithm.json")
