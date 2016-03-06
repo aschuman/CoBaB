@@ -45,11 +45,11 @@ void SearchResultTester::testSort()
 
     QList<SearchResultElement> sortedList = s.sortByScore();
 
-    QCOMPARE(sortedList.takeAt(0).getScore(), element2.getScore());
-    QCOMPARE(sortedList.takeAt(1).getScore(), element5.getScore());
-    QCOMPARE(sortedList.takeAt(2).getScore(), element4.getScore());
-    QCOMPARE(sortedList.takeAt(3).getScore(), element1.getScore());
-    QCOMPARE(sortedList.takeAt(4).getScore(), element3.getScore());
+    QCOMPARE(sortedList.at(0).getScore(), element2.getScore());
+    QCOMPARE(sortedList.at(1).getScore(), element5.getScore());
+    QCOMPARE(sortedList.at(2).getScore(), element4.getScore());
+    QCOMPARE(sortedList.at(3).getScore(), element1.getScore());
+    QCOMPARE(sortedList.at(4).getScore(), element3.getScore());
 
 }
 void SearchResultTester::testStreamMethods()
