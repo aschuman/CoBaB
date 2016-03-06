@@ -86,22 +86,23 @@ void ConfirmationPageWidget::reset()
     emit readFromStack(1, varSearchQuery);
     if(varSearchQuery.canConvert<std::shared_ptr<SearchQuery>>()) {
         std::shared_ptr<SearchQuery> searchQuery = varSearchQuery.value<std::shared_ptr<SearchQuery>>();
-        QImage chosenImage(searchQuery->getSearchObject().getMedium());
+        SearchObject searchObject = searchQuery->getSearchObject();
+        QImage chosenImage(searchObject.getMedium());
         QPixmap pixmap;
         pixmap.convertFromImage(chosenImage);
 
-        if(searchQuery->getSearchObject().getType() == SearchObject::ROI) {
-            pixmap = pixmap.copy(searchQuery->getSearchObject().getROI());
-        } else if(searchQuery->getSearchObject().getType() == SearchObject::ANNOTATION) {
-            /*RectangleAnnotation* rectAnnotation = new RectangleAnnotation(searchQuery->getSearchObject().getAnnotation());
-            //RectangleAnnotation* rectAnnotation = dynamic_cast<RectangleAnnotation*> (annotation);
-            if(rectAnnotation != nullptr) {
-                qDebug() << "rect annotation";
-                QRect rect = static_cast<QRect> (*rectAnnotation);
-                pixmap = pixmap.copy(rect);
-                qDebug() << rect.height() << rect.width() << rect.x() << rect.y();
-            }*/
+        if(searchObject.getType() == SearchObject::ROI) {
+            pixmap = pixmap.copy(searchObject.getROI());
+        } else if(searchObject.getType() == SearchObject::ANNOTATION) {
+            if (searchObject.getAnnotation()->getForm() == Annotation::RECTANGLE) {
+                RectangleAnnotation* rectAnnotation = (RectangleAnnotation*)searchObject.getAnnotation();
+                if(rectAnnotation != nullptr) {
+                    QRect rect = static_cast<QRect> (*rectAnnotation);
+                    pixmap = pixmap.copy(rect);
+                }
+            }
         }
+
         QSize pixSize = pixmap.size();
         pixSize.scale(size(), Qt::KeepAspectRatio);
         pixmap = pixmap.scaled(pixSize, Qt::KeepAspectRatio);
