@@ -10,7 +10,8 @@
  * @author Tung
  */
 
-class Algorithm {
+class Algorithm : public QObject {
+    Q_OBJECT
 public: 
     virtual ~Algorithm() = default;
     

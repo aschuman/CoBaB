@@ -10,7 +10,8 @@
  */
 
 class SearchAlgorithm: public Algorithm {
-public: 
+    Q_OBJECT
+public:
     
     virtual void setName(const QString& name) = 0;
 
