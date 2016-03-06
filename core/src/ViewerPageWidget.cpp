@@ -11,7 +11,7 @@ const int ViewerPageWidget::EXIT_NEXT = 0;
 ViewerPageWidget::ViewerPageWidget() :
     ui(new Ui::ViewerPageWidget), mIndex(0), mImage(nullptr), mSelectionPen(QColor(0,255,230)),
     mCurrentSelection(nullptr), mAnnotationDrawer(&mGraphicsScene), mSelectedAnnotation(nullptr),
-    mAlgorithmList(""), mDataset(nullptr)
+    mAlgorithmList(nullptr), mDataset(nullptr)
 {
     ui->setupUi(this);
     ui->mViewerListView->setResizeMode(QListView::Adjust);
@@ -76,7 +76,7 @@ void ViewerPageWidget::contextMenu(const QPointF &pos) {
     datasetList.push_back(mDataset->getName());
     searchQuery.setDatasets(datasetList);
 
-    QList<Algorithm*> algoList = mAlgorithmList.findCompatibleAlgorithms(searchQuery);
+    QList<Algorithm*> algoList = mAlgorithmList ? mAlgorithmList->findCompatibleAlgorithms(searchQuery) : QList<Algorithm*>();
 
     QMenu contextMenu(this);
     if(algoList.isEmpty()) {
@@ -152,6 +152,14 @@ void ViewerPageWidget::reset()
 
             display();
         }
+    }
+
+    QVariant algoListVariant;
+    emit readFromStack(-1, algoListVariant);
+    if(algoListVariant.canConvert<std::shared_ptr<AlgorithmList>>()){
+        mAlgorithmList = algoListVariant.value<std::shared_ptr<AlgorithmList>>().get();
+    } else {
+        mAlgorithmList = nullptr;
     }
 }
 

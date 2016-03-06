@@ -67,7 +67,7 @@ protected:
 
     QRect mROI;
 
-    AlgorithmList mAlgorithmList;
+    AlgorithmList* mAlgorithmList;
     QHash<QString, Algorithm*> mAlgorithms;
 
     virtual void display();
