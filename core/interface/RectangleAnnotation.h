@@ -14,7 +14,9 @@ public:
 
     RectangleAnnotation(const QString& id, const QString& type);
 
-    Annotation* copy();
+    Annotation* copy() const;
+
+    Form getForm() const;
 
     friend QDataStream& operator<<(QDataStream& out, const RectangleAnnotation& annotation);
 

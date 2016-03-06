@@ -6,5 +6,10 @@ AnnotationGraphicsItemFactory::AnnotationGraphicsItemFactory()
 }
 
 QGraphicsItem* AnnotationGraphicsItemFactory::getAnnotationVisualizer(Annotation* annotation) {
-    return new ClickableGraphicsRectItem((RectangleAnnotation*)annotation);
+    if(annotation != nullptr) {
+        if(annotation->getForm() == Annotation::Form::RECTANGLE) {
+            return new ClickableGraphicsRectItem((RectangleAnnotation*)annotation);
+        }
+    }
+    return nullptr;
 }

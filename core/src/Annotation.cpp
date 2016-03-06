@@ -3,7 +3,6 @@
 /**
  * @brief Annotation::Annotation default constructor
  */
-
 Annotation::Annotation() {
     mId = "";
     mType = "Unknown";
@@ -19,7 +18,7 @@ Annotation::Annotation(const QString& id, const QString& type) {
     mType = type;
 }
 
-Annotation* Annotation::copy() {
+Annotation* Annotation::copy() const {
     return new Annotation(*this);
 }
 
@@ -41,6 +40,15 @@ Annotation::Type Annotation::getType() const {
         case 1:     return PERSON;
         default:    return UNKNOWN;
     }
+}
+
+/**
+ * @brief Annotation::getForm Returns the form of the Annotation. RECTANGLE, if it is a RectangleAnnotation and
+ *        UNKNOWN for a normal Annotation
+ * @return the annotation form
+ */
+Annotation::Form Annotation::getForm() const {
+    return UNKNOWN_FORM;
 }
 
 /**

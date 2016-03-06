@@ -1,6 +1,6 @@
 #include "SearchObject.h"
 
-SearchObject::SearchObject() {
+SearchObject::SearchObject() : mAnnotation(nullptr) {
 
     mMedium = "";
 
@@ -9,6 +9,22 @@ SearchObject::SearchObject() {
     mMediumIndex = 0;
 
 }
+
+SearchObject::SearchObject(const SearchObject& other) {
+    mMedium = other.getMedium();
+    mROI = other.getROI();
+    mSourceDataset = other.getSourceDataset();
+    mMediumIndex = other.getMediumIndex();
+    mType = other.getType();
+    setAnnotation(other.getAnnotation());
+}
+
+SearchObject::~SearchObject() {
+    if(mAnnotation != nullptr) {
+        delete mAnnotation;
+    }
+}
+
 /**
  * @brief gets the medium
  * @return the medium
@@ -29,16 +45,20 @@ void SearchObject::setMedium(const QString medium) {
  * @brief gets the annotation
  * @return the annotation
  */
-Annotation SearchObject::getAnnotation() const {
+Annotation* SearchObject::getAnnotation() const {
     return mAnnotation;
 }
 /**
  * @brief sets the annotation
  * @param annotation to be set
  */
-void SearchObject::setAnnotation(const Annotation annotation) {
-    mAnnotation = annotation;
-    mType = SearchObject::Type::ANNOTATION;
+void SearchObject::setAnnotation(const Annotation* annotation) {
+    if(annotation == nullptr) {
+        mAnnotation = nullptr;
+    } else {
+        mAnnotation = annotation->copy();
+        mType = SearchObject::Type::ANNOTATION;
+    }
 }
 /**
  * @brief gets the region of interest
@@ -99,9 +119,14 @@ void SearchObject::toStream(QDataStream& out) const {
     //write object to stream
 
     out << mMedium
-        << mMediumIndex
-        << mAnnotation
-        << mROI
+        << mMediumIndex;
+    if(mAnnotation != nullptr) {
+        out << mAnnotation->getForm()
+            << *mAnnotation;
+    } else {
+        out << Annotation::Form::NONE;
+    }
+    out << mROI
         << mSourceDataset;
 
 }
@@ -114,7 +139,28 @@ void SearchObject::fromStream(QDataStream& in) {
     //read object from stream
     in >> mMedium;
     in >> mMediumIndex;
-    in >> mAnnotation;
+    Annotation::Form form;
+    in >> (quint32&)form;
+    switch(form) {
+        case Annotation::Form::UNKNOWN_FORM:
+            {
+                Annotation temp;
+                in >> temp;
+                mAnnotation = temp.copy();
+            }
+            break;
+        case Annotation::Form::RECTANGLE:
+            {
+                RectangleAnnotation temp("","");
+                in >> temp;
+                mAnnotation = temp.copy();
+            }
+            break;
+        case Annotation::Form::NONE:
+        default:
+            mAnnotation = nullptr;
+            break;
+    }
     in >> mROI;
     in >> mSourceDataset;
 

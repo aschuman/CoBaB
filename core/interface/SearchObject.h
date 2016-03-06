@@ -20,13 +20,17 @@ public:
 
     SearchObject();
 
+    SearchObject(const SearchObject& other);
+
+    ~SearchObject();
+
     QString getMedium() const;
 
     void setMedium(const QString medium);
 
-    Annotation getAnnotation() const;
+    Annotation* getAnnotation() const;
 
-    void setAnnotation(const Annotation annotation);
+    void setAnnotation(const Annotation *annotation);
 
     QRect getROI() const;
 
@@ -54,7 +58,7 @@ private:
 
     QString mMedium;            ///< Medium as the searchobject
 
-    Annotation mAnnotation;     ///< Annotation as the searchobject
+    Annotation* mAnnotation;     ///< Annotation as the searchobject
 
     QRect mROI;                 ///< The annotation as rectangle with coordinates ("region of interest")
 

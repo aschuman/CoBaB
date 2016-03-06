@@ -40,8 +40,8 @@ SearchObject SearchQuery::getSearchObject() const {
  * @brief sets the searchobject
  * @param searchObject to be set
  */
-void SearchQuery::setSearchObject(const SearchObject searchObject) {
-    mSearchObject = searchObject;
+void SearchQuery::setSearchObject(const SearchObject& searchObject) {
+    mSearchObject = *(new SearchObject(searchObject));
 }
 
 /**

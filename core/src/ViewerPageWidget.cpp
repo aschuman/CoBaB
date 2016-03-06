@@ -67,7 +67,7 @@ void ViewerPageWidget::contextMenu(const QPointF &pos) {
     if(!mROI.isNull()) {
         searchObject.setROI(mROI);
     } else if(mSelectedAnnotation != nullptr) {
-        searchObject.setAnnotation(*mSelectedAnnotation);
+        searchObject.setAnnotation(mSelectedAnnotation);
     }
     searchObject.setSourceDataset(mDataset->getPath());
     SearchQuery searchQuery;
@@ -161,7 +161,7 @@ void ViewerPageWidget::nextWidget(QAction* action) {
     if(!mROI.isNull()) {
         searchObject.setROI(mROI);
     } else if(mSelectedAnnotation != nullptr) {
-        searchObject.setAnnotation(*mSelectedAnnotation);
+        searchObject.setAnnotation(mSelectedAnnotation);
     }
     searchObject.setSourceDataset(mDataset->getPath());
     delete mSelectedAnnotation;

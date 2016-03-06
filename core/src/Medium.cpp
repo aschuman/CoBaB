@@ -28,7 +28,8 @@ Medium* Medium::copy() {
  */
 Medium::~Medium() {
     for(QPair<int, Annotation*> iter: mAnnotationList) {
-        delete iter.second;
+        if(iter.second != nullptr)
+            delete iter.second;
     }
 }
 

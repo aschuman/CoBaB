@@ -14,16 +14,20 @@ class Annotation: public Serializable {
 public: 
 
     enum Type { FACE, PERSON, UNKNOWN };
+    enum Form { NONE, RECTANGLE, UNKNOWN_FORM }; //needed for serialization to construct annotations of the right type,
+                                                 //NONE is only needed to check if the annotation is a null object
 
     Annotation();
 
     Annotation(const QString& id, const QString& type);
 
-    virtual Annotation* copy();
+    virtual Annotation* copy() const;
 
     QString getId() const;
     
     Type getType() const;
+
+    virtual Form getForm() const;
 
     friend QDataStream& operator<<(QDataStream& out, const Annotation& annotation);
 

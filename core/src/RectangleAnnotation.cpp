@@ -9,8 +9,12 @@ RectangleAnnotation::RectangleAnnotation(const QString& id, const QString& type)
 
 }
 
-Annotation* RectangleAnnotation::copy() {
+Annotation* RectangleAnnotation::copy() const {
     return new RectangleAnnotation(*this);
+}
+
+Annotation::Form RectangleAnnotation::getForm() const {
+    return RECTANGLE;
 }
 
 /**
