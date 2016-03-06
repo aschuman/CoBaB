@@ -26,13 +26,14 @@
      <x>0</x>
      <y>0</y>
      <width>629</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="mFileMenu">
     <property name="title">
      <string>Datei</string>
     </property>
+    <addaction name="mDatasetAction"/>
    </widget>
    <widget class="QMenu" name="mLanguageMenu">
     <property name="title">
@@ -117,6 +118,11 @@
   <action name="mActionEnglish">
    <property name="text">
     <string>English</string>
+   </property>
+  </action>
+  <action name="mDatasetAction">
+   <property name="text">
+    <string>Datensatz öffnen</string>
    </property>
   </action>
  </widget>

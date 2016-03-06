@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     QObject::connect(ui->mHomeAction, SIGNAL(triggered(bool)), this, SIGNAL(requestedHomePage()));
     QObject::connect(ui->mBackAction, SIGNAL(triggered(bool)), this, SIGNAL(requestedPreviousPage()));
+    QObject::connect(ui->mDatasetAction, SIGNAL(triggered(bool)), this, SIGNAL(requestedFileDialog()));
 
     QObject::connect(ui->mAboutAction, SIGNAL(triggered(bool)), this, SLOT(showAboutDialog()));
     QObject::connect(ui->mHelpAction, SIGNAL(triggered(bool)), this, SLOT(showHelpDialog()));
@@ -69,6 +70,14 @@ void MainWindow::showHelpDialog() {
     QMessageBox msgBox(QMessageBox::Information, tr("Hilfe für CoBaB"), data->getHelp(), QMessageBox::NoButton, this);
     msgBox.addButton(tr("Schließen"), QMessageBox::DestructiveRole);
     msgBox.exec();
+}
+
+void MainWindow::showOpenDataset() {
+    ui->mDatasetAction->setVisible(true);
+}
+
+void MainWindow::hideOpenDataset() {
+    ui->mDatasetAction->setVisible(false);
 }
 
 void MainWindow::changeLanguageToGerman() {

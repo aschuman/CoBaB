@@ -1,6 +1,8 @@
 #include "include/LibraryPageWidget.h"
 #include "ui_LibraryPageWidget.h"
 #include <QVariant>
+#include <QFileDialog>
+#include <QMessageBox>
 
 const int LibraryPageWidget::EXIT_PHOTO = 0;
 const int LibraryPageWidget::EXIT_SINGLE_FRAME_VIDEO = 1;
@@ -56,4 +58,29 @@ void LibraryPageWidget::on_mLibraryListView_doubleClicked(const QModelIndex &ind
 
     emit pushToStack(i);
     emit exit(e);
+}
+
+void LibraryPageWidget::showFileDialog() {
+    QString dir = QFileDialog::getExistingDirectory(this, tr("Open Dataset"), "/home");
+    Dataset dataset(dir);
+    if(dataset.isValid()) {
+        mDatasetList->addDataset(dataset);
+        int e = -1;
+        switch(dataset.getType()){
+        case Dataset::PHOTO:
+            e = EXIT_PHOTO;
+        break;
+        case Dataset::SINGLE_FRAME_VIDEO:
+            e = EXIT_SINGLE_FRAME_VIDEO;
+            break;
+        case Dataset::VIDEO:
+            e = EXIT_VIDEO;
+            break;
+        }
+        emit pushToStack(mDatasetList->getDatasetList().size()-1);
+        emit exit(e);
+    } else {
+        QMessageBox msgBox(QMessageBox::Information, "", "No valid dataset chosen.", QMessageBox::Ok, this);
+        msgBox.exec();
+    }
 }

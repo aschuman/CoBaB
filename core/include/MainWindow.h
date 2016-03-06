@@ -22,6 +22,8 @@ public:
     ~MainWindow();
     void display(QWidget* widget);
     void retranslate();
+    void showOpenDataset();
+    void hideOpenDataset();
 
 public slots:
     void showAboutDialog();
@@ -38,6 +40,8 @@ signals:
      * @brief Emitted when the user requests the home page to be displayed.
      */
     void requestedHomePage();
+
+    void requestedFileDialog();
 
 private:
     Ui::MainWindow *ui;

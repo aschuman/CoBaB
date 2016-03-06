@@ -28,6 +28,9 @@ public:
     static const int EXIT_SINGLE_FRAME_VIDEO;
     static const int EXIT_VIDEO;
 
+public slots:
+    void showFileDialog();
+
 private slots:
     void on_mLibraryListView_doubleClicked(const QModelIndex &index);
 

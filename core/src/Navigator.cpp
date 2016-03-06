@@ -28,6 +28,9 @@ void Navigator::registerPage(PageType type, std::unique_ptr<PageWidget> widget)
     QObject::connect(widget.get(), SIGNAL(pushToStack(QVariant)), this, SLOT(tryPush(QVariant)));
     QObject::connect(widget.get(), SIGNAL(readFromStack(int, QVariant&)), this, SLOT(tryRead(int,QVariant&)));
     QObject::connect(widget.get(), SIGNAL(exit(int)), this, SLOT(tryExit(int)));
+    if(type == PageType::LIBRARY) {
+        QObject::connect(mMainWindow.get(), SIGNAL(requestedFileDialog()), widget.get(), SLOT(showFileDialog()));
+    }
 
     mPageRegistrations.insert(std::map<PageType, PageRegistration>::value_type(type, PageRegistration(move(widget))));
 }
@@ -154,6 +157,11 @@ bool Navigator::tryDisplayTopPage()
         if(itRegistration != mPageRegistrations.end()){
             PageWidget& targetWidget = itRegistration->second.getWidget();
             targetWidget.reset();
+            if(getCurrentPageType() == PageType::LIBRARY) {
+                mMainWindow->showOpenDataset();
+            } else {
+                mMainWindow->hideOpenDataset();
+            }
             mMainWindow->display(&targetWidget);
             success = true;
         }else{
