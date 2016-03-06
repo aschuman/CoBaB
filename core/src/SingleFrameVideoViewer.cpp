@@ -35,6 +35,7 @@ void SingleFrameVideoViewer::display() {
         mGraphicsScene.setSceneRect(0,0, mImage->boundingRect().width(), mImage->boundingRect().height());
         mFrameIndex = 0;
     }
+    mAnnotations.clear();
     for(QPair<int, Annotation*> iter: mSFVideo.getAnnotationList()) {
         mAnnotations.insert(iter.first, iter);
     }
