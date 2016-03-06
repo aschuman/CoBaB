@@ -30,7 +30,7 @@ AlgorithmList::AlgorithmList(const QString& file) {
             LOG("loading plugin ", fileName.toStdString(), " ..");
             Algorithm* algo = qobject_cast<Algorithm*>(plugin);
             if(algo){
-                LOG("sucessfully loaded plugin");
+                LOG("sucessfully loaded algorithm ", algo->getName().toStdString());
                 mAlgorithmList.push_back(std::unique_ptr<Algorithm>(algo));
             } else {
                 LOG("plugin does not implement Algorithm-interface");
