@@ -12,6 +12,7 @@
 #include "AnnotationDrawer.h"
 #include <ClickableGraphicsPixmapItem.h>
 #include "AlgorithmList.h"
+#include "SearchQuery.h"
 #include <QHash>
 
 
@@ -67,8 +68,10 @@ protected:
 
     QRect mROI;
 
-    AlgorithmList mAlgorithmList;
+    AlgorithmList* mAlgorithmList;
     QHash<QString, Algorithm*> mAlgorithms;
+
+    std::shared_ptr<SearchQuery> mSearchQuery;
 
     virtual void display();
     void resizeEvent(QResizeEvent* event);

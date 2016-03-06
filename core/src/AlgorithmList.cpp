@@ -48,8 +48,16 @@ AlgorithmList& AlgorithmList::operator=(AlgorithmList &&a)
  * @param packet
  * @return QList<Algorithm>
  */
-QList<Algorithm*> AlgorithmList::findCompatibleAlgorithms(const DataPacket& packet) {
-    return QList<Algorithm*>();
+QList<Algorithm*> AlgorithmList::findCompatibleAlgorithms(const QList<DataPacket*>& inputDataList) {
+    QList<Algorithm*> algos;
+    for(auto& loader : mPluginLoaders){
+        auto algo = loadAlgorithm(loader.get());
+        if(algo){
+            if(algo->setInputs(inputDataList))
+                algos.push_back(std::move(algo));
+        }
+    }
+    return algos;
 }
 
 /**
