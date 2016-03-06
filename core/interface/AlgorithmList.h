@@ -26,7 +26,7 @@ public:
     /**
      * @param packet
      */
-    QList<Algorithm*> findCompatibleAlgorithms(const DataPacket& packet);
+    QList<Algorithm*> findCompatibleAlgorithms(const QList<DataPacket *> &inputDataList);
     
     QList<Algorithm*> getAlgorithmList();
 private:

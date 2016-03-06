@@ -1,6 +1,5 @@
 #include "include/ViewerPageWidget.h"
 #include "ui_ViewerPageWidget.h"
-#include "SearchQuery.h"
 #include "TestAlgorithm.h"
 #include <QMenu>
 #include <QToolTip>
@@ -70,13 +69,13 @@ void ViewerPageWidget::contextMenu(const QPointF &pos) {
         searchObject.setAnnotation(mSelectedAnnotation);
     }
     searchObject.setSourceDataset(mDataset->getPath());
-    SearchQuery searchQuery;
-    searchQuery.setSearchObject(searchObject);
+    mSearchQuery = std::make_shared<SearchQuery>();
+    mSearchQuery->setSearchObject(searchObject);
     QList<QString> datasetList;
     datasetList.push_back(mDataset->getName());
-    searchQuery.setDatasets(datasetList);
+    mSearchQuery->setDatasets(datasetList);
 
-    QList<Algorithm*> algoList = mAlgorithmList ? mAlgorithmList->findCompatibleAlgorithms(searchQuery) : QList<Algorithm*>();
+    QList<Algorithm*> algoList = mAlgorithmList ? mAlgorithmList->findCompatibleAlgorithms(QList<DataPacket*>({mSearchQuery.get()})) : QList<Algorithm*>();
 
     QMenu contextMenu(this);
     if(algoList.isEmpty()) {
@@ -179,16 +178,16 @@ void ViewerPageWidget::nextWidget(QAction* action) {
     delete mImage;
     mImage = nullptr;
 
-    SearchQuery searchQuery;
+    /*SearchQuery searchQuery;
     searchQuery.setSearchObject(searchObject);
     QList<QString> datasetList;
     datasetList.push_back(mDataset->getName());
     searchQuery.setDatasets(datasetList);
     delete mDataset;
-    mDataset = nullptr;
+    mDataset = nullptr;*/
 
     QVariant query;
-    query.setValue(std::make_shared<SearchQuery>(searchQuery));
+    query.setValue(mSearchQuery);
     pushToStack(query);
 
     // todo: push actual, user-chosen algorithm
