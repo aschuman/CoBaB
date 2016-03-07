@@ -22,6 +22,12 @@ public:
 
     SearchObject(const SearchObject& other);
 
+    SearchObject(SearchObject&& other);
+
+    SearchObject& operator=(const SearchObject& other);
+
+    SearchObject& operator=(SearchObject&& other);
+
     ~SearchObject();
 
     QString getMedium() const;

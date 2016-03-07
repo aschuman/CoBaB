@@ -41,7 +41,7 @@ SearchObject SearchQuery::getSearchObject() const {
  * @param searchObject to be set
  */
 void SearchQuery::setSearchObject(const SearchObject& searchObject) {
-    mSearchObject = *(new SearchObject(searchObject));
+    mSearchObject = searchObject;
 }
 
 /**
