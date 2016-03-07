@@ -67,7 +67,7 @@ void ViewerPageWidget::contextMenu(const QPointF &pos) {
     mSearchQuery = std::make_shared<SearchQuery>();
     mSearchQuery->setSearchObject(searchObject);
     QList<QString> datasetList;
-    datasetList.push_back(mDataset->getName());
+    datasetList.push_back(mDataset->getPath());
     mSearchQuery->setDatasets(datasetList);
 
     QList<Algorithm*> algoList = mAlgorithmList ? mAlgorithmList->findCompatibleAlgorithms(QList<DataPacket*>({mSearchQuery.get()})) : QList<Algorithm*>();
