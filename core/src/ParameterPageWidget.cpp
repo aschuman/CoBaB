@@ -1,25 +1,28 @@
 #include "include/ParameterPageWidget.h"
 #include "ui_ParameterPageWidget.h"
+#include <stdio.h>
+#include <iterator>
 
 const int ParameterPageWidget::EXIT_NEXT = 0;
 
 ParameterPageWidget::ParameterPageWidget() :
     ui(new Ui::ParameterPageWidget)
 {
+
     ui->setupUi(this);
     ui->mSearchDatasetListView->setModel(&mModel);
 
-//        QString fileName = "/home/vzh/Documents/PSE/CoBaB/resources/PluginDepthEstimator.json";
-//        QFile file(fileName);
+    QString fileName = "resources/PluginDepthEstimator.json";
+    QFile file(fileName);
+    file.open(QIODevice::ReadOnly);
+    QJsonObject object = QJsonDocument::fromJson(file.readAll()).object();
+    mParameterModel.loadQJson(object);
 
-//        QJsonObject object = QJsonDocument::fromJson(file.readAll()).object();
 //        QVector<QJsonObject> list;
 //        list.append(object);
 //        mParameterModel(ui->mParameterWidget, list);
 
     ui->mParameterWidget->setModel(&mParameterModel);
-
- //   mParameterModel.load("/home/vzh/Documents/PSE/CoBaB/resources/PluginDepthEstimator.json");
 
     connect(ui->mNext, SIGNAL(clicked()), this, SLOT(nextButtonClicked()));
 }
@@ -42,18 +45,17 @@ void ParameterPageWidget::reset() {
 
 void ParameterPageWidget::nextButtonClicked() {
 
-   // QModelIndexList listOfDatasetIndexes = ui->mSearchDatasetListView->selectionMode().selectedIndexes();
-  //  pushToStack(listOfDatasetIndexes);
     exit(EXIT_NEXT);
 }
 
 void ParameterPageWidget::on_mSearchDatasetListView_indexesMoved(const QModelIndexList &indexes)
 {
+
     //save chosen datasets to the stack
-//    QModelIndexList listOfDatasetIndexes = indexes;
-//    for (int i = 0; i <listOfDatasetIndexes.size(); i++) {
-//        pushToStack(listOfDatasetIndexes.at(i));
-//    }
+    QModelIndexList listOfDatasetIndexes = indexes;
+    for (int i = 0; i <listOfDatasetIndexes.size(); i++) {
+        pushToStack(listOfDatasetIndexes.at(i));
+    }
 
 }
 
