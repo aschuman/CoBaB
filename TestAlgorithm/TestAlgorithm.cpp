@@ -19,7 +19,7 @@ QList<DataPacket*> TestAlgorithm::run() {
     QList<DataPacket*> list;
     SearchResult* result = new SearchResult();
 
-    for (QString& datasetPath : mQuery.getDatasets()) {
+    for (QString& datasetPath : mQuery->getDatasets()) {
         Dataset dataset(datasetPath);
 
         for (Medium* medium : dataset.getMediaList()) {
@@ -62,7 +62,7 @@ bool TestAlgorithm::setInputs(const QList<DataPacket*>& inputDataList) {
         return false;
     }
 
-    mQuery = *(SearchQuery*)packet;
+    mQuery = dynamic_cast<SearchQuery*>(packet);
     return true;
 }
 

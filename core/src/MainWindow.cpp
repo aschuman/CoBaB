@@ -104,6 +104,7 @@ void MainWindow::retranslate() {
     ui->mLanguageMenu->setTitle(tr("Sprache"));
     ui->mActionDeutsch->setText(tr("Deutsch"));
     ui->mActionEnglish->setText(tr("Englisch"));
+    ui->mDatasetAction->setText(tr("Datenordner öffnen"));
 
     PageWidget* pageWidget = dynamic_cast<PageWidget*> (currentWidget);
     if (pageWidget != nullptr) {

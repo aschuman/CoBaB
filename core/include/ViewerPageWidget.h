@@ -40,7 +40,6 @@ public:
 public slots:
     void next();
     void before();
-    void clicked(const QModelIndex& index);
     void nextWidget(QAction* action);
     virtual void contextMenu(const QPointF &pos);
     void on_mGraphicsView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint);
@@ -50,6 +49,7 @@ public slots:
     void zoomIn();
     void zoomOut();
     void resize();
+    void selectionChanged(const QModelIndex& index, const QModelIndex& previousIndex);
 
 protected:
     Ui::ViewerPageWidget *ui;
@@ -67,6 +67,7 @@ protected:
     Annotation* mSelectedAnnotation;
 
     QRect mROI;
+    bool mROIIsChosen;
 
     AlgorithmList* mAlgorithmList;
     QHash<QString, Algorithm*> mAlgorithms;
@@ -74,7 +75,7 @@ protected:
     std::shared_ptr<SearchQuery> mSearchQuery;
 
     virtual void display();
-    void resizeEvent(QResizeEvent* event);
+    void resizeEvent(QResizeEvent* event) override;
 };
 
 #endif // VIEWERPAGEWIDGET_H

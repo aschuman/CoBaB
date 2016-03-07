@@ -45,7 +45,7 @@ public:
     void sendProgress(double progress, QString message) override;
 
 private: 
-    SearchQuery mQuery;
+    SearchQuery* mQuery;
     QString mDescription;
     QList<int> mParameterList;
     QString mName;
