@@ -54,7 +54,6 @@ HEADERS += \
     include/RectangleAnnotationTester.h \
     include/BookmarkTester.h \
     include/BookmarkListTester.h \
-    include/TestAlgorithmTester.h \
     include/SearchFeedbackTester.h \
     include/AlgorithmListTester.h
 
@@ -78,7 +77,6 @@ SOURCES += \
     src/SearchFeedbackTester.cpp \
     src/BookmarkTester.cpp \
     src/BookmarkListTester.cpp \
-    src/TestAlgorithmTester.cpp \
     src/AlgorithmListTester.cpp
 
 

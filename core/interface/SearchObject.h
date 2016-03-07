@@ -22,6 +22,12 @@ public:
 
     SearchObject(const SearchObject& other);
 
+    SearchObject(SearchObject&& other);
+
+    SearchObject& operator=(const SearchObject& other);
+
+    SearchObject& operator=(SearchObject&& other);
+
     ~SearchObject();
 
     QString getMedium() const;
@@ -45,6 +51,8 @@ public:
     void setMediumIndex(const int index);
 
     Type getType() const;
+
+    void setType(const Type type);
 
     void toStream(QDataStream& out) const override;
 

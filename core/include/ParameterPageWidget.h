@@ -37,6 +37,7 @@ private:
     DatasetList* mSearchDatasetList;
     DatasetModel mModel;
     QJsonModel mParameterModel;
+    QVector<QJsonObject> parameterList;
 };
 
 #endif // PARAMETERPAGEWIDGET_H

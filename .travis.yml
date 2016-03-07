@@ -23,6 +23,7 @@ script:
   - qmake --version
   - qmake "QMAKE_CXX=g++-5" "CC=gcc-5" "CONFIG+=travis" CoBaB.pro
   - make
+  - ls -la
   - cd test
   - ./test
   - cd ..

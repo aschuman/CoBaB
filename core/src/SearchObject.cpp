@@ -19,10 +19,40 @@ SearchObject::SearchObject(const SearchObject& other) {
     setAnnotation(other.getAnnotation());
 }
 
+SearchObject::SearchObject(SearchObject &&other)
+    : mMedium(std::move(other.mMedium)),
+      mROI(std::move(other.mROI)),
+      mSourceDataset(std::move(other.mSourceDataset)),
+      mMediumIndex(std::move(other.mMediumIndex)),
+      mType(std::move(other.mType)),
+      mAnnotation(std::move(other.mAnnotation))
+{
+    other.mAnnotation = nullptr;
+}
+
+SearchObject& SearchObject::operator=(const SearchObject &other)
+{
+    mMedium = other.mMedium;
+    mROI = other.mROI;
+    mSourceDataset = other.mSourceDataset;
+    mMediumIndex = other.mMediumIndex;
+    mType = other.mType;
+    setAnnotation(other.mAnnotation);
+}
+
+SearchObject& SearchObject::operator=(SearchObject &&other)
+{
+    mMedium = std::move(other.mMedium);
+    mROI = std::move(other.mROI);
+    mSourceDataset = std::move(other.mSourceDataset);
+    mMediumIndex = std::move(other.mMediumIndex);
+    mType = std::move(other.mType);
+    mAnnotation = std::move(other.mAnnotation);
+    other.mAnnotation = nullptr;
+}
+
 SearchObject::~SearchObject() {
-    if(mAnnotation != nullptr) {
-        delete mAnnotation;
-    }
+    delete mAnnotation;
 }
 
 /**
@@ -109,6 +139,13 @@ void SearchObject::setMediumIndex(const int index) {
  */
 SearchObject::Type SearchObject::getType() const {
     return mType;
+}
+/**
+ * @brief SearchObject::setType sets the type of the searchobject to type
+ * @param type
+ */
+void SearchObject::setType(const Type type) {
+    mType = type;
 }
 /**
  * @brief calls the << operator
