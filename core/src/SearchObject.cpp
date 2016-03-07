@@ -20,9 +20,7 @@ SearchObject::SearchObject(const SearchObject& other) {
 }
 
 SearchObject::~SearchObject() {
-    if(mAnnotation != nullptr) {
-        delete mAnnotation;
-    }
+    delete mAnnotation;
 }
 
 /**
