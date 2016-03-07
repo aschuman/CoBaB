@@ -27,7 +27,6 @@ HEADERS += \
     include/DatasetList.h \
     interface/Algorithm.h \
     interface/SearchAlgorithm.h \
-    interface/TestAlgorithm.h \
     include/SearchFeedback.h \
     include/Bookmark.h \
     include/BookmarkList.h \
@@ -89,7 +88,6 @@ SOURCES += \
     src/log.cpp \
     src/ConfigData.cpp \
     src/DatasetModel.cpp \
-    src/TestAlgorithm.cpp \
     src/ConfirmationPageWidget.cpp \
     src/PhotoViewer.cpp \
     src/MediaModel.cpp \

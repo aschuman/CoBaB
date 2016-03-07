@@ -1,6 +1,5 @@
 #include "include/ViewerPageWidget.h"
 #include "ui_ViewerPageWidget.h"
-#include "TestAlgorithm.h"
 #include <QMenu>
 #include <QToolTip>
 #include <QMessageBox>
