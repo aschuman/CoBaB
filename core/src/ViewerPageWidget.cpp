@@ -52,21 +52,17 @@ void ViewerPageWidget::annotationSelected(Annotation* annotation, const QPointF&
 }
 
 void ViewerPageWidget::contextMenu(const QPointF &pos) {
-    if(mCurrentSelection != nullptr) {
-        if(mCurrentSelection->contains(pos)) {
-            mROI = mCurrentSelection->rect().toRect();
-            mSelectedAnnotation = nullptr;
-        } else {
-            mROI.setRect(0,0,0,0);
-        }
-    }
-
     SearchObject searchObject;
     searchObject.setMedium(mDataset->getMediaList().at(mIndex)->getPath());
-    if(!mROI.isNull()) {
+    if(mCurrentSelection != nullptr && mCurrentSelection->contains(pos)) {
+        mROI = mCurrentSelection->rect().toRect();
         searchObject.setROI(mROI);
+        searchObject.setType(SearchObject::Type::ROI);
     } else if(mSelectedAnnotation != nullptr) {
         searchObject.setAnnotation(mSelectedAnnotation);
+        searchObject.setType(SearchObject::Type::ANNOTATION);
+    } else {
+        searchObject.setType(SearchObject::Type::MEDIUM);
     }
     searchObject.setSourceDataset(mDataset->getPath());
     mSearchQuery = std::make_shared<SearchQuery>();
@@ -81,26 +77,19 @@ void ViewerPageWidget::contextMenu(const QPointF &pos) {
     if(algoList.isEmpty()) {
         QMessageBox msgBox(QMessageBox::Information, "", "Found no fitting algorithm.", QMessageBox::Ok, this);
         msgBox.exec();
-        //return;
+        return;
     }
     for(Algorithm* iter: algoList) {
         mAlgorithms.insert(iter->getName(), iter);
-        QAction action(iter->getName(), this);
-        action.setToolTip(iter->getDescription());
-        contextMenu.addAction(&action);
+        QAction* action = new QAction(iter->getName(), this);
+        action->setToolTip(iter->getDescription());
+        contextMenu.addAction(action);
     }
-    //for testing
-    QAction action1("algorithm 1", this);
-    action1.setToolTip("description 1");
-    contextMenu.addAction(&action1);
-    QAction action2("algorithm 2", this);
-    action2.setToolTip("description 2");
-    contextMenu.addAction(&action2);
-
     connect(&contextMenu, SIGNAL(triggered(QAction*)), this, SLOT(nextWidget(QAction*)));
     connect(&contextMenu, SIGNAL(hovered(QAction*)), this, SLOT(showToolTip(QAction*)));
     contextMenu.exec(QCursor::pos());
 }
+
 void ViewerPageWidget::showToolTip(QAction* action) {
     QToolTip::showText(QCursor::pos(), action->toolTip());
 }
@@ -163,14 +152,8 @@ void ViewerPageWidget::reset()
 }
 
 void ViewerPageWidget::nextWidget(QAction* action) {
-    SearchObject searchObject;
-    searchObject.setMedium(mDataset->getMediaList().at(mIndex)->getPath());
-    if(!mROI.isNull()) {
-        searchObject.setROI(mROI);
-    } else if(mSelectedAnnotation != nullptr) {
-        searchObject.setAnnotation(mSelectedAnnotation);
-    }
-    searchObject.setSourceDataset(mDataset->getPath());
+    delete mDataset;
+    mDataset = nullptr;
     delete mSelectedAnnotation;
     mSelectedAnnotation = nullptr;
     delete mCurrentSelection;
@@ -178,21 +161,13 @@ void ViewerPageWidget::nextWidget(QAction* action) {
     delete mImage;
     mImage = nullptr;
 
-    /*SearchQuery searchQuery;
-    searchQuery.setSearchObject(searchObject);
-    QList<QString> datasetList;
-    datasetList.push_back(mDataset->getName());
-    searchQuery.setDatasets(datasetList);
-    delete mDataset;
-    mDataset = nullptr;*/
-
     QVariant query;
     query.setValue(mSearchQuery);
     pushToStack(query);
 
     // todo: push actual, user-chosen algorithm
-    //std::shared_ptr<Algorithm> algo(mAlgorithms.value(action->text()));
-    std::shared_ptr<Algorithm> algo = std::make_shared<TestAlgorithm>("id123");
+    std::shared_ptr<Algorithm> algo(mAlgorithms.value(action->text()));
+    //std::shared_ptr<Algorithm> algo = std::make_shared<TestAlgorithm>("id123");
     QVariant varAlgo;
     varAlgo.setValue(algo);
     pushToStack(varAlgo);

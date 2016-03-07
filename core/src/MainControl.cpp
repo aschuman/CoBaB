@@ -10,6 +10,7 @@
 #include "ParameterPageWidget.h"
 #include "ResultsPageWidget.h"
 #include "AlgorithmList.h"
+#include "Configuration.h"
 
 #define LOGGING_LEVEL_1
 #include "log.h"
@@ -72,6 +73,7 @@ void MainControl::initNavigation()
 DatasetList MainControl::findDatasets() const
 {
     DatasetList list;
+    list.load(DATASET_HISTORY_FILE);
     QDir dir("../test/testdata");
     for(const QFileInfo& file : dir.entryInfoList(QDir::Filter::Dirs|QDir::Filter::NoDotAndDotDot)){
         list.addDataset(Dataset(file.absoluteFilePath()));

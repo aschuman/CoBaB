@@ -3,6 +3,7 @@
 #include <QVariant>
 #include <QFileDialog>
 #include <QMessageBox>
+#include "Configuration.h"
 
 const int LibraryPageWidget::EXIT_PHOTO = 0;
 const int LibraryPageWidget::EXIT_SINGLE_FRAME_VIDEO = 1;
@@ -65,6 +66,7 @@ void LibraryPageWidget::showFileDialog() {
     Dataset dataset(dir);
     if(dataset.isValid()) {
         mDatasetList->addDataset(dataset);
+        mDatasetList->store(DATASET_HISTORY_FILE);
         int e = -1;
         switch(dataset.getType()){
         case Dataset::PHOTO:

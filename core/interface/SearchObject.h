@@ -46,6 +46,8 @@ public:
 
     Type getType() const;
 
+    void setType(const Type type);
+
     void toStream(QDataStream& out) const override;
 
     void fromStream(QDataStream& in) override;

@@ -111,6 +111,13 @@ SearchObject::Type SearchObject::getType() const {
     return mType;
 }
 /**
+ * @brief SearchObject::setType sets the type of the searchobject to type
+ * @param type
+ */
+void SearchObject::setType(const Type type) {
+    mType = type;
+}
+/**
  * @brief calls the << operator
  * @param in the datastream
  */
