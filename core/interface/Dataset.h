@@ -33,6 +33,7 @@ public:
     QString getPath() const;
     Type getType() const;
     bool isValid() const;
+    friend bool operator==(const Dataset& A, const Dataset& B);
 
 private:
     QString mName;                  ///< The name of the dataset.

@@ -15,7 +15,9 @@ const QList<Dataset>& DatasetList::getDatasetList() const {
  * @param dataset The Dataset which is added to the list.
  */
 void DatasetList::addDataset(const Dataset& dataset) {
-    mDatasetList.append(dataset);
+    if(!mDatasetList.contains(dataset)) {
+        mDatasetList.append(dataset);
+    }
 }
 
 /**

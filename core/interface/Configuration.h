@@ -12,6 +12,7 @@ const QString HELP_GERMAN = "Hilfe";
 const QString HELP_ENGLISH = "Help";
 const QString ABOUT_GERMAN = "Über CoBaB";
 const QString ABOUT_ENGLISH = "About CoBaB";
+const QString DATASET_HISTORY_FILE = "datasetHistory.txt";
 
 
 #endif // _CONFIGURATION_H

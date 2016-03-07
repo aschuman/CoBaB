@@ -334,3 +334,10 @@ QList<QPair<QString, Annotation*>> Dataset::parseAnnotations(const QString& file
     file.close();
     return annotations;
 }
+
+bool operator==(const Dataset& A, const Dataset& B) {
+    if(A.getPath() == B.getPath() && A.getType() == B.getType()) {
+        return true;
+    }
+    return false;
+}
