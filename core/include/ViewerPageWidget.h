@@ -67,6 +67,7 @@ protected:
     Annotation* mSelectedAnnotation;
 
     QRect mROI;
+    bool mROIIsChosen;
 
     AlgorithmList* mAlgorithmList;
     QHash<QString, Algorithm*> mAlgorithms;

@@ -61,7 +61,7 @@ void LibraryPageWidget::on_mLibraryListView_doubleClicked(const QModelIndex &ind
 }
 
 void LibraryPageWidget::showFileDialog() {
-    QString dir = QFileDialog::getExistingDirectory(this, tr("Open Dataset"), "/home");
+    QString dir = QFileDialog::getExistingDirectory(this, tr("Datenordner öffnen"), "/home");
     Dataset dataset(dir);
     if(dataset.isValid()) {
         mDatasetList->addDataset(dataset);
@@ -80,7 +80,7 @@ void LibraryPageWidget::showFileDialog() {
         emit pushToStack(mDatasetList->getDatasetList().size()-1);
         emit exit(e);
     } else {
-        QMessageBox msgBox(QMessageBox::Information, "", "No valid dataset chosen.", QMessageBox::Ok, this);
+        QMessageBox msgBox(QMessageBox::Information, "", tr("Kein valider Datenordner gewählt"), QMessageBox::Ok, this);
         msgBox.exec();
     }
 }
