@@ -9,7 +9,7 @@ const int ViewerPageWidget::EXIT_NEXT = 0;
 ViewerPageWidget::ViewerPageWidget() :
     ui(new Ui::ViewerPageWidget), mIndex(0), mImage(nullptr), mSelectionPen(QColor(0,255,230)),
     mCurrentSelection(nullptr), mAnnotationDrawer(&mGraphicsScene), mSelectedAnnotation(nullptr),
-    mAlgorithmList(nullptr), mDataset(nullptr)
+    mAlgorithmList(nullptr), mDataset(nullptr), mROIIsChosen(false)
 {
     ui->setupUi(this);
     ui->mViewerListView->setResizeMode(QListView::Adjust);
@@ -68,7 +68,7 @@ void ViewerPageWidget::contextMenu(const QPointF &pos) {
     mSearchQuery = std::make_shared<SearchQuery>();
     mSearchQuery->setSearchObject(searchObject);
     QList<QString> datasetList;
-    datasetList.push_back(mDataset->getName());
+    datasetList.push_back(mDataset->getPath());
     mSearchQuery->setDatasets(datasetList);
 
     QList<Algorithm*> algoList = mAlgorithmList ? mAlgorithmList->findCompatibleAlgorithms(QList<DataPacket*>({mSearchQuery.get()})) : QList<Algorithm*>();
@@ -215,12 +215,14 @@ void ViewerPageWidget::on_mGraphicsView_rubberBandChanged(const QRect &viewportR
 }
 
 void ViewerPageWidget::roiClicked() {
-    if(ui->mROIButton->text() == "select ROI") {
+    if(!mROIIsChosen) {
         ui->mGraphicsView->setDragMode(QGraphicsView::DragMode::RubberBandDrag);
-        ui->mROIButton->setText("remove ROI");
+        ui->mROIButton->setText(tr("Bereich entfernen"));
+        mROIIsChosen = true;
     } else {
         ui->mGraphicsView->setDragMode(QGraphicsView::DragMode::NoDrag);
-        ui->mROIButton->setText("select ROI");
+        ui->mROIButton->setText(tr("Bereich auswählen"));
+        mROIIsChosen = false;
         if(mCurrentSelection != nullptr) {
             mGraphicsScene.removeItem(mCurrentSelection);
             mCurrentSelection = nullptr;
@@ -236,5 +238,10 @@ void ViewerPageWidget::display() {
 void ViewerPageWidget::retranslateUi() {
     ui->mBeforeButton->setText(tr("vorheriges"));
     ui->mNextButton->setText(tr("nächstes"));
+    if(mROIIsChosen) {
+        ui->mROIButton->setText(tr("Bereich entfernen"));
+    } else {
+        ui->mROIButton->setText(tr("Bereich auswählen"));
+    }
 }
 

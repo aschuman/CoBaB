@@ -43,6 +43,7 @@ void DualFeedbackEditor::mouseReleaseEvent(QMouseEvent* event)
     if(event->button() == Qt::LeftButton){
         mFeedback = (mFeedback + 2) % 3 - 1;
         emit feedbackChanged();
+        update();
     }
 }
 
