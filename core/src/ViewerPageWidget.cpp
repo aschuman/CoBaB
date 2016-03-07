@@ -16,7 +16,8 @@ ViewerPageWidget::ViewerPageWidget() :
     ui->mGraphicsView->setScene(&mGraphicsScene);
     ui->mViewerListView->setModel(&mModel);
 
-    connect(ui->mViewerListView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(clicked(const QModelIndex&)));
+    connect(ui->mViewerListView->selectionModel(), SIGNAL(currentChanged(const QModelIndex&, const QModelIndex&)), this,
+        SLOT(selectionChanged(const QModelIndex&, const QModelIndex&)));
     connect(ui->mNextButton, SIGNAL(clicked()), this, SLOT(next()));
     connect(ui->mBeforeButton, SIGNAL(clicked()), this, SLOT(before()));
     connect(ui->mROIButton, SIGNAL(clicked()), this, SLOT(roiClicked()));
@@ -93,13 +94,14 @@ void ViewerPageWidget::showToolTip(QAction* action) {
     QToolTip::showText(QCursor::pos(), action->toolTip());
 }
 
-void ViewerPageWidget::clicked(const QModelIndex& index) {
+void ViewerPageWidget::selectionChanged(const QModelIndex &index, const QModelIndex &previousIndex) {
     mIndex = index.row();
     display();
 }
 void ViewerPageWidget::next() {
     mIndex++;
     mIndex%=mDataset->getNumberOfMedia();
+    ui->mViewerListView->selectionModel()->setCurrentIndex(mModel.index(mIndex), QItemSelectionModel::ClearAndSelect);
     display();
 }
 void ViewerPageWidget::before() {  
@@ -107,6 +109,7 @@ void ViewerPageWidget::before() {
         mIndex = mDataset->getNumberOfMedia();
     }
     mIndex--;
+    ui->mViewerListView->selectionModel()->setCurrentIndex(mModel.index(mIndex), QItemSelectionModel::ClearAndSelect);
     display();
 }
 
@@ -234,3 +237,4 @@ void ViewerPageWidget::retranslateUi() {
     ui->mBeforeButton->setText(tr("vorheriges"));
     ui->mNextButton->setText(tr("nächstes"));
 }
+
