@@ -68,7 +68,6 @@ QWidget *FeedbackDelegate::createEditor(QWidget *parent, const QStyleOptionViewI
     if(index.data().canConvert<SearchResultElementFeedback>()){
         SearchResultElementFeedback element = index.data().value<SearchResultElementFeedback>();
         DualFeedbackEditor* dfEditor = new DualFeedbackEditor(parent);
-        dfEditor->setFeedback(element.rating);
         connect(dfEditor, &DualFeedbackEditor::feedbackChanged, this, &FeedbackDelegate::commit);
         editor = dfEditor;
     } else {
