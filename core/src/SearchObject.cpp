@@ -38,6 +38,7 @@ SearchObject& SearchObject::operator=(const SearchObject &other)
     mMediumIndex = other.mMediumIndex;
     mType = other.mType;
     setAnnotation(other.mAnnotation);
+    return *this;
 }
 
 SearchObject& SearchObject::operator=(SearchObject &&other)
@@ -49,6 +50,7 @@ SearchObject& SearchObject::operator=(SearchObject &&other)
     mType = std::move(other.mType);
     mAnnotation = std::move(other.mAnnotation);
     other.mAnnotation = nullptr;
+    return *this;
 }
 
 SearchObject::~SearchObject() {
