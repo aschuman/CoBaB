@@ -6,6 +6,7 @@
 #include "log.h"
 #include <QJsonDocument>
 #include <QDebug>
+#include <QResizeEvent>
 
 ConfirmationPageWidget::ConfirmationPageWidget() :
     ui(new Ui::ConfirmationPageWidget)
@@ -75,7 +76,7 @@ void ConfirmationPageWidget::reset()
             ui->mParameters->item(0, 0)->setText(chosenDataset->getName());
             ui->mParameters->item(0, 0)->setTextAlignment(Qt::AlignCenter);
         }
-    } 
+    }
     if(chosenDataset == nullptr) {
         LOG_ERR("no chosen dataset");
         return;
@@ -88,7 +89,6 @@ void ConfirmationPageWidget::reset()
         std::shared_ptr<SearchQuery> searchQuery = varSearchQuery.value<std::shared_ptr<SearchQuery>>();
         SearchObject searchObject = searchQuery->getSearchObject();
         QImage chosenImage(searchObject.getMedium());
-        QPixmap pixmap;
         pixmap.convertFromImage(chosenImage);
 
         if(searchObject.getType() == SearchObject::ROI) {
@@ -102,12 +102,8 @@ void ConfirmationPageWidget::reset()
                 }
             }
         }
+        ui->mImageToSearchLabel->setPixmap(pixmap.scaled(ui->mImageToSearchLabel->size(), Qt::KeepAspectRatio));
 
-        QSize pixSize = pixmap.size();
-        pixSize.scale(size(), Qt::KeepAspectRatio);
-        pixmap = pixmap.scaled(pixSize, Qt::KeepAspectRatio);
-        ui->mImageToSearchLabel->setPixmap(pixmap);
-        ui->mImageToSearchLabel->setFixedSize(pixSize);
 
     } else {
         LOG_ERR("no searchQuery");
@@ -162,6 +158,16 @@ void ConfirmationPageWidget::reset()
 
     ui->mParameters->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
+
+void ConfirmationPageWidget::showEvent(QShowEvent* event) {
+    if(!event->spontaneous()) {
+        ui->mImageToSearchLabel->setPixmap(pixmap.scaled(ui->mImageToSearchLabel->size(), Qt::KeepAspectRatio));
+    }
+}
+
+/*void ConfirmationPageWidget::resizeEvent(QResizeEvent* event) {
+    ui->mImageToSearchLabel->setPixmap(pixmap.scaled(ui->mImageToSearchLabel->size(), Qt::KeepAspectRatio));
+}*/
 
 void ConfirmationPageWidget::on_mSearchButton_clicked()
 {

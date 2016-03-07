@@ -20,6 +20,8 @@ public:
     ~ConfirmationPageWidget();
     void reset() override;
     void retranslateUi() override;
+    void showEvent(QShowEvent* event);
+    //void resizeEvent(QResizeEvent* event);
 
     static const int EXIT_NEXT;
 
@@ -29,6 +31,7 @@ private slots:
 
 private:
     Ui::ConfirmationPageWidget *ui;
+    QPixmap pixmap;
 
 };
 
