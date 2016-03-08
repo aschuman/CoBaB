@@ -74,11 +74,22 @@ void MainControl::initNavigation()
 
 DatasetList MainControl::findDatasets() const
 {
+    QCommandLineParser parser;
+    parser.addPositionalArgument("standard directory", "The directory with the standard datasets.");
+    parser.process(*qApp);
+
     DatasetList list;
     list.load(DATASET_HISTORY_FILE);
-    QDir dir("../test/testdata");
+    if(parser.positionalArguments().size() == 0) {
+        return list; // no standard directory set
+    }
+    QDir dir(parser.positionalArguments().at(0));
+    //QDir dir("../test/testdata");
     for(const QFileInfo& file : dir.entryInfoList(QDir::Filter::Dirs|QDir::Filter::NoDotAndDotDot)){
-        list.addDataset(Dataset(file.absoluteFilePath()));
+        Dataset dataset(file.absoluteFilePath());
+        if(dataset.isValid()) {
+            list.addDataset(dataset);
+        }
     }
     return list;
 }

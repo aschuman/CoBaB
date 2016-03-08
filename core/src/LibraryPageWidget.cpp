@@ -79,10 +79,10 @@ void LibraryPageWidget::showFileDialog() {
             e = EXIT_VIDEO;
             break;
         }
-        emit pushToStack(mDatasetList->getDatasetList().size()-1);
+        emit pushToStack(mDatasetList->getDatasetList().indexOf(dataset));
         emit exit(e);
     } else {
-        QMessageBox msgBox(QMessageBox::Information, "", tr("Kein valider Datenordner gewählt"), QMessageBox::Ok, this);
+        QMessageBox msgBox(QMessageBox::Information, "", tr("Kein gültiger Datenordner gewählt"), QMessageBox::Ok, this);
         msgBox.exec();
     }
 }

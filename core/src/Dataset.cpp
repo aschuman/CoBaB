@@ -31,6 +31,9 @@ Dataset::Dataset(const QString& path) {
         }
     }
     mValid = createPreviewPhoto();
+    if(mType == VIDEO) {
+        mValid = false; // while we doesn't have a video player
+    }
 }
 
 Dataset::Dataset(const Dataset& other) {
@@ -100,7 +103,6 @@ QList<QPair<int, Annotation*>> Dataset::createVideoAnnotations(QString path) {
 bool Dataset::createSingleFrameVideoDataset() {
     bool successful = false;
     QStringList filters(FRAMERATE_FILE);
-    QTextStream s(stdout);
     QDirIterator iter(mPath, filters, QDir::Filter::Files, QDirIterator::Subdirectories);
     while(iter.hasNext()) {
         QString filepath = iter.next();
