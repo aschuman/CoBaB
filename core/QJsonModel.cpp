@@ -125,9 +125,9 @@ bool QJsonModel::loadJson(const QByteArray &json)
     {
 
         if (mDocument.isArray()) {
-            mRootItem->appendChild(QJsonTreeItem::load(QJsonValue(mDocument.array())));
+            mRootItem->appendChild(QJsonTreeItem::load(QJsonValue(mDocument.array()), mRootItem));
         } else {
-            mRootItem->appendChild(QJsonTreeItem::load(QJsonValue(mDocument.object())));
+            mRootItem->appendChild(QJsonTreeItem::load(QJsonValue(mDocument.object()), mRootItem));
         }
 
         return true;
