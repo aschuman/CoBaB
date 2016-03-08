@@ -40,4 +40,7 @@ private:
 
 };
 
+#include <memory>
+Q_DECLARE_METATYPE(std::shared_ptr<SearchResult>)
+
 #endif //_SEARCHRESULT_H
