@@ -1,0 +1,17 @@
+{
+    "Autor" : "Tung Nguyen",
+    "Date"  : "2016-03-08",
+    "Version" : 1.0,
+    "Properties" : {
+        "FirstParameter" : {
+            "type" : "string",
+            "default" : "none",
+            "description" : "First parameter to testing display."
+        },
+        "SecondParameter" : {
+            "type" : "bool",
+            "default" : false,
+            "description" : "Second parameter"
+        }
+    }
+}
