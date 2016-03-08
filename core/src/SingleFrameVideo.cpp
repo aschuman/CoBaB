@@ -7,7 +7,7 @@
 #include "log.h"
 
 /**
- * @brief SingleFrameVideo::SingleFrameVideo Creates a SingleFrameVideo.
+ * @brief SingleFrameVideo::SingleFrameVideo Constructs a SingleFrameVideo.
  * @param path The path to the SingleFrameVideo.
  * @param annotations The Annotations which belong to the SingleFrameVideo.
  */

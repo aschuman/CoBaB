@@ -21,7 +21,7 @@ class ViewerPageWidget;
 }
 
 /**
- * @brief The ViewerPageWidget class
+ * @brief The ViewerPageWidget class provides users the possibility to select and view media.
  * @author Anja
  */
 class ViewerPageWidget : public PageWidget
@@ -52,30 +52,30 @@ public slots:
     void selectionChanged(const QModelIndex& index, const QModelIndex& previousIndex);
 
 protected:
-    Ui::ViewerPageWidget *ui;
-    const Dataset* mDataset;
-    MediaModel mModel;
-    QGraphicsScene mGraphicsScene;
-    ClickableGraphicsPixmapItem* mImage;
-    int mIndex;
+    Ui::ViewerPageWidget *ui; ///< The ui.
+    const Dataset* mDataset; ///< The Datasets whose contents are displayed in this PageWidget.
+    MediaModel mModel; ///< The Model for the QListView to show the media.
+    QGraphicsScene mGraphicsScene; ///< The GraphicsScene to display the media.
+    ClickableGraphicsPixmapItem* mImage; ///< The current selected Medium that is shown in the QGraphicsScene.
+    int mIndex; ///< The index of the selected Medium in the media list.
 
-    QPen mSelectionPen;
-    QGraphicsRectItem* mCurrentSelection;
-    QRect mCurrentRubberBand;
+    QPen mSelectionPen; ///< The pen to select a ROI.
+    QGraphicsRectItem* mCurrentSelection; ///< The current user defined selection in the QGraphicsScene.
+    QRect mCurrentRubberBand; ///< The current user defined selection.
+    QRect mROI; ///< The ROI, selected by the user.
+    bool mROIIsChosen; ///< Indicates if the ROI button was pressed.
 
-    AnnotationDrawer mAnnotationDrawer;
-    Annotation* mSelectedAnnotation;
+    AnnotationDrawer mAnnotationDrawer; ///< The AnnotationDrawer to draw the annotations on the media.
+    Annotation* mSelectedAnnotation; ///< The selected annotation.
 
-    QRect mROI;
-    bool mROIIsChosen;
+    AlgorithmList* mAlgorithmList; ///< A list of available algorithms.
+    QHash<QString, Algorithm*> mAlgorithms; ///< Hashes an algorithm name to the algorithm.
 
-    AlgorithmList* mAlgorithmList;
-    QHash<QString, Algorithm*> mAlgorithms;
-
-    std::shared_ptr<SearchQuery> mSearchQuery;
+    std::shared_ptr<SearchQuery> mSearchQuery; ///< The SearchQuery, filled with the selected Medium and Annotation/ROI.
 
     virtual void display();
     void resizeEvent(QResizeEvent* event) override;
+    virtual QString getSearchMedium() = 0;
 };
 
 #endif // VIEWERPAGEWIDGET_H

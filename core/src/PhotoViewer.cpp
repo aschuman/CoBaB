@@ -1,6 +1,9 @@
 #include "PhotoViewer.h"
 #include "ui_ViewerPageWidget.h"
 
+/**
+ * @brief PhotoViewer::PhotoViewer Constructs a PhotoViewer.
+ */
 PhotoViewer::PhotoViewer() :
     ViewerPageWidget()
 {
@@ -8,11 +11,9 @@ PhotoViewer::PhotoViewer() :
     ViewerPageWidget::ui->mTime->hide();
 }
 
-PhotoViewer::~PhotoViewer()
-{
-
-}
-
+/**
+ * @brief PhotoViewer::display Displays a photo in the QGraphicsScene.
+ */
 void PhotoViewer::display() {
     ViewerPageWidget::display();
     if(mImage != nullptr) {
@@ -35,4 +36,12 @@ void PhotoViewer::display() {
     mGraphicsScene.setSceneRect(0,0, mImage->boundingRect().width(), mImage->boundingRect().height());
     mAnnotationDrawer.setAnnotations(medium->getAnnotationList());
     resize();
+}
+
+/**
+ * @brief PhotoViewer::getSearchMedium Returns the path to the Medium that is searched for.
+ * @return The path of the Medium (to be set in the SearchObject).
+ */
+QString PhotoViewer::getSearchMedium() {
+    return mDataset->getMediaList().at(mIndex)->getPath();
 }
