@@ -10,6 +10,7 @@ MediaModel::MediaModel()
 void MediaModel::setDataset(const Dataset& dataset)
 {
     mDataset = &dataset;
+    emit layoutChanged();
     emit dataChanged(createIndex(0,0), createIndex(mDataset->getNumberOfMedia(), 0));
 }
 
