@@ -15,6 +15,9 @@ public:
      * @brief Resets this widget to its initial state.
      */
     virtual void reset() = 0;
+    /**
+     * @brief Retranslates the user interface after the user switched the language.
+     */
     virtual void retranslateUi() = 0;
 
 signals:

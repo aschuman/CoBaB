@@ -58,41 +58,48 @@ void MainWindow::display(QWidget* widget)
     }
 }
 
-void MainWindow::showAboutDialog() {
+void MainWindow::showAboutDialog()
+{
     ConfigData* data = ConfigData::getInstance();
     QMessageBox msgBox(QMessageBox::Information, tr("Über CoBaB"), data->getAbout(), QMessageBox::NoButton, this);
     msgBox.addButton(tr("Schließen"), QMessageBox::DestructiveRole);
     msgBox.exec();
 }
 
-void MainWindow::showHelpDialog() {
+void MainWindow::showHelpDialog()
+{
     ConfigData* data = ConfigData::getInstance();
     QMessageBox msgBox(QMessageBox::Information, tr("Hilfe für CoBaB"), data->getHelp(), QMessageBox::NoButton, this);
     msgBox.addButton(tr("Schließen"), QMessageBox::DestructiveRole);
     msgBox.exec();
 }
 
-void MainWindow::showOpenDataset() {
+void MainWindow::showOpenDataset()
+{
     ui->mDatasetAction->setVisible(true);
 }
 
-void MainWindow::hideOpenDataset() {
+void MainWindow::hideOpenDataset()
+{
     ui->mDatasetAction->setVisible(false);
 }
 
-void MainWindow::changeLanguageToGerman() {
+void MainWindow::changeLanguageToGerman()
+{
     ConfigData* data = ConfigData::getInstance();
     data->setLanguage("German");
     retranslate();
 }
 
-void MainWindow::changeLanguageToEnglish() {
+void MainWindow::changeLanguageToEnglish()
+{
     ConfigData* data = ConfigData::getInstance();
     data->setLanguage("English");
     retranslate();
 }
 
-void MainWindow::retranslate() {
+void MainWindow::retranslate()
+{
     ui->mAboutAction->setText(tr("Über CoBaB"));
     ui->mHelpAction->setText(tr("Hilfe für CoBaB"));
     ui->mBackAction->setText(tr("Zurück"));
@@ -107,7 +114,7 @@ void MainWindow::retranslate() {
     ui->mDatasetAction->setText(tr("Datenordner öffnen"));
 
     PageWidget* pageWidget = dynamic_cast<PageWidget*> (currentWidget);
-    if (pageWidget != nullptr) {
+    if(pageWidget != nullptr) {
         pageWidget->retranslateUi();
     }
 

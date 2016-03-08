@@ -11,6 +11,14 @@ namespace Ui {
 class ConfirmationPageWidget;
 }
 
+/**
+ * @brief The ConfirmationPageWidget class displays the current selection.
+ *
+ * The chosen photo/annotation/region of interest, the chosen datasets,
+ * the chosen algorithm, and the values of the parameters are displayed.
+ *
+ * @author Marie
+ */
 class ConfirmationPageWidget : public PageWidget
 {
     Q_OBJECT
@@ -20,7 +28,7 @@ public:
     ~ConfirmationPageWidget();
     void reset() override;
     void retranslateUi() override;
-    void showEvent(QShowEvent* event);
+    void showEvent(QShowEvent* event) override;
     //void resizeEvent(QResizeEvent* event);
 
     static const int EXIT_NEXT;
@@ -28,10 +36,9 @@ public:
 private slots:
     void on_mSearchButton_clicked();
 
-
 private:
     Ui::ConfirmationPageWidget *ui;
-    QPixmap pixmap;
+    QPixmap pixmap;                     ///< This pixmap contains the chosen area of the Medium of the SearchObject.
     void clearTable();
 
 };

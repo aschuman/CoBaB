@@ -10,12 +10,14 @@
 #include <QResizeEvent>
 #include <QPointer>
 
+/**
+ * @brief ConfirmationPageWidget::ConfirmationPageWidget Constructs a ConfirmationPageWidget.
+ */
 ConfirmationPageWidget::ConfirmationPageWidget() :
     ui(new Ui::ConfirmationPageWidget)
 {
     ui->setupUi(this);
     ui->mSearchButton->setText(tr("Suche starten"));
-
 
     ui->mParameters->setRowCount(1);
     ui->mParameters->setColumnCount(3);
@@ -23,30 +25,13 @@ ConfirmationPageWidget::ConfirmationPageWidget() :
     ui->mParameters->setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Datenordner")));
     ui->mParameters->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Algorithmus")));
     ui->mParameters->setHorizontalHeaderItem(2, new QTableWidgetItem(tr("Parameter")));
-
-    QTableWidgetItem* datasetNames = new QTableWidgetItem("no dataset chosen");
-    datasetNames->setFlags(datasetNames->flags() ^ Qt::ItemIsEditable);
-    QTableWidgetItem* algorithmName = new QTableWidgetItem("no algo chosen");
-    algorithmName->setFlags(algorithmName->flags() ^ Qt::ItemIsEditable);
-    QTableWidgetItem* parameters = new QTableWidgetItem("no parameters set");
-    parameters->setFlags(parameters->flags() ^ Qt::ItemIsEditable);
-
-    ui->mParameters->setItem(0, 0, datasetNames);
-    ui->mParameters->setItem(0, 1, algorithmName);
-    ui->mParameters->setItem(0, 2, parameters);
-    ui->mParameters->item(0, 2)->setTextAlignment(Qt::AlignCenter);
-
     ui->mParameters->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
 }
 
-void ConfirmationPageWidget::retranslateUi() {
-    ui->mSearchButton->setText(tr("Suche starten"));
-    ui->mParameters->horizontalHeaderItem(0)->setText(tr("Datenordner"));
-    ui->mParameters->horizontalHeaderItem(1)->setText(tr("Algorithmus"));
-    ui->mParameters->horizontalHeaderItem(2)->setText(tr("Parameter"));
-}
-
+/**
+ * @brief ConfirmationPageWidget::~ConfirmationPageWidget Destructs a ConfirmationPageWidget.
+ */
 ConfirmationPageWidget::~ConfirmationPageWidget()
 {
     delete ui;
@@ -59,7 +44,7 @@ void ConfirmationPageWidget::reset()
     int indexOfChosenDataset = -1;
     const Dataset* chosenDataset = nullptr;
 
-    //read datasets
+    //read available datasets from the stack
     QVariant varDatasets;
     emit readFromStack(-2, varDatasets);
     if(varDatasets.canConvert<std::shared_ptr<DatasetList>>()){
@@ -68,7 +53,7 @@ void ConfirmationPageWidget::reset()
         LOG_ERR("no datasets");
     }
 
-    //read number of chosen dataset
+    //read the index of the chosen dataset in the dataset list from the stack
     QVariant varChosenDataset;
     emit readFromStack(3, varChosenDataset);
     if(varChosenDataset.canConvert<int>()) {
@@ -86,12 +71,13 @@ void ConfirmationPageWidget::reset()
         return;
     }
 
-    //read searchobject
+    //read the SearchObject from the stack
     QVariant varSearchQuery;
     emit readFromStack(2, varSearchQuery);
     if(varSearchQuery.canConvert<std::shared_ptr<SearchQuery>>()) {
         std::shared_ptr<SearchQuery> searchQuery = varSearchQuery.value<std::shared_ptr<SearchQuery>>();
         SearchObject searchObject = searchQuery->getSearchObject();
+
         QImage chosenImage(searchObject.getMedium());
         pixmap.convertFromImage(chosenImage);
 
@@ -106,7 +92,13 @@ void ConfirmationPageWidget::reset()
                 }
             }
         }
-        ui->mImageToSearchLabel->setPixmap(pixmap.scaled(ui->mImageToSearchLabel->size(), Qt::KeepAspectRatio));
+
+        if(!pixmap.isNull()) {
+            ui->mImageToSearchLabel->setPixmap(pixmap.scaled(ui->mImageToSearchLabel->size(), Qt::KeepAspectRatio));
+        } else {
+            ui->mImageToSearchLabel->setText(tr("Bild kann nicht geöffnet werden."));
+            LOG_ERR("medium of search object cannot be opened");
+        }
     } else {
         LOG_ERR("no searchQuery");
     }
@@ -166,14 +158,32 @@ void ConfirmationPageWidget::reset()
     ui->mParameters->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
+/**
+ * @brief ConfirmationPageWidget::clearTable Resets the QTableWidget which contains the parameters.
+ */
 void ConfirmationPageWidget::clearTable() {
     while(ui->mParameters->rowCount() > 0) {
         ui->mParameters->removeRow(0);
     }
 }
 
+void ConfirmationPageWidget::retranslateUi() {
+    ui->mSearchButton->setText(tr("Suche starten"));
+    ui->mParameters->horizontalHeaderItem(0)->setText(tr("Datenordner"));
+    ui->mParameters->horizontalHeaderItem(1)->setText(tr("Algorithmus"));
+    ui->mParameters->horizontalHeaderItem(2)->setText(tr("Parameter"));
+    if(pixmap.isNull()) {
+        ui->mImageToSearchLabel->setText(tr("Bild kann nicht geöffnet werden."));
+    }
+}
+
+/**
+ * @brief ConfirmationPageWidget::showEvent Sets the label with the photo to the correct size
+ * when showing the label for the first time.
+ * @param event Is sent when the widget is shown.
+ */
 void ConfirmationPageWidget::showEvent(QShowEvent* event) {
-    if(!event->spontaneous()) {
+    if(!event->spontaneous() && !pixmap.isNull()) {
         ui->mImageToSearchLabel->setPixmap(pixmap.scaled(ui->mImageToSearchLabel->size(), Qt::KeepAspectRatio));
     }
 }
@@ -182,6 +192,10 @@ void ConfirmationPageWidget::showEvent(QShowEvent* event) {
     ui->mImageToSearchLabel->setPixmap(pixmap.scaled(ui->mImageToSearchLabel->size(), Qt::KeepAspectRatio));
 }*/
 
+/**
+ * @brief ConfirmationPageWidget::on_mSearchButton_clicked Sends the signal that the ConfirmationPageWidget
+ * wants to exit and the ResultsPageWidget should be shown.
+ */
 void ConfirmationPageWidget::on_mSearchButton_clicked()
 {
     exit(EXIT_NEXT);

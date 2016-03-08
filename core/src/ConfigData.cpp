@@ -96,5 +96,6 @@ QString ConfigData::getHelp() {
 QString ConfigData::getAbout() {
     return tr("CoBaB ermöglicht es, anhand eines ausgewählten Bildes"
     " oder Videos eine inhaltsbasierte Suche in Bild- oder Videodaten durchzuführen."
-    " Als Ergebnis liefert CoBaB eine Auswahl ähnlicher Bilder oder Videos. Durch die Eingabe von Feedback kann diese Auswahl verfeinert werden.");
+    " Als Ergebnis liefert CoBaB eine Auswahl ähnlicher Bilder oder Videos. Durch die Eingabe von Feedback kann diese Auswahl verfeinert werden.\n\n"
+    "Autoren: Anja Blechinger, Marie Bommersheim, Georgi Georgiev, Tung Nguyen, Vincent Winkler, Violina Zhekova");
 }

@@ -70,8 +70,14 @@ By clicking the button &apos;search again&apos; the feedback is submitted to the
     </message>
     <message>
         <location filename="core/src/ConfigData.cpp" line="97"/>
-        <source>CoBaB ermöglicht es, anhand eines ausgewählten Bildes oder Videos eine inhaltsbasierte Suche in Bild- oder Videodaten durchzuführen. Als Ergebnis liefert CoBaB eine Auswahl ähnlicher Bilder oder Videos. Durch die Eingabe von Feedback kann diese Auswahl verfeinert werden.</source>
-        <translation>CoBaB provides content based search in photo or video data. Based on a chosen photo it shows similar photos or videos. This result can be improved by giving feedback.</translation>
+        <source>CoBaB ermöglicht es, anhand eines ausgewählten Bildes oder Videos eine inhaltsbasierte Suche in Bild- oder Videodaten durchzuführen. Als Ergebnis liefert CoBaB eine Auswahl ähnlicher Bilder oder Videos. Durch die Eingabe von Feedback kann diese Auswahl verfeinert werden.
+
+Autoren: Anja Blechinger, Marie Bommersheim, Georgi Georgiev, Tung Nguyen, Vincent Winkler, Violina Zhekova</source>
+        <oldsource>CoBaB ermöglicht es, anhand eines ausgewählten Bildes oder Videos eine inhaltsbasierte Suche in Bild- oder Videodaten durchzuführen. Als Ergebnis liefert CoBaB eine Auswahl ähnlicher Bilder oder Videos. Durch die Eingabe von Feedback kann diese Auswahl verfeinert werden.
+Autoren: Anja Blechinger, Marie Bommersheim, Georgi Georgiev, Tung Nguyen, Vincent Winkler, Violina Zhekova</oldsource>
+        <translation>CoBaB provides content based search in photo or video data. Based on a chosen photo it shows similar photos or videos. This result can be improved by giving feedback.
+
+Authors: Anja Blechinger, Marie Bommersheim, Georgi Georgiev, Tung Nguyen, Vincent Winkler, Violina Zhekova</translation>
     </message>
 </context>
 <context>
@@ -92,28 +98,34 @@ By clicking the button &apos;search again&apos; the feedback is submitted to the
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/src/ConfirmationPageWidget.cpp" line="15"/>
-        <location filename="core/src/ConfirmationPageWidget.cpp" line="42"/>
+        <location filename="core/src/ConfirmationPageWidget.cpp" line="20"/>
+        <location filename="core/src/ConfirmationPageWidget.cpp" line="171"/>
         <source>Suche starten</source>
         <translation>start search</translation>
     </message>
     <message>
-        <location filename="core/src/ConfirmationPageWidget.cpp" line="21"/>
-        <location filename="core/src/ConfirmationPageWidget.cpp" line="43"/>
+        <location filename="core/src/ConfirmationPageWidget.cpp" line="25"/>
+        <location filename="core/src/ConfirmationPageWidget.cpp" line="172"/>
         <source>Datenordner</source>
         <translation>datasets</translation>
     </message>
     <message>
-        <location filename="core/src/ConfirmationPageWidget.cpp" line="22"/>
-        <location filename="core/src/ConfirmationPageWidget.cpp" line="44"/>
+        <location filename="core/src/ConfirmationPageWidget.cpp" line="26"/>
+        <location filename="core/src/ConfirmationPageWidget.cpp" line="173"/>
         <source>Algorithmus</source>
         <translation>algorithm</translation>
     </message>
     <message>
-        <location filename="core/src/ConfirmationPageWidget.cpp" line="23"/>
-        <location filename="core/src/ConfirmationPageWidget.cpp" line="45"/>
+        <location filename="core/src/ConfirmationPageWidget.cpp" line="27"/>
+        <location filename="core/src/ConfirmationPageWidget.cpp" line="174"/>
         <source>Parameter</source>
         <translation>parameters</translation>
+    </message>
+    <message>
+        <location filename="core/src/ConfirmationPageWidget.cpp" line="99"/>
+        <location filename="core/src/ConfirmationPageWidget.cpp" line="176"/>
+        <source>Bild kann nicht geöffnet werden.</source>
+        <translation>Photo cannot be opened.</translation>
     </message>
 </context>
 <context>
@@ -124,12 +136,12 @@ By clicking the button &apos;search again&apos; the feedback is submitted to the
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/src/LibraryPageWidget.cpp" line="64"/>
+        <location filename="core/src/LibraryPageWidget.cpp" line="65"/>
         <source>Datenordner öffnen</source>
         <translation>Open Dataset</translation>
     </message>
     <message>
-        <location filename="core/src/LibraryPageWidget.cpp" line="83"/>
+        <location filename="core/src/LibraryPageWidget.cpp" line="85"/>
         <source>Kein valider Datenordner gewählt</source>
         <oldsource>Kein valider Datensatz gewählt</oldsource>
         <translation>No valid dataset chosen</translation>
@@ -144,7 +156,7 @@ By clicking the button &apos;search again&apos; the feedback is submitted to the
     </message>
     <message>
         <location filename="core/ui/MainWindow.ui" line="34"/>
-        <location filename="core/src/MainWindow.cpp" line="101"/>
+        <location filename="core/src/MainWindow.cpp" line="108"/>
         <source>Datei</source>
         <translation>File</translation>
     </message>
@@ -166,7 +178,7 @@ By clicking the button &apos;search again&apos; the feedback is submitted to the
     <message>
         <location filename="core/ui/MainWindow.ui" line="57"/>
         <location filename="core/ui/MainWindow.ui" line="105"/>
-        <location filename="core/src/MainWindow.cpp" line="102"/>
+        <location filename="core/src/MainWindow.cpp" line="109"/>
         <source>Hilfe</source>
         <translation>Help</translation>
     </message>
@@ -178,26 +190,26 @@ By clicking the button &apos;search again&apos; the feedback is submitted to the
     </message>
     <message>
         <location filename="core/ui/MainWindow.ui" line="95"/>
-        <location filename="core/src/MainWindow.cpp" line="99"/>
+        <location filename="core/src/MainWindow.cpp" line="106"/>
         <source>Anfang</source>
         <translation>Home</translation>
     </message>
     <message>
         <location filename="core/ui/MainWindow.ui" line="100"/>
-        <location filename="core/src/MainWindow.cpp" line="98"/>
+        <location filename="core/src/MainWindow.cpp" line="105"/>
         <source>Zurück</source>
         <translation>Back</translation>
     </message>
     <message>
         <location filename="core/ui/MainWindow.ui" line="110"/>
-        <location filename="core/src/MainWindow.cpp" line="63"/>
-        <location filename="core/src/MainWindow.cpp" line="96"/>
+        <location filename="core/src/MainWindow.cpp" line="64"/>
+        <location filename="core/src/MainWindow.cpp" line="103"/>
         <source>Über CoBaB</source>
         <translation>About CoBaB</translation>
     </message>
     <message>
         <location filename="core/ui/MainWindow.ui" line="115"/>
-        <location filename="core/src/MainWindow.cpp" line="105"/>
+        <location filename="core/src/MainWindow.cpp" line="112"/>
         <source>Deutsch</source>
         <translation>German</translation>
     </message>
@@ -212,39 +224,39 @@ By clicking the button &apos;search again&apos; the feedback is submitted to the
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/src/MainWindow.cpp" line="64"/>
-        <location filename="core/src/MainWindow.cpp" line="71"/>
+        <location filename="core/src/MainWindow.cpp" line="65"/>
+        <location filename="core/src/MainWindow.cpp" line="73"/>
         <source>Schließen</source>
         <translation>Close</translation>
     </message>
     <message>
-        <location filename="core/src/MainWindow.cpp" line="70"/>
-        <location filename="core/src/MainWindow.cpp" line="97"/>
+        <location filename="core/src/MainWindow.cpp" line="72"/>
+        <location filename="core/src/MainWindow.cpp" line="104"/>
         <source>Hilfe für CoBaB</source>
         <translation>Help for CoBaB</translation>
     </message>
     <message>
-        <location filename="core/src/MainWindow.cpp" line="100"/>
+        <location filename="core/src/MainWindow.cpp" line="107"/>
         <source>Lesezeichen</source>
         <translation>Bookmarks</translation>
     </message>
     <message>
-        <location filename="core/src/MainWindow.cpp" line="103"/>
+        <location filename="core/src/MainWindow.cpp" line="110"/>
         <source>Chronik</source>
         <translation>Chronicle</translation>
     </message>
     <message>
-        <location filename="core/src/MainWindow.cpp" line="104"/>
+        <location filename="core/src/MainWindow.cpp" line="111"/>
         <source>Sprache</source>
         <translation>Language</translation>
     </message>
     <message>
-        <location filename="core/src/MainWindow.cpp" line="106"/>
+        <location filename="core/src/MainWindow.cpp" line="113"/>
         <source>Englisch</source>
         <translation>English</translation>
     </message>
     <message>
-        <location filename="core/src/MainWindow.cpp" line="107"/>
+        <location filename="core/src/MainWindow.cpp" line="114"/>
         <source>Datenordner öffnen</source>
         <translation>Open Dataset</translation>
     </message>
@@ -262,7 +274,7 @@ By clicking the button &apos;search again&apos; the feedback is submitted to the
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/src/ParameterPageWidget.cpp" line="49"/>
+        <location filename="core/src/ParameterPageWidget.cpp" line="69"/>
         <source>Weiter</source>
         <translation type="unfinished">next</translation>
     </message>
@@ -272,6 +284,11 @@ By clicking the button &apos;search again&apos; the feedback is submitted to the
     <message>
         <location filename="core/ui/ResultsPageWidget.ui" line="14"/>
         <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/ui/ResultsPageWidget.ui" line="63"/>
+        <source>Erneut Suchen</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -323,24 +340,24 @@ By clicking the button &apos;search again&apos; the feedback is submitted to the
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="core/src/ViewerPageWidget.cpp" line="221"/>
         <location filename="core/src/ViewerPageWidget.cpp" line="243"/>
-        <location filename="core/src/ViewerPageWidget.cpp" line="265"/>
         <source>Bereich entfernen</source>
         <translation>remove ROI</translation>
     </message>
     <message>
-        <location filename="core/src/ViewerPageWidget.cpp" line="247"/>
-        <location filename="core/src/ViewerPageWidget.cpp" line="267"/>
+        <location filename="core/src/ViewerPageWidget.cpp" line="225"/>
+        <location filename="core/src/ViewerPageWidget.cpp" line="245"/>
         <source>Bereich auswählen</source>
         <translation>select ROI</translation>
     </message>
     <message>
-        <location filename="core/src/ViewerPageWidget.cpp" line="262"/>
+        <location filename="core/src/ViewerPageWidget.cpp" line="240"/>
         <source>vorheriges</source>
         <translation type="unfinished">before</translation>
     </message>
     <message>
-        <location filename="core/src/ViewerPageWidget.cpp" line="263"/>
+        <location filename="core/src/ViewerPageWidget.cpp" line="241"/>
         <source>nächstes</source>
         <translation type="unfinished">next</translation>
     </message>
