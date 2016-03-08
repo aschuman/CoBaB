@@ -32,7 +32,10 @@ private slots:
 private:
     Ui::ConfirmationPageWidget *ui;
     QPixmap pixmap;
+    void clearTable();
 
 };
+
+
 
 #endif // CONFIRMATIONPAGEWIDGET_H
