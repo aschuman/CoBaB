@@ -6,6 +6,9 @@
 
 const int ViewerPageWidget::EXIT_NEXT = 0;
 
+/**
+ * @brief ViewerPageWidget::ViewerPageWidget Constructs a ViewerPageWidget.
+ */
 ViewerPageWidget::ViewerPageWidget() :
     ui(new Ui::ViewerPageWidget), mIndex(0), mImage(nullptr), mSelectionPen(QColor(0,255,230)),
     mCurrentSelection(nullptr), mAnnotationDrawer(&mGraphicsScene), mSelectedAnnotation(nullptr),
@@ -27,33 +30,60 @@ ViewerPageWidget::ViewerPageWidget() :
     connect(ui->mGraphicsView, SIGNAL(resize()), this, SLOT(resize()));
 }
 
+/**
+ * @brief ViewerPageWidget::~ViewerPageWidget Deletes the ViewerPageWidget.
+ */
 ViewerPageWidget::~ViewerPageWidget()
 {
     delete ui;
 }
 
+/**
+ * @brief ViewerPageWidget::resizeEvent Resizes the widget.
+ * @param event The QResizeEvent.
+ */
 void ViewerPageWidget::resizeEvent(QResizeEvent *event) {
     resize();
 }
+
+/**
+ * @brief ViewerPageWidget::resize Resizes the displayed Medium.
+ */
 void ViewerPageWidget::resize() {
     ui->mGraphicsView->fitInView(mImage, Qt::KeepAspectRatio);
 }
 
+/**
+ * @brief ViewerPageWidget::zoomIn Zooms in the Medium.
+ */
 void ViewerPageWidget::zoomIn() {
     ui->mGraphicsView->scale(2,2);
 }
+
+/**
+ * @brief ViewerPageWidget::zoomOut Zooms the Medium out.
+ */
 void ViewerPageWidget::zoomOut() {
     ui->mGraphicsView->scale(0.5,0.5);
 }
 
+/**
+ * @brief ViewerPageWidget::annotationSelected Sets the selected annotation and shows a context menu to select an Algorithm.
+ * @param annotation The selected Annotation.
+ * @param pos The mouse position.
+ */
 void ViewerPageWidget::annotationSelected(Annotation* annotation, const QPointF& pos) {
     mSelectedAnnotation = annotation->copy();
     contextMenu(pos);
 }
 
+/**
+ * @brief ViewerPageWidget::contextMenu Shows a context menu to select an Algorithm.
+ * @param pos The mouse position.
+ */
 void ViewerPageWidget::contextMenu(const QPointF &pos) {
     SearchObject searchObject;
-    searchObject.setMedium(mDataset->getMediaList().at(mIndex)->getPath());
+    searchObject.setMedium(getSearchMedium());
     if(mCurrentSelection != nullptr && mCurrentSelection->contains(pos)) {
         mROI = mCurrentSelection->rect().toRect();
         searchObject.setROI(mROI);
@@ -90,20 +120,37 @@ void ViewerPageWidget::contextMenu(const QPointF &pos) {
     contextMenu.exec(QCursor::pos());
 }
 
+/**
+ * @brief ViewerPageWidget::showToolTip Shows tooltips for the algorithms.
+ * @param action The QAction of the algorithm in the context menu.
+ */
 void ViewerPageWidget::showToolTip(QAction* action) {
     QToolTip::showText(QCursor::pos(), action->toolTip());
 }
 
+/**
+ * @brief ViewerPageWidget::selectionChanged Updates the displayed Medium when the selection changed.
+ * @param index The new QModelIndex.
+ * @param previousIndex The previous QModelIndex.
+ */
 void ViewerPageWidget::selectionChanged(const QModelIndex &index, const QModelIndex &previousIndex) {
     mIndex = index.row();
     display();
 }
+
+/**
+ * @brief ViewerPageWidget::next Shows the next Medium in the ListView.
+ */
 void ViewerPageWidget::next() {
     mIndex++;
     mIndex%=mDataset->getNumberOfMedia();
     ui->mViewerListView->selectionModel()->setCurrentIndex(mModel.index(mIndex), QItemSelectionModel::ClearAndSelect);
     display();
 }
+
+/**
+ * @brief ViewerPageWidget::before Shows the Medium before in the ListView.
+ */
 void ViewerPageWidget::before() {  
     if(mIndex <= 0) {
         mIndex = mDataset->getNumberOfMedia();
@@ -113,6 +160,9 @@ void ViewerPageWidget::before() {
     display();
 }
 
+/**
+ * @brief ViewerPageWidget::reset Resets the ViewerPageWidget.
+ */
 void ViewerPageWidget::reset()
 {
     QVariant var;
@@ -153,6 +203,10 @@ void ViewerPageWidget::reset()
     }
 }
 
+/**
+ * @brief ViewerPageWidget::nextWidget Switches to the next widget.
+ * @param action The QAction of the selected Algorithm.
+ */
 void ViewerPageWidget::nextWidget(QAction* action) {
     delete mDataset;
     mDataset = nullptr;
@@ -177,6 +231,12 @@ void ViewerPageWidget::nextWidget(QAction* action) {
     exit(EXIT_NEXT);
 }
 
+/**
+ * @brief ViewerPageWidget::on_mGraphicsView_rubberBandChanged Selects a ROI.
+ * @param viewportRect unused
+ * @param fromScenePoint The starting point of the selection.
+ * @param toScenePoint The ending point of the selection.
+ */
 void ViewerPageWidget::on_mGraphicsView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint,
                                                           const QPointF &toScenePoint)
 {
@@ -214,6 +274,9 @@ void ViewerPageWidget::on_mGraphicsView_rubberBandChanged(const QRect &viewportR
     }
 }
 
+/**
+ * @brief ViewerPageWidget::roiClicked En-/Disables the selection mode of a ROI, when the ROI button was clicked.
+ */
 void ViewerPageWidget::roiClicked() {
     if(!mROIIsChosen) {
         ui->mGraphicsView->setDragMode(QGraphicsView::DragMode::RubberBandDrag);
@@ -231,10 +294,16 @@ void ViewerPageWidget::roiClicked() {
     }
 }
 
+/**
+ * @brief ViewerPageWidget::display Displays a Medium.
+ */
 void ViewerPageWidget::display() {
     ui->mPhotoCount->setText("Foto "+QString::number(mIndex+1)+" von "+QString::number(mDataset->getNumberOfMedia()));
 }
 
+/**
+ * @brief ViewerPageWidget::retranslateUi Translates the GUI.
+ */
 void ViewerPageWidget::retranslateUi() {
     ui->mBeforeButton->setText(tr("vorheriges"));
     ui->mNextButton->setText(tr("nächstes"));
