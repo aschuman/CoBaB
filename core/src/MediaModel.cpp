@@ -2,6 +2,7 @@
 
 /**
  * @brief MediaModel::MediaModel Constructs a MediaModel.
+ * @author Anja
  */
 MediaModel::MediaModel()
     : QAbstractListModel(nullptr),
