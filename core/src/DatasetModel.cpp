@@ -16,6 +16,7 @@ DatasetModel::DatasetModel()
 void DatasetModel::setDatasetList(const QList<Dataset>& datasets)
 {
     mDatasets = &datasets;
+    emit layoutChanged();
     emit dataChanged(createIndex(0,0), createIndex(datasets.size(), 0));
 }
 
