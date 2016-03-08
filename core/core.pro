@@ -6,6 +6,26 @@ QT += widgets core
 INCLUDEPATH += include interface
 RESOURCES = ../application.qrc
 
+unix{
+res.commands = $(COPY_DIR) $$PWD/../resources $$OUT_PWD/../
+first.depends = $(first) res
+export(first.depends)
+export(res.commands)
+QMAKE_EXTRA_TARGETS += first res
+}
+win32{
+PWD_WIN = $${PWD}
+DESTDIR_WIN = $${OUT_PWD}
+PWD_WIN ~= s,/,\,g
+DESTDIR_WIN ~= s,/,\,g
+
+res.commands = $(COPY_DIR) \"$${PWD_WIN}\..\resources\" \"$${DESTDIR_WIN}\..\resources\"
+first.depends = $(first) res
+export(first.depends)
+export(res.commands)
+QMAKE_EXTRA_TARGETS += first res
+}
+
 HEADERS += \
     interface/Medium.h \
     interface/Photo.h \
