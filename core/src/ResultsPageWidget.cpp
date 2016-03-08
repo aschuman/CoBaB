@@ -1,6 +1,7 @@
 #include "include/ResultsPageWidget.h"
 #include "ui_ResultsPageWidget.h"
 
+#include <QPointer>
 #include "SearchResult.h"
 
 #define LOGGING_LEVEL_1
@@ -86,8 +87,8 @@ void ResultsPageWidget::reset()
 {
     QVariant var;
     emit readFromStack(0, var);
-    if(var.canConvert<std::shared_ptr<Algorithm>>()){
-        emit startAlgorithm(var.value<std::shared_ptr<Algorithm>>().get());
+    if(var.canConvert<QPointer<Algorithm>>()){
+        emit startAlgorithm(var.value<QPointer<Algorithm>>().data());
     } else {
         LOG_ERR("could not find algorithm on stack");
     }

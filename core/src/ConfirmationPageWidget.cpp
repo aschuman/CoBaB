@@ -7,6 +7,7 @@
 #include <QJsonDocument>
 #include <QDebug>
 #include <QResizeEvent>
+#include <QPointer>
 
 ConfirmationPageWidget::ConfirmationPageWidget() :
     ui(new Ui::ConfirmationPageWidget)
@@ -127,8 +128,8 @@ void ConfirmationPageWidget::reset()
     //read name of algorithm
     QVariant chosenAlgorithm;
     emit readFromStack(0, chosenAlgorithm);
-    if(chosenAlgorithm.canConvert<std::shared_ptr<Algorithm>>()){
-        std::shared_ptr<Algorithm> algo = chosenAlgorithm.value<std::shared_ptr<Algorithm>>();
+    if(chosenAlgorithm.canConvert<QPointer<Algorithm>>()){
+        QPointer<Algorithm> algo = chosenAlgorithm.value<QPointer<Algorithm>>();
         ui->mParameters->item(0, 1)->setText(algo->getName());
         ui->mParameters->item(0, 1)->setTextAlignment(Qt::AlignCenter);
     } else {
