@@ -7,6 +7,8 @@
 #include "FeedbackDelegate.h"
 #include "Algorithm.h"
 
+#include <memory>
+
 namespace Ui {
 class ResultsPageWidget;
 }
@@ -27,14 +29,19 @@ public:
 
     void setResults(SearchResult result);
 
+    static const int EXIT_NEW_SEARCH;
+
 signals:
     void startAlgorithm(Algorithm* algo);
+
+private slots:
+    void on_btnNewSearch_clicked();
 
 private:
     Ui::ResultsPageWidget *ui;
     SearchResultModel mModel;
     FeedbackDelegate mDelegate;
-    SearchResult mResult;
+    std::shared_ptr<SearchResult> mResult;
 };
 
 #endif // RESULTSPAGEWIDGET_H

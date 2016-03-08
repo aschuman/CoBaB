@@ -1,10 +1,14 @@
 #include "include/ResultsPageWidget.h"
 #include "ui_ResultsPageWidget.h"
 
+#include <QPointer>
 #include "SearchResult.h"
+#include "SearchQuery.h"
 
 #define LOGGING_LEVEL_1
 #include "log.h"
+
+const int ResultsPageWidget::EXIT_NEW_SEARCH = 0;
 
 /**
  * @brief temporary
@@ -85,9 +89,9 @@ ResultsPageWidget::~ResultsPageWidget()
 void ResultsPageWidget::reset()
 {
     QVariant var;
-    emit readFromStack(0, var);
-    if(var.canConvert<std::shared_ptr<Algorithm>>()){
-        emit startAlgorithm(var.value<std::shared_ptr<Algorithm>>().get());
+    emit readFromStack(1, var);
+    if(var.canConvert<QPointer<Algorithm>>()){
+        emit startAlgorithm(var.value<QPointer<Algorithm>>().data());
     } else {
         LOG_ERR("could not find algorithm on stack");
     }
@@ -95,10 +99,43 @@ void ResultsPageWidget::reset()
 
 void ResultsPageWidget::setResults(SearchResult result)
 {
-    mResult = std::move(result);
-    mModel.setSearchResult(&mResult);
+    mResult = std::make_shared<SearchResult>(std::move(result));
+    mModel.setSearchResult(mResult.get());
+    ui->btnNewSearch->setEnabled(true);
 }
 
 void ResultsPageWidget::retranslateUi() {
 
+}
+
+void ResultsPageWidget::on_btnNewSearch_clicked()
+{
+    QVariant varDatasetNo;
+    emit readFromStack(3, varDatasetNo);
+    if(!varDatasetNo.canConvert<int>()){
+        LOG_ERR("could not find dataset on stack");
+    }
+
+    QVariant varSearchQuery;
+    emit readFromStack(2, varSearchQuery);
+    if(!varSearchQuery.canConvert<std::shared_ptr<SearchQuery>>()){
+        LOG_ERR("could not find search query on stack");
+    }
+
+    QVariant varAlgorithm;
+    emit readFromStack(1, varAlgorithm);
+    if(!varAlgorithm.canConvert<QPointer<Algorithm>>()){
+        LOG_ERR("could not find algorithm on stack");
+    }
+
+    // ToDo: read parameters from stack
+
+    // ToDo: push feedback
+
+    emit pushToStack(varDatasetNo);
+    emit pushToStack(varSearchQuery);
+    emit pushToStack(varAlgorithm);
+    //emit pushToStack(varParameter);
+
+    emit exit(EXIT_NEW_SEARCH);
 }

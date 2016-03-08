@@ -55,6 +55,7 @@ void MainWindow::display(QWidget* widget)
         currentWidget = widget;
         currentWidget->show();
         retranslate();
+        setWindowTitle(currentWidget->windowTitle());
     }
 }
 
@@ -110,5 +111,4 @@ void MainWindow::retranslate() {
     if (pageWidget != nullptr) {
         pageWidget->retranslateUi();
     }
-
 }

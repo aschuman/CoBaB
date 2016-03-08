@@ -3,10 +3,12 @@
 #include "DatasetList.h"
 #include "SearchQuery.h"
 #include "Algorithm.h"
+#include "ParameterPageWidget.h"
 #include "log.h"
 #include <QJsonDocument>
 #include <QDebug>
 #include <QResizeEvent>
+#include <QPointer>
 
 ConfirmationPageWidget::ConfirmationPageWidget() :
     ui(new Ui::ConfirmationPageWidget)
@@ -52,6 +54,7 @@ ConfirmationPageWidget::~ConfirmationPageWidget()
 
 void ConfirmationPageWidget::reset()
 {
+    clearTable();
     std::shared_ptr<DatasetList> list = nullptr;
     int indexOfChosenDataset = -1;
     const Dataset* chosenDataset = nullptr;
@@ -67,13 +70,14 @@ void ConfirmationPageWidget::reset()
 
     //read number of chosen dataset
     QVariant varChosenDataset;
-    emit readFromStack(2, varChosenDataset);
+    emit readFromStack(3, varChosenDataset);
     if(varChosenDataset.canConvert<int>()) {
         indexOfChosenDataset = varChosenDataset.value<int>();
 
         if((list != nullptr) && (indexOfChosenDataset < list->getDatasetList().size())) {
             chosenDataset = &(list->getDatasetList().at(indexOfChosenDataset));
-            ui->mParameters->item(0, 0)->setText(chosenDataset->getName());
+            ui->mParameters->insertRow(0);
+            ui->mParameters->setItem(0, 0, new QTableWidgetItem(chosenDataset->getName()));
             ui->mParameters->item(0, 0)->setTextAlignment(Qt::AlignCenter);
         }
     }
@@ -84,7 +88,7 @@ void ConfirmationPageWidget::reset()
 
     //read searchobject
     QVariant varSearchQuery;
-    emit readFromStack(1, varSearchQuery);
+    emit readFromStack(2, varSearchQuery);
     if(varSearchQuery.canConvert<std::shared_ptr<SearchQuery>>()) {
         std::shared_ptr<SearchQuery> searchQuery = varSearchQuery.value<std::shared_ptr<SearchQuery>>();
         SearchObject searchObject = searchQuery->getSearchObject();
@@ -103,8 +107,6 @@ void ConfirmationPageWidget::reset()
             }
         }
         ui->mImageToSearchLabel->setPixmap(pixmap.scaled(ui->mImageToSearchLabel->size(), Qt::KeepAspectRatio));
-
-
     } else {
         LOG_ERR("no searchQuery");
     }
@@ -112,24 +114,29 @@ void ConfirmationPageWidget::reset()
     // add names of chosen datasets
     QVariant varDatasetIndices;
     emit readFromStack(0, varDatasetIndices);
-    if(varDatasetIndices.canConvert<QList<int>>()) {
-        QList<int> indices = varDatasetIndices.value<QList<int>>();
-        for(int i = 0; i < indices.size(); i++) {
-            QString name = list->getDatasetList().at(i).getName();
-            if(name != chosenDataset->getName()) {
-                ui->mParameters->insertRow(i);
-                ui->mParameters->setItem(i, 0, new QTableWidgetItem(name));
-                ui->mParameters->item(i, 0)->setTextAlignment(Qt::AlignCenter);
+    if(varDatasetIndices.canConvert<std::shared_ptr<QModelIndexList>>()) {
+        std::shared_ptr<QModelIndexList> indices = varDatasetIndices.value<std::shared_ptr<QModelIndexList>>();
+        for(int i = 0; i < indices.get()->size(); i++) {
+            int index = indices.get()->at(i).row();
+            if((list != nullptr) && (index < list->getDatasetList().size())) {
+                QString name = list->getDatasetList().at(index).getName();
+                if(name != chosenDataset->getName()) {
+                    ui->mParameters->insertRow(i);
+                    ui->mParameters->setItem(i, 0, new QTableWidgetItem(name));
+                    ui->mParameters->item(i, 0)->setTextAlignment(Qt::AlignCenter);
+                }
+            } else {
+                LOG_ERR("invalid dataset index");
             }
         }
     }
 
     //read name of algorithm
     QVariant chosenAlgorithm;
-    emit readFromStack(0, chosenAlgorithm);
-    if(chosenAlgorithm.canConvert<std::shared_ptr<Algorithm>>()){
-        std::shared_ptr<Algorithm> algo = chosenAlgorithm.value<std::shared_ptr<Algorithm>>();
-        ui->mParameters->item(0, 1)->setText(algo->getName());
+    emit readFromStack(1, chosenAlgorithm);
+    if(chosenAlgorithm.canConvert<QPointer<Algorithm>>()){
+        QPointer<Algorithm> algo = chosenAlgorithm.value<QPointer<Algorithm>>();
+		ui->mParameters->setItem(0, 1, new QTableWidgetItem(algo->getName()));
         ui->mParameters->item(0, 1)->setTextAlignment(Qt::AlignCenter);
     } else {
         LOG_ERR("no algorithm");
@@ -157,6 +164,12 @@ void ConfirmationPageWidget::reset()
     }
 
     ui->mParameters->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+}
+
+void ConfirmationPageWidget::clearTable() {
+    while(ui->mParameters->rowCount() > 0) {
+        ui->mParameters->removeRow(0);
+    }
 }
 
 void ConfirmationPageWidget::showEvent(QShowEvent* event) {

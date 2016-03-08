@@ -45,6 +45,12 @@ void ParameterPageWidget::reset() {
 
 void ParameterPageWidget::nextButtonClicked() {
 
+    QItemSelectionModel* model = ui->mSearchDatasetListView->selectionModel();
+    QModelIndexList listOfDatasetIndexes = model->selectedIndexes();
+    std::shared_ptr<QModelIndexList> list = std::make_shared<QModelIndexList>(listOfDatasetIndexes);
+    QVariant var;
+    var.setValue(list);
+    emit pushToStack(var);
     exit(EXIT_NEXT);
 }
 

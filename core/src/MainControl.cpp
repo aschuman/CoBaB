@@ -68,6 +68,8 @@ void MainControl::initNavigation()
     mSearchManager = std::make_unique<SearchManager>(resultsPageWidget.get());
     mNavi->registerPage(PageType::RESULTS, move(resultsPageWidget));
     mNavi->registerTransition(PageType::CONFIRMATION, ConfirmationPageWidget::EXIT_NEXT, PageType::RESULTS);
+
+    mNavi->registerTransition(PageType::RESULTS, ResultsPageWidget::EXIT_NEW_SEARCH, PageType::PARAMETER);
 }
 
 DatasetList MainControl::findDatasets() const

@@ -3,6 +3,7 @@
 #include <QMenu>
 #include <QToolTip>
 #include <QMessageBox>
+#include <QPointer>
 
 const int ViewerPageWidget::EXIT_NEXT = 0;
 
@@ -222,7 +223,7 @@ void ViewerPageWidget::nextWidget(QAction* action) {
     pushToStack(query);
 
     // todo: push actual, user-chosen algorithm
-    std::shared_ptr<Algorithm> algo(mAlgorithms.value(action->text()));
+    QPointer<Algorithm> algo(mAlgorithms.value(action->text()));
     //std::shared_ptr<Algorithm> algo = std::make_shared<TestAlgorithm>("id123");
     QVariant varAlgo;
     varAlgo.setValue(algo);

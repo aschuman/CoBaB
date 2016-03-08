@@ -40,4 +40,7 @@ private:
     QVector<QJsonObject> parameterList;
 };
 
+#include <memory>
+Q_DECLARE_METATYPE(std::shared_ptr<QModelIndexList>)
+
 #endif // PARAMETERPAGEWIDGET_H
