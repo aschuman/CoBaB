@@ -1,5 +1,8 @@
 #include "MediaModel.h"
 
+/**
+ * @brief MediaModel::MediaModel Constructs a MediaModel.
+ */
 MediaModel::MediaModel()
     : QAbstractListModel(nullptr),
       mDataset(nullptr)
@@ -7,6 +10,10 @@ MediaModel::MediaModel()
     Q_INIT_RESOURCE(application);
 }
 
+/**
+ * @brief MediaModel::setDataset Sets the dataset.
+ * @param dataset
+ */
 void MediaModel::setDataset(const Dataset& dataset)
 {
     mDataset = &dataset;
@@ -14,12 +21,23 @@ void MediaModel::setDataset(const Dataset& dataset)
     emit dataChanged(createIndex(0,0), createIndex(mDataset->getNumberOfMedia(), 0));
 }
 
+/**
+ * @brief MediaModel::rowCount Returns the number of rows.
+ * @param parent unused
+ * @return The number of rows.
+ */
 int MediaModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
     return mDataset ? mDataset->getNumberOfMedia() : 0;
 }
 
+/**
+ * @brief MediaModel::data Returns the data stored under the given role for the item referred to by the index.
+ * @param index
+ * @param role
+ * @return
+ */
 QVariant MediaModel::data(const QModelIndex &index, int role) const
 {  
     QVariant result;

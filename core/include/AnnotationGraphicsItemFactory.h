@@ -5,7 +5,7 @@
 #include "Annotation.h"
 
 /**
- * @brief The AnnotationGraphicsItemFactory class
+ * @brief The AnnotationGraphicsItemFactory class creates QGraphicsItems dependent on the form of the Annotation.
  * @author Anja
  */
 class AnnotationGraphicsItemFactory

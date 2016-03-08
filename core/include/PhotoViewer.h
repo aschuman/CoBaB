@@ -5,7 +5,7 @@
 #include "ViewerPageWidget.h"
 
 /**
- * @brief The PhotoViewer class
+ * @brief The PhotoViewer class is a ViewerPageWidget which can only show Photos.
  * @author Anja
  */
 class PhotoViewer : public ViewerPageWidget
@@ -14,8 +14,8 @@ class PhotoViewer : public ViewerPageWidget
 
 public:
     explicit PhotoViewer();
-    ~PhotoViewer();
     void display() override;
+    QString getSearchMedium() override;
 };
 
 #endif // PHOTOVIEWER_H
