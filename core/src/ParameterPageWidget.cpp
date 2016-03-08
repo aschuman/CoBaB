@@ -12,7 +12,7 @@ ParameterPageWidget::ParameterPageWidget() :
     ui->setupUi(this);
     ui->mSearchDatasetListView->setModel(&mModel);
 
-    QString fileName = "resources/PluginDepthEstimator.json";
+    QString fileName = "../resources/PluginDepthEstimator.json";
     QFile file(fileName);
     file.open(QIODevice::ReadOnly);
     QJsonObject object = QJsonDocument::fromJson(file.readAll()).object();
