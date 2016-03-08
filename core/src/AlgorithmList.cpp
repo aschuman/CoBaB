@@ -1,8 +1,3 @@
-/**
- * Project \
- */
-
-
 #include "AlgorithmList.h"
 #include <QDir>
 
@@ -13,12 +8,12 @@
  * AlgorithmList implementation
  */
 
-
 /**
- * @param file
+ * @brief AlgorithmList::AlgorithmList create new AlgorithmList containing all algorithms in a folder
+ * @param path algorithm folder path
  */
-AlgorithmList::AlgorithmList(const QString& file) {
-    QDir pluginsDir(file);
+AlgorithmList::AlgorithmList(const QString& path) {
+    QDir pluginsDir(path);
 
     for(const QString& fileName : pluginsDir.entryList(QDir::Files))
     {
@@ -27,6 +22,9 @@ AlgorithmList::AlgorithmList(const QString& file) {
     }
 }
 
+/**
+ * @brief AlgorithmList::~AlgorithmList destructor to unload the algorithms
+ */
 AlgorithmList::~AlgorithmList()
 {
     for(auto& loader : mPluginLoaders){
@@ -34,10 +32,19 @@ AlgorithmList::~AlgorithmList()
     }
 }
 
+/**
+ * @brief AlgorithmList::AlgorithmList
+ * @param a
+ */
 AlgorithmList::AlgorithmList(AlgorithmList&& a) : mPluginLoaders(std::move(a.mPluginLoaders))
 {
 }
 
+/**
+ * @brief AlgorithmList::operator =
+ * @param a
+ * @return
+ */
 AlgorithmList& AlgorithmList::operator=(AlgorithmList &&a)
 {
     mPluginLoaders = std::move(a.mPluginLoaders);
@@ -45,8 +52,9 @@ AlgorithmList& AlgorithmList::operator=(AlgorithmList &&a)
 }
 
 /**
- * @param packet
- * @return QList<Algorithm>
+ * @brief AlgorithmList::findCompatibleAlgorithms find algorithms compatible mit input data
+ * @param inputDataList list of input data
+ * @return all algorithms compatible mit input data
  */
 QList<Algorithm*> AlgorithmList::findCompatibleAlgorithms(const QList<DataPacket*>& inputDataList) {
     QList<Algorithm*> algos;
@@ -61,7 +69,8 @@ QList<Algorithm*> AlgorithmList::findCompatibleAlgorithms(const QList<DataPacket
 }
 
 /**
- * @return QList<Algorithm>
+ * @brief AlgorithmList::getAlgorithmList
+ * @return all loaded algorithms
  */
 QList<Algorithm*> AlgorithmList::getAlgorithmList() {
     QList<Algorithm*> algos;
@@ -73,7 +82,12 @@ QList<Algorithm*> AlgorithmList::getAlgorithmList() {
     return algos;
 }
 
-Algorithm *AlgorithmList::loadAlgorithm(QPluginLoader* loader)
+/**
+ * @brief AlgorithmList::loadAlgorithm load an algorithm from loader
+ * @param loader pointer to loader
+ * @return an pointer to algorithm instance
+ */
+Algorithm* AlgorithmList::loadAlgorithm(QPluginLoader* loader)
 {
     Algorithm* loadedAlgorithm = nullptr;
     QObject* plugin = loader->instance();
