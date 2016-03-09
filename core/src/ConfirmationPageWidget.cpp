@@ -177,6 +177,10 @@ void ConfirmationPageWidget::retranslateUi() {
     }
 }
 
+QString ConfirmationPageWidget::getName() {
+    return tr("CoBaB - Bestätigung");
+}
+
 /**
  * @brief ConfirmationPageWidget::showEvent Sets the label with the photo to the correct size
  * when showing the label for the first time.

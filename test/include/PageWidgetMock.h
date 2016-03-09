@@ -9,6 +9,7 @@ public:
     PageWidgetMock();
     virtual void reset();
     virtual void retranslateUi();
+    virtual QString getName();
     void emitPush(QVariant item);
     void emitRead(int index, QVariant& value);
     void emitExit(int exitCode);

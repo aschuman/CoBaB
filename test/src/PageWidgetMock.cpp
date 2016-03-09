@@ -38,3 +38,8 @@ void PageWidgetMock::retranslateUi()
 {
 
 }
+
+QString PageWidgetMock::getName()
+{
+    return "Mock";
+}

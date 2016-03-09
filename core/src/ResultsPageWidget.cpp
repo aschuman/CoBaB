@@ -104,10 +104,6 @@ void ResultsPageWidget::setResults(SearchResult result)
     ui->btnNewSearch->setEnabled(true);
 }
 
-void ResultsPageWidget::retranslateUi() {
-
-}
-
 void ResultsPageWidget::on_btnNewSearch_clicked()
 {
     QVariant varDatasetNo;
@@ -138,4 +134,12 @@ void ResultsPageWidget::on_btnNewSearch_clicked()
     //emit pushToStack(varParameter);
 
     emit exit(EXIT_NEW_SEARCH);
+}
+
+void ResultsPageWidget::retranslateUi() {
+    ui->btnNewSearch->setText(tr("Erneut suchen"));
+}
+
+QString ResultsPageWidget::getName() {
+    return tr("CoBaB - Ergebnisse");
 }

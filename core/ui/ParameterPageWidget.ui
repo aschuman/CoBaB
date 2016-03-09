@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Parameter</string>
+   <string>CoBaB - Parameter</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

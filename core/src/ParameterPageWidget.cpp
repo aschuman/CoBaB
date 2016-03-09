@@ -68,3 +68,7 @@ void ParameterPageWidget::on_mSearchDatasetListView_indexesMoved(const QModelInd
 void ParameterPageWidget::retranslateUi() {
     ui->mNext->setText(tr("Weiter"));
 }
+
+QString ParameterPageWidget::getName() {
+    return tr("CoBaB - Parameter");
+}

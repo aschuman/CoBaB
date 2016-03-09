@@ -315,3 +315,7 @@ void ViewerPageWidget::retranslateUi() {
     }
 }
 
+QString ViewerPageWidget::getName() {
+    return tr("CoBaB - Viewer");
+}
+

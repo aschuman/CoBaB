@@ -26,6 +26,7 @@ public:
     ~ResultsPageWidget();
     void reset() override;
     void retranslateUi() override;
+    QString getName() override;
 
     void setResults(SearchResult result);
 

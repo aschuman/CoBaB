@@ -3,6 +3,7 @@
 #include "ConfigData.h"
 #include "PageWidget.h"
 #include <QMessageBox>
+#include "LibraryPageWidget.h"
 
 /**
  * @brief Constructs the MainWindow.
@@ -28,6 +29,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ConfigData* data = ConfigData::getInstance();
     data->setLanguage(data->getLanguage());
     retranslate();
+
+    Q_INIT_RESOURCE(application);
+    QIcon home(":/homeIcon.png");
+    ui->mHomeAction->setIcon(home);
+    QIcon back(":/backIcon.png");
+    ui->mBackAction->setIcon(back);
 }
 
 /**
@@ -55,7 +62,6 @@ void MainWindow::display(QWidget* widget)
         currentWidget = widget;
         currentWidget->show();
         retranslate();
-        setWindowTitle(currentWidget->windowTitle());
     }
 }
 
@@ -103,8 +109,6 @@ void MainWindow::retranslate()
 {
     ui->mAboutAction->setText(tr("Über CoBaB"));
     ui->mHelpAction->setText(tr("Hilfe für CoBaB"));
-    ui->mBackAction->setText(tr("Zurück"));
-    ui->mHomeAction->setText(tr("Anfang"));
     ui->mBookmarkMenu->setTitle(tr("Lesezeichen"));
     ui->mFileMenu->setTitle(tr("Datei"));
     ui->mHelpMenu->setTitle(tr("Hilfe"));
@@ -114,8 +118,10 @@ void MainWindow::retranslate()
     ui->mActionEnglish->setText(tr("Englisch"));
     ui->mDatasetAction->setText(tr("Datenordner öffnen"));
 
+
     PageWidget* pageWidget = dynamic_cast<PageWidget*> (currentWidget);
     if(pageWidget != nullptr) {
         pageWidget->retranslateUi();
+        setWindowTitle(pageWidget->getName());
     }
 }

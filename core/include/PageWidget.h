@@ -19,6 +19,7 @@ public:
      * @brief Retranslates the user interface after the user switched the language.
      */
     virtual void retranslateUi() = 0;
+    virtual QString getName() = 0;
 
 signals:
     /**
