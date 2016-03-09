@@ -39,6 +39,7 @@ void CustomGraphicsView::scalingTime(qreal x)
 {
     qreal factor = 1.0+ qreal(_numScheduledScalings) / 300.0;
     scale(factor, factor);
+    emit zoomed(factor);
 }
 
 /**

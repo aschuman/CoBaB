@@ -40,7 +40,7 @@ public:
 public slots:
     void next();
     void before();
-    void nextWidget(QAction* action);
+    virtual void nextWidget(QAction* action);
     virtual void contextMenu(const QPointF &pos);
     void on_mGraphicsView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint);
     void roiClicked();
@@ -48,6 +48,7 @@ public slots:
     void showToolTip(QAction* action);
     void zoomIn();
     void zoomOut();
+    void zoomed(double factor);
     void resize();
     void selectionChanged(const QModelIndex& index, const QModelIndex& previousIndex);
 
@@ -72,6 +73,8 @@ protected:
     QHash<QString, Algorithm*> mAlgorithms; ///< Hashes an algorithm name to the algorithm.
 
     std::shared_ptr<SearchQuery> mSearchQuery; ///< The SearchQuery, filled with the selected Medium and Annotation/ROI.
+
+    double mZoomLevel;
 
     virtual void display();
     void resizeEvent(QResizeEvent* event) override;
