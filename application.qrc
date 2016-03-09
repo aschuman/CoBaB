@@ -1,8 +1,13 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
     <file alias="videoIcon.png">resources/images/videoIcon.png</file>
-</qresource>
-<qresource>
+	<file alias="play.png">resources/images/play.png</file>
+	<file alias="pause.png">resources/images/pause.png</file>
+	<file alias="stop.png">resources/images/stop.png</file>
+	<file alias="loop.png">resources/images/loop.png</file>
+	<file alias="noLoop.png">resources/images/noLoop.png</file>
+	<file alias="next.png">resources/images/next.png</file>
+	<file alias="before.png">resources/images/before.png</file>
 	<file>resources/translations/CoBaB_en.qm</file>
 </qresource>
 </RCC>

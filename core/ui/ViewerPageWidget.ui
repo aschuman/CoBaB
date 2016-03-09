@@ -40,7 +40,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>before</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -53,7 +53,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>next</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -103,6 +103,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QLabel" name="mZoom">
+         <property name="text">
+          <string>100 %</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="horizontalSpacer_4">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -145,6 +152,13 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
+        <widget class="QPushButton" name="mLoopButton">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="mPlayOrPauseButton">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -156,22 +170,23 @@
           <enum>Qt::LeftToRight</enum>
          </property>
          <property name="text">
-          <string>play</string>
+          <string/>
          </property>
         </widget>
        </item>
        <item>
-        <spacer name="horizontalSpacer_2">
+        <widget class="QPushButton" name="mStopButton">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSlider" name="mSlider">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
+        </widget>
        </item>
        <item>
         <widget class="QLabel" name="mTime">
@@ -182,8 +197,14 @@
        </item>
        <item>
         <widget class="QLabel" name="mPhotoCount">
+         <property name="layoutDirection">
+          <enum>Qt::RightToLeft</enum>
+         </property>
          <property name="text">
           <string>TextLabel</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>

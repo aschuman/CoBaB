@@ -32,7 +32,7 @@ Dataset::Dataset(const QString& path) {
     }
     mValid = createPreviewPhoto();
     if(mType == VIDEO) {
-        mValid = false; // while we doesn't have a video player
+        mValid = false; // while we dosn't have a video player
     }
 }
 

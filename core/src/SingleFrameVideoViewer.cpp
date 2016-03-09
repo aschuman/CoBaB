@@ -5,21 +5,30 @@
 /**
  * @brief SingleFrameVideoViewer::SingleFrameVideoViewer Constructs a SingleFrameVideoViewer.
  */
-SingleFrameVideoViewer::SingleFrameVideoViewer() : ViewerPageWidget(), mIsPlaying(false), mSFVideo("", QList<QPair<int, Annotation*>>()), mFrameIndex(-1)
+SingleFrameVideoViewer::SingleFrameVideoViewer() : ViewerPageWidget(), mIsPlaying(false),
+    mSFVideo("", QList<QPair<int, Annotation*>>()), mFrameIndex(-1), mIsLooping(false)
 {
-    ViewerPageWidget::ui->mZoomIn->hide();
-    ViewerPageWidget::ui->mZoomOut->hide();
-    connect(ViewerPageWidget::ui->mPlayOrPauseButton, SIGNAL(clicked()), this, SLOT(playOrPause()));
+    Q_INIT_RESOURCE(application);
+    connect(ui->mPlayOrPauseButton, SIGNAL(clicked()), this, SLOT(playOrPause()));
+    connect(ui->mStopButton, SIGNAL(clicked()), this, SLOT(stop()));
+    connect(ui->mLoopButton, SIGNAL(clicked()), this, SLOT(loop()));
+
     connect(&mTimer, SIGNAL(timeout()), this, SLOT(showFrame()));
     mVideoTime.setInterval(1000);
     connect(&mVideoTime, SIGNAL(timeout()), this, SLOT(showTime()));
+
+    ui->mSlider->setSingleStep(1);
+    connect(ui->mSlider, SIGNAL(sliderPressed()), this, SLOT(pause()));
+    connect(ui->mSlider, SIGNAL(sliderMoved(int)), this, SLOT(slide(int)));
+    connect(ui->mSlider, SIGNAL(sliderReleased()), this, SLOT(play()));
 }
 
 /**
  * @brief SingleFrameVideoViewer::showTime Shows the current time in the video.
  */
 void SingleFrameVideoViewer::showTime() {
-    ViewerPageWidget::ui->mTime->setText(QString::number(mFrameIndex*mTimer.interval()/1000));
+    ui->mTime->setText(QString::number(mFrameIndex*mTimer.interval()/1000));
+    ui->mSlider->triggerAction(QAbstractSlider::SliderSingleStepAdd);
 }
 
 /**
@@ -27,8 +36,17 @@ void SingleFrameVideoViewer::showTime() {
  */
 void SingleFrameVideoViewer::display() {
     ViewerPageWidget::display();
+    stop();
+    ui->mStopButton->setIcon(QIcon(":/stop.png"));
+    ui->mLoopButton->setIcon(QIcon(":/loop.png"));
+    mIsLooping = false;
+    mFrameIndex = 0;
+
+    ui->mPhotoCount->setText("Video "+QString::number(mIndex+1)+" von "+QString::number(mDataset->getNumberOfMedia()));
+
     mSFVideo = *(SingleFrameVideo*)mDataset->getMediaList().at(mIndex);
     mTimer.setInterval(1000/mSFVideo.getFramerate()); //time interval in milliseconds per frame
+    ui->mSlider->setMaximum(mSFVideo.getFrameList().size()/mSFVideo.getFramerate());
     mFrameList.clear();
     for(QString iter : mSFVideo.getFrameList()) {
         mFrameList.append(QPixmap(mSFVideo.getPath()+"/"+iter));
@@ -42,7 +60,6 @@ void SingleFrameVideoViewer::display() {
         mGraphicsScene.addItem(mImage);
         connect(mImage, SIGNAL(selected(const QPointF&)), this, SLOT(contextMenu(QPointF)));
         mGraphicsScene.setSceneRect(0,0, mImage->boundingRect().width(), mImage->boundingRect().height());
-        mFrameIndex = 0;
     }
     mAnnotations.clear();
     for(QPair<int, Annotation*> iter: mSFVideo.getAnnotationList()) {
@@ -62,17 +79,31 @@ void SingleFrameVideoViewer::playOrPause() {
 }
 
 /**
- * @brief SingleFrameVideoViewer::videoEnd Stops the video when it is finished.
+ * @brief SingleFrameVideoViewer::stop Stops the video.
  */
-void SingleFrameVideoViewer::videoEnd() {
+void SingleFrameVideoViewer::stop() {
     pause();
-    ViewerPageWidget::ui->mTime->setText("0");
+    ui->mTime->setText("0");
+    ui->mSlider->setSliderPosition(0);
     if(mImage != nullptr)
+        mGraphicsScene.removeItem(mImage);
         delete mImage;
-    mImage = new ClickableGraphicsPixmapItem(mFrameList.first());
+    if(!mFrameList.isEmpty()) {
+        mImage = new ClickableGraphicsPixmapItem(mFrameList.first());
+    }
     if(mImage != nullptr) {
         mGraphicsScene.addItem(mImage);
         mFrameIndex = 0;
+    }
+}
+
+void SingleFrameVideoViewer::loop() {
+    if(mIsLooping) {
+        mIsLooping = false;
+        ui->mLoopButton->setIcon(QIcon(":/loop.png"));
+    } else {
+        mIsLooping = true;
+        ui->mLoopButton->setIcon(QIcon(":/noLoop.png"));
     }
 }
 
@@ -92,7 +123,7 @@ void SingleFrameVideoViewer::pause() {
     mVideoTime.stop();
     mTimer.stop();
     mIsPlaying = false;
-    ViewerPageWidget::ui->mPlayOrPauseButton->setText("play");
+    ui->mPlayOrPauseButton->setIcon(QIcon(":/play.png"));
 }
 
 /**
@@ -100,7 +131,7 @@ void SingleFrameVideoViewer::pause() {
  */
 void SingleFrameVideoViewer::play() {
     mIsPlaying = true;
-    ViewerPageWidget::ui->mPlayOrPauseButton->setText("pause");
+    ui->mPlayOrPauseButton->setIcon(QIcon(":/pause.png"));
     mVideoTime.start();
     mTimer.start();
 }
@@ -123,7 +154,10 @@ void SingleFrameVideoViewer::showFrame() {
     if(mFrameIndex >= mFrameList.size()) {
         mTimer.stop();
         mImage = nullptr;
-        videoEnd();
+        stop();
+        if(mIsLooping) {
+            play();
+        }
         return;
     }
 
@@ -139,4 +173,14 @@ void SingleFrameVideoViewer::showFrame() {
  */
 QString SingleFrameVideoViewer::getSearchMedium() {
     return mSFVideo.getPath() + "/" + mSFVideo.getFrameList().at(mFrameIndex);
+}
+
+void SingleFrameVideoViewer::nextWidget(QAction* action) {
+    stop();
+    ViewerPageWidget::nextWidget(action);
+}
+
+void SingleFrameVideoViewer::slide(int sec) {
+    mFrameIndex = sec * mSFVideo.getFramerate() - 1;
+    showFrame();
 }
