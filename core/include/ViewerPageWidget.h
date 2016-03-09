@@ -34,6 +34,7 @@ public:
 
     void reset() override;
     void retranslateUi() override;
+    QString getName() override;
 
     static const int EXIT_NEXT;
 

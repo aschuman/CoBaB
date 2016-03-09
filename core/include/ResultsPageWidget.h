@@ -26,6 +26,7 @@ public:
     ~ResultsPageWidget();
     void reset() override;
     void retranslateUi() override;
+    QString getName() override;
 
     void setResults(SearchResult result);
 
@@ -42,6 +43,7 @@ private:
     SearchResultModel mModel;
     FeedbackDelegate mDelegate;
     std::shared_ptr<SearchResult> mResult;
+    Algorithm* mAlgorithm;
 };
 
 #endif // RESULTSPAGEWIDGET_H

@@ -41,6 +41,10 @@ void LibraryPageWidget::retranslateUi() {
 
 }
 
+QString LibraryPageWidget::getName() {
+    return tr("CoBaB - Bibliothek");
+}
+
 void LibraryPageWidget::on_mLibraryListView_doubleClicked(const QModelIndex &index)
 {
     int i = index.row();

@@ -28,6 +28,7 @@ public:
     ~ConfirmationPageWidget();
     void reset() override;
     void retranslateUi() override;
+    QString getName() override;
     void showEvent(QShowEvent* event) override;
     //void resizeEvent(QResizeEvent* event);
 

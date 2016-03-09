@@ -23,6 +23,7 @@ public:
     ~LibraryPageWidget();
     void reset() override;
     void retranslateUi() override;
+    QString getName();
 
     static const int EXIT_PHOTO;
     static const int EXIT_SINGLE_FRAME_VIDEO;

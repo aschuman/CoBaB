@@ -8,6 +8,8 @@
 	<file alias="noLoop.png">resources/images/noLoop.png</file>
 	<file alias="next.png">resources/images/next.png</file>
 	<file alias="before.png">resources/images/before.png</file>
+	<file alias="homeIcon.png">resources/images/homeIcon.png</file>
+	<file alias="backIcon.png">resources/images/backIcon.png</file>
 	<file>resources/translations/CoBaB_en.qm</file>
 </qresource>
 </RCC>
