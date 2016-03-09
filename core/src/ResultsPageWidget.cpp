@@ -91,7 +91,8 @@ void ResultsPageWidget::reset()
     QVariant var;
     emit readFromStack(1, var);
     if(var.canConvert<QPointer<Algorithm>>()){
-        emit startAlgorithm(var.value<QPointer<Algorithm>>().data());
+        mAlgorithm = var.value<QPointer<Algorithm>>().data();
+        emit startAlgorithm(mAlgorithm);
     } else {
         LOG_ERR("could not find algorithm on stack");
     }
@@ -101,7 +102,24 @@ void ResultsPageWidget::setResults(SearchResult result)
 {
     mResult = std::make_shared<SearchResult>(std::move(result));
     mModel.setSearchResult(mResult.get());
-    ui->btnNewSearch->setEnabled(true);
+
+    QVariant varQuery;
+    emit readFromStack(2, varQuery);
+    if(varQuery.canConvert<std::shared_ptr<SearchQuery>>()){
+        SearchQuery* query = varQuery.value<std::shared_ptr<SearchQuery>>().get();
+        SearchFeedback feedback = mModel.getFeedback();
+
+        QList<DataPacket*> algoInputs;
+        algoInputs.push_back(query);
+        algoInputs.push_back(&feedback);
+
+        if(mAlgorithm->setInputs(algoInputs)){
+            ui->btnNewSearch->setEnabled(true);
+        }
+
+    } else {
+        LOG_ERR("could not find search query on stack");
+    }
 }
 
 void ResultsPageWidget::retranslateUi() {
@@ -110,6 +128,8 @@ void ResultsPageWidget::retranslateUi() {
 
 void ResultsPageWidget::on_btnNewSearch_clicked()
 {
+    bool newSearchPossible = true;
+
     QVariant varDatasetNo;
     emit readFromStack(3, varDatasetNo);
     if(!varDatasetNo.canConvert<int>()){
@@ -119,6 +139,7 @@ void ResultsPageWidget::on_btnNewSearch_clicked()
     QVariant varSearchQuery;
     emit readFromStack(2, varSearchQuery);
     if(!varSearchQuery.canConvert<std::shared_ptr<SearchQuery>>()){
+        newSearchPossible = false;
         LOG_ERR("could not find search query on stack");
     }
 
@@ -130,12 +151,29 @@ void ResultsPageWidget::on_btnNewSearch_clicked()
 
     // ToDo: read parameters from stack
 
-    // ToDo: push feedback
+    QVariant varFeedback;
+    if(newSearchPossible){
+        SearchQuery* query = varSearchQuery.value<std::shared_ptr<SearchQuery>>().get();
+        auto feedback = std::make_shared<SearchFeedback>(mModel.getFeedback());
 
-    emit pushToStack(varDatasetNo);
-    emit pushToStack(varSearchQuery);
-    emit pushToStack(varAlgorithm);
-    //emit pushToStack(varParameter);
+        QList<DataPacket*> algoInputs;
+        algoInputs.push_back(query);
+        algoInputs.push_back(feedback.get());
 
-    emit exit(EXIT_NEW_SEARCH);
+        varFeedback.setValue(feedback);
+
+        if(!mAlgorithm->setInputs(algoInputs)){
+            newSearchPossible = false;
+        }
+    }
+
+    if(newSearchPossible){
+        emit pushToStack(varFeedback);
+        emit pushToStack(varDatasetNo);
+        emit pushToStack(varSearchQuery);
+        emit pushToStack(varAlgorithm);
+        //emit pushToStack(varParameter);
+        emit exit(EXIT_NEW_SEARCH);
+    }
+
 }

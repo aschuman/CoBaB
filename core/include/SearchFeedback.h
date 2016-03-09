@@ -39,4 +39,7 @@ private:
     QString mFeedbackType;      //feedback type
 };
 
+#include <memory>
+Q_DECLARE_METATYPE(std::shared_ptr<SearchFeedback>)
+
 #endif //_SEARCHFEEDBACK_H
