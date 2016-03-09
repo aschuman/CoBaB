@@ -30,6 +30,14 @@ void MainControl::run()
     LOG("Start CoBaB..");
     std::unique_ptr<MainWindow> mainWindow = std::make_unique<MainWindow>();
     mainWindow->show();
+
+    mParser.addPositionalArgument("standard directory", "The directory with the standard datasets.");
+    QCommandLineOption fullscreen("f", "Start in fullscreen mode.");
+    mParser.addOption(fullscreen);
+    mParser.process(*qApp);
+    if(mParser.isSet(fullscreen)) {
+        mainWindow->showFullScreen();
+    }
     mNavi = std::make_unique<Navigator>(move(mainWindow));
     initNavigation();
 
@@ -74,16 +82,12 @@ void MainControl::initNavigation()
 
 DatasetList MainControl::findDatasets() const
 {
-    QCommandLineParser parser;
-    parser.addPositionalArgument("standard directory", "The directory with the standard datasets.");
-    parser.process(*qApp);
-
     DatasetList list;
     list.load(DATASET_HISTORY_FILE);
-    if(parser.positionalArguments().size() == 0) {
+    if(mParser.positionalArguments().size() == 0) {
         return list; // no standard directory set
     }
-    QDir dir(parser.positionalArguments().at(0));
+    QDir dir(mParser.positionalArguments().at(0));
     //QDir dir("../test/testdata");
     for(const QFileInfo& file : dir.entryInfoList(QDir::Filter::Dirs|QDir::Filter::NoDotAndDotDot)){
         Dataset dataset(file.absoluteFilePath());
