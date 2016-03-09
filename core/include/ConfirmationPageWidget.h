@@ -30,7 +30,7 @@ public:
     void retranslateUi() override;
     QString getName() override;
     void showEvent(QShowEvent* event) override;
-    //void resizeEvent(QResizeEvent* event);
+    void resizeEvent(QResizeEvent* event);
 
     static const int EXIT_NEXT;
 

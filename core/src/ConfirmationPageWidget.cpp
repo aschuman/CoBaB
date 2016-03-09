@@ -94,6 +94,7 @@ void ConfirmationPageWidget::reset()
         }
 
         if(!pixmap.isNull()) {
+            ui->mImageToSearchLabel->setMinimumSize(1, 1);
             ui->mImageToSearchLabel->setPixmap(pixmap.scaled(ui->mImageToSearchLabel->size(), Qt::KeepAspectRatio));
         } else {
             ui->mImageToSearchLabel->setText(tr("Bild kann nicht geöffnet werden."));
@@ -192,9 +193,10 @@ void ConfirmationPageWidget::showEvent(QShowEvent* event) {
     }
 }
 
-/*void ConfirmationPageWidget::resizeEvent(QResizeEvent* event) {
+void ConfirmationPageWidget::resizeEvent(QResizeEvent* event) {
+    ui->mImageToSearchLabel->setMinimumSize(1, 1);
     ui->mImageToSearchLabel->setPixmap(pixmap.scaled(ui->mImageToSearchLabel->size(), Qt::KeepAspectRatio));
-}*/
+}
 
 /**
  * @brief ConfirmationPageWidget::on_mSearchButton_clicked Sends the signal that the ConfirmationPageWidget
