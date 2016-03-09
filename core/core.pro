@@ -47,7 +47,7 @@ HEADERS += \
     include/DatasetList.h \
     interface/Algorithm.h \
     interface/SearchAlgorithm.h \
-    include/SearchFeedback.h \
+    interface/SearchFeedback.h \
     include/Bookmark.h \
     include/BookmarkList.h \
     interface/DataPacket.h \
@@ -66,19 +66,19 @@ HEADERS += \
     include/ParameterPageWidget.h \
     include/AnnotationDrawer.h \
     include/AnnotationGraphicsItemFactory.h \
-    QJsonModel.h \
-    QJsonItem.h \
+    include/QJsonModel.h \
+    include/QJsonItem.h \
     include/ClickableGraphicsRectItem.h \
     include/ClickableGraphicsPixmapItem.h \
     include/FeedbackEditor.h \
     include/DualFeedbackEditor.h \
-    interface/SearchResultElementFeedback.h \
+    include/SearchResultElementFeedback.h \
     include/FeedbackDelegate.h \
     include/SearchResultModel.h \
     include/ResultsPageWidget.h \
     include/SingleFrameVideoViewer.h \
     include/SearchManager.h \
-    interface/AlgorithmList.h \
+    include/AlgorithmList.h \
     include/CustomGraphicsView.h
 
 SOURCES += \
@@ -114,8 +114,8 @@ SOURCES += \
     src/ParameterPageWidget.cpp \
     src/AnnotationDrawer.cpp \
     src/AnnotationGraphicsItemFactory.cpp \
-    QJsonModel.cpp \
-    QJsonItem.cpp \
+    src/QJsonModel.cpp \
+    src/QJsonItem.cpp \
     src/ClickableGraphicsRectItem.cpp \
     src/ClickableGraphicsPixmapItem.cpp \
     src/DualFeedbackEditor.cpp \
