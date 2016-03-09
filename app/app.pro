@@ -1,7 +1,7 @@
 include(../compileSettings.pri)
 TEMPLATE = app
 TARGET = CoBaB
-QT += widgets
+QT += widgets multimedia
 
 unix {
 LIBS += -L../core -lcore

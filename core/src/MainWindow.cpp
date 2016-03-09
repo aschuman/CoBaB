@@ -3,7 +3,6 @@
 #include "ConfigData.h"
 #include "PageWidget.h"
 #include <QMessageBox>
-#include "LibraryPageWidget.h"
 
 /**
  * @brief Constructs the MainWindow.
@@ -22,8 +21,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->mAboutAction, SIGNAL(triggered(bool)), this, SLOT(showAboutDialog()));
     QObject::connect(ui->mHelpAction, SIGNAL(triggered(bool)), this, SLOT(showHelpDialog()));
 
-    QObject::connect(ui->mActionDeutsch, SIGNAL(triggered(bool)), this, SLOT(changeLanguageToGerman()));
-    QObject::connect(ui->mActionEnglish, SIGNAL(triggered(bool)), this, SLOT(changeLanguageToEnglish()));
+    QObject::connect(ui->mGermanAction, SIGNAL(triggered(bool)), this, SLOT(changeLanguageToGerman()));
+    QObject::connect(ui->mEnglishAction, SIGNAL(triggered(bool)), this, SLOT(changeLanguageToEnglish()));
+
+    QObject::connect(ui->mSoundAction, SIGNAL(triggered(bool)), this, SLOT(changeSound()));
+
+
 
     //load config data with previously chosen language
     ConfigData* data = ConfigData::getInstance();
@@ -105,8 +108,22 @@ void MainWindow::changeLanguageToEnglish()
     retranslate();
 }
 
+void MainWindow::changeSound()
+{
+    ConfigData* data = ConfigData::getInstance();
+    bool soundOn = data->getSoundOn();
+    data->setSoundOn(!soundOn);
+    if(soundOn) {
+        ui->mSoundAction->setText(tr("Ton einschalten"));
+    } else {
+        //sound is now on
+        ui->mSoundAction->setText(tr("Ton ausschalten"));
+    }
+}
+
 void MainWindow::retranslate()
 {
+    ConfigData* data = ConfigData::getInstance();
     ui->mAboutAction->setText(tr("Über CoBaB"));
     ui->mHelpAction->setText(tr("Hilfe für CoBaB"));
     ui->mBookmarkMenu->setTitle(tr("Lesezeichen"));
@@ -114,9 +131,15 @@ void MainWindow::retranslate()
     ui->mHelpMenu->setTitle(tr("Hilfe"));
     ui->mHistoryMenu->setTitle(tr("Chronik"));
     ui->mLanguageMenu->setTitle(tr("Sprache"));
-    ui->mActionDeutsch->setText(tr("Deutsch"));
-    ui->mActionEnglish->setText(tr("Englisch"));
+    ui->mGermanAction->setText(tr("Deutsch"));
+    ui->mEnglishAction->setText(tr("Englisch"));
     ui->mDatasetAction->setText(tr("Datenordner öffnen"));
+    ui->mSettingsMenu->setTitle(tr("Einstellungen"));
+    if(data->getSoundOn()) {
+        ui->mSoundAction->setText(tr("Ton ausschalten"));
+    } else {
+        ui->mSoundAction->setText(tr("Ton einschalten"));
+    }
 
 
     PageWidget* pageWidget = dynamic_cast<PageWidget*> (currentWidget);

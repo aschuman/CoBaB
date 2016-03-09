@@ -11,4 +11,7 @@
 <qresource>
 	<file>resources/translations/CoBaB_en.qm</file>
 </qresource>
+<qresource>
+	<file alias="klingel.wav">resources/sounds/klingel.wav</file>
+</qresource>
 </RCC>

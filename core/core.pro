@@ -2,7 +2,7 @@ include(../compileSettings.pri)
 TEMPLATE = lib
 TARGET = core
 CONFIG += staticlib
-QT += widgets core
+QT += widgets core multimedia
 INCLUDEPATH += include interface
 RESOURCES = ../application.qrc
 

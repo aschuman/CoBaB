@@ -4,6 +4,7 @@
 #include <QPointer>
 #include "SearchResult.h"
 #include "SearchQuery.h"
+#include "ConfigData.h"
 
 #define LOGGING_LEVEL_1
 #include "log.h"
@@ -102,6 +103,12 @@ void ResultsPageWidget::setResults(SearchResult result)
 {
     mResult = std::make_shared<SearchResult>(std::move(result));
     mModel.setSearchResult(mResult.get());
+
+    ConfigData* data = ConfigData::getInstance();
+    if(data->getSoundOn()) {
+        Q_INIT_RESOURCE(application);
+        QSound::play(":/klingel.wav");
+    }
 
     QVariant varQuery;
     emit readFromStack(2, varQuery);

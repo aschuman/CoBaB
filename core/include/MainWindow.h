@@ -30,6 +30,7 @@ public slots:
     void showHelpDialog();
     void changeLanguageToGerman();
     void changeLanguageToEnglish();
+    void changeSound();
 
 signals:
     /**

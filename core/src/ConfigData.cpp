@@ -73,19 +73,18 @@ void ConfigData::setSoundOn(bool soundOn) {
 QString ConfigData::getHelp() {
     return tr("Bibliothek:\nEnthält die zuletzt verwendeten Datensätze und die Datensätze aus dem Standardordner, der per Kommandozeile übergeben werden kann.\n"
     "Per Doppelklick wird der Datensatz ausgewählt, in dem sich das Bild/Video befindet, das als Grundlage für die inhaltsbasierte Suche dienen soll. \n \n"
-    "Medienanzeiger:\nÜber die Buttons 'vorheriges' und 'nächstes' wird das Bild/Video ausgewählt, das als Grundlage für die inhaltsbasierte Suche dienen soll. \n"
-    "Bei einem Rechtsklick auf das Bild werden die Algorithmen aufgelistet, die für diese Suche zur Verfügung stehen. "
+    "Viewer:\nÜber die Buttons 'vorheriges' und 'nächstes' wird das Bild/Video ausgewählt, das als Grundlage für die inhaltsbasierte Suche dienen soll. \n"
+    "Bei einem Rechtsklick auf das Bild werden die verfügbaren Suchalgorithmen aufgelistet. "
     "Fährt man mit der Maus über einen solchen Algorithmus, erscheint eine Beschreibung zu diesem. "
     "Durch Klicken auf einen Algorithmus kann mit dem Programm fortgefahren werden. \n"
-    "In den Bildern werden außerdem, falls vorhanden, Annotationen, d.h. in den Datensätzen vordefinierte Bereiche des Bildes/Videos, angezeigt. \n"
+    "In den Bildern werden außerdem, falls vorhanden, Annotationen angezeigt. \n"
     "Nach einem Klick auf den Button 'Bereich auswählen' kann ein eigenes Rechteck auf dem Bild gezogen werden. "
-    "Mit einem Rechtsklick in die Annotation oder das gezogene Rechteck werden die dafür verfügbaren Algorithmen angezeigt. \n"
-    "Wenn jetzt auf einen Algorithmus geklickt wird, wird nur nach diesem Bereich gesucht. \n \n"
-    "Parameterauswahl:\nNach der Auswahl eines Algorithmus kann man Parameter für den diesen festlegen. "
+    "Mit einem Rechtsklick in die Annotation oder das gezogene Rechteck werden die dafür verfügbaren Algorithmen angezeigt. \n\n"
+    "Parameter:\nNach der Auswahl eines Algorithmus kann man Parameter für den diesen festlegen. "
     "Außerdem können weitere Datensätze ausgewählt werden, in denen gesucht werden soll. \n \n"
-    "Überprüfung:\nIm Überprüfungsfenster wird noch einmal die aktuelle Auswahl angezeigt: der gewählte Bild-/Videoausschnitt, die Datensätze, in denen gesucht wird, der Suchalgorithmus und die Parameter. \n \n"
-    "Suchergebnisse:\nWenn alle Ergebnisse angezeigt werden, kann das Suchergebnis über den Button als Lesezeichen gespeichert werden. \n"
-    "Durch einen Klick auf ein Bild kann dieses als positiv (grüner Kasten) bewertet werden. Durch einen weiteren Klick wird es negativ (roter Kasten) und durch noch einen Klick wieder neutral (kein Kasten) bewertet. \n"
+    "Bestätigung:\nHier wird die aktuelle Auswahl angezeigt, die dem Algorithmus übergeben wird. \n \n"
+    "Ergebnisse:\nDas Suchergebnis kann als Lesezeichen gespeichert werden. \n"
+    "Die Bilder können als positiv (grüner Kasten, ein Klick auf das Bild), negativ (roter Kasten, zweiter Klick) oder wieder neutral (dritter Klick) bewertet werden.\n"
     "Durch einen Klick auf den Button 'Erneut suchen' wird das Feedback an den Algorithmus übermittelt und eine neue verbesserte Suche gestartet.");
 }
 

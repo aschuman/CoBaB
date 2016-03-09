@@ -6,6 +6,8 @@
 #include "SearchResultModel.h"
 #include "FeedbackDelegate.h"
 #include "Algorithm.h"
+#include <QtMultimedia>
+#include <QSound>
 
 #include <memory>
 
