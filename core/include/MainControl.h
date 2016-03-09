@@ -6,6 +6,7 @@
 #include "Navigator.h"
 #include "DatasetList.h"
 #include "SearchManager.h"
+#include <QCommandLineParser>
 
 
 /**
@@ -35,6 +36,7 @@ private:
 
     std::unique_ptr<Navigator> mNavi;
     std::unique_ptr<SearchManager> mSearchManager;
+    QCommandLineParser mParser;
 };
 
 #endif // MAINCONTROL_H

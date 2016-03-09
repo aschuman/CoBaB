@@ -7,8 +7,11 @@
 PhotoViewer::PhotoViewer() :
     ViewerPageWidget()
 {
-    ViewerPageWidget::ui->mPlayOrPauseButton->hide();
-    ViewerPageWidget::ui->mTime->hide();
+    ui->mPlayOrPauseButton->hide();
+    ui->mStopButton->hide();
+    ui->mLoopButton->hide();
+    ui->mTime->hide();
+    ui->mSlider->hide();
 }
 
 /**
@@ -16,6 +19,7 @@ PhotoViewer::PhotoViewer() :
  */
 void PhotoViewer::display() {
     ViewerPageWidget::display();
+    ui->mPhotoCount->setText("Foto "+QString::number(mIndex+1)+" von "+QString::number(mDataset->getNumberOfMedia()));
     if(mImage != nullptr) {
         mGraphicsScene.removeItem(mImage);
         delete mImage;

@@ -13,7 +13,7 @@ const int ViewerPageWidget::EXIT_NEXT = 0;
 ViewerPageWidget::ViewerPageWidget() :
     ui(new Ui::ViewerPageWidget), mIndex(0), mImage(nullptr), mSelectionPen(QColor(0,255,230)),
     mCurrentSelection(nullptr), mAnnotationDrawer(&mGraphicsScene), mSelectedAnnotation(nullptr),
-    mAlgorithmList(nullptr), mDataset(nullptr), mROIIsChosen(false)
+    mAlgorithmList(nullptr), mDataset(nullptr), mROIIsChosen(false), mZoomLevel(1.0)
 {
     ui->setupUi(this);
     ui->mViewerListView->setResizeMode(QListView::Adjust);
@@ -28,7 +28,12 @@ ViewerPageWidget::ViewerPageWidget() :
     connect(&mAnnotationDrawer, SIGNAL(selected(Annotation*, const QPointF&)), this, SLOT(annotationSelected(Annotation*, const QPointF&)));
     connect(ui->mZoomIn, SIGNAL(clicked()), this, SLOT(zoomIn()));
     connect(ui->mZoomOut, SIGNAL(clicked()), this, SLOT(zoomOut()));
+    connect(ui->mGraphicsView, SIGNAL(zoomed(double)), this, SLOT(zoomed(double)));
     connect(ui->mGraphicsView, SIGNAL(resize()), this, SLOT(resize()));
+
+    Q_INIT_RESOURCE(application);
+    ui->mBeforeButton->setIcon(QIcon(":/before.png"));
+    ui->mNextButton->setIcon(QIcon(":/next.png"));
 }
 
 /**
@@ -59,6 +64,7 @@ void ViewerPageWidget::resize() {
  */
 void ViewerPageWidget::zoomIn() {
     ui->mGraphicsView->scale(2,2);
+    zoomed(2);
 }
 
 /**
@@ -66,6 +72,12 @@ void ViewerPageWidget::zoomIn() {
  */
 void ViewerPageWidget::zoomOut() {
     ui->mGraphicsView->scale(0.5,0.5);
+    zoomed(0.5);
+}
+
+void ViewerPageWidget::zoomed(double factor) {
+    mZoomLevel *= factor;
+    ui->mZoom->setText(QString::number(mZoomLevel*100) + " %");
 }
 
 /**
@@ -109,6 +121,17 @@ void ViewerPageWidget::contextMenu(const QPointF &pos) {
         QMessageBox msgBox(QMessageBox::Information, "", "Found no fitting algorithm.", QMessageBox::Ok, this);
         msgBox.exec();
         return;
+    }
+    switch(searchObject.getType()) {
+        case SearchObject::Type::ROI:
+            contextMenu.setTitle("ROI");
+            break;
+        case SearchObject::Type::ANNOTATION:
+            contextMenu.setTitle("Annotation");
+            break;
+        case  SearchObject::Type::MEDIUM:
+        default:
+            contextMenu.setTitle("Medium");
     }
     for(Algorithm* iter: algoList) {
         mAlgorithms.insert(iter->getName(), iter);
@@ -159,6 +182,14 @@ void ViewerPageWidget::before() {
     mIndex--;
     ui->mViewerListView->selectionModel()->setCurrentIndex(mModel.index(mIndex), QItemSelectionModel::ClearAndSelect);
     display();
+}
+
+/**
+ * @brief ViewerPageWidget::display Displays a Medium.
+ */
+void ViewerPageWidget::display() {
+    mZoomLevel = 1.0;
+    ui->mZoom->setText("100 %");
 }
 
 /**
@@ -296,18 +327,9 @@ void ViewerPageWidget::roiClicked() {
 }
 
 /**
- * @brief ViewerPageWidget::display Displays a Medium.
- */
-void ViewerPageWidget::display() {
-    ui->mPhotoCount->setText("Foto "+QString::number(mIndex+1)+" von "+QString::number(mDataset->getNumberOfMedia()));
-}
-
-/**
  * @brief ViewerPageWidget::retranslateUi Translates the GUI.
  */
 void ViewerPageWidget::retranslateUi() {
-    ui->mBeforeButton->setText(tr("vorheriges"));
-    ui->mNextButton->setText(tr("nächstes"));
     if(mROIIsChosen) {
         ui->mROIButton->setText(tr("Bereich entfernen"));
     } else {

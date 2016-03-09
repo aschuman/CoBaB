@@ -19,9 +19,15 @@ public:
 
 public slots:
     void playOrPause();
+    void stop();
+    void loop();
     void contextMenu(const QPointF &pos);
     void showFrame();
     void showTime();
+    void nextWidget(QAction* action) override;
+    void play();
+    void pause();
+    void slide(int sec);
 
 protected:
     QString getSearchMedium() override;
@@ -34,9 +40,7 @@ private:
     int mFrameIndex;           ///< The index of the current frame in the video.
     bool mIsPlaying;           ///< Indicates whether the video is currently playing.
     QMultiHash<int, QPair<int,Annotation*>> mAnnotations; ///< Hashes a frame index to a list of annotations.
-    void pause();
-    void play();
-    void videoEnd();
+    bool mIsLooping;
 };
 
 #endif // SINGLEFRAMEVIDEOVIEWER_H

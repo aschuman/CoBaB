@@ -22,6 +22,7 @@ signals:
      * @brief resize This signal is emitted if the size of the view changes.
      */
     void resize();
+    void zoomed(double factor);
 
 protected:
     void wheelEvent(QWheelEvent* event) override;
