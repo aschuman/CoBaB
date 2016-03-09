@@ -43,6 +43,7 @@ private:
     SearchResultModel mModel;
     FeedbackDelegate mDelegate;
     std::shared_ptr<SearchResult> mResult;
+    Algorithm* mAlgorithm;
 };
 
 #endif // RESULTSPAGEWIDGET_H
