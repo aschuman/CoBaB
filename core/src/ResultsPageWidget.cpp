@@ -107,7 +107,7 @@ void ResultsPageWidget::setResults(SearchResult result)
     ConfigData* data = ConfigData::getInstance();
     if(data->getSoundOn()) {
         Q_INIT_RESOURCE(application);
-        QSound::play(":/klingel.wav");
+        QSound::play(":/sound.wav");
     }
 
     QVariant varQuery;
