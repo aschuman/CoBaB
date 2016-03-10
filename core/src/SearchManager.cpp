@@ -41,5 +41,7 @@ void SearchManager::terminateSearch()
 
 void SearchManager::updateProgress(float progress, const QString& message)
 {
+    Q_UNUSED(progress);
+    Q_UNUSED(message);
 }
 

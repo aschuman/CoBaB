@@ -49,6 +49,7 @@ ViewerPageWidget::~ViewerPageWidget()
  * @param event The QResizeEvent.
  */
 void ViewerPageWidget::resizeEvent(QResizeEvent *event) {
+    Q_UNUSED(event);
     resize();
 }
 
@@ -158,6 +159,7 @@ void ViewerPageWidget::showToolTip(QAction* action) {
  * @param previousIndex The previous QModelIndex.
  */
 void ViewerPageWidget::selectionChanged(const QModelIndex &index, const QModelIndex &previousIndex) {
+    Q_UNUSED(previousIndex);
     mIndex = index.row();
     display();
 }

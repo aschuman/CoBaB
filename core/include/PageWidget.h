@@ -19,6 +19,10 @@ public:
      * @brief Retranslates the user interface after the user switched the language.
      */
     virtual void retranslateUi() = 0;
+    /**
+     * @brief Returns the name of the PageWidget
+     * @return The name of the PageWidget
+     */
     virtual QString getName() = 0;
 
 signals:

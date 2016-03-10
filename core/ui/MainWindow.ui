@@ -134,11 +134,17 @@
    </property>
   </action>
   <action name="mGermanAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Deutsch</string>
    </property>
   </action>
   <action name="mEnglishAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Englisch</string>
    </property>

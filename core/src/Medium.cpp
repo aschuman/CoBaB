@@ -10,6 +10,10 @@ Medium::Medium(const QString path, const QList<QPair<int, Annotation*>> annotati
     mType = Medium::Type::PHOTO;
 }
 
+/**
+ * @brief Medium::Medium Copy constructor for Medium.
+ * @param other The Medium to be copied.
+ */
 Medium::Medium(const Medium& other) {
     mPath = other.getPath();
     mType = other.getType();
@@ -19,6 +23,10 @@ Medium::Medium(const Medium& other) {
     }
 }
 
+/**
+ * @brief Medium::copy Copies this Medium.
+ * @return A copy of this Medium.
+ */
 Medium* Medium::copy() {
     return new Medium(*this);
 }
