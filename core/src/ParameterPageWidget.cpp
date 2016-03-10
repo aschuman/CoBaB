@@ -17,14 +17,14 @@ ParameterPageWidget::ParameterPageWidget() :
     file.open(QIODevice::ReadOnly);
     QJsonObject object = QJsonDocument::fromJson(file.readAll()).object();
 
-    QJsonArray jsonArray = object["Properties"].toArray();
+//    QJsonArray jsonArray = object["Properties"].toArray();
 
-    foreach (const QJsonValue & value, jsonArray) {
-        QJsonObject obj = value.toObject();
-        mParameterModel.loadQJson(obj);
-    }
+//    foreach (const QJsonValue & value, jsonArray) {
+//        QJsonObject obj = value.toObject();
+//        mParameterModel.loadQJson(obj);
+//    }
 
-//    mParameterModel.loadQJson(object);
+    mParameterModel.loadQJson(object);
     mParameterModel.connect(ui->mParameterWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(on_mParameterWidget_clicked(QModelIndex)));
 
 //        QVector<QJsonObject> list;
