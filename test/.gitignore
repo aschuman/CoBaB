@@ -1,0 +1,12 @@
+
+prototypes/FileIOTest/FileIOTest
+prototypes/MainWindow_with_Library_and_Menu/Prototyp_Test/Prototyp_Test
+prototypes/NavigationPrototype/NavigationPrototype
+prototypes/ParameterWindowPrototype/ParameterWindowPrototype
+prototypes/PlayerPrototype/PlayerPrototype
+prototypes/Prototyp_Viewer/Prototyp_Viewer
+
+file.dat
+datasets.txt
+temp_dir/
+

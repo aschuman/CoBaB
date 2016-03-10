@@ -22,10 +22,16 @@
 *.a
 *.lib
 
-# Executables
+# Executables & dynamic libraries
 *.exe
 *.out
 *.app
+*.so
+*.so.*
+app/CoBaB
+test/test
+TestAlgorithmLinkTester/TestAlgorithmLinkTester
+
 
 # files produced by pdftex
 *.aux
@@ -46,8 +52,21 @@
 *pro.user
 *pro.user.*
 
+# temporary qt files
+moc_*
+ui_*
+qrc_*
+Makefile
+
 # build directory
 build-*/
 
 # temporary test files
 *.tmp
+
+# other temporary files
+*.swp
+
+# CoBaB created files
+datasetHistory.txt
+
