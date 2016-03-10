@@ -3,7 +3,7 @@
 
 #include <memory>
 #include <QObject>
-#include "../interface/SingleFrameVideo.h"
+#include "SingleFrameVideo.h"
 
 class SingleFrameVideoTester : public QObject
 {
