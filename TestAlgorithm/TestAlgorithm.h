@@ -19,10 +19,6 @@ class TestAlgorithm : public SearchAlgorithm {
 public:
 
     TestAlgorithm();
-    
-    QList<DataPacket*> run() override;
-    
-    void cancel() override;
 
     bool setInputs(const QList<DataPacket*>& inputDataList) override;
      
@@ -39,10 +35,11 @@ public:
     QString getDescription() const override;
     
     bool supportsProgressInfo() override;
-    
-    void sendIntermediateResults(SearchResult& searchResult) override;
 
-    void sendProgress(double progress, QString message) override;
+public slots:
+    QList<DataPacket*> run() override;
+
+    void cancel() override;
 
 private: 
     SearchQuery* mQuery;

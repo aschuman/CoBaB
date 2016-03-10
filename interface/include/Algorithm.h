@@ -15,10 +15,6 @@ class Algorithm : public QObject {
 public: 
     virtual ~Algorithm() = default;
     
-    virtual QList<DataPacket*> run() = 0;
-    
-    virtual void cancel() = 0;
-    
     virtual bool setInputs(const QList<DataPacket*>& inputDataList) = 0;
     
     virtual bool setParameters(const QJsonObject& parameters) = 0;
@@ -28,6 +24,11 @@ public:
     virtual QString getName() const = 0;
 
     virtual QString getDescription() const = 0;
+
+public slots:
+    virtual QList<DataPacket*> run() = 0;
+
+    virtual void cancel() = 0;
 };
 
 #define Algorithm_iid "org.CoBaB.Algorithm"

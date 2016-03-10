@@ -123,22 +123,3 @@ QString TestAlgorithm::getDescription() const {
 bool TestAlgorithm::supportsProgressInfo() {
     return false;
 }
-
-/**
- * @brief TestAlgorithm::sendIntermediateResults send a number of new search results
- * @param searchResult new output
- */
-void TestAlgorithm::sendIntermediateResults(SearchResult& searchResult) {
-    Q_UNUSED(searchResult);
-}
-
-/**
- * @brief TestAlgorithm::sendProgress send progress information
- * @param progress a real number between 0 and 1 show the progress
- * @param message warning message if available
- */
-void TestAlgorithm::sendProgress(double progress, QString message) {
-    Q_UNUSED(progress);
-    Q_UNUSED(message);
-
-}
