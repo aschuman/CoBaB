@@ -19,6 +19,7 @@ void SearchResultModel::setSearchResult(const SearchResult* searchResult)
 {
     mSearchResult = searchResult;
     mFeedbacks.clear();
+    emit layoutChanged();
 }
 
 /**
@@ -67,7 +68,7 @@ QVariant SearchResultModel::data(const QModelIndex &index, int role) const
         if(mSearchResult && index.row() < mSearchResult->getSearchResultList().size()){
             SearchObject searchObject = mSearchResult->getSearchResultList().at(index.row()).getSearchObject();
             SearchResultElementFeedback element;
-            element.img = QImage(searchObject.getMedium());
+            element.img = QImage(searchObject.getMedium()).scaledToHeight(100);
             auto it = mFeedbacks.find(index.row());
             if(it != mFeedbacks.end())
                 element.rating = *it;

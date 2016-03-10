@@ -54,13 +54,13 @@ QVariant MediaModel::data(const QModelIndex &index, int role) const
             Medium* medium = mDataset->getMediaList().at(index.row());
             switch(mDataset->getType()) {
                 case Dataset::Type::PHOTO:
-                    result = QImage(medium->getPath()).scaled(100, 100, Qt::KeepAspectRatio);
+                    result = QImage(medium->getPath()).scaledToHeight(100);
                     break;
                 case Dataset::Type::VIDEO:
-                    result = QImage(":/videoIcon.png").scaled(100, 100, Qt::KeepAspectRatio);
+                    result = QImage(":/videoIcon.png").scaledToHeight(100);
                     break;
                 case Dataset::Type::SINGLE_FRAME_VIDEO:
-                    result = QImage(medium->getPath() + "/" + ((SingleFrameVideo*)medium)->getFrameList().first()).scaled(100, 100, Qt::KeepAspectRatio);
+                    result = QImage(medium->getPath() + "/" + ((SingleFrameVideo*)medium)->getFrameList().first()).scaledToHeight(100);
                     break;
                 default:
                     break;

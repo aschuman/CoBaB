@@ -255,12 +255,12 @@ bool Dataset::createPreviewPhoto() {
     QStringList filters(PREVIEW_PHOTO);
     QDirIterator iter(mPath, filters, QDir::Filter::Files, QDirIterator::Subdirectories);
     if(iter.hasNext()) {
-       mPreviewPhoto = QImage(iter.next()).scaled(100, 100, Qt::KeepAspectRatio);
+       mPreviewPhoto = QImage(iter.next()).scaledToHeight(100);
     } else {
         if(mType == Type::PHOTO) {
             //first photo in the list
             QImage preview(mMediaList.first()->getPath());
-            mPreviewPhoto = preview.scaled(100, 100, Qt::KeepAspectRatio);
+            mPreviewPhoto = preview.scaledToHeight(100);
         } else if(mType == Type::SINGLE_FRAME_VIDEO) {
             //first frame in the first single frame video
             SingleFrameVideo *sfvideo = (SingleFrameVideo*)mMediaList.first();
@@ -269,10 +269,10 @@ bool Dataset::createPreviewPhoto() {
                 return false;
             }
             QImage preview(sfvideo->getPath() + "/" + sfvideo->getFrameList().first());
-            mPreviewPhoto = preview.scaled(100, 100, Qt::KeepAspectRatio);
+            mPreviewPhoto = preview.scaledToHeight(100);
         } else if(mType == Type::VIDEO) {
             QImage preview(":/videoIcon.png");
-            mPreviewPhoto = preview.scaled(100, 100, Qt::KeepAspectRatio);
+            mPreviewPhoto = preview.scaledToHeight(100);
         }
     }
     return true;
