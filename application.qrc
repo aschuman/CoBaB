@@ -1,5 +1,6 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
+	<file alias="logo.png">resources/images/Logo.png</file>
     <file alias="videoIcon.png">resources/images/videoIcon.png</file>
 	<file alias="play.png">resources/images/play.png</file>
 	<file alias="pause.png">resources/images/pause.png</file>

@@ -58,6 +58,8 @@ void ViewerPageWidget::resizeEvent(QResizeEvent *event) {
  */
 void ViewerPageWidget::resize() {
     ui->mGraphicsView->fitInView(mImage, Qt::KeepAspectRatio);
+    mZoomLevel = 1.0;
+    ui->mZoom->setText("100 %");
 }
 
 /**

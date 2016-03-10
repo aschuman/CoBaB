@@ -26,7 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QObject::connect(ui->mSoundAction, SIGNAL(triggered(bool)), this, SLOT(changeSound()));
 
-
+    Q_INIT_RESOURCE(application);
+    setWindowIcon(QIcon(":/logo.png"));
 
     //load config data with previously chosen language
     ConfigData* data = ConfigData::getInstance();
