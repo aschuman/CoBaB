@@ -16,7 +16,16 @@ ParameterPageWidget::ParameterPageWidget() :
     QFile file(fileName);
     file.open(QIODevice::ReadOnly);
     QJsonObject object = QJsonDocument::fromJson(file.readAll()).object();
-    mParameterModel.loadQJson(object);
+
+    QJsonArray jsonArray = object["Properties"].toArray();
+
+    foreach (const QJsonValue & value, jsonArray) {
+        QJsonObject obj = value.toObject();
+        mParameterModel.loadQJson(obj);
+    }
+
+//    mParameterModel.loadQJson(object);
+    mParameterModel.connect(ui->mParameterWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(on_mParameterWidget_clicked(QModelIndex)));
 
 //        QVector<QJsonObject> list;
 //        list.append(object);
@@ -25,6 +34,7 @@ ParameterPageWidget::ParameterPageWidget() :
     ui->mParameterWidget->setModel(&mParameterModel);
 
     connect(ui->mNext, SIGNAL(clicked()), this, SLOT(nextButtonClicked()));
+ //   connect(ui->mParameterWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(on_mParameterWidget_clicked(QModelIndex)));
 }
 
 ParameterPageWidget::~ParameterPageWidget()
@@ -71,4 +81,10 @@ void ParameterPageWidget::retranslateUi() {
 
 QString ParameterPageWidget::getName() {
     return tr("CoBaB - Parameter");
+}
+
+void ParameterPageWidget::on_mParameterWidget_clicked(const QModelIndex &index)
+{
+    QModelIndex indexNew = index;
+    mParameterModel.flags(indexNew);
 }

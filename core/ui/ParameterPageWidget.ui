@@ -15,7 +15,14 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QTreeView" name="mParameterWidget"/>
+    <widget class="QTreeView" name="mParameterWidget">
+     <property name="editTriggers">
+      <set>QAbstractItemView::DoubleClicked|QAbstractItemView::SelectedClicked</set>
+     </property>
+     <property name="allColumnsShowFocus">
+      <bool>false</bool>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QListView" name="mSearchDatasetListView">

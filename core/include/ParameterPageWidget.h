@@ -33,6 +33,8 @@ public slots:
 private slots:
     void on_mSearchDatasetListView_indexesMoved(const QModelIndexList &indexes);
 
+    void on_mParameterWidget_clicked(const QModelIndex &index);
+
 private:
     Ui::ParameterPageWidget *ui;
     DatasetList* mSearchDatasetList;
