@@ -68,7 +68,8 @@ HEADERS += \
     include/SearchResultElementFeedback.h \
     include/SearchResultModel.h \
     include/SingleFrameVideoViewer.h \
-    include/ViewerPageWidget.h
+    include/ViewerPageWidget.h \
+    include/AlgorithmThread.h
 
 SOURCES += \
     src/AlgorithmList.cpp \
@@ -100,7 +101,8 @@ SOURCES += \
     src/SearchManager.cpp \
     src/SearchResultModel.cpp \
     src/SingleFrameVideoViewer.cpp \
-    src/ViewerPageWidget.cpp
+    src/ViewerPageWidget.cpp \
+    src/AlgorithmThread.cpp
 
 FORMS += \
     ui/ConfirmationPageWidget.ui \
