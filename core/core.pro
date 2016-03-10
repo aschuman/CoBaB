@@ -3,8 +3,15 @@ TEMPLATE = lib
 TARGET = core
 CONFIG += staticlib
 QT += widgets core multimedia
-INCLUDEPATH += include interface
-RESOURCES = ../application.qrc
+INCLUDEPATH += include
+
+INCLUDEPATH += ../interface/include
+unix {
+LIBS += -L../interface -linterface
+}
+win32 {
+LIBS += -L../interface/debug -linterface
+}
 
 unix{
 res.commands = $(COPY_DIR) $$PWD/../resources $$OUT_PWD/../
@@ -27,110 +34,78 @@ QMAKE_EXTRA_TARGETS += first res
 }
 
 HEADERS += \
-    interface/Medium.h \
-    interface/Photo.h \
-    interface/Serializable.h \
-    interface/SingleFrameVideo.h \
-    interface/Video.h \
-    interface/Dataset.h \
-    interface/Annotation.h \
-    interface/RectangleAnnotation.h \
+    include/AlgorithmList.h \
+    include/AnnotationDrawer.h \
+    include/AnnotationGraphicsItemFactory.h \
+    include/Bookmark.h \
+    include/BookmarkList.h \
+    include/ClickableGraphicsPixmapItem.h \
+    include/ClickableGraphicsRectItem.h \
+    include/ConfigData.h \
+    include/ConfirmationPageWidget.h \
+    include/CustomGraphicsView.h \
+    include/DatasetList.h \
+    include/DatasetModel.h \
+    include/DualFeedbackEditor.h \
+    include/FeedbackDelegate.h \
+    include/FeedbackEditor.h \
+    include/Language.h \
+    include/LibraryPageWidget.h \
     include/MainControl.h \
     include/MainWindow.h \
+    include/MediaModel.h \
     include/Navigator.h \
     include/PageRegistration.h \
     include/PageStackFrame.h \
     include/PageType.h \
     include/PageWidget.h \
-    interface/SearchObject.h \
-    interface/SearchQuery.h \
-    include/DatasetList.h \
-    interface/Algorithm.h \
-    interface/SearchAlgorithm.h \
-    interface/SearchFeedback.h \
-    include/Bookmark.h \
-    include/BookmarkList.h \
-    interface/DataPacket.h \
-    interface/SearchResultElement.h \
-    interface/SearchResult.h \
-    include/LibraryPageWidget.h \
-    include/ViewerPageWidget.h \
-    interface/Configuration.h \
-    interface/logger.h \
-    interface/log.h \
-    include/ConfigData.h \
-    include/DatasetModel.h \
-    include/ConfirmationPageWidget.h \
-    include/PhotoViewer.h \
-    include/MediaModel.h \
     include/ParameterPageWidget.h \
-    include/AnnotationDrawer.h \
-    include/AnnotationGraphicsItemFactory.h \
-    include/QJsonModel.h \
+    include/PhotoViewer.h \
     include/QJsonItem.h \
-    include/ClickableGraphicsRectItem.h \
-    include/ClickableGraphicsPixmapItem.h \
-    include/FeedbackEditor.h \
-    include/DualFeedbackEditor.h \
-    include/SearchResultElementFeedback.h \
-    include/FeedbackDelegate.h \
-    include/SearchResultModel.h \
+    include/QJsonModel.h \
     include/ResultsPageWidget.h \
-    include/SingleFrameVideoViewer.h \
     include/SearchManager.h \
-    include/AlgorithmList.h \
-    include/CustomGraphicsView.h
+    include/SearchResultElementFeedback.h \
+    include/SearchResultModel.h \
+    include/SingleFrameVideoViewer.h \
+    include/ViewerPageWidget.h
 
 SOURCES += \
-    src/Medium.cpp \
-    src/Photo.cpp \
-    src/SingleFrameVideo.cpp \
-    src/Video.cpp \
-    src/Dataset.cpp \
-    src/Annotation.cpp \
-    src/RectangleAnnotation.cpp \
+    src/AlgorithmList.cpp \
+    src/AnnotationDrawer.cpp \
+    src/AnnotationGraphicsItemFactory.cpp \
+    src/Bookmark.cpp \
+    src/BookmarkList.cpp \
+    src/ClickableGraphicsPixmapItem.cpp \
+    src/ClickableGraphicsRectItem.cpp \
+    src/ConfigData.cpp \
+    src/ConfirmationPageWidget.cpp \
+    src/CustomGraphicsView.cpp \
+    src/DatasetList.cpp \
+    src/DatasetModel.cpp \
+    src/DualFeedbackEditor.cpp \
+    src/FeedbackDelegate.cpp \
+    src/LibraryPageWidget.cpp \
     src/MainControl.cpp \
     src/MainWindow.cpp \
+    src/MediaModel.cpp \
     src/Navigator.cpp \
     src/PageRegistration.cpp \
     src/PageStackFrame.cpp \
-    src/SearchObject.cpp \
-    src/SearchQuery.cpp \
-    src/SearchFeedback.cpp \
-    src/DatasetList.cpp \
-    src/DataPacket.cpp \
-    src/SearchResultElement.cpp \
-    src/SearchResult.cpp \
-    src/LibraryPageWidget.cpp \
-    src/ViewerPageWidget.cpp \
-    src/Bookmark.cpp \
-    src/BookmarkList.cpp \
-    src/log.cpp \
-    src/ConfigData.cpp \
-    src/DatasetModel.cpp \
-    src/ConfirmationPageWidget.cpp \
-    src/PhotoViewer.cpp \
-    src/MediaModel.cpp \
     src/ParameterPageWidget.cpp \
-    src/AnnotationDrawer.cpp \
-    src/AnnotationGraphicsItemFactory.cpp \
-    src/QJsonModel.cpp \
+    src/PhotoViewer.cpp \
     src/QJsonItem.cpp \
-    src/ClickableGraphicsRectItem.cpp \
-    src/ClickableGraphicsPixmapItem.cpp \
-    src/DualFeedbackEditor.cpp \
-    src/FeedbackDelegate.cpp \
+    src/QJsonModel.cpp \
     src/ResultsPageWidget.cpp \
+    src/SearchManager.cpp \
     src/SearchResultModel.cpp \
     src/SingleFrameVideoViewer.cpp \
-    src/SearchManager.cpp \
-    src/AlgorithmList.cpp \
-    src/CustomGraphicsView.cpp
+    src/ViewerPageWidget.cpp
 
 FORMS += \
+    ui/ConfirmationPageWidget.ui \
     ui/LibraryPageWidget.ui \
     ui/MainWindow.ui \
-    ui/ViewerPageWidget.ui \
-    ui/ConfirmationPageWidget.ui \
     ui/ParameterPageWidget.ui \
-    ui/ResultsPageWidget.ui
+    ui/ResultsPageWidget.ui \
+    ui/ViewerPageWidget.ui

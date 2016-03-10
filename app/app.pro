@@ -2,15 +2,15 @@ include(../compileSettings.pri)
 TEMPLATE = app
 TARGET = CoBaB
 QT += widgets multimedia
+INCLUDEPATH += ../core/include ../interface/include
 
 unix {
 LIBS += -L../core -lcore
-INCLUDEPATH += ../core/include ../core/interface
+LIBS += -L../interface -linterface
 }
 win32 {
 LIBS += -L../core/debug -lcore
-INCLUDEPATH += ../core/include
-INCLUDEPATH += ../core/include ../core/interface
+LIBS += -L../interface/debug -linterface
 }
 
 SOURCES += \
