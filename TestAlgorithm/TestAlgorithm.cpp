@@ -5,7 +5,6 @@
  * @param id algorithm ID
  */
 TestAlgorithm::TestAlgorithm() {
-    //TestAlgorithm();
     mId = "default";
     mName = "Test algorithm";
     mDescription = "dummy algorithm that scores randomly";
@@ -74,46 +73,6 @@ bool TestAlgorithm::setInputs(const QList<DataPacket*>& inputDataList) {
 bool TestAlgorithm::setParameters(const QJsonObject& parameters) {
     Q_UNUSED(parameters);
     return true;
-}
-
-/**
- * @brief TestAlgorithm::setName give the algorithm a new name
- * @param name new name
- */
-void TestAlgorithm::setName(const QString& name) {
-    mName = name;
-}
-
-/**
- * @brief TestAlgorithm::setDescription set algorithm description
- * @param description a text which explains what the algorith does
- */
-void TestAlgorithm::setDescription(const QString& description) {
-    mDescription = description;
-}
-
-/**
- * @brief TestAlgorithm::getId get the algorithm ID
- * @return algorithm ID
- */
-QString TestAlgorithm::getId() const {
-    return mId;
-}
-
-/**
- * @brief TestAlgorithm::getName get name of the algorithm
- * @return algorithm name (must be unique)
- */
-QString TestAlgorithm::getName() const {
-    return mName;
-}
-
-/**
- * @brief TestAlgorithm::getDescription show algorithm description
- * @return a QString that describes the algorithm
- */
-QString TestAlgorithm::getDescription() const {
-    return mDescription;
 }
 
 /**

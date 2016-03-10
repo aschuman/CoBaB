@@ -28,6 +28,7 @@ HEADERS += \
     include/Video.h
 
 SOURCES += \
+    src/Algorithm.cpp \
     src/Annotation.cpp \
     src/DataPacket.cpp \
     src/Dataset.cpp \

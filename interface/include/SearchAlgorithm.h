@@ -13,10 +13,6 @@ class SearchAlgorithm: public Algorithm {
     Q_OBJECT
 public:
     
-    virtual void setName(const QString& name) = 0;
-
-    virtual void setDescription(const QString& description) = 0;
-    
     virtual bool supportsProgressInfo() = 0;
 
 signals:

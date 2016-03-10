@@ -24,10 +24,6 @@ public:
      
     bool setParameters(const QJsonObject& parameters) override;
 
-    void setName(const QString& name) override;
-
-    void setDescription(const QString& description) override;
-
     QString getId() const override;
 
     QString getName() const override;
@@ -43,10 +39,7 @@ public slots:
 
 private: 
     SearchQuery* mQuery;
-    QString mDescription;
     QList<int> mParameterList;
-    QString mName;
-    QString mId;
 };
 
 #endif //_TESTALGORITHM_H

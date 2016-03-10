@@ -19,16 +19,21 @@ public:
     
     virtual bool setParameters(const QJsonObject& parameters) = 0;
 
-    virtual QString getId() const = 0;
+    virtual QString getId() const;
 
-    virtual QString getName() const = 0;
+    virtual QString getName() const;
 
-    virtual QString getDescription() const = 0;
+    virtual QString getDescription() const;
 
 public slots:
     virtual QList<DataPacket*> run() = 0;
 
     virtual void cancel() = 0;
+
+protected:
+    QString mDescription;
+    QString mName;
+    QString mId;
 };
 
 #define Algorithm_iid "org.CoBaB.Algorithm"
