@@ -37,6 +37,9 @@ ConfirmationPageWidget::~ConfirmationPageWidget()
     delete ui;
 }
 
+/**
+ * @brief ConfirmationPageWidget::reset
+ */
 void ConfirmationPageWidget::reset()
 {
     clearTable();
@@ -147,8 +150,8 @@ void ConfirmationPageWidget::reset()
 
     mParameterList.clear();
     if(algo != nullptr) {
-        QJsonObject json = algo->getParameters();
-        readParameters(json["Properties"].toObject());
+        QJsonObject parameterJson = algo->getParameters();
+        readParameters(parameterJson["Properties"].toObject());
         for(int i = 0; i < mParameterList.size(); i++) {
             ui->mParameters->setRowCount(std::max(mParameterList.size(), ui->mParameters->rowCount()));
             ui->mParameters->setItem(i, 2, new QTableWidgetItem(mParameterList.at(i)));
@@ -156,48 +159,26 @@ void ConfirmationPageWidget::reset()
         }
     }
 
-    //read parameters and their values
-    /*QVariant parameterFile;
-    emit readFromStack(0, parameterFile);
-    if (parameterFile.canConvert<QString>()) {
-        QString fileName = parameterFile.value<QString>();
-        QFile file(fileName);
-        if(!file.open(QFile::ReadOnly)) {
-            LOG_ERR("cannot open parameter file");
-        }
-        QJsonObject json = QJsonDocument::fromJson(file.readAll()).object();
-        QJsonObject object = json["Properties"].toObject();
-        QJsonObject::const_iterator iter;
-        int i = 0;
-        for(iter = object.begin(); iter != object.end(); iter++) {
-            QVariant value = iter.value().toObject()["default"].toVariant();
-            ui->mParameters->setRowCount(std::max(object.keys().size(), ui->mParameters->rowCount()));
-            ui->mParameters->setItem(i, 2, new QTableWidgetItem(iter.key() + " = " + value.toString()));
-            ui->mParameters->item(i, 2)->setTextAlignment(Qt::AlignCenter);
-            i++;
-        }
-    } else {
-        LOG_ERR("no parameter file");
-    }*/
-
     ui->mParameters->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
+/**
+ * @brief ConfirmationPageWidget::readParameters
+ * @param object
+ */
 void ConfirmationPageWidget::readParameters(QJsonObject object) {
     QJsonObject::const_iterator iter;
     for(iter = object.begin(); iter != object.end(); iter++) {
-        if(iter.value().toObject()["default"] != QJsonValue::Null) {
+        if (iter.value().toObject()["default"] != QJsonValue::Null) {
             QVariant line = iter.key() + " = " + iter.value().toObject()["default"].toVariant().toString();
             mParameterList.append(line.toString());
         } else {
             if(iter.value().isObject()) {
                 mParameterList.append(iter.key() + ":");
                 readParameters(iter.value().toObject());
-
             }
         }
     }
-
 }
 
 /**
@@ -209,6 +190,9 @@ void ConfirmationPageWidget::clearTable() {
     }
 }
 
+/**
+ * @brief ConfirmationPageWidget::retranslateUi
+ */
 void ConfirmationPageWidget::retranslateUi() {
     ui->mSearchButton->setText(tr("Suche starten"));
     ui->mParameters->horizontalHeaderItem(0)->setText(tr("Datenordner"));
@@ -219,6 +203,10 @@ void ConfirmationPageWidget::retranslateUi() {
     }
 }
 
+/**
+ * @brief ConfirmationPageWidget::getName
+ * @return
+ */
 QString ConfirmationPageWidget::getName() {
     return tr("CoBaB - Bestätigung");
 }

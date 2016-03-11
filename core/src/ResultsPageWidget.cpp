@@ -11,8 +11,6 @@
 #define LOGGING_LEVEL_1
 #include "log.h"
 
-const int ResultsPageWidget::EXIT_NEW_SEARCH = 0;
-
 /**
  * @brief temporary
  * @return
@@ -85,16 +83,18 @@ ResultsPageWidget::ResultsPageWidget() :
  *
  * Frees user interface.
  */
-ResultsPageWidget::~ResultsPageWidget()
-{
+ResultsPageWidget::~ResultsPageWidget() {
     delete ui;
 }
 
+/**
+ * @brief ResultsPageWidget::reset
+ */
 void ResultsPageWidget::reset()
 {
     QVariant var;
     emit readFromStack(1, var);
-    if(var.canConvert<QPointer<Algorithm>>()){
+    if(var.canConvert<QPointer<Algorithm>>()) {
         mAlgorithm = var.value<QPointer<Algorithm>>().data();
         SearchAlgorithm* searchAlgo = qobject_cast<SearchAlgorithm*>(mAlgorithm);
         mUseSimpleProgressBar = !(searchAlgo && searchAlgo->supportsProgressInfo());
@@ -106,8 +106,11 @@ void ResultsPageWidget::reset()
     ui->progressBar->setValue(0);
 }
 
-void ResultsPageWidget::setResults(SearchResult result)
-{
+/**
+ * @brief ResultsPageWidget::setResults
+ * @param result
+ */
+void ResultsPageWidget::setResults(SearchResult result) {
     updateProgressBar(1.0);
 
     mResult = std::make_shared<SearchResult>(std::move(result));
@@ -115,14 +118,14 @@ void ResultsPageWidget::setResults(SearchResult result)
     mModel.setSearchResult(mResult.get());
 
     ConfigData* data = ConfigData::getInstance();
-    if(data->getSoundOn()) {
+    if (data->getSoundOn()) {
         Q_INIT_RESOURCE(application);
         QSound::play(":/sound.wav");
     }
 
     QVariant varQuery;
     emit readFromStack(2, varQuery);
-    if(varQuery.canConvert<std::shared_ptr<SearchQuery>>()){
+    if (varQuery.canConvert<std::shared_ptr<SearchQuery>>()) {
         SearchQuery* query = varQuery.value<std::shared_ptr<SearchQuery>>().get();
         SearchFeedback feedback = mModel.getFeedback();
 
@@ -140,38 +143,43 @@ void ResultsPageWidget::setResults(SearchResult result)
     setCursor(QCursor(Qt::CursorShape::ArrowCursor));
 }
 
-void ResultsPageWidget::setProgress(double progress)
-{
+/**
+ * @brief ResultsPageWidget::setProgress
+ * @param progress
+ */
+void ResultsPageWidget::setProgress(double progress) {
     updateProgressBar(progress);
 }
 
-void ResultsPageWidget::on_btnNewSearch_clicked()
-{
+/**
+ * @brief ResultsPageWidget::on_btnNewSearch_clicked
+ */
+void ResultsPageWidget::on_btnNewSearch_clicked() {
     bool newSearchPossible = true;
 
     QVariant varDatasetNo;
     emit readFromStack(3, varDatasetNo);
-    if(!varDatasetNo.canConvert<int>()){
+    if(!varDatasetNo.canConvert<int>()) {
         LOG_ERR("could not find dataset on stack");
     }
 
     QVariant varSearchQuery;
     emit readFromStack(2, varSearchQuery);
-    if(!varSearchQuery.canConvert<std::shared_ptr<SearchQuery>>()){
+    if(!varSearchQuery.canConvert<std::shared_ptr<SearchQuery>>()) {
         newSearchPossible = false;
         LOG_ERR("could not find search query on stack");
     }
 
     QVariant varAlgorithm;
     emit readFromStack(1, varAlgorithm);
-    if(!varAlgorithm.canConvert<QPointer<Algorithm>>()){
+    if(!varAlgorithm.canConvert<QPointer<Algorithm>>()) {
         LOG_ERR("could not find algorithm on stack");
     }
 
     // ToDo: read parameters from stack
 
     QVariant varFeedback;
-    if(newSearchPossible){
+    if (newSearchPossible) {
         SearchQuery* query = varSearchQuery.value<std::shared_ptr<SearchQuery>>().get();
         auto feedback = std::make_shared<SearchFeedback>(mModel.getFeedback());
 
@@ -186,7 +194,7 @@ void ResultsPageWidget::on_btnNewSearch_clicked()
         }
     }
 
-    if(newSearchPossible){
+    if (newSearchPossible) {
         emit pushToStack(varFeedback);
         emit pushToStack(varDatasetNo);
         emit pushToStack(varSearchQuery);
@@ -197,22 +205,34 @@ void ResultsPageWidget::on_btnNewSearch_clicked()
 
 }
 
-void ResultsPageWidget::updateProgressBar(double progress)
-{
+/**
+ * @brief ResultsPageWidget::updateProgressBar
+ * @param progress
+ */
+void ResultsPageWidget::updateProgressBar(double progress) {
     int value = (int)std::lround(progress*100);
-    if(mUseSimpleProgressBar && value < 100)
+    if (mUseSimpleProgressBar && value < 100) {
         ui->progressBar->setMaximum(0);
-    else
+    }
+    else {
         ui->progressBar->setMaximum(100);
+    }
 
     ui->progressBar->setTextVisible(!mUseSimpleProgressBar);
     ui->progressBar->setValue(value);
 }
 
+/**
+ * @brief ResultsPageWidget::retranslateUi
+ */
 void ResultsPageWidget::retranslateUi() {
     ui->btnNewSearch->setText(tr("Erneut suchen"));
 }
 
+/**
+ * @brief ResultsPageWidget::getName
+ * @return
+ */
 QString ResultsPageWidget::getName() {
     return tr("CoBaB - Ergebnisse");
 }

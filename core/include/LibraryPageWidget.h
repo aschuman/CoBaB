@@ -25,9 +25,9 @@ public:
     void retranslateUi() override;
     QString getName();
 
-    static const int EXIT_PHOTO;
-    static const int EXIT_SINGLE_FRAME_VIDEO;
-    static const int EXIT_VIDEO;
+    static const int EXIT_PHOTO = 0;
+    static const int EXIT_SINGLE_FRAME_VIDEO = 1;
+    static const int EXIT_VIDEO = 2;
 
 public slots:
     void showFileDialog();

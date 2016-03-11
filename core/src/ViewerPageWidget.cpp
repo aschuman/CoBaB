@@ -5,8 +5,6 @@
 #include <QMessageBox>
 #include <QPointer>
 
-const int ViewerPageWidget::EXIT_NEXT = 0;
-
 /**
  * @brief ViewerPageWidget::ViewerPageWidget Constructs a ViewerPageWidget.
  */

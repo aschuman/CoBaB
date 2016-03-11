@@ -5,10 +5,6 @@
 #include <QMessageBox>
 #include "Configuration.h"
 
-const int LibraryPageWidget::EXIT_PHOTO = 0;
-const int LibraryPageWidget::EXIT_SINGLE_FRAME_VIDEO = 1;
-const int LibraryPageWidget::EXIT_VIDEO = 2;
-
 /**
  * @brief Constructs a LibraryPageWidget.
  */

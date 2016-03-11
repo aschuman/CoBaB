@@ -36,7 +36,7 @@ public:
     void retranslateUi() override;
     QString getName() override;
 
-    static const int EXIT_NEXT;
+    static const int EXIT_NEXT = 0;
 
 public slots:
     void next();

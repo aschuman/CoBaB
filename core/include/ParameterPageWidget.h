@@ -25,13 +25,13 @@ public:
     void retranslateUi() override;
     QString getName() override;
 
-    static const int EXIT_NEXT;
+    static const int EXIT_NEXT = 0;
 
 public slots:
     void nextButtonClicked();
 
 private slots:
-    void on_mSearchDatasetListView_indexesMoved(const QModelIndexList &indexes);
+    //void on_mSearchDatasetListView_indexesMoved(const QModelIndexList &indexes);
 
     void on_mParameterWidget_clicked(const QModelIndex &index);
 

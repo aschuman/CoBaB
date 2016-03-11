@@ -5,11 +5,11 @@
 #include "Algorithm.h"
 #include "log.h"
 
-const int ParameterPageWidget::EXIT_NEXT = 0;
-
+/**
+ * @brief ParameterPageWidget::ParameterPageWidget
+ */
 ParameterPageWidget::ParameterPageWidget() :
-    ui(new Ui::ParameterPageWidget), mSearchDatasetList(nullptr)
-{
+    ui(new Ui::ParameterPageWidget), mSearchDatasetList(nullptr) {
 
     ui->setupUi(this);
     ui->mSearchDatasetListView->setModel(&mModel);
@@ -18,38 +18,47 @@ ParameterPageWidget::ParameterPageWidget() :
     connect(ui->mParameterWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(on_mParameterWidget_clicked(QModelIndex)));
 }
 
-ParameterPageWidget::~ParameterPageWidget()
-{
+/**
+ * @brief ParameterPageWidget::~ParameterPageWidget
+ */
+ParameterPageWidget::~ParameterPageWidget() {
     delete ui;
 }
 
+/**
+ * @brief ParameterPageWidget::reset
+ */
 void ParameterPageWidget::reset() {
 
     QVariant var;
     emit readFromStack(-2, var);
-    if(var.canConvert<std::shared_ptr<DatasetList>>()){
+    if (var.canConvert<std::shared_ptr<DatasetList>>()){
         mSearchDatasetList = var.value<std::shared_ptr<DatasetList>>().get();
         mModel.setDatasetList(mSearchDatasetList->getDatasetList());
     }
 
     QVariant chosenAlgorithm;
     emit readFromStack(0, chosenAlgorithm);
-    if(chosenAlgorithm.canConvert<QPointer<Algorithm>>()){
+    if (chosenAlgorithm.canConvert<QPointer<Algorithm>>()){
         QPointer<Algorithm> algo = chosenAlgorithm.value<QPointer<Algorithm>>();
-        QJsonObject json = algo->getParameters();
-        QJsonObject jsonObject = json["Properties"].toObject();
+        QJsonObject parameterJson = algo->getParameters();
+        QJsonObject parameters = parameterJson["Properties"].toObject();
         QVector<QJsonObject> list;
-        list.append(jsonObject);
+        list.append(parameters);
         mParameterModel = new QJsonModel(ui->mParameterWidget, list);
 
         ui->mParameterWidget->setModel(mParameterModel);
 
-    } else {
+    }
+    else {
         LOG_ERR("no algorithm");
     }
 
 }
 
+/**
+ * @brief ParameterPageWidget::nextButtonClicked
+ */
 void ParameterPageWidget::nextButtonClicked() {
 
     QItemSelectionModel* model = ui->mSearchDatasetListView->selectionModel();
@@ -61,7 +70,7 @@ void ParameterPageWidget::nextButtonClicked() {
     exit(EXIT_NEXT);
 }
 
-void ParameterPageWidget::on_mSearchDatasetListView_indexesMoved(const QModelIndexList &indexes)
+/*void ParameterPageWidget::on_mSearchDatasetListView_indexesMoved(const QModelIndexList &indexes)
 {
 
     //save chosen datasets to the stack
@@ -69,19 +78,28 @@ void ParameterPageWidget::on_mSearchDatasetListView_indexesMoved(const QModelInd
     for (int i = 0; i <listOfDatasetIndexes.size(); i++) {
         pushToStack(listOfDatasetIndexes.at(i));
     }
+}*/
 
-}
-
+/**
+ * @brief ParameterPageWidget::retranslateUi
+ */
 void ParameterPageWidget::retranslateUi() {
     ui->mNext->setText(tr("Weiter"));
 }
 
+/**
+ * @brief ParameterPageWidget::getName
+ * @return
+ */
 QString ParameterPageWidget::getName() {
     return tr("CoBaB - Parameter");
 }
 
-void ParameterPageWidget::on_mParameterWidget_clicked(const QModelIndex &index)
-{
+/**
+ * @brief ParameterPageWidget::on_mParameterWidget_clicked
+ * @param index
+ */
+void ParameterPageWidget::on_mParameterWidget_clicked(const QModelIndex &index) {
     QModelIndex indexNew = index;
     mParameterModel->flags(indexNew);
 }
