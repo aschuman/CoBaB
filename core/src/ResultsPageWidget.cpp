@@ -102,6 +102,7 @@ void ResultsPageWidget::reset()
 void ResultsPageWidget::setResults(SearchResult result)
 {
     mResult = std::make_shared<SearchResult>(std::move(result));
+    mResult->sortByScore();
     mModel.setSearchResult(mResult.get());
 
     ConfigData* data = ConfigData::getInstance();
