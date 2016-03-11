@@ -144,13 +144,16 @@ void ConfirmationPageWidget::reset()
         if(!file.open(QFile::ReadOnly)) {
             LOG_ERR("cannot open parameter file");
         }
-        QJsonObject object = QJsonDocument::fromJson(file.readAll()).object();
-        QStringList keys = object.keys();
-        ui->mParameters->setRowCount(std::max(keys.size(), ui->mParameters->rowCount()));
-        for (int i = 0; i < keys.size(); i++) {
-            QString value = object.value(keys.at(i)).toString();
-            ui->mParameters->setItem(i, 2, new QTableWidgetItem(keys.at(i) + " = " + value));
+        QJsonObject json = QJsonDocument::fromJson(file.readAll()).object();
+        QJsonObject object = json["Properties"].toObject();
+        QJsonObject::const_iterator iter;
+        int i = 0;
+        for(iter = object.begin(); iter != object.end(); iter++) {
+            QVariant value = iter.value().toObject()["default"].toVariant();
+            ui->mParameters->setRowCount(std::max(object.keys().size(), ui->mParameters->rowCount()));
+            ui->mParameters->setItem(i, 2, new QTableWidgetItem(iter.key() + " = " + value.toString()));
             ui->mParameters->item(i, 2)->setTextAlignment(Qt::AlignCenter);
+            i++;
         }
     } else {
         LOG_ERR("no parameter file");
