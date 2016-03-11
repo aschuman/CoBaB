@@ -21,7 +21,7 @@ void SearchManager::startSearch(Algorithm *algo)
 {
     mThread = new AlgorithmThread(algo);
     connect(mThread, SIGNAL(resultsReady()), this, SLOT(submitResults()));
-    connect(mThread, SIGNAL(finished()), this, SLOT(deleteLater()));
+    connect(mThread, SIGNAL(finished()), mThread, SLOT(deleteLater()));
     mThread->start();
 }
 
