@@ -32,7 +32,7 @@ public:
     void showEvent(QShowEvent* event) override;
     void resizeEvent(QResizeEvent* event) override;
 
-    static const int EXIT_NEXT;
+    static const int EXIT_NEXT = 0;     //exit code for next widget : ResultsPageWidget
 
 private slots:
     void on_mSearchButton_clicked();
@@ -43,10 +43,6 @@ private:
     QStringList mParameterList;
     void clearTable();
     void readParameters(QJsonObject object);
-
-
 };
-
-
 
 #endif // CONFIRMATIONPAGEWIDGET_H

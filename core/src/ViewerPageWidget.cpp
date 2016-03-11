@@ -13,6 +13,8 @@ ViewerPageWidget::ViewerPageWidget() :
     mCurrentSelection(nullptr), mAnnotationDrawer(&mGraphicsScene), mSelectedAnnotation(nullptr),
     mAlgorithmList(nullptr), mDataset(nullptr), mROIIsChosen(false), mZoomLevel(1.0)
 {
+    mName = "CoBaB - Viewer";
+
     ui->setupUi(this);
     ui->mViewerListView->setResizeMode(QListView::Adjust);
     ui->mGraphicsView->setScene(&mGraphicsScene);
@@ -345,10 +347,6 @@ void ViewerPageWidget::retranslateUi() {
     } else {
         ui->mROIButton->setText(tr("Bereich auswählen"));
     }
-}
-
-QString ViewerPageWidget::getName() {
-    return tr("CoBaB - Viewer");
 }
 
 /**

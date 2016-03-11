@@ -5,12 +5,12 @@
     "Properties" : {
         "FirstParameter" : {
             "type" : "string",
-            "default" : "none",
+            "value" : "none",
             "description" : "First parameter to testing display."
         },
         "SecondParameter" : {
             "type" : "bool",
-            "default" : false,
+            "value" : "false",
             "description" : "Second parameter"
         }
     }

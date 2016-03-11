@@ -14,8 +14,10 @@
  * @brief ConfirmationPageWidget::ConfirmationPageWidget Constructs a ConfirmationPageWidget.
  */
 ConfirmationPageWidget::ConfirmationPageWidget() :
-    ui(new Ui::ConfirmationPageWidget)
-{
+    ui(new Ui::ConfirmationPageWidget) {
+
+    mName = "CoBaB - Bestätigung";
+
     ui->setupUi(this);
     ui->mSearchButton->setText(tr("Suche starten"));
 
@@ -26,7 +28,6 @@ ConfirmationPageWidget::ConfirmationPageWidget() :
     ui->mParameters->setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Algorithmus")));
     ui->mParameters->setHorizontalHeaderItem(2, new QTableWidgetItem(tr("Parameter")));
     ui->mParameters->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-
 }
 
 /**
@@ -169,8 +170,8 @@ void ConfirmationPageWidget::reset()
 void ConfirmationPageWidget::readParameters(QJsonObject object) {
     QJsonObject::const_iterator iter;
     for(iter = object.begin(); iter != object.end(); iter++) {
-        if (iter.value().toObject()["default"] != QJsonValue::Null) {
-            QVariant line = iter.key() + " = " + iter.value().toObject()["default"].toVariant().toString();
+        if (iter.value().toObject()["value"] != QJsonValue::Null) {
+            QVariant line = iter.key() + " = " + iter.value().toObject()["value"].toVariant().toString();
             mParameterList.append(line.toString());
         } else {
             if(iter.value().isObject()) {
@@ -204,14 +205,6 @@ void ConfirmationPageWidget::retranslateUi() {
 }
 
 /**
- * @brief ConfirmationPageWidget::getName
- * @return
- */
-QString ConfirmationPageWidget::getName() {
-    return tr("CoBaB - Bestätigung");
-}
-
-/**
  * @brief ConfirmationPageWidget::showEvent Sets the label with the photo to the correct size
  * when showing the label for the first time.
  * @param event Is sent when the widget is shown.
@@ -236,13 +229,6 @@ void ConfirmationPageWidget::resizeEvent(QResizeEvent* event) {
  * @brief ConfirmationPageWidget::on_mSearchButton_clicked Sends the signal that the ConfirmationPageWidget
  * wants to exit and the ResultsPageWidget should be shown.
  */
-void ConfirmationPageWidget::on_mSearchButton_clicked()
-{
+void ConfirmationPageWidget::on_mSearchButton_clicked() {
     exit(EXIT_NEXT);
 }
-
-/**
- * @brief ConfirmationPageWidget::EXIT_NEXT Code noting the type of exit,
- * in this case the ResultsPageWidget is the next widget.
- */
-const int ConfirmationPageWidget::EXIT_NEXT = 0;
