@@ -24,6 +24,7 @@ QList<DataPacket*> TestAlgorithm::run() {
         for (Medium* medium : dataset.getMediaList()) {
             SearchObject* object = new SearchObject();
             object->setMedium(medium->getPath());
+            object->setSourceDataset(dataset.getPath());
 
             //new result element
             SearchResultElement* resultElement = new SearchResultElement();
@@ -35,7 +36,7 @@ QList<DataPacket*> TestAlgorithm::run() {
         }
     }
 
-    list.append((DataPacket*)result);
+    list.append(dynamic_cast<DataPacket*>(result));
     return list;
 }
 
@@ -52,7 +53,7 @@ void TestAlgorithm::cancel() {
  * @return true if input data is accepted
  */
 bool TestAlgorithm::setInputs(const QList<DataPacket*>& inputDataList) {
-    if (inputDataList.length() < 1) {  //illegal number of parameters
+    if (inputDataList.length() != 1) {  //illegal number of parameters
         return false;
     }
 
