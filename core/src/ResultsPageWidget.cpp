@@ -1,10 +1,12 @@
 #include "include/ResultsPageWidget.h"
 #include "ui_ResultsPageWidget.h"
 
+#include <cmath>
 #include <QPointer>
 #include "SearchResult.h"
 #include "SearchQuery.h"
 #include "ConfigData.h"
+#include "SearchAlgorithm.h"
 
 #define LOGGING_LEVEL_1
 #include "log.h"
@@ -70,7 +72,8 @@ SearchResult generateReslut()
  * Sets up user interface.
  */
 ResultsPageWidget::ResultsPageWidget() :
-    ui(new Ui::ResultsPageWidget)
+    ui(new Ui::ResultsPageWidget),
+    mUseSimpleProgressBar(true)
 {
     ui->setupUi(this);
     ui->mListView->setModel(&mModel);
@@ -93,14 +96,20 @@ void ResultsPageWidget::reset()
     emit readFromStack(1, var);
     if(var.canConvert<QPointer<Algorithm>>()){
         mAlgorithm = var.value<QPointer<Algorithm>>().data();
+        SearchAlgorithm* searchAlgo = qobject_cast<SearchAlgorithm*>(mAlgorithm);
+        mUseSimpleProgressBar = !(searchAlgo && searchAlgo->supportsProgressInfo());
+        updateProgressBar(0.0);
         emit startAlgorithm(mAlgorithm);
     } else {
         LOG_ERR("could not find algorithm on stack");
     }
+    ui->progressBar->setValue(0);
 }
 
 void ResultsPageWidget::setResults(SearchResult result)
 {
+    updateProgressBar(1.0);
+
     mResult = std::make_shared<SearchResult>(std::move(result));
     mResult->sortByScore();
     mModel.setSearchResult(mResult.get());
@@ -129,6 +138,11 @@ void ResultsPageWidget::setResults(SearchResult result)
         LOG_ERR("could not find search query on stack");
     }
     setCursor(QCursor(Qt::CursorShape::ArrowCursor));
+}
+
+void ResultsPageWidget::setProgress(double progress)
+{
+    updateProgressBar(progress);
 }
 
 void ResultsPageWidget::on_btnNewSearch_clicked()
@@ -181,6 +195,18 @@ void ResultsPageWidget::on_btnNewSearch_clicked()
         emit exit(EXIT_NEW_SEARCH);
     }
 
+}
+
+void ResultsPageWidget::updateProgressBar(double progress)
+{
+    int value = (int)std::lround(progress*100);
+    if(mUseSimpleProgressBar && value < 100)
+        ui->progressBar->setMaximum(0);
+    else
+        ui->progressBar->setMaximum(100);
+
+    ui->progressBar->setTextVisible(!mUseSimpleProgressBar);
+    ui->progressBar->setValue(value);
 }
 
 void ResultsPageWidget::retranslateUi() {
