@@ -7,6 +7,7 @@ SearchObject::SearchObject() : mAnnotation(nullptr) {
     mSourceDataset = "";
 
     mMediumIndex = 0;
+    mFrameIndex = 0;
 
 }
 
@@ -15,6 +16,7 @@ SearchObject::SearchObject(const SearchObject& other) {
     mROI = other.getROI();
     mSourceDataset = other.getSourceDataset();
     mMediumIndex = other.getMediumIndex();
+    mFrameIndex = other.getFrameIndex();
     mType = other.getType();
     setAnnotation(other.getAnnotation());
 }
@@ -24,6 +26,7 @@ SearchObject::SearchObject(SearchObject &&other)
       mROI(std::move(other.mROI)),
       mSourceDataset(std::move(other.mSourceDataset)),
       mMediumIndex(std::move(other.mMediumIndex)),
+      mFrameIndex(std::move(other.mFrameIndex)),
       mType(std::move(other.mType)),
       mAnnotation(std::move(other.mAnnotation))
 {
@@ -36,6 +39,7 @@ SearchObject& SearchObject::operator=(const SearchObject &other)
     mROI = other.mROI;
     mSourceDataset = other.mSourceDataset;
     mMediumIndex = other.mMediumIndex;
+    mFrameIndex = other.mFrameIndex;
     mType = other.mType;
     setAnnotation(other.mAnnotation);
     return *this;
@@ -47,6 +51,7 @@ SearchObject& SearchObject::operator=(SearchObject &&other)
     mROI = std::move(other.mROI);
     mSourceDataset = std::move(other.mSourceDataset);
     mMediumIndex = std::move(other.mMediumIndex);
+    mFrameIndex = std::move(other.mFrameIndex);
     mType = std::move(other.mType);
     mAnnotation = std::move(other.mAnnotation);
     other.mAnnotation = nullptr;
@@ -122,6 +127,20 @@ void SearchObject::setSourceDataset(const QString dataset) {
     mSourceDataset = dataset;
 }
 /**
+ * @brief gets the frame in the medium
+ * @return the index
+ */
+int SearchObject::getFrameIndex() const {
+    return mFrameIndex;
+}
+/**
+ * @brief sets the frame in the medium
+ * @param index to be set
+ */
+void SearchObject::setFrameIndex(const int index) {
+    mFrameIndex = index;
+}
+/**
  * @brief gets the index of the medium
  * @return the index
  */
@@ -158,7 +177,8 @@ void SearchObject::toStream(QDataStream& out) const {
     //write object to stream
 
     out << mMedium
-        << mMediumIndex;
+        << mMediumIndex
+        << mFrameIndex;
     if(mAnnotation != nullptr) {
         out << mAnnotation->getForm()
             << *mAnnotation;
@@ -178,6 +198,7 @@ void SearchObject::fromStream(QDataStream& in) {
     //read object from stream
     in >> mMedium;
     in >> mMediumIndex;
+    in >> mFrameIndex;
     Annotation::Form form;
     in >> (quint32&)form;
     switch(form) {

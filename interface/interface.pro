@@ -29,6 +29,7 @@ HEADERS += \
 
 SOURCES += \
     src/Algorithm.cpp \
+    src/SearchAlgorithm.cpp \
     src/Annotation.cpp \
     src/DataPacket.cpp \
     src/Dataset.cpp \
@@ -43,4 +44,5 @@ SOURCES += \
     src/SearchResultElement.cpp \
     src/SingleFrameVideo.cpp \
     src/Video.cpp
+
 

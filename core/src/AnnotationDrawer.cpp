@@ -16,6 +16,9 @@ AnnotationDrawer::AnnotationDrawer(QGraphicsScene* scene) : mScene(scene)
 void AnnotationDrawer::setAnnotations(QList<QPair<int, Annotation*>> annotations) {
     for(QPair<int, Annotation*> iter: annotations) {
         QGraphicsItem* item = mFactory.getAnnotationVisualizer(iter.second);
+        if(iter.second->getType() == Annotation::Type::FACE) {
+            item->setZValue(1); // faces are drawn over persons
+        }
         mAnnotations.append(item);
         mScene->addItem(item);
         connect((ClickableGraphicsRectItem*)item, SIGNAL(selected(Annotation*, const QPointF&)),

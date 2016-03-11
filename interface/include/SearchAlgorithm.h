@@ -13,12 +13,16 @@ class SearchAlgorithm: public Algorithm {
     Q_OBJECT
 public:
     
-    virtual bool supportsProgressInfo() = 0;
+    virtual bool supportsProgressInfo();
 
 signals:
     void producedIntermediateResults(SearchResult& searchResult);
     
     void madeProgress(double progress, QString message);
+
+protected:
+    bool mSupportProgressInfo = false;
+
 };
 
 #endif //_SEARCHALGORITHM_H

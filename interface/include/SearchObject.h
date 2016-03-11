@@ -46,6 +46,10 @@ public:
 
     void setSourceDataset(const QString dataset);
 
+    int getFrameIndex() const;
+
+    void setFrameIndex(const int index);
+
     int getMediumIndex() const;
 
     void setMediumIndex(const int index);
@@ -72,7 +76,9 @@ private:
 
     QString mSourceDataset;     ///< The source dataset, where the searchobject is to be found
 
-    int mMediumIndex;           ///< The index of the medium, which specifies if it is a video or photo
+    int mFrameIndex;            ///< The index of the frame in the video, 0 if it is a photo
+
+    int mMediumIndex;           ///< The index of the medium, which specifies if it is a single frame video (1) or photo (0)
 
     Type mType;                 ///< The type of the searchobject
 

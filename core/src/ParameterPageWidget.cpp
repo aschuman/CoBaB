@@ -6,7 +6,7 @@
 const int ParameterPageWidget::EXIT_NEXT = 0;
 
 ParameterPageWidget::ParameterPageWidget() :
-    ui(new Ui::ParameterPageWidget)
+    ui(new Ui::ParameterPageWidget), mSearchDatasetList(nullptr)
 {
 
     ui->setupUi(this);
@@ -17,24 +17,15 @@ ParameterPageWidget::ParameterPageWidget() :
     file.open(QIODevice::ReadOnly);
     QJsonObject object = QJsonDocument::fromJson(file.readAll()).object();
 
-//    QJsonArray jsonArray = object["Properties"].toArray();
+    QJsonObject jsonObject = object["Properties"].toObject();
+    QVector<QJsonObject> list;
+    list.append(jsonObject);
+    mParameterModel = new QJsonModel(ui->mParameterWidget, list);
 
-//    foreach (const QJsonValue & value, jsonArray) {
-//        QJsonObject obj = value.toObject();
-//        mParameterModel.loadQJson(obj);
-//    }
-
-    mParameterModel.loadQJson(object);
-    mParameterModel.connect(ui->mParameterWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(on_mParameterWidget_clicked(QModelIndex)));
-
-//        QVector<QJsonObject> list;
-//        list.append(object);
-//        mParameterModel(ui->mParameterWidget, list);
-
-    ui->mParameterWidget->setModel(&mParameterModel);
+    ui->mParameterWidget->setModel(mParameterModel);
 
     connect(ui->mNext, SIGNAL(clicked()), this, SLOT(nextButtonClicked()));
- //   connect(ui->mParameterWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(on_mParameterWidget_clicked(QModelIndex)));
+    connect(ui->mParameterWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(on_mParameterWidget_clicked(QModelIndex)));
 }
 
 ParameterPageWidget::~ParameterPageWidget()
@@ -86,5 +77,5 @@ QString ParameterPageWidget::getName() {
 void ParameterPageWidget::on_mParameterWidget_clicked(const QModelIndex &index)
 {
     QModelIndex indexNew = index;
-    mParameterModel.flags(indexNew);
+    mParameterModel->flags(indexNew);
 }

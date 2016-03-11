@@ -69,7 +69,12 @@ QVariant SearchResultModel::data(const QModelIndex &index, int role) const
         if(mSearchResult && index.row() < mSearchResult->getSearchResultList().size()){
             SearchObject searchObject = mSearchResult->getSearchResultList().at(index.row()).getSearchObject();
             SearchResultElementFeedback element;
-            element.img = QImage(searchObject.getMedium()).scaledToHeight(100);
+            if(searchObject.getMediumIndex() == 0) { // photo dataset
+                element.img = QImage(searchObject.getMedium()).scaledToHeight(100);
+            } else if(searchObject.getMediumIndex() == 1) { // single frame video dataset
+                Dataset dataset(searchObject.getMedium());
+                element.img = dataset.getPreviewPhoto();
+            }
             auto it = mFeedbacks.find(index.row());
             if(it != mFeedbacks.end())
                 element.rating = *it;

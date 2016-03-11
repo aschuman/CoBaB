@@ -39,7 +39,7 @@ private:
     Ui::ParameterPageWidget *ui;
     DatasetList* mSearchDatasetList;
     DatasetModel mModel;
-    QJsonModel mParameterModel;
+    QJsonModel* mParameterModel;
     QVector<QJsonObject> parameterList;
 };
 

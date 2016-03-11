@@ -8,6 +8,7 @@ TestAlgorithm::TestAlgorithm() {
     mId = "default";
     mName = "Test algorithm";
     mDescription = "dummy algorithm that scores randomly";
+    mSupportProgressInfo = false;
 }
 
 /**
@@ -74,12 +75,4 @@ bool TestAlgorithm::setInputs(const QList<DataPacket*>& inputDataList) {
 bool TestAlgorithm::setParameters(const QJsonObject& parameters) {
     Q_UNUSED(parameters);
     return true;
-}
-
-/**
- * @brief TestAlgorithm::supportsProgressInfo
- * @return true if progress information will be sent to application when the search runs
- */
-bool TestAlgorithm::supportsProgressInfo() {
-    return false;
 }
