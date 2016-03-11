@@ -23,3 +23,19 @@ QString Algorithm::getName() const {
 QString Algorithm::getDescription() const {
     return mDescription;
 }
+
+/**
+ * @brief Algorithm::initialize Loads the corresponding QJsonObject for this algorithm
+ * @param loader The plugin loader which loads the QJsonObject
+ */
+void Algorithm::initialize(QPluginLoader *loader) {
+    mParameters = loader->metaData().value("MetaData").toObject();
+}
+
+/**
+ * @brief Algorithm::getParameters Returns the parameter file for this algorithm
+ * @return The QJsonObject parameter file for this algorithm
+ */
+QJsonObject Algorithm::getParameters() {
+    return mParameters;
+}

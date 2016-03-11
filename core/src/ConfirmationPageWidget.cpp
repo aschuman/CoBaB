@@ -147,7 +147,7 @@ void ConfirmationPageWidget::reset()
 
     mParameterList.clear();
     if(algo != nullptr) {
-        QJsonObject json = algo->getParameterJson();
+        QJsonObject json = algo->getParameters();
         readParameters(json["Properties"].toObject());
         for(int i = 0; i < mParameterList.size(); i++) {
             ui->mParameters->setRowCount(std::max(mParameterList.size(), ui->mParameters->rowCount()));

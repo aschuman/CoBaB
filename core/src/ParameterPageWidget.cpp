@@ -36,7 +36,7 @@ void ParameterPageWidget::reset() {
     emit readFromStack(0, chosenAlgorithm);
     if(chosenAlgorithm.canConvert<QPointer<Algorithm>>()){
         QPointer<Algorithm> algo = chosenAlgorithm.value<QPointer<Algorithm>>();
-        QJsonObject json = algo->getParameterJson();
+        QJsonObject json = algo->getParameters();
         QJsonObject jsonObject = json["Properties"].toObject();
         QVector<QJsonObject> list;
         list.append(jsonObject);

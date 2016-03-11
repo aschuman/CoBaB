@@ -26,9 +26,9 @@ public:
 
     virtual QString getDescription() const;
 
-    virtual QJsonObject getParameterJson() = 0;
+    QJsonObject getParameters();
 
-    virtual void initialize(QPluginLoader* loader) = 0;
+    void initialize(QPluginLoader* loader);
 
 public slots:
     virtual QList<DataPacket*> run() = 0;
@@ -39,6 +39,7 @@ protected:
     QString mDescription = "";
     QString mName = "";
     QString mId = "";
+    QJsonObject mParameters;
 };
 
 #define Algorithm_iid "org.CoBaB.Algorithm"

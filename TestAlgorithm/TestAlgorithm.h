@@ -24,10 +24,6 @@ public:
      
     bool setParameters(const QJsonObject& parameters) override;
 
-    QJsonObject getParameterJson() override;
-
-    void initialize(QPluginLoader* loader) override;
-
 public slots:
     QList<DataPacket*> run() override;
 
@@ -36,7 +32,6 @@ public slots:
 private: 
     SearchQuery* mQuery;
     QList<int> mParameterList;
-    QJsonObject mParameters;
     bool mAborted;
 
 };
