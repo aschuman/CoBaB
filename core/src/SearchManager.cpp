@@ -7,7 +7,8 @@
  * @brief Constructs a SearchManager connecting it to the given ResultsPageWidget.
  * @param The ResultsPageWidget.
  */
-SearchManager::SearchManager(ResultsPageWidget *resultsPageWidget) : mResultsPageWidget(resultsPageWidget)
+SearchManager::SearchManager(ResultsPageWidget *resultsPageWidget)
+    : mResultsPageWidget(resultsPageWidget)
 {
     QObject::connect(resultsPageWidget, SIGNAL(startAlgorithm(Algorithm*)), this, SLOT(startSearch(Algorithm*)));
 }
@@ -18,7 +19,22 @@ SearchManager::SearchManager(ResultsPageWidget *resultsPageWidget) : mResultsPag
  */
 void SearchManager::startSearch(Algorithm *algo)
 {
-    QList<DataPacket*> results = algo->run();
+    mThread = new AlgorithmThread(algo);
+    connect(mThread, SIGNAL(resultsReady()), this, SLOT(submitResults()));
+    connect(mThread, SIGNAL(finished()), this, SLOT(deleteLater()));
+    mThread->start();
+}
+
+/**
+ * @brief Terminates the search.
+ */
+void SearchManager::terminateSearch()
+{
+}
+
+void SearchManager::submitResults()
+{
+    QList<DataPacket*> results = mThread->getResults();
     if(results.size() > 0){
         SearchResult* searchResult = dynamic_cast<SearchResult*>(results.at(0));
         if(searchResult){
@@ -32,14 +48,9 @@ void SearchManager::startSearch(Algorithm *algo)
     qDeleteAll(results);
 }
 
-/**
- * @brief Terminates the search.
- */
-void SearchManager::terminateSearch()
-{
-}
-
 void SearchManager::updateProgress(float progress, const QString& message)
 {
+    Q_UNUSED(progress);
+    Q_UNUSED(message);
 }
 

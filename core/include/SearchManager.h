@@ -1,9 +1,11 @@
 #ifndef SEARCHMANAGER_H
 #define SEARCHMANAGER_H
 
+#include <QThread>
+#include <QObject>
 #include "ResultsPageWidget.h"
 #include "Algorithm.h"
-#include "QObject"
+#include "AlgorithmThread.h"
 
 /**
  * @brief Handles an algorithm that will return a SearchResult during the algorithms runtime.
@@ -20,10 +22,12 @@ public slots:
     void terminateSearch();
 
 private slots:
+    void submitResults();
     void updateProgress(float progress, const QString &message);
 
 private:
     ResultsPageWidget* mResultsPageWidget;
+    AlgorithmThread* mThread;
 };
 
 #endif // SEARCHMANAGER_H

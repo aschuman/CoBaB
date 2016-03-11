@@ -22,6 +22,7 @@ void DatasetModel::setDatasetList(const QList<Dataset>& datasets)
 
 int DatasetModel::rowCount(const QModelIndex &parent) const
 {
+    Q_UNUSED(parent);
     return mDatasets ? mDatasets->size() : 0;
 }
 

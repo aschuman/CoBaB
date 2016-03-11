@@ -51,6 +51,7 @@ SearchFeedback SearchResultModel::getFeedback() const
  */
 int SearchResultModel::rowCount(const QModelIndex &parent) const
 {
+    Q_UNUSED(parent);
     return mSearchResult ? mSearchResult->getSearchResultList().size() : 0;
 }
 
@@ -104,6 +105,7 @@ QVariant SearchResultModel::data(const QModelIndex &index, int role) const
  */
 bool SearchResultModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
+    Q_UNUSED(role);
     bool result = false;
     if(value.canConvert<int>()){
         mFeedbacks.insert(index.row(), value.toInt());
@@ -118,5 +120,6 @@ bool SearchResultModel::setData(const QModelIndex &index, const QVariant &value,
  */
 Qt::ItemFlags SearchResultModel::flags(const QModelIndex &index) const
 {
+    Q_UNUSED(index);
     return Qt::ItemIsEditable | Qt::ItemIsEnabled;
 }

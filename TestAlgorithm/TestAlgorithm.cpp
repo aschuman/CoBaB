@@ -5,7 +5,6 @@
  * @param id algorithm ID
  */
 TestAlgorithm::TestAlgorithm() {
-    //TestAlgorithm();
     mId = "default";
     mName = "Test algorithm";
     mDescription = "dummy algorithm that scores randomly";
@@ -25,6 +24,7 @@ QList<DataPacket*> TestAlgorithm::run() {
         for (Medium* medium : dataset.getMediaList()) {
             SearchObject* object = new SearchObject();
             object->setMedium(medium->getPath());
+            object->setSourceDataset(dataset.getPath());
 
             //new result element
             SearchResultElement* resultElement = new SearchResultElement();
@@ -36,7 +36,7 @@ QList<DataPacket*> TestAlgorithm::run() {
         }
     }
 
-    list.append((DataPacket*)result);
+    list.append(dynamic_cast<DataPacket*>(result));
     return list;
 }
 
@@ -53,7 +53,7 @@ void TestAlgorithm::cancel() {
  * @return true if input data is accepted
  */
 bool TestAlgorithm::setInputs(const QList<DataPacket*>& inputDataList) {
-    if (inputDataList.length() < 1) {  //illegal number of parameters
+    if (inputDataList.length() != 1) {  //illegal number of parameters
         return false;
     }
 
@@ -77,68 +77,9 @@ bool TestAlgorithm::setParameters(const QJsonObject& parameters) {
 }
 
 /**
- * @brief TestAlgorithm::setName give the algorithm a new name
- * @param name new name
- */
-void TestAlgorithm::setName(const QString& name) {
-    mName = name;
-}
-
-/**
- * @brief TestAlgorithm::setDescription set algorithm description
- * @param description a text which explains what the algorith does
- */
-void TestAlgorithm::setDescription(const QString& description) {
-    mDescription = description;
-}
-
-/**
- * @brief TestAlgorithm::getId get the algorithm ID
- * @return algorithm ID
- */
-QString TestAlgorithm::getId() const {
-    return mId;
-}
-
-/**
- * @brief TestAlgorithm::getName get name of the algorithm
- * @return algorithm name (must be unique)
- */
-QString TestAlgorithm::getName() const {
-    return mName;
-}
-
-/**
- * @brief TestAlgorithm::getDescription show algorithm description
- * @return a QString that describes the algorithm
- */
-QString TestAlgorithm::getDescription() const {
-    return mDescription;
-}
-
-/**
  * @brief TestAlgorithm::supportsProgressInfo
  * @return true if progress information will be sent to application when the search runs
  */
 bool TestAlgorithm::supportsProgressInfo() {
     return false;
-}
-
-/**
- * @brief TestAlgorithm::sendIntermediateResults send a number of new search results
- * @param searchResult new output
- */
-void TestAlgorithm::sendIntermediateResults(SearchResult& searchResult) {
-    Q_UNUSED(searchResult);
-}
-
-/**
- * @brief TestAlgorithm::sendProgress send progress information
- * @param progress a real number between 0 and 1 show the progress
- * @param message warning message if available
- */
-void TestAlgorithm::sendProgress(double progress, QString message) {
-    Q_UNUSED(progress);
-    Q_UNUSED(message);
-
 }

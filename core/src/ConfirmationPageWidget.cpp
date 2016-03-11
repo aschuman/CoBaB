@@ -202,7 +202,12 @@ void ConfirmationPageWidget::showEvent(QShowEvent* event) {
     }
 }
 
+/**
+ * @brief ConfirmationPageWidget::resizeEvent Resizes the label with the photo when the size of the GUI changed.
+ * @param event The resizeEvent when the size of the GUI changed.
+ */
 void ConfirmationPageWidget::resizeEvent(QResizeEvent* event) {
+    Q_UNUSED(event);
     ui->mImageToSearchLabel->setMinimumSize(1, 1);
     ui->mImageToSearchLabel->setPixmap(pixmap.scaled(ui->mImageToSearchLabel->size(), Qt::KeepAspectRatio));
 }
@@ -216,4 +221,8 @@ void ConfirmationPageWidget::on_mSearchButton_clicked()
     exit(EXIT_NEXT);
 }
 
+/**
+ * @brief ConfirmationPageWidget::EXIT_NEXT Code noting the type of exit,
+ * in this case the ResultsPageWidget is the next widget.
+ */
 const int ConfirmationPageWidget::EXIT_NEXT = 0;

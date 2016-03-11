@@ -14,7 +14,9 @@ AlgorithmList::AlgorithmList(const QString& path) {
     for (const QString& fileName : pluginsDir.entryList(QDir::Files))
     {
         QString filePath = pluginsDir.absoluteFilePath(fileName);
-        mPluginLoaders.push_back(std::make_unique<QPluginLoader>(filePath));
+        std::unique_ptr<QPluginLoader> loader =  std::make_unique<QPluginLoader>(filePath);
+        loader->load();
+        mPluginLoaders.push_back(std::move(loader));
     }
 }
 

@@ -69,6 +69,9 @@ void MainWindow::display(QWidget* widget)
     }
 }
 
+/**
+ * @brief MainWindow::showAboutDialog Displays the about dialog in the current language.
+ */
 void MainWindow::showAboutDialog()
 {
     ConfigData* data = ConfigData::getInstance();
@@ -77,6 +80,9 @@ void MainWindow::showAboutDialog()
     msgBox.exec();
 }
 
+/**
+ * @brief MainWindow::showHelpDialog Displays the help dialog in the current language.
+ */
 void MainWindow::showHelpDialog()
 {
     ConfigData* data = ConfigData::getInstance();
@@ -95,6 +101,9 @@ void MainWindow::hideOpenDataset()
     ui->mDatasetAction->setVisible(false);
 }
 
+/**
+ * @brief MainWindow::changeLanguageToGerman Stores the language as "German" and retranslates the GUI.
+ */
 void MainWindow::changeLanguageToGerman()
 {
     ConfigData* data = ConfigData::getInstance();
@@ -102,6 +111,9 @@ void MainWindow::changeLanguageToGerman()
     retranslate();
 }
 
+/**
+ * @brief MainWindow::changeLanguageToEnglish Stores the language as "English" and retranslates the GUI.
+ */
 void MainWindow::changeLanguageToEnglish()
 {
     ConfigData* data = ConfigData::getInstance();
@@ -109,6 +121,9 @@ void MainWindow::changeLanguageToEnglish()
     retranslate();
 }
 
+/**
+ * @brief MainWindow::changeSound Stores the current setting of the notification sound.
+ */
 void MainWindow::changeSound()
 {
     ConfigData* data = ConfigData::getInstance();
@@ -117,11 +132,13 @@ void MainWindow::changeSound()
     if(soundOn) {
         ui->mSoundAction->setText(tr("Ton einschalten"));
     } else {
-        //sound is now on
         ui->mSoundAction->setText(tr("Ton ausschalten"));
     }
 }
 
+/**
+ * @brief MainWindow::retranslate Retranslates the MainWindow after changing the language.
+ */
 void MainWindow::retranslate()
 {
     ConfigData* data = ConfigData::getInstance();
@@ -141,7 +158,13 @@ void MainWindow::retranslate()
     } else {
         ui->mSoundAction->setText(tr("Ton einschalten"));
     }
-
+    if(data->getLanguage() == "German") {
+        ui->mGermanAction->setChecked(true);
+        ui->mEnglishAction->setChecked(false);
+    } else {
+        ui->mGermanAction->setChecked(false);
+        ui->mEnglishAction->setChecked(true);
+    }
 
     PageWidget* pageWidget = dynamic_cast<PageWidget*> (currentWidget);
     if(pageWidget != nullptr) {

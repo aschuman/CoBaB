@@ -13,15 +13,12 @@ class SearchAlgorithm: public Algorithm {
     Q_OBJECT
 public:
     
-    virtual void setName(const QString& name) = 0;
-
-    virtual void setDescription(const QString& description) = 0;
-    
     virtual bool supportsProgressInfo() = 0;
 
-    virtual void sendIntermediateResults(SearchResult& searchResult) = 0;
+signals:
+    void producedIntermediateResults(SearchResult& searchResult);
     
-    virtual void sendProgress(double progress, QString message) = 0;
+    void madeProgress(double progress, QString message);
 };
 
 #endif //_SEARCHALGORITHM_H

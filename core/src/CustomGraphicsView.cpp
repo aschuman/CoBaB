@@ -37,6 +37,7 @@ void CustomGraphicsView::wheelEvent (QWheelEvent* event)
  */
 void CustomGraphicsView::scalingTime(qreal x)
 {
+    Q_UNUSED(x);
     qreal factor = 1.0+ qreal(_numScheduledScalings) / 300.0;
     scale(factor, factor);
     emit zoomed(factor);

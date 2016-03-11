@@ -11,6 +11,7 @@ before_install:
 install:
   - sudo apt-get install -qq g++-5
   - sudo apt-get install qt55base
+  - sudo apt-get install qt55multimedia
   - sudo apt-get install cppcheck
 
 before_script:
