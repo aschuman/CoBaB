@@ -25,6 +25,7 @@ public:
     enum Type { PHOTO, VIDEO, SINGLE_FRAME_VIDEO };
     explicit Dataset(const QString& path);
     Dataset(const Dataset& other);
+    Dataset& operator=(const Dataset& other);
     ~Dataset();
     QString getName() const;
     int getNumberOfMedia() const;

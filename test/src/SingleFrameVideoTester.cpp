@@ -18,6 +18,12 @@ void SingleFrameVideoTester::testFrameList()
     list.append("bigbangtheory_s1e1.vob_00000.png");
     list.append("bigbangtheory_s1e1.vob_00250.png");
     list.append("bigbangtheory_s1e1.vob_00500.png");
+    list.append("bigbangtheory_s1e1.vob_00750.png");
+    list.append("bigbangtheory_s1e1.vob_01000.png");
+    list.append("bigbangtheory_s1e1.vob_01250.png");
+    list.append("bigbangtheory_s1e1.vob_01500.png");
+    list.append("bigbangtheory_s1e1.vob_01750.png");
+    list.append("bigbangtheory_s1e1.vob_02000.png");
     QCOMPARE(mSingleFrameVideo->getFrameList(), list);
 
 }

@@ -67,7 +67,7 @@ void DatasetTester::testPreviewImage()
     Dataset dataset(path);
     QImage preview(image);
     QVERIFY(!preview.isNull());
-    QCOMPARE(dataset.getPreviewPhoto(), preview.scaled(100, 100, Qt::KeepAspectRatio));
+    QCOMPARE(dataset.getPreviewPhoto(), preview.scaledToHeight(100));
 
 }
 

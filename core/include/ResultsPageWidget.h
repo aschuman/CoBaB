@@ -37,15 +37,21 @@ public:
 signals:
     void startAlgorithm(Algorithm* algo);
 
+public slots:
+    void setProgress(double progress);
+
 private slots:
     void on_btnNewSearch_clicked();
 
 private:
+    void updateProgressBar(double progress);
+
     Ui::ResultsPageWidget *ui;
     SearchResultModel mModel;
     FeedbackDelegate mDelegate;
     std::shared_ptr<SearchResult> mResult;
     Algorithm* mAlgorithm;
+    bool mUseSimpleProgressBar;
 };
 
 #endif // RESULTSPAGEWIDGET_H

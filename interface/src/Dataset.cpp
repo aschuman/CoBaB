@@ -48,6 +48,16 @@ Dataset::Dataset(const Dataset& other) {
     }
 }
 
+Dataset& Dataset::operator=(const Dataset& other)
+{
+    mName = other.mName;
+    mPreviewPhoto = other.mPreviewPhoto;
+    mPath = other.mPath;
+    mType = other.mType;
+    mMediaList = other.getMediaList();
+    return *this;
+}
+
 /**
  * @brief Dataset::~Dataset Deletes the Dataset.
  */

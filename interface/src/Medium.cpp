@@ -23,6 +23,13 @@ Medium::Medium(const Medium& other) {
     }
 }
 
+Medium& Medium::operator=(const Medium& other) {
+    mPath = other.mPath;
+    mType = other.mType;
+    mAnnotationList = other.mAnnotationList;
+    return *this;
+}
+
 /**
  * @brief Medium::copy Copies this Medium.
  * @return A copy of this Medium.

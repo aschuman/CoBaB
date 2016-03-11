@@ -37,6 +37,8 @@ private:
     SearchQuery* mQuery;
     QList<int> mParameterList;
     QJsonObject mParameters;
+    bool mAborted;
+
 };
 
 #endif //_TESTALGORITHM_H

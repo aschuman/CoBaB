@@ -37,6 +37,15 @@ SingleFrameVideo::SingleFrameVideo(const SingleFrameVideo& other)
     mFrameList = other.getFrameList();
 }
 
+SingleFrameVideo& SingleFrameVideo::operator=(const SingleFrameVideo& other) {
+    mPath = other.mPath;
+    mType = other.mType;
+    mAnnotationList = other.mAnnotationList;
+    mFramerate = other.mFramerate;
+    mFrameList = other.mFrameList;
+    return *this;
+}
+
 Medium* SingleFrameVideo::copy() {
     return new SingleFrameVideo(*this);
 }
