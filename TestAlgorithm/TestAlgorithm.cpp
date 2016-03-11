@@ -8,6 +8,8 @@ TestAlgorithm::TestAlgorithm() {
     mId = "default";
     mName = "Test algorithm";
     mDescription = "dummy algorithm that scores randomly";
+    mSupportProgressInfo = false;
+    mAborted = false;
 }
 
 /**
@@ -17,11 +19,16 @@ TestAlgorithm::TestAlgorithm() {
 QList<DataPacket*> TestAlgorithm::run() {
     QList<DataPacket*> list;
     SearchResult* result = new SearchResult();
+    list.append(dynamic_cast<DataPacket*>(result));
 
     for (QString& datasetPath : mQuery->getDatasets()) {
         Dataset dataset(datasetPath);
 
         for (Medium* medium : dataset.getMediaList()) {
+            if (mAborted == true) {
+                return list;
+            }
+
             SearchObject* object = new SearchObject();
             object->setMedium(medium->getPath());
             object->setSourceDataset(dataset.getPath());
@@ -36,7 +43,6 @@ QList<DataPacket*> TestAlgorithm::run() {
         }
     }
 
-    list.append(dynamic_cast<DataPacket*>(result));
     return list;
 }
 
@@ -44,7 +50,7 @@ QList<DataPacket*> TestAlgorithm::run() {
  * @brief TestAlgorithm::cancel terminate the algorithm
  */
 void TestAlgorithm::cancel() {
-
+    mAborted = true;
 }
 
 /**
@@ -74,12 +80,4 @@ bool TestAlgorithm::setInputs(const QList<DataPacket*>& inputDataList) {
 bool TestAlgorithm::setParameters(const QJsonObject& parameters) {
     Q_UNUSED(parameters);
     return true;
-}
-
-/**
- * @brief TestAlgorithm::supportsProgressInfo
- * @return true if progress information will be sent to application when the search runs
- */
-bool TestAlgorithm::supportsProgressInfo() {
-    return false;
 }

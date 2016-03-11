@@ -23,8 +23,6 @@ public:
     bool setInputs(const QList<DataPacket*>& inputDataList) override;
      
     bool setParameters(const QJsonObject& parameters) override;
-    
-    bool supportsProgressInfo() override;
 
 public slots:
     QList<DataPacket*> run() override;
@@ -34,6 +32,7 @@ public slots:
 private: 
     SearchQuery* mQuery;
     QList<int> mParameterList;
+    bool mAborted;
 };
 
 #endif //_TESTALGORITHM_H
