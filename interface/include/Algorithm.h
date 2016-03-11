@@ -4,6 +4,7 @@
 #include "DataPacket.h"
 #include <QList>
 #include <QJsonObject>
+#include <QPluginLoader>
 
 /**
  * Algorithm interface
@@ -24,6 +25,10 @@ public:
     virtual QString getName() const;
 
     virtual QString getDescription() const;
+
+    virtual QJsonObject getParameterJson() = 0;
+
+    virtual void initialize(QPluginLoader* loader) = 0;
 
 public slots:
     virtual QList<DataPacket*> run() = 0;

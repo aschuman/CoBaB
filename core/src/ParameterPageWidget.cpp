@@ -2,6 +2,8 @@
 #include "ui_ParameterPageWidget.h"
 #include <stdio.h>
 #include <iterator>
+#include "Algorithm.h"
+#include "log.h"
 
 const int ParameterPageWidget::EXIT_NEXT = 0;
 
@@ -11,18 +13,6 @@ ParameterPageWidget::ParameterPageWidget() :
 
     ui->setupUi(this);
     ui->mSearchDatasetListView->setModel(&mModel);
-
-    QString fileName = "../resources/PluginDepthEstimator.json";
-    QFile file(fileName);
-    file.open(QIODevice::ReadOnly);
-    QJsonObject object = QJsonDocument::fromJson(file.readAll()).object();
-
-    QJsonObject jsonObject = object["Properties"].toObject();
-    QVector<QJsonObject> list;
-    list.append(jsonObject);
-    mParameterModel = new QJsonModel(ui->mParameterWidget, list);
-
-    ui->mParameterWidget->setModel(mParameterModel);
 
     connect(ui->mNext, SIGNAL(clicked()), this, SLOT(nextButtonClicked()));
     connect(ui->mParameterWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(on_mParameterWidget_clicked(QModelIndex)));
@@ -40,6 +30,22 @@ void ParameterPageWidget::reset() {
     if(var.canConvert<std::shared_ptr<DatasetList>>()){
         mSearchDatasetList = var.value<std::shared_ptr<DatasetList>>().get();
         mModel.setDatasetList(mSearchDatasetList->getDatasetList());
+    }
+
+    QVariant chosenAlgorithm;
+    emit readFromStack(0, chosenAlgorithm);
+    if(chosenAlgorithm.canConvert<QPointer<Algorithm>>()){
+        QPointer<Algorithm> algo = chosenAlgorithm.value<QPointer<Algorithm>>();
+        QJsonObject json = algo->getParameterJson();
+        QJsonObject jsonObject = json["Properties"].toObject();
+        QVector<QJsonObject> list;
+        list.append(jsonObject);
+        mParameterModel = new QJsonModel(ui->mParameterWidget, list);
+
+        ui->mParameterWidget->setModel(mParameterModel);
+
+    } else {
+        LOG_ERR("no algorithm");
     }
 
 }

@@ -135,17 +135,29 @@ void ConfirmationPageWidget::reset()
 
     //read name of algorithm
     QVariant chosenAlgorithm;
+    QPointer<Algorithm> algo = nullptr;
     emit readFromStack(1, chosenAlgorithm);
     if(chosenAlgorithm.canConvert<QPointer<Algorithm>>()){
-        QPointer<Algorithm> algo = chosenAlgorithm.value<QPointer<Algorithm>>();
+        algo = chosenAlgorithm.value<QPointer<Algorithm>>();
 		ui->mParameters->setItem(0, 1, new QTableWidgetItem(algo->getName()));
         ui->mParameters->item(0, 1)->setTextAlignment(Qt::AlignCenter);
     } else {
         LOG_ERR("no algorithm");
     }
 
+    mParameterList.clear();
+    if(algo != nullptr) {
+        QJsonObject json = algo->getParameterJson();
+        readParameters(json["Properties"].toObject());
+        for(int i = 0; i < mParameterList.size(); i++) {
+            ui->mParameters->setRowCount(std::max(mParameterList.size(), ui->mParameters->rowCount()));
+            ui->mParameters->setItem(i, 2, new QTableWidgetItem(mParameterList.at(i)));
+            ui->mParameters->item(i, 2)->setTextAlignment(Qt::AlignCenter);
+        }
+    }
+
     //read parameters and their values
-    QVariant parameterFile;
+    /*QVariant parameterFile;
     emit readFromStack(0, parameterFile);
     if (parameterFile.canConvert<QString>()) {
         QString fileName = parameterFile.value<QString>();
@@ -166,9 +178,26 @@ void ConfirmationPageWidget::reset()
         }
     } else {
         LOG_ERR("no parameter file");
-    }
+    }*/
 
     ui->mParameters->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+}
+
+void ConfirmationPageWidget::readParameters(QJsonObject object) {
+    QJsonObject::const_iterator iter;
+    for(iter = object.begin(); iter != object.end(); iter++) {
+        if(iter.value().toObject()["default"] != QJsonValue::Null) {
+            QVariant line = iter.key() + " = " + iter.value().toObject()["default"].toVariant().toString();
+            mParameterList.append(line.toString());
+        } else {
+            if(iter.value().isObject()) {
+                mParameterList.append(iter.key() + ":");
+                readParameters(iter.value().toObject());
+
+            }
+        }
+    }
+
 }
 
 /**
