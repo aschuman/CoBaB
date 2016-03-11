@@ -161,7 +161,7 @@ void ResultsPageWidget::on_btnNewSearch_clicked() {
 
     QVariant varDatasetNo;
     emit readFromStack(3, varDatasetNo);
-    if(!varDatasetNo.canConvert<int>()) {
+    if (!varDatasetNo.canConvert<int>()) {
         LOG_ERR("could not find dataset on stack");
     }
 

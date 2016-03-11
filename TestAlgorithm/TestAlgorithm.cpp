@@ -59,7 +59,7 @@ void TestAlgorithm::cancel() {
  * @return true if input data is accepted
  */
 bool TestAlgorithm::setInputs(const QList<DataPacket*>& inputDataList) {
-    if (inputDataList.length() < 1) {  //illegal number of parameters
+    if (inputDataList.length() != 1) {  //illegal number of parameters
         return false;
     }
 

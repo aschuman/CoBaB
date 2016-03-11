@@ -1,0 +1,17 @@
+{
+    "Autor" : "Tung Nguyen",
+    "Date"  : "2016-03-10",
+    "Version" : 1.0,
+    "Properties" : {
+        "FirstParameter" : {
+            "type" : "string",
+            "value" : "none",
+            "description" : "first parameter"
+        },
+        "SecondParameter" : {
+            "type" : "integer",
+            "value" : 0,
+            "description" : "second parameter"
+        }
+    }
+}

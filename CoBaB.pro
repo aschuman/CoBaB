@@ -5,7 +5,8 @@ SUBDIRS = \
     TestAlgorithm \
     TestAlgorithmLinkTester \
     test \
-    app
+    app \
+    PersonAlgorithm
 
 CONFIG += ordered
 TRANSLATIONS += CoBaB_en.ts

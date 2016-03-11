@@ -1,5 +1,8 @@
 #include "SearchObject.h"
 
+/**
+ * @brief SearchObject::SearchObject
+ */
 SearchObject::SearchObject() : mAnnotation(nullptr) {
 
     mMedium = "";
@@ -8,9 +11,12 @@ SearchObject::SearchObject() : mAnnotation(nullptr) {
 
     mMediumIndex = 0;
     mFrameIndex = 0;
-
 }
 
+/**
+ * @brief SearchObject::SearchObject
+ * @param other
+ */
 SearchObject::SearchObject(const SearchObject& other) {
     mMedium = other.getMedium();
     mROI = other.getROI();
@@ -21,6 +27,10 @@ SearchObject::SearchObject(const SearchObject& other) {
     setAnnotation(other.getAnnotation());
 }
 
+/**
+ * @brief SearchObject::SearchObject
+ * @param other
+ */
 SearchObject::SearchObject(SearchObject &&other)
     : mMedium(std::move(other.mMedium)),
       mROI(std::move(other.mROI)),
@@ -28,13 +38,17 @@ SearchObject::SearchObject(SearchObject &&other)
       mMediumIndex(std::move(other.mMediumIndex)),
       mFrameIndex(std::move(other.mFrameIndex)),
       mType(std::move(other.mType)),
-      mAnnotation(std::move(other.mAnnotation))
-{
+      mAnnotation(std::move(other.mAnnotation)) {
+
     other.mAnnotation = nullptr;
 }
 
-SearchObject& SearchObject::operator=(const SearchObject &other)
-{
+/**
+ * @brief SearchObject::operator =
+ * @param other
+ * @return
+ */
+SearchObject& SearchObject::operator=(const SearchObject &other) {
     mMedium = other.mMedium;
     mROI = other.mROI;
     mSourceDataset = other.mSourceDataset;
@@ -45,8 +59,12 @@ SearchObject& SearchObject::operator=(const SearchObject &other)
     return *this;
 }
 
-SearchObject& SearchObject::operator=(SearchObject &&other)
-{
+/**
+ * @brief SearchObject::operator =
+ * @param other
+ * @return
+ */
+SearchObject& SearchObject::operator=(SearchObject &&other) {
     mMedium = std::move(other.mMedium);
     mROI = std::move(other.mROI);
     mSourceDataset = std::move(other.mSourceDataset);
@@ -58,6 +76,9 @@ SearchObject& SearchObject::operator=(SearchObject &&other)
     return *this;
 }
 
+/**
+ * @brief SearchObject::~SearchObject
+ */
 SearchObject::~SearchObject() {
     delete mAnnotation;
 }
@@ -223,14 +244,25 @@ void SearchObject::fromStream(QDataStream& in) {
     }
     in >> mROI;
     in >> mSourceDataset;
-
 }
 
+/**
+ * @brief operator <<
+ * @param out
+ * @param searchObject
+ * @return
+ */
 QDataStream& operator<<(QDataStream& out, const SearchObject& searchObject) {
     searchObject.toStream(out);
     return out;
 }
 
+/**
+ * @brief operator >>
+ * @param in
+ * @param searchObject
+ * @return
+ */
 QDataStream& operator>>(QDataStream& in, SearchObject& searchObject) {
     searchObject.fromStream(in);
     return in;
