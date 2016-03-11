@@ -15,7 +15,6 @@ class PhotoViewer : public ViewerPageWidget
 public:
     explicit PhotoViewer();
     void display() override;
-    QString getSearchMedium() override;
 };
 
 #endif // PHOTOVIEWER_H

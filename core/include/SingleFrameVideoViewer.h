@@ -30,7 +30,7 @@ public slots:
     void slide(int sec);
 
 protected:
-    QString getSearchMedium() override;
+    int getFrameIndex() override;
 
 private:
     SingleFrameVideo mSFVideo; ///< The SingleFrameVideo that is currently selected.

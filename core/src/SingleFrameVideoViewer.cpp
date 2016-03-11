@@ -85,6 +85,7 @@ void SingleFrameVideoViewer::stop() {
     pause();
     ui->mTime->setText("0");
     ui->mSlider->setSliderPosition(0);
+    mAnnotationDrawer.removeAnnotations();
     if(mImage != nullptr)
         mGraphicsScene.removeItem(mImage);
         delete mImage;
@@ -168,11 +169,11 @@ void SingleFrameVideoViewer::showFrame() {
 }
 
 /**
- * @brief SingleFrameVideoViewer::getSearchMedium Returns the path to the Medium that is searched for.
- * @return The path of the Medium (to be set in the SearchObject).
+ * @brief SingleFrameVideoViewer::getFrameIndex Returns the frame in the video.
+ * @return The frame in the Medium (to be set in the SearchObject).
  */
-QString SingleFrameVideoViewer::getSearchMedium() {
-    return mSFVideo.getPath() + "/" + mSFVideo.getFrameList().at(mFrameIndex);
+int SingleFrameVideoViewer::getFrameIndex() {
+    return mFrameIndex;
 }
 
 void SingleFrameVideoViewer::nextWidget(QAction* action) {

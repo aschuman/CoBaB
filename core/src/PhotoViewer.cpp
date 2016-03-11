@@ -41,11 +41,3 @@ void PhotoViewer::display() {
     mAnnotationDrawer.setAnnotations(medium->getAnnotationList());
     resize();
 }
-
-/**
- * @brief PhotoViewer::getSearchMedium Returns the path to the Medium that is searched for.
- * @return The path of the Medium (to be set in the SearchObject).
- */
-QString PhotoViewer::getSearchMedium() {
-    return mDataset->getMediaList().at(mIndex)->getPath();
-}

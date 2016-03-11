@@ -79,7 +79,7 @@ protected:
 
     virtual void display();
     void resizeEvent(QResizeEvent* event) override;
-    virtual QString getSearchMedium() = 0;
+    virtual int getFrameIndex();
 };
 
 #endif // VIEWERPAGEWIDGET_H

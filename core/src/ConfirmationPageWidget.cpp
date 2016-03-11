@@ -78,7 +78,16 @@ void ConfirmationPageWidget::reset()
         std::shared_ptr<SearchQuery> searchQuery = varSearchQuery.value<std::shared_ptr<SearchQuery>>();
         SearchObject searchObject = searchQuery->getSearchObject();
 
-        QImage chosenImage(searchObject.getMedium());
+        QImage chosenImage;
+        if(searchObject.getMediumIndex() == 0) {
+            chosenImage.load(searchObject.getMedium());
+        } else if(searchObject.getMediumIndex() == 1) {
+            Dataset dataset(searchObject.getMedium());
+            chosenImage.load(dataset.getPath() + "/" +
+                ((SingleFrameVideo*)dataset.getMediaList().at(0))->getFrameList().at(searchObject.getFrameIndex()));
+        } else {
+            LOG_ERR("No valid medium");
+        }
         pixmap.convertFromImage(chosenImage);
 
         if(searchObject.getType() == SearchObject::ROI) {

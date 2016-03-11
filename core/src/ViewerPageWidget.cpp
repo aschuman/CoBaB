@@ -98,7 +98,15 @@ void ViewerPageWidget::annotationSelected(Annotation* annotation, const QPointF&
  */
 void ViewerPageWidget::contextMenu(const QPointF &pos) {
     SearchObject searchObject;
-    searchObject.setMedium(getSearchMedium());
+    searchObject.setMedium(mDataset->getMediaList().at(mIndex)->getPath());
+    searchObject.setFrameIndex(getFrameIndex());
+    if(mDataset->getType() == Dataset::Type::PHOTO) {
+        searchObject.setMediumIndex(0);
+    } else if (mDataset->getType() == Dataset::Type::SINGLE_FRAME_VIDEO) {
+        searchObject.setMediumIndex(1);
+    } else {
+        searchObject.setMediumIndex(-1);
+    }
     if(mCurrentSelection != nullptr && mCurrentSelection->contains(pos)) {
         mROI = mCurrentSelection->rect().toRect();
         searchObject.setROI(mROI);
@@ -341,5 +349,13 @@ void ViewerPageWidget::retranslateUi() {
 
 QString ViewerPageWidget::getName() {
     return tr("CoBaB - Viewer");
+}
+
+/**
+ * @brief ViewerPageWidget::getFrameIndex Returns the frameIndex for the SearchObject, 0 if it is a photo.
+ * @return The frameIndex.
+ */
+int ViewerPageWidget::getFrameIndex() {
+    return 0;
 }
 
