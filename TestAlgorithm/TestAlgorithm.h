@@ -32,6 +32,7 @@ public slots:
 private: 
     SearchQuery* mQuery;
     QList<int> mParameterList;
+    bool mAborted;
 };
 
 #endif //_TESTALGORITHM_H
