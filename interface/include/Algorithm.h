@@ -31,9 +31,9 @@ public slots:
     virtual void cancel() = 0;
 
 protected:
-    QString mDescription;
-    QString mName;
-    QString mId;
+    QString mDescription = "";
+    QString mName = "";
+    QString mId = "";
 };
 
 #define Algorithm_iid "org.CoBaB.Algorithm"

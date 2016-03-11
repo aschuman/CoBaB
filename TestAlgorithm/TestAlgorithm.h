@@ -23,12 +23,6 @@ public:
     bool setInputs(const QList<DataPacket*>& inputDataList) override;
      
     bool setParameters(const QJsonObject& parameters) override;
-
-    QString getId() const override;
-
-    QString getName() const override;
-
-    QString getDescription() const override;
     
     bool supportsProgressInfo() override;
 
