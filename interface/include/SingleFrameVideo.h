@@ -13,6 +13,7 @@ class SingleFrameVideo: public Medium {
 public: 
     SingleFrameVideo(const QString path, const QList<QPair<int, Annotation*>> annotations);
     SingleFrameVideo(const SingleFrameVideo& other);
+    SingleFrameVideo& operator=(const SingleFrameVideo& other);
     double getFramerate() const;
     QList<QString> getFrameList() const;
     Medium* copy() override;
