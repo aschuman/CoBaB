@@ -128,6 +128,7 @@ void ResultsPageWidget::setResults(SearchResult result)
     } else {
         LOG_ERR("could not find search query on stack");
     }
+    setCursor(QCursor(Qt::CursorShape::ArrowCursor));
 }
 
 void ResultsPageWidget::on_btnNewSearch_clicked()
