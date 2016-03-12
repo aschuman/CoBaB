@@ -71,10 +71,8 @@ SearchResult generateReslut()
  */
 ResultsPageWidget::ResultsPageWidget() :
     ui(new Ui::ResultsPageWidget),
-    mUseSimpleProgressBar(true) {
-
-    mName = "CoBaB - Ergebnisse";
-
+    mUseSimpleProgressBar(true)
+{
     ui->setupUi(this);
     ui->mListView->setModel(&mModel);
     ui->mListView->setItemDelegate(&mDelegate);
@@ -229,4 +227,12 @@ void ResultsPageWidget::updateProgressBar(double progress) {
  */
 void ResultsPageWidget::retranslateUi() {
     ui->btnNewSearch->setText(tr("Erneut suchen"));
+}
+
+/**
+ * @brief ResultsPageWidget::getName
+ * @return
+ */
+QString ResultsPageWidget::getName() {
+    return tr("CoBaB - Ergebnisse");
 }

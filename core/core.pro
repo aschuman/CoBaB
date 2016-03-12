@@ -102,8 +102,7 @@ SOURCES += \
     src/SearchResultModel.cpp \
     src/SingleFrameVideoViewer.cpp \
     src/ViewerPageWidget.cpp \
-    src/AlgorithmThread.cpp \
-    src/PageWidget.cpp
+    src/AlgorithmThread.cpp
 
 FORMS += \
     ui/ConfirmationPageWidget.ui \

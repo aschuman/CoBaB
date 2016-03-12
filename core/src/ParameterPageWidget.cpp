@@ -11,8 +11,6 @@
 ParameterPageWidget::ParameterPageWidget() :
     ui(new Ui::ParameterPageWidget), mSearchDatasetList(nullptr) {
 
-    mName = "CoBaB - Parameter";
-
     ui->setupUi(this);
     ui->mSearchDatasetListView->setModel(&mModel);
 
@@ -87,6 +85,14 @@ void ParameterPageWidget::nextButtonClicked() {
  */
 void ParameterPageWidget::retranslateUi() {
     ui->mNext->setText(tr("Weiter"));
+}
+
+/**
+ * @brief ParameterPageWidget::getName
+ * @return
+ */
+QString ParameterPageWidget::getName() {
+    return tr("CoBaB - Parameter");
 }
 
 /**

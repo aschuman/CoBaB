@@ -9,8 +9,8 @@
  * @brief Constructs a LibraryPageWidget.
  */
 LibraryPageWidget::LibraryPageWidget() :
-    ui(new Ui::LibraryPageWidget) {
-    mName = "CoBaB - Bibliothek";
+    ui(new Ui::LibraryPageWidget)
+{
     ui->setupUi(this);
     ui->mLibraryListView->setModel(&mModel);
 }
@@ -35,6 +35,10 @@ void LibraryPageWidget::reset()
 
 void LibraryPageWidget::retranslateUi() {
 
+}
+
+QString LibraryPageWidget::getName() {
+    return tr("CoBaB - Bibliothek");
 }
 
 void LibraryPageWidget::on_mLibraryListView_doubleClicked(const QModelIndex &index)

@@ -23,7 +23,7 @@ public:
      * @brief Returns the name of the PageWidget
      * @return The name of the PageWidget
      */
-    virtual QString getName();
+    virtual QString getName() = 0;
 
 signals:
     /**
@@ -45,8 +45,6 @@ signals:
      */
     void exit(int exitCode);
 
-protected:
-    QString mName = "";
 };
 
 #endif // PAGEWIDGET_H
