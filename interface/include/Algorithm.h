@@ -4,6 +4,7 @@
 #include "DataPacket.h"
 #include <QList>
 #include <QJsonObject>
+#include <QPluginLoader>
 
 /**
  * Algorithm interface
@@ -25,6 +26,10 @@ public:
 
     virtual QString getDescription() const;
 
+    QJsonObject getParameters();
+
+    void initialize(QPluginLoader* loader);
+
 public slots:
     virtual QList<DataPacket*> run() = 0;
 
@@ -34,6 +39,7 @@ protected:
     QString mDescription = "";
     QString mName = "";
     QString mId = "";
+    QJsonObject mParameters;
 };
 
 #define Algorithm_iid "org.CoBaB.Algorithm"

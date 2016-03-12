@@ -37,6 +37,9 @@ ConfirmationPageWidget::~ConfirmationPageWidget()
     delete ui;
 }
 
+/**
+ * @brief ConfirmationPageWidget::reset
+ */
 void ConfirmationPageWidget::reset()
 {
     clearTable();
@@ -139,9 +142,10 @@ void ConfirmationPageWidget::reset()
 
     //read name of algorithm
     QVariant chosenAlgorithm;
+    QPointer<Algorithm> algo = nullptr;
     emit readFromStack(2, chosenAlgorithm);
     if(chosenAlgorithm.canConvert<QPointer<Algorithm>>()){
-        QPointer<Algorithm> algo = chosenAlgorithm.value<QPointer<Algorithm>>();
+        algo = chosenAlgorithm.value<QPointer<Algorithm>>();
 		ui->mParameters->setItem(0, 1, new QTableWidgetItem(algo->getName()));
         ui->mParameters->item(0, 1)->setTextAlignment(Qt::AlignCenter);
     } else {
@@ -167,15 +171,43 @@ void ConfirmationPageWidget::reset()
             //QVariant value = iter.value().toObject()["default"].toVariant();
             ui->mParameters->setRowCount(std::max(object.keys().size(), ui->mParameters->rowCount()));
             //ui->mParameters->setItem(i, 2, new QTableWidgetItem(iter.key() + " = " + value.toString()));
-            ui->mParameters->setItem(i, 2, new QTableWidgetItem(iter.key() + " = " + iter.value().toString()));
+            QString kex = iter.key();
+            QString val = iter.value().toVariant().toString();
+            ui->mParameters->setItem(i, 2, new QTableWidgetItem(iter.key() + " = " + iter.value().toVariant().toString()));
+
+    /*mParameterList.clear();
+    if(algo != nullptr) {
+        QJsonObject parameterJson = algo->getParameters();
+        readParameters(parameterJson["Properties"].toObject());
+        for(int i = 0; i < mParameterList.size(); i++) {
+            ui->mParameters->setRowCount(std::max(mParameterList.size(), ui->mParameters->rowCount()));
+            ui->mParameters->setItem(i, 2, new QTableWidgetItem(mParameterList.at(i)));*/
+			
             ui->mParameters->item(i, 2)->setTextAlignment(Qt::AlignCenter);
             i++;
         }
-    } else {
-        LOG_ERR("no parameter file");
     }
 
     ui->mParameters->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+}
+
+/**
+ * @brief ConfirmationPageWidget::readParameters
+ * @param object
+ */
+void ConfirmationPageWidget::readParameters(QJsonObject object) {
+    QJsonObject::const_iterator iter;
+    for(iter = object.begin(); iter != object.end(); iter++) {
+        if (iter.value().toObject()["default"] != QJsonValue::Null) {
+            QVariant line = iter.key() + " = " + iter.value().toObject()["default"].toVariant().toString();
+            mParameterList.append(line.toString());
+        } else {
+            if(iter.value().isObject()) {
+                mParameterList.append(iter.key() + ":");
+                readParameters(iter.value().toObject());
+            }
+        }
+    }
 }
 
 /**
@@ -187,6 +219,9 @@ void ConfirmationPageWidget::clearTable() {
     }
 }
 
+/**
+ * @brief ConfirmationPageWidget::retranslateUi
+ */
 void ConfirmationPageWidget::retranslateUi() {
     ui->mSearchButton->setText(tr("Suche starten"));
     ui->mParameters->horizontalHeaderItem(0)->setText(tr("Datenordner"));
@@ -197,6 +232,10 @@ void ConfirmationPageWidget::retranslateUi() {
     }
 }
 
+/**
+ * @brief ConfirmationPageWidget::getName
+ * @return
+ */
 QString ConfirmationPageWidget::getName() {
     return tr("CoBaB - Bestätigung");
 }

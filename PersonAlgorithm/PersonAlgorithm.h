@@ -1,27 +1,27 @@
-#ifndef _TESTALGORITHM_H
-#define _TESTALGORITHM_H
+#ifndef PERSONALGORITHM_H
+#define PERSONALGORITHM_H
 
 #include <memory>
 #include "SearchAlgorithm.h"
 #include "SearchQuery.h"
 
 /**
- * The TestAlgorithm implementation
+ * The PersonAlgorithm implementation
  * @author Tung
  */
 
-class TestAlgorithm : public SearchAlgorithm {
+class PersonAlgorithm : public SearchAlgorithm {
 
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.CoBaB.Algorithm" FILE "TestAlgorithm.json")
+    Q_PLUGIN_METADATA(IID "org.CoBaB.Algorithm" FILE "PersonAlgorithm.json")
     Q_INTERFACES(Algorithm)
 
 public:
 
-    TestAlgorithm();
+    PersonAlgorithm();
 
     bool setInputs(const QList<DataPacket*>& inputDataList) override;
-     
+
     bool setParameters(const QJsonObject& parameters) override;
 
 public slots:
@@ -29,11 +29,11 @@ public slots:
 
     void cancel() override;
 
-private: 
+private:
     SearchQuery* mQuery;
     QList<int> mParameterList;
     bool mAborted;
-
+    SearchObject mSearchObject;
 };
 
-#endif //_TESTALGORITHM_H
+#endif // PERSONALGORITHM_H

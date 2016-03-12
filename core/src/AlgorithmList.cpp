@@ -24,7 +24,7 @@ AlgorithmList::AlgorithmList(const QString& path) {
  * @brief AlgorithmList::~AlgorithmList destructor to unload the algorithms
  */
 AlgorithmList::~AlgorithmList() {
-    for (auto& loader : mPluginLoaders){
+    for (auto& loader : mPluginLoaders) {
         loader->unload();
     }
 }
@@ -34,6 +34,7 @@ AlgorithmList::~AlgorithmList() {
  * @param a
  */
 AlgorithmList::AlgorithmList(AlgorithmList&& a) : mPluginLoaders(std::move(a.mPluginLoaders)) {
+
 }
 
 /**
@@ -58,6 +59,7 @@ QList<Algorithm*> AlgorithmList::findCompatibleAlgorithms(const QList<DataPacket
         if (algo) {
             if (algo->setInputs(inputDataList)) {
                 algos.push_back(std::move(algo));
+                algo->initialize(loader.get());
             }
         }
     }

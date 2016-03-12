@@ -40,7 +40,10 @@ private slots:
 private:
     Ui::ConfirmationPageWidget *ui;
     QPixmap pixmap;                     ///< This pixmap contains the chosen area of the Medium of the SearchObject.
+    QStringList mParameterList;
     void clearTable();
+    void readParameters(QJsonObject object);
+
 
 };
 

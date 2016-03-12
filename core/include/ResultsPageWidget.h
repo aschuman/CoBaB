@@ -32,7 +32,7 @@ public:
 
     void setResults(SearchResult result);
 
-    static const int EXIT_NEW_SEARCH;
+    static const int EXIT_NEW_SEARCH = 0;
 
 signals:
     void startAlgorithm(Algorithm* algo);

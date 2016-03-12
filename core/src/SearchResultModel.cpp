@@ -12,6 +12,7 @@ SearchResultModel::SearchResultModel() {
  * @brief Sets the SearchResult to be prepared by this model for a view.
  *
  * Does not take ownership of searchResult.
+ * A nullptr for searchResult indicates the absence of any result.
  *
  * @param The SearchResult.
  */
@@ -29,15 +30,17 @@ void SearchResultModel::setSearchResult(const SearchResult* searchResult)
 SearchFeedback SearchResultModel::getFeedback() const
 {
     QList<QPair<SearchObject, int>> feedbackList;
-    auto searchResultList = mSearchResult->getSearchResultList();
-    for(size_t i = 0; i < searchResultList.size(); ++i){
-        auto it = mFeedbacks.find(i);
-        QPair<SearchObject, int> feedback;
-        feedback.first = searchResultList.at(i).getSearchObject();
-        if(it != mFeedbacks.end()){
-            feedback.second = *it;
+    if(mSearchResult){
+        auto searchResultList = mSearchResult->getSearchResultList();
+        for(size_t i = 0; i < searchResultList.size(); ++i){
+            auto it = mFeedbacks.find(i);
+            QPair<SearchObject, int> feedback;
+            feedback.first = searchResultList.at(i).getSearchObject();
+            if(it != mFeedbacks.end()){
+                feedback.second = *it;
+            }
+            feedbackList.push_back(feedback);
         }
-        feedbackList.push_back(feedback);
     }
     SearchFeedback searchFeedback("Dual"); // todo
     searchFeedback.setFeedbackList(feedbackList);

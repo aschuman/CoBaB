@@ -101,6 +101,11 @@ void MainWindow::hideOpenDataset()
     ui->mDatasetAction->setVisible(false);
 }
 
+void MainWindow::setMenuVisible(bool visible)
+{
+    ui->mMenubar->setVisible(visible);
+}
+
 /**
  * @brief MainWindow::changeLanguageToGerman Stores the language as "German" and retranslates the GUI.
  */
