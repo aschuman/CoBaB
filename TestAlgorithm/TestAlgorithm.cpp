@@ -1,4 +1,5 @@
 #include "TestAlgorithm.h"
+#include <QThread>
 
 /**
  * @brief TestAlgorithm::TestAlgorithm create new algorithm with given ID
@@ -42,7 +43,7 @@ QList<DataPacket*> TestAlgorithm::run() {
             result->addResultElement(*resultElement);
         }
     }
-
+    QThread::msleep(1500);
     return list;
 }
 
