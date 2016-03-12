@@ -92,6 +92,7 @@ ResultsPageWidget::~ResultsPageWidget() {
  */
 void ResultsPageWidget::reset()
 {
+    mModel.setSearchResult(nullptr);
     QVariant var;
     emit readFromStack(1, var);
     if(var.canConvert<QPointer<Algorithm>>()) {
