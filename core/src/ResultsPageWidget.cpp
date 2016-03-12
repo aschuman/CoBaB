@@ -93,7 +93,7 @@ ResultsPageWidget::~ResultsPageWidget()
 void ResultsPageWidget::reset()
 {
     QVariant var;
-    emit readFromStack(1, var);
+    emit readFromStack(2, var);
     if(var.canConvert<QPointer<Algorithm>>()){
         mAlgorithm = var.value<QPointer<Algorithm>>().data();
         SearchAlgorithm* searchAlgo = qobject_cast<SearchAlgorithm*>(mAlgorithm);
@@ -121,7 +121,7 @@ void ResultsPageWidget::setResults(SearchResult result)
     }
 
     QVariant varQuery;
-    emit readFromStack(2, varQuery);
+    emit readFromStack(3, varQuery);
     if(varQuery.canConvert<std::shared_ptr<SearchQuery>>()){
         SearchQuery* query = varQuery.value<std::shared_ptr<SearchQuery>>().get();
         SearchFeedback feedback = mModel.getFeedback();
@@ -150,20 +150,20 @@ void ResultsPageWidget::on_btnNewSearch_clicked()
     bool newSearchPossible = true;
 
     QVariant varDatasetNo;
-    emit readFromStack(3, varDatasetNo);
+    emit readFromStack(4, varDatasetNo);
     if(!varDatasetNo.canConvert<int>()){
         LOG_ERR("could not find dataset on stack");
     }
 
     QVariant varSearchQuery;
-    emit readFromStack(2, varSearchQuery);
+    emit readFromStack(3, varSearchQuery);
     if(!varSearchQuery.canConvert<std::shared_ptr<SearchQuery>>()){
         newSearchPossible = false;
         LOG_ERR("could not find search query on stack");
     }
 
     QVariant varAlgorithm;
-    emit readFromStack(1, varAlgorithm);
+    emit readFromStack(2, varAlgorithm);
     if(!varAlgorithm.canConvert<QPointer<Algorithm>>()){
         LOG_ERR("could not find algorithm on stack");
     }

@@ -154,6 +154,7 @@ QJsonTreeItem* QJsonTreeItem::load(const QJsonValue& value, QJsonTreeItem* paren
 
     QJsonTreeItem * rootItem = new QJsonTreeItem(parent);
     rootItem->setKey("root");
+    rootItem->setType(value.type());
 
     if ( value.isObject())
     {

@@ -55,7 +55,7 @@ void ConfirmationPageWidget::reset()
 
     //read the index of the chosen dataset in the dataset list from the stack
     QVariant varChosenDataset;
-    emit readFromStack(3, varChosenDataset);
+    emit readFromStack(4, varChosenDataset);
     if(varChosenDataset.canConvert<int>()) {
         indexOfChosenDataset = varChosenDataset.value<int>();
 
@@ -73,9 +73,10 @@ void ConfirmationPageWidget::reset()
 
     //read the SearchObject from the stack
     QVariant varSearchQuery;
-    emit readFromStack(2, varSearchQuery);
+    emit readFromStack(3, varSearchQuery);
+    std::shared_ptr<SearchQuery> searchQuery = nullptr;
     if(varSearchQuery.canConvert<std::shared_ptr<SearchQuery>>()) {
-        std::shared_ptr<SearchQuery> searchQuery = varSearchQuery.value<std::shared_ptr<SearchQuery>>();
+        searchQuery = varSearchQuery.value<std::shared_ptr<SearchQuery>>();
         SearchObject searchObject = searchQuery->getSearchObject();
 
         QImage chosenImage;
@@ -115,18 +116,21 @@ void ConfirmationPageWidget::reset()
 
     // add names of chosen datasets
     QVariant varDatasetIndices;
-    emit readFromStack(0, varDatasetIndices);
+    emit readFromStack(1, varDatasetIndices);
     if(varDatasetIndices.canConvert<std::shared_ptr<QModelIndexList>>()) {
         std::shared_ptr<QModelIndexList> indices = varDatasetIndices.value<std::shared_ptr<QModelIndexList>>();
         for(int i = 0; i < indices.get()->size(); i++) {
             int index = indices.get()->at(i).row();
             if((list != nullptr) && (index < list->getDatasetList().size())) {
                 QString name = list->getDatasetList().at(index).getName();
+                QList<QString> datasetList;
                 if(name != chosenDataset->getName()) {
                     ui->mParameters->insertRow(i);
                     ui->mParameters->setItem(i, 0, new QTableWidgetItem(name));
                     ui->mParameters->item(i, 0)->setTextAlignment(Qt::AlignCenter);
+                    datasetList.append(list->getDatasetList().at(index).getPath());
                 }
+                searchQuery->setDatasets(searchQuery->getDatasets()+datasetList);
             } else {
                 LOG_ERR("invalid dataset index");
             }
@@ -135,7 +139,7 @@ void ConfirmationPageWidget::reset()
 
     //read name of algorithm
     QVariant chosenAlgorithm;
-    emit readFromStack(1, chosenAlgorithm);
+    emit readFromStack(2, chosenAlgorithm);
     if(chosenAlgorithm.canConvert<QPointer<Algorithm>>()){
         QPointer<Algorithm> algo = chosenAlgorithm.value<QPointer<Algorithm>>();
 		ui->mParameters->setItem(0, 1, new QTableWidgetItem(algo->getName()));
@@ -145,22 +149,25 @@ void ConfirmationPageWidget::reset()
     }
 
     //read parameters and their values
-    QVariant parameterFile;
-    emit readFromStack(0, parameterFile);
-    if (parameterFile.canConvert<QString>()) {
+    QVariant varParameters;
+    emit readFromStack(0, varParameters);
+    if(varParameters.canConvert<std::shared_ptr<QJsonObject>>()) {
+        std::shared_ptr<QJsonObject> parameters = varParameters.value<std::shared_ptr<QJsonObject>>();
+    /*if (parameterFile.canConvert<QString>()) {
         QString fileName = parameterFile.value<QString>();
         QFile file(fileName);
         if(!file.open(QFile::ReadOnly)) {
             LOG_ERR("cannot open parameter file");
         }
-        QJsonObject json = QJsonDocument::fromJson(file.readAll()).object();
-        QJsonObject object = json["Properties"].toObject();
+        QJsonObject json = QJsonDocument::fromJson(file.readAll()).object();*/
+        QJsonObject object = parameters->value("root").toObject();
         QJsonObject::const_iterator iter;
         int i = 0;
         for(iter = object.begin(); iter != object.end(); iter++) {
-            QVariant value = iter.value().toObject()["default"].toVariant();
+            //QVariant value = iter.value().toObject()["default"].toVariant();
             ui->mParameters->setRowCount(std::max(object.keys().size(), ui->mParameters->rowCount()));
-            ui->mParameters->setItem(i, 2, new QTableWidgetItem(iter.key() + " = " + value.toString()));
+            //ui->mParameters->setItem(i, 2, new QTableWidgetItem(iter.key() + " = " + value.toString()));
+            ui->mParameters->setItem(i, 2, new QTableWidgetItem(iter.key() + " = " + iter.value().toString()));
             ui->mParameters->item(i, 2)->setTextAlignment(Qt::AlignCenter);
             i++;
         }

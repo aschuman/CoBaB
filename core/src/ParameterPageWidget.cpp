@@ -17,15 +17,25 @@ ParameterPageWidget::ParameterPageWidget() :
     file.open(QIODevice::ReadOnly);
     QJsonObject object = QJsonDocument::fromJson(file.readAll()).object();
 
-    QJsonObject jsonObject = object["Properties"].toObject();
+    //QJsonObject jsonObject = object["Properties"].toObject();
+    QJsonObject jsonObject;
+    QJsonObject jObject = object["Properties"].toObject();
+    for(QString key: jObject.keys()) {
+        for(QString key2: jObject.value(key).toObject().keys()) {
+            if(key2 == "default") {
+                jsonObject.insert(key, jObject.value(key).toObject().value(key2));
+            }
+        }
+    }
+
     QVector<QJsonObject> list;
     list.append(jsonObject);
     mParameterModel = new QJsonModel(ui->mParameterWidget, list);
 
     ui->mParameterWidget->setModel(mParameterModel);
+    ui->mParameterWidget->setColumnWidth(0,250);
 
     connect(ui->mNext, SIGNAL(clicked()), this, SLOT(nextButtonClicked()));
-    connect(ui->mParameterWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(on_mParameterWidget_clicked(QModelIndex)));
 }
 
 ParameterPageWidget::~ParameterPageWidget()
@@ -52,6 +62,12 @@ void ParameterPageWidget::nextButtonClicked() {
     QVariant var;
     var.setValue(list);
     emit pushToStack(var);
+
+    std::shared_ptr<QJsonObject> parameters = std::make_shared<QJsonObject>(mParameterModel->getParameters());
+    QVariant var2;
+    var2.setValue(parameters);
+    emit pushToStack(var2);
+
     exit(EXIT_NEXT);
 }
 
@@ -72,10 +88,4 @@ void ParameterPageWidget::retranslateUi() {
 
 QString ParameterPageWidget::getName() {
     return tr("CoBaB - Parameter");
-}
-
-void ParameterPageWidget::on_mParameterWidget_clicked(const QModelIndex &index)
-{
-    QModelIndex indexNew = index;
-    mParameterModel->flags(indexNew);
 }
