@@ -24,6 +24,7 @@ public:
     void retranslate();
     void showOpenDataset();
     void hideOpenDataset();
+    void setMenuVisible(bool visible);
 
 public slots:
     void showAboutDialog();

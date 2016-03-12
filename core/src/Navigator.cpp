@@ -168,6 +168,8 @@ bool Navigator::tryDisplayTopPage()
             LOG_ERR("could not display unregistered page ", to_String(type));
         }
     }
+
+    mMainWindow->setMenuVisible(mPageStack.size() == 1);
     return success;
 }
 
