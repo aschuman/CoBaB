@@ -14,7 +14,6 @@
  */
 void FeedbackDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
-    //painter->save();
     if(index.data().canConvert<SearchResultElementFeedback>()){
         SearchResultElementFeedback element = index.data().value<SearchResultElementFeedback>();
         QImage scaledImg = element.img.scaled(option.rect.width(), option.rect.height(), Qt::KeepAspectRatio);
@@ -27,14 +26,16 @@ void FeedbackDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
         else
             painter->setPen(Qt::red);
 
+        QPen pen = painter->pen();
+        pen.setWidth(3);
+        painter->setPen(pen);
+
         QRect imageRect(option.rect.x(), option.rect.y(), scaledImg.width(), scaledImg.height());
 
         painter->drawRect(imageRect);
 
         painter->setPen(QPen());
-        painter->drawText(imageRect, Qt::AlignRight | Qt::AlignTop, QString::number(element.rating));
     }
-    //painter->restore();
 }
 
 /**
