@@ -1,0 +1,12 @@
+Während der Implementierung ergaben sich folgende Änderungen im Entwurf.
+
+\subsection{ViewerPageWidget}
+Da sich der Photo- und der SingleFrameVideoViewer in ihren UIs nur um ein paar Buttons unterscheiden, nutzen sie die gemeinsame UI des ViewerPageWidget. Der PhotoViewer blendet die nicht benötigten UI Elemente aus. Daher sind die Buttons des SingleFrameVideoViewers in die Basisklasse verschoben worden.
+
+Der Entwurf war für das GraphicsSingleFrameVideoItem so nicht umsetzbar, da es keinen Sinn macht, dass das GraphicsSingleFrameVideoItem, das im CustomGraphicsView als einzelnes Frame angezeigt wird, einen Player besitzt. Daher wurde die Abspiellogik direkt im SingleFrameVideoViewer implementiert und die beiden Klassen (GraphicsSingleFrameVideoItem und SingleFrameVideoPlayer) wurden weggelassen. Für die Videoframes wurden stattdessen ebenfalls ClickableGraphicsPixmapItems verwendet, was zudem näher an der Implementierung des PhotoViewers liegt.
+
+Das CustomGraphicsView sollte erst ein QGraphicsView besitzen, erbt aber nun direkt von QGraphicsView, um das Zoomen zu ermöglichen. Da es nun ein QGraphicsView ist, wurden die Buttons ins ViewerPageWidget verschoben.
+
+In den ClickableGraphicsItems wurde außerdem nicht das mousePressEvent, sondern das contextMenuEvent überschrieben, da nur der Rechtsklick abgefangen werden sollte, um ein Kontextmenü anzuzeigen.
+
+Der VideoViewer und das zugehörige ClickableQGraphicsVideoItem wurden aus Zeitgründen nicht implementiert.
