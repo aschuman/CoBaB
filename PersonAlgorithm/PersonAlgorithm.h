@@ -25,12 +25,9 @@ public:
 public slots:
     QList<DataPacket*> run() override;
 
-    void cancel() override;
-
 private:
     SearchQuery* mQuery;
     QList<int> mParameterList;
-    bool mAborted;
     SearchObject mSearchObject;
 };
 

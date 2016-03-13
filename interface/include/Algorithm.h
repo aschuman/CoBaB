@@ -33,12 +33,13 @@ public:
 public slots:
     virtual QList<DataPacket*> run() = 0;
 
-    virtual void cancel() = 0;
+    virtual void cancel();
 
 protected:
     QString mDescription = "";
     QString mName = "";
     QString mId = "";
+    bool mCancel = false;
     QJsonObject mParameters;
 };
 

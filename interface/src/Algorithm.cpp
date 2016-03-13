@@ -78,3 +78,11 @@ bool Algorithm::setParameters(const QJsonObject& parameters)
 QJsonObject Algorithm::getParameters() {
     return mParameters;
 }
+
+/**
+ * @brief Cancel running algorithm.
+ */
+void Algorithm::cancel()
+{
+    mCancel = true;
+}
