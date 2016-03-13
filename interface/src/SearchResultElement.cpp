@@ -17,7 +17,7 @@ SearchResultElement::SearchResultElement() {
  * @brief gets the score of the element
  * @return the score
  */
-int SearchResultElement::getScore() const {
+double SearchResultElement::getScore() const {
     return mScore;
 }
 
@@ -25,7 +25,7 @@ int SearchResultElement::getScore() const {
  * @brief sets the score of the element
  * @param score to be set
  */
-void SearchResultElement::setScore(const int score) {
+void SearchResultElement::setScore(const double score) {
     mScore = score;
 }
 

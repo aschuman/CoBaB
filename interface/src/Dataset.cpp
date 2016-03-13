@@ -54,7 +54,10 @@ Dataset& Dataset::operator=(const Dataset& other)
     mPreviewPhoto = other.mPreviewPhoto;
     mPath = other.mPath;
     mType = other.mType;
-    mMediaList = other.getMediaList();
+    for(Medium* iter: other.getMediaList()) {
+        Medium* medium = iter->copy();
+        mMediaList.append(medium);
+    }
     return *this;
 }
 

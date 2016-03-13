@@ -1,4 +1,5 @@
 #include "PersonAlgorithm.h"
+#include <QCoreApplication>
 
 /**
  * @brief PersonAlgorithm::PersonAlgorithm create new algorithm with given ID
@@ -9,7 +10,6 @@ PersonAlgorithm::PersonAlgorithm() {
     mName = "PersonSearch";
     mDescription = "algorithm that searches for person annotations in photo datasets only";
     mSupportProgressInfo = false;
-    mAborted = false;
 }
 
 /**
@@ -28,9 +28,8 @@ QList<DataPacket*> PersonAlgorithm::run() {
 
         for (Medium* medium : dataset.getMediaList()) {
 
-            if (mAborted == true) {
-                return list;
-            }
+            QCoreApplication::processEvents();
+            if (mCancel) return list;
 
             Photo* photo = dynamic_cast<Photo*>(medium);
 
@@ -60,13 +59,6 @@ QList<DataPacket*> PersonAlgorithm::run() {
     }
 
     return list;
-}
-
-/**
- * @brief PersonAlgorithm::cancel terminate the algorithm
- */
-void PersonAlgorithm::cancel() {
-    mAborted = true;
 }
 
 /**
@@ -105,16 +97,6 @@ bool PersonAlgorithm::setInputs(const QList<DataPacket*>& inputDataList) {
         }
     }
 
-    return true;
-}
-
-/**
- * @brief PersonAlgorithm::setParameters set algorithm parameters
- * @param parameters the parameters
- * @return true if the algorithm accepts the parameters
- */
-bool PersonAlgorithm::setParameters(const QJsonObject& parameters) {
-    Q_UNUSED(parameters);
     return true;
 }
 

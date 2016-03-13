@@ -15,8 +15,23 @@ AlgorithmList::AlgorithmList(const QString& path) {
     {
         QString filePath = pluginsDir.absoluteFilePath(fileName);
         std::unique_ptr<QPluginLoader> loader =  std::make_unique<QPluginLoader>(filePath);
-        loader->load();
-        mPluginLoaders.push_back(std::move(loader));
+        LOG("loading plugin '",  fileName.toStdString(), "' ..");
+        QObject* plugin = loader->instance();
+        if(plugin){
+            Algorithm* loadedAlgorithm = qobject_cast<Algorithm*>(plugin);
+            if (loadedAlgorithm) {
+                if(loadedAlgorithm->initialize(loader.get())){
+                    mPluginLoaders.push_back(std::move(loader));
+                    LOG("sucessfully loaded algorithm '", loadedAlgorithm->getName().toStdString(), "'");
+                } else {
+                    LOG("plugin could not be initialized");
+                }
+            } else {
+                LOG("plugin does not implement Algorithm-interface");
+            }
+        } else {
+            LOG("could not load plugin");
+        }
     }
 }
 
@@ -55,11 +70,10 @@ AlgorithmList& AlgorithmList::operator=(AlgorithmList &&a) {
 QList<Algorithm*> AlgorithmList::findCompatibleAlgorithms(const QList<DataPacket*>& inputDataList) {
     QList<Algorithm*> algos;
     for (auto& loader : mPluginLoaders) {
-        auto algo = loadAlgorithm(loader.get());
+        auto algo = instanceAlgorithm(loader.get());
         if (algo) {
             if (algo->setInputs(inputDataList)) {
                 algos.push_back(std::move(algo));
-                algo->initialize(loader.get());
             }
         }
     }
@@ -73,7 +87,7 @@ QList<Algorithm*> AlgorithmList::findCompatibleAlgorithms(const QList<DataPacket
 QList<Algorithm*> AlgorithmList::getAlgorithmList() {
     QList<Algorithm*> algos;
     for(auto& loader : mPluginLoaders) {
-        auto algo = loadAlgorithm(loader.get());
+        auto algo = instanceAlgorithm(loader.get());
         if (algo) {
             algos.push_back(std::move(algo));
         }
@@ -86,18 +100,12 @@ QList<Algorithm*> AlgorithmList::getAlgorithmList() {
  * @param loader pointer to loader
  * @return an pointer to algorithm instance
  */
-Algorithm* AlgorithmList::loadAlgorithm(QPluginLoader* loader) {
+Algorithm* AlgorithmList::instanceAlgorithm(QPluginLoader* loader) {
     Algorithm* loadedAlgorithm = nullptr;
     QObject* plugin = loader->instance();
 
-    if (plugin) {
-        LOG("loading plugin ",  loader->fileName().toStdString(), " ..");
+    if (plugin)
         loadedAlgorithm = qobject_cast<Algorithm*>(plugin);
-        if (loadedAlgorithm) {
-            LOG("sucessfully loaded algorithm ", loadedAlgorithm->getName().toStdString());
-        } else {
-            LOG("plugin does not implement Algorithm-interface");
-        }
-    }
+
     return loadedAlgorithm;
 }
