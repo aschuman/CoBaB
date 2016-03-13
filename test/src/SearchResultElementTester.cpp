@@ -6,9 +6,9 @@
 void SearchResultElementTester::testScore()
 {
     SearchResultElement s;
-    QCOMPARE(s.getScore(), 0);
-    s.setScore(5);
-    QCOMPARE(s.getScore(), 5);
+    QCOMPARE(s.getScore(), 0.);
+    s.setScore(5.);
+    QCOMPARE(s.getScore(), 5.);
 }
 void SearchResultElementTester::testSearchObject()
 {
