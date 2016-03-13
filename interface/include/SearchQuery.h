@@ -11,7 +11,7 @@
 #include "SearchObject.h"
 
 /**
- * @brief SearchQuery class
+ * @brief The SearchQuery class builds a search query with the given searchobject and the datasets to be searched from.
  * @author Georgi
  */
 class SearchQuery: public DataPacket {

@@ -10,7 +10,8 @@
 #include "SearchResultElement.h"
 
 /**
- * @brief SearchResult class
+ * @brief The SearchResult class builds a search result with a list of search result elements.
+ * The search result elements can be sorted by score given by the algorithm.
  * @author Violina
  */
 class SearchResult: public DataPacket {

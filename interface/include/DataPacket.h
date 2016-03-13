@@ -9,7 +9,7 @@
 #include <QUuid>
 
 /**
- * @brief DataPacket implementation
+ * @brief The class represents an abstraction for the three datapacket types: SearchResult, SearchFeedback and SearchResult
  * @author Violina, Georgi
  */
 class DataPacket: public Serializable {

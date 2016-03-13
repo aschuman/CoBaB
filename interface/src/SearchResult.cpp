@@ -1,14 +1,14 @@
 #include "SearchResult.h"
 
 /**
- * @brief SearchResult::SearchResult default constructor
+ * @brief SearchResult::SearchResult Costructs a default SearchResult.
  */
 SearchResult::SearchResult() {
     mType = DataPacket::Type::SEARCHRESULT;
 }
 
 /**
- * @brief a constructor for the class
+ * @brief SearchResult::SearchResult Constructs a SearchResult.
  * @param list of SearchResultElements
  */
 SearchResult::SearchResult(QList<SearchResultElement> list) {
@@ -17,15 +17,15 @@ SearchResult::SearchResult(QList<SearchResultElement> list) {
 }
 
 /**
- * @brief SearchResult::addResultElement
- * @param newElement
+ * @brief SearchResult::addResultElement Adds a result element.
+ * @param newElement to be added
  */
 void SearchResult::addResultElement(const SearchResultElement &newElement) {
    mSearchResultElementList.append(newElement);
 }
 
 /**
- * @brief gets the list of SearchResultElements
+ * @brief SearchResult::getSearchResultList Gets the list of SearchResultElements.
  * @return the list of SearchResultElements
  */
 QList<SearchResultElement> SearchResult::getSearchResultList() const {
@@ -33,7 +33,7 @@ QList<SearchResultElement> SearchResult::getSearchResultList() const {
 }
 
 /**
- * @brief sorts the SearchResultElements by score
+ * @brief SearchResult::sortByScore Sorts the SearchResultElements by score.
  * @return the sorted list
  */
 QList<SearchResultElement> SearchResult::sortByScore() {
@@ -42,9 +42,9 @@ QList<SearchResultElement> SearchResult::sortByScore() {
 }
 
 /**
- * @brief override << the operator
+ * @brief operator << Overrides the operator <<.
  * @param out the datastream
- * @param SearchResult whose data will be sent
+ * @param searchResult to be written
  * @return out the datastream
  */
 QDataStream& operator<<(QDataStream& out, const SearchResult& searchResult) {
@@ -54,9 +54,9 @@ QDataStream& operator<<(QDataStream& out, const SearchResult& searchResult) {
 }
 
 /**
- * @brief override >> the operator
+ * @brief operator >> Overrides the operator >>.
  * @param in the datastream
- * @param SearchResult to be changed
+ * @param searchResult to be read
  * @return in the datastream
  */
 QDataStream& operator>>(QDataStream& in, SearchResult& searchResult) {
@@ -66,8 +66,8 @@ QDataStream& operator>>(QDataStream& in, SearchResult& searchResult) {
 }
 
 /**
- * @brief calls the << operator
- * @param in the datastream
+ * @brief SearchResult::toStream Calls the << operator and writes the searchresult to stream.
+ * @param out the datastream
  */
 void SearchResult::toStream(QDataStream& out) const  {
     DataPacket::toStream(out);
@@ -76,9 +76,9 @@ void SearchResult::toStream(QDataStream& out) const  {
 }
 
 /**
- * @brief calls the >> operator
- * @param out the datastream
- */
+* @brief SearchResult::fromStream Calls the >> operator and calls the searchresult from stream.
+* @param in the datastream
+*/
 void SearchResult::fromStream(QDataStream& in) {
     DataPacket::fromStream(in);
     in >> mSearchResultElementList;
