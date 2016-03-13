@@ -263,9 +263,7 @@ void ViewerPageWidget::nextWidget(QAction* action) {
     query.setValue(mSearchQuery);
     pushToStack(query);
 
-    // todo: push actual, user-chosen algorithm
     QPointer<Algorithm> algo(mAlgorithms.value(action->text()));
-    //std::shared_ptr<Algorithm> algo = std::make_shared<TestAlgorithm>("id123");
     QVariant varAlgo;
     varAlgo.setValue(algo);
     pushToStack(varAlgo);

@@ -50,7 +50,7 @@ void BookmarkTester::testSearchQuery() {
 void BookmarkTester::testSearchResult() {
     QList<SearchResultElement> resultList = fB.getSearchResult().getSearchResultList();
     QCOMPARE(resultList.length(), 1);
-    QCOMPARE(resultList.value(0).getScore(), 100);
+    QCOMPARE(resultList.value(0).getScore(), 100.);
 }
 
 void BookmarkTester::testSearchFeedback() {

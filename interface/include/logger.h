@@ -5,13 +5,22 @@
 #include <string>
 #include <mutex>
 
+/**
+ * @brief Denotes the severity of the cause of a log message.
+ */
 enum severity_type
 {
-   debug = 1,
-   error,
-   warning
+   debug = 1, ///< message does not describe a problem
+   error, ///< message describes a problem that could not be handled
+   warning ///< message describes a problem that could be handled
 };
 
+
+/**
+ * @brief Writes messages with timestamp and severity_type to a stream
+ *
+ * The Stream is determined by the log_policy.
+ */
 template< typename log_policy >
 class logger
 {
@@ -36,6 +45,10 @@ public:
 };
 
 template< typename log_policy >
+/**
+ * @brief Constructs a logger. Sends the given name to this loggers log_policy to open the stream.
+ * @param name Name of the logger.
+ */
 logger< log_policy >::logger( const std::string& name )
 {
    log_line_number = 0;
@@ -47,7 +60,11 @@ logger< log_policy >::logger( const std::string& name )
     policy->open_ostream( name );
 }
 
+
 template< typename log_policy >
+/**
+ * @brief Closes the stream. Destructs this logger.
+ */
 logger< log_policy >::~logger()
 {
     if( policy )
@@ -57,6 +74,13 @@ logger< log_policy >::~logger()
     }
 }
 
+
+/**
+ * @brief Writes a log message.
+ *
+ * Method is thread-safe.
+ * @param args Mutiple arguments that will be written to the stream.
+ */
 template< typename log_policy >
     template< severity_type severity , typename...Args >
 void logger< log_policy >::print( Args...args )

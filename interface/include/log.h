@@ -6,6 +6,9 @@
 #include <string>
 #include "logger.h"
 
+/**
+ * @brief A log policy for a logger. Writes log messages to a file.
+ */
 class file_log_policy
 {
        std::unique_ptr< std::ofstream > out_stream;

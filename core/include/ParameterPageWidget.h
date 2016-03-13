@@ -33,8 +33,6 @@ public slots:
 private slots:
     //void on_mSearchDatasetListView_indexesMoved(const QModelIndexList &indexes);
 
-    void on_mParameterWidget_clicked(const QModelIndex &index);
-
 private:
     Ui::ParameterPageWidget *ui;
     DatasetList* mSearchDatasetList;
@@ -45,5 +43,6 @@ private:
 
 #include <memory>
 Q_DECLARE_METATYPE(std::shared_ptr<QModelIndexList>)
+Q_DECLARE_METATYPE(std::shared_ptr<QJsonObject>)
 
 #endif // PARAMETERPAGEWIDGET_H

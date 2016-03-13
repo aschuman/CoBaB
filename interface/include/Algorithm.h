@@ -18,7 +18,7 @@ public:
     
     virtual bool setInputs(const QList<DataPacket*>& inputDataList) = 0;
     
-    virtual bool setParameters(const QJsonObject& parameters) = 0;
+    virtual bool setParameters(const QJsonObject& parameters);
 
     virtual QString getId() const;
 
@@ -28,17 +28,18 @@ public:
 
     QJsonObject getParameters();
 
-    void initialize(QPluginLoader* loader);
+    bool initialize(QPluginLoader* loader);
 
 public slots:
     virtual QList<DataPacket*> run() = 0;
 
-    virtual void cancel() = 0;
+    virtual void cancel();
 
 protected:
     QString mDescription = "";
     QString mName = "";
     QString mId = "";
+    bool mCancel = false;
     QJsonObject mParameters;
 };
 

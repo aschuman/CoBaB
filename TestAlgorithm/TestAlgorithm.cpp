@@ -72,13 +72,3 @@ bool TestAlgorithm::setInputs(const QList<DataPacket*>& inputDataList) {
     mQuery = dynamic_cast<SearchQuery*>(packet);
     return true;
 }
-
-/**
- * @brief TestAlgorithm::setParameters set algorithm parameters
- * @param parameters the parameters
- * @return true if the algorithm accepts the parameters
- */
-bool TestAlgorithm::setParameters(const QJsonObject& parameters) {
-    Q_UNUSED(parameters);
-    return true;
-}

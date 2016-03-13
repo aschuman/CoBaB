@@ -18,9 +18,9 @@ public:
     
     SearchResultElement();
     
-    int getScore() const;
+    double getScore() const;
 
-    void setScore(const int score);
+    void setScore(const double score);
     
     SearchObject getSearchObject() const;
 
@@ -38,7 +38,7 @@ public:
 
 private:
 
-    int mScore;     ///< The score of the searchresult
+    double mScore;     ///< The score of the searchresult
 
     SearchObject mSearchObject;     ///< The searchobject
 

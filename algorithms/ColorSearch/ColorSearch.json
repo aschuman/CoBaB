@@ -1,0 +1,16 @@
+{
+    "Author"      : "Arne Schumann",
+    "Date"        : "2016-03-10",
+    "Version"     : "1.0",
+    "Name"        : "Color Search",
+    "Description" : "Content-based search algorithm that focuses on color distribution.",
+    "Properties"  : 
+    {
+        "Number of Bins" : 
+        {
+            "type"        : "int",
+            "default"     : 4,
+            "description" : "Number of histogram bins to use for the color search."
+        }
+    }
+}

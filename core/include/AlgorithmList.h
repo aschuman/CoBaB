@@ -28,7 +28,7 @@ public:
     QList<Algorithm*> getAlgorithmList();
 
 private:
-    Algorithm* loadAlgorithm(QPluginLoader* loader);
+    Algorithm* instanceAlgorithm(QPluginLoader* loader);
 
     std::vector<std::unique_ptr<QPluginLoader>> mPluginLoaders;
 };

@@ -18,7 +18,7 @@ public:
 signals:
     void producedIntermediateResults(SearchResult& searchResult);
     
-    void madeProgress(double progress, QString message);
+    void madeProgress(double progress, QString message="");
 
 protected:
     bool mSupportProgressInfo = false;

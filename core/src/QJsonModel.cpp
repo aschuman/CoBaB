@@ -37,6 +37,10 @@ QJsonModel::QJsonModel(QObject *parent, QVector<QJsonObject> list) :
 
 }
 
+QJsonObject QJsonModel::getParameters() {
+    return mRootItem->getChilds().value(0)->toJson();
+}
+
 void QJsonModel::saveSettings(int row, QUrl filename)
 {
     QJsonObject data;
@@ -51,44 +55,41 @@ void QJsonModel::loadSettings(int row, QUrl filename)
     int j = mRootItem->getChilds().size() - 1;
     mRootItem->getChilds().swap(row, j);
 }
-Qt::ItemFlags QJsonModel::flags(QModelIndex& index)
+Qt::ItemFlags QJsonModel::flags(const QModelIndex& index) const
 {
-int row;
-row = index.row();
-//checks if not root item or the one below
-if (row == 0 || index.parent().parent().row()) {
-    return Qt::ItemIsSelectable;
-} else {
-    return Qt::ItemIsEditable;
-}
+  if(index.column() == 1)
+  {
+      QJsonTreeItem* temp = static_cast<QJsonTreeItem*>(index.internalPointer());
+      if (temp->type() != QJsonValue::Array && temp->type() != QJsonValue::Object) {
+          return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
+      }
+  }
+  return QAbstractItemModel::flags(index);
 }
 
-bool QJsonModel::setData(QModelIndex& index, QVariant& value, int role)
+bool QJsonModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
     if (!index.isValid())
         return false;
-    QJsonValue tempvalue = value.toJsonValue();
     if (role == Qt::EditRole) {
-        QJsonTreeItem temp = backtrack(index);
-        if (tempvalue.type() != temp.type()) {
-            return false;
-        }
-        temp.setValue(tempvalue.toString());
+        QJsonTreeItem* temp = static_cast<QJsonTreeItem*>(index.internalPointer());
+        temp->setValue(value.toString());
         return true;
     }
     return false;
 }
-QJsonTreeItem QJsonModel::backtrack(QModelIndex& index)
+QJsonTreeItem* QJsonModel::backtrack(QModelIndex& index)
 {
-    if(index.parent().parent().isValid() == false) //one row under root
-    {
-       return mRootItem->getChilds().value(index.row());
-    } else {
-        QModelIndex tempindex = index.parent();
-        QModelIndex &parent = tempindex;
-        QJsonTreeItem temp = backtrack(parent);
-        return temp.getChilds().value(index.row());
-    }
+    if (index.parent().isValid() == false) //one row under root
+        {
+            return mRootItem->getChilds().at(index.row());
+        }
+        else {
+            QModelIndex tempindex = index.parent();
+            QModelIndex& parent = tempindex;
+            QJsonTreeItem* temp = backtrack(parent);
+            return temp;
+        }
 }
 
 void QJsonModel::loadQJson(QJsonObject data)

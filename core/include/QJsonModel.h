@@ -38,8 +38,8 @@ public:
       */
      void loadSettings(int row, QUrl filename);
 
-     Qt::ItemFlags flags(QModelIndex& index);
-     bool setData(QModelIndex& index, QVariant& value, int role);
+     Qt::ItemFlags flags(const QModelIndex& index) const override;
+     bool setData(const QModelIndex& index, const QVariant& value, int role) override;
 
     bool load(const QString& fileName);
     bool load(QIODevice * device);
@@ -52,6 +52,8 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     void setIcon(const QJsonValue::Type& type, const QIcon& icon);
 
+    QJsonObject getParameters();
+
 public slots:
     /*!
      * \brief loadQJson loads a qjsonobject into the model
@@ -63,7 +65,7 @@ signals:
     void saveQJson(QJsonObject data, QUrl directory);
 
 protected:
-    QJsonTreeItem backtrack(QModelIndex &index);
+    QJsonTreeItem *backtrack(QModelIndex &index);
 
     QJsonTreeItem * mRootItem;
     QJsonDocument mDocument;
