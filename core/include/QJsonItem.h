@@ -6,8 +6,8 @@
 #include <QJsonObject>
 
 /**
- * From 3DMuVi
- * @brief The QJsonTreeItem class
+ * @brief The class builds an QJsonTreeItem from a Jsonfile.
+ * @author 3DMuVi-Team
  */
 class QJsonTreeItem
 {

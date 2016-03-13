@@ -6,7 +6,7 @@
 #include "log.h"
 
 /**
- * @brief ParameterPageWidget::ParameterPageWidget
+ * @brief ParameterPageWidget::ParameterPageWidget Constructs a ParameterPageWidget.
  */
 ParameterPageWidget::ParameterPageWidget() :
     ui(new Ui::ParameterPageWidget), mSearchDatasetList(nullptr) {
@@ -18,17 +18,18 @@ ParameterPageWidget::ParameterPageWidget() :
 }
 
 /**
- * @brief ParameterPageWidget::~ParameterPageWidget
+ * @brief ParameterPageWidget::~ParameterPageWidget Destructs a ParameterPageWidget.
  */
 ParameterPageWidget::~ParameterPageWidget() {
     delete ui;
 }
 
 /**
- * @brief ParameterPageWidget::reset
+ * @brief ParameterPageWidget::reset Resets the data of the ParameterPageWidget.
  */
 void ParameterPageWidget::reset() {
 
+    //display the parameters
     QVariant var;
     emit readFromStack(-2, var);
     if (var.canConvert<std::shared_ptr<DatasetList>>()){
@@ -36,6 +37,7 @@ void ParameterPageWidget::reset() {
         mModel.setDatasetList(mSearchDatasetList->getDatasetList());
     }
 
+    //display the parameters
     QVariant chosenAlgorithm;
     emit readFromStack(0, chosenAlgorithm);
     if (chosenAlgorithm.canConvert<QPointer<Algorithm>>()){
@@ -66,10 +68,11 @@ void ParameterPageWidget::reset() {
 }
 
 /**
- * @brief ParameterPageWidget::nextButtonClicked
+ * @brief ParameterPageWidget::nextButtonClicked Switches to the next GUI window and pushesh the needed data to stack.
  */
 void ParameterPageWidget::nextButtonClicked() {
 
+    //push the chosen datasets to stack
     QItemSelectionModel* model = ui->mSearchDatasetListView->selectionModel();
     QModelIndexList listOfDatasetIndexes = model->selectedIndexes();
     std::shared_ptr<QModelIndexList> list = std::make_shared<QModelIndexList>(listOfDatasetIndexes);
@@ -77,6 +80,7 @@ void ParameterPageWidget::nextButtonClicked() {
     var.setValue(list);
     emit pushToStack(var);
 
+    //push the parameters to stack
     std::shared_ptr<QJsonObject> parameters = std::make_shared<QJsonObject>(mParameterModel->getParameters());
     QVariant var2;
     var2.setValue(parameters);
@@ -85,18 +89,8 @@ void ParameterPageWidget::nextButtonClicked() {
     exit(EXIT_NEXT);
 }
 
-/*void ParameterPageWidget::on_mSearchDatasetListView_indexesMoved(const QModelIndexList &indexes)
-{
-
-    //save chosen datasets to the stack
-    QModelIndexList listOfDatasetIndexes = indexes;
-    for (int i = 0; i <listOfDatasetIndexes.size(); i++) {
-        pushToStack(listOfDatasetIndexes.at(i));
-    }
-}*/
-
 /**
- * @brief ParameterPageWidget::retranslateUi
+ * @brief ParameterPageWidget::retranslateUi Translates the ParameterPageWidget in English.
  */
 void ParameterPageWidget::retranslateUi() {
     ui->mNext->setText(tr("Weiter"));
@@ -105,8 +99,8 @@ void ParameterPageWidget::retranslateUi() {
 }
 
 /**
- * @brief ParameterPageWidget::getName
- * @return
+ * @brief ParameterPageWidget::getName Gets the name of the ParameterPageWidget.
+ * @return the name ot the ParameterPageWidget
  */
 QString ParameterPageWidget::getName() {
     return tr("CoBaB - Parameter");

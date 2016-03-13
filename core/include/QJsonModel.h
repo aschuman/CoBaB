@@ -12,8 +12,8 @@
 #include <QPair>
 
 /**
- * From 3DMuVi
- * @brief The QJsonModel class
+ * @brief The class builds a QJsonModel for the displaying of the parameters from a Jsonfile.
+ * @author 3DMuVi-Team
  */
 class QJsonModel : public QAbstractItemModel
 {
