@@ -85,6 +85,8 @@ void ParameterPageWidget::nextButtonClicked() {
  */
 void ParameterPageWidget::retranslateUi() {
     ui->mNext->setText(tr("Weiter"));
+    ui->mParameterLabel->setText(tr("Verfahrensparameter"));
+    ui->mSearchAreaLabel->setText(tr("Auswahl des Suchraums"));
 }
 
 /**

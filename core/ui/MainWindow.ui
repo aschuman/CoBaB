@@ -50,6 +50,9 @@
     <addaction name="mSoundAction"/>
    </widget>
    <widget class="QMenu" name="mBookmarkMenu">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="title">
      <string>&amp;Lesezeichen</string>
     </property>

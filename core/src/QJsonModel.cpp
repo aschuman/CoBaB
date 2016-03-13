@@ -29,8 +29,8 @@ QJsonModel::QJsonModel(QObject *parent, QVector<QJsonObject> list) :
     QAbstractItemModel(parent)
 {
     mRootItem = new QJsonTreeItem;
-    mHeaders.append("Parameter");
-    mHeaders.append("Wert");
+    mHeaders.append(tr("Parameter"));
+    mHeaders.append(tr("Wert"));
     for (int i = 0; i < list.size(); i++) {
         loadQJson(list.value(i));
     }
