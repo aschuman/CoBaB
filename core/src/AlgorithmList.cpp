@@ -58,8 +58,9 @@ QList<Algorithm*> AlgorithmList::findCompatibleAlgorithms(const QList<DataPacket
         auto algo = loadAlgorithm(loader.get());
         if (algo) {
             if (algo->setInputs(inputDataList)) {
-                algos.push_back(std::move(algo));
-                algo->initialize(loader.get());
+                bool b = algo->initialize(loader.get());
+                if (b) algos.push_back(std::move(algo));
+                else {} // LOG WARNING
             }
         }
     }

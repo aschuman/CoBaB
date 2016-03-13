@@ -108,13 +108,3 @@ bool PersonAlgorithm::setInputs(const QList<DataPacket*>& inputDataList) {
     return true;
 }
 
-/**
- * @brief PersonAlgorithm::setParameters set algorithm parameters
- * @param parameters the parameters
- * @return true if the algorithm accepts the parameters
- */
-bool PersonAlgorithm::setParameters(const QJsonObject& parameters) {
-    Q_UNUSED(parameters);
-    return true;
-}
-

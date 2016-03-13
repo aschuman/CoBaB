@@ -21,8 +21,6 @@ public:
     TestAlgorithm();
 
     bool setInputs(const QList<DataPacket*>& inputDataList) override;
-     
-    bool setParameters(const QJsonObject& parameters) override;
 
 public slots:
     QList<DataPacket*> run() override;

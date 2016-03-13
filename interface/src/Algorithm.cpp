@@ -27,9 +27,48 @@ QString Algorithm::getDescription() const {
 /**
  * @brief Algorithm::initialize Loads the corresponding QJsonObject for this algorithm
  * @param loader The plugin loader which loads the QJsonObject
+ * @return True, if all went well.
  */
-void Algorithm::initialize(QPluginLoader *loader) {
-    mParameters = loader->metaData().value("MetaData").toObject();
+bool Algorithm::initialize(QPluginLoader *loader) {
+    if (!loader) return false;
+    QJsonObject tmp = loader->metaData();
+    if (tmp.isEmpty()) return false;
+    QJsonValue v = tmp.value("MetaData");
+    if (v.isUndefined()) return false;
+    QJsonObject o = v.toObject();
+    if (o.isEmpty()) return false;
+
+    mId = "";
+    mName = "";
+    mDescription = "";
+
+    QString version = "";
+    if (o.contains("Author")) {}
+    if (o.contains("Date")) {}
+    if (o.contains("Name")) mName = o.value("Name").toString();
+    else {} //LOG WARNING
+    if (o.contains("Version")) version = o.value("Version").toString();
+    else {} //LOG WARNING
+    if (o.contains("Description")) mDescription = o.value("Description").toString();
+    else {} //LOG WARNING
+    mId = mName + " " + version;
+    if (mId.trimmed() == "") {} //LOG WARNING
+
+    if (o.contains("Properties")) return setParameters(o.value("Properties").toObject());
+    else {} //LOG WARNING
+
+    return true;
+}
+
+/**
+ * @brief Algorithm::setParameters Set the algorithm's parameters
+ * @param parameters The new parameters as Json object.
+ * @return True, if all went well.
+ */
+bool Algorithm::setParameters(const QJsonObject& parameters)
+{
+    mParameters = parameters;
+    return true;
 }
 
 /**
