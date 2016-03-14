@@ -122,22 +122,23 @@ void ConfirmationPageWidget::reset()
     emit readFromStack(1, varDatasetIndices);
     if(varDatasetIndices.canConvert<std::shared_ptr<QModelIndexList>>()) {
         std::shared_ptr<QModelIndexList> indices = varDatasetIndices.value<std::shared_ptr<QModelIndexList>>();
+        QList<QString> datasetList;
+        datasetList.append(chosenDataset->getPath());
         for(int i = 0; i < indices.get()->size(); i++) {
             int index = indices.get()->at(i).row();
             if((list != nullptr) && (index < list->getDatasetList().size())) {
                 QString name = list->getDatasetList().at(index).getName();
-                QList<QString> datasetList;
                 if(name != chosenDataset->getName()) {
                     ui->mParameters->insertRow(i);
                     ui->mParameters->setItem(i, 0, new QTableWidgetItem(name));
                     ui->mParameters->item(i, 0)->setTextAlignment(Qt::AlignCenter);
                     datasetList.append(list->getDatasetList().at(index).getPath());
                 }
-                searchQuery->setDatasets(searchQuery->getDatasets()+datasetList);
             } else {
                 LOG_ERR("invalid dataset index");
             }
         }
+        searchQuery->setDatasets(datasetList);
     }
 
     //read name of algorithm
