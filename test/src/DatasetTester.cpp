@@ -33,6 +33,7 @@ void DatasetTester::testName_data()
     QTest::newRow("single frame video dataset") << "../test/testdata/SingleFrameVideo" << "SingleFrameVideo";
     QTest::newRow("video dataset") << "../test/testdata/Video" << "Video";
     QTest::newRow("photo dataset") << "../test/testdata/Fotos" << "Fotos";
+    QTest::newRow("invalid dataset") << "lsflnlkdfa" << "";
 
 }
 
@@ -56,6 +57,7 @@ void DatasetTester::testPreviewImage_data()
                                                 << "../test/testdata/SingleFrameVideo/SingleFrameVideo/bigbangtheory_s1e1.vob_00000.png";
     QTest::newRow("video dataset") << "../test/testdata/Video" << "../test/testdata/videoIcon.png";
     QTest::newRow("photo dataset") << "../test/testdata/Fotos" << "../test/testdata/Fotos/preview.png";
+    QTest::newRow("invalid dataset") << "bjkkb" << "";
 
 }
 
@@ -66,8 +68,12 @@ void DatasetTester::testPreviewImage()
 
     Dataset dataset(path);
     QImage preview(image);
-    QVERIFY(!preview.isNull());
-    QCOMPARE(dataset.getPreviewPhoto(), preview.scaledToHeight(100));
+    if(image != "") {
+        QVERIFY(!preview.isNull());
+        QCOMPARE(dataset.getPreviewPhoto(), preview.scaledToHeight(100));
+    } else {
+        QCOMPARE(dataset.getPreviewPhoto(), preview);
+    }
 
 }
 
@@ -90,6 +96,9 @@ void DatasetTester::testMediaList_data()
     list.append("test/testdata/Fotos/002_45.bmp");
     QTest::newRow("photo dataset") << "Fotos" << list;
 
+    list.clear();
+    QTest::newRow("invalid dataset") << "kjbuzv" << list;
+
 }
 
 void DatasetTester::testMediaList()
@@ -98,7 +107,7 @@ void DatasetTester::testMediaList()
     QFETCH(QList<QString>, list);
 
     Dataset dataset(path);
-    for(int i= 0; i < dataset.getMediaList().size(); i++) {
+    for(int i = 0; i < dataset.getMediaList().size(); i++) {
         QVERIFY(dataset.getMediaList().at(i)->getPath().endsWith(list.at(i)));
     }
 }
@@ -112,6 +121,7 @@ void DatasetTester::testPath_data()
     QTest::newRow("single frame video dataset") << "../test/testdata/SingleFrameVideo" << "test/testdata/SingleFrameVideo";
     QTest::newRow("video dataset") << "../test/testdata/Video" << "test/testdata/Video";
     QTest::newRow("photo dataset") << "../test/testdata/Fotos" << "test/testdata/Fotos";
+    QTest::newRow("invalid dataset") << "ksdgsn" << "";
 
 }
 
@@ -121,7 +131,11 @@ void DatasetTester::testPath()
     QFETCH(QString, resultPath);
 
     Dataset dataset(path);
-    QVERIFY(dataset.getPath().endsWith(resultPath));
+    if(resultPath == "") {
+        QCOMPARE(dataset.getPath(), resultPath);
+    } else {
+        QVERIFY(dataset.getPath().endsWith(resultPath));
+    }
 }
 
 
