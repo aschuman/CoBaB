@@ -1,0 +1,376 @@
+% !TeX spellcheck = de_DE_frami
+\subsection{Testdaten}
+Zum Testen während der Entwicklung und zum Durchspielen der Testszenarien werden mindestens nachfolgende Testdaten benötigt:
+\begin{itemize}
+	\item ein Bilddatensatz (mit mehreren Bildern und mindestens einem annotiertem Bild)
+	\item ein Datensatz mit mindestens einem Video aus Einzelbildern
+	\item ein Testsuchverfahren, das eine beliebige Sortierung als Suchergebnis zurück gibt
+	\item ein Suchverfahren, das auf eine Annotation des oben geforderten annotierten Bildes anwendbar ist
+\end{itemize}
+Insbesondere die Schnittstelle zwischen Suchverfahren und Anwendung soll durch diese Testdaten überprüft werden.
+
+\subsection{Testszenarien}
+Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detail.
+
+\subsubsection{Testszenarien der Pflichtanforderungen}
+\begin{enumerate} [label=\bfseries /TS \arabic*0/, leftmargin=*]
+	\item Grundfunktionalität \label{ts:grundfunktionalitaet} \newline \newline
+	\begin{tabular}{rp{4in}|l}
+	1. & \textbf{Vorbedingung} Das Programm ist startbereit; es wurden weder Datensätze noch Suchverfahren entfernt oder manipuliert & \\
+	   & \textbf{Aktion} Der Benutzer startet das Programm &  \\
+	   & \textbf{Nachbedingung} Die Startansicht der GUI wird angezeigt; die Bibliothek wird angezeigt und enthält alle Datensätze des Standardordners & bestanden \\
+	\hline
+	2. & \textbf{Aktion} Der Benutzer doppelklickt einen Datensatz & \\
+	   & \textbf{Nachbedingung} Es wird eine Übersicht des Datensatzes angezeigt & bestanden \\
+	\end{tabular}	   
+	\begin{tabular}{rp{4in}|l}
+	3. & \textbf{Aktion} Der Benutzer klickt auf ein Bild aus der Übersicht & \\
+	   & \textbf{Nachbedingung} Das Bild wird groß dargestellt & bestanden \\
+	\hline    
+    4. & \textbf{Aktion} Der Benutzer rechtsklickt auf einen Bereich des Bildes, der nicht annotiert ist & \\
+       & \textbf{Nachbedingung} Es wird ein Kontextmenü angezeigt, in dem mindestens ein Suchverfahren zur Auswahl bereitsteht & bestanden \\
+	\hline    
+    5. & \textbf{Aktion} Der Benutzer fährt mit der Maus über ein Suchverfahren & \\
+	   & \textbf{Nachbedingung} Es wird eine Beschreibung des Suchverfahrens angezeigt & bestanden \\
+	\hline    
+    6. & \textbf{Aktion} Der Benutzer linksklickt auf eines der Suchverfahren & \\
+	   & \textbf{Nachbedingung} Das angezeigte Fenster enthält die Parameter des Suchverfahrens und entsprechende UI-Elemente, die ermöglichen sie festzulegen & bestanden \\
+	\hline	
+	7. & \textbf{Aktion} Der Benutzer nimmt seine Eingaben vor und bestätigt sie & \\
+	   & \textbf{Nachbedingung} Es werden die vorgenommenen Einstellungen angezeigt; eine Schaltfläche zum Starten der Suche wird angezeigt & bestanden \\
+	\hline    
+    8. & \textbf{Aktion} Der Benutzer startet die Suche & \\
+       & \textbf{Nachbedingung} Eine Animation zeigt die Aktivität des Suchverfahrens an & bestanden \\
+	\hline	
+	9. & \textbf{Aktion} Der Benutzer wartet & \\
+       & \textbf{Nachbedingung} Eine Übersicht über die Ergebnisse der Suche wird angezeigt & bestanden \\
+	\hline   
+   10. & \textbf{Aktion} Der Benutzer wählt die Schaltfläche zur Rückkehr & \\
+	   & \textbf{Nachbedingung} Es werden wieder die vorgenommenen Einstellungen angezeigt; eine Schaltfläche zum Starten der Suche wird angezeigt & bestanden \\
+	\hline
+   11. & \textbf{Aktion} Der Benutzer startet die Suche erneut & \\
+	   & \textbf{Nachbedingung} Eine Animation zeigt die Aktivität des Suchverfahrens an & bestanden \\
+	\hline   
+   12. & \textbf{Aktion} Der Benutzer beendet das Programm (während der laufenden Suche) über den üblichen Schließen-Button & \\ 
+	   & \textbf{Nachbedingung} die GUI ist nicht mehr sichtbar; der Prozess hat terminiert & bestanden \\
+	\end{tabular}
+	
+	\pagebreak
+
+	\item Kommandozeile \label{ts:standardordner_übergeben} \newline \newline
+	\begin{tabular}{rp{4in}|l}
+	1. & \textbf{Vorbedingung} Das Programm ist startbereit & \\
+	   & \textbf{Aktion} Der Benutzer startet das Programm mit einem Pfad als Kommandozeilenargument in der entsprechenden Position & \\
+	   & \textbf{Nachbedingung} In der Bibliothek werden die Datensätze, die sich an dem übergebenen Pfad befinden, angezeigt & bestanden \\
+	\hline	
+	2. & \textbf{Aktion} Der Benutzer wählt über den Menüpunkt ganz rechts \enquote{Hilfe} aus & \\
+	   & \textbf{Nachbedingung} Ein Dialog mit Hinweisen zur Benutzung des Programms wird angezeigt & bestanden \\
+	\end{tabular}
+	\newline
+
+	\item erweiterte Funktionen zu Bilddatensätzen \label{ts:erweiterte_Funktionen_zu_Bilddatensätzen} \newline \newline
+	\begin{tabular}{rp{4in}|l}
+	1. & \textbf{Vorbedingung} Es wurde ein Datensatz (bestehend aus Bildern) gewählt; das Programm zeigt die Übersicht der Bilder des Datensatzes; es ist ein Foto eines realen Motivs im Datensatz vorhanden; das Foto weist annotierte Bildbereiche auf & \\
+	   & \textbf{Aktion} Der Benutzer wählt dieses Bild zur vergrößerten Ansicht & \\
+	   & \textbf{Nachbedingung} Das Bild wird in vergrößerter Ansicht angezeigt; es werden die annotierten Bildbereiche angezeigt & bestanden \\
+	\hline
+	2. & \textbf{Aktion} Der Benutzer verwendet die Schaltflächen, um zum nächsten und vorherigen Bild zu wechseln & \\
+	   & \textbf{Nachbedinung} Das Bild in der größeren Ansicht wechselt vor bzw. zurück entsprechend der durch die Übersicht gegebenen Reihenfolge & bestanden \\
+	\hline
+	3. & \textbf{Aktion} Der Benutzer kehrt zum annotierten Bild zurück; der Benutzer rechtsklickt auf einen annotierten Bildbereich & \\
+	   & \textbf{Nachbedingung} Es wird ein Kontextmenü angezeigt, in dem mindestens ein Suchverfahren zur Auswahl bereitsteht & bestanden \\
+	\hline
+	4. & \textbf{Aktion} Der Benutzer linksklickt auf ein Suchverfahren & \\
+	   & \textbf{Nachbedingung} Es wird die Parameterauswahl angezeigt & bestanden \\
+	\hline
+	5. & \textbf{Aktion} Der Benutzer wählt seine Parameter und bestätigt sie & \\
+	   & \textbf{Nachbedingung} Es wird der gewählte annotierte Bildbereich angezeigt; eine Schaltfläche zur Rückkehr zur Parameterauswahl wird angezeigt & bestanden \\
+	\end{tabular}
+	
+	\begin{tabular}{rp{4in}|l}
+	6. & \textbf{Aktion} Der Benutzer linksklickt die Schaltfläche zur Rückkehr zweimal & \\
+	   & \textbf{Nachbedingung}	Das eben gewählte Bild wird in der vergrößerten Ansicht dargestellt & nicht bestanden\\
+	\hline
+	7. & \textbf{Aktion} Der Benutzer wählt das Werkzeug zur Auswahl eines Bildbereiches und wählt per Drag-and-Drop in der vergrößerten Ansicht einen Bildbereich & \\
+	   & \textbf{Nachbedingung} Der gewählte Bereich wird dargestellt & bestanden \\
+	\hline	
+	8. & \textbf{Aktion} Der Benutzer rechtsklickt in den gewählten Bereich und linksklickt auf ein Suchverfahren & \\
+	   & \textbf{Nachbedingung} Es wird die Parameterauswahl angezeigt & bestanden \\
+	\hline	
+	9. & \textbf{Aktion} Der Benutzer wählt seine Parameter und bestätigt sie & \\
+	   & \textbf{Nachbedingung} Es wird der gewählte Bildbereich angezeigt; eine Schaltfläche zur Rückkehr zur Parameterauswahl wird angezeigt & bestanden \\
+	\hline   
+   10. & \textbf{Aktion} Der Benutzer linksklickt die Schaltfläche zur Rückkehr zweimal & \\
+	   & \textbf{Nachbedingung} Das eben gewählte Bild wird in der vergrößerten Ansicht dargestellt; der gewählte Bildbereich wird angezeigt & nicht bestanden \\
+	\hline
+   11. & \textbf{Aktion} Der Benutzer verwendet die Schaltflächen, um zum nächsten und vorherigen Bild zu wechseln & \\
+	   & \textbf{Nachbedingung} Das Bild in der größeren Ansicht wechselt vor bzw. zurück entsprechend der durch die Übersicht gegebenen Reihenfolge & bestanden \\
+	\hline
+   12. & \textbf{Aktion} Der Benutzer linksklickt die Schaltfläche zur Rückkehr zur Bibliothek & \\
+	   & \textbf{Nachbedingung} Die Bibliothek wird angezeigt & bestanden \\
+	\end{tabular}
+	\newline
+
+	\item Feedback und weitere Suche \label{ts:feedback} \newline \newline
+	\begin{tabular}{rp{4in}|l}
+	1. & \textbf{Vorbedingung} Das Programm zeigt die Ergebnisse einer Suche & \\
+	   & \textbf{Aktion} Der Benutzer stellt für mehrere Ergebnisse ein Feedback ein & \\
+	   & \textbf{Nachbedingung}Das eingestellte Feedback wird dargestellt & bestanden \\
+	\hline	
+	2. & \textbf{Aktion} Der Benutzer startet über die entsprechende Schaltfläche eine weitere Suche und wartet & \\
+	   & \textbf{Nachbedingung} Die Ergebnisse werden angezeigt & bestanden \\
+	 \end{tabular}
+	 \pagebreak
+
+	\item Datensatz zur Bibliothek hinzufügen \label{ts:datensatz_hinzufuegen} \newline \newline
+	\begin{tabular}{rp{4in}|l}
+	1. & \textbf{Vorbedingung} Programm ist startbereit; ein korrekter Datensatz liegt auf der Festplatte & \\
+	   & \textbf{Aktion} Benutzer startet Programm & \\
+	   & \textbf{Nachbedingung} Startbildschirm der GUI wird angezeigt; die Bibliothek wird angezeigt & bestanden \\
+	\hline	
+	2. & \textbf{Aktion} Der Benutzer klickt die Schaltfläche zum Hinzufügen eines neuen Datensatzes & \\
+	   & \textbf{Nachbedingung} Ein Dialog, der die Auswahl eines Datensatzes von der Festplatte ermöglicht, wird angezeigt & bestanden \\
+	\hline	
+	3. & \textbf{Aktion} Der Benutzer wählt einen korrekten Datensatz von der Festplatte und bestätigt seine Wahl & \\
+	   & \textbf{Nachbedingung} Der Dialog wird nicht mehr angezeigt; es wird eine Übersicht des gewählten Datensatzes angezeigt & bestanden \\
+	\hline	
+	4. & \textbf{Aktion} Der Benutzer linksklickt die Schaltfläche zur Rückkehr & \\
+	   & \textbf{Nachbedingung} Die Liste der Bibliothek enthält den eben gewählten Datensatz & bestanden \\
+	\end{tabular}
+	\newline
+
+	\item Videos aus Einzelbildern abspielen \label{ts:video_abspielen} \newline \newline
+	\begin{tabular}{rp{4in}|l}
+	1. & \textbf{Vorbedingung} Es wurde ein Datensatz gewählt, der mindestens ein Video aus Einzelbildern enthält & \\
+	   & \textbf{Aktion} Der Benutzer wählt eines der Videos zur Ansicht & \\
+	   & \textbf{Nachbedingung} Ein Videoplayer wird angezeigt; eine Schaltfläche zum Starten des Videos ist verfügbar & bestanden \\
+	\hline
+	2. & \textbf{Aktion} Der Benutzer klickt auf die Schaltfläche zum Starten des Videos & \\
+	   & \textbf{Nachbedingung} Das Video wird abgespielt & bestanden \\
+	\end{tabular}
+	\newline
+
+	\item weitere Menüpunkte \label{ts:weitere_menuepunkte} \newline \newline
+	\begin{tabular}{rp{4in}|l}
+	1. & \textbf{Vorbedingung} Das Menü ist verfügbar & \\
+	   & \textbf{Aktion} Der Benutzer wählt über den Menüpunkt ganz rechts \enquote{About} aus & \\
+	   & \textbf{Nachbedingung} Ein Dialog mit Informationen zum Programm wird angezeigt & bestanden \\
+	\hline
+	2. & \textbf{Aktion} Der Benutzer wählt über den Menüpunkt ganz rechts \enquote{Hilfe} aus & \\
+	   & \textbf{Nachbedingung} Ein Dialog mit Hinweisen zur Benutzung des Programms wird angezeigt & bestanden \\
+	\end{tabular}
+\end{enumerate}
+
+\subsubsection{Testszenarien der Wunschanforderungen}
+\begin{enumerate} [label=\bfseries /TSW \arabic*0/, leftmargin=*]
+	\item Feedback, Suchchronik und Lesezeichen \label{ts:feedback_chronik_lesezeichen} \newline \newline
+	\begin{tabular}{rp{4in}|l}
+	1. & \textbf{Vorbedingung} Es wurde gerade eine Suche durchgeführt; es werden die Ergebnisse der Suche angezeigt & \\
+	   & \textbf{Aktion} Der Benutzer stellt ein positives und ein negatives Feedback für je ein Suchergebnis ein & \\
+	   & \textbf{Nachbedingung} Das gegebene Feedback wird in der Übersicht dargestellt & bestanden \\
+	\hline
+	2. & \textbf{Aktion} Der Benutzer beendet das Programm & \\
+	   & \textbf{Nachbedingung} Das Programm wurde beendet & bestanden \\
+	\hline
+	3. & \textbf{Aktion} Der Benutzer startet das Programm erneut & \\
+	   & \textbf{Nachbedingung} Die Startansicht der GUI wird angezeigt & bestanden \\
+	\hline	
+	4. & \textbf{Aktion} Der Benutzer wählt den Menüpunkt \enquote{Chronik} & \\
+	   & \textbf{Nachbedingung} Die zuletzt beendeten Suchen werden angezeigt & nicht bestanden \\
+	\hline
+	5. & \textbf{Aktion} Der Benutzer wählt die zuletzt beendete Suche & \\
+	   & \textbf{Nachbedingung} Die bereits zuvor angezeigten Suchergebnisse werden in der selben Reihenfolge wieder angezeigt; das zuvor festgelegte Feedback wird wieder angezeigt & nicht bestanden \\
+	\hline
+	6. & \textbf{Aktion} Der Benutzer klickt auf die Schaltfläche zum Speichern der Suchergebnisse, gibt einen Namen für das Lesezeichen ein und beendet anschließend das Programm & \\
+	   & \textbf{Nachbedingung} Das Programm wurde beendet & nicht bestanden \\
+	\hline
+	7. & \textbf{Aktion} Der Benutzer startet das Programm erneut & \\
+	   & \textbf{Nachbedingung} Die Startansicht der GUI wird angezeigt & bestanden \\
+	\hline
+	8. & \textbf{Aktion} Der Benutzer klickt auf die Schaltfläche für das Anzeigen der Lesezeichen & \\
+	   & \textbf{Nachbedingung}in der angezeigten Liste ist mindestens das zuvor angelegte Lesezeichen zu finden & nicht bestanden \\
+	\hline	
+	9. & \textbf{Aktion} Der Benutzer wählt das zuvor angelegte Lesezeichen & \\
+	   & \textbf{Nachbedingung} Die bereits zuvor angezeigten Suchergebnisse werden in der selben Reihenfolge wieder angezeigt; das zuvor festgelegte Feedback wird wieder angezeigt & nicht bestanden \\
+	\end{tabular}
+	\pagebreak
+
+	\item Datensatz-Historie \label{ts:historie} \newline \newline
+	\begin{tabular}{rp{4in}|l}
+	1. & \textbf{Vorbedingung} Das Programm zeigt die Bibliothek; ein Datensatz befindet sich auf der Festplatte, aber nicht in der Bibliothek & \\
+	   & \textbf{Aktion} Der Benutzer wählt diesen Datensatz & \\
+	   & \textbf{Nachbedingung} Die Übersicht des Datensatzes wird angezeigt & bestanden \\
+	\hline
+	2. & \textbf{Aktion} Der Benutzer beendet das Prgramm & \\
+	   & \textbf{Nachbedingung} Die GUI wird nicht mehr angezeigt & bestanden \\
+	\hline
+	3. & \textbf{Aktion} Der Benutzer startet das Programm & \\
+	   & \textbf{Nachbedingung} Die Bibliothek wird angezeigt; der eben gewählte Datensatz wird in der Historie als zuletzt verwendeter Datensatz angezeigt & bestanden \\
+	\hline
+	4. & \textbf{Aktion} Der Benutzer wählt diesen zuletzt verwendeten Datensatz & \\
+	   & \textbf{Nachbedingung} Die Übersicht des Datensatzes wird angezeigt & bestanden \\
+	\end{tabular}
+	\newline
+
+	\item Sprachwahl \label{ts:sprachwahl} \newline \newline
+	\begin{tabular}{rp{4in}|l}
+	1. & \textbf{Vorbedingung} Programm ist startbereit; Einstellungen wurden noch nicht geändert & \\
+	   & \textbf{Aktion} Benutzer startet Programm & \\
+	   & \textbf{Nachbedingung} Deutsche GUI wird angezeigt; Menüpunkt \enquote{Sprache} ist sichtbar, es sind die Sprachen Deutsch und Englisch wählbar; Deutsch ist als aktuell gewählte Sprache markiert & bestanden \\
+	\hline
+	2. & \textbf{Aktion} Der Benutzer wählt über den Menüpunkt \enquote{Sprache} die englische Sprache aus & \\
+	   & \textbf{Nachbedingung} Die GUI wird auf Englisch dargestellt & bestanden \\
+	\hline
+	3. & \textbf{Aktion} Der Benutzer beendet das Programm über den üblichen Schließen-Button & \\
+	   & \textbf{Nachbedingung} Die GUI ist nicht mehr sichtbar; der Prozess hat terminiert & bestanden \\
+	\hline
+	4. & \textbf{Aktion} Der Benutzer startet das Programm & \\
+	   & \textbf{Nachbedingung} GUI wird auf Englisch angezeigt; unter dem Menüpunkt \enquote{Sprache} ist nun Englisch als aktuell gewählte Sprache markiert & bestanden \\
+	\end{tabular}
+	\pagebreak
+
+	\item Signalton \label{ts:signalton} \newline \newline
+	\begin{tabular}{rp{4in}|l}
+	1. & \textbf{Vorbedingung} Das Programm befindet sich in der Bibliothek; Audioausgabe des Computers ist möglich und eingeschaltet & \\
+	   & \textbf{Aktion} Der Benutzer schaltet in den Einstellungen den Signalton ein, falls dieser noch nicht eingeschaltet war & \\ 
+	   & \textbf{Nachbedingung} Die GUI zeigt an, dass der Signalton eingeschaltet ist & bestanden \\
+	\hline
+	2. & \textbf{Aktion} Der Benutzer beendet das Programm & \\
+	   & \textbf{Nachbedingung} Das Programm ist beendet & bestanden \\
+	\hline
+	3. & \textbf{Aktion} Der Benutzer startet das Programm & \\
+	   & \textbf{Nachbedingung} Das Programm zeigt die Bibliothek an & bestanden \\
+	\hline
+	4. & \textbf{Aktion} Der Benutzer lässt sich die eben vorgenommenen Einstellungen bezüglich des Signaltons anzeigen & \\
+	   & \textbf{Nachbedingung} Die GUI zeigt an, dass der Signalton eingeschaltet ist & bestanden \\
+	\hline
+	5. & \textbf{Aktion} Der Benutzer wählt einen Datensatz, eine Suchvorlage, einen Algorithmus und die Parameter & \\
+	   & \textbf{Nachbedingung} Dem Benutzer werden die gewählten Einstellungen und die Schaltfläche zum Starten der Suche angezeigt & bestanden \\
+	\hline
+	6. & \textbf{Aktion} Der Benutzer startet die Suche, bringt das Programm in den Hintergrund und wartet & \\
+	   & \textbf{Nachbedingung} Es ist ein Signalton zu hören & bestanden \\
+	\hline
+	7. & \textbf{Aktion} Der Benutzer bringt die GUI in den Vordergrund & \\
+	   & \textbf{Nachbedingung} Die Suche ist beendet; die Ergebnisse werden angezeigt & bestanden \\
+	\hline
+	8. & \textbf{Aktion} Der Benutzer kehrt zur Bibliothek zurück & \\
+	   & \textbf{Nachbedingung} Die Bibliothek wird angezeigt & bestanden \\
+	\hline
+	9. & \textbf{Aktion} Der Benutzer lässt sich die eben vorgenommenen Einstellungen anzeigen & \\
+	   & \textbf{Nachbedingung} Die GUI zeigt an, dass der Signalton eingeschaltet ist & bestanden \\
+	\hline
+   10. & \textbf{Aktion} Der Benutzer schaltet den Signalton aus & \\
+	   & \textbf{Nachbedingung} Die GUI zeigt an, dass der Signalton ausgeschaltet ist & bestanden \\
+	\hline
+   11. & \textbf{Aktion} Der Benutzer beendet das Programm & \\
+	   & \textbf{Nachbedingung} Das Programm ist beendet & bestanden \\
+	\end{tabular}
+	
+	\begin{tabular}{rp{4in}|l}
+   12. & \textbf{Aktion} Der Benutzer startet das Programm & \\
+	   & \textbf{Nachbedingung} Das Programm zeigt die Bibliothek an & bestanden \\
+	\hline
+   13. & \textbf{Aktion} Der Benutzer lässt sich die eben vorgenommenen Einstellungen bezüglich des Signaltons anzeigen & \\
+	   & \textbf{Nachbedingung} Die GUI zeigt an, dass der Signalton ausgeschaltet ist & bestanden \\
+	\hline
+   14. & \textbf{Aktion} Der Benutzer nimmt alle Schritte vor, um eine Suche zu starten und wartet & \\
+	   & \textbf{Nachbedingung} die Suche ist beendet und die Ergebnisse werden angezeigt; es wird kein Signalton abgespielt & bestanden \\
+	\end{tabular}
+	\newline
+
+	\item weitere Suche \label{ts:weitere_suche} \newline \newline
+	\begin{tabular}{rp{4in}|l}
+	1. & \textbf{Vorbedingung} Das Programm zeigt die Ergebnisse einer Suche & \\
+	   & \textbf{Aktion} Der Benutzer stellt für mehrere Ergebnisse ein Feedback ein & \\
+	   & \textbf{Nachbedingung} Das gegebene Feedback wird dargestellt & bestanden \\
+	\hline
+	2. & \textbf{Aktion} Der Benutzer wählt einen anderen Algorithmus für die nächste Suche, startet die Suche und wartet & \\
+	   & \textbf{Nachbedingung} Die Ergebnisse werden angezeigt & nicht bestanden \\
+	\end{tabular}
+	\newline
+
+	\item Videos in Videoformaten abspielen \label{ts:echtes_video_abspielen} \newline \newline
+	\begin{tabular}{rp{4in}|l}
+	1. & \textbf{Vorbedingung} Das Programm zeigt die Übersicht eines Videodatensatzes (Videos in Videoformaten) & \\
+	   & \textbf{Aktion} Der Benutzer wählt ein Video aus & \\
+	   & \textbf{Nachbedingung} Das gewählte Video wird im Videoplayer angezeigt & nicht bestanden \\
+	\hline
+	2. & \textbf{Aktion} Der Benutzer startet das Video & \\
+	   & \textbf{Nachbedingung} Das gewählte Video wird im Videoplayer abgespielt & nicht bestanden \\
+	\hline
+	3. & \textbf{Aktion} Der Benutzer pausiert das Video, rechtsklickt in das Video und wählt ein Suchverfahren & \\
+	   & \textbf{Nachbedingung} Die Parameterwahl wird angezeigt & nicht bestanden \\
+	\hline
+	4. & \textbf{Aktion} Der Benutzer wählt die Parameter nach Belieben und klickt auf \enquote{Weiter} & \\
+	   & \textbf{Nachbedingung} Das gewählte Video wird angezeigt (nicht abgespielt); die vorgenommenen Einstellungen werden angezeigt & nicht bestanden \\
+	\end{tabular}
+	\pagebreak
+
+	\item Präsentationsmodus \label{ts:präsentation} \newline \newline
+	\begin{tabular}{rp{4in}|l}
+	1. & \textbf{Vorbedingung} Das Programm ist startberteit & \\
+	   & \textbf{Aktion} Der Benutzer startet das Programm mit einem speziellen Kommandozeilenparameter & \\
+	   & \textbf{Nachbedingung} Das Programm ist im Präsentationsmodus, die GUI wird als Vollbild angezeigt & bestanden \\
+	\hline
+	2. & \textbf{Aktion} Der Benutzer beendet den Vollbildmodus mit einem Tastenkürzel & \\
+	   & \textbf{Nachbedingung}	Die GUI wird im normalen Modus angezeigt & bestanden \\
+	\end{tabular}
+	\newline
+
+	\item Zoomen und Scrollen \label{ts:zoom_scroll} \newline \newline
+	\begin{tabular}{rp{4in}|l}
+	1. & \textbf{Vorbedingung} Das Programm zeigt die Übersicht eines Bilddatensatzes; ein Bild ist ausgewählt & \\
+	   & \textbf{Aktion} Der Benutzer rollt das Mausrad vorwärts, während sich der Cursor über der größeren Ansicht befindet & \\
+	   & \textbf{Nachbedingung} Es wird ein kleinerer Ausschnitt des Bildes größer angezeigt & bestanden \\
+	\hline
+	2. & \textbf{Aktion} Der Benutzer hält die linke Maustaste und bewegt den Cursor im Bereich der größeren Ansicht & \\
+	   & \textbf{Nachbedingung} Das Bild folgt dem Cursor, wodurch andere Bereiche des Bildes sichtbar werden; falls der Rand des gesamten Bildes sichtbar ist, verschiebt sich der sichtbare Bereich jedoch nicht über den Rand hinaus & nicht bestanden \\
+	\hline
+	3. & \textbf{Aktion} Der Benutzer rollt das Mausrad rückwärts & \\
+	   & \textbf{Nachbedingung} Es wird wieder ein größerer Ausschnitt des Bildes kleiner angezeigt & bestanden \\
+	\end{tabular}
+	\newline
+
+	\item Suchergebnisse größer anzeigen \label{ts:groesseres_suchergebnis} \newline \newline
+	\begin{tabular}{rp{4in}|l}
+	1. & \textbf{Vorbedingung} Das Programm zeigt die Übersicht der Ergebnisse einer Suche an & \\
+	   & \textbf{Aktion} Der Benutzer wählt ein Ergebnis & \\
+	   & \textbf{Nachbedingung} Das Ergebnis wird in einer größeren Ansicht angezeigt & nicht bestanden \\
+	\end{tabular}
+	\pagebreak
+
+	\item Suche abbrechen \label{ts:suche_abbrechen} \newline \newline
+	\begin{tabular}{rp{4in}|l}
+	1. & \textbf{Vorbedingung} Es wurden alle Einstellungen einer bevorstehenden Suche vorgenommen; es werden die vorgenommenen Einstellungen angezeigt; eine Schaltfläche zum Starten der Suche wird angezeigt & \\
+	   & \textbf{Aktion} Der Benutzer startet die Suche & \\
+	   & \textbf{Nachbedingung} Eine Animation zeigt die Aktivität des Suchverfahrens an & bestanden \\
+	\hline
+	2. & \textbf{Aktion} Der Benutzer bricht die Suche ab & \\
+	   & \textbf{Nachbedingung} Es werden wieder die vorgenommenen Einstellungen angezeigt; eine Schaltfläche zum Starten der Suche wird angezeigt & nicht bestanden \\
+	\hline
+	3. & \textbf{Aktion} Der Benutzer startet die Suche & \\
+	   & \textbf{Nachbedingung} Eine Animation zeigt die Aktivität des Suchverfahrens an & bestanden \\
+	\hline
+	4. & \textbf{Aktion} Der Benutzer wartet & \\
+	   & \textbf{Nachbedingung} Die Ergebnisse der Suche werden angezeigt & bestanden \\
+	\end{tabular}
+	\newline
+
+	\item zusätzliche Datensätze \label{ts:mehrere_datensaetze_waehlen} \newline \newline
+	\begin{tabular}{rp{4in}|l}
+	1. & \textbf{Vorbedingung} Das Programm befindet sich in der Parameterwahl & \\
+	   & \textbf{Aktion} Der Benutzer wählt einen weiteren Datensatz für die Suche aus und bestätigt seine Eingaben & \\
+	   & \textbf{Nachbedingung} Die Überprüfung wird angezeigt & bestanden \\
+	\hline	
+	2. & \textbf{Aktion} Der Benutzer startet die Suche und wartet & \\
+	   & \textbf{Nachbedingung} Die Suchergebnisse werden angezeigt; Elemente des zusätzlich gewählten Datensatzes sind enthalten & bestanden \\
+	\end{tabular}
+	\newline
+
+	\item genaueres Feedback \label{ts:zehner_feedback} \newline \newline
+	\begin{tabular}{rp{4in}|l}
+	1. & \textbf{Vorbedingung} Das Programm zeigt die Übersicht der Ergebnisse einer Suche an; der Benutzer hat die Möglichkeit, ein Feedback in Form eines Wertes von 0 bis 10 festzulegen & \\
+	   & \textbf{Aktion} Der Benutzer wählt ein Feedback für eines der Ergebnisse & \\
+	   & \textbf{Nachbedingung} Das gegebene Feedback wird dargestellt & nicht bestanden \\
+	\end{tabular}
+\end{enumerate}
