@@ -9,7 +9,11 @@
 
 namespace Ui {
 
-
+/**
+ * @brief The class displays the given parameters and enables the editing of chosen parameter values.
+ * One may also select the datasets, in which the search will be done.
+ * @author Violina, Georgi, Anja
+ */
 class ParameterPageWidget;
 }
 
@@ -30,15 +34,12 @@ public:
 public slots:
     void nextButtonClicked();
 
-private slots:
-    //void on_mSearchDatasetListView_indexesMoved(const QModelIndexList &indexes);
-
 private:
-    Ui::ParameterPageWidget *ui;
-    DatasetList* mSearchDatasetList;
-    DatasetModel mModel;
-    QJsonModel* mParameterModel;
-    QVector<QJsonObject> parameterList;
+    Ui::ParameterPageWidget *ui;            ///< The ui for the ParameterPageWidget
+    DatasetList* mSearchDatasetList;        ///< The list of datasets to display in the ParameterPageWidget
+    DatasetModel mModel;                    ///< The model for the datasets
+    QJsonModel* mParameterModel;            ///< The model for the parameters
+    QVector<QJsonObject> parameterList;     ///< The list with the parameters to be displayed in the QTreeView
 };
 
 #include <memory>

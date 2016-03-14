@@ -10,7 +10,7 @@
 #include "SearchObject.h"
 
 /**
- * @brief SearchResultElement class
+ * @brief The SearchResultElement class builds a search result element and sets its score according to the algorithm.
  * @author Violina
  */
 class SearchResultElement: public Serializable {
@@ -38,8 +38,7 @@ public:
 
 private:
 
-    double mScore;     ///< The score of the searchresult
-
+    double mScore;                  ///< The score of the searchresult
     SearchObject mSearchObject;     ///< The searchobject
 
 };

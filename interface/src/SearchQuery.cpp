@@ -6,14 +6,14 @@
 #include "SearchQuery.h"
 
 /**
- * @brief SearchQuery standart constructor
+ * @brief SearchQuery::SearchQuery Constructs a default SearchQuery.
  */
 SearchQuery::SearchQuery() {
     mType = DataPacket::Type::SEARCHQUERY;
 }
 
 /**
- * @brief gets the list of datasets
+ * @brief SearchQuery::getDatasets Gets the list of datasets.
  * @return the list of datasets
  */
 QList<QString> SearchQuery::getDatasets() const {
@@ -21,7 +21,7 @@ QList<QString> SearchQuery::getDatasets() const {
 }
 
 /**
- * @brief sets the list of datasets
+ * @brief SearchQuery::setDatasets Sets the list of datasets.
  * @param datasets to be set in the list
  */
 void SearchQuery::setDatasets(const QList<QString> datasets) {
@@ -29,7 +29,7 @@ void SearchQuery::setDatasets(const QList<QString> datasets) {
 }
 
 /**
- * @brief gets the searchobject
+ * @brief SearchQuery::getSearchObject Gets the searchobject.
  * @return the searchobject
  */
 SearchObject SearchQuery::getSearchObject() const {
@@ -37,7 +37,7 @@ SearchObject SearchQuery::getSearchObject() const {
 }
 
 /**
- * @brief sets the searchobject
+ * @brief SearchQuery::setSearchObject Sets the searchobject.
  * @param searchObject to be set
  */
 void SearchQuery::setSearchObject(const SearchObject& searchObject) {
@@ -45,9 +45,9 @@ void SearchQuery::setSearchObject(const SearchObject& searchObject) {
 }
 
 /**
- * @brief override << the operator so it calls fromStream
+ * @brief operator << Overrides the operator <<.
  * @param out the datastream
- * @param SearchQuery whose data will be sent
+ * @param searchQuery whose data will be written
  * @return out the datastream
  */
 QDataStream& operator<<(QDataStream& out, const SearchQuery& searchQuery) {
@@ -56,9 +56,9 @@ QDataStream& operator<<(QDataStream& out, const SearchQuery& searchQuery) {
 }
 
 /**
- * @brief override >> the operator so it calls toStream
+ * @brief operator >> Overrides the operator >>.
  * @param in the datastream
- * @param searchObject to be changed
+ * @param searchQuery whose data will be read
  * @return in the datastream
  */
 QDataStream& operator>>(QDataStream& in, SearchQuery& searchQuery) {
@@ -67,10 +67,11 @@ QDataStream& operator>>(QDataStream& in, SearchQuery& searchQuery) {
 }
 
 /**
- * @brief calls the << operator
- * @param in the datastream
+ * @brief SearchQuery::toStream Writes the SearchQuery to a datastream.
+ * @param out the datastream
  */
 void SearchQuery::toStream(QDataStream& out) const {
+
     //write object to stream
     DataPacket::toStream(out); //write uuid and type
     out << mDatasets
@@ -78,8 +79,8 @@ void SearchQuery::toStream(QDataStream& out) const {
 }
 
 /**
- * @brief calls the >> operator
- * @param out the datastream
+ * @brief SearchQuery::fromStream Reads the SearchQuery from a datastream.
+ * @param in the datastream
  */
 void SearchQuery::fromStream(QDataStream& in) {
 

@@ -70,7 +70,7 @@ private:
 
     QString mMedium;            ///< Medium as the searchobject
 
-    Annotation* mAnnotation;     ///< Annotation as the searchobject
+    Annotation* mAnnotation;    ///< Annotation as the searchobject
 
     QRect mROI;                 ///< The annotation as rectangle with coordinates ("region of interest")
 

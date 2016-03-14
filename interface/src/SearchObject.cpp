@@ -1,7 +1,7 @@
 #include "SearchObject.h"
 
 /**
- * @brief SearchObject::SearchObject
+ * @brief SearchObject::SearchObject Constructs a default searchobject.
  */
 SearchObject::SearchObject() : mAnnotation(nullptr) {
 
@@ -14,7 +14,7 @@ SearchObject::SearchObject() : mAnnotation(nullptr) {
 }
 
 /**
- * @brief SearchObject::SearchObject
+ * @brief SearchObject::SearchObject Copies a searchobject.
  * @param other
  */
 SearchObject::SearchObject(const SearchObject& other) {
@@ -28,7 +28,7 @@ SearchObject::SearchObject(const SearchObject& other) {
 }
 
 /**
- * @brief SearchObject::SearchObject
+ * @brief SearchObject::SearchObject Copies a searchobject.
  * @param other
  */
 SearchObject::SearchObject(SearchObject &&other)
@@ -44,7 +44,7 @@ SearchObject::SearchObject(SearchObject &&other)
 }
 
 /**
- * @brief SearchObject::operator =
+ * @brief SearchObject::operator = Overrides the operator =.
  * @param other
  * @return
  */
@@ -60,7 +60,7 @@ SearchObject& SearchObject::operator=(const SearchObject &other) {
 }
 
 /**
- * @brief SearchObject::operator =
+ * @brief SearchObject::operator = Overrides the operator =.
  * @param other
  * @return
  */
@@ -77,21 +77,22 @@ SearchObject& SearchObject::operator=(SearchObject &&other) {
 }
 
 /**
- * @brief SearchObject::~SearchObject
+ * @brief SearchObject::~SearchObject Destructs a searchobject.
  */
 SearchObject::~SearchObject() {
     delete mAnnotation;
 }
 
 /**
- * @brief gets the medium
+ * @brief SearchObject::getMedium Gets the medium.
  * @return the medium
  */
 QString SearchObject::getMedium() const {
     return mMedium;
 }
+
 /**
- * @brief sets the medium
+ * @brief SearchObject::setMedium Sets the medium.
  * @param medium to be set
  */
 void SearchObject::setMedium(const QString medium) {
@@ -99,15 +100,17 @@ void SearchObject::setMedium(const QString medium) {
     mType = SearchObject::Type::MEDIUM;
 
 }
+
 /**
- * @brief gets the annotation
+ * @brief SearchObject::getAnnotation Gets the annotation.
  * @return the annotation
  */
 Annotation* SearchObject::getAnnotation() const {
     return mAnnotation;
 }
+
 /**
- * @brief sets the annotation
+ * @brief SearchObject::setAnnotation Sets the annotation.
  * @param annotation to be set
  */
 void SearchObject::setAnnotation(const Annotation* annotation) {
@@ -118,80 +121,91 @@ void SearchObject::setAnnotation(const Annotation* annotation) {
         mType = SearchObject::Type::ANNOTATION;
     }
 }
+
 /**
- * @brief gets the region of interest
+ * @brief SearchObject::getROI Gets the region of interest.
  * @return the region of interest
  */
 QRect SearchObject::getROI() const {
     return mROI;
 }
+
 /**
- * @brief sets the region of interest
- * @param roi - the region of interest
+ * @brief SearchObject::setROI Sets the region of interest.
+ * @param roi the region of interest
  */
 void SearchObject::setROI(const QRect roi) {
     mROI = roi;
     mType = SearchObject::Type::ROI;
 }
+
 /**
- * @brief gets the source dataset
+ * @brief SearchObject::getSourceDataset Gets the source dataset.
  * @return the source dataset
  */
 QString SearchObject::getSourceDataset() const {
     return mSourceDataset;
 }
+
 /**
- * @brief sets the souce dataset
+ * @brief SearchObject::setSourceDataset Sets the souce dataset.
  * @param dataset to be set as source
  */
 void SearchObject::setSourceDataset(const QString dataset) {
     mSourceDataset = dataset;
 }
+
 /**
- * @brief gets the frame in the medium
+ * @brief SearchObject::getFrameIndex Gets the frame in the medium.
  * @return the index
  */
 int SearchObject::getFrameIndex() const {
     return mFrameIndex;
 }
+
 /**
- * @brief sets the frame in the medium
- * @param index to be set
+ * @brief SearchObject::setFrameIndex Sets the frame in the medium.
+ * @param index the frame
  */
 void SearchObject::setFrameIndex(const int index) {
     mFrameIndex = index;
 }
+
 /**
- * @brief gets the index of the medium
+ * @brief SearchObject::getMediumIndex Gets the index of the medium.
  * @return the index
  */
 int SearchObject::getMediumIndex() const {
     return mMediumIndex;
 }
+
 /**
- * @brief sets the index of the medium
+ * @brief SearchObject::setMediumIndex Sets the index of the medium.
  * @param index to be set
  */
 void SearchObject::setMediumIndex(const int index) {
     mMediumIndex = index;
 }
+
 /**
- * @brief gets the type of the searchobject
+ * @brief SearchObject::getType Gets the type of the searchobject.
  * @return the type
  */
 SearchObject::Type SearchObject::getType() const {
     return mType;
 }
+
 /**
- * @brief SearchObject::setType sets the type of the searchobject to type
+ * @brief SearchObject::setType Sets the type of the searchobject to type.
  * @param type
  */
 void SearchObject::setType(const Type type) {
     mType = type;
 }
+
 /**
- * @brief calls the << operator
- * @param in the datastream
+ * @brief SearchObject::toStream Calls the << operator and writes the searchobject to stream..
+ * @param out the datastream
  */
 void SearchObject::toStream(QDataStream& out) const {
 
@@ -210,9 +224,10 @@ void SearchObject::toStream(QDataStream& out) const {
         << mSourceDataset;
 
 }
+
 /**
- * @brief calls the >> operator
- * @param out the datastream
+ * @brief SearchObject::fromStream Calls the >> operator and calls the searchobject from stream.
+ * @param in the datastream
  */
 void SearchObject::fromStream(QDataStream& in) {
 
@@ -247,10 +262,10 @@ void SearchObject::fromStream(QDataStream& in) {
 }
 
 /**
- * @brief operator <<
- * @param out
- * @param searchObject
- * @return
+ * @brief operator << Overrides the operator <<.
+ * @param out the datastream
+ * @param searchObject to be written
+ * @return out the datastream
  */
 QDataStream& operator<<(QDataStream& out, const SearchObject& searchObject) {
     searchObject.toStream(out);
@@ -258,10 +273,10 @@ QDataStream& operator<<(QDataStream& out, const SearchObject& searchObject) {
 }
 
 /**
- * @brief operator >>
- * @param in
- * @param searchObject
- * @return
+ * @brief operator >> Overrides the operator >>.
+ * @param in the datastream
+ * @param searchObject to be read
+ * @return in the datastream
  */
 QDataStream& operator>>(QDataStream& in, SearchObject& searchObject) {
     searchObject.fromStream(in);

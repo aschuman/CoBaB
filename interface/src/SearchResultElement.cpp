@@ -7,14 +7,14 @@
 
 
 /**
- * @brief SearchResultElement::SearchResultElement
+ * @brief SearchResultElement::SearchResultElement Constructs a default SearchResultElement.
  */
 SearchResultElement::SearchResultElement() {
     mScore = 0;
 }
 
 /**
- * @brief gets the score of the element
+ * @brief SearchResultElement::getScore Gets the score of the element.
  * @return the score
  */
 double SearchResultElement::getScore() const {
@@ -22,7 +22,7 @@ double SearchResultElement::getScore() const {
 }
 
 /**
- * @brief sets the score of the element
+ * @brief SearchResultElement::setScore Sets the score of the element.
  * @param score to be set
  */
 void SearchResultElement::setScore(const double score) {
@@ -30,7 +30,7 @@ void SearchResultElement::setScore(const double score) {
 }
 
 /**
- * @brief gets the searchobject
+ * @brief SearchResultElement::getSearchObject Gets the searchobject.
  * @return the searchobject
  */
 SearchObject SearchResultElement::getSearchObject() const {
@@ -38,7 +38,7 @@ SearchObject SearchResultElement::getSearchObject() const {
 }
 
 /**
- * @brief sets the searchobject
+ * @brief SearchResultElement::setSearchObject Sets the searchobject.
  * @param searchObject to be set
  */
 void SearchResultElement::setSearchObject(const SearchObject searchObject) {
@@ -46,7 +46,7 @@ void SearchResultElement::setSearchObject(const SearchObject searchObject) {
 }
 
 /**
- * @brief override << the operator
+ * @brief operator << Overrides the operator <<.
  * @param out the datastream
  * @param SearchResultElement whose data will be sent
  * @return out the datastream
@@ -57,7 +57,7 @@ QDataStream& operator<<(QDataStream& out, const SearchResultElement& searchResul
 }
 
 /**
- * @brief override >> the operator
+ * @brief operator >> Overrides the operator >>.
  * @param in the datastream
  * @param SearchResultElement to be changed
  * @return in the datastream
@@ -68,8 +68,8 @@ QDataStream& operator>>(QDataStream& in, SearchResultElement& searchResultElemen
 }
 
 /**
- * @brief calls the << operator
- * @param in the datastream
+ * @brief SearchResultElement::toStream Calls the << operator and writes the SearchResultElement to stream.
+ * @param out the datastream
  */
 void SearchResultElement::toStream(QDataStream& out) const {
 
@@ -79,8 +79,8 @@ void SearchResultElement::toStream(QDataStream& out) const {
 }
 
 /**
- * @brief calls the >> operator
- * @param out the datastream
+ * @brief SearchResultElement::fromStream Calls the >> operator and reads the SearchResultElement from stream.
+ * @param in the datastream
  */
 void SearchResultElement::fromStream(QDataStream& in) {
 
@@ -90,9 +90,10 @@ void SearchResultElement::fromStream(QDataStream& in) {
 
 
 }
+
 /**
- * @brief compareByScore compares 2 elements by score
- * @param A first element
+ * @brief SearchResultElement::compareByScore Compares 2 search result elements by score.
+ * @param first element
  * @param B second element
  * @return true if A's score is smaller than B's
  */

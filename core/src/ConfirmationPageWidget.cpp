@@ -158,31 +158,12 @@ void ConfirmationPageWidget::reset()
     emit readFromStack(0, varParameters);
     if(varParameters.canConvert<std::shared_ptr<QJsonObject>>()) {
         std::shared_ptr<QJsonObject> parameters = varParameters.value<std::shared_ptr<QJsonObject>>();
-    /*if (parameterFile.canConvert<QString>()) {
-        QString fileName = parameterFile.value<QString>();
-        QFile file(fileName);
-        if(!file.open(QFile::ReadOnly)) {
-            LOG_ERR("cannot open parameter file");
-        }
-        QJsonObject json = QJsonDocument::fromJson(file.readAll()).object();*/
         QJsonObject object = parameters->value("root").toObject();
         QJsonObject::const_iterator iter;
         int i = 0;
         for(iter = object.begin(); iter != object.end(); iter++) {
-            //QVariant value = iter.value().toObject()["default"].toVariant();
             ui->mParameters->setRowCount(std::max(object.keys().size(), ui->mParameters->rowCount()));
-            //ui->mParameters->setItem(i, 2, new QTableWidgetItem(iter.key() + " = " + value.toString()));
-            QString kex = iter.key();
-            QString val = iter.value().toVariant().toString();
             ui->mParameters->setItem(i, 2, new QTableWidgetItem(iter.key() + " = " + iter.value().toVariant().toString()));
-
-    /*mParameterList.clear();
-    if(algo != nullptr) {
-        QJsonObject parameterJson = algo->getParameters();
-        readParameters(parameterJson["Properties"].toObject());
-        for(int i = 0; i < mParameterList.size(); i++) {
-            ui->mParameters->setRowCount(std::max(mParameterList.size(), ui->mParameters->rowCount()));
-            ui->mParameters->setItem(i, 2, new QTableWidgetItem(mParameterList.at(i)));*/
 			
             ui->mParameters->item(i, 2)->setTextAlignment(Qt::AlignCenter);
             i++;
@@ -190,25 +171,6 @@ void ConfirmationPageWidget::reset()
     }
 
     ui->mParameters->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-}
-
-/**
- * @brief ConfirmationPageWidget::readParameters
- * @param object
- */
-void ConfirmationPageWidget::readParameters(QJsonObject object) {
-    QJsonObject::const_iterator iter;
-    for(iter = object.begin(); iter != object.end(); iter++) {
-        if (iter.value().toObject()["default"] != QJsonValue::Null) {
-            QVariant line = iter.key() + " = " + iter.value().toObject()["default"].toVariant().toString();
-            mParameterList.append(line.toString());
-        } else {
-            if(iter.value().isObject()) {
-                mParameterList.append(iter.key() + ":");
-                readParameters(iter.value().toObject());
-            }
-        }
-    }
 }
 
 /**
