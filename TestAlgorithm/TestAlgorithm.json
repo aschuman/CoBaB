@@ -1,6 +1,8 @@
 {
     "Autor" : "Tung Nguyen",
     "Date"  : "2016-03-08",
+	"Name"	: "Testalgorithm",
+	"Description"	: "Description of Testalgorithm",
     "Version" : 1.0,
     "Properties" : {
         "FirstParameter" : {

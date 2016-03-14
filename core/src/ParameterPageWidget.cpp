@@ -45,11 +45,10 @@ void ParameterPageWidget::reset() {
         QJsonObject parameterJson = algo->getParameters();
 
 		QJsonObject parameters;
-		QJsonObject jsonObject = parameterJson["Properties"].toObject();
-		for(QString key: jsonObject.keys()) {
-			for(QString key2: jsonObject.value(key).toObject().keys()) {
+        for(QString key: parameterJson.keys()) {
+            for(QString key2: parameterJson.value(key).toObject().keys()) {
 				if(key2 == "default") {
-					parameters.insert(key, jsonObject.value(key).toObject().value(key2));
+                    parameters.insert(key, parameterJson.value(key).toObject().value(key2));
 				}
 			}
 		}
