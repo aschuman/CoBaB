@@ -65,6 +65,7 @@ void SingleFrameVideoViewer::display() {
     for(QPair<int, Annotation*> iter: mSFVideo.getAnnotationList()) {
         mAnnotations.insert(iter.first, iter);
     }
+    resize();
 }
 
 /**
@@ -98,6 +99,9 @@ void SingleFrameVideoViewer::stop() {
     }
 }
 
+/**
+ * @brief SingleFrameVideoViewer::loop Loops the video if it is not looping, else don't loop it.
+ */
 void SingleFrameVideoViewer::loop() {
     if(mIsLooping) {
         mIsLooping = false;
@@ -176,12 +180,28 @@ int SingleFrameVideoViewer::getFrameIndex() {
     return mFrameIndex;
 }
 
+/**
+ * @brief SingleFrameVideoViewer::nextWidget Shows the next widget.
+ * @param action The Action of the context menu that was selceted.
+ */
 void SingleFrameVideoViewer::nextWidget(QAction* action) {
     stop();
     ViewerPageWidget::nextWidget(action);
 }
 
+/**
+ * @brief SingleFrameVideoViewer::slide Moves the slider.
+ * @param sec The seconds that have passed since the video started.
+ */
 void SingleFrameVideoViewer::slide(int sec) {
     mFrameIndex = sec * mSFVideo.getFramerate() - 1;
     showFrame();
+}
+
+/**
+ * @brief SingleFrameVideoViewer::retranslateUi Translates the GUI.
+ */
+void SingleFrameVideoViewer::retranslateUi() {
+    ViewerPageWidget::retranslateUi();
+    ui->mPhotoCount->setText(tr("Video ")+QString::number(mIndex+1)+tr(" von ")+QString::number(mDataset->getNumberOfMedia()));
 }

@@ -41,3 +41,11 @@ void PhotoViewer::display() {
     mAnnotationDrawer.setAnnotations(medium->getAnnotationList());
     resize();
 }
+
+/**
+ * @brief PhotoViewer::retranslateUi Translates the GUI.
+ */
+void PhotoViewer::retranslateUi() {
+    ViewerPageWidget::retranslateUi();
+    ui->mPhotoCount->setText(tr("Foto ")+QString::number(mIndex+1)+tr(" von ")+QString::number(mDataset->getNumberOfMedia()));
+}

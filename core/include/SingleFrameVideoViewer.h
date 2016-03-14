@@ -16,6 +16,7 @@ class SingleFrameVideoViewer : public ViewerPageWidget
 public:
     SingleFrameVideoViewer();
     void display() override;
+    void retranslateUi() override;
 
 public slots:
     void playOrPause();
