@@ -23,6 +23,11 @@ Medium::Medium(const Medium& other) {
     }
 }
 
+/**
+ * @brief Medium::operator = Sets this Medium to other.
+ * @param other The other Medium.
+ * @return This Medium.
+ */
 Medium& Medium::operator=(const Medium& other) {
     mPath = other.mPath;
     mType = other.mType;

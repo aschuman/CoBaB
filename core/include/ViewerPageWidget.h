@@ -36,7 +36,7 @@ public:
     void retranslateUi() override;
     QString getName() override;
 
-    static const int EXIT_NEXT = 0;
+    static const int EXIT_NEXT = 0; ///< The number the widget exits with.
 
 public slots:
     void next();
@@ -75,7 +75,7 @@ protected:
 
     std::shared_ptr<SearchQuery> mSearchQuery; ///< The SearchQuery, filled with the selected Medium and Annotation/ROI.
 
-    double mZoomLevel;
+    double mZoomLevel; ///< The level how much the view is zoomed.
 
     virtual void display();
     void resizeEvent(QResizeEvent* event) override;

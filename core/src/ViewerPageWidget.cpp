@@ -76,6 +76,10 @@ void ViewerPageWidget::zoomOut() {
     zoomed(0.5);
 }
 
+/**
+ * @brief ViewerPageWidget::zoomed The view was zoomed, so the zooming level and display are updated.
+ * @param factor The zooming factor.
+ */
 void ViewerPageWidget::zoomed(double factor) {
     mZoomLevel *= factor;
     ui->mZoom->setText(QString::number(mZoomLevel*100) + " %");
@@ -198,6 +202,7 @@ void ViewerPageWidget::before() {
  * @brief ViewerPageWidget::display Displays a Medium.
  */
 void ViewerPageWidget::display() {
+
     mZoomLevel = 1.0;
     ui->mZoom->setText("100 %");
 }
@@ -345,6 +350,10 @@ void ViewerPageWidget::retranslateUi() {
     }
 }
 
+/**
+ * @brief ViewerPageWidget::getName Returns the name of the widget.
+ * @return The name.
+ */
 QString ViewerPageWidget::getName() {
     return tr("CoBaB - Viewer");
 }

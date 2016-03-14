@@ -42,7 +42,9 @@ signals:
      * @brief Emitted when the user requests the home page to be displayed.
      */
     void requestedHomePage();
-
+    /**
+     * @brief requestedFileDialog Emitted when the user requests a file dialog to select another dataset.
+     */
     void requestedFileDialog();
 
 private:

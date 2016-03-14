@@ -31,12 +31,21 @@ SingleFrameVideo::SingleFrameVideo(const QString path, const QList<QPair<int, An
     mFramerate = readFramerateFromJson(mPath+"/"+FRAMERATE_FILE);
 }
 
+/**
+ * @brief SingleFrameVideo::SingleFrameVideo Constructs a SingleFrameVideo as a copy of other.
+ * @param other Another SingleFrameVideo that is copied.
+ */
 SingleFrameVideo::SingleFrameVideo(const SingleFrameVideo& other)
     : Medium(other) {
     mFramerate = other.getFramerate();
     mFrameList = other.getFrameList();
 }
 
+/**
+ * @brief SingleFrameVideo::operator = Sets this SingleFrameVideo to other.
+ * @param other The other SingleFrameVideo.
+ * @return This SingleFrameVideo.
+ */
 SingleFrameVideo& SingleFrameVideo::operator=(const SingleFrameVideo& other) {
     mPath = other.mPath;
     mType = other.mType;
@@ -46,6 +55,10 @@ SingleFrameVideo& SingleFrameVideo::operator=(const SingleFrameVideo& other) {
     return *this;
 }
 
+/**
+ * @brief SingleFrameVideo::copy Copies this SingleFrameVideo.
+ * @return A copy of this SingleFrameVideo.
+ */
 Medium* SingleFrameVideo::copy() {
     return new SingleFrameVideo(*this);
 }

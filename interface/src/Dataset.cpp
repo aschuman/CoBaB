@@ -36,6 +36,10 @@ Dataset::Dataset(const QString& path) {
     }
 }
 
+/**
+ * @brief Dataset::Dataset Constructs a Dataset as a copy of other.
+ * @param other Another Dataset that is copied.
+ */
 Dataset::Dataset(const Dataset& other) {
     mName = other.getName();
     mPreviewPhoto = other.getPreviewPhoto();
@@ -48,6 +52,11 @@ Dataset::Dataset(const Dataset& other) {
     }
 }
 
+/**
+ * @brief Dataset::operator = Sets this Dataset to other.
+ * @param other The other Dataset.
+ * @return This Dataset.
+ */
 Dataset& Dataset::operator=(const Dataset& other)
 {
     mName = other.mName;
@@ -350,6 +359,12 @@ QList<QPair<QString, Annotation*>> Dataset::parseAnnotations(const QString& file
     return annotations;
 }
 
+/**
+ * @brief operator == Compares if two datasets are the same.
+ * @param A One Dataset.
+ * @param B Another Dataset.
+ * @return If the datasets are equal.
+ */
 bool operator==(const Dataset& A, const Dataset& B) {
     if(A.getPath() == B.getPath() && A.getType() == B.getType()) {
         return true;

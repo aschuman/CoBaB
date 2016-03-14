@@ -91,11 +91,17 @@ void MainWindow::showHelpDialog()
     msgBox.exec();
 }
 
+/**
+ * @brief MainWindow::showOpenDataset Shows the menu entry to select another dataset.
+ */
 void MainWindow::showOpenDataset()
 {
     ui->mDatasetAction->setVisible(true);
 }
 
+/**
+ * @brief MainWindow::hideOpenDataset Hides the menu entry to select another dataset.
+ */
 void MainWindow::hideOpenDataset()
 {
     ui->mDatasetAction->setVisible(false);

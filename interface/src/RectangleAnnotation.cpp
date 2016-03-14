@@ -9,10 +9,18 @@ RectangleAnnotation::RectangleAnnotation(const QString& id, const QString& type)
 
 }
 
+/**
+ * @brief RectangleAnnotation::copy Copies the RectangleAnnotation.
+ * @return A copy of this RectangleAnnotation.
+ */
 Annotation* RectangleAnnotation::copy() const {
     return new RectangleAnnotation(*this);
 }
 
+/**
+ * @brief RectangleAnnotation::getForm Returns the form of the Annotation (rectangle).
+ * @return The form.
+ */
 Annotation::Form RectangleAnnotation::getForm() const {
     return RECTANGLE;
 }

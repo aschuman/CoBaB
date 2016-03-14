@@ -13,9 +13,16 @@
 class Annotation: public Serializable {
 public: 
 
+    /**
+     * @brief The Type of the Annotation can be face, person or unknown.
+     */
     enum Type { FACE, PERSON, UNKNOWN };
-    enum Form { NONE, RECTANGLE, UNKNOWN_FORM }; //needed for serialization to construct annotations of the right type,
-                                                 //NONE is only needed to check if the annotation is a null object
+    /**
+     * @brief The Form enum is needed for serialization to construct annotations of the right type,
+     * NONE is only needed to check if the annotation is a null object
+     */
+    enum Form { NONE, RECTANGLE, UNKNOWN_FORM };
+
 
     Annotation();
 
@@ -38,8 +45,8 @@ public:
     virtual void fromStream(QDataStream& in) override;
 
 protected: 
-    QString mId;    //Id
-    QString mType;  //Type
+    QString mId;    ///<Id
+    QString mType;  ///<Type
 
 private:
     QStringList mTypes = (QStringList() << "Face" << "Person" << "Unknown");

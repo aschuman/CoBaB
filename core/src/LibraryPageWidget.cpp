@@ -61,6 +61,9 @@ void LibraryPageWidget::on_mLibraryListView_doubleClicked(const QModelIndex &ind
     emit exit(e);
 }
 
+/**
+ * @brief LibraryPageWidget::showFileDialog Shows a file dialog to select another dataset.
+ */
 void LibraryPageWidget::showFileDialog() {
     QString dir = QFileDialog::getExistingDirectory(this, tr("Datenordner öffnen"), "/home");
     Dataset dataset(dir);

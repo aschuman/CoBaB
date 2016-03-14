@@ -22,6 +22,10 @@ signals:
      * @brief resize This signal is emitted if the size of the view changes.
      */
     void resize();
+    /**
+     * @brief zoomed This signal is emitted if the view is zoomed
+     * @param factor The zooming factor.
+     */
     void zoomed(double factor);
 
 protected:

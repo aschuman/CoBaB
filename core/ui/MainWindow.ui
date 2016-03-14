@@ -26,7 +26,7 @@
      <x>0</x>
      <y>0</y>
      <width>629</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="mFileMenu">
@@ -108,12 +108,15 @@
   </widget>
   <action name="mHomeAction">
    <property name="text">
-    <string>Anfang</string>
+    <string/>
+   </property>
+   <property name="iconText">
+    <string/>
    </property>
   </action>
   <action name="mBackAction">
    <property name="text">
-    <string>Zurück</string>
+    <string/>
    </property>
   </action>
   <action name="mHelpAction">
