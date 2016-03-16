@@ -75,8 +75,10 @@
    <addaction name="mHistoryMenu"/>
    <addaction name="mHelpMenu"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="mToolBar">
+   <property name="contextMenuPolicy">
+    <enum>Qt::PreventContextMenu</enum>
+   </property>
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
@@ -96,6 +98,9 @@
    <addaction name="mBackAction"/>
   </widget>
   <widget class="QToolBar" name="toolBar">
+   <property name="contextMenuPolicy">
+    <enum>Qt::PreventContextMenu</enum>
+   </property>
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
