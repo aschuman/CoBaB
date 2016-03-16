@@ -1,0 +1,35 @@
+Während der Implementierung ergaben sich folgende Änderungen im Entwurf.
+
+\subsection{ViewerPageWidget}
+Da sich der Photo- und der SingleFrameVideoViewer in ihren UIs nur um ein paar Buttons unterscheiden, nutzen sie die gemeinsame UI des ViewerPageWidget. Der PhotoViewer blendet die nicht benötigten UI Elemente aus. Daher sind die Buttons des SingleFrameVideoViewers in die Basisklasse verschoben worden.
+
+Der Entwurf war für das GraphicsSingleFrameVideoItem so nicht umsetzbar, da es keinen Sinn macht, dass das GraphicsSingleFrameVideoItem, das im CustomGraphicsView als einzelnes Frame angezeigt wird, einen Player besitzt. Daher wurde die Abspiellogik direkt im SingleFrameVideoViewer implementiert und die beiden Klassen (GraphicsSingleFrameVideoItem und SingleFrameVideoPlayer) wurden weggelassen. Für die Videoframes wurden stattdessen ebenfalls ClickableGraphicsPixmapItems verwendet, was zudem näher an der Implementierung des PhotoViewers liegt.
+
+Das CustomGraphicsView sollte erst ein QGraphicsView besitzen, erbt aber nun direkt von QGraphicsView, um das Zoomen zu ermöglichen. Da es nun ein QGraphicsView ist, wurden die Buttons ins ViewerPageWidget verschoben.
+
+In den ClickableGraphicsItems wurde außerdem nicht das mousePressEvent, sondern das contextMenuEvent überschrieben, da nur der Rechtsklick abgefangen werden sollte, um ein Kontextmenü anzuzeigen.
+
+Der VideoViewer und das zugehörige ClickableQGraphicsVideoItem wurden aus Zeitgründen nicht implementiert.
+
+\subsection{Controller}
+Die Klassen BookmarkManager und MainWindowManager sowie SearchResultManager wurden nicht umgesetzt.
+
+\subsubsection{SearchManager}
+\inlinecode{SearchManager(resWind : ResultsWindow*)} wird zu \inlinecode{SearchManager(resultsPageWidget : ResultsPageWidget*)}. Hierbei handelt es sich um eine versäumte Anpassung, die bereits in der Entwurfsphase vorgenommen hätte werden müssen.
+
+\subsubsection{AlgorithmThread}
+Die AlgorithmThread-Klasse war im Entwurf nicht vorgesehen. Sie wurde nötig, um die Ergebnisse eines vollendeten Suchvorgangs einsammeln zu können ohne das Algorithmeninterface zu ändern. AlgorithmThread speichert die Ergebnisse bis sie von SearchManager abgefragt werden.
+
+\subsubsection{PageStackFrame}
+Die Methode void \inlinecode{incrementSize()} wurde hinzugefügt. Sie dient lediglich der Bequemlichkeit.
+
+\subsubsection{PageType}
+Die Elemente \inlinecode{PHOTO\_VIEWER}, \inlinecode{SINGLE\_FRAME\_VIDEO\_VIEWER} sowie \inlinecode{VIDEO\_VIEWER} sind hinzugekommen. \inlinecode{VIEWER} ist weggefallen. Hierbei handelt es sich um eine versäumte Anpassung, die bereits in der Entwurfsphase vorgenommen hätte werden müssen. Der Entwurf des View sieht vor, dass PhotoViewer, SingleFrameVideoViewer und VideoViewer PageWidgets sind und als solche beim Navigator registriert werden. Dies ernötigt die zusätzlichen PageTypes. \inlinecode{PageType::Viewer} erübrigt sich dadurch.
+
+\subsubsection{PageRegistration}
+PageRegistration bekommt einen Konstruktor \inlinecode{PageRegistration(widget : PageWidget)}, der im Entwurf fehlt. Zusätzlich ist ein explizit deklarierter und manuell definierter Move-Konstruktor und Move-Zuweisungsoperator hinzugefügt worden. Der Rückgabewert von get Widget ist PageWidget, was im Entwurf nicht eingetragen wurde.
+
+\subsubsection{Navigator}
+Alle Container Typen aus Qt wurden im Navigator durch ebenbürtige Typen C++-Standardbibliothek ersetzt. QVariant ist von dieser Änderung ausgenommen. Grund sind die oft strengeren Bedingungen der Qt-Typen an die benutzerdefinierten Typen. Beispielsweise fordert \inlinecode{QList<T>} einen Standardkonstruktor in T.
+Die Slots \inlinecode{toPreviousPage()} und \inlinecode{toHomePage()} wurden für Signale des MainWindow hinzugefügt und waren im Entwurf versäumt.
+Der Slot \inlinecode{tryRead(index : size\_t, value : QVariant)} wurde zu \inlinecode{tryRead(index : int, value : QVariant)}. Diese Änderung vereinfacht die Benutzung des Stacks des Navigators (nachzulesen in der Sourcecodedokumentation).
