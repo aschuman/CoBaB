@@ -1,0 +1,344 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - app.info - /usr/include/qt5/QtCore/qcoreapplication.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">usr/include/qt5/QtCore</a> - qcoreapplication.h<span style="font-size: 80%;"> (source / <a href="qcoreapplication.h.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">app.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2016-03-16</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /****************************************************************************</a>
+<span class="lineNum">       2 </span>            : **
+<span class="lineNum">       3 </span>            : ** Copyright (C) 2015 The Qt Company Ltd.
+<span class="lineNum">       4 </span>            : ** Contact: http://www.qt.io/licensing/
+<span class="lineNum">       5 </span>            : **
+<span class="lineNum">       6 </span>            : ** This file is part of the QtCore module of the Qt Toolkit.
+<span class="lineNum">       7 </span>            : **
+<span class="lineNum">       8 </span>            : ** $QT_BEGIN_LICENSE:LGPL21$
+<span class="lineNum">       9 </span>            : ** Commercial License Usage
+<span class="lineNum">      10 </span>            : ** Licensees holding valid commercial Qt licenses may use this file in
+<span class="lineNum">      11 </span>            : ** accordance with the commercial license agreement provided with the
+<span class="lineNum">      12 </span>            : ** Software or, alternatively, in accordance with the terms contained in
+<span class="lineNum">      13 </span>            : ** a written agreement between you and The Qt Company. For licensing terms
+<span class="lineNum">      14 </span>            : ** and conditions see http://www.qt.io/terms-conditions. For further
+<span class="lineNum">      15 </span>            : ** information use the contact form at http://www.qt.io/contact-us.
+<span class="lineNum">      16 </span>            : **
+<span class="lineNum">      17 </span>            : ** GNU Lesser General Public License Usage
+<span class="lineNum">      18 </span>            : ** Alternatively, this file may be used under the terms of the GNU Lesser
+<span class="lineNum">      19 </span>            : ** General Public License version 2.1 or version 3 as published by the Free
+<span class="lineNum">      20 </span>            : ** Software Foundation and appearing in the file LICENSE.LGPLv21 and
+<span class="lineNum">      21 </span>            : ** LICENSE.LGPLv3 included in the packaging of this file. Please review the
+<span class="lineNum">      22 </span>            : ** following information to ensure the GNU Lesser General Public License
+<span class="lineNum">      23 </span>            : ** requirements will be met: https://www.gnu.org/licenses/lgpl.html and
+<span class="lineNum">      24 </span>            : ** http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+<span class="lineNum">      25 </span>            : **
+<span class="lineNum">      26 </span>            : ** As a special exception, The Qt Company gives you certain additional
+<span class="lineNum">      27 </span>            : ** rights. These rights are described in The Qt Company LGPL Exception
+<span class="lineNum">      28 </span>            : ** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+<span class="lineNum">      29 </span>            : **
+<span class="lineNum">      30 </span>            : ** $QT_END_LICENSE$
+<span class="lineNum">      31 </span>            : **
+<span class="lineNum">      32 </span>            : ****************************************************************************/
+<span class="lineNum">      33 </span>            : 
+<span class="lineNum">      34 </span>            : #ifndef QCOREAPPLICATION_H
+<span class="lineNum">      35 </span>            : #define QCOREAPPLICATION_H
+<span class="lineNum">      36 </span>            : 
+<span class="lineNum">      37 </span>            : #include &lt;QtCore/qglobal.h&gt;
+<span class="lineNum">      38 </span>            : #include &lt;QtCore/qstring.h&gt;
+<span class="lineNum">      39 </span>            : #ifndef QT_NO_QOBJECT
+<span class="lineNum">      40 </span>            : #include &lt;QtCore/qobject.h&gt;
+<span class="lineNum">      41 </span>            : #include &lt;QtCore/qcoreevent.h&gt;
+<span class="lineNum">      42 </span>            : #include &lt;QtCore/qeventloop.h&gt;
+<span class="lineNum">      43 </span>            : #else
+<span class="lineNum">      44 </span>            : #include &lt;QtCore/qscopedpointer.h&gt;
+<span class="lineNum">      45 </span>            : #endif
+<span class="lineNum">      46 </span>            : 
+<span class="lineNum">      47 </span>            : #ifndef QT_NO_QOBJECT
+<span class="lineNum">      48 </span>            : #if defined(Q_OS_WIN) &amp;&amp; !defined(tagMSG)
+<span class="lineNum">      49 </span>            : typedef struct tagMSG MSG;
+<span class="lineNum">      50 </span>            : #endif
+<span class="lineNum">      51 </span>            : #endif
+<span class="lineNum">      52 </span>            : 
+<span class="lineNum">      53 </span>            : QT_BEGIN_NAMESPACE
+<span class="lineNum">      54 </span>            : 
+<span class="lineNum">      55 </span>            : 
+<span class="lineNum">      56 </span>            : class QCoreApplicationPrivate;
+<span class="lineNum">      57 </span>            : class QTextCodec;
+<span class="lineNum">      58 </span>            : class QTranslator;
+<span class="lineNum">      59 </span>            : class QPostEventList;
+<span class="lineNum">      60 </span>            : class QStringList;
+<span class="lineNum">      61 </span>            : class QAbstractEventDispatcher;
+<span class="lineNum">      62 </span>            : class QAbstractNativeEventFilter;
+<span class="lineNum">      63 </span>            : 
+<span class="lineNum">      64 </span>            : #define qApp QCoreApplication::instance()
+<span class="lineNum">      65 </span>            : 
+<span class="lineNum">      66 </span>            : class Q_CORE_EXPORT QCoreApplication
+<span class="lineNum">      67 </span>            : #ifndef QT_NO_QOBJECT
+<span class="lineNum">      68 </span>            :     : public QObject
+<span class="lineNum">      69 </span>            : #endif
+<span class="lineNum">      70 </span>            : {
+<span class="lineNum">      71 </span>            : #ifndef QT_NO_QOBJECT
+<span class="lineNum">      72 </span>            :     Q_OBJECT
+<span class="lineNum">      73 </span>            :     Q_PROPERTY(QString applicationName READ applicationName WRITE setApplicationName NOTIFY applicationNameChanged)
+<span class="lineNum">      74 </span>            :     Q_PROPERTY(QString applicationVersion READ applicationVersion WRITE setApplicationVersion NOTIFY applicationVersionChanged)
+<span class="lineNum">      75 </span>            :     Q_PROPERTY(QString organizationName READ organizationName WRITE setOrganizationName NOTIFY organizationNameChanged)
+<span class="lineNum">      76 </span>            :     Q_PROPERTY(QString organizationDomain READ organizationDomain WRITE setOrganizationDomain NOTIFY organizationDomainChanged)
+<span class="lineNum">      77 </span>            :     Q_PROPERTY(bool quitLockEnabled READ isQuitLockEnabled WRITE setQuitLockEnabled)
+<span class="lineNum">      78 </span>            : #endif
+<span class="lineNum">      79 </span>            : 
+<span class="lineNum">      80 </span>            :     Q_DECLARE_PRIVATE(QCoreApplication)
+<span class="lineNum">      81 </span>            : public:
+<span class="lineNum">      82 </span>            :     enum { ApplicationFlags = QT_VERSION
+<span class="lineNum">      83 </span>            :     };
+<span class="lineNum">      84 </span>            : 
+<span class="lineNum">      85 </span>            :     QCoreApplication(int &amp;argc, char **argv
+<span class="lineNum">      86 </span>            : #ifndef Q_QDOC
+<span class="lineNum">      87 </span>            :                      , int = ApplicationFlags
+<span class="lineNum">      88 </span>            : #endif
+<span class="lineNum">      89 </span>            :             );
+<span class="lineNum">      90 </span>            : 
+<span class="lineNum">      91 </span>            :     ~QCoreApplication();
+<span class="lineNum">      92 </span>            : 
+<span class="lineNum">      93 </span>            :     static QStringList arguments();
+<span class="lineNum">      94 </span>            : 
+<span class="lineNum">      95 </span>            :     static void setAttribute(Qt::ApplicationAttribute attribute, bool on = true);
+<span class="lineNum">      96 </span>            :     static bool testAttribute(Qt::ApplicationAttribute attribute);
+<span class="lineNum">      97 </span>            : 
+<span class="lineNum">      98 </span>            :     static void setOrganizationDomain(const QString &amp;orgDomain);
+<span class="lineNum">      99 </span>            :     static QString organizationDomain();
+<span class="lineNum">     100 </span>            :     static void setOrganizationName(const QString &amp;orgName);
+<span class="lineNum">     101 </span>            :     static QString organizationName();
+<span class="lineNum">     102 </span>            :     static void setApplicationName(const QString &amp;application);
+<span class="lineNum">     103 </span>            :     static QString applicationName();
+<span class="lineNum">     104 </span>            :     static void setApplicationVersion(const QString &amp;version);
+<span class="lineNum">     105 </span>            :     static QString applicationVersion();
+<span class="lineNum">     106 </span>            : 
+<span class="lineNum">     107 </span>            :     static void setSetuidAllowed(bool allow);
+<a name="108"><span class="lineNum">     108 </span>            :     static bool isSetuidAllowed();</a>
+<span class="lineNum">     109 </span>            : 
+<span class="lineNum">     110 </span><span class="lineCov">          3 :     static QCoreApplication *instance() { return self; }</span>
+<span class="lineNum">     111 </span>            : 
+<span class="lineNum">     112 </span>            : #ifndef QT_NO_QOBJECT
+<span class="lineNum">     113 </span>            :     static int exec();
+<span class="lineNum">     114 </span>            :     static void processEvents(QEventLoop::ProcessEventsFlags flags = QEventLoop::AllEvents);
+<span class="lineNum">     115 </span>            :     static void processEvents(QEventLoop::ProcessEventsFlags flags, int maxtime);
+<span class="lineNum">     116 </span>            :     static void exit(int retcode=0);
+<span class="lineNum">     117 </span>            : 
+<span class="lineNum">     118 </span>            :     static bool sendEvent(QObject *receiver, QEvent *event);
+<span class="lineNum">     119 </span>            :     static void postEvent(QObject *receiver, QEvent *event, int priority = Qt::NormalEventPriority);
+<span class="lineNum">     120 </span>            :     static void sendPostedEvents(QObject *receiver = 0, int event_type = 0);
+<span class="lineNum">     121 </span>            :     static void removePostedEvents(QObject *receiver, int eventType = 0);
+<span class="lineNum">     122 </span>            : #if QT_DEPRECATED_SINCE(5, 3)
+<span class="lineNum">     123 </span>            :     QT_DEPRECATED static bool hasPendingEvents();
+<span class="lineNum">     124 </span>            : #endif
+<span class="lineNum">     125 </span>            :     static QAbstractEventDispatcher *eventDispatcher();
+<span class="lineNum">     126 </span>            :     static void setEventDispatcher(QAbstractEventDispatcher *eventDispatcher);
+<span class="lineNum">     127 </span>            : 
+<span class="lineNum">     128 </span>            :     virtual bool notify(QObject *, QEvent *);
+<span class="lineNum">     129 </span>            : 
+<span class="lineNum">     130 </span>            :     static bool startingUp();
+<span class="lineNum">     131 </span>            :     static bool closingDown();
+<span class="lineNum">     132 </span>            : #endif
+<span class="lineNum">     133 </span>            : 
+<span class="lineNum">     134 </span>            :     static QString applicationDirPath();
+<span class="lineNum">     135 </span>            :     static QString applicationFilePath();
+<span class="lineNum">     136 </span>            :     static qint64 applicationPid();
+<span class="lineNum">     137 </span>            : 
+<span class="lineNum">     138 </span>            : #ifndef QT_NO_LIBRARY
+<span class="lineNum">     139 </span>            :     static void setLibraryPaths(const QStringList &amp;);
+<span class="lineNum">     140 </span>            :     static QStringList libraryPaths();
+<span class="lineNum">     141 </span>            :     static void addLibraryPath(const QString &amp;);
+<span class="lineNum">     142 </span>            :     static void removeLibraryPath(const QString &amp;);
+<span class="lineNum">     143 </span>            : #endif // QT_NO_LIBRARY
+<span class="lineNum">     144 </span>            : 
+<span class="lineNum">     145 </span>            : #ifndef QT_NO_TRANSLATION
+<span class="lineNum">     146 </span>            :     static bool installTranslator(QTranslator * messageFile);
+<span class="lineNum">     147 </span>            :     static bool removeTranslator(QTranslator * messageFile);
+<span class="lineNum">     148 </span>            : #endif
+<span class="lineNum">     149 </span>            : 
+<span class="lineNum">     150 </span>            :     static QString translate(const char * context,
+<span class="lineNum">     151 </span>            :                              const char * key,
+<span class="lineNum">     152 </span>            :                              const char * disambiguation = 0,
+<span class="lineNum">     153 </span>            :                              int n = -1);
+<span class="lineNum">     154 </span>            : #if QT_DEPRECATED_SINCE(5, 0)
+<span class="lineNum">     155 </span>            :     enum Encoding { UnicodeUTF8, Latin1, DefaultCodec = UnicodeUTF8, CodecForTr = UnicodeUTF8 };
+<span class="lineNum">     156 </span>            :     QT_DEPRECATED static inline QString translate(const char * context, const char * key,
+<span class="lineNum">     157 </span>            :                              const char * disambiguation, Encoding, int n = -1)
+<span class="lineNum">     158 </span>            :         { return translate(context, key, disambiguation, n); }
+<span class="lineNum">     159 </span>            : #endif
+<span class="lineNum">     160 </span>            : 
+<span class="lineNum">     161 </span>            : #ifndef QT_NO_QOBJECT
+<span class="lineNum">     162 </span>            :     static void flush();
+<span class="lineNum">     163 </span>            : 
+<span class="lineNum">     164 </span>            :     void installNativeEventFilter(QAbstractNativeEventFilter *filterObj);
+<span class="lineNum">     165 </span>            :     void removeNativeEventFilter(QAbstractNativeEventFilter *filterObj);
+<span class="lineNum">     166 </span>            : 
+<span class="lineNum">     167 </span>            :     static bool isQuitLockEnabled();
+<span class="lineNum">     168 </span>            :     static void setQuitLockEnabled(bool enabled);
+<span class="lineNum">     169 </span>            : 
+<span class="lineNum">     170 </span>            : public Q_SLOTS:
+<span class="lineNum">     171 </span>            :     static void quit();
+<span class="lineNum">     172 </span>            : 
+<span class="lineNum">     173 </span>            : Q_SIGNALS:
+<span class="lineNum">     174 </span>            :     void aboutToQuit(QPrivateSignal);
+<span class="lineNum">     175 </span>            : 
+<span class="lineNum">     176 </span>            :     void organizationNameChanged();
+<span class="lineNum">     177 </span>            :     void organizationDomainChanged();
+<span class="lineNum">     178 </span>            :     void applicationNameChanged();
+<span class="lineNum">     179 </span>            :     void applicationVersionChanged();
+<span class="lineNum">     180 </span>            : 
+<span class="lineNum">     181 </span>            : protected:
+<span class="lineNum">     182 </span>            :     bool event(QEvent *) Q_DECL_OVERRIDE;
+<span class="lineNum">     183 </span>            : 
+<span class="lineNum">     184 </span>            :     virtual bool compressEvent(QEvent *, QObject *receiver, QPostEventList *);
+<span class="lineNum">     185 </span>            : #endif // QT_NO_QOBJECT
+<span class="lineNum">     186 </span>            : 
+<span class="lineNum">     187 </span>            : protected:
+<span class="lineNum">     188 </span>            :     QCoreApplication(QCoreApplicationPrivate &amp;p);
+<span class="lineNum">     189 </span>            : 
+<span class="lineNum">     190 </span>            : #ifdef QT_NO_QOBJECT
+<span class="lineNum">     191 </span>            :     QScopedPointer&lt;QCoreApplicationPrivate&gt; d_ptr;
+<span class="lineNum">     192 </span>            : #endif
+<span class="lineNum">     193 </span>            : 
+<span class="lineNum">     194 </span>            : private:
+<span class="lineNum">     195 </span>            : #ifndef QT_NO_QOBJECT
+<span class="lineNum">     196 </span>            :     static bool sendSpontaneousEvent(QObject *receiver, QEvent *event);
+<span class="lineNum">     197 </span>            :     bool notifyInternal(QObject *receiver, QEvent *event);
+<span class="lineNum">     198 </span>            : #endif
+<span class="lineNum">     199 </span>            : 
+<span class="lineNum">     200 </span>            :     void init();
+<span class="lineNum">     201 </span>            : 
+<span class="lineNum">     202 </span>            :     static QCoreApplication *self;
+<span class="lineNum">     203 </span>            : 
+<span class="lineNum">     204 </span>            :     Q_DISABLE_COPY(QCoreApplication)
+<span class="lineNum">     205 </span>            : 
+<span class="lineNum">     206 </span>            :     friend class QApplication;
+<span class="lineNum">     207 </span>            :     friend class QApplicationPrivate;
+<span class="lineNum">     208 </span>            :     friend class QGuiApplication;
+<span class="lineNum">     209 </span>            :     friend class QGuiApplicationPrivate;
+<span class="lineNum">     210 </span>            :     friend class QWidget;
+<span class="lineNum">     211 </span>            :     friend class QWidgetWindow;
+<span class="lineNum">     212 </span>            :     friend class QWidgetPrivate;
+<span class="lineNum">     213 </span>            : #ifndef QT_NO_QOBJECT
+<span class="lineNum">     214 </span>            :     friend class QEventDispatcherUNIXPrivate;
+<span class="lineNum">     215 </span>            :     friend class QCocoaEventDispatcherPrivate;
+<span class="lineNum">     216 </span>            :     friend bool qt_sendSpontaneousEvent(QObject*, QEvent*);
+<span class="lineNum">     217 </span>            : #endif
+<span class="lineNum">     218 </span>            :     friend Q_CORE_EXPORT QString qAppName();
+<span class="lineNum">     219 </span>            :     friend class QClassFactory;
+<span class="lineNum">     220 </span>            : };
+<span class="lineNum">     221 </span>            : 
+<span class="lineNum">     222 </span>            : #ifndef QT_NO_QOBJECT
+<span class="lineNum">     223 </span>            : inline bool QCoreApplication::sendEvent(QObject *receiver, QEvent *event)
+<span class="lineNum">     224 </span>            : {  if (event) event-&gt;spont = false; return self ? self-&gt;notifyInternal(receiver, event) : false; }
+<span class="lineNum">     225 </span>            : 
+<span class="lineNum">     226 </span>            : inline bool QCoreApplication::sendSpontaneousEvent(QObject *receiver, QEvent *event)
+<span class="lineNum">     227 </span>            : { if (event) event-&gt;spont = true; return self ? self-&gt;notifyInternal(receiver, event) : false; }
+<span class="lineNum">     228 </span>            : #endif
+<span class="lineNum">     229 </span>            : 
+<span class="lineNum">     230 </span>            : #ifdef QT_NO_DEPRECATED
+<span class="lineNum">     231 </span>            : #  define QT_DECLARE_DEPRECATED_TR_FUNCTIONS(context)
+<span class="lineNum">     232 </span>            : #else
+<span class="lineNum">     233 </span>            : #  define QT_DECLARE_DEPRECATED_TR_FUNCTIONS(context) \
+<span class="lineNum">     234 </span>            :     QT_DEPRECATED static inline QString trUtf8(const char *sourceText, const char *disambiguation = 0, int n = -1) \
+<span class="lineNum">     235 </span>            :         { return QCoreApplication::translate(#context, sourceText, disambiguation, n); }
+<span class="lineNum">     236 </span>            : #endif
+<span class="lineNum">     237 </span>            : 
+<span class="lineNum">     238 </span>            : #define Q_DECLARE_TR_FUNCTIONS(context) \
+<span class="lineNum">     239 </span>            : public: \
+<span class="lineNum">     240 </span>            :     static inline QString tr(const char *sourceText, const char *disambiguation = 0, int n = -1) \
+<span class="lineNum">     241 </span>            :         { return QCoreApplication::translate(#context, sourceText, disambiguation, n); } \
+<span class="lineNum">     242 </span>            :     QT_DECLARE_DEPRECATED_TR_FUNCTIONS(context) \
+<span class="lineNum">     243 </span>            : private:
+<span class="lineNum">     244 </span>            : 
+<span class="lineNum">     245 </span>            : typedef void (*QtStartUpFunction)();
+<span class="lineNum">     246 </span>            : typedef void (*QtCleanUpFunction)();
+<span class="lineNum">     247 </span>            : 
+<span class="lineNum">     248 </span>            : Q_CORE_EXPORT void qAddPreRoutine(QtStartUpFunction);
+<span class="lineNum">     249 </span>            : Q_CORE_EXPORT void qAddPostRoutine(QtCleanUpFunction);
+<span class="lineNum">     250 </span>            : Q_CORE_EXPORT void qRemovePostRoutine(QtCleanUpFunction);
+<span class="lineNum">     251 </span>            : Q_CORE_EXPORT QString qAppName();                // get application name
+<span class="lineNum">     252 </span>            : 
+<span class="lineNum">     253 </span>            : #define Q_COREAPP_STARTUP_FUNCTION(AFUNC) \
+<span class="lineNum">     254 </span>            :     static void AFUNC ## _ctor_function() {  \
+<span class="lineNum">     255 </span>            :         qAddPreRoutine(AFUNC);        \
+<span class="lineNum">     256 </span>            :     }                                 \
+<span class="lineNum">     257 </span>            :     Q_CONSTRUCTOR_FUNCTION(AFUNC ## _ctor_function)
+<span class="lineNum">     258 </span>            : 
+<span class="lineNum">     259 </span>            : #ifndef QT_NO_QOBJECT
+<span class="lineNum">     260 </span>            : #if defined(Q_OS_WIN) &amp;&amp; !defined(QT_NO_DEBUG_STREAM)
+<span class="lineNum">     261 </span>            : Q_CORE_EXPORT QString decodeMSG(const MSG &amp;);
+<span class="lineNum">     262 </span>            : Q_CORE_EXPORT QDebug operator&lt;&lt;(QDebug, const MSG &amp;);
+<span class="lineNum">     263 </span>            : #endif
+<span class="lineNum">     264 </span>            : #endif
+<span class="lineNum">     265 </span>            : 
+<span class="lineNum">     266 </span>            : QT_END_NAMESPACE
+<span class="lineNum">     267 </span>            : 
+<span class="lineNum">     268 </span>            : #endif // QCOREAPPLICATION_H
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - app.info - CoBaB/test/src/PageStackframeTester.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">CoBaB/test/src</a> - PageStackframeTester.cpp<span style="font-size: 80%;"> (source / <a href="PageStackframeTester.cpp.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">app.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">21</td>
+            <td class="headerCovTableEntry">21</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2016-03-16</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;include/PageStackframeTester.h&quot;</a>
+<span class="lineNum">       2 </span>            : #include &lt;QtTest&gt;
+<a name="3"><span class="lineNum">       3 </span>            : #include &quot;PageStackFrame.h&quot;</a>
+<span class="lineNum">       4 </span>            : 
+<span class="lineNum">       5 </span><span class="lineCov">          1 : void PageStackFrameTester::testConstructor_data(){</span>
+<span class="lineNum">       6 </span><span class="lineCov">          1 :     QTest::addColumn&lt;PageType&gt;(&quot;inType&quot;);</span>
+<span class="lineNum">       7 </span><span class="lineCov">          1 :     QTest::addColumn&lt;PageType&gt;(&quot;outType&quot;);</span>
+<span class="lineNum">       8 </span>            : 
+<span class="lineNum">       9 </span><span class="lineCov">          1 :     QTest::newRow(&quot;confirmation&quot;) &lt;&lt; PageType::CONFIRMATION &lt;&lt; PageType::CONFIRMATION;</span>
+<span class="lineNum">      10 </span><span class="lineCov">          1 :     QTest::newRow(&quot;library&quot;) &lt;&lt; PageType::LIBRARY &lt;&lt; PageType::LIBRARY;</span>
+<span class="lineNum">      11 </span><span class="lineCov">          1 :     QTest::newRow(&quot;none&quot;) &lt;&lt; PageType::NONE &lt;&lt; PageType::NONE;</span>
+<span class="lineNum">      12 </span><span class="lineCov">          1 :     QTest::newRow(&quot;parameter&quot;) &lt;&lt; PageType::PARAMETER &lt;&lt; PageType::PARAMETER;</span>
+<span class="lineNum">      13 </span><span class="lineCov">          1 :     QTest::newRow(&quot;results&quot;) &lt;&lt; PageType::RESULTS &lt;&lt; PageType::RESULTS;</span>
+<span class="lineNum">      14 </span><span class="lineCov">          1 :     QTest::newRow(&quot;viewer&quot;) &lt;&lt; PageType::PHOTO_VIEWER &lt;&lt; PageType::PHOTO_VIEWER;</span>
+<a name="15"><span class="lineNum">      15 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">      16 </span>            : 
+<span class="lineNum">      17 </span><span class="lineCov">          6 : void PageStackFrameTester::testConstructor()</span>
+<span class="lineNum">      18 </span>            : {
+<span class="lineNum">      19 </span><span class="lineCov">          6 :     QFETCH(PageType, inType);</span>
+<span class="lineNum">      20 </span><span class="lineCov">          6 :     QFETCH(PageType, outType);</span>
+<span class="lineNum">      21 </span><span class="lineCov">          6 :     PageStackFrame frame(inType);</span>
+<span class="lineNum">      22 </span><span class="lineCov">          6 :     QCOMPARE(frame.getType(), outType);</span>
+<span class="lineNum">      23 </span><span class="lineCov">          6 :     QCOMPARE(frame.getSize(), (size_t)0);</span>
+<a name="24"><span class="lineNum">      24 </span>            : }</a>
+<span class="lineNum">      25 </span>            : 
+<span class="lineNum">      26 </span><span class="lineCov">          1 : void PageStackFrameTester::testSetSize()</span>
+<span class="lineNum">      27 </span>            : {
+<span class="lineNum">      28 </span><span class="lineCov">          1 :     const size_t SIZE = 123;</span>
+<span class="lineNum">      29 </span><span class="lineCov">          1 :     PageStackFrame frame(PageType::NONE);</span>
+<span class="lineNum">      30 </span><span class="lineCov">          1 :     frame.setSize(SIZE);</span>
+<span class="lineNum">      31 </span><span class="lineCov">          1 :     QCOMPARE(frame.getSize(), SIZE);</span>
+<span class="lineNum">      32 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

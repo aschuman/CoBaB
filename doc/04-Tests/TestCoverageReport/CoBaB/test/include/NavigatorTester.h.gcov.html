@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - app.info - CoBaB/test/include/NavigatorTester.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">CoBaB/test/include</a> - NavigatorTester.h<span style="font-size: 80%;"> (source / <a href="NavigatorTester.h.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">app.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2016-03-16</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntryLo">66.7 %</td>
+          </tr>
+          <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #ifndef NAVIGATORTESTER_H</a>
+<span class="lineNum">       2 </span>            : #define NAVIGATORTESTER_H
+<span class="lineNum">       3 </span>            : 
+<span class="lineNum">       4 </span>            : #include &lt;memory&gt;
+<span class="lineNum">       5 </span>            : #include &lt;QObject&gt;
+<span class="lineNum">       6 </span>            : #include &quot;Navigator.h&quot;
+<span class="lineNum">       7 </span>            : #include &quot;PageWidgetMock.h&quot;
+<a name="8"><span class="lineNum">       8 </span>            : </a>
+<span class="lineNum">       9 </span>            : 
+<span class="lineNum">      10 </span><span class="lineCov">          2 : class NavigatorTester : public QObject</span>
+<span class="lineNum">      11 </span>            : {
+<span class="lineNum">      12 </span>            :     Q_OBJECT
+<span class="lineNum">      13 </span>            : private slots:
+<span class="lineNum">      14 </span>            :     void init();
+<span class="lineNum">      15 </span>            :     void testInitialState();
+<span class="lineNum">      16 </span>            :     void testReadStackTop();
+<span class="lineNum">      17 </span>            :     void testReadStackOutOfRange();
+<span class="lineNum">      18 </span>            :     void testReadStackSecondFromTop();
+<span class="lineNum">      19 </span>            :     void testReadStackBottom();
+<span class="lineNum">      20 </span>            :     void testReadSecondFromBottom();
+<span class="lineNum">      21 </span>            :     void testReadStackFromBottomOutOfRange();
+<span class="lineNum">      22 </span>            :     void testLibraryViewerTransition();
+<span class="lineNum">      23 </span>            :     void testPushToStack();
+<span class="lineNum">      24 </span>            :     void testHomePage();
+<span class="lineNum">      25 </span>            :     void testPreviousPage();
+<span class="lineNum">      26 </span>            :     void testRemainingInitialStackAfterReturnHome();
+<span class="lineNum">      27 </span>            :     void testRemainingInitialStackAfterReturnBack();
+<span class="lineNum">      28 </span>            : 
+<span class="lineNum">      29 </span>            : private:
+<span class="lineNum">      30 </span>            :     std::unique_ptr&lt;Navigator&gt; mNavigator;
+<span class="lineNum">      31 </span>            : 
+<span class="lineNum">      32 </span>            :     MainWindow* mMainWindow;
+<span class="lineNum">      33 </span>            : 
+<span class="lineNum">      34 </span>            :     PageWidgetMock* mLibraryMock;
+<span class="lineNum">      35 </span>            :     PageWidgetMock* mViewerMock;
+<span class="lineNum">      36 </span>            :     PageWidgetMock* mParametersMock;
+<span class="lineNum">      37 </span>            : };
+<span class="lineNum">      38 </span>            : 
+<span class="lineNum">      39 </span>            : #endif // NAVIGATORTESTER_H
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - app.info - CoBaB/test/src/BookmarkListTester.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">CoBaB/test/src</a> - BookmarkListTester.cpp<span style="font-size: 80%;"> (source / <a href="BookmarkListTester.cpp.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">app.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">52</td>
+            <td class="headerCovTableEntry">52</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2016-03-16</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;BookmarkListTester.h&quot;</a>
+<span class="lineNum">       2 </span>            : 
+<span class="lineNum">       3 </span><span class="lineCov">          1 : void BookmarkListTester::initTest() {</span>
+<span class="lineNum">       4 </span>            :     //create new temporary directory
+<span class="lineNum">       5 </span><span class="lineCov">          2 :     QDir dir(QDir::currentPath());</span>
+<span class="lineNum">       6 </span><span class="lineCov">          1 :     dir.mkdir(&quot;temp_dir&quot;);</span>
+<span class="lineNum">       7 </span><span class="lineCov">          1 :     dir.cd(&quot;temp_dir&quot;);</span>
+<span class="lineNum">       8 </span>            : 
+<span class="lineNum">       9 </span><span class="lineCov">          2 :     Bookmark bm1;</span>
+<span class="lineNum">      10 </span><span class="lineCov">          1 :     bm1.setName(&quot;3rd bm&quot;);</span>
+<span class="lineNum">      11 </span><span class="lineCov">          1 :     bm1.setDate(QDateTime(QDate(2015,1,1)));</span>
+<span class="lineNum">      12 </span><span class="lineCov">          1 :     bm1.setPath(dir.path().append(&quot;/bookmark.01&quot;));</span>
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span><span class="lineCov">          2 :     Bookmark bm2;</span>
+<span class="lineNum">      15 </span><span class="lineCov">          1 :     bm2.setName(&quot;1st bm&quot;);</span>
+<span class="lineNum">      16 </span><span class="lineCov">          1 :     bm2.setDate(QDateTime(QDate(2015,3,1)));</span>
+<span class="lineNum">      17 </span><span class="lineCov">          1 :     bm2.setPath(dir.path().append(&quot;/bookmark.02&quot;));</span>
+<span class="lineNum">      18 </span>            : 
+<span class="lineNum">      19 </span><span class="lineCov">          2 :     Bookmark bm3;</span>
+<span class="lineNum">      20 </span><span class="lineCov">          1 :     bm3.setName(&quot;2nd bm&quot;);</span>
+<span class="lineNum">      21 </span><span class="lineCov">          1 :     bm3.setDate(QDateTime(QDate(2015,2,1)));</span>
+<span class="lineNum">      22 </span><span class="lineCov">          1 :     bm3.setPath(dir.path().append(&quot;/bookmark.03&quot;));</span>
+<span class="lineNum">      23 </span>            : 
+<span class="lineNum">      24 </span><span class="lineCov">          1 :     list.addBookmark(bm1);</span>
+<span class="lineNum">      25 </span><span class="lineCov">          1 :     list.addBookmark(bm2);</span>
+<span class="lineNum">      26 </span><span class="lineCov">          1 :     list.addBookmark(bm3);</span>
+<a name="27"><span class="lineNum">      27 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">      28 </span>            : 
+<span class="lineNum">      29 </span><span class="lineCov">          1 : void BookmarkListTester::testAdd() {</span>
+<span class="lineNum">      30 </span><span class="lineCov">          2 :     Bookmark bm4;</span>
+<span class="lineNum">      31 </span><span class="lineCov">          1 :     bm4.setName(&quot;4th bm&quot;);</span>
+<span class="lineNum">      32 </span>            : 
+<span class="lineNum">      33 </span><span class="lineCov">          1 :     QCOMPARE(list.sortByName().size(), 3);</span>
+<span class="lineNum">      34 </span>            : 
+<span class="lineNum">      35 </span><span class="lineCov">          1 :     list.addBookmark(bm4);</span>
+<span class="lineNum">      36 </span><span class="lineCov">          1 :     QCOMPARE(list.sortByName().size(), 4);</span>
+<a name="37"><span class="lineNum">      37 </span>            : }</a>
+<span class="lineNum">      38 </span>            : 
+<span class="lineNum">      39 </span><span class="lineCov">          1 : void BookmarkListTester::testRemove() {</span>
+<span class="lineNum">      40 </span><span class="lineCov">          2 :     Bookmark bm;</span>
+<span class="lineNum">      41 </span><span class="lineCov">          1 :     bm.setName(&quot;5th bm&quot;);</span>
+<span class="lineNum">      42 </span>            : 
+<span class="lineNum">      43 </span><span class="lineCov">          1 :     QCOMPARE(list.sortByName().size(), 4);</span>
+<span class="lineNum">      44 </span><span class="lineCov">          1 :     QVERIFY(!list.removeBookmark(bm));</span>
+<span class="lineNum">      45 </span>            : 
+<span class="lineNum">      46 </span><span class="lineCov">          1 :     bm.setName(&quot;4th bm&quot;);</span>
+<span class="lineNum">      47 </span><span class="lineCov">          1 :     QVERIFY(list.removeBookmark(bm));</span>
+<span class="lineNum">      48 </span><span class="lineCov">          1 :     QCOMPARE(list.sortByName().size(), 3);</span>
+<a name="49"><span class="lineNum">      49 </span>            : }</a>
+<span class="lineNum">      50 </span>            : 
+<span class="lineNum">      51 </span><span class="lineCov">          1 : void BookmarkListTester::testSortByName() {</span>
+<span class="lineNum">      52 </span><span class="lineCov">          2 :     QList&lt;const Bookmark*&gt; nList = list.sortByName();</span>
+<span class="lineNum">      53 </span><span class="lineCov">          1 :     QCOMPARE(nList.size(), 3);</span>
+<span class="lineNum">      54 </span>            : 
+<span class="lineNum">      55 </span><span class="lineCov">          1 :     QCOMPARE(nList.value(0)-&gt;getName(), (QString)&quot;1st bm&quot;);</span>
+<span class="lineNum">      56 </span><span class="lineCov">          1 :     QCOMPARE(nList.value(1)-&gt;getName(), (QString)&quot;2nd bm&quot;);</span>
+<span class="lineNum">      57 </span><span class="lineCov">          1 :     QCOMPARE(nList.value(2)-&gt;getName(), (QString)&quot;3rd bm&quot;);</span>
+<a name="58"><span class="lineNum">      58 </span>            : }</a>
+<span class="lineNum">      59 </span>            : 
+<span class="lineNum">      60 </span><span class="lineCov">          1 : void BookmarkListTester::testSortByDate() {</span>
+<span class="lineNum">      61 </span><span class="lineCov">          2 :     QList&lt;const Bookmark*&gt; nList = list.sortByDate();</span>
+<span class="lineNum">      62 </span><span class="lineCov">          1 :     QCOMPARE(nList.size(), 3);</span>
+<span class="lineNum">      63 </span>            : 
+<span class="lineNum">      64 </span><span class="lineCov">          1 :     QCOMPARE(nList.value(0)-&gt;getName(), (QString)&quot;3rd bm&quot;);</span>
+<span class="lineNum">      65 </span><span class="lineCov">          1 :     QCOMPARE(nList.value(1)-&gt;getName(), (QString)&quot;2nd bm&quot;);</span>
+<span class="lineNum">      66 </span><span class="lineCov">          1 :     QCOMPARE(nList.value(2)-&gt;getName(), (QString)&quot;1st bm&quot;);</span>
+<a name="67"><span class="lineNum">      67 </span>            : }</a>
+<span class="lineNum">      68 </span>            : 
+<span class="lineNum">      69 </span><span class="lineCov">          1 : void BookmarkListTester::testLoad() {</span>
+<span class="lineNum">      70 </span><span class="lineCov">          2 :     QString path = QDir::currentPath().append(&quot;/temp_dir&quot;);</span>
+<span class="lineNum">      71 </span><span class="lineCov">          2 :     BookmarkList fList;</span>
+<span class="lineNum">      72 </span><span class="lineCov">          1 :     fList.load(path);</span>
+<a name="73"><span class="lineNum">      73 </span>            : </a>
+<span class="lineNum">      74 </span><span class="lineCov">          1 :     QCOMPARE(fList.sortByName().size(), 3);</span>
+<span class="lineNum">      75 </span><span class="lineCov">          3 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
