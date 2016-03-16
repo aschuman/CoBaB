@@ -155,22 +155,30 @@ void ConfirmationPageWidget::reset()
 
     //read parameters and their values
     QVariant varParameters;
+    std::shared_ptr<QJsonObject> parameters = nullptr;
     emit readFromStack(0, varParameters);
     if(varParameters.canConvert<std::shared_ptr<QJsonObject>>()) {
-        std::shared_ptr<QJsonObject> parameters = varParameters.value<std::shared_ptr<QJsonObject>>();
-        QJsonObject object = parameters->value("root").toObject();
+        parameters = varParameters.value<std::shared_ptr<QJsonObject>>();
         QJsonObject::const_iterator iter;
         int i = 0;
-        for(iter = object.begin(); iter != object.end(); iter++) {
-            ui->mParameters->setRowCount(std::max(object.keys().size(), ui->mParameters->rowCount()));
+        for(iter = parameters->begin(); iter != parameters->end(); iter++) {
+            ui->mParameters->setRowCount(std::max(parameters->keys().size(), ui->mParameters->rowCount()));
             ui->mParameters->setItem(i, 2, new QTableWidgetItem(iter.key() + " = " + iter.value().toVariant().toString()));
 			
             ui->mParameters->item(i, 2)->setTextAlignment(Qt::AlignCenter);
             i++;
         }
+    } else {
+        LOG_ERR("no parameters");
     }
 
     ui->mParameters->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    if(parameters != nullptr) {
+        if(!algo->setParameters(*(parameters.get()))) {
+            LOG_ERR("could not set parameters");
+        }
+    }
 }
 
 /**

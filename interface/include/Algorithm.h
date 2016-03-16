@@ -28,6 +28,8 @@ public:
 
     QJsonObject getParameters();
 
+    QJsonObject getDefaultParameters();
+
     bool initialize(QPluginLoader* loader);
 
 public slots:
@@ -41,6 +43,7 @@ protected:
     QString mId = "";
     bool mCancel = false;
     QJsonObject mParameters;
+    QJsonObject mDefaultParameters;
 };
 
 #define Algorithm_iid "org.CoBaB.Algorithm"

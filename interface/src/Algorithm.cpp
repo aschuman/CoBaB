@@ -54,14 +54,14 @@ bool Algorithm::initialize(QPluginLoader *loader) {
     mId = mName + " " + version;
     if (mId.trimmed() == "") {} //LOG WARNING
 
-    if (o.contains("Properties")) return setParameters(o.value("Properties").toObject());
+    if (o.contains("Properties")) mDefaultParameters = o.value("Properties").toObject();
     else {} //LOG WARNING
 
     return true;
 }
 
 /**
- * @brief Algorithm::setParameters Set the algorithm's parameters
+ * @brief Algorithm::setParameters Set the algorithm's parameters.
  * @param parameters The new parameters as Json object.
  * @return True, if all went well.
  */
@@ -72,11 +72,19 @@ bool Algorithm::setParameters(const QJsonObject& parameters)
 }
 
 /**
- * @brief Algorithm::getParameters Returns the parameter file for this algorithm
- * @return The QJsonObject parameter file for this algorithm
+ * @brief Algorithm::getParameters Returns the parameters set for this algorithm.
+ * @return The current parameters for this algorithm.
  */
 QJsonObject Algorithm::getParameters() {
     return mParameters;
+}
+
+/**
+ * @brief Algorithm::getDefaultParameters Returns the parameter file for this algorithm.
+ * @return The QJsonObject parameter file for this algorithm.
+ */
+QJsonObject Algorithm::getDefaultParameters() {
+    return mDefaultParameters;
 }
 
 /**

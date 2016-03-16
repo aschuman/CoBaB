@@ -42,7 +42,7 @@ void ParameterPageWidget::reset() {
     emit readFromStack(0, chosenAlgorithm);
     if (chosenAlgorithm.canConvert<QPointer<Algorithm>>()){
         QPointer<Algorithm> algo = chosenAlgorithm.value<QPointer<Algorithm>>();
-        QJsonObject parameterJson = algo->getParameters();
+        QJsonObject parameterJson = algo->getDefaultParameters();
 
 		QJsonObject parameters;
         for(QString key: parameterJson.keys()) {
@@ -80,7 +80,7 @@ void ParameterPageWidget::nextButtonClicked() {
     emit pushToStack(var);
 
     //push the parameters to stack
-    std::shared_ptr<QJsonObject> parameters = std::make_shared<QJsonObject>(mParameterModel->getParameters());
+    std::shared_ptr<QJsonObject> parameters = std::make_shared<QJsonObject>(mParameterModel->getParameters().value("root").toObject());
     QVariant var2;
     var2.setValue(parameters);
     emit pushToStack(var2);
