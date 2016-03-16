@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - app.info - /usr/include/qt5/QtTest/qtest_gui.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">usr/include/qt5/QtTest</a> - qtest_gui.h<span style="font-size: 80%;"> (source / <a href="qtest_gui.h.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">app.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">11</td>
+            <td class="headerCovTableEntry">20</td>
+            <td class="headerCovTableEntryLo">55.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2016-03-16</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /****************************************************************************</a>
+<span class="lineNum">       2 </span>            : **
+<span class="lineNum">       3 </span>            : ** Copyright (C) 2015 The Qt Company Ltd.
+<span class="lineNum">       4 </span>            : ** Contact: http://www.qt.io/licensing/
+<span class="lineNum">       5 </span>            : **
+<span class="lineNum">       6 </span>            : ** This file is part of the QtTest module of the Qt Toolkit.
+<span class="lineNum">       7 </span>            : **
+<span class="lineNum">       8 </span>            : ** $QT_BEGIN_LICENSE:LGPL21$
+<span class="lineNum">       9 </span>            : ** Commercial License Usage
+<span class="lineNum">      10 </span>            : ** Licensees holding valid commercial Qt licenses may use this file in
+<span class="lineNum">      11 </span>            : ** accordance with the commercial license agreement provided with the
+<span class="lineNum">      12 </span>            : ** Software or, alternatively, in accordance with the terms contained in
+<span class="lineNum">      13 </span>            : ** a written agreement between you and The Qt Company. For licensing terms
+<span class="lineNum">      14 </span>            : ** and conditions see http://www.qt.io/terms-conditions. For further
+<span class="lineNum">      15 </span>            : ** information use the contact form at http://www.qt.io/contact-us.
+<span class="lineNum">      16 </span>            : **
+<span class="lineNum">      17 </span>            : ** GNU Lesser General Public License Usage
+<span class="lineNum">      18 </span>            : ** Alternatively, this file may be used under the terms of the GNU Lesser
+<span class="lineNum">      19 </span>            : ** General Public License version 2.1 or version 3 as published by the Free
+<span class="lineNum">      20 </span>            : ** Software Foundation and appearing in the file LICENSE.LGPLv21 and
+<span class="lineNum">      21 </span>            : ** LICENSE.LGPLv3 included in the packaging of this file. Please review the
+<span class="lineNum">      22 </span>            : ** following information to ensure the GNU Lesser General Public License
+<span class="lineNum">      23 </span>            : ** requirements will be met: https://www.gnu.org/licenses/lgpl.html and
+<span class="lineNum">      24 </span>            : ** http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+<span class="lineNum">      25 </span>            : **
+<span class="lineNum">      26 </span>            : ** As a special exception, The Qt Company gives you certain additional
+<span class="lineNum">      27 </span>            : ** rights. These rights are described in The Qt Company LGPL Exception
+<span class="lineNum">      28 </span>            : ** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+<span class="lineNum">      29 </span>            : **
+<span class="lineNum">      30 </span>            : ** $QT_END_LICENSE$
+<span class="lineNum">      31 </span>            : **
+<span class="lineNum">      32 </span>            : ****************************************************************************/
+<span class="lineNum">      33 </span>            : 
+<span class="lineNum">      34 </span>            : #ifndef QTEST_GUI_H
+<span class="lineNum">      35 </span>            : #define QTEST_GUI_H
+<span class="lineNum">      36 </span>            : 
+<span class="lineNum">      37 </span>            : // enable GUI features
+<span class="lineNum">      38 </span>            : #ifndef QT_GUI_LIB
+<span class="lineNum">      39 </span>            : #define QT_GUI_LIB
+<span class="lineNum">      40 </span>            : #endif
+<span class="lineNum">      41 </span>            : #if 0
+<span class="lineNum">      42 </span>            : #pragma qt_class(QtTestGui)
+<span class="lineNum">      43 </span>            : #endif
+<span class="lineNum">      44 </span>            : 
+<span class="lineNum">      45 </span>            : #include &lt;QtTest/qtestassert.h&gt;
+<span class="lineNum">      46 </span>            : #include &lt;QtTest/qtest.h&gt;
+<span class="lineNum">      47 </span>            : #include &lt;QtTest/qtestevent.h&gt;
+<span class="lineNum">      48 </span>            : #include &lt;QtTest/qtestmouse.h&gt;
+<span class="lineNum">      49 </span>            : #include &lt;QtTest/qtesttouch.h&gt;
+<span class="lineNum">      50 </span>            : #include &lt;QtTest/qtestkeyboard.h&gt;
+<span class="lineNum">      51 </span>            : 
+<span class="lineNum">      52 </span>            : #include &lt;QtGui/qpixmap.h&gt;
+<span class="lineNum">      53 </span>            : #include &lt;QtGui/qimage.h&gt;
+<span class="lineNum">      54 </span>            : 
+<span class="lineNum">      55 </span>            : #ifdef QT_WIDGETS_LIB
+<span class="lineNum">      56 </span>            : #include &lt;QtGui/qicon.h&gt;
+<span class="lineNum">      57 </span>            : #endif
+<span class="lineNum">      58 </span>            : 
+<span class="lineNum">      59 </span>            : #if 0
+<span class="lineNum">      60 </span>            : // inform syncqt
+<span class="lineNum">      61 </span>            : #pragma qt_no_master_include
+<span class="lineNum">      62 </span>            : #endif
+<span class="lineNum">      63 </span>            : 
+<span class="lineNum">      64 </span>            : QT_BEGIN_NAMESPACE
+<span class="lineNum">      65 </span>            : 
+<span class="lineNum">      66 </span>            : 
+<span class="lineNum">      67 </span>            : namespace QTest
+<span class="lineNum">      68 </span>            : {
+<span class="lineNum">      69 </span>            : 
+<span class="lineNum">      70 </span>            : inline bool qCompare(QIcon const &amp;t1, QIcon const &amp;t2, const char *actual, const char *expected,
+<span class="lineNum">      71 </span>            :                     const char *file, int line)
+<span class="lineNum">      72 </span>            : {
+<span class="lineNum">      73 </span>            :     QTEST_ASSERT(sizeof(QIcon) == sizeof(void *));
+<span class="lineNum">      74 </span>            :     return qCompare(*reinterpret_cast&lt;void * const *&gt;(&amp;t1),
+<span class="lineNum">      75 </span>            :                    *reinterpret_cast&lt;void * const *&gt;(&amp;t2), actual, expected, file, line);
+<a name="76"><span class="lineNum">      76 </span>            : }</a>
+<span class="lineNum">      77 </span>            : 
+<span class="lineNum">      78 </span><span class="lineCov">          4 : inline bool qCompare(QImage const &amp;t1, QImage const &amp;t2,</span>
+<span class="lineNum">      79 </span>            :                      const char *actual, const char *expected, const char *file, int line)
+<span class="lineNum">      80 </span>            : {
+<span class="lineNum">      81 </span>            :     char msg[1024];
+<span class="lineNum">      82 </span><span class="lineCov">          4 :     msg[0] = '\0';</span>
+<span class="lineNum">      83 </span><span class="lineCov">          4 :     const bool t1Null = t1.isNull();</span>
+<span class="lineNum">      84 </span><span class="lineCov">          4 :     const bool t2Null = t2.isNull();</span>
+<span class="lineNum">      85 </span><span class="lineCov">          4 :     if (t1Null != t2Null) {</span>
+<span class="lineNum">      86 </span><span class="lineNoCov">          0 :         qsnprintf(msg, 1024, &quot;Compared QImages differ.\n&quot;</span>
+<span class="lineNum">      87 </span>            :                   &quot;   Actual   (%s).isNull(): %d\n&quot;
+<span class="lineNum">      88 </span><span class="lineNoCov">          0 :                   &quot;   Expected (%s).isNull(): %d&quot;, actual, t1Null, expected, t2Null);</span>
+<span class="lineNum">      89 </span><span class="lineNoCov">          0 :         return compare_helper(false, msg, 0, 0, actual, expected, file, line);</span>
+<span class="lineNum">      90 </span>            :     }
+<span class="lineNum">      91 </span><span class="lineCov">          4 :     if (t1Null &amp;&amp; t2Null)</span>
+<span class="lineNum">      92 </span><span class="lineCov">          1 :         return compare_helper(true, 0, 0, 0, actual, expected, file, line);</span>
+<span class="lineNum">      93 </span><span class="lineCov">          3 :     if (t1.width() != t2.width() || t1.height() != t2.height()) {</span>
+<span class="lineNum">      94 </span><span class="lineNoCov">          0 :         qsnprintf(msg, 1024, &quot;Compared QImages differ in size.\n&quot;</span>
+<span class="lineNum">      95 </span>            :                   &quot;   Actual   (%s): %dx%d\n&quot;
+<span class="lineNum">      96 </span>            :                   &quot;   Expected (%s): %dx%d&quot;,
+<span class="lineNum">      97 </span>            :                   actual, t1.width(), t1.height(),
+<span class="lineNum">      98 </span><span class="lineNoCov">          0 :                   expected, t2.width(), t2.height());</span>
+<span class="lineNum">      99 </span><span class="lineNoCov">          0 :         return compare_helper(false, msg, 0, 0, actual, expected, file, line);</span>
+<span class="lineNum">     100 </span>            :     }
+<span class="lineNum">     101 </span><span class="lineCov">          3 :     if (t1.format() != t2.format()) {</span>
+<span class="lineNum">     102 </span><span class="lineNoCov">          0 :         qsnprintf(msg, 1024, &quot;Compared QImages differ in format.\n&quot;</span>
+<span class="lineNum">     103 </span>            :                   &quot;   Actual   (%s): %d\n&quot;
+<span class="lineNum">     104 </span>            :                   &quot;   Expected (%s): %d&quot;,
+<span class="lineNum">     105 </span><span class="lineNoCov">          0 :                   actual, t1.format(), expected, t2.format());</span>
+<span class="lineNum">     106 </span><span class="lineNoCov">          0 :         return compare_helper(false, msg, 0, 0, actual, expected, file, line);</span>
+<span class="lineNum">     107 </span>            :     }
+<span class="lineNum">     108 </span><span class="lineCov">          3 :     return compare_helper(t1 == t2, &quot;Compared values are not the same&quot;,</span>
+<span class="lineNum">     109 </span><span class="lineCov">          3 :                           toString(t1), toString(t2), actual, expected, file, line);</span>
+<span class="lineNum">     110 </span>            : }
+<span class="lineNum">     111 </span>            : 
+<span class="lineNum">     112 </span>            : inline bool qCompare(QPixmap const &amp;t1, QPixmap const &amp;t2, const char *actual, const char *expected,
+<span class="lineNum">     113 </span>            :                     const char *file, int line)
+<span class="lineNum">     114 </span>            : {
+<span class="lineNum">     115 </span>            :     char msg[1024];
+<span class="lineNum">     116 </span>            :     msg[0] = '\0';
+<span class="lineNum">     117 </span>            :     const bool t1Null = t1.isNull();
+<span class="lineNum">     118 </span>            :     const bool t2Null = t2.isNull();
+<span class="lineNum">     119 </span>            :     if (t1Null != t2Null) {
+<span class="lineNum">     120 </span>            :         qsnprintf(msg, 1024, &quot;Compared QPixmaps differ.\n&quot;
+<span class="lineNum">     121 </span>            :                   &quot;   Actual   (%s).isNull(): %d\n&quot;
+<span class="lineNum">     122 </span>            :                   &quot;   Expected (%s).isNull(): %d&quot;, actual, t1Null, expected, t2Null);
+<span class="lineNum">     123 </span>            :         return compare_helper(false, msg, 0, 0, actual, expected, file, line);
+<span class="lineNum">     124 </span>            :     }
+<span class="lineNum">     125 </span>            :     if (t1Null &amp;&amp; t2Null)
+<span class="lineNum">     126 </span>            :         return compare_helper(true, 0, 0, 0, actual, expected, file, line);
+<span class="lineNum">     127 </span>            :     if (t1.width() != t2.width() || t1.height() != t2.height()) {
+<span class="lineNum">     128 </span>            :         qsnprintf(msg, 1024, &quot;Compared QPixmaps differ in size.\n&quot;
+<span class="lineNum">     129 </span>            :                   &quot;   Actual   (%s): %dx%d\n&quot;
+<span class="lineNum">     130 </span>            :                   &quot;   Expected (%s): %dx%d&quot;,
+<span class="lineNum">     131 </span>            :                   actual, t1.width(), t1.height(),
+<span class="lineNum">     132 </span>            :                   expected, t2.width(), t2.height());
+<span class="lineNum">     133 </span>            :         return compare_helper(false, msg, 0, 0, actual, expected, file, line);
+<span class="lineNum">     134 </span>            :     }
+<span class="lineNum">     135 </span>            :     return qCompare(t1.toImage(), t2.toImage(), actual, expected, file, line);
+<span class="lineNum">     136 </span>            : }
+<span class="lineNum">     137 </span>            : 
+<span class="lineNum">     138 </span>            : }
+<span class="lineNum">     139 </span>            : 
+<span class="lineNum">     140 </span>            : QT_END_NAMESPACE
+<span class="lineNum">     141 </span>            : 
+<span class="lineNum">     142 </span>            : #endif
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

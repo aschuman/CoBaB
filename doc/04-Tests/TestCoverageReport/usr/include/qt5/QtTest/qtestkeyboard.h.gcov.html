@@ -1,0 +1,371 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - app.info - /usr/include/qt5/QtTest/qtestkeyboard.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">usr/include/qt5/QtTest</a> - qtestkeyboard.h<span style="font-size: 80%;"> (source / <a href="qtestkeyboard.h.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">app.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">112</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2016-03-16</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /****************************************************************************</a>
+<span class="lineNum">       2 </span>            : **
+<span class="lineNum">       3 </span>            : ** Copyright (C) 2015 The Qt Company Ltd.
+<span class="lineNum">       4 </span>            : ** Contact: http://www.qt.io/licensing/
+<span class="lineNum">       5 </span>            : **
+<span class="lineNum">       6 </span>            : ** This file is part of the QtTest module of the Qt Toolkit.
+<span class="lineNum">       7 </span>            : **
+<span class="lineNum">       8 </span>            : ** $QT_BEGIN_LICENSE:LGPL21$
+<span class="lineNum">       9 </span>            : ** Commercial License Usage
+<span class="lineNum">      10 </span>            : ** Licensees holding valid commercial Qt licenses may use this file in
+<span class="lineNum">      11 </span>            : ** accordance with the commercial license agreement provided with the
+<span class="lineNum">      12 </span>            : ** Software or, alternatively, in accordance with the terms contained in
+<span class="lineNum">      13 </span>            : ** a written agreement between you and The Qt Company. For licensing terms
+<span class="lineNum">      14 </span>            : ** and conditions see http://www.qt.io/terms-conditions. For further
+<span class="lineNum">      15 </span>            : ** information use the contact form at http://www.qt.io/contact-us.
+<span class="lineNum">      16 </span>            : **
+<span class="lineNum">      17 </span>            : ** GNU Lesser General Public License Usage
+<span class="lineNum">      18 </span>            : ** Alternatively, this file may be used under the terms of the GNU Lesser
+<span class="lineNum">      19 </span>            : ** General Public License version 2.1 or version 3 as published by the Free
+<span class="lineNum">      20 </span>            : ** Software Foundation and appearing in the file LICENSE.LGPLv21 and
+<span class="lineNum">      21 </span>            : ** LICENSE.LGPLv3 included in the packaging of this file. Please review the
+<span class="lineNum">      22 </span>            : ** following information to ensure the GNU Lesser General Public License
+<span class="lineNum">      23 </span>            : ** requirements will be met: https://www.gnu.org/licenses/lgpl.html and
+<span class="lineNum">      24 </span>            : ** http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+<span class="lineNum">      25 </span>            : **
+<span class="lineNum">      26 </span>            : ** As a special exception, The Qt Company gives you certain additional
+<span class="lineNum">      27 </span>            : ** rights. These rights are described in The Qt Company LGPL Exception
+<span class="lineNum">      28 </span>            : ** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+<span class="lineNum">      29 </span>            : **
+<span class="lineNum">      30 </span>            : ** $QT_END_LICENSE$
+<span class="lineNum">      31 </span>            : **
+<span class="lineNum">      32 </span>            : ****************************************************************************/
+<span class="lineNum">      33 </span>            : 
+<span class="lineNum">      34 </span>            : #ifndef QTESTKEYBOARD_H
+<span class="lineNum">      35 </span>            : #define QTESTKEYBOARD_H
+<span class="lineNum">      36 </span>            : 
+<span class="lineNum">      37 </span>            : #if 0
+<span class="lineNum">      38 </span>            : // inform syncqt
+<span class="lineNum">      39 </span>            : #pragma qt_no_master_include
+<span class="lineNum">      40 </span>            : #endif
+<span class="lineNum">      41 </span>            : 
+<span class="lineNum">      42 </span>            : #include &lt;QtTest/qtestassert.h&gt;
+<span class="lineNum">      43 </span>            : #include &lt;QtTest/qtest_global.h&gt;
+<span class="lineNum">      44 </span>            : #include &lt;QtTest/qtestsystem.h&gt;
+<span class="lineNum">      45 </span>            : #include &lt;QtTest/qtestspontaneevent.h&gt;
+<span class="lineNum">      46 </span>            : 
+<span class="lineNum">      47 </span>            : #include &lt;QtCore/qpointer.h&gt;
+<span class="lineNum">      48 </span>            : #include &lt;QtGui/qguiapplication.h&gt;
+<span class="lineNum">      49 </span>            : #include &lt;QtGui/qwindow.h&gt;
+<span class="lineNum">      50 </span>            : #include &lt;QtGui/qevent.h&gt;
+<span class="lineNum">      51 </span>            : 
+<span class="lineNum">      52 </span>            : #ifdef QT_WIDGETS_LIB
+<span class="lineNum">      53 </span>            : #include &lt;QtWidgets/qwidget.h&gt;
+<span class="lineNum">      54 </span>            : #include &lt;QtWidgets/qapplication.h&gt;
+<span class="lineNum">      55 </span>            : #endif
+<span class="lineNum">      56 </span>            : 
+<span class="lineNum">      57 </span>            : QT_BEGIN_NAMESPACE
+<span class="lineNum">      58 </span>            : 
+<span class="lineNum">      59 </span>            : Q_GUI_EXPORT void qt_handleKeyEvent(QWindow *w, QEvent::Type t, int k, Qt::KeyboardModifiers mods, const QString &amp; text = QString(), bool autorep = false, ushort count = 1);
+<span class="lineNum">      60 </span>            : Q_GUI_EXPORT bool qt_sendShortcutOverrideEvent(QObject *o, ulong timestamp, int k, Qt::KeyboardModifiers mods, const QString &amp;text = QString(), bool autorep = false, ushort count = 1);
+<span class="lineNum">      61 </span>            : 
+<span class="lineNum">      62 </span>            : namespace QTest
+<span class="lineNum">      63 </span>            : {
+<a name="64"><span class="lineNum">      64 </span>            :     enum KeyAction { Press, Release, Click };</a>
+<span class="lineNum">      65 </span>            : 
+<span class="lineNum">      66 </span><span class="lineNoCov">          0 :     static void simulateEvent(QWindow *window, bool press, int code,</span>
+<span class="lineNum">      67 </span>            :                               Qt::KeyboardModifiers modifier, QString text, bool repeat, int delay=-1)
+<span class="lineNum">      68 </span>            :     {
+<span class="lineNum">      69 </span>            :         QEvent::Type type;
+<span class="lineNum">      70 </span><span class="lineNoCov">          0 :         type = press ? QEvent::KeyPress : QEvent::KeyRelease;</span>
+<span class="lineNum">      71 </span><span class="lineNoCov">          0 :         qt_handleKeyEvent(window, type, code, modifier, text, repeat, delay);</span>
+<span class="lineNum">      72 </span>            : #ifdef QT_MAC_USE_COCOA
+<span class="lineNum">      73 </span>            :         QTest::qWait(20);
+<span class="lineNum">      74 </span>            : #else
+<span class="lineNum">      75 </span><span class="lineNoCov">          0 :         qApp-&gt;processEvents();</span>
+<span class="lineNum">      76 </span>            : #endif
+<a name="77"><span class="lineNum">      77 </span><span class="lineNoCov">          0 :     }</span></a>
+<span class="lineNum">      78 </span>            : 
+<span class="lineNum">      79 </span><span class="lineNoCov">          0 :     static void sendKeyEvent(KeyAction action, QWindow *window, Qt::Key code,</span>
+<span class="lineNum">      80 </span>            :                              QString text, Qt::KeyboardModifiers modifier, int delay=-1)
+<span class="lineNum">      81 </span>            :     {
+<span class="lineNum">      82 </span><span class="lineNoCov">          0 :         QTEST_ASSERT(qApp);</span>
+<span class="lineNum">      83 </span>            : 
+<span class="lineNum">      84 </span><span class="lineNoCov">          0 :         if (!window)</span>
+<span class="lineNum">      85 </span><span class="lineNoCov">          0 :             window = QGuiApplication::focusWindow();</span>
+<span class="lineNum">      86 </span>            : 
+<span class="lineNum">      87 </span><span class="lineNoCov">          0 :         QTEST_ASSERT(window);</span>
+<span class="lineNum">      88 </span>            : 
+<span class="lineNum">      89 </span>            : 
+<span class="lineNum">      90 </span><span class="lineNoCov">          0 :         if (action == Click) {</span>
+<span class="lineNum">      91 </span><span class="lineNoCov">          0 :             sendKeyEvent(Press, window, code, text, modifier, delay);</span>
+<span class="lineNum">      92 </span><span class="lineNoCov">          0 :             sendKeyEvent(Release, window, code, text, modifier, delay);</span>
+<span class="lineNum">      93 </span><span class="lineNoCov">          0 :             return;</span>
+<span class="lineNum">      94 </span>            :         }
+<span class="lineNum">      95 </span>            : 
+<span class="lineNum">      96 </span><span class="lineNoCov">          0 :         bool repeat = false;</span>
+<span class="lineNum">      97 </span>            : 
+<span class="lineNum">      98 </span><span class="lineNoCov">          0 :         if (action == Press) {</span>
+<span class="lineNum">      99 </span><span class="lineNoCov">          0 :             if (modifier &amp; Qt::ShiftModifier)</span>
+<span class="lineNum">     100 </span><span class="lineNoCov">          0 :                 simulateEvent(window, true, Qt::Key_Shift, 0, QString(), false, delay);</span>
+<span class="lineNum">     101 </span>            : 
+<span class="lineNum">     102 </span><span class="lineNoCov">          0 :             if (modifier &amp; Qt::ControlModifier)</span>
+<span class="lineNum">     103 </span><span class="lineNoCov">          0 :                 simulateEvent(window, true, Qt::Key_Control, modifier &amp; Qt::ShiftModifier, QString(), false, delay);</span>
+<span class="lineNum">     104 </span>            : 
+<span class="lineNum">     105 </span><span class="lineNoCov">          0 :             if (modifier &amp; Qt::AltModifier)</span>
+<span class="lineNum">     106 </span><span class="lineNoCov">          0 :                 simulateEvent(window, true, Qt::Key_Alt,</span>
+<span class="lineNum">     107 </span><span class="lineNoCov">          0 :                               modifier &amp; (Qt::ShiftModifier | Qt::ControlModifier), QString(), false, delay);</span>
+<span class="lineNum">     108 </span><span class="lineNoCov">          0 :             if (modifier &amp; Qt::MetaModifier)</span>
+<span class="lineNum">     109 </span><span class="lineNoCov">          0 :                 simulateEvent(window, true, Qt::Key_Meta, modifier &amp; (Qt::ShiftModifier</span>
+<span class="lineNum">     110 </span><span class="lineNoCov">          0 :                                                                       | Qt::ControlModifier | Qt::AltModifier), QString(), false, delay);</span>
+<span class="lineNum">     111 </span><span class="lineNoCov">          0 :             simulateEvent(window, true, code, modifier, text, repeat, delay);</span>
+<span class="lineNum">     112 </span><span class="lineNoCov">          0 :         } else if (action == Release) {</span>
+<span class="lineNum">     113 </span><span class="lineNoCov">          0 :             simulateEvent(window, false, code, modifier, text, repeat, delay);</span>
+<span class="lineNum">     114 </span>            : 
+<span class="lineNum">     115 </span><span class="lineNoCov">          0 :             if (modifier &amp; Qt::MetaModifier)</span>
+<span class="lineNum">     116 </span><span class="lineNoCov">          0 :                 simulateEvent(window, false, Qt::Key_Meta, modifier, QString(), false, delay);</span>
+<span class="lineNum">     117 </span><span class="lineNoCov">          0 :             if (modifier &amp; Qt::AltModifier)</span>
+<span class="lineNum">     118 </span><span class="lineNoCov">          0 :                 simulateEvent(window, false, Qt::Key_Alt, modifier &amp;</span>
+<span class="lineNum">     119 </span><span class="lineNoCov">          0 :                               (Qt::ShiftModifier | Qt::ControlModifier | Qt::AltModifier), QString(), false, delay);</span>
+<span class="lineNum">     120 </span>            : 
+<span class="lineNum">     121 </span><span class="lineNoCov">          0 :             if (modifier &amp; Qt::ControlModifier)</span>
+<span class="lineNum">     122 </span><span class="lineNoCov">          0 :                 simulateEvent(window, false, Qt::Key_Control,</span>
+<span class="lineNum">     123 </span><span class="lineNoCov">          0 :                               modifier &amp; (Qt::ShiftModifier | Qt::ControlModifier), QString(), false, delay);</span>
+<span class="lineNum">     124 </span>            : 
+<span class="lineNum">     125 </span><span class="lineNoCov">          0 :             if (modifier &amp; Qt::ShiftModifier)</span>
+<span class="lineNum">     126 </span><span class="lineNoCov">          0 :                 simulateEvent(window, false, Qt::Key_Shift, modifier &amp; Qt::ShiftModifier, QString(), false, delay);</span>
+<span class="lineNum">     127 </span>            :         }
+<span class="lineNum">     128 </span>            :     }
+<a name="129"><span class="lineNum">     129 </span>            : </a>
+<span class="lineNum">     130 </span>            :     // Convenience function
+<span class="lineNum">     131 </span><span class="lineNoCov">          0 :     static void sendKeyEvent(KeyAction action, QWindow *window, Qt::Key code,</span>
+<span class="lineNum">     132 </span>            :                              char ascii, Qt::KeyboardModifiers modifier, int delay=-1)
+<span class="lineNum">     133 </span>            :     {
+<span class="lineNum">     134 </span><span class="lineNoCov">          0 :         QString text;</span>
+<span class="lineNum">     135 </span><span class="lineNoCov">          0 :         if (ascii)</span>
+<span class="lineNum">     136 </span><span class="lineNoCov">          0 :             text = QString(QChar::fromLatin1(ascii));</span>
+<span class="lineNum">     137 </span><span class="lineNoCov">          0 :         sendKeyEvent(action, window, code, text, modifier, delay);</span>
+<span class="lineNum">     138 </span><span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">     139 </span>            : 
+<span class="lineNum">     140 </span>            :     inline static void keyEvent(KeyAction action, QWindow *window, char ascii,
+<span class="lineNum">     141 </span>            :                                 Qt::KeyboardModifiers modifier = Qt::NoModifier, int delay=-1)
+<span class="lineNum">     142 </span>            :     { sendKeyEvent(action, window, asciiToKey(ascii), ascii, modifier, delay); }
+<span class="lineNum">     143 </span>            :     inline static void keyEvent(KeyAction action, QWindow *window, Qt::Key key,
+<span class="lineNum">     144 </span>            :                                 Qt::KeyboardModifiers modifier = Qt::NoModifier, int delay=-1)
+<span class="lineNum">     145 </span>            :     { sendKeyEvent(action, window, key, keyToAscii(key), modifier, delay); }
+<span class="lineNum">     146 </span>            : 
+<span class="lineNum">     147 </span>            :     Q_DECL_UNUSED inline static void keyClick(QWindow *window, Qt::Key key, Qt::KeyboardModifiers modifier = Qt::NoModifier, int delay=-1)
+<span class="lineNum">     148 </span>            :     { keyEvent(Click, window, key, modifier, delay); }
+<span class="lineNum">     149 </span>            :     Q_DECL_UNUSED inline static void keyClick(QWindow *window, char key, Qt::KeyboardModifiers modifier = Qt::NoModifier, int delay=-1)
+<span class="lineNum">     150 </span>            :     { keyEvent(Click, window, key, modifier, delay); }
+<span class="lineNum">     151 </span>            :     Q_DECL_UNUSED inline static void keyRelease(QWindow *window, char key, Qt::KeyboardModifiers modifier = Qt::NoModifier, int delay=-1)
+<span class="lineNum">     152 </span>            :     { keyEvent(Release, window, key, modifier, delay); }
+<span class="lineNum">     153 </span>            :     Q_DECL_UNUSED inline static void keyRelease(QWindow *window, Qt::Key key, Qt::KeyboardModifiers modifier = Qt::NoModifier, int delay=-1)
+<span class="lineNum">     154 </span>            :     { keyEvent(Release, window, key, modifier, delay); }
+<span class="lineNum">     155 </span>            :     Q_DECL_UNUSED inline static void keyPress(QWindow *window, char key, Qt::KeyboardModifiers modifier = Qt::NoModifier, int delay=-1)
+<span class="lineNum">     156 </span>            :     { keyEvent(Press, window, key, modifier, delay); }
+<span class="lineNum">     157 </span>            :     Q_DECL_UNUSED inline static void keyPress(QWindow *window, Qt::Key key, Qt::KeyboardModifiers modifier = Qt::NoModifier, int delay=-1)
+<span class="lineNum">     158 </span>            :     { keyEvent(Press, window, key, modifier, delay); }
+<a name="159"><span class="lineNum">     159 </span>            : </a>
+<span class="lineNum">     160 </span>            : #ifdef QT_WIDGETS_LIB
+<span class="lineNum">     161 </span><span class="lineNoCov">          0 :     static void simulateEvent(QWidget *widget, bool press, int code,</span>
+<span class="lineNum">     162 </span>            :                               Qt::KeyboardModifiers modifier, QString text, bool repeat, int delay=-1)
+<span class="lineNum">     163 </span>            :     {
+<span class="lineNum">     164 </span><span class="lineNoCov">          0 :         QTEST_ASSERT(widget);</span>
+<span class="lineNum">     165 </span>            :         extern int Q_TESTLIB_EXPORT defaultKeyDelay();
+<span class="lineNum">     166 </span>            : 
+<span class="lineNum">     167 </span><span class="lineNoCov">          0 :         if (delay == -1 || delay &lt; defaultKeyDelay())</span>
+<span class="lineNum">     168 </span><span class="lineNoCov">          0 :             delay = defaultKeyDelay();</span>
+<span class="lineNum">     169 </span><span class="lineNoCov">          0 :         if (delay &gt; 0)</span>
+<span class="lineNum">     170 </span><span class="lineNoCov">          0 :             QTest::qWait(delay);</span>
+<span class="lineNum">     171 </span>            : 
+<span class="lineNum">     172 </span><span class="lineNoCov">          0 :         QKeyEvent a(press ? QEvent::KeyPress : QEvent::KeyRelease, code, modifier, text, repeat);</span>
+<span class="lineNum">     173 </span><span class="lineNoCov">          0 :         QSpontaneKeyEvent::setSpontaneous(&amp;a);</span>
+<span class="lineNum">     174 </span>            : 
+<span class="lineNum">     175 </span><span class="lineNoCov">          0 :         if (press &amp;&amp; qt_sendShortcutOverrideEvent(widget, a.timestamp(), code, modifier, text, repeat))</span>
+<span class="lineNum">     176 </span><span class="lineNoCov">          0 :             return;</span>
+<span class="lineNum">     177 </span><span class="lineNoCov">          0 :         if (!qApp-&gt;notify(widget, &amp;a))</span>
+<span class="lineNum">     178 </span><span class="lineNoCov">          0 :             QTest::qWarn(&quot;Keyboard event not accepted by receiving widget&quot;);</span>
+<a name="179"><span class="lineNum">     179 </span>            :     }</a>
+<span class="lineNum">     180 </span>            : 
+<span class="lineNum">     181 </span><span class="lineNoCov">          0 :     static void sendKeyEvent(KeyAction action, QWidget *widget, Qt::Key code,</span>
+<span class="lineNum">     182 </span>            :                              QString text, Qt::KeyboardModifiers modifier, int delay=-1)
+<span class="lineNum">     183 </span>            :     {
+<span class="lineNum">     184 </span><span class="lineNoCov">          0 :         QTEST_ASSERT(qApp);</span>
+<span class="lineNum">     185 </span>            : 
+<span class="lineNum">     186 </span><span class="lineNoCov">          0 :         if (!widget)</span>
+<span class="lineNum">     187 </span><span class="lineNoCov">          0 :             widget = QWidget::keyboardGrabber();</span>
+<span class="lineNum">     188 </span><span class="lineNoCov">          0 :         if (!widget) {</span>
+<span class="lineNum">     189 </span>            :             // Popup widgets stealthily steal the keyboard grab
+<span class="lineNum">     190 </span><span class="lineNoCov">          0 :             if (QWidget *apw = QApplication::activePopupWidget())</span>
+<span class="lineNum">     191 </span><span class="lineNoCov">          0 :                 widget = apw-&gt;focusWidget() ? apw-&gt;focusWidget() : apw;</span>
+<span class="lineNum">     192 </span>            :         }
+<span class="lineNum">     193 </span><span class="lineNoCov">          0 :         if (!widget) {</span>
+<span class="lineNum">     194 </span><span class="lineNoCov">          0 :             QWindow *window = QGuiApplication::focusWindow();</span>
+<span class="lineNum">     195 </span><span class="lineNoCov">          0 :             if (window) {</span>
+<span class="lineNum">     196 </span><span class="lineNoCov">          0 :                 sendKeyEvent(action, window, code, text, modifier, delay);</span>
+<span class="lineNum">     197 </span><span class="lineNoCov">          0 :                 return;</span>
+<span class="lineNum">     198 </span>            :             }
+<span class="lineNum">     199 </span>            :         }
+<span class="lineNum">     200 </span><span class="lineNoCov">          0 :         if (!widget)</span>
+<span class="lineNum">     201 </span><span class="lineNoCov">          0 :             widget = QApplication::focusWidget();</span>
+<span class="lineNum">     202 </span><span class="lineNoCov">          0 :         if (!widget)</span>
+<span class="lineNum">     203 </span><span class="lineNoCov">          0 :             widget = QApplication::activeWindow();</span>
+<span class="lineNum">     204 </span>            : 
+<span class="lineNum">     205 </span><span class="lineNoCov">          0 :         QTEST_ASSERT(widget);</span>
+<span class="lineNum">     206 </span>            : 
+<span class="lineNum">     207 </span><span class="lineNoCov">          0 :         if (action == Click) {</span>
+<span class="lineNum">     208 </span><span class="lineNoCov">          0 :             QPointer&lt;QWidget&gt; ptr(widget);</span>
+<span class="lineNum">     209 </span><span class="lineNoCov">          0 :             sendKeyEvent(Press, widget, code, text, modifier, delay);</span>
+<span class="lineNum">     210 </span><span class="lineNoCov">          0 :             if (!ptr) {</span>
+<span class="lineNum">     211 </span>            :                 // if we send key-events to embedded widgets, they might be destroyed
+<span class="lineNum">     212 </span>            :                 // when the user presses Return
+<span class="lineNum">     213 </span><span class="lineNoCov">          0 :                 return;</span>
+<span class="lineNum">     214 </span>            :             }
+<span class="lineNum">     215 </span><span class="lineNoCov">          0 :             sendKeyEvent(Release, widget, code, text, modifier, delay);</span>
+<span class="lineNum">     216 </span><span class="lineNoCov">          0 :             return;</span>
+<span class="lineNum">     217 </span>            :         }
+<span class="lineNum">     218 </span>            : 
+<span class="lineNum">     219 </span><span class="lineNoCov">          0 :         bool repeat = false;</span>
+<span class="lineNum">     220 </span>            : 
+<span class="lineNum">     221 </span><span class="lineNoCov">          0 :         if (action == Press) {</span>
+<span class="lineNum">     222 </span><span class="lineNoCov">          0 :             if (modifier &amp; Qt::ShiftModifier)</span>
+<span class="lineNum">     223 </span><span class="lineNoCov">          0 :                 simulateEvent(widget, true, Qt::Key_Shift, 0, QString(), false, delay);</span>
+<span class="lineNum">     224 </span>            : 
+<span class="lineNum">     225 </span><span class="lineNoCov">          0 :             if (modifier &amp; Qt::ControlModifier)</span>
+<span class="lineNum">     226 </span><span class="lineNoCov">          0 :                 simulateEvent(widget, true, Qt::Key_Control, modifier &amp; Qt::ShiftModifier, QString(), false, delay);</span>
+<span class="lineNum">     227 </span>            : 
+<span class="lineNum">     228 </span><span class="lineNoCov">          0 :             if (modifier &amp; Qt::AltModifier)</span>
+<span class="lineNum">     229 </span><span class="lineNoCov">          0 :                 simulateEvent(widget, true, Qt::Key_Alt,</span>
+<span class="lineNum">     230 </span><span class="lineNoCov">          0 :                               modifier &amp; (Qt::ShiftModifier | Qt::ControlModifier), QString(), false, delay);</span>
+<span class="lineNum">     231 </span><span class="lineNoCov">          0 :             if (modifier &amp; Qt::MetaModifier)</span>
+<span class="lineNum">     232 </span><span class="lineNoCov">          0 :                 simulateEvent(widget, true, Qt::Key_Meta, modifier &amp; (Qt::ShiftModifier</span>
+<span class="lineNum">     233 </span><span class="lineNoCov">          0 :                                                                       | Qt::ControlModifier | Qt::AltModifier), QString(), false, delay);</span>
+<span class="lineNum">     234 </span><span class="lineNoCov">          0 :             simulateEvent(widget, true, code, modifier, text, repeat, delay);</span>
+<span class="lineNum">     235 </span><span class="lineNoCov">          0 :         } else if (action == Release) {</span>
+<span class="lineNum">     236 </span><span class="lineNoCov">          0 :             simulateEvent(widget, false, code, modifier, text, repeat, delay);</span>
+<span class="lineNum">     237 </span>            : 
+<span class="lineNum">     238 </span><span class="lineNoCov">          0 :             if (modifier &amp; Qt::MetaModifier)</span>
+<span class="lineNum">     239 </span><span class="lineNoCov">          0 :                 simulateEvent(widget, false, Qt::Key_Meta, modifier, QString(), false, delay);</span>
+<span class="lineNum">     240 </span><span class="lineNoCov">          0 :             if (modifier &amp; Qt::AltModifier)</span>
+<span class="lineNum">     241 </span><span class="lineNoCov">          0 :                 simulateEvent(widget, false, Qt::Key_Alt, modifier &amp;</span>
+<span class="lineNum">     242 </span><span class="lineNoCov">          0 :                               (Qt::ShiftModifier | Qt::ControlModifier | Qt::AltModifier), QString(), false, delay);</span>
+<span class="lineNum">     243 </span>            : 
+<span class="lineNum">     244 </span><span class="lineNoCov">          0 :             if (modifier &amp; Qt::ControlModifier)</span>
+<span class="lineNum">     245 </span><span class="lineNoCov">          0 :                 simulateEvent(widget, false, Qt::Key_Control,</span>
+<span class="lineNum">     246 </span><span class="lineNoCov">          0 :                               modifier &amp; (Qt::ShiftModifier | Qt::ControlModifier), QString(), false, delay);</span>
+<span class="lineNum">     247 </span>            : 
+<span class="lineNum">     248 </span><span class="lineNoCov">          0 :             if (modifier &amp; Qt::ShiftModifier)</span>
+<span class="lineNum">     249 </span><span class="lineNoCov">          0 :                 simulateEvent(widget, false, Qt::Key_Shift, modifier &amp; Qt::ShiftModifier, QString(), false, delay);</span>
+<span class="lineNum">     250 </span>            :         }
+<span class="lineNum">     251 </span>            :     }
+<a name="252"><span class="lineNum">     252 </span>            : </a>
+<span class="lineNum">     253 </span>            :     // Convenience function
+<span class="lineNum">     254 </span><span class="lineNoCov">          0 :     static void sendKeyEvent(KeyAction action, QWidget *widget, Qt::Key code,</span>
+<span class="lineNum">     255 </span>            :                              char ascii, Qt::KeyboardModifiers modifier, int delay=-1)
+<span class="lineNum">     256 </span>            :     {
+<span class="lineNum">     257 </span><span class="lineNoCov">          0 :         QString text;</span>
+<span class="lineNum">     258 </span><span class="lineNoCov">          0 :         if (ascii)</span>
+<span class="lineNum">     259 </span><span class="lineNoCov">          0 :             text = QString(QChar::fromLatin1(ascii));</span>
+<span class="lineNum">     260 </span><span class="lineNoCov">          0 :         sendKeyEvent(action, widget, code, text, modifier, delay);</span>
+<span class="lineNum">     261 </span><span class="lineNoCov">          0 :     }</span>
+<span class="lineNum">     262 </span>            : 
+<span class="lineNum">     263 </span>            :     inline static void keyEvent(KeyAction action, QWidget *widget, char ascii,
+<span class="lineNum">     264 </span>            :                                 Qt::KeyboardModifiers modifier = Qt::NoModifier, int delay=-1)
+<span class="lineNum">     265 </span>            :     { sendKeyEvent(action, widget, asciiToKey(ascii), ascii, modifier, delay); }
+<span class="lineNum">     266 </span>            :     inline static void keyEvent(KeyAction action, QWidget *widget, Qt::Key key,
+<span class="lineNum">     267 </span>            :                                 Qt::KeyboardModifiers modifier = Qt::NoModifier, int delay=-1)
+<span class="lineNum">     268 </span>            :     { sendKeyEvent(action, widget, key, keyToAscii(key), modifier, delay); }
+<span class="lineNum">     269 </span>            : 
+<span class="lineNum">     270 </span>            :     inline static void keyClicks(QWidget *widget, const QString &amp;sequence,
+<span class="lineNum">     271 </span>            :                                  Qt::KeyboardModifiers modifier = Qt::NoModifier, int delay=-1)
+<span class="lineNum">     272 </span>            :     {
+<span class="lineNum">     273 </span>            :         for (int i=0; i &lt; sequence.length(); i++)
+<span class="lineNum">     274 </span>            :             keyEvent(Click, widget, sequence.at(i).toLatin1(), modifier, delay);
+<span class="lineNum">     275 </span>            :     }
+<span class="lineNum">     276 </span>            : 
+<span class="lineNum">     277 </span>            :     inline static void keyPress(QWidget *widget, char key, Qt::KeyboardModifiers modifier = Qt::NoModifier, int delay=-1)
+<span class="lineNum">     278 </span>            :     { keyEvent(Press, widget, key, modifier, delay); }
+<span class="lineNum">     279 </span>            :     inline static void keyRelease(QWidget *widget, char key, Qt::KeyboardModifiers modifier = Qt::NoModifier, int delay=-1)
+<span class="lineNum">     280 </span>            :     { keyEvent(Release, widget, key, modifier, delay); }
+<span class="lineNum">     281 </span>            :     inline static void keyClick(QWidget *widget, char key, Qt::KeyboardModifiers modifier = Qt::NoModifier, int delay=-1)
+<span class="lineNum">     282 </span>            :     { keyEvent(Click, widget, key, modifier, delay); }
+<span class="lineNum">     283 </span>            :     inline static void keyPress(QWidget *widget, Qt::Key key, Qt::KeyboardModifiers modifier = Qt::NoModifier, int delay=-1)
+<span class="lineNum">     284 </span>            :     { keyEvent(Press, widget, key, modifier, delay); }
+<span class="lineNum">     285 </span>            :     inline static void keyRelease(QWidget *widget, Qt::Key key, Qt::KeyboardModifiers modifier = Qt::NoModifier, int delay=-1)
+<span class="lineNum">     286 </span>            :     { keyEvent(Release, widget, key, modifier, delay); }
+<span class="lineNum">     287 </span>            :     inline static void keyClick(QWidget *widget, Qt::Key key, Qt::KeyboardModifiers modifier = Qt::NoModifier, int delay=-1)
+<span class="lineNum">     288 </span>            :     { keyEvent(Click, widget, key, modifier, delay); }
+<span class="lineNum">     289 </span>            : #endif // QT_WIDGETS_LIB
+<span class="lineNum">     290 </span>            : 
+<span class="lineNum">     291 </span>            : }
+<span class="lineNum">     292 </span>            : 
+<span class="lineNum">     293 </span>            : QT_END_NAMESPACE
+<span class="lineNum">     294 </span>            : 
+<span class="lineNum">     295 </span>            : #endif // QTESTKEYBOARD_H
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

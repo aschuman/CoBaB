@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - app.info - /usr/include/qt5/QtCore/qpair.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../../index.html">top level</a> - <a href="index.html">usr/include/qt5/QtCore</a> - qpair.h<span style="font-size: 80%;"> (source / <a href="qpair.h.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">app.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2016-03-16</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : /****************************************************************************</a>
+<span class="lineNum">       2 </span>            : **
+<span class="lineNum">       3 </span>            : ** Copyright (C) 2015 The Qt Company Ltd.
+<span class="lineNum">       4 </span>            : ** Contact: http://www.qt.io/licensing/
+<span class="lineNum">       5 </span>            : **
+<span class="lineNum">       6 </span>            : ** This file is part of the QtCore module of the Qt Toolkit.
+<span class="lineNum">       7 </span>            : **
+<span class="lineNum">       8 </span>            : ** $QT_BEGIN_LICENSE:LGPL21$
+<span class="lineNum">       9 </span>            : ** Commercial License Usage
+<span class="lineNum">      10 </span>            : ** Licensees holding valid commercial Qt licenses may use this file in
+<span class="lineNum">      11 </span>            : ** accordance with the commercial license agreement provided with the
+<span class="lineNum">      12 </span>            : ** Software or, alternatively, in accordance with the terms contained in
+<span class="lineNum">      13 </span>            : ** a written agreement between you and The Qt Company. For licensing terms
+<span class="lineNum">      14 </span>            : ** and conditions see http://www.qt.io/terms-conditions. For further
+<span class="lineNum">      15 </span>            : ** information use the contact form at http://www.qt.io/contact-us.
+<span class="lineNum">      16 </span>            : **
+<span class="lineNum">      17 </span>            : ** GNU Lesser General Public License Usage
+<span class="lineNum">      18 </span>            : ** Alternatively, this file may be used under the terms of the GNU Lesser
+<span class="lineNum">      19 </span>            : ** General Public License version 2.1 or version 3 as published by the Free
+<span class="lineNum">      20 </span>            : ** Software Foundation and appearing in the file LICENSE.LGPLv21 and
+<span class="lineNum">      21 </span>            : ** LICENSE.LGPLv3 included in the packaging of this file. Please review the
+<span class="lineNum">      22 </span>            : ** following information to ensure the GNU Lesser General Public License
+<span class="lineNum">      23 </span>            : ** requirements will be met: https://www.gnu.org/licenses/lgpl.html and
+<span class="lineNum">      24 </span>            : ** http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+<span class="lineNum">      25 </span>            : **
+<span class="lineNum">      26 </span>            : ** As a special exception, The Qt Company gives you certain additional
+<span class="lineNum">      27 </span>            : ** rights. These rights are described in The Qt Company LGPL Exception
+<span class="lineNum">      28 </span>            : ** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+<span class="lineNum">      29 </span>            : **
+<span class="lineNum">      30 </span>            : ** $QT_END_LICENSE$
+<span class="lineNum">      31 </span>            : **
+<span class="lineNum">      32 </span>            : ****************************************************************************/
+<span class="lineNum">      33 </span>            : 
+<span class="lineNum">      34 </span>            : #ifndef QPAIR_H
+<span class="lineNum">      35 </span>            : #define QPAIR_H
+<span class="lineNum">      36 </span>            : 
+<span class="lineNum">      37 </span>            : #include &lt;QtCore/qglobal.h&gt;
+<span class="lineNum">      38 </span>            : 
+<span class="lineNum">      39 </span>            : QT_BEGIN_NAMESPACE
+<span class="lineNum">      40 </span>            : 
+<a name="41"><span class="lineNum">      41 </span>            : </a>
+<span class="lineNum">      42 </span>            : template &lt;class T1, class T2&gt;
+<span class="lineNum">      43 </span><span class="lineCov">         44 : struct QPair</span>
+<span class="lineNum">      44 </span>            : {
+<span class="lineNum">      45 </span>            :     typedef T1 first_type;
+<a name="46"><span class="lineNum">      46 </span>            :     typedef T2 second_type;</a>
+<span class="lineNum">      47 </span>            : 
+<span class="lineNum">      48 </span><span class="lineCov">          2 :     Q_DECL_CONSTEXPR QPair()</span>
+<a name="49"><span class="lineNum">      49 </span>            :         Q_DECL_NOEXCEPT_EXPR(noexcept(T1()) &amp;&amp; noexcept(T2()))</a>
+<span class="lineNum">      50 </span><span class="lineCov">          2 :         : first(), second() {}</span>
+<span class="lineNum">      51 </span><span class="lineCov">          2 :     Q_DECL_CONSTEXPR QPair(const T1 &amp;t1, const T2 &amp;t2)</span>
+<span class="lineNum">      52 </span>            :         Q_DECL_NOEXCEPT_EXPR(noexcept(T1(t1)) &amp;&amp; noexcept(T2(t2)))
+<span class="lineNum">      53 </span><span class="lineCov">          2 :         : first(t1), second(t2) {}</span>
+<span class="lineNum">      54 </span>            :     // compiler-generated copy/move ctor/assignment operators are fine!
+<span class="lineNum">      55 </span>            : 
+<span class="lineNum">      56 </span>            :     template &lt;typename TT1, typename TT2&gt;
+<span class="lineNum">      57 </span>            :     Q_DECL_CONSTEXPR QPair(const QPair&lt;TT1, TT2&gt; &amp;p)
+<span class="lineNum">      58 </span>            :         Q_DECL_NOEXCEPT_EXPR(noexcept(T1(p.first)) &amp;&amp; noexcept(T2(p.second)))
+<span class="lineNum">      59 </span>            :         : first(p.first), second(p.second) {}
+<span class="lineNum">      60 </span>            :     template &lt;typename TT1, typename TT2&gt;
+<span class="lineNum">      61 </span>            :     Q_DECL_RELAXED_CONSTEXPR QPair &amp;operator=(const QPair&lt;TT1, TT2&gt; &amp;p)
+<span class="lineNum">      62 </span>            :         Q_DECL_NOEXCEPT_EXPR(noexcept(std::declval&lt;T1&amp;&gt;() = p.first) &amp;&amp; noexcept(std::declval&lt;T2&amp;&gt;() = p.second))
+<span class="lineNum">      63 </span>            :     { first = p.first; second = p.second; return *this; }
+<span class="lineNum">      64 </span>            : #ifdef Q_COMPILER_RVALUE_REFS
+<span class="lineNum">      65 </span>            :     template &lt;typename TT1, typename TT2&gt;
+<span class="lineNum">      66 </span>            :     Q_DECL_CONSTEXPR QPair(QPair&lt;TT1, TT2&gt; &amp;&amp;p)
+<span class="lineNum">      67 </span>            :         // can't use std::move here as it's not constexpr in C++11:
+<span class="lineNum">      68 </span>            :         Q_DECL_NOEXCEPT_EXPR(noexcept(T1(static_cast&lt;TT1 &amp;&amp;&gt;(p.first))) &amp;&amp; noexcept(T2(static_cast&lt;TT2 &amp;&amp;&gt;(p.second))))
+<span class="lineNum">      69 </span>            :         : first(static_cast&lt;TT1 &amp;&amp;&gt;(p.first)), second(static_cast&lt;TT2 &amp;&amp;&gt;(p.second)) {}
+<span class="lineNum">      70 </span>            :     template &lt;typename TT1, typename TT2&gt;
+<span class="lineNum">      71 </span>            :     Q_DECL_RELAXED_CONSTEXPR QPair &amp;operator=(QPair&lt;TT1, TT2&gt; &amp;&amp;p)
+<span class="lineNum">      72 </span>            :         Q_DECL_NOEXCEPT_EXPR(noexcept(std::declval&lt;T1&amp;&gt;() = std::move(p.first)) &amp;&amp; noexcept(std::declval&lt;T2&amp;&gt;() = std::move(p.second)))
+<span class="lineNum">      73 </span>            :     { first = std::move(p.first); second = std::move(p.second); return *this; }
+<span class="lineNum">      74 </span>            : #endif
+<span class="lineNum">      75 </span>            : 
+<span class="lineNum">      76 </span>            :     Q_DECL_RELAXED_CONSTEXPR void swap(QPair &amp;other)
+<span class="lineNum">      77 </span>            :         Q_DECL_NOEXCEPT_EXPR(noexcept(qSwap(other.first, other.first)) &amp;&amp; noexcept(qSwap(other.second, other.second)))
+<span class="lineNum">      78 </span>            :     {
+<span class="lineNum">      79 </span>            :         // use qSwap() to pick up ADL swaps automatically:
+<span class="lineNum">      80 </span>            :         qSwap(first, other.first);
+<span class="lineNum">      81 </span>            :         qSwap(second, other.second);
+<span class="lineNum">      82 </span>            :     }
+<span class="lineNum">      83 </span>            : 
+<span class="lineNum">      84 </span>            :     T1 first;
+<span class="lineNum">      85 </span>            :     T2 second;
+<span class="lineNum">      86 </span>            : };
+<span class="lineNum">      87 </span>            : 
+<span class="lineNum">      88 </span>            : template &lt;typename T1, typename T2&gt;
+<span class="lineNum">      89 </span>            : void swap(QPair&lt;T1, T2&gt; &amp;lhs, QPair&lt;T1, T2&gt; &amp;rhs) Q_DECL_NOEXCEPT_EXPR(noexcept(lhs.swap(rhs)))
+<span class="lineNum">      90 </span>            : { lhs.swap(rhs); }
+<span class="lineNum">      91 </span>            : 
+<span class="lineNum">      92 </span>            : // mark QPair&lt;T1,T2&gt; as complex/movable/primitive depending on the
+<span class="lineNum">      93 </span>            : // typeinfos of the constituents:
+<span class="lineNum">      94 </span>            : template&lt;class T1, class T2&gt;
+<span class="lineNum">      95 </span>            : class QTypeInfo&lt;QPair&lt;T1, T2&gt; &gt; : public QTypeInfoMerger&lt;QPair&lt;T1, T2&gt;, T1, T2&gt; {}; // Q_DECLARE_TYPEINFO
+<span class="lineNum">      96 </span>            : 
+<span class="lineNum">      97 </span>            : template &lt;class T1, class T2&gt;
+<span class="lineNum">      98 </span>            : Q_DECL_CONSTEXPR Q_INLINE_TEMPLATE bool operator==(const QPair&lt;T1, T2&gt; &amp;p1, const QPair&lt;T1, T2&gt; &amp;p2)
+<span class="lineNum">      99 </span>            :     Q_DECL_NOEXCEPT_EXPR(noexcept(p1.first == p2.first &amp;&amp; p1.second == p2.second))
+<span class="lineNum">     100 </span>            : { return p1.first == p2.first &amp;&amp; p1.second == p2.second; }
+<span class="lineNum">     101 </span>            : 
+<span class="lineNum">     102 </span>            : template &lt;class T1, class T2&gt;
+<span class="lineNum">     103 </span>            : Q_DECL_CONSTEXPR Q_INLINE_TEMPLATE bool operator!=(const QPair&lt;T1, T2&gt; &amp;p1, const QPair&lt;T1, T2&gt; &amp;p2)
+<span class="lineNum">     104 </span>            :     Q_DECL_NOEXCEPT_EXPR(noexcept(!(p1 == p2)))
+<span class="lineNum">     105 </span>            : { return !(p1 == p2); }
+<span class="lineNum">     106 </span>            : 
+<span class="lineNum">     107 </span>            : template &lt;class T1, class T2&gt;
+<span class="lineNum">     108 </span>            : Q_DECL_CONSTEXPR Q_INLINE_TEMPLATE bool operator&lt;(const QPair&lt;T1, T2&gt; &amp;p1, const QPair&lt;T1, T2&gt; &amp;p2)
+<span class="lineNum">     109 </span>            :     Q_DECL_NOEXCEPT_EXPR(noexcept(p1.first &lt; p2.first || (!(p2.first &lt; p1.first) &amp;&amp; p1.second &lt; p2.second)))
+<span class="lineNum">     110 </span>            : {
+<span class="lineNum">     111 </span>            :     return p1.first &lt; p2.first || (!(p2.first &lt; p1.first) &amp;&amp; p1.second &lt; p2.second);
+<span class="lineNum">     112 </span>            : }
+<span class="lineNum">     113 </span>            : 
+<span class="lineNum">     114 </span>            : template &lt;class T1, class T2&gt;
+<span class="lineNum">     115 </span>            : Q_DECL_CONSTEXPR Q_INLINE_TEMPLATE bool operator&gt;(const QPair&lt;T1, T2&gt; &amp;p1, const QPair&lt;T1, T2&gt; &amp;p2)
+<span class="lineNum">     116 </span>            :     Q_DECL_NOEXCEPT_EXPR(noexcept(p2 &lt; p1))
+<span class="lineNum">     117 </span>            : {
+<span class="lineNum">     118 </span>            :     return p2 &lt; p1;
+<span class="lineNum">     119 </span>            : }
+<span class="lineNum">     120 </span>            : 
+<span class="lineNum">     121 </span>            : template &lt;class T1, class T2&gt;
+<span class="lineNum">     122 </span>            : Q_DECL_CONSTEXPR Q_INLINE_TEMPLATE bool operator&lt;=(const QPair&lt;T1, T2&gt; &amp;p1, const QPair&lt;T1, T2&gt; &amp;p2)
+<span class="lineNum">     123 </span>            :     Q_DECL_NOEXCEPT_EXPR(noexcept(!(p2 &lt; p1)))
+<span class="lineNum">     124 </span>            : {
+<span class="lineNum">     125 </span>            :     return !(p2 &lt; p1);
+<span class="lineNum">     126 </span>            : }
+<span class="lineNum">     127 </span>            : 
+<span class="lineNum">     128 </span>            : template &lt;class T1, class T2&gt;
+<span class="lineNum">     129 </span>            : Q_DECL_CONSTEXPR Q_INLINE_TEMPLATE bool operator&gt;=(const QPair&lt;T1, T2&gt; &amp;p1, const QPair&lt;T1, T2&gt; &amp;p2)
+<span class="lineNum">     130 </span>            :     Q_DECL_NOEXCEPT_EXPR(noexcept(!(p1 &lt; p2)))
+<span class="lineNum">     131 </span>            : {
+<span class="lineNum">     132 </span>            :     return !(p1 &lt; p2);
+<span class="lineNum">     133 </span>            : }
+<span class="lineNum">     134 </span>            : 
+<span class="lineNum">     135 </span>            : template &lt;class T1, class T2&gt;
+<span class="lineNum">     136 </span>            : Q_DECL_CONSTEXPR Q_OUTOFLINE_TEMPLATE QPair&lt;T1, T2&gt; qMakePair(const T1 &amp;x, const T2 &amp;y)
+<span class="lineNum">     137 </span>            :     Q_DECL_NOEXCEPT_EXPR(noexcept(QPair&lt;T1, T2&gt;(x, y)))
+<span class="lineNum">     138 </span>            : {
+<span class="lineNum">     139 </span>            :     return QPair&lt;T1, T2&gt;(x, y);
+<span class="lineNum">     140 </span>            : }
+<span class="lineNum">     141 </span>            : 
+<span class="lineNum">     142 </span>            : QT_END_NAMESPACE
+<span class="lineNum">     143 </span>            : 
+<span class="lineNum">     144 </span>            : #endif // QPAIR_H
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>

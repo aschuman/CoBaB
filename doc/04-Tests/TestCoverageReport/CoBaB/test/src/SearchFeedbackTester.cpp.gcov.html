@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - app.info - CoBaB/test/src/SearchFeedbackTester.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../../index.html">top level</a> - <a href="index.html">CoBaB/test/src</a> - SearchFeedbackTester.cpp<span style="font-size: 80%;"> (source / <a href="SearchFeedbackTester.cpp.func.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">app.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">43</td>
+            <td class="headerCovTableEntry">43</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2016-03-16</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;SearchFeedbackTester.h&quot;</a>
+<span class="lineNum">       2 </span>            : 
+<span class="lineNum">       3 </span><span class="lineCov">          1 : SearchFeedbackTester::SearchFeedbackTester() : fb(&quot;Dual&quot;)</span>
+<span class="lineNum">       4 </span>            : {
+<a name="5"><span class="lineNum">       5 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span><span class="lineCov">          1 : void SearchFeedbackTester::initTestCase() {</span>
+<span class="lineNum">       8 </span><span class="lineCov">          2 :     SearchObject obj1;</span>
+<span class="lineNum">       9 </span><span class="lineCov">          1 :     obj1.setMedium(&quot;picture&quot;);</span>
+<span class="lineNum">      10 </span><span class="lineCov">          1 :     list.append(pair(obj1, 10));</span>
+<span class="lineNum">      11 </span>            : 
+<span class="lineNum">      12 </span><span class="lineCov">          2 :     SearchObject obj2;</span>
+<span class="lineNum">      13 </span><span class="lineCov">          1 :     obj2.setROI(QRect(1,2,3,4));</span>
+<span class="lineNum">      14 </span><span class="lineCov">          1 :     list.append(pair(obj2, 20));</span>
+<span class="lineNum">      15 </span>            : 
+<span class="lineNum">      16 </span><span class="lineCov">          1 :     fb.setFeedbackList(list);</span>
+<a name="17"><span class="lineNum">      17 </span><span class="lineCov">          1 : }</span></a>
+<span class="lineNum">      18 </span>            : 
+<span class="lineNum">      19 </span><span class="lineCov">          1 : void SearchFeedbackTester::testGetType() {</span>
+<span class="lineNum">      20 </span><span class="lineCov">          1 :     QCOMPARE(fb.getType(), DataPacket::Type::SEARCHFEEDBACK);</span>
+<span class="lineNum">      21 </span><span class="lineCov">          1 :     QCOMPARE(fb.getFeedbackType(), SearchFeedback::Type::DUAL);</span>
+<span class="lineNum">      22 </span>            : 
+<span class="lineNum">      23 </span><span class="lineCov">          2 :     SearchFeedback f((QString)&quot;Extended&quot;);</span>
+<span class="lineNum">      24 </span><span class="lineCov">          1 :     QCOMPARE(f.getFeedbackType(), SearchFeedback::Type::EXTENDED);</span>
+<a name="25"><span class="lineNum">      25 </span>            : }</a>
+<span class="lineNum">      26 </span>            : 
+<span class="lineNum">      27 </span><span class="lineCov">          1 : void SearchFeedbackTester::testGetList() {</span>
+<span class="lineNum">      28 </span><span class="lineCov">          2 :     QList&lt;pair&gt; fbList = fb.getFeedbackList();</span>
+<span class="lineNum">      29 </span><span class="lineCov">          1 :     QCOMPARE(list.size(), fbList.size());</span>
+<span class="lineNum">      30 </span><span class="lineCov">          1 :     QCOMPARE(list.value(0).first.getMedium(), fbList.value(0).first.getMedium());</span>
+<span class="lineNum">      31 </span><span class="lineCov">          1 :     QCOMPARE(list.value(0).second, fbList.value(0).second);</span>
+<span class="lineNum">      32 </span>            : 
+<span class="lineNum">      33 </span><span class="lineCov">          1 :     QCOMPARE(list.value(1).first.getROI(), fbList.value(1).first.getROI());</span>
+<span class="lineNum">      34 </span><span class="lineCov">          1 :     QCOMPARE(list.value(1).second, fbList.value(1).second);</span>
+<a name="35"><span class="lineNum">      35 </span>            : }</a>
+<span class="lineNum">      36 </span>            : 
+<span class="lineNum">      37 </span><span class="lineCov">          1 : void SearchFeedbackTester::testSaveLoad() {</span>
+<span class="lineNum">      38 </span><span class="lineCov">          2 :     QFile file(&quot;testSearchFeedback.tmp&quot;);</span>
+<span class="lineNum">      39 </span>            : 
+<span class="lineNum">      40 </span>            :     //write to file
+<span class="lineNum">      41 </span><span class="lineCov">          1 :     file.open(QIODevice::WriteOnly);</span>
+<span class="lineNum">      42 </span><span class="lineCov">          2 :     QDataStream stream(&amp;file);</span>
+<span class="lineNum">      43 </span><span class="lineCov">          1 :     stream &lt;&lt; fb;</span>
+<span class="lineNum">      44 </span><span class="lineCov">          1 :     file.close();</span>
+<span class="lineNum">      45 </span>            : 
+<span class="lineNum">      46 </span>            :     //read from file
+<span class="lineNum">      47 </span><span class="lineCov">          1 :     file.open(QIODevice::ReadOnly);</span>
+<span class="lineNum">      48 </span><span class="lineCov">          2 :     SearchFeedback feedback;</span>
+<span class="lineNum">      49 </span><span class="lineCov">          1 :     stream &gt;&gt; feedback;</span>
+<span class="lineNum">      50 </span><span class="lineCov">          1 :     file.close();</span>
+<span class="lineNum">      51 </span>            : 
+<span class="lineNum">      52 </span><span class="lineCov">          1 :     QCOMPARE(fb.getType(), feedback.getType());</span>
+<span class="lineNum">      53 </span><span class="lineCov">          1 :     QCOMPARE(fb.getFeedbackType(), feedback.getFeedbackType());</span>
+<span class="lineNum">      54 </span>            : 
+<span class="lineNum">      55 </span><span class="lineCov">          2 :     QList&lt;pair&gt; fList = fb.getFeedbackList();</span>
+<span class="lineNum">      56 </span><span class="lineCov">          2 :     QList&lt;pair&gt; sList = feedback.getFeedbackList();</span>
+<span class="lineNum">      57 </span><span class="lineCov">          1 :     QCOMPARE(fList.size(), sList.size());</span>
+<span class="lineNum">      58 </span>            : 
+<span class="lineNum">      59 </span><span class="lineCov">          1 :     QCOMPARE(fList.value(0).first.getMedium(), sList.value(0).first.getMedium());</span>
+<span class="lineNum">      60 </span><span class="lineCov">          1 :     QCOMPARE(fList.value(0).second, sList.value(0).second);</span>
+<span class="lineNum">      61 </span>            : 
+<a name="62"><span class="lineNum">      62 </span><span class="lineCov">          1 :     QCOMPARE(fList.value(1).first.getROI(), sList.value(1).first.getROI());</span></a>
+<span class="lineNum">      63 </span><span class="lineCov">          1 :     QCOMPARE(fList.value(1).second, sList.value(1).second);</span>
+<span class="lineNum">      64 </span><span class="lineCov">          3 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.10</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
