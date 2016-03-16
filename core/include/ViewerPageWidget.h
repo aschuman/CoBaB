@@ -49,7 +49,7 @@ public slots:
     void showToolTip(QAction* action);
     void zoomIn();
     void zoomOut();
-    void zoomed(double factor);
+    void zoomed(double zoomLevel);
     void resize();
     void selectionChanged(const QModelIndex& index, const QModelIndex& previousIndex);
 
@@ -74,8 +74,6 @@ protected:
     QHash<QString, Algorithm*> mAlgorithms; ///< Hashes an algorithm name to the algorithm.
 
     std::shared_ptr<SearchQuery> mSearchQuery; ///< The SearchQuery, filled with the selected Medium and Annotation/ROI.
-
-    double mZoomLevel; ///< The level how much the view is zoomed.
 
     virtual void display();
     void resizeEvent(QResizeEvent* event) override;

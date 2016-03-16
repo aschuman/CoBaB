@@ -12,6 +12,8 @@ class CustomGraphicsView : public QGraphicsView
     Q_OBJECT
 public:
     CustomGraphicsView(QWidget* parent=0);
+    void zoom(double);
+    void resetZoom();
 
 public slots:
     void scalingTime(qreal x);
@@ -33,7 +35,8 @@ protected:
     void showEvent(QShowEvent *event) override;
 
 private:
-    int _numScheduledScalings; ///< The total number of scalings that have to be done.
+    int _numScheduledScalings; ///< The total number of scalings that have to be done.4
+    double mZoomLevel;         ///< The level how much the view is zoomed.
 };
 
 #endif // CUSTOMGRAPHICSVIEW_H

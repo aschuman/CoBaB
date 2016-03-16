@@ -11,7 +11,7 @@
 ViewerPageWidget::ViewerPageWidget() :
     ui(new Ui::ViewerPageWidget), mIndex(0), mImage(nullptr), mSelectionPen(QColor(0,255,230)),
     mCurrentSelection(nullptr), mAnnotationDrawer(&mGraphicsScene), mSelectedAnnotation(nullptr),
-    mAlgorithmList(nullptr), mDataset(nullptr), mROIIsChosen(false), mZoomLevel(1.0)
+    mAlgorithmList(nullptr), mDataset(nullptr), mROIIsChosen(false)
 {
     ui->setupUi(this);
     ui->mViewerListView->setResizeMode(QListView::Adjust);
@@ -56,7 +56,7 @@ void ViewerPageWidget::resizeEvent(QResizeEvent *event) {
  */
 void ViewerPageWidget::resize() {
     ui->mGraphicsView->fitInView(mImage, Qt::KeepAspectRatio);
-    mZoomLevel = 1.0;
+    ui->mGraphicsView->resetZoom();
     ui->mZoom->setText("100 %");
 }
 
@@ -64,25 +64,22 @@ void ViewerPageWidget::resize() {
  * @brief ViewerPageWidget::zoomIn Zooms in the Medium.
  */
 void ViewerPageWidget::zoomIn() {
-    ui->mGraphicsView->scale(2,2);
-    zoomed(2);
+    ui->mGraphicsView->zoom(2);
 }
 
 /**
  * @brief ViewerPageWidget::zoomOut Zooms the Medium out.
  */
 void ViewerPageWidget::zoomOut() {
-    ui->mGraphicsView->scale(0.5,0.5);
-    zoomed(0.5);
+    ui->mGraphicsView->zoom(0.5);
 }
 
 /**
  * @brief ViewerPageWidget::zoomed The view was zoomed, so the zooming level and display are updated.
  * @param factor The zooming factor.
  */
-void ViewerPageWidget::zoomed(double factor) {
-    mZoomLevel *= factor;
-    ui->mZoom->setText(QString::number(mZoomLevel*100) + " %");
+void ViewerPageWidget::zoomed(double zoomLevel) {
+    ui->mZoom->setText(QString::number(zoomLevel*100) + " %");
 }
 
 /**
@@ -202,8 +199,7 @@ void ViewerPageWidget::before() {
  * @brief ViewerPageWidget::display Displays a Medium.
  */
 void ViewerPageWidget::display() {
-
-    mZoomLevel = 1.0;
+    ui->mGraphicsView->resetZoom();
     ui->mZoom->setText("100 %");
 }
 

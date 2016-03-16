@@ -6,7 +6,7 @@
  * @brief CustomGraphicsView::CustomGraphicsView Constructs a CustomGraphicsView with the given parent.
  * @param parent The parent is passed to QGraphisView's constructor.
  */
-CustomGraphicsView::CustomGraphicsView(QWidget *parent) : QGraphicsView(parent), _numScheduledScalings(0)
+CustomGraphicsView::CustomGraphicsView(QWidget *parent) : QGraphicsView(parent), _numScheduledScalings(0), mZoomLevel(1.0)
 {
 
 }
@@ -39,8 +39,26 @@ void CustomGraphicsView::scalingTime(qreal x)
 {
     Q_UNUSED(x);
     qreal factor = 1.0+ qreal(_numScheduledScalings) / 300.0;
-    scale(factor, factor);
-    emit zoomed(factor);
+    zoom(factor);
+}
+
+/**
+ * @brief CustomGraphicsView::zoom Zooms the view if the zoom level is between 0.01 and 10000.
+ * @param factor The zooming factor.
+ */
+void CustomGraphicsView::zoom(double factor) {
+    if((factor > 1 && mZoomLevel < 10000) || (factor < 1 && mZoomLevel > (double)0.01)) {
+        scale(factor, factor);
+        mZoomLevel *= factor;
+        emit zoomed(mZoomLevel);
+    }
+}
+
+/**
+ * @brief CustomGraphicsView::resetZoom Sets the zoom level to 1.
+ */
+void CustomGraphicsView::resetZoom() {
+    mZoomLevel = 1.0;
 }
 
 /**
