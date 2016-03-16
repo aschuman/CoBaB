@@ -15,7 +15,7 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 \subsubsection{Testszenarien der Pflichtanforderungen}
 \begin{enumerate} [label=\bfseries /TS \arabic*0/, leftmargin=*]
 	\item Grundfunktionalität \newline \newline
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm ist startbereit; es wurden weder Datensätze noch Suchverfahren entfernt oder manipuliert & \\
 	   & \textbf{Aktion} Der Benutzer startet das Programm &  \\
 	   & \textbf{Nachbedingung} Die Startansicht der GUI wird angezeigt; die Bibliothek wird angezeigt und enthält alle Datensätze des Standardordners & bestanden \\
@@ -23,7 +23,7 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	2. & \textbf{Aktion} Der Benutzer doppelklickt einen Datensatz & \\
 	   & \textbf{Nachbedingung} Es wird eine Übersicht des Datensatzes angezeigt & bestanden \\
 	\end{tabular}	   
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	3. & \textbf{Aktion} Der Benutzer klickt auf ein Bild aus der Übersicht & \\
 	   & \textbf{Nachbedingung} Das Bild wird groß dargestellt & bestanden \\
 	\hline    
@@ -58,7 +58,7 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	\pagebreak
 
 	\item Kommandozeile \newline \newline
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm ist startbereit & \\
 	   & \textbf{Aktion} Der Benutzer startet das Programm mit einem Pfad als Kommandozeilenargument in der entsprechenden Position & \\
 	   & \textbf{Nachbedingung} In der Bibliothek werden die Datensätze, die sich an dem übergebenen Pfad befinden, angezeigt & bestanden \\
@@ -69,7 +69,7 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	\newline
 
 	\item erweiterte Funktionen zu Bilddatensätzen \newline \newline
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	1. & \textbf{Vorbedingung} Es wurde ein Datensatz (bestehend aus Bildern) gewählt; das Programm zeigt die Übersicht der Bilder des Datensatzes; es ist ein Foto eines realen Motivs im Datensatz vorhanden; das Foto weist annotierte Bildbereiche auf & \\
 	   & \textbf{Aktion} Der Benutzer wählt dieses Bild zur vergrößerten Ansicht & \\
 	   & \textbf{Nachbedingung} Das Bild wird in vergrößerter Ansicht angezeigt; es werden die annotierten Bildbereiche angezeigt & bestanden \\
@@ -87,7 +87,7 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	   & \textbf{Nachbedingung} Es wird der gewählte annotierte Bildbereich angezeigt; eine Schaltfläche zur Rückkehr zur Parameterauswahl wird angezeigt & bestanden \\
 	\end{tabular}
 	
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	6. & \textbf{Aktion} Der Benutzer linksklickt die Schaltfläche zur Rückkehr zweimal & \\
 	   & \textbf{Nachbedingung}	Das eben gewählte Bild wird in der vergrößerten Ansicht dargestellt & nicht bestanden\\
 	\hline
@@ -109,10 +109,12 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
    12. & \textbf{Aktion} Der Benutzer linksklickt die Schaltfläche zur Rückkehr zur Bibliothek & \\
 	   & \textbf{Nachbedingung} Die Bibliothek wird angezeigt & bestanden \\
 	\end{tabular}
-	\newline
+	\par
+6. und 10. haben nicht bestanden, da bei der Rückkehr zum ViewerPageWidget nicht mehr das ausgewählte, sondern das erste Bild des Datensatzes angezeigt wird. Das liegt daran, dass dies aufgrund des aktuellen Designs nicht möglich ist. Beim Anzeigen des ViewerPageWidgets wird die reset Methode aufgerufen, unabhängig davon, ob das vorherige PageWidget das Library- oder ParameterPageWidget war. Da dies nicht unterschieden werden kann, kann auch nicht unterschieden werden, ob das erste, oder das zuletzt gewählte Bild angezeigt werden soll. Das Testszenario schlägt daher fehl, was aber keine funktionalen Anforderungen betrifft. 
+	\pagebreak
 
 	\item Feedback und weitere Suche \newline \newline
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm zeigt die Ergebnisse einer Suche & \\
 	   & \textbf{Aktion} Der Benutzer stellt für mehrere Ergebnisse ein Feedback ein & \\
 	   & \textbf{Nachbedingung}Das eingestellte Feedback wird dargestellt & bestanden \\
@@ -120,10 +122,10 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	2. & \textbf{Aktion} Der Benutzer startet über die entsprechende Schaltfläche eine weitere Suche und wartet & \\
 	   & \textbf{Nachbedingung} Die Ergebnisse werden angezeigt & bestanden \\
 	 \end{tabular}
-	 \pagebreak
+	 \newline
 
 	\item Datensatz zur Bibliothek hinzufügen \newline \newline
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	1. & \textbf{Vorbedingung} Programm ist startbereit; ein korrekter Datensatz liegt auf der Festplatte & \\
 	   & \textbf{Aktion} Benutzer startet Programm & \\
 	   & \textbf{Nachbedingung} Startbildschirm der GUI wird angezeigt; die Bibliothek wird angezeigt & bestanden \\
@@ -140,7 +142,7 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	\newline
 
 	\item Videos aus Einzelbildern abspielen \newline \newline
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	1. & \textbf{Vorbedingung} Es wurde ein Datensatz gewählt, der mindestens ein Video aus Einzelbildern enthält & \\
 	   & \textbf{Aktion} Der Benutzer wählt eines der Videos zur Ansicht & \\
 	   & \textbf{Nachbedingung} Ein Videoplayer wird angezeigt; eine Schaltfläche zum Starten des Videos ist verfügbar & bestanden \\
@@ -148,10 +150,10 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	2. & \textbf{Aktion} Der Benutzer klickt auf die Schaltfläche zum Starten des Videos & \\
 	   & \textbf{Nachbedingung} Das Video wird abgespielt & bestanden \\
 	\end{tabular}
-	\newline
+	\newpage
 
 	\item weitere Menüpunkte \newline \newline
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Menü ist verfügbar & \\
 	   & \textbf{Aktion} Der Benutzer wählt über den Menüpunkt ganz rechts \enquote{About} aus & \\
 	   & \textbf{Nachbedingung} Ein Dialog mit Informationen zum Programm wird angezeigt & bestanden \\
@@ -162,10 +164,11 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	\newline
 
 	\newpage
+\subsubsection{Neu definierte Testszenarien}
 	Die folgenden Testszenarien kamen erst in der Testphase hinzu.
 
 	\item Interaktion mit Videos aus Einzelbildern \newline \newline
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	1. & \textbf{Vorbedingung} Es gibt einen Datensatz mit mind. zwei SingleFrameVideos & \\
 	   & \textbf{Aktion} Wähle diesen Datensatz & \\
 	   & \textbf{Nachbedingung} Es wird eine Übersicht der Videos angezeigt, das erste Video wird groß dargestellt & bestanden \\
@@ -205,9 +208,9 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	\end{tabular}
 	\newline
 
-	\newpage
+
 	\item Navigation \newline \newline
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	1. & \textbf{Vorbedingung} Der Viewer ist sichtbar & \\
 	   & \textbf{Aktion} Wähle den Home Button & \\
 	   & \textbf{Nachbedingung} Die Library wird angezeigt & bestanden \\
@@ -242,7 +245,7 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 \subsubsection{Testszenarien der Wunschanforderungen}
 \begin{enumerate} [label=\bfseries /TSW \arabic*0/, leftmargin=*]
 	\item Feedback, Suchchronik und Lesezeichen \newline \newline
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	1. & \textbf{Vorbedingung} Es wurde gerade eine Suche durchgeführt; es werden die Ergebnisse der Suche angezeigt & \\
 	   & \textbf{Aktion} Der Benutzer stellt ein positives und ein negatives Feedback für je ein Suchergebnis ein & \\
 	   & \textbf{Nachbedingung} Das gegebene Feedback wird in der Übersicht dargestellt & bestanden \\
@@ -271,10 +274,12 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	9. & \textbf{Aktion} Der Benutzer wählt das zuvor angelegte Lesezeichen & \\
 	   & \textbf{Nachbedingung} Die bereits zuvor angezeigten Suchergebnisse werden in der selben Reihenfolge wieder angezeigt; das zuvor festgelegte Feedback wird wieder angezeigt & nicht bestanden \\
 	\end{tabular}
+	\par
+Das Testszenario hat nicht bestanden, da Suchchronik und Lesezeichen nicht implementiert wurden.	
 	\pagebreak
 
 	\item Datensatz-Historie \newline \newline
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm zeigt die Bibliothek; ein Datensatz befindet sich auf der Festplatte, aber nicht in der Bibliothek & \\
 	   & \textbf{Aktion} Der Benutzer wählt diesen Datensatz & \\
 	   & \textbf{Nachbedingung} Die Übersicht des Datensatzes wird angezeigt & bestanden \\
@@ -291,7 +296,7 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	\newline
 
 	\item Sprachwahl \newline \newline
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	1. & \textbf{Vorbedingung} Programm ist startbereit; Einstellungen wurden noch nicht geändert & \\
 	   & \textbf{Aktion} Benutzer startet Programm & \\
 	   & \textbf{Nachbedingung} Deutsche GUI wird angezeigt; Menüpunkt \enquote{Sprache} ist sichtbar, es sind die Sprachen Deutsch und Englisch wählbar; Deutsch ist als aktuell gewählte Sprache markiert & bestanden \\
@@ -308,7 +313,7 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	\pagebreak
 
 	\item Signalton \newline \newline
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm befindet sich in der Bibliothek; Audioausgabe des Computers ist möglich und eingeschaltet & \\
 	   & \textbf{Aktion} Der Benutzer schaltet in den Einstellungen den Signalton ein, falls dieser noch nicht eingeschaltet war & \\ 
 	   & \textbf{Nachbedingung} Die GUI zeigt an, dass der Signalton eingeschaltet ist & bestanden \\
@@ -342,12 +347,12 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	\hline
    11. & \textbf{Aktion} Der Benutzer beendet das Programm & \\
 	   & \textbf{Nachbedingung} Das Programm ist beendet & bestanden \\
-	\end{tabular}
-	
-	\begin{tabular}{rp{4in}|l}
+	\hline
    12. & \textbf{Aktion} Der Benutzer startet das Programm & \\
 	   & \textbf{Nachbedingung} Das Programm zeigt die Bibliothek an & bestanden \\
-	\hline
+	\end{tabular}
+
+	\begin{tabular}{@{}rp{4in}|l}
    13. & \textbf{Aktion} Der Benutzer lässt sich die eben vorgenommenen Einstellungen bezüglich des Signaltons anzeigen & \\
 	   & \textbf{Nachbedingung} Die GUI zeigt an, dass der Signalton ausgeschaltet ist & bestanden \\
 	\hline
@@ -357,7 +362,7 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	\newline
 
 	\item weitere Suche \newline \newline
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm zeigt die Ergebnisse einer Suche & \\
 	   & \textbf{Aktion} Der Benutzer stellt für mehrere Ergebnisse ein Feedback ein & \\
 	   & \textbf{Nachbedingung} Das gegebene Feedback wird dargestellt & bestanden \\
@@ -365,10 +370,12 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	2. & \textbf{Aktion} Der Benutzer wählt einen anderen Algorithmus für die nächste Suche, startet die Suche und wartet & \\
 	   & \textbf{Nachbedingung} Die Ergebnisse werden angezeigt & nicht bestanden \\
 	\end{tabular}
+	\par
+Die Tests haben nicht bestanden, weil eine weitere Suche mit anderem Suchverfahren nicht implementiert wurde.
 	\newline
 
 	\item Videos in Videoformaten abspielen \newline \newline
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm zeigt die Übersicht eines Videodatensatzes (Videos in Videoformaten) & \\
 	   & \textbf{Aktion} Der Benutzer wählt ein Video aus & \\
 	   & \textbf{Nachbedingung} Das gewählte Video wird im Videoplayer angezeigt & nicht bestanden \\
@@ -382,10 +389,12 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	4. & \textbf{Aktion} Der Benutzer wählt die Parameter nach Belieben und klickt auf \enquote{Weiter} & \\
 	   & \textbf{Nachbedingung} Das gewählte Video wird angezeigt (nicht abgespielt); die vorgenommenen Einstellungen werden angezeigt & nicht bestanden \\
 	\end{tabular}
+	\par
+Die Tests haben nicht bestanden, da kein Videoplayer implementiert wurde.
 	\pagebreak
 
 	\item Präsentationsmodus \newline \newline
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm ist startberteit & \\
 	   & \textbf{Aktion} Der Benutzer startet das Programm mit einem speziellen Kommandozeilenparameter & \\
 	   & \textbf{Nachbedingung} Das Programm ist im Präsentationsmodus, die GUI wird als Vollbild angezeigt & bestanden \\
@@ -396,7 +405,7 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	\newline
 
 	\item Zoomen und Scrollen \newline \newline
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm zeigt die Übersicht eines Bilddatensatzes; ein Bild ist ausgewählt & \\
 	   & \textbf{Aktion} Der Benutzer rollt das Mausrad vorwärts, während sich der Cursor über der größeren Ansicht befindet & \\
 	   & \textbf{Nachbedingung} Es wird ein kleinerer Ausschnitt des Bildes größer angezeigt & bestanden \\
@@ -407,18 +416,22 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	3. & \textbf{Aktion} Der Benutzer rollt das Mausrad rückwärts & \\
 	   & \textbf{Nachbedingung} Es wird wieder ein größerer Ausschnitt des Bildes kleiner angezeigt & bestanden \\
 	\end{tabular}
+	\par
+2. hat nicht bestanden, weil das Bewegen des Bildes per Maus nicht implementiert wurde.
 	\newline
 
 	\item Suchergebnisse größer anzeigen \newline \newline
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm zeigt die Übersicht der Ergebnisse einer Suche an & \\
 	   & \textbf{Aktion} Der Benutzer wählt ein Ergebnis & \\
 	   & \textbf{Nachbedingung} Das Ergebnis wird in einer größeren Ansicht angezeigt & nicht bestanden \\
 	\end{tabular}
+	\par
+Der Test hat nicht bestanden, weil die Funktion nicht implementiert wurde.
 	\pagebreak
 
 	\item Suche abbrechen \newline \newline
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	1. & \textbf{Vorbedingung} Es wurden alle Einstellungen einer bevorstehenden Suche vorgenommen; es werden die vorgenommenen Einstellungen angezeigt; eine Schaltfläche zum Starten der Suche wird angezeigt & \\
 	   & \textbf{Aktion} Der Benutzer startet die Suche & \\
 	   & \textbf{Nachbedingung} Eine Animation zeigt die Aktivität des Suchverfahrens an & bestanden \\
@@ -432,10 +445,12 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	4. & \textbf{Aktion} Der Benutzer wartet & \\
 	   & \textbf{Nachbedingung} Die Ergebnisse der Suche werden angezeigt & bestanden \\
 	\end{tabular}
+	\par
+2. hat nicht bestanden, da es keinen Button gibt, um die laufende Suche abzubrechen.
 	\newline
 
 	\item zusätzliche Datensätze \newline \newline
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm befindet sich in der Parameterwahl & \\
 	   & \textbf{Aktion} Der Benutzer wählt einen weiteren Datensatz für die Suche aus und bestätigt seine Eingaben & \\
 	   & \textbf{Nachbedingung} Die Überprüfung wird angezeigt & bestanden \\
@@ -446,9 +461,11 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	\newline
 
 	\item genaueres Feedback \newline \newline
-	\begin{tabular}{rp{4in}|l}
+	\begin{tabular}{@{}rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm zeigt die Übersicht der Ergebnisse einer Suche an; der Benutzer hat die Möglichkeit, ein Feedback in Form eines Wertes von 0 bis 10 festzulegen & \\
 	   & \textbf{Aktion} Der Benutzer wählt ein Feedback für eines der Ergebnisse & \\
 	   & \textbf{Nachbedingung} Das gegebene Feedback wird dargestellt & nicht bestanden \\
 	\end{tabular}
+	\par
+Der Test hat nicht bestanden, da das genauere Feedback nicht implementiert wurde.
 \end{enumerate}

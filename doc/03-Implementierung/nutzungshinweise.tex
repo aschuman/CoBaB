@@ -4,3 +4,24 @@ Hier ein paar Hinweise zur Benutzung des Programms.
 Beim Start des Programms kann als Kommandozeilenparameter der Pfad zu einem Standardordner übergeben werden. Die Datensätze des Standardordners werden zusammen mit den Datensätzen der Historie in der Bibliothek angezeigt.
 
 Das Programm kann zusätzlich mit dem Kommandozeilenparameter -f gestartet werden, um die GUI in einem Präsentationsmodus (Vollbild) darzustellen.
+
+\subsection{Annotationsdateien}
+Pro Bilddatensatz kann es genau eine Annotationsdatei geben, die direkt im Hauptordner des Datensatzes liegen und annotations.ann heißen muss.
+Für Videos aus Einzelbildern kann es jeweils eine Annotationsdatei pro Video geben, die im entsprechenden Bildordner liegen und annotations.ann heißen muss.
+Für Videos aus Videodateien kann es jeweils eine Annotationsdatei pro Video geben, die im selben Ordner wie das Video liegen und VIDEONAME.ann heißen muss (wobei VIDEONAME der Name des Videos ist).
+
+Die Annotationsdatei für Bilddatensätze und Videos aus Einzelbildern muss folgendermaßen aufgebaut sein:
+\begin{enumerate}
+\item Eine Header Zeile, die den Datensatz beschreibt.
+\item Die Anzahl der folgenden Parameter und die Annotationsparameter, deren Reihenfolge hier festgelegt werden kann: ID, Position, Breite, Höhe und der Typ der Annotation (id, x, y, width, height, class). Die später folgenden Annotationsparameter werden dann in dieser Reihenfolge interpretiert.
+\item In den folgenden Zeilen stehen die Bilder/Frames mit den Annotationen. Dabei steht als erstes der Bildname, anschließend die Anzahl der Annotationen, gefolgt von den Annotationsparametern (in der zuvor festgelegten Reihenfolge) zu allen Annotationen zu diesem Bild.
+\end{enumerate}
+
+In Videodatensätzen muss statt des nichtvorhandenen Bildnamens die Framenummer oder eine andere Kennzeichnung stehen. Die Annotationen werden den Frames in alphabetisch sortierter Reihenfolge der Kennzeichnung zugeordnet.
+
+Beispiel für einen Bilddatensatz: \newline\newline
+CVHCI\_TRACKS\_V1 \newline
+6 id x y width height class \newline
+000\_45.bmp 2 11 0.0 0.0 48.0 128.0 Person 21 17.0 0.0 16.0 17.0 Face \newline
+001\_45.bmp 0 \newline
+002\_45.bmp 1 11 0.0 0.0 48.0 128.0 Person \newline
