@@ -10,7 +10,6 @@ TestAlgorithm::TestAlgorithm() {
     mName = "Test algorithm";
     mDescription = "dummy algorithm that scores randomly";
     mSupportProgressInfo = false;
-    mAborted = false;
 }
 
 /**
@@ -26,7 +25,7 @@ QList<DataPacket*> TestAlgorithm::run() {
         Dataset dataset(datasetPath);
 
         for (Medium* medium : dataset.getMediaList()) {
-            if (mAborted == true) {
+            if (mCancel == true) {
                 return list;
             }
 
@@ -45,13 +44,6 @@ QList<DataPacket*> TestAlgorithm::run() {
     }
     QThread::msleep(1500);
     return list;
-}
-
-/**
- * @brief TestAlgorithm::cancel terminate the algorithm
- */
-void TestAlgorithm::cancel() {
-    mAborted = true;
 }
 
 /**

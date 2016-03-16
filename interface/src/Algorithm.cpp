@@ -30,6 +30,7 @@ QString Algorithm::getDescription() const {
  * @return True, if all went well.
  */
 bool Algorithm::initialize(QPluginLoader *loader) {
+    //read the QJsonObject parameter
     if (!loader) return false;
     QJsonObject tmp = loader->metaData();
     if (tmp.isEmpty()) return false;
@@ -65,8 +66,7 @@ bool Algorithm::initialize(QPluginLoader *loader) {
  * @param parameters The new parameters as Json object.
  * @return True, if all went well.
  */
-bool Algorithm::setParameters(const QJsonObject& parameters)
-{
+bool Algorithm::setParameters(const QJsonObject& parameters) {
     mParameters = parameters;
     return true;
 }
@@ -90,7 +90,6 @@ QJsonObject Algorithm::getDefaultParameters() {
 /**
  * @brief Cancel running algorithm.
  */
-void Algorithm::cancel()
-{
+void Algorithm::cancel() {
     mCancel = true;
 }

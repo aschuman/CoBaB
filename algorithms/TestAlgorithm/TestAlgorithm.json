@@ -1,9 +1,9 @@
 {
-    "Autor" : "Tung Nguyen",
+    "Author" : "Tung Nguyen",
     "Date"  : "2016-03-08",
-	"Name"	: "Testalgorithm",
-	"Description"	: "Description of Testalgorithm",
-    "Version" : 1.0,
+    "Name"	: "Test Algorithm",
+    "Description"	: "dummy algorithm that scores randomly",
+    "Version" : "1.0",
     "Properties" : {
         "FirstParameter" : {
             "type" : "string",
@@ -12,7 +12,7 @@
         },
         "SecondParameter" : {
             "type" : "bool",
-            "default" : false,
+            "default" : "false",
             "description" : "Second parameter"
         }
     }

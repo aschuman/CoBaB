@@ -2,7 +2,7 @@
     "Autor" : "Tung Nguyen",
     "Date"  : "2016-03-10",
 	"Name"	: "PersonAlgorithm",
-	"Description"	: "Description of PersonAlgorithm",
+    "Description"	: "Searches for person annotations in photo dataset(s)",
     "Version" : 1.0,
     "Properties" : {
         "FirstParameter" : {

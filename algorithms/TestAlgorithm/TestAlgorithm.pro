@@ -5,14 +5,14 @@ TARGET = $$qtLibraryTarget(TestAlgorithm)
 
 TEMPLATE = lib
 CONFIG += plugin c++14
-INCLUDEPATH += ../interface/include
-DESTDIR = ../plugins
+INCLUDEPATH += ../../interface/include
+DESTDIR = ../../plugins
 
 unix {
-LIBS += -L../interface -linterface
+LIBS += -L../../interface -linterface
 }
 win32 {
-LIBS += -L../interface/debug -linterface
+LIBS += -L../../interface/debug -linterface
 }
 
 SOURCES += \

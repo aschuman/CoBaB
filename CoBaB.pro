@@ -2,11 +2,13 @@ TEMPLATE = subdirs
 SUBDIRS = \
     interface \
     core \
-    TestAlgorithm \
+    algorithms/TestAlgorithm \
+    algorithms/PersonAlgorithm \
+    algorithms/ColorSearch \
     TestAlgorithmLinkTester \
     test \
     app \
-    PersonAlgorithm
+
 
 CONFIG += ordered
 TRANSLATIONS += CoBaB_en.ts

@@ -8,7 +8,7 @@
 PersonAlgorithm::PersonAlgorithm() {
     mId = "personAlgo";
     mName = "PersonSearch";
-    mDescription = "algorithm that searches for person annotations in photo datasets only";
+    mDescription = "Searches for person annotations in photo dataset(s)";
     mSupportProgressInfo = false;
 }
 
