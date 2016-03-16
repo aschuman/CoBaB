@@ -10,11 +10,11 @@ Zum Testen während der Entwicklung und zum Durchspielen der Testszenarien werde
 Insbesondere die Schnittstelle zwischen Suchverfahren und Anwendung soll durch diese Testdaten überprüft werden.
 
 \subsection{Testszenarien}
-Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detail.
+Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den Arbeitsablauf des Benutzers im Detail.
 
 \subsubsection{Testszenarien der Pflichtanforderungen}
 \begin{enumerate} [label=\bfseries /TS \arabic*0/, leftmargin=*]
-	\item Grundfunktionalität \label{ts:grundfunktionalitaet} \newline \newline
+	\item Grundfunktionalität \newline \newline
 	\begin{tabular}{rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm ist startbereit; es wurden weder Datensätze noch Suchverfahren entfernt oder manipuliert & \\
 	   & \textbf{Aktion} Der Benutzer startet das Programm &  \\
@@ -57,7 +57,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	
 	\pagebreak
 
-	\item Kommandozeile \label{ts:standardordner_übergeben} \newline \newline
+	\item Kommandozeile \newline \newline
 	\begin{tabular}{rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm ist startbereit & \\
 	   & \textbf{Aktion} Der Benutzer startet das Programm mit einem Pfad als Kommandozeilenargument in der entsprechenden Position & \\
@@ -68,7 +68,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\end{tabular}
 	\newline
 
-	\item erweiterte Funktionen zu Bilddatensätzen \label{ts:erweiterte_Funktionen_zu_Bilddatensätzen} \newline \newline
+	\item erweiterte Funktionen zu Bilddatensätzen \newline \newline
 	\begin{tabular}{rp{4in}|l}
 	1. & \textbf{Vorbedingung} Es wurde ein Datensatz (bestehend aus Bildern) gewählt; das Programm zeigt die Übersicht der Bilder des Datensatzes; es ist ein Foto eines realen Motivs im Datensatz vorhanden; das Foto weist annotierte Bildbereiche auf & \\
 	   & \textbf{Aktion} Der Benutzer wählt dieses Bild zur vergrößerten Ansicht & \\
@@ -111,7 +111,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\end{tabular}
 	\newline
 
-	\item Feedback und weitere Suche \label{ts:feedback} \newline \newline
+	\item Feedback und weitere Suche \newline \newline
 	\begin{tabular}{rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm zeigt die Ergebnisse einer Suche & \\
 	   & \textbf{Aktion} Der Benutzer stellt für mehrere Ergebnisse ein Feedback ein & \\
@@ -122,7 +122,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	 \end{tabular}
 	 \pagebreak
 
-	\item Datensatz zur Bibliothek hinzufügen \label{ts:datensatz_hinzufuegen} \newline \newline
+	\item Datensatz zur Bibliothek hinzufügen \newline \newline
 	\begin{tabular}{rp{4in}|l}
 	1. & \textbf{Vorbedingung} Programm ist startbereit; ein korrekter Datensatz liegt auf der Festplatte & \\
 	   & \textbf{Aktion} Benutzer startet Programm & \\
@@ -139,7 +139,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\end{tabular}
 	\newline
 
-	\item Videos aus Einzelbildern abspielen \label{ts:video_abspielen} \newline \newline
+	\item Videos aus Einzelbildern abspielen \newline \newline
 	\begin{tabular}{rp{4in}|l}
 	1. & \textbf{Vorbedingung} Es wurde ein Datensatz gewählt, der mindestens ein Video aus Einzelbildern enthält & \\
 	   & \textbf{Aktion} Der Benutzer wählt eines der Videos zur Ansicht & \\
@@ -150,7 +150,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\end{tabular}
 	\newline
 
-	\item weitere Menüpunkte \label{ts:weitere_menuepunkte} \newline \newline
+	\item weitere Menüpunkte \newline \newline
 	\begin{tabular}{rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Menü ist verfügbar & \\
 	   & \textbf{Aktion} Der Benutzer wählt über den Menüpunkt ganz rechts \enquote{About} aus & \\
@@ -159,11 +159,89 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	2. & \textbf{Aktion} Der Benutzer wählt über den Menüpunkt ganz rechts \enquote{Hilfe} aus & \\
 	   & \textbf{Nachbedingung} Ein Dialog mit Hinweisen zur Benutzung des Programms wird angezeigt & bestanden \\
 	\end{tabular}
+	\newline
+
+	\newpage
+	Die folgenden Testszenarien kamen erst in der Testphase hinzu.
+
+	\item Interaktion mit Videos aus Einzelbildern \newline \newline
+	\begin{tabular}{rp{4in}|l}
+	1. & \textbf{Vorbedingung} Es gibt einen Datensatz mit mind. zwei SingleFrameVideos & \\
+	   & \textbf{Aktion} Wähle diesen Datensatz & \\
+	   & \textbf{Nachbedingung} Es wird eine Übersicht der Videos angezeigt, das erste Video wird groß dargestellt & bestanden \\
+	\hline
+	2. & \textbf{Aktion} Wähle ein Video und starte es mithilfe des Play Buttons & \\
+	   & \textbf{Nachbedingung} Das ausgewählte Video wird abgespielt, der Slider bewegt sich & bestanden \\
+	\hline
+	3. & \textbf{Aktion} Wähle währenddessen ein anderes Video und starte es & \\
+	   & \textbf{Nachbedingung} Das ausgewählte Video wird angezeigt und abgespielt & bestanden \\
+	\hline
+	4. & \textbf{Aktion} Pausiere das Video mithilfe des Pause Buttons & \\
+	   & \textbf{Nachbedingung} Das Video pausiert & bestanden \\
+	\hline
+	5. & \textbf{Aktion} Klicke den Play Button & \\
+	   & \textbf{Nachbedingung} Das Video wird weiter abgespielt & bestanden \\
+	\hline
+	6. & \textbf{Aktion} Klicke den Stop Button & \\
+	   & \textbf{Nachbedingung} Das Video wird gestoppt & bestanden \\
+	\hline
+	7. & \textbf{Aktion} Klicke den Play und anschließend den Loop Button & \\
+	   & \textbf{Nachbedingung} Das Video wird abgespielt und nach dem Ende erneut abgespielt & bestanden \\
+	\hline
+	8. & \textbf{Aktion} Zoome in das Video hinein und wieder hinaus & \\
+	   & \textbf{Nachbedingung} Es wird während des Abspielens in das Video hinein/heraus gezoomt & bestanden \\
+	\hline
+	9. & \textbf{Aktion} Klicke den Loop Button & \\
+	   & \textbf{Nachbedingung} Das Video wird nach dem Ende nicht erneut abgespielt & bestanden \\
+	\hline
+	10. & \textbf{Aktion} Klicke den Play Button & \\
+	    & \textbf{Nachbedingung} Das Video wird abgespielt & bestanden \\
+	\hline
+	11. & \textbf{Aktion} Rechtsklicke auf eine Annotation im laufenden Video & \\
+	    & \textbf{Nachbedingung} Das Video pausiert und es wird ein Kontextmenü angezeigt, das die verfügbaren Suchverfahren anzeigt & bestanden \\
+	\hline
+	12. & \textbf{Aktion} Wähle ein Suchverfahren und die Parameter und klicke auf \enquote{Weiter} & \\
+	    & \textbf{Nachbedingung} Die gewählte Annotation wird im Überprüfungsfenster angezeigt & bestanden \\
+	\end{tabular}
+	\newline
+
+	\newpage
+	\item Navigation \newline \newline
+	\begin{tabular}{rp{4in}|l}
+	1. & \textbf{Vorbedingung} Der Viewer ist sichtbar & \\
+	   & \textbf{Aktion} Wähle den Home Button & \\
+	   & \textbf{Nachbedingung} Die Library wird angezeigt & bestanden \\
+	\hline
+	2. & \textbf{Aktion} Wähle einen Datensatz und einen Algorithmus; Klicke den Home Button & \\
+	   & \textbf{Nachbedingung} Die Library wird angezeigt & bestanden \\
+	\hline
+	3. & \textbf{Aktion} Wähle einen Datensatz, einen Algorithmus und die Parameter; Klicke den Home Button & \\
+	   & \textbf{Nachbedingung} Die Library wird angezeigt & bestanden \\
+	\hline
+	4. & \textbf{Aktion} Wähle einen Datensatz, einen Algorithmus, die Parameter und starte die Suche; klicke während der laufenden Suche den Home Button & \\
+	   & \textbf{Nachbedingung} Die Library wird angezeigt & bestanden \\
+	\hline
+	5. & \textbf{Vorbedingung} Das Ergebnisfenster wird angezeigt & \\
+	   & \textbf{Aktion} Klicke den zurück Button & \\
+	   & \textbf{Nachbedingung} Das Bestätigungfenster wird angezeigt & bestanden \\
+	\hline
+	6. & \textbf{Aktion} Klicke den zurück Button & \\
+	   & \textbf{Nachbedingung} Das Parameterauswahl wird angezeigt & bestanden \\
+	\hline
+	7. & \textbf{Aktion} Klicke den zurück Button & \\
+	   & \textbf{Nachbedingung} Der Viewer wird angezeigt & bestanden \\
+	\hline
+	8. & \textbf{Aktion} Klicke den zurück Button & \\
+	   & \textbf{Nachbedingung} Die Library wird angezeigt & bestanden \\
+	\end{tabular}
+
 \end{enumerate}
+
+\newpage
 
 \subsubsection{Testszenarien der Wunschanforderungen}
 \begin{enumerate} [label=\bfseries /TSW \arabic*0/, leftmargin=*]
-	\item Feedback, Suchchronik und Lesezeichen \label{ts:feedback_chronik_lesezeichen} \newline \newline
+	\item Feedback, Suchchronik und Lesezeichen \newline \newline
 	\begin{tabular}{rp{4in}|l}
 	1. & \textbf{Vorbedingung} Es wurde gerade eine Suche durchgeführt; es werden die Ergebnisse der Suche angezeigt & \\
 	   & \textbf{Aktion} Der Benutzer stellt ein positives und ein negatives Feedback für je ein Suchergebnis ein & \\
@@ -195,7 +273,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\end{tabular}
 	\pagebreak
 
-	\item Datensatz-Historie \label{ts:historie} \newline \newline
+	\item Datensatz-Historie \newline \newline
 	\begin{tabular}{rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm zeigt die Bibliothek; ein Datensatz befindet sich auf der Festplatte, aber nicht in der Bibliothek & \\
 	   & \textbf{Aktion} Der Benutzer wählt diesen Datensatz & \\
@@ -212,7 +290,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\end{tabular}
 	\newline
 
-	\item Sprachwahl \label{ts:sprachwahl} \newline \newline
+	\item Sprachwahl \newline \newline
 	\begin{tabular}{rp{4in}|l}
 	1. & \textbf{Vorbedingung} Programm ist startbereit; Einstellungen wurden noch nicht geändert & \\
 	   & \textbf{Aktion} Benutzer startet Programm & \\
@@ -229,7 +307,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\end{tabular}
 	\pagebreak
 
-	\item Signalton \label{ts:signalton} \newline \newline
+	\item Signalton \newline \newline
 	\begin{tabular}{rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm befindet sich in der Bibliothek; Audioausgabe des Computers ist möglich und eingeschaltet & \\
 	   & \textbf{Aktion} Der Benutzer schaltet in den Einstellungen den Signalton ein, falls dieser noch nicht eingeschaltet war & \\ 
@@ -278,7 +356,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\end{tabular}
 	\newline
 
-	\item weitere Suche \label{ts:weitere_suche} \newline \newline
+	\item weitere Suche \newline \newline
 	\begin{tabular}{rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm zeigt die Ergebnisse einer Suche & \\
 	   & \textbf{Aktion} Der Benutzer stellt für mehrere Ergebnisse ein Feedback ein & \\
@@ -289,7 +367,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\end{tabular}
 	\newline
 
-	\item Videos in Videoformaten abspielen \label{ts:echtes_video_abspielen} \newline \newline
+	\item Videos in Videoformaten abspielen \newline \newline
 	\begin{tabular}{rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm zeigt die Übersicht eines Videodatensatzes (Videos in Videoformaten) & \\
 	   & \textbf{Aktion} Der Benutzer wählt ein Video aus & \\
@@ -306,7 +384,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\end{tabular}
 	\pagebreak
 
-	\item Präsentationsmodus \label{ts:präsentation} \newline \newline
+	\item Präsentationsmodus \newline \newline
 	\begin{tabular}{rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm ist startberteit & \\
 	   & \textbf{Aktion} Der Benutzer startet das Programm mit einem speziellen Kommandozeilenparameter & \\
@@ -317,7 +395,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\end{tabular}
 	\newline
 
-	\item Zoomen und Scrollen \label{ts:zoom_scroll} \newline \newline
+	\item Zoomen und Scrollen \newline \newline
 	\begin{tabular}{rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm zeigt die Übersicht eines Bilddatensatzes; ein Bild ist ausgewählt & \\
 	   & \textbf{Aktion} Der Benutzer rollt das Mausrad vorwärts, während sich der Cursor über der größeren Ansicht befindet & \\
@@ -331,7 +409,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\end{tabular}
 	\newline
 
-	\item Suchergebnisse größer anzeigen \label{ts:groesseres_suchergebnis} \newline \newline
+	\item Suchergebnisse größer anzeigen \newline \newline
 	\begin{tabular}{rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm zeigt die Übersicht der Ergebnisse einer Suche an & \\
 	   & \textbf{Aktion} Der Benutzer wählt ein Ergebnis & \\
@@ -339,7 +417,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\end{tabular}
 	\pagebreak
 
-	\item Suche abbrechen \label{ts:suche_abbrechen} \newline \newline
+	\item Suche abbrechen \newline \newline
 	\begin{tabular}{rp{4in}|l}
 	1. & \textbf{Vorbedingung} Es wurden alle Einstellungen einer bevorstehenden Suche vorgenommen; es werden die vorgenommenen Einstellungen angezeigt; eine Schaltfläche zum Starten der Suche wird angezeigt & \\
 	   & \textbf{Aktion} Der Benutzer startet die Suche & \\
@@ -356,7 +434,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\end{tabular}
 	\newline
 
-	\item zusätzliche Datensätze \label{ts:mehrere_datensaetze_waehlen} \newline \newline
+	\item zusätzliche Datensätze \newline \newline
 	\begin{tabular}{rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm befindet sich in der Parameterwahl & \\
 	   & \textbf{Aktion} Der Benutzer wählt einen weiteren Datensatz für die Suche aus und bestätigt seine Eingaben & \\
@@ -367,7 +445,7 @@ Die folgenden Testszenarien beschreiben den Arbeitsablauf des Benutzers im Detai
 	\end{tabular}
 	\newline
 
-	\item genaueres Feedback \label{ts:zehner_feedback} \newline \newline
+	\item genaueres Feedback \newline \newline
 	\begin{tabular}{rp{4in}|l}
 	1. & \textbf{Vorbedingung} Das Programm zeigt die Übersicht der Ergebnisse einer Suche an; der Benutzer hat die Möglichkeit, ein Feedback in Form eines Wertes von 0 bis 10 festzulegen & \\
 	   & \textbf{Aktion} Der Benutzer wählt ein Feedback für eines der Ergebnisse & \\
