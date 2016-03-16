@@ -29,13 +29,22 @@
      <height>26</height>
     </rect>
    </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::PreventContextMenu</enum>
+   </property>
    <widget class="QMenu" name="mFileMenu">
+    <property name="contextMenuPolicy">
+     <enum>Qt::PreventContextMenu</enum>
+    </property>
     <property name="title">
      <string>Datei</string>
     </property>
     <addaction name="mDatasetAction"/>
    </widget>
    <widget class="QMenu" name="mSettingsMenu">
+    <property name="contextMenuPolicy">
+     <enum>Qt::PreventContextMenu</enum>
+    </property>
     <property name="title">
      <string>Einstellungen</string>
     </property>
@@ -53,16 +62,25 @@
     <property name="enabled">
      <bool>true</bool>
     </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::PreventContextMenu</enum>
+    </property>
     <property name="title">
      <string>&amp;Lesezeichen</string>
     </property>
    </widget>
    <widget class="QMenu" name="mHistoryMenu">
+    <property name="contextMenuPolicy">
+     <enum>Qt::PreventContextMenu</enum>
+    </property>
     <property name="title">
      <string>&amp;Chronik</string>
     </property>
    </widget>
    <widget class="QMenu" name="mHelpMenu">
+    <property name="contextMenuPolicy">
+     <enum>Qt::PreventContextMenu</enum>
+    </property>
     <property name="title">
      <string>Hilfe</string>
     </property>

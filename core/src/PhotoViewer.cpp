@@ -20,12 +20,11 @@ PhotoViewer::PhotoViewer() :
 void PhotoViewer::display() {
     ViewerPageWidget::display();
     ui->mPhotoCount->setText("Foto "+QString::number(mIndex+1)+" von "+QString::number(mDataset->getNumberOfMedia()));
+    mAnnotationDrawer.removeAnnotations();
     if(mImage != nullptr) {
         mGraphicsScene.removeItem(mImage);
         delete mImage;
         mImage = nullptr;
-        mAnnotationDrawer.removeAnnotations();
-
     }
     if(mCurrentSelection != nullptr){
         mGraphicsScene.removeItem(mCurrentSelection);
