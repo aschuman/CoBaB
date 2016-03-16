@@ -14,20 +14,20 @@ void PageRegistrationTester::init()
 
 void PageRegistrationTester::testGetTransition0()
 {
-    QCOMPARE(mPageRegistration->getTarget(0), PageType::CONFIRMATION);
+    QCOMPARE(mPageRegistration->getTarget(0).type, PageType::CONFIRMATION);
 }
 
 void PageRegistrationTester::testGetTransitionNeg2()
 {
-    QCOMPARE(mPageRegistration->getTarget(-2), PageType::PHOTO_VIEWER);
+    QCOMPARE(mPageRegistration->getTarget(-2).type, PageType::PHOTO_VIEWER);
 }
 
 void PageRegistrationTester::testGetTransition32()
 {
-    QCOMPARE(mPageRegistration->getTarget(32), PageType::NONE);
+    QCOMPARE(mPageRegistration->getTarget(32).type, PageType::NONE);
 }
 
 void PageRegistrationTester::testGetNonExistingTransition()
 {
-    QCOMPARE(mPageRegistration->getTarget(144), PageType::NONE);
+    QCOMPARE(mPageRegistration->getTarget(144).type, PageType::NONE);
 }

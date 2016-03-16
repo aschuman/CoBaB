@@ -25,6 +25,7 @@ public:
     void showOpenDataset();
     void hideOpenDataset();
     void setMenuVisible(bool visible);
+    void setReturnEnabled(bool enabled);
 
 public slots:
     void showAboutDialog();

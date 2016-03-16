@@ -4,7 +4,7 @@
  * @brief Constructs a PageStackFrame with a number of 0 data stack items.
  * @param type The PageType of the PageWidget this PageStackFrame holds information on.
  */
-PageStackFrame::PageStackFrame(PageType type) : mSize(0), mType(type){
+PageStackFrame::PageStackFrame(PageType type) : mSize(0), mType(type), mNoReturn(false){
 }
 
 /**
@@ -14,6 +14,17 @@ PageStackFrame::PageStackFrame(PageType type) : mSize(0), mType(type){
 void PageStackFrame::setSize(size_t size)
 {
     mSize = size;
+}
+
+/**
+ * @brief Sets whether or not a return from the page represented by this stack frame is allowed.
+ *
+ * Return by default allowed.
+ * @param noReturn true if a return from this page is disallowed, false otherwise.
+ */
+void PageStackFrame::setNoReturn(bool noReturn)
+{
+    mNoReturn = noReturn;
 }
 
 /**
@@ -40,5 +51,14 @@ size_t PageStackFrame::getSize() const
 PageType PageStackFrame::getType() const
 {
     return mType;
+}
+
+/**
+ * @brief Returns whether or not a return from the page represented by this stack frame is allowed.
+ * @return true if a return is not allowd, false otherwise.
+ */
+bool PageStackFrame::getNoReturn() const
+{
+    return mNoReturn;
 }
 

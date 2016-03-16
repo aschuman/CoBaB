@@ -91,8 +91,10 @@ void Navigator::tryExit(int exitCode)
 {
     PageRegistration* registration = checkSender();
     if(registration){
-        PageType targetType = registration->getTarget(exitCode);
-        mPageStack.push_back(PageStackFrame(targetType));
+        PageRegistration::TransitionTarget target = registration->getTarget(exitCode);
+        PageStackFrame frame(target.type);
+        frame.setNoReturn(target.noReturn);
+        mPageStack.push_back(std::move(frame));
         tryDisplayTopPage();
     }
 }
@@ -103,7 +105,7 @@ void Navigator::tryExit(int exitCode)
  */
 void Navigator::toPreviousPage()
 {
-    if(mPageStack.size() > 1){
+    if(mPageStack.size() > 1 && !mPageStack.back().getNoReturn()){
         LOG("going to previous page");
         mDataStack.resize(mDataStack.size() - mPageStack.back().getSize());
         mPageStack.pop_back();
@@ -163,6 +165,7 @@ bool Navigator::tryDisplayTopPage()
                 mMainWindow->hideOpenDataset();
             }
             mMainWindow->display(&targetWidget);
+            mMainWindow->setReturnEnabled(!mPageStack.back().getNoReturn());
             success = true;
         }else{
             LOG_ERR("could not display unregistered page ", to_String(type));
@@ -184,12 +187,13 @@ PageType Navigator::getCurrentPageType() const
  * @param origin PageWidget that during navigation has to be displayed for this transition to take effect.
  * @param exitCode Exit code that has to be emmited by origin for this transition to take effect.
  * @param target PageWidget that will be displayed as effect of this transition.
+ * @param noReturn true if this transition can not be returned from, false otherwise
  */
-void Navigator::registerTransition(PageType origin, int exitCode, PageType target)
+void Navigator::registerTransition(PageType origin, int exitCode, PageType target, bool noReturn)
 {
     auto it = mPageRegistrations.find(origin);
     if(it != mPageRegistrations.end()){
-        it->second.addTransition(exitCode, target);
+        it->second.addTransition(exitCode, target, noReturn);
     } else {
         LOG_ERR("could not register transition from unregistered page ", to_String(origin));
     }

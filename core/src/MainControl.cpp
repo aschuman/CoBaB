@@ -77,7 +77,7 @@ void MainControl::initNavigation()
     mNavi->registerPage(PageType::RESULTS, move(resultsPageWidget));
     mNavi->registerTransition(PageType::CONFIRMATION, ConfirmationPageWidget::EXIT_NEXT, PageType::RESULTS);
 
-    mNavi->registerTransition(PageType::RESULTS, ResultsPageWidget::EXIT_NEW_SEARCH, PageType::PARAMETER);
+    mNavi->registerTransition(PageType::RESULTS, ResultsPageWidget::EXIT_NEW_SEARCH, PageType::PARAMETER, true);
 }
 
 DatasetList MainControl::findDatasets() const

@@ -17,12 +17,15 @@ class PageStackFrame
 {
     size_t mSize;
     PageType mType;
+    bool mNoReturn;
 public:
     explicit PageStackFrame(PageType type = PageType::NONE);
     void setSize(size_t size);
+    void setNoReturn(bool noReturn);
     void incrementSize();
     size_t getSize() const;
     PageType getType() const;
+    bool getNoReturn() const;
 };
 
 #endif // PAGESTACKFRAME_H

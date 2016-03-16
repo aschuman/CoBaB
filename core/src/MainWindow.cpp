@@ -112,6 +112,11 @@ void MainWindow::setMenuVisible(bool visible)
     ui->mMenubar->setVisible(visible);
 }
 
+void MainWindow::setReturnEnabled(bool enabled)
+{
+    ui->mBackAction->setEnabled(enabled);
+}
+
 /**
  * @brief MainWindow::changeLanguageToGerman Stores the language as "German" and retranslates the GUI.
  */
