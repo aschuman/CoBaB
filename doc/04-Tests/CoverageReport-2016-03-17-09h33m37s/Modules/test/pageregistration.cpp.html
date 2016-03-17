@@ -1,0 +1,91 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		pageregistration.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "PageRegistration.h"
+
+/**
+ * @brief Constructs a PageRegistration with the given PageWidget.
+ * @param widget Registered widget.
+ */
+PageRegistration::PageRegistration(std::unique_ptr&lt;PageWidget&gt; widget) : mWidget(move(widget))
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Move constructor.
+ * @param p Old PageRegistration.
+ */
+PageRegistration::PageRegistration(PageRegistration&amp;&amp; p)
+    : mWidget(move(p.mWidget)),
+      mTransitions(move(p.mTransitions))
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Move assignment constructor.
+ * @param p Old PageRegistration
+ * @return This PageRegistration after the assignment.
+ */
+PageRegistration&amp; PageRegistration::operator=(PageRegistration&amp;&amp; p)
+<span style = "background-color:#fdd">{</span>
+<span style = "background-color:#fdd">    mWidget = move(p.mWidget);</span>
+<span style = "background-color:#fdd">    mTransitions = move(p.mTransitions);</span>
+<span style = "background-color:#fdd">    return *this;</span>
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief Adds a transitiont from the PageWidget.
+ * @param exitCode Exit code to which this transition takes effect.
+ * @param type Target Page
+ * @param noReturn true if this transition can be returned from, false otherwise
+ */
+void PageRegistration::addTransition(int exitCode, PageType type, bool noReturn)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    mTransitions[exitCode].type = type;</span>
+<span style = "background-color:#dfd">    mTransitions[exitCode].noReturn = noReturn;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Returns the widget as const reference.
+ * @return The widget.
+ */
+const PageWidget &amp;PageRegistration::getWidget() const
+<span style = "background-color:#fdd">{</span>
+<span style = "background-color:#fdd">    return *mWidget;</span>
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief Returns the widget.
+ * @return The widget.
+ */
+PageWidget &amp;PageRegistration::getWidget()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    return *mWidget;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Returns the target the widget of this registration will transition to given the exit code.
+ * @param exitCode The exit code.
+ * @return target of the transition.
+ */
+PageRegistration::TransitionTarget PageRegistration::getTarget(int exitCode) const
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    auto it = mTransitions.find(exitCode);</span>
+<span style = "background-color:#dfd">    return it != mTransitions.end() ? it-&gt;second : TransitionTarget();</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Constructs a TransitionTarget with default type and allowed return.
+ */
+PageRegistration::TransitionTarget::TransitionTarget() : type(), noReturn(false)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

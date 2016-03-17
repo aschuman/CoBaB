@@ -1,0 +1,69 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		searchmanager.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "include/SearchManager.h"
+
+#define LOGGING_LEVEL_1
+#include "log.h"
+
+/**
+ * @brief Constructs a SearchManager connecting it to the given ResultsPageWidget.
+ * @param The ResultsPageWidget.
+ */
+SearchManager::SearchManager(ResultsPageWidget *resultsPageWidget)
+    : mResultsPageWidget(resultsPageWidget)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    QObject::connect(resultsPageWidget, SIGNAL(startAlgorithm(Algorithm*)), this, SLOT(startSearch(Algorithm*)));</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Runs the given Algorithm and sends the results to the ResultsPageWidget.
+ * @param The Algorithm.
+ */
+void SearchManager::startSearch(Algorithm *algo)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    mResultsPageWidget-&gt;setCursor(QCursor(Qt::CursorShape::WaitCursor));</span>
+<span style = "background-color:#dfd">    mThread = new AlgorithmThread(algo);</span>
+<span style = "background-color:#dfd">    connect(mThread, SIGNAL(resultsReady()), this, SLOT(submitResults()));</span>
+<span style = "background-color:#dfd">    connect(mThread, SIGNAL(finished()), mThread, SLOT(deleteLater()));</span>
+<span style = "background-color:#dfd">    mThread-&gt;start();</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Terminates the search.
+ */
+void SearchManager::terminateSearch()
+<span style = "background-color:#fdd">{</span>
+<span style = "background-color:#fdd">}</span>
+
+void SearchManager::submitResults()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    QList&lt;DataPacket*&gt; results = mThread-&gt;getResults();</span>
+<span style = "background-color:#dfd">    if(results.size() &gt; 0){</span>
+<span style = "background-color:#dfd">        SearchResult* searchResult = dynamic_cast&lt;SearchResult*&gt;(results.at(0));</span>
+<span style = "background-color:#dfd">        if(searchResult){</span>
+<span style = "background-color:#dfd">            mResultsPageWidget-&gt;setResults(std::move(*searchResult));</span>
+<span style = "background-color:#dfd">        } else {</span>
+<span style = "background-color:#fdd">            LOG_ERR("could not handle packet of type other than SearchResult in SearchManager");</span>
+        }
+<span style = "background-color:#dfd">    } else {</span>
+<span style = "background-color:#fdd">        LOG("algorithm did not return any results");</span>
+    }
+<span style = "background-color:#dfd">    qDeleteAll(results);</span>
+<span style = "background-color:#dfd">}</span>
+
+void SearchManager::updateProgress(float progress, const QString&amp; message)
+<span style = "background-color:#fdd">{</span>
+    Q_UNUSED(progress);
+    Q_UNUSED(message);
+<span style = "background-color:#fdd">}</span>
+
+</pre>
+	</body>
+</html>

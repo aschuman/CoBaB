@@ -1,0 +1,73 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		datasetlist.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "DatasetList.h"
+#include &lt;QTextStream&gt;
+#include "log.h"
+
+/**
+ * @brief DatasetList::getDatasetList Returns the list of Dataset.
+ * @return The list of Dataset.
+ */
+<span style = "background-color:#dfd">const QList&lt;Dataset&gt;&amp; DatasetList::getDatasetList() const {</span>
+<span style = "background-color:#dfd">    return mDatasetList;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief DatasetList::addDataset Adds the given Dataset to the list.
+ * @param dataset The Dataset which is added to the list.
+ */
+<span style = "background-color:#dfd">void DatasetList::addDataset(const Dataset&amp; dataset) {</span>
+<span style = "background-color:#dfd">    if(!mDatasetList.contains(dataset)) {</span>
+<span style = "background-color:#dfd">        mDatasetList.append(dataset);</span>
+    }
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief DatasetList::load Loads the list of Dataset from the file with the given path.
+ * @param path The path of the file in which the Dataset list is stored.
+ */
+<span style = "background-color:#dfd">void DatasetList::load(const QString&amp; path) {</span>
+<span style = "background-color:#dfd">    mDatasetList.clear();</span>
+<span style = "background-color:#dfd">    QFile file(path);</span>
+<span style = "background-color:#dfd">    if(!file.open(QFile::ReadOnly)) {</span>
+        LOG_ERR("couldn't open file");
+<span style = "background-color:#fdd">        return;</span>
+    }
+<span style = "background-color:#dfd">    QTextStream stream(&amp;file);</span>
+<span style = "background-color:#dfd">    QString line;</span>
+<span style = "background-color:#dfd">    while (stream.readLineInto(&amp;line)) {</span>
+<span style = "background-color:#dfd">        QDir dir(line);</span>
+<span style = "background-color:#dfd">        if(dir.exists()) {</span>
+<span style = "background-color:#dfd">            Dataset dataset(line);</span>
+<span style = "background-color:#dfd">            mDatasetList.append(dataset);</span>
+<span style = "background-color:#dfd">        }</span>
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">    file.close();</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief DatasetList::store Stores the Dataset list in the file with the given path.
+ * @param path The path of the file in which the Dataset list is stored.
+ */
+<span style = "background-color:#dfd">void DatasetList::store(const QString path) const {</span>
+<span style = "background-color:#dfd">    QFile file(path);</span>
+<span style = "background-color:#dfd">    if(!file.open(QFile::WriteOnly)) {</span>
+        LOG_ERR("couldn't open file");
+<span style = "background-color:#fdd">        return;</span>
+    }
+<span style = "background-color:#dfd">    QTextStream stream(&amp;file);</span>
+<span style = "background-color:#dfd">    for(const Dataset&amp; iter: mDatasetList) {</span>
+<span style = "background-color:#dfd">        stream &lt;&lt; iter.getPath() &lt;&lt; endl;</span>
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">    file.close();</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

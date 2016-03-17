@@ -1,0 +1,266 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		confirmationpagewidget.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "ConfirmationPageWidget.h"
+#include "ui_ConfirmationPageWidget.h"
+#include "DatasetList.h"
+#include "SearchQuery.h"
+#include "Algorithm.h"
+#include "ParameterPageWidget.h"
+#include "log.h"
+#include &lt;QJsonDocument&gt;
+#include &lt;QDebug&gt;
+#include &lt;QResizeEvent&gt;
+#include &lt;QPointer&gt;
+
+/**
+ * @brief ConfirmationPageWidget::ConfirmationPageWidget Constructs a ConfirmationPageWidget.
+ */
+ConfirmationPageWidget::ConfirmationPageWidget() :
+    ui(new Ui::ConfirmationPageWidget)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    ui-&gt;setupUi(this);</span>
+<span style = "background-color:#dfd">    ui-&gt;mSearchButton-&gt;setText(tr("Suche starten"));</span>
+
+<span style = "background-color:#dfd">    ui-&gt;mParameters-&gt;setRowCount(1);</span>
+<span style = "background-color:#dfd">    ui-&gt;mParameters-&gt;setColumnCount(3);</span>
+
+<span style = "background-color:#dfd">    ui-&gt;mParameters-&gt;setHorizontalHeaderItem(0, new QTableWidgetItem(tr("Datenordner")));</span>
+<span style = "background-color:#dfd">    ui-&gt;mParameters-&gt;setHorizontalHeaderItem(1, new QTableWidgetItem(tr("Algorithmus")));</span>
+<span style = "background-color:#dfd">    ui-&gt;mParameters-&gt;setHorizontalHeaderItem(2, new QTableWidgetItem(tr("Parameter")));</span>
+<span style = "background-color:#dfd">    ui-&gt;mParameters-&gt;horizontalHeader()-&gt;setSectionResizeMode(QHeaderView::Stretch);</span>
+
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ConfirmationPageWidget::~ConfirmationPageWidget Destructs a ConfirmationPageWidget.
+ */
+ConfirmationPageWidget::~ConfirmationPageWidget()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    delete ui;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ConfirmationPageWidget::reset
+ */
+void ConfirmationPageWidget::reset()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    clearTable();</span>
+<span style = "background-color:#dfd">    std::shared_ptr&lt;DatasetList&gt; list = nullptr;</span>
+<span style = "background-color:#dfd">    const Dataset* chosenDataset = nullptr;</span>
+
+    //read available datasets from the stack
+<span style = "background-color:#dfd">    QVariant varDatasets;</span>
+<span style = "background-color:#dfd">    emit readFromStack(-2, varDatasets);</span>
+<span style = "background-color:#dfd">    if(varDatasets.canConvert&lt;std::shared_ptr&lt;DatasetList&gt;&gt;()){</span>
+<span style = "background-color:#dfd">        list = varDatasets.value&lt;std::shared_ptr&lt;DatasetList&gt;&gt;();</span>
+    } else {
+        LOG_ERR("no datasets");
+    }
+
+    //read the index of the chosen dataset in the dataset list from the stack
+<span style = "background-color:#dfd">    QVariant varChosenDataset;</span>
+<span style = "background-color:#dfd">    emit readFromStack(4, varChosenDataset);</span>
+<span style = "background-color:#dfd">    if(varChosenDataset.canConvert&lt;int&gt;()) {</span>
+<span style = "background-color:#dfd">        int indexOfChosenDataset = varChosenDataset.value&lt;int&gt;();</span>
+
+<span style = "background-color:#dfd">        if((list != nullptr) &amp;&amp; (indexOfChosenDataset &lt; list-&gt;getDatasetList().size())) {</span>
+<span style = "background-color:#dfd">            chosenDataset = &amp;(list-&gt;getDatasetList().at(indexOfChosenDataset));</span>
+<span style = "background-color:#dfd">            ui-&gt;mParameters-&gt;insertRow(0);</span>
+<span style = "background-color:#dfd">            ui-&gt;mParameters-&gt;setItem(0, 0, new QTableWidgetItem(chosenDataset-&gt;getName()));</span>
+<span style = "background-color:#dfd">            ui-&gt;mParameters-&gt;item(0, 0)-&gt;setTextAlignment(Qt::AlignCenter);</span>
+        }
+    }
+<span style = "background-color:#dfd">    if(chosenDataset == nullptr) {</span>
+        LOG_ERR("no chosen dataset");
+<span style = "background-color:#fdd">        return;</span>
+    }
+
+    //read the SearchObject from the stack
+<span style = "background-color:#dfd">    QVariant varSearchQuery;</span>
+<span style = "background-color:#dfd">    emit readFromStack(3, varSearchQuery);</span>
+<span style = "background-color:#dfd">    std::shared_ptr&lt;SearchQuery&gt; searchQuery = nullptr;</span>
+<span style = "background-color:#dfd">    if(varSearchQuery.canConvert&lt;std::shared_ptr&lt;SearchQuery&gt;&gt;()) {</span>
+<span style = "background-color:#dfd">        searchQuery = varSearchQuery.value&lt;std::shared_ptr&lt;SearchQuery&gt;&gt;();</span>
+<span style = "background-color:#dfd">        SearchObject searchObject = searchQuery-&gt;getSearchObject();</span>
+
+<span style = "background-color:#dfd">        QImage chosenImage;</span>
+<span style = "background-color:#dfd">        if(searchObject.getMediumIndex() == 0) {</span>
+<span style = "background-color:#dfd">            chosenImage.load(searchObject.getMedium());</span>
+<span style = "background-color:#dfd">        } else if(searchObject.getMediumIndex() == 1) {</span>
+<span style = "background-color:#dfd">            Dataset dataset(searchObject.getMedium());</span>
+            chosenImage.load(dataset.getPath() + "/" +
+<span style = "background-color:#dfd">                ((SingleFrameVideo*)dataset.getMediaList().at(0))-&gt;getFrameList().at(searchObject.getFrameIndex()));</span>
+<span style = "background-color:#dfd">        } else {</span>
+            LOG_ERR("No valid medium");
+        }
+<span style = "background-color:#dfd">        pixmap.convertFromImage(chosenImage);</span>
+
+<span style = "background-color:#dfd">        if(searchObject.getType() == SearchObject::ROI) {</span>
+<span style = "background-color:#dfd">            pixmap = pixmap.copy(searchObject.getROI());</span>
+<span style = "background-color:#dfd">        } else if(searchObject.getType() == SearchObject::ANNOTATION) {</span>
+<span style = "background-color:#dfd">            if (searchObject.getAnnotation()-&gt;getForm() == Annotation::RECTANGLE) {</span>
+<span style = "background-color:#dfd">                RectangleAnnotation* rectAnnotation = (RectangleAnnotation*)searchObject.getAnnotation();</span>
+<span style = "background-color:#dfd">                if(rectAnnotation != nullptr) {</span>
+<span style = "background-color:#dfd">                    QRect rect = static_cast&lt;QRect&gt; (*rectAnnotation);</span>
+<span style = "background-color:#dfd">                    pixmap = pixmap.copy(rect);</span>
+                }
+            }
+        }
+
+<span style = "background-color:#dfd">        if(!pixmap.isNull()) {</span>
+<span style = "background-color:#dfd">            ui-&gt;mImageToSearchLabel-&gt;setMinimumSize(1, 1);</span>
+<span style = "background-color:#dfd">            ui-&gt;mImageToSearchLabel-&gt;setPixmap(pixmap.scaled(ui-&gt;mImageToSearchLabel-&gt;size(), Qt::KeepAspectRatio));</span>
+<span style = "background-color:#dfd">        } else {</span>
+<span style = "background-color:#fdd">            ui-&gt;mImageToSearchLabel-&gt;setText(tr("Bild kann nicht geÃ¶ffnet werden."));</span>
+            LOG_ERR("medium of search object cannot be opened");
+        }
+<span style = "background-color:#dfd">    } else {</span>
+        LOG_ERR("no searchQuery");
+    }
+
+    // add names of chosen datasets
+<span style = "background-color:#dfd">    QVariant varDatasetIndices;</span>
+<span style = "background-color:#dfd">    emit readFromStack(1, varDatasetIndices);</span>
+<span style = "background-color:#dfd">    if(varDatasetIndices.canConvert&lt;std::shared_ptr&lt;QModelIndexList&gt;&gt;()) {</span>
+<span style = "background-color:#dfd">        std::shared_ptr&lt;QModelIndexList&gt; indices = varDatasetIndices.value&lt;std::shared_ptr&lt;QModelIndexList&gt;&gt;();</span>
+<span style = "background-color:#dfd">        QList&lt;QString&gt; datasetList;</span>
+<span style = "background-color:#dfd">        datasetList.append(chosenDataset-&gt;getPath());</span>
+<span style = "background-color:#dfd">        for(int i = 0; i &lt; indices.get()-&gt;size(); i++) {</span>
+<span style = "background-color:#dfd">            int index = indices.get()-&gt;at(i).row();</span>
+<span style = "background-color:#dfd">            if((list != nullptr) &amp;&amp; (index &lt; list-&gt;getDatasetList().size())) {</span>
+<span style = "background-color:#dfd">                QString name = list-&gt;getDatasetList().at(index).getName();</span>
+<span style = "background-color:#dfd">                if(name != chosenDataset-&gt;getName()) {</span>
+<span style = "background-color:#dfd">                    ui-&gt;mParameters-&gt;insertRow(i);</span>
+<span style = "background-color:#dfd">                    ui-&gt;mParameters-&gt;setItem(i, 0, new QTableWidgetItem(name));</span>
+<span style = "background-color:#dfd">                    ui-&gt;mParameters-&gt;item(i, 0)-&gt;setTextAlignment(Qt::AlignCenter);</span>
+<span style = "background-color:#dfd">                    datasetList.append(list-&gt;getDatasetList().at(index).getPath());</span>
+                }
+<span style = "background-color:#dfd">            } else {</span>
+                LOG_ERR("invalid dataset index");
+            }
+<span style = "background-color:#dfd">        }</span>
+<span style = "background-color:#dfd">        searchQuery-&gt;setDatasets(datasetList);</span>
+<span style = "background-color:#dfd">    }</span>
+
+    //read name of algorithm
+<span style = "background-color:#dfd">    QVariant chosenAlgorithm;</span>
+<span style = "background-color:#dfd">    QPointer&lt;Algorithm&gt; algo = nullptr;</span>
+<span style = "background-color:#dfd">    emit readFromStack(2, chosenAlgorithm);</span>
+<span style = "background-color:#dfd">    if(chosenAlgorithm.canConvert&lt;QPointer&lt;Algorithm&gt;&gt;()){</span>
+<span style = "background-color:#dfd">        algo = chosenAlgorithm.value&lt;QPointer&lt;Algorithm&gt;&gt;();</span>
+<span style = "background-color:#dfd">		ui-&gt;mParameters-&gt;setItem(0, 1, new QTableWidgetItem(algo-&gt;getName()));</span>
+<span style = "background-color:#dfd">        ui-&gt;mParameters-&gt;item(0, 1)-&gt;setTextAlignment(Qt::AlignCenter);</span>
+    } else {
+        LOG_ERR("no algorithm");
+    }
+
+    //read parameters and their values
+<span style = "background-color:#dfd">    QVariant varParameters;</span>
+<span style = "background-color:#dfd">    std::shared_ptr&lt;QJsonObject&gt; parameters = nullptr;</span>
+<span style = "background-color:#dfd">    emit readFromStack(0, varParameters);</span>
+<span style = "background-color:#dfd">    if(varParameters.canConvert&lt;std::shared_ptr&lt;QJsonObject&gt;&gt;()) {</span>
+<span style = "background-color:#dfd">        parameters = varParameters.value&lt;std::shared_ptr&lt;QJsonObject&gt;&gt;();</span>
+<span style = "background-color:#dfd">        QJsonObject::const_iterator iter;</span>
+<span style = "background-color:#dfd">        int i = 0;</span>
+<span style = "background-color:#dfd">        for(iter = parameters-&gt;begin(); iter != parameters-&gt;end(); ++iter) {</span>
+<span style = "background-color:#dfd">            ui-&gt;mParameters-&gt;setRowCount(std::max(parameters-&gt;keys().size(), ui-&gt;mParameters-&gt;rowCount()));</span>
+<span style = "background-color:#dfd">            ui-&gt;mParameters-&gt;setItem(i, 2, new QTableWidgetItem(iter.key() + " = " + iter.value().toVariant().toString()));</span>
+			
+<span style = "background-color:#dfd">            ui-&gt;mParameters-&gt;item(i, 2)-&gt;setTextAlignment(Qt::AlignCenter);</span>
+<span style = "background-color:#dfd">            i++;</span>
+<span style = "background-color:#dfd">        }</span>
+    } else {
+        LOG_ERR("no parameters");
+    }
+
+<span style = "background-color:#dfd">    ui-&gt;mParameters-&gt;verticalHeader()-&gt;setSectionResizeMode(QHeaderView::Stretch);</span>
+
+<span style = "background-color:#dfd">    if(parameters != nullptr) {</span>
+<span style = "background-color:#dfd">        if(!algo-&gt;setParameters(*(parameters.get()))) {</span>
+            LOG_ERR("could not set parameters");
+        }
+    }
+<span style = "background-color:#dfd">    if(searchQuery != nullptr) {</span>
+<span style = "background-color:#dfd">        QList&lt;DataPacket*&gt; dplist;</span>
+<span style = "background-color:#dfd">        dplist.append(searchQuery.get());</span>
+<span style = "background-color:#dfd">        if(!algo-&gt;setInputs(dplist)) {</span>
+            LOG_ERR("Could not set search query");
+        }
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ConfirmationPageWidget::clearTable Resets the QTableWidget which contains the parameters.
+ */
+<span style = "background-color:#dfd">void ConfirmationPageWidget::clearTable() {</span>
+<span style = "background-color:#dfd">    while(ui-&gt;mParameters-&gt;rowCount() &gt; 0) {</span>
+<span style = "background-color:#dfd">        ui-&gt;mParameters-&gt;removeRow(0);</span>
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ConfirmationPageWidget::retranslateUi
+ */
+<span style = "background-color:#dfd">void ConfirmationPageWidget::retranslateUi() {</span>
+<span style = "background-color:#dfd">    ui-&gt;mSearchButton-&gt;setText(tr("Suche starten"));</span>
+<span style = "background-color:#dfd">    ui-&gt;mParameters-&gt;horizontalHeaderItem(0)-&gt;setText(tr("Datenordner"));</span>
+<span style = "background-color:#dfd">    ui-&gt;mParameters-&gt;horizontalHeaderItem(1)-&gt;setText(tr("Algorithmus"));</span>
+<span style = "background-color:#dfd">    ui-&gt;mParameters-&gt;horizontalHeaderItem(2)-&gt;setText(tr("Parameter"));</span>
+<span style = "background-color:#dfd">    if(pixmap.isNull()) {</span>
+<span style = "background-color:#fdd">        ui-&gt;mImageToSearchLabel-&gt;setText(tr("Bild kann nicht geÃ¶ffnet werden."));</span>
+    }
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ConfirmationPageWidget::getName
+ * @return
+ */
+<span style = "background-color:#dfd">QString ConfirmationPageWidget::getName() {</span>
+<span style = "background-color:#dfd">    return tr("CoBaB - BestÃ¤tigung");</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ConfirmationPageWidget::showEvent Sets the label with the photo to the correct size
+ * when showing the label for the first time.
+ * @param event Is sent when the widget is shown.
+ */
+<span style = "background-color:#dfd">void ConfirmationPageWidget::showEvent(QShowEvent* event) {</span>
+<span style = "background-color:#dfd">    if(!event-&gt;spontaneous() &amp;&amp; !pixmap.isNull()) {</span>
+<span style = "background-color:#dfd">        ui-&gt;mImageToSearchLabel-&gt;setPixmap(pixmap.scaled(ui-&gt;mImageToSearchLabel-&gt;size(), Qt::KeepAspectRatio));</span>
+    }
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ConfirmationPageWidget::resizeEvent Resizes the label with the photo when the size of the GUI changed.
+ * @param event The resizeEvent when the size of the GUI changed.
+ */
+<span style = "background-color:#dfd">void ConfirmationPageWidget::resizeEvent(QResizeEvent* event) {</span>
+    Q_UNUSED(event);
+<span style = "background-color:#dfd">    ui-&gt;mImageToSearchLabel-&gt;setMinimumSize(1, 1);</span>
+<span style = "background-color:#dfd">    ui-&gt;mImageToSearchLabel-&gt;setPixmap(pixmap.scaled(ui-&gt;mImageToSearchLabel-&gt;size(), Qt::KeepAspectRatio));</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ConfirmationPageWidget::on_mSearchButton_clicked Sends the signal that the ConfirmationPageWidget
+ * wants to exit and the ResultsPageWidget should be shown.
+ */
+void ConfirmationPageWidget::on_mSearchButton_clicked()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    exit(EXIT_NEXT);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ConfirmationPageWidget::EXIT_NEXT Code noting the type of exit,
+ * in this case the ResultsPageWidget is the next widget.
+ */
+const int ConfirmationPageWidget::EXIT_NEXT = 0;
+</pre>
+	</body>
+</html>

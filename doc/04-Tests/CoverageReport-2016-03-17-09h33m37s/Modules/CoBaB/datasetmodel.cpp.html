@@ -1,0 +1,57 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		datasetmodel.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "DatasetModel.h"
+
+/**
+ * @brief Constructs a DatasetModel.
+ */
+DatasetModel::DatasetModel()
+    : QAbstractListModel(nullptr),
+      mDatasets(nullptr)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Sets the list of datasets.
+ * @param datasets The list of datasets.
+ */
+void DatasetModel::setDatasetList(const QList&lt;Dataset&gt;&amp; datasets)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    mDatasets = &amp;datasets;</span>
+<span style = "background-color:#dfd">    emit layoutChanged();</span>
+<span style = "background-color:#dfd">    emit dataChanged(createIndex(0,0), createIndex(datasets.size(), 0));</span>
+<span style = "background-color:#dfd">}</span>
+
+int DatasetModel::rowCount(const QModelIndex &amp;parent) const
+<span style = "background-color:#dfd">{</span>
+    Q_UNUSED(parent);
+<span style = "background-color:#dfd">    return mDatasets ? mDatasets-&gt;size() : 0;</span>
+<span style = "background-color:#dfd">}</span>
+
+QVariant DatasetModel::data(const QModelIndex &amp;index, int role) const
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    QVariant result;</span>
+<span style = "background-color:#dfd">    switch (role) {</span>
+    case Qt::DisplayRole:
+<span style = "background-color:#dfd">        if(mDatasets &amp;&amp; index.row() &lt; mDatasets-&gt;size())</span>
+<span style = "background-color:#dfd">            result = mDatasets-&gt;at(index.row()).getName();</span>
+<span style = "background-color:#dfd">        break;</span>
+    case Qt::DecorationRole:
+<span style = "background-color:#dfd">        if(mDatasets &amp;&amp; index.row() &lt; mDatasets-&gt;size())</span>
+<span style = "background-color:#dfd">            result = mDatasets-&gt;at(index.row()).getPreviewPhoto();</span>
+        break;
+    default:
+        break;
+    }
+<span style = "background-color:#dfd">    return result;</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

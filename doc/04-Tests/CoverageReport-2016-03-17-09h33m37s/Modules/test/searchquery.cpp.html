@@ -1,0 +1,104 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		searchquery.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">/**
+ * Project \
+ */
+
+
+#include "SearchQuery.h"
+
+/**
+ * @brief SearchQuery::SearchQuery Constructs a default SearchQuery.
+ */
+<span style = "background-color:#dfd">SearchQuery::SearchQuery() {</span>
+<span style = "background-color:#dfd">    mType = DataPacket::Type::SEARCHQUERY;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchQuery::getDatasets Gets the list of datasets.
+ * @return the list of datasets
+ */
+<span style = "background-color:#dfd">QList&lt;QString&gt; SearchQuery::getDatasets() const {</span>
+<span style = "background-color:#dfd">    return mDatasets;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchQuery::setDatasets Sets the list of datasets.
+ * @param datasets to be set in the list
+ */
+<span style = "background-color:#dfd">void SearchQuery::setDatasets(const QList&lt;QString&gt; datasets) {</span>
+<span style = "background-color:#dfd">    mDatasets = datasets;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchQuery::getSearchObject Gets the searchobject.
+ * @return the searchobject
+ */
+<span style = "background-color:#dfd">SearchObject SearchQuery::getSearchObject() const {</span>
+<span style = "background-color:#dfd">    return mSearchObject;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchQuery::setSearchObject Sets the searchobject.
+ * @param searchObject to be set
+ */
+<span style = "background-color:#dfd">void SearchQuery::setSearchObject(const SearchObject&amp; searchObject) {</span>
+<span style = "background-color:#dfd">    mSearchObject = searchObject;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief operator &lt;&lt; Overrides the operator &lt;&lt;.
+ * @param out the datastream
+ * @param searchQuery whose data will be written
+ * @return out the datastream
+ */
+<span style = "background-color:#dfd">QDataStream&amp; operator&lt;&lt;(QDataStream&amp; out, const SearchQuery&amp; searchQuery) {</span>
+<span style = "background-color:#dfd">    searchQuery.toStream(out);</span>
+<span style = "background-color:#dfd">    return out;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief operator &gt;&gt; Overrides the operator &gt;&gt;.
+ * @param in the datastream
+ * @param searchQuery whose data will be read
+ * @return in the datastream
+ */
+<span style = "background-color:#dfd">QDataStream&amp; operator&gt;&gt;(QDataStream&amp; in, SearchQuery&amp; searchQuery) {</span>
+<span style = "background-color:#dfd">    searchQuery.fromStream(in);</span>
+<span style = "background-color:#dfd">    return in;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchQuery::toStream Writes the SearchQuery to a datastream.
+ * @param out the datastream
+ */
+<span style = "background-color:#dfd">void SearchQuery::toStream(QDataStream&amp; out) const {</span>
+
+    //write object to stream
+<span style = "background-color:#dfd">    DataPacket::toStream(out); //write uuid and type</span>
+    out &lt;&lt; mDatasets
+<span style = "background-color:#dfd">        &lt;&lt; mSearchObject;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchQuery::fromStream Reads the SearchQuery from a datastream.
+ * @param in the datastream
+ */
+<span style = "background-color:#dfd">void SearchQuery::fromStream(QDataStream&amp; in) {</span>
+
+    //read object from stream
+<span style = "background-color:#dfd">    DataPacket::fromStream(in); //write uuid and type</span>
+<span style = "background-color:#dfd">    in &gt;&gt; mDatasets;</span>
+<span style = "background-color:#dfd">    in &gt;&gt; mSearchObject;</span>
+
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

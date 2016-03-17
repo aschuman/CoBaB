@@ -1,0 +1,118 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		parameterpagewidget.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "include/ParameterPageWidget.h"
+#include "ui_ParameterPageWidget.h"
+#include &lt;stdio.h&gt;
+#include &lt;iterator&gt;
+#include "Algorithm.h"
+#include "log.h"
+
+/**
+ * @brief ParameterPageWidget::ParameterPageWidget Constructs a ParameterPageWidget.
+ */
+ParameterPageWidget::ParameterPageWidget() :
+<span style = "background-color:#dfd">    ui(new Ui::ParameterPageWidget), mSearchDatasetList(nullptr) {</span>
+
+<span style = "background-color:#dfd">    ui-&gt;setupUi(this);</span>
+<span style = "background-color:#dfd">    ui-&gt;mSearchDatasetListView-&gt;setModel(&amp;mModel);</span>
+
+<span style = "background-color:#dfd">    connect(ui-&gt;mNext, SIGNAL(clicked()), this, SLOT(nextButtonClicked()));</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ParameterPageWidget::~ParameterPageWidget Destructs a ParameterPageWidget.
+ */
+<span style = "background-color:#dfd">ParameterPageWidget::~ParameterPageWidget() {</span>
+<span style = "background-color:#dfd">    delete ui;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ParameterPageWidget::reset Resets the data of the ParameterPageWidget.
+ */
+<span style = "background-color:#dfd">void ParameterPageWidget::reset() {</span>
+
+    //display the parameters
+<span style = "background-color:#dfd">    QVariant var;</span>
+<span style = "background-color:#dfd">    emit readFromStack(-2, var);</span>
+<span style = "background-color:#dfd">    if (var.canConvert&lt;std::shared_ptr&lt;DatasetList&gt;&gt;()){</span>
+<span style = "background-color:#dfd">        mSearchDatasetList = var.value&lt;std::shared_ptr&lt;DatasetList&gt;&gt;().get();</span>
+<span style = "background-color:#dfd">        mModel.setDatasetList(mSearchDatasetList-&gt;getDatasetList());</span>
+    }
+
+    //display the parameters
+<span style = "background-color:#dfd">    QVariant chosenAlgorithm;</span>
+<span style = "background-color:#dfd">    emit readFromStack(0, chosenAlgorithm);</span>
+<span style = "background-color:#dfd">    if (chosenAlgorithm.canConvert&lt;QPointer&lt;Algorithm&gt;&gt;()){</span>
+<span style = "background-color:#dfd">        QPointer&lt;Algorithm&gt; algo = chosenAlgorithm.value&lt;QPointer&lt;Algorithm&gt;&gt;();</span>
+<span style = "background-color:#dfd">        QJsonObject parameterJson = algo-&gt;getDefaultParameters();</span>
+
+<span style = "background-color:#dfd">		QJsonObject parameters;</span>
+<span style = "background-color:#dfd">        for(QString key: parameterJson.keys()) {</span>
+<span style = "background-color:#dfd">            for(QString key2: parameterJson.value(key).toObject().keys()) {</span>
+<span style = "background-color:#dfd">				if(key2 == "default") {</span>
+<span style = "background-color:#dfd">                    parameters.insert(key, parameterJson.value(key).toObject().value(key2));</span>
+				}
+			}
+<span style = "background-color:#dfd">		}</span>
+
+<span style = "background-color:#dfd">		QVector&lt;QJsonObject&gt; list;</span>
+<span style = "background-color:#dfd">		list.append(parameters);</span>
+<span style = "background-color:#dfd">		mParameterModel = new QJsonModel(ui-&gt;mParameterWidget, list);</span>
+
+<span style = "background-color:#dfd">		ui-&gt;mParameterWidget-&gt;setModel(mParameterModel);</span>
+<span style = "background-color:#dfd">		ui-&gt;mParameterWidget-&gt;setColumnWidth(0,250);</span>
+
+<span style = "background-color:#dfd">    } else {</span>
+        LOG_ERR("no algorithm");
+    }
+
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ParameterPageWidget::nextButtonClicked Switches to the next GUI window and pushesh the needed data to stack.
+ */
+<span style = "background-color:#dfd">void ParameterPageWidget::nextButtonClicked() {</span>
+
+    //push the chosen datasets to stack
+<span style = "background-color:#dfd">    QItemSelectionModel* model = ui-&gt;mSearchDatasetListView-&gt;selectionModel();</span>
+<span style = "background-color:#dfd">    QModelIndexList listOfDatasetIndexes = model-&gt;selectedIndexes();</span>
+<span style = "background-color:#dfd">    std::shared_ptr&lt;QModelIndexList&gt; list = std::make_shared&lt;QModelIndexList&gt;(listOfDatasetIndexes);</span>
+<span style = "background-color:#dfd">    QVariant var;</span>
+<span style = "background-color:#dfd">    var.setValue(list);</span>
+<span style = "background-color:#dfd">    emit pushToStack(var);</span>
+
+    //push the parameters to stack
+<span style = "background-color:#dfd">    std::shared_ptr&lt;QJsonObject&gt; parameters = std::make_shared&lt;QJsonObject&gt;(mParameterModel-&gt;getParameters().value("root").toObject());</span>
+<span style = "background-color:#dfd">    QVariant var2;</span>
+<span style = "background-color:#dfd">    var2.setValue(parameters);</span>
+<span style = "background-color:#dfd">    emit pushToStack(var2);</span>
+
+<span style = "background-color:#dfd">    exit(EXIT_NEXT);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ParameterPageWidget::retranslateUi Translates the ParameterPageWidget in English.
+ */
+<span style = "background-color:#dfd">void ParameterPageWidget::retranslateUi() {</span>
+<span style = "background-color:#dfd">    ui-&gt;mNext-&gt;setText(tr("Weiter"));</span>
+<span style = "background-color:#dfd">    ui-&gt;mParameterLabel-&gt;setText(tr("Verfahrensparameter"));</span>
+<span style = "background-color:#dfd">    ui-&gt;mSearchAreaLabel-&gt;setText(tr("Auswahl des Suchraums"));</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ParameterPageWidget::getName Gets the name of the ParameterPageWidget.
+ * @return the name ot the ParameterPageWidget
+ */
+<span style = "background-color:#dfd">QString ParameterPageWidget::getName() {</span>
+<span style = "background-color:#dfd">    return tr("CoBaB - Parameter");</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

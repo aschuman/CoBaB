@@ -1,0 +1,140 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		searchresultmodel.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "SearchResultModel.h"
+
+#include &lt;QPair&gt;
+#include &lt;QBrush&gt;
+#include "SearchResultElementFeedback.h"
+
+<span style = "background-color:#dfd">SearchResultModel::SearchResultModel() {</span>
+<span style = "background-color:#dfd">    mSearchResult = nullptr;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Sets the SearchResult to be prepared by this model for a view.
+ *
+ * Does not take ownership of searchResult.
+ * A nullptr for searchResult indicates the absence of any result.
+ *
+ * @param The SearchResult.
+ */
+void SearchResultModel::setSearchResult(const SearchResult* searchResult)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    mSearchResult = searchResult;</span>
+<span style = "background-color:#dfd">    mFeedbacks.clear();</span>
+<span style = "background-color:#dfd">    emit layoutChanged();</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Returns the Feedback as set in the respective view.
+ * @return The feedback.
+ */
+SearchFeedback SearchResultModel::getFeedback() const
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    QList&lt;QPair&lt;SearchObject, int&gt;&gt; feedbackList;</span>
+<span style = "background-color:#dfd">    if(mSearchResult){</span>
+<span style = "background-color:#dfd">        auto searchResultList = mSearchResult-&gt;getSearchResultList();</span>
+<span style = "background-color:#dfd">        for(size_t i = 0; i &lt; searchResultList.size(); ++i){</span>
+<span style = "background-color:#dfd">            auto it = mFeedbacks.find(i);</span>
+<span style = "background-color:#dfd">            QPair&lt;SearchObject, int&gt; feedback;</span>
+<span style = "background-color:#dfd">            feedback.first = searchResultList.at(i).getSearchObject();</span>
+<span style = "background-color:#dfd">            if(it != mFeedbacks.end()){</span>
+<span style = "background-color:#dfd">                feedback.second = *it;</span>
+            }
+<span style = "background-color:#dfd">            feedbackList.push_back(feedback);</span>
+<span style = "background-color:#dfd">        }</span>
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">    SearchFeedback searchFeedback("Dual"); // todo</span>
+<span style = "background-color:#dfd">    searchFeedback.setFeedbackList(feedbackList);</span>
+<span style = "background-color:#dfd">    return searchFeedback;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Implementation of QAbstractListModel::rowCount.
+ * @param parent
+ * @return
+ */
+int SearchResultModel::rowCount(const QModelIndex &amp;parent) const
+<span style = "background-color:#dfd">{</span>
+    Q_UNUSED(parent);
+<span style = "background-color:#dfd">    return mSearchResult ? mSearchResult-&gt;getSearchResultList().size() : 0;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Implementation of QAbstractListModel::data
+ * @param index
+ * @param role
+ * @return
+ */
+QVariant SearchResultModel::data(const QModelIndex &amp;index, int role) const
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    QVariant result;</span>
+<span style = "background-color:#dfd">    switch (role) {</span>
+    case Qt::DisplayRole:
+<span style = "background-color:#dfd">        if(mSearchResult &amp;&amp; index.row() &lt; mSearchResult-&gt;getSearchResultList().size()){</span>
+<span style = "background-color:#dfd">            SearchObject searchObject = mSearchResult-&gt;getSearchResultList().at(index.row()).getSearchObject();</span>
+<span style = "background-color:#dfd">            SearchResultElementFeedback element;</span>
+<span style = "background-color:#dfd">            if(searchObject.getMediumIndex() == 0) { // photo dataset</span>
+<span style = "background-color:#dfd">                element.img = QImage(searchObject.getMedium()).scaledToHeight(100);</span>
+<span style = "background-color:#dfd">            } else if(searchObject.getMediumIndex() == 1) { // single frame video dataset</span>
+<span style = "background-color:#fdd">                Dataset dataset(searchObject.getMedium());</span>
+<span style = "background-color:#fdd">                element.img = dataset.getPreviewPhoto();</span>
+<span style = "background-color:#fdd">            }</span>
+<span style = "background-color:#dfd">            auto it = mFeedbacks.find(index.row());</span>
+<span style = "background-color:#dfd">            if(it != mFeedbacks.end())</span>
+<span style = "background-color:#dfd">                element.rating = *it;</span>
+<span style = "background-color:#dfd">            else</span>
+<span style = "background-color:#dfd">                element.rating = 0;</span>
+<span style = "background-color:#dfd">            result.setValue(element);</span>
+<span style = "background-color:#dfd">        }</span>
+<span style = "background-color:#dfd">        break;</span>
+
+    default:
+<span style = "background-color:#dfd">        break;</span>
+
+    case Qt::BackgroundRole:
+<span style = "background-color:#dfd">        QBrush brush;</span>
+<span style = "background-color:#dfd">        brush.setColor(Qt::GlobalColor::red);</span>
+<span style = "background-color:#dfd">        result = brush;</span>
+<span style = "background-color:#dfd">        break;</span>
+    }
+<span style = "background-color:#dfd">    return result;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Implementation of QAbstractListModel::setData
+ * @param index
+ * @param value
+ * @param role
+ * @return
+ */
+bool SearchResultModel::setData(const QModelIndex &amp;index, const QVariant &amp;value, int role)
+<span style = "background-color:#dfd">{</span>
+    Q_UNUSED(role);
+<span style = "background-color:#dfd">    bool result = false;</span>
+<span style = "background-color:#dfd">    if(value.canConvert&lt;int&gt;()){</span>
+<span style = "background-color:#dfd">        mFeedbacks.insert(index.row(), value.toInt());</span>
+    }
+<span style = "background-color:#dfd">    return result;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Implementation of QAbstractListModel::flags
+ * @param index
+ * @return
+ */
+Qt::ItemFlags SearchResultModel::flags(const QModelIndex &amp;index) const
+<span style = "background-color:#dfd">{</span>
+    Q_UNUSED(index);
+<span style = "background-color:#dfd">    return Qt::ItemIsEditable | Qt::ItemIsEnabled;</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

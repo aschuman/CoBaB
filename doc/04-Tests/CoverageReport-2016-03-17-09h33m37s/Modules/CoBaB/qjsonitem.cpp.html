@@ -1,0 +1,207 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		qjsonitem.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">/***********************************************
+    Copyright (C) 2014  Schutz Sacha
+    This file is part of QJsonModel (https://github.com/dridk/QJsonmodel).
+
+    QJsonModel is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    QJsonModel is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with QJsonModel.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+
+**********************************************/
+
+#include "QJsonItem.h"
+
+QJsonTreeItem::QJsonTreeItem(QJsonTreeItem *parent)
+<span style = "background-color:#dfd">{</span>
+
+<span style = "background-color:#dfd">    mParent = parent;</span>
+
+
+<span style = "background-color:#dfd">}</span>
+
+QJsonTreeItem::~QJsonTreeItem()
+<span style = "background-color:#fdd">{</span>
+<span style = "background-color:#fdd">    qDeleteAll(mChilds);</span>
+
+<span style = "background-color:#fdd">}</span>
+QList&lt;QJsonTreeItem*&gt; QJsonTreeItem::getChilds()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    return mChilds;</span>
+<span style = "background-color:#dfd">}</span>
+
+<span style = "background-color:#dfd">QJsonObject QJsonTreeItem::toJson() {</span>
+<span style = "background-color:#dfd">    QJsonObject object;</span>
+<span style = "background-color:#dfd">    object.insert(mKey, this-&gt;toJsonValue());</span>
+<span style = "background-color:#dfd">    return object;</span>
+<span style = "background-color:#dfd">}</span>
+
+<span style = "background-color:#dfd">QJsonValue QJsonTreeItem::toJsonValue() {</span>
+<span style = "background-color:#dfd">    QJsonValue value;</span>
+<span style = "background-color:#dfd">    switch (mType)</span>
+    {
+    case QJsonValue::String:
+    {
+<span style = "background-color:#dfd">        value = QJsonValue(mValue);</span>
+<span style = "background-color:#dfd">        break;</span>
+    }
+    case QJsonValue::Double:
+    {
+<span style = "background-color:#dfd">        value = QJsonValue(mValue.toDouble());</span>
+<span style = "background-color:#dfd">        break;</span>
+    }
+    case QJsonValue::Bool:
+    {
+<span style = "background-color:#fdd">        bool boolvalue = false;</span>
+<span style = "background-color:#fdd">        if (mValue == "true") {</span>
+<span style = "background-color:#fdd">            boolvalue = true;</span>
+        }
+<span style = "background-color:#fdd">        value = QJsonValue(boolvalue);</span>
+<span style = "background-color:#fdd">        break;</span>
+    }
+    case QJsonValue::Object:
+    {
+<span style = "background-color:#dfd">        QJsonObject object;</span>
+<span style = "background-color:#dfd">        for (int i = 0; i &lt; mChilds.size(); i++) {</span>
+<span style = "background-color:#dfd">            object.insert(mChilds.value(i)-&gt;key(), mChilds.value(i)-&gt;toJsonValue());</span>
+<span style = "background-color:#dfd">        }</span>
+<span style = "background-color:#dfd">        value = object;</span>
+<span style = "background-color:#dfd">        break;</span>
+    }
+    case QJsonValue::Array:
+    {
+<span style = "background-color:#fdd">        QJsonArray array;</span>
+<span style = "background-color:#fdd">        for (int i = 0; i &lt; mChilds.size(); i++) {</span>
+<span style = "background-color:#fdd">            array.append(mChilds.value(i)-&gt;toJsonValue());</span>
+<span style = "background-color:#fdd">        }</span>
+<span style = "background-color:#fdd">        break;</span>
+    }
+    default:
+        break;
+    }
+<span style = "background-color:#dfd">    return value;</span>
+<span style = "background-color:#dfd">}</span>
+
+
+void QJsonTreeItem::appendChild(QJsonTreeItem *item)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    mChilds.append(item);</span>
+<span style = "background-color:#dfd">}</span>
+
+QJsonTreeItem *QJsonTreeItem::child(int row)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    return mChilds.value(row);</span>
+<span style = "background-color:#dfd">}</span>
+
+QJsonTreeItem *QJsonTreeItem::parent()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    return mParent;</span>
+<span style = "background-color:#dfd">}</span>
+
+int QJsonTreeItem::childCount() const
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    return mChilds.count();</span>
+<span style = "background-color:#dfd">}</span>
+
+int QJsonTreeItem::row() const
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    if (mParent)</span>
+<span style = "background-color:#dfd">        return mParent-&gt;mChilds.indexOf(const_cast&lt;QJsonTreeItem*&gt;(this));</span>
+
+<span style = "background-color:#fdd">    return 0;</span>
+<span style = "background-color:#dfd">}</span>
+
+void QJsonTreeItem::setKey(const QString &amp;key)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    mKey = key;</span>
+<span style = "background-color:#dfd">}</span>
+
+void QJsonTreeItem::setValue(QString value)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    mValue = value;</span>
+<span style = "background-color:#dfd">}</span>
+
+void QJsonTreeItem::setType(const QJsonValue::Type &amp;type)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    mType = type;</span>
+<span style = "background-color:#dfd">}</span>
+
+QString QJsonTreeItem::key() const
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    return mKey;</span>
+<span style = "background-color:#dfd">}</span>
+
+QString QJsonTreeItem::value() const
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    return mValue;</span>
+<span style = "background-color:#dfd">}</span>
+
+QJsonValue::Type QJsonTreeItem::type() const
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    return mType;</span>
+<span style = "background-color:#dfd">}</span>
+
+QJsonTreeItem* QJsonTreeItem::load(const QJsonValue&amp; value, QJsonTreeItem* parent)
+<span style = "background-color:#dfd">{</span>
+
+
+<span style = "background-color:#dfd">    QJsonTreeItem * rootItem = new QJsonTreeItem(parent);</span>
+<span style = "background-color:#dfd">    rootItem-&gt;setKey("root");</span>
+<span style = "background-color:#dfd">    rootItem-&gt;setType(value.type());</span>
+
+<span style = "background-color:#dfd">    if ( value.isObject())</span>
+    {
+
+        //Get all QJsonValue childs
+<span style = "background-color:#dfd">        foreach (QString key , value.toObject().keys()){</span>
+<span style = "background-color:#dfd">            QJsonValue v = value.toObject().value(key);</span>
+<span style = "background-color:#dfd">            QJsonTreeItem * child = load(v,rootItem);</span>
+<span style = "background-color:#dfd">            child-&gt;setKey(key);</span>
+<span style = "background-color:#dfd">            child-&gt;setType(v.type());</span>
+<span style = "background-color:#dfd">            rootItem-&gt;appendChild(child);</span>
+
+<span style = "background-color:#dfd">        }</span>
+
+    }
+
+<span style = "background-color:#dfd">    else if ( value.isArray())</span>
+    {
+        //Get all QJsonValue childs
+<span style = "background-color:#fdd">        int index = 0;</span>
+<span style = "background-color:#fdd">        foreach (QJsonValue v , value.toArray()){</span>
+
+<span style = "background-color:#fdd">            QJsonTreeItem * child = load(v,rootItem);</span>
+<span style = "background-color:#fdd">            child-&gt;setKey(QString::number(index));</span>
+<span style = "background-color:#fdd">            child-&gt;setType(v.type());</span>
+<span style = "background-color:#fdd">            rootItem-&gt;appendChild(child);</span>
+<span style = "background-color:#fdd">            ++index;</span>
+<span style = "background-color:#fdd">        }</span>
+    }
+<span style = "background-color:#fdd">    else</span>
+    {
+<span style = "background-color:#dfd">        rootItem-&gt;setValue(value.toVariant().toString());</span>
+<span style = "background-color:#dfd">        rootItem-&gt;setType(value.type());</span>
+    }
+
+<span style = "background-color:#dfd">    return rootItem;</span>
+<span style = "background-color:#dfd">}</span>
+
+</pre>
+	</body>
+</html>

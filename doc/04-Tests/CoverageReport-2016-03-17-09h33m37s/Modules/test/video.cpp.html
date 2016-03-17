@@ -1,0 +1,23 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		video.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "Video.h"
+
+/**
+ * @brief Video::Video Creates a Video with the given path and Annotations.
+ * @param path The path to the Video.
+ * @param annotations The Annotations which belong to this Video.
+ */
+Video::Video(QString path, QList&lt;QPair&lt;int, Annotation*&gt;&gt; annotations)
+<span style = "background-color:#dfd">    : Medium(path, annotations) {</span>
+<span style = "background-color:#dfd">    mType = Type::VIDEO;</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

@@ -1,0 +1,35 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		algorithmthread.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "include/AlgorithmThread.h"
+
+/**
+ * @brief Constructs an AlgorithmThread with the given Algorithm.
+ * @param The Algorithm that will be startet on call to run.
+ */
+AlgorithmThread::AlgorithmThread(Algorithm *algo) : mAlgorithm(algo)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Runs the algorithm.
+ */
+void AlgorithmThread::run()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    mResults = mAlgorithm-&gt;run();</span>
+<span style = "background-color:#dfd">    emit resultsReady();</span>
+<span style = "background-color:#dfd">}</span>
+
+QList&lt;DataPacket *&gt; AlgorithmThread::getResults()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    return mResults;</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>
