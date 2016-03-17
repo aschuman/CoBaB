@@ -2,15 +2,19 @@
 #include "SearchQuery.h"
 #include <QtTest>
 
-SearchQuery squery;
-
+SearchQuery squery; ///< Instance of SearchQuery for testing.
+/**
+ * @brief Tests the type of the SearchQuery.
+ */
 void SearchQueryTester::testType()
 {
 
     QCOMPARE(squery.getType(), DataPacket::Type::SEARCHQUERY);
 
 }
-
+/**
+ * @brief Tests the setter and getter of the list of Datasets of the SearchQuery
+ */
 void SearchQueryTester::testDatasets()
 {
 
@@ -18,7 +22,9 @@ void SearchQueryTester::testDatasets()
     squery.setDatasets(datasets);
     QCOMPARE(squery.getDatasets(), datasets);
 }
-
+/**
+ * @brief Tests the setter and getter of the SearchObject of the SearchQuery.
+ */
 void SearchQueryTester::testSearchObject()
 {
 
@@ -26,7 +32,9 @@ void SearchQueryTester::testSearchObject()
     squery.setSearchObject(sobject);
     QCOMPARE(squery.getSearchObject().getMediumIndex(), sobject.getMediumIndex());
 }
-
+/**
+ * @brief Tests the sending and receiving of information through streams.
+ */
 void SearchQueryTester::testStreamMethods()
 {
 

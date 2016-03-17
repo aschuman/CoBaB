@@ -2,7 +2,10 @@
 #define DATAPACKETTESTER_H
 
 #include <QObject>
-
+/**
+ * @brief The DataPacketTester class
+ * @author Violina
+ */
 class DataPacketTester : public QObject
 {
     Q_OBJECT
