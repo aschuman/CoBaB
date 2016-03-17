@@ -6,13 +6,13 @@ Beim Start des Programms kann als Kommandozeilenparameter der Pfad zu einem Stan
 Das Programm kann zusätzlich mit dem Kommandozeilenparameter -f gestartet werden, um die GUI in einem Präsentationsmodus (Vollbild) darzustellen.
 
 \subsection{Annotationsdateien}
-Pro Bilddatensatz kann es genau eine Annotationsdatei geben, die direkt im Hauptordner des Datensatzes liegen und annotations.ann heißen muss.
-Für Videos aus Einzelbildern kann es jeweils eine Annotationsdatei pro Video geben, die im entsprechenden Bildordner liegen und annotations.ann heißen muss.
+Pro Bilddatensatz kann es genau eine Annotationsdatei geben, die direkt im Hauptordner des Datensatzes liegen und annotations.ann heißen muss. \newline
+Für Videos aus Einzelbildern kann es jeweils eine Annotationsdatei pro Video geben, die im entsprechenden Bildordner liegen und annotations.ann heißen muss. \newline
 Für Videos aus Videodateien kann es jeweils eine Annotationsdatei pro Video geben, die im selben Ordner wie das Video liegen und VIDEONAME.ann heißen muss (wobei VIDEONAME der Name des Videos ist).
 
 Die Annotationsdatei für Bilddatensätze und Videos aus Einzelbildern muss folgendermaßen aufgebaut sein:
 \begin{enumerate}
-\item Eine Header Zeile, die den Datensatz beschreibt.
+\item Eine Header-Zeile, die den Datensatz beschreibt.
 \item Die Anzahl der folgenden Parameter und die Annotationsparameter, deren Reihenfolge hier festgelegt werden kann: ID, Position, Breite, Höhe und der Typ der Annotation (id, x, y, width, height, class). Die später folgenden Annotationsparameter werden dann in dieser Reihenfolge interpretiert.
 \item In den folgenden Zeilen stehen die Bilder/Frames mit den Annotationen. Dabei steht als erstes der Bildname, anschließend die Anzahl der Annotationen, gefolgt von den Annotationsparametern (in der zuvor festgelegten Reihenfolge) zu allen Annotationen zu diesem Bild.
 \end{enumerate}
