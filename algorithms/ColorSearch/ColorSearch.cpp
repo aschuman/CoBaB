@@ -158,7 +158,7 @@ bool ColorSearch::setParameters(const QJsonObject& parameters)
     if (parameters.contains("Number of Bins"))
     {
         bins = parameters.value("Number of Bins").toInt();
-        if (bins < 1 && bins > 32) return false;
+        if (bins < 1 || bins > 32) return false;
     }
 
     mNumBins = bins;
