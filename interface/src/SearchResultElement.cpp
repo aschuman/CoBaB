@@ -41,7 +41,7 @@ SearchObject SearchResultElement::getSearchObject() const {
  * @brief SearchResultElement::setSearchObject Sets the searchobject.
  * @param searchObject to be set
  */
-void SearchResultElement::setSearchObject(const SearchObject searchObject) {
+void SearchResultElement::setSearchObject(const SearchObject& searchObject) {
     mSearchObject = searchObject;
 }
 

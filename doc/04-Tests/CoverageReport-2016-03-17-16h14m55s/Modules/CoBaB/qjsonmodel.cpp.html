@@ -1,0 +1,252 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		qjsonmodel.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">/***********************************************
+    Copyright (C) 2014  Schutz Sacha
+    This file is part of QJsonModel (https://github.com/dridk/QJsonmodel).
+
+    QJsonModel is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    QJsonModel is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with QJsonModel.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+
+**********************************************/
+
+#include "QJsonModel.h"
+#include &lt;QFile&gt;
+#include &lt;QDebug&gt;
+#include &lt;QJsonDocument&gt;
+#include &lt;QJsonObject&gt;
+#include &lt;QIcon&gt;
+#include &lt;QFont&gt;
+
+QJsonModel::QJsonModel(QObject *parent, QVector&lt;QJsonObject&gt; list) :
+    QAbstractItemModel(parent)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    mRootItem = new QJsonTreeItem;</span>
+<span style = "background-color:#dfd">    mHeaders.append(tr("Parameter"));</span>
+<span style = "background-color:#dfd">    mHeaders.append(tr("Wert"));</span>
+<span style = "background-color:#dfd">    for (int i = 0; i &lt; list.size(); i++) {</span>
+<span style = "background-color:#dfd">        loadQJson(list.value(i));</span>
+<span style = "background-color:#dfd">    }</span>
+
+<span style = "background-color:#dfd">}</span>
+
+<span style = "background-color:#dfd">QJsonObject QJsonModel::getParameters() {</span>
+<span style = "background-color:#dfd">    return mRootItem-&gt;getChilds().value(0)-&gt;toJson();</span>
+<span style = "background-color:#dfd">}</span>
+
+void QJsonModel::saveSettings(int row, QUrl filename)
+<span style = "background-color:#fdd">{</span>
+<span style = "background-color:#fdd">    QJsonObject data;</span>
+<span style = "background-color:#fdd">    data = mRootItem-&gt;getChilds().value(row)-&gt;toJson();</span>
+<span style = "background-color:#fdd">    emit saveQJson(data, filename);</span>
+<span style = "background-color:#fdd">}</span>
+
+void QJsonModel::loadSettings(int row, QUrl filename)
+<span style = "background-color:#fdd">{</span>
+<span style = "background-color:#fdd">    emit requestQJson(filename);</span>
+<span style = "background-color:#fdd">    mRootItem-&gt;getChilds().removeAt(row);</span>
+<span style = "background-color:#fdd">    int j = mRootItem-&gt;getChilds().size() - 1;</span>
+<span style = "background-color:#fdd">    mRootItem-&gt;getChilds().swap(row, j);</span>
+<span style = "background-color:#fdd">}</span>
+Qt::ItemFlags QJsonModel::flags(const QModelIndex&amp; index) const
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">  if(index.column() == 1)</span>
+  {
+<span style = "background-color:#dfd">      QJsonTreeItem* temp = static_cast&lt;QJsonTreeItem*&gt;(index.internalPointer());</span>
+<span style = "background-color:#dfd">      if (temp-&gt;type() != QJsonValue::Array &amp;&amp; temp-&gt;type() != QJsonValue::Object) {</span>
+<span style = "background-color:#dfd">          return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;</span>
+      }
+  }
+<span style = "background-color:#dfd">  return QAbstractItemModel::flags(index);</span>
+<span style = "background-color:#dfd">}</span>
+
+bool QJsonModel::setData(const QModelIndex&amp; index, const QVariant&amp; value, int role)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    if (!index.isValid())</span>
+<span style = "background-color:#fdd">        return false;</span>
+<span style = "background-color:#dfd">    if (role == Qt::EditRole) {</span>
+<span style = "background-color:#dfd">        QJsonTreeItem* temp = static_cast&lt;QJsonTreeItem*&gt;(index.internalPointer());</span>
+<span style = "background-color:#dfd">        temp-&gt;setValue(value.toString());</span>
+<span style = "background-color:#dfd">        return true;</span>
+    }
+<span style = "background-color:#fdd">    return false;</span>
+<span style = "background-color:#dfd">}</span>
+QJsonTreeItem* QJsonModel::backtrack(QModelIndex&amp; index)
+<span style = "background-color:#fdd">{</span>
+<span style = "background-color:#fdd">    if (index.parent().isValid() == false) //one row under root</span>
+        {
+<span style = "background-color:#fdd">            return mRootItem-&gt;getChilds().at(index.row());</span>
+        }
+<span style = "background-color:#fdd">        else {</span>
+<span style = "background-color:#fdd">            QModelIndex tempindex = index.parent();</span>
+<span style = "background-color:#fdd">            QModelIndex&amp; parent = tempindex;</span>
+<span style = "background-color:#fdd">            QJsonTreeItem* temp = backtrack(parent);</span>
+<span style = "background-color:#fdd">            return temp;</span>
+        }
+<span style = "background-color:#fdd">}</span>
+
+void QJsonModel::loadQJson(QJsonObject data)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    QJsonDocument docu = QJsonDocument(data);</span>
+<span style = "background-color:#dfd">    loadJson(docu.toJson());</span>
+<span style = "background-color:#dfd">}</span>
+
+
+
+bool QJsonModel::load(const QString &amp;fileName)
+<span style = "background-color:#fdd">{</span>
+<span style = "background-color:#fdd">    QFile file(fileName);</span>
+<span style = "background-color:#fdd">    bool success = false;</span>
+<span style = "background-color:#fdd">    if (file.open(QIODevice::ReadOnly)) {</span>
+<span style = "background-color:#fdd">        success = load(&amp;file);</span>
+<span style = "background-color:#fdd">        file.close();</span>
+    }
+<span style = "background-color:#fdd">    else success = false;</span>
+
+<span style = "background-color:#fdd">    return success;</span>
+<span style = "background-color:#fdd">}</span>
+
+bool QJsonModel::load(QIODevice *device)
+<span style = "background-color:#fdd">{</span>
+<span style = "background-color:#fdd">    return loadJson(device-&gt;readAll());</span>
+<span style = "background-color:#fdd">}</span>
+
+bool QJsonModel::loadJson(const QByteArray &amp;json)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    mDocument = QJsonDocument::fromJson(json);</span>
+
+<span style = "background-color:#dfd">    if (!mDocument.isNull())</span>
+    {
+
+<span style = "background-color:#dfd">        if (mDocument.isArray()) {</span>
+<span style = "background-color:#fdd">            mRootItem-&gt;appendChild(QJsonTreeItem::load(QJsonValue(mDocument.array()), mRootItem));</span>
+<span style = "background-color:#fdd">        } else {</span>
+<span style = "background-color:#dfd">            mRootItem-&gt;appendChild(QJsonTreeItem::load(QJsonValue(mDocument.object()), mRootItem));</span>
+        }
+
+<span style = "background-color:#dfd">        return true;</span>
+    }
+<span style = "background-color:#fdd">    return false;</span>
+<span style = "background-color:#dfd">}</span>
+
+
+QVariant QJsonModel::data(const QModelIndex &amp;index, int role) const
+<span style = "background-color:#dfd">{</span>
+
+<span style = "background-color:#dfd">    if (!index.isValid())</span>
+<span style = "background-color:#fdd">        return QVariant();</span>
+
+
+<span style = "background-color:#dfd">    QJsonTreeItem *item = static_cast&lt;QJsonTreeItem*&gt;(index.internalPointer());</span>
+
+
+<span style = "background-color:#dfd">    if ((role == Qt::DecorationRole) &amp;&amp; (index.column() == 0)){</span>
+
+<span style = "background-color:#dfd">        return mTypeIcons.value(item-&gt;type());</span>
+    }
+
+
+<span style = "background-color:#dfd">    if (role == Qt::DisplayRole) {</span>
+
+<span style = "background-color:#dfd">        if (index.column() == 0)</span>
+<span style = "background-color:#dfd">            return QString("%1").arg(item-&gt;key());</span>
+
+<span style = "background-color:#dfd">        if (index.column() == 1)</span>
+<span style = "background-color:#dfd">            return QString("%1").arg(item-&gt;value());</span>
+    }
+
+
+
+<span style = "background-color:#dfd">    return QVariant();</span>
+
+<span style = "background-color:#dfd">}</span>
+
+QVariant QJsonModel::headerData(int section, Qt::Orientation orientation, int role) const
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    if (role != Qt::DisplayRole)</span>
+<span style = "background-color:#dfd">        return QVariant();</span>
+
+<span style = "background-color:#dfd">    if (orientation == Qt::Horizontal) {</span>
+
+<span style = "background-color:#dfd">        return mHeaders.value(section);</span>
+    }
+<span style = "background-color:#fdd">    else</span>
+<span style = "background-color:#fdd">        return QVariant();</span>
+<span style = "background-color:#dfd">}</span>
+
+QModelIndex QJsonModel::index(int row, int column, const QModelIndex &amp;parent) const
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    if (!hasIndex(row, column, parent))</span>
+<span style = "background-color:#fdd">        return QModelIndex();</span>
+
+    QJsonTreeItem *parentItem;
+
+<span style = "background-color:#dfd">    if (!parent.isValid())</span>
+<span style = "background-color:#dfd">        parentItem = mRootItem;</span>
+<span style = "background-color:#dfd">    else</span>
+<span style = "background-color:#dfd">        parentItem = static_cast&lt;QJsonTreeItem*&gt;(parent.internalPointer());</span>
+
+<span style = "background-color:#dfd">    QJsonTreeItem *childItem = parentItem-&gt;child(row);</span>
+<span style = "background-color:#dfd">    if (childItem)</span>
+<span style = "background-color:#dfd">        return createIndex(row, column, childItem);</span>
+<span style = "background-color:#fdd">    else</span>
+<span style = "background-color:#fdd">        return QModelIndex();</span>
+<span style = "background-color:#dfd">}</span>
+
+QModelIndex QJsonModel::parent(const QModelIndex &amp;index) const
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    if (!index.isValid())</span>
+<span style = "background-color:#fdd">        return QModelIndex();</span>
+
+<span style = "background-color:#dfd">    QJsonTreeItem *childItem = static_cast&lt;QJsonTreeItem*&gt;(index.internalPointer());</span>
+<span style = "background-color:#dfd">    QJsonTreeItem *parentItem = childItem-&gt;parent();</span>
+
+<span style = "background-color:#dfd">    if (parentItem == mRootItem)</span>
+<span style = "background-color:#dfd">        return QModelIndex();</span>
+
+<span style = "background-color:#dfd">    return createIndex(parentItem-&gt;row(), 0, parentItem);</span>
+<span style = "background-color:#dfd">}</span>
+
+int QJsonModel::rowCount(const QModelIndex &amp;parent) const
+<span style = "background-color:#dfd">{</span>
+    QJsonTreeItem *parentItem;
+<span style = "background-color:#dfd">    if (parent.column() &gt; 0)</span>
+<span style = "background-color:#fdd">        return 0;</span>
+
+<span style = "background-color:#dfd">    if (!parent.isValid())</span>
+<span style = "background-color:#dfd">        parentItem = mRootItem;</span>
+<span style = "background-color:#dfd">    else</span>
+<span style = "background-color:#dfd">        parentItem = static_cast&lt;QJsonTreeItem*&gt;(parent.internalPointer());</span>
+
+<span style = "background-color:#dfd">    return parentItem-&gt;childCount();</span>
+<span style = "background-color:#dfd">}</span>
+
+int QJsonModel::columnCount(const QModelIndex &amp;parent) const
+<span style = "background-color:#dfd">{</span>
+    Q_UNUSED(parent)
+<span style = "background-color:#dfd">    return 2;</span>
+<span style = "background-color:#dfd">}</span>
+
+void QJsonModel::setIcon(const QJsonValue::Type &amp;type, const QIcon &amp;icon)
+<span style = "background-color:#fdd">{</span>
+<span style = "background-color:#fdd">    mTypeIcons.insert(type,icon);</span>
+<span style = "background-color:#fdd">}</span>
+</pre>
+	</body>
+</html>

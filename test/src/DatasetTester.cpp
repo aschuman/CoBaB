@@ -4,6 +4,25 @@
 
 Q_DECLARE_METATYPE(Dataset::Type)
 
+void DatasetTester::testValid_data() {
+    QTest::addColumn<QString>("path");
+    QTest::addColumn<bool>("valid");
+
+    QTest::newRow("single frame video dataset") << "../test/testdata/SingleFrameVideo" << true;
+    QTest::newRow("video dataset") << "../test/testdata/Video" << false; //because there is no video player
+    QTest::newRow("photo dataset") << "../test/testdata/Fotos" << true;
+    QTest::newRow("invalid, non existing directory") << "sdkkjhgnj" << false;
+    QTest::newRow("invalid, existing directory") << "../core" << false;
+}
+
+void DatasetTester::testValid() {
+    QFETCH(QString, path);
+    QFETCH(bool, valid);
+
+    Dataset dataset(path);
+    QCOMPARE(dataset.isValid(), valid);
+}
+
 void DatasetTester::testType_data()
 {
     QTest::addColumn<QString>("path");
@@ -34,7 +53,6 @@ void DatasetTester::testName_data()
     QTest::newRow("video dataset") << "../test/testdata/Video" << "Video";
     QTest::newRow("photo dataset") << "../test/testdata/Fotos" << "Fotos";
     QTest::newRow("invalid dataset") << "lsflnlkdfa" << "";
-
 }
 
 void DatasetTester::testName()
