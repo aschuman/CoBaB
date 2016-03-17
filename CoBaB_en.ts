@@ -16,13 +16,12 @@ In den Bildern werden außerdem, falls vorhanden, Annotationen angezeigt.
 Nach einem Klick auf den Button &apos;Bereich auswählen&apos; kann ein eigenes Rechteck auf dem Bild gezogen werden. Mit einem Rechtsklick in die Annotation oder das gezogene Rechteck werden die dafür verfügbaren Algorithmen angezeigt. 
 
 Parameter:
-Nach der Auswahl eines Algorithmus kann man Parameter für den diesen festlegen. Außerdem können weitere Datensätze ausgewählt werden, in denen gesucht werden soll. 
+Nach der Auswahl eines Algorithmus kann man Parameter für diesen festlegen. Außerdem können weitere Datensätze ausgewählt werden, in denen gesucht werden soll. 
  
 Bestätigung:
 Hier wird die aktuelle Auswahl angezeigt, die dem Algorithmus übergeben wird. 
  
 Ergebnisse:
-Das Suchergebnis kann als Lesezeichen gespeichert werden. 
 Die Bilder können als positiv (grüner Kasten, ein Klick auf das Bild), negativ (roter Kasten, zweiter Klick) oder wieder neutral (dritter Klick) bewertet werden.
 Durch einen Klick auf den Button &apos;Erneut suchen&apos; wird das Feedback an den Algorithmus übermittelt und eine neue verbesserte Suche gestartet.</source>
         <translation>Library:
@@ -42,12 +41,11 @@ Confirmation:
 It shows the values which will be given to the search algorithm.
 
 Search Results:
-The search results can be saved as a bookmark.
 The photos can be marked as positive (green box, one click on the photo), negative (red box, second click on the photo) or neutral again (third click).
 By clicking the button &apos;search again&apos; the feedback is submitted to the algorithm and a new and better search is started.</translation>
     </message>
     <message>
-        <location filename="core/src/ConfigData.cpp" line="96"/>
+        <location filename="core/src/ConfigData.cpp" line="95"/>
         <source>CoBaB ermöglicht es, anhand eines ausgewählten Bildes oder Videos eine inhaltsbasierte Suche in Bild- oder Videodaten durchzuführen. Als Ergebnis liefert CoBaB eine Auswahl ähnlicher Bilder oder Videos. Durch die Eingabe von Feedback kann diese Auswahl verfeinert werden.
 
 Autoren: Anja Blechinger, Marie Bommersheim, Georgi Georgiev, Tung Nguyen, Vincent Winkler, Violina Zhekova</source>
@@ -60,7 +58,7 @@ Authors: Anja Blechinger, Marie Bommersheim, Georgi Georgiev, Tung Nguyen, Vince
     <name>ConfirmationPageWidget</name>
     <message>
         <location filename="core/ui/ConfirmationPageWidget.ui" line="14"/>
-        <location filename="core/src/ConfirmationPageWidget.cpp" line="203"/>
+        <location filename="core/src/ConfirmationPageWidget.cpp" line="211"/>
         <source>CoBaB - Bestätigung</source>
         <translation>CoBaB - Confirmation</translation>
     </message>
@@ -76,31 +74,31 @@ Authors: Anja Blechinger, Marie Bommersheim, Georgi Georgiev, Tung Nguyen, Vince
     </message>
     <message>
         <location filename="core/src/ConfirmationPageWidget.cpp" line="20"/>
-        <location filename="core/src/ConfirmationPageWidget.cpp" line="189"/>
+        <location filename="core/src/ConfirmationPageWidget.cpp" line="197"/>
         <source>Suche starten</source>
         <translation>start search</translation>
     </message>
     <message>
         <location filename="core/src/ConfirmationPageWidget.cpp" line="25"/>
-        <location filename="core/src/ConfirmationPageWidget.cpp" line="190"/>
+        <location filename="core/src/ConfirmationPageWidget.cpp" line="198"/>
         <source>Datenordner</source>
         <translation>datasets</translation>
     </message>
     <message>
         <location filename="core/src/ConfirmationPageWidget.cpp" line="26"/>
-        <location filename="core/src/ConfirmationPageWidget.cpp" line="191"/>
+        <location filename="core/src/ConfirmationPageWidget.cpp" line="199"/>
         <source>Algorithmus</source>
         <translation>algorithm</translation>
     </message>
     <message>
         <location filename="core/src/ConfirmationPageWidget.cpp" line="27"/>
-        <location filename="core/src/ConfirmationPageWidget.cpp" line="192"/>
+        <location filename="core/src/ConfirmationPageWidget.cpp" line="200"/>
         <source>Parameter</source>
         <translation>parameters</translation>
     </message>
     <message>
         <location filename="core/src/ConfirmationPageWidget.cpp" line="113"/>
-        <location filename="core/src/ConfirmationPageWidget.cpp" line="194"/>
+        <location filename="core/src/ConfirmationPageWidget.cpp" line="202"/>
         <source>Bild kann nicht geöffnet werden.</source>
         <translation>Photo cannot be opened.</translation>
     </message>
@@ -132,62 +130,52 @@ Authors: Anja Blechinger, Marie Bommersheim, Georgi Georgiev, Tung Nguyen, Vince
         <translation>CoBaB</translation>
     </message>
     <message>
-        <location filename="core/ui/MainWindow.ui" line="34"/>
-        <location filename="core/src/MainWindow.cpp" line="159"/>
+        <location filename="core/ui/MainWindow.ui" line="40"/>
+        <location filename="core/src/MainWindow.cpp" line="163"/>
         <source>Datei</source>
         <translation>File</translation>
     </message>
     <message>
-        <location filename="core/ui/MainWindow.ui" line="40"/>
-        <location filename="core/src/MainWindow.cpp" line="166"/>
+        <location filename="core/ui/MainWindow.ui" line="49"/>
+        <location filename="core/src/MainWindow.cpp" line="169"/>
         <source>Einstellungen</source>
         <translation>Settings</translation>
     </message>
     <message>
-        <location filename="core/ui/MainWindow.ui" line="57"/>
-        <source>&amp;Lesezeichen</source>
-        <translation>&amp;Bookmark</translation>
-    </message>
-    <message>
-        <location filename="core/ui/MainWindow.ui" line="62"/>
-        <source>&amp;Chronik</source>
-        <translation>&amp;Chronicle</translation>
-    </message>
-    <message>
-        <location filename="core/ui/MainWindow.ui" line="67"/>
-        <location filename="core/ui/MainWindow.ui" line="124"/>
-        <location filename="core/src/MainWindow.cpp" line="160"/>
+        <location filename="core/ui/MainWindow.ui" line="66"/>
+        <location filename="core/ui/MainWindow.ui" line="126"/>
+        <location filename="core/src/MainWindow.cpp" line="164"/>
         <source>Hilfe</source>
         <translation>Help</translation>
     </message>
     <message>
-        <location filename="core/ui/MainWindow.ui" line="81"/>
-        <location filename="core/ui/MainWindow.ui" line="100"/>
+        <location filename="core/ui/MainWindow.ui" line="80"/>
+        <location filename="core/ui/MainWindow.ui" line="102"/>
         <source>toolBar</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="core/ui/MainWindow.ui" line="129"/>
+        <location filename="core/ui/MainWindow.ui" line="131"/>
         <location filename="core/src/MainWindow.cpp" line="78"/>
-        <location filename="core/src/MainWindow.cpp" line="156"/>
+        <location filename="core/src/MainWindow.cpp" line="161"/>
         <source>Über CoBaB</source>
         <translation>About CoBaB</translation>
     </message>
     <message>
-        <location filename="core/ui/MainWindow.ui" line="134"/>
-        <location filename="core/src/MainWindow.cpp" line="144"/>
-        <location filename="core/src/MainWindow.cpp" line="170"/>
+        <location filename="core/ui/MainWindow.ui" line="136"/>
+        <location filename="core/src/MainWindow.cpp" line="149"/>
+        <location filename="core/src/MainWindow.cpp" line="173"/>
         <source>Ton einschalten</source>
         <translation>sound on</translation>
     </message>
     <message>
-        <location filename="core/ui/MainWindow.ui" line="147"/>
-        <location filename="core/src/MainWindow.cpp" line="163"/>
+        <location filename="core/ui/MainWindow.ui" line="149"/>
+        <location filename="core/src/MainWindow.cpp" line="166"/>
         <source>Deutsch</source>
         <translation>German</translation>
     </message>
     <message>
-        <location filename="core/ui/MainWindow.ui" line="139"/>
+        <location filename="core/ui/MainWindow.ui" line="141"/>
         <source>Datensatz öffnen</source>
         <translation>open dataset</translation>
     </message>
@@ -199,40 +187,30 @@ Authors: Anja Blechinger, Marie Bommersheim, Georgi Georgiev, Tung Nguyen, Vince
     </message>
     <message>
         <location filename="core/src/MainWindow.cpp" line="89"/>
-        <location filename="core/src/MainWindow.cpp" line="157"/>
+        <location filename="core/src/MainWindow.cpp" line="162"/>
         <source>Hilfe für CoBaB</source>
         <translation>Help for CoBaB</translation>
     </message>
     <message>
-        <location filename="core/src/MainWindow.cpp" line="146"/>
-        <location filename="core/src/MainWindow.cpp" line="168"/>
+        <location filename="core/src/MainWindow.cpp" line="151"/>
+        <location filename="core/src/MainWindow.cpp" line="171"/>
         <source>Ton ausschalten</source>
         <translation>sound off</translation>
     </message>
     <message>
-        <location filename="core/src/MainWindow.cpp" line="158"/>
-        <source>Lesezeichen</source>
-        <translation>Bookmarks</translation>
-    </message>
-    <message>
-        <location filename="core/src/MainWindow.cpp" line="161"/>
-        <source>Chronik</source>
-        <translation>Chronicle</translation>
-    </message>
-    <message>
-        <location filename="core/ui/MainWindow.ui" line="44"/>
-        <location filename="core/src/MainWindow.cpp" line="162"/>
+        <location filename="core/ui/MainWindow.ui" line="53"/>
+        <location filename="core/src/MainWindow.cpp" line="165"/>
         <source>Sprache</source>
         <translation>Language</translation>
     </message>
     <message>
-        <location filename="core/ui/MainWindow.ui" line="155"/>
-        <location filename="core/src/MainWindow.cpp" line="164"/>
+        <location filename="core/ui/MainWindow.ui" line="157"/>
+        <location filename="core/src/MainWindow.cpp" line="167"/>
         <source>Englisch</source>
         <translation>English</translation>
     </message>
     <message>
-        <location filename="core/src/MainWindow.cpp" line="165"/>
+        <location filename="core/src/MainWindow.cpp" line="168"/>
         <source>Datenordner öffnen</source>
         <translation>Open Dataset</translation>
     </message>
@@ -271,12 +249,12 @@ Authors: Anja Blechinger, Marie Bommersheim, Georgi Georgiev, Tung Nguyen, Vince
 <context>
     <name>PhotoViewer</name>
     <message>
-        <location filename="core/src/PhotoViewer.cpp" line="50"/>
+        <location filename="core/src/PhotoViewer.cpp" line="49"/>
         <source>Foto </source>
         <translation>Photo </translation>
     </message>
     <message>
-        <location filename="core/src/PhotoViewer.cpp" line="50"/>
+        <location filename="core/src/PhotoViewer.cpp" line="49"/>
         <source> von </source>
         <translation> of </translation>
     </message>
@@ -284,12 +262,12 @@ Authors: Anja Blechinger, Marie Bommersheim, Georgi Georgiev, Tung Nguyen, Vince
 <context>
     <name>QJsonModel</name>
     <message>
-        <location filename="core/src/QJsonModel.cpp" line="37"/>
+        <location filename="core/src/QJsonModel.cpp" line="32"/>
         <source>Parameter</source>
         <translation>Parameter</translation>
     </message>
     <message>
-        <location filename="core/src/QJsonModel.cpp" line="38"/>
+        <location filename="core/src/QJsonModel.cpp" line="33"/>
         <source>Wert</source>
         <translation>Value</translation>
     </message>
@@ -330,7 +308,7 @@ Authors: Anja Blechinger, Marie Bommersheim, Georgi Georgiev, Tung Nguyen, Vince
     <name>ViewerPageWidget</name>
     <message>
         <location filename="core/ui/ViewerPageWidget.ui" line="14"/>
-        <location filename="core/src/ViewerPageWidget.cpp" line="358"/>
+        <location filename="core/src/ViewerPageWidget.cpp" line="354"/>
         <source>CoBaB - Viewer</source>
         <translation>CoBaB - Viewer</translation>
     </message>
@@ -365,14 +343,14 @@ Authors: Anja Blechinger, Marie Bommersheim, Georgi Georgiev, Tung Nguyen, Vince
         <translation></translation>
     </message>
     <message>
-        <location filename="core/src/ViewerPageWidget.cpp" line="328"/>
-        <location filename="core/src/ViewerPageWidget.cpp" line="347"/>
+        <location filename="core/src/ViewerPageWidget.cpp" line="324"/>
+        <location filename="core/src/ViewerPageWidget.cpp" line="343"/>
         <source>Bereich entfernen</source>
         <translation>remove ROI</translation>
     </message>
     <message>
-        <location filename="core/src/ViewerPageWidget.cpp" line="332"/>
-        <location filename="core/src/ViewerPageWidget.cpp" line="349"/>
+        <location filename="core/src/ViewerPageWidget.cpp" line="328"/>
+        <location filename="core/src/ViewerPageWidget.cpp" line="345"/>
         <source>Bereich auswählen</source>
         <translation>select ROI</translation>
     </message>

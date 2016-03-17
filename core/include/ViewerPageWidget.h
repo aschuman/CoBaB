@@ -42,7 +42,7 @@ public slots:
     void next();
     void before();
     virtual void nextWidget(QAction* action);
-    virtual void contextMenu(const QPointF &pos);
+    virtual void contextMenu(const QPointF &pos, const Annotation* selectedAnnotation = nullptr);
     void on_mGraphicsView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint);
     void roiClicked();
     void annotationSelected(Annotation *annotation, const QPointF &pos);
@@ -68,7 +68,6 @@ protected:
     bool mROIIsChosen; ///< Indicates if the ROI button was pressed.
 
     AnnotationDrawer mAnnotationDrawer; ///< The AnnotationDrawer to draw the annotations on the media.
-    Annotation* mSelectedAnnotation; ///< The selected annotation.
 
     AlgorithmList* mAlgorithmList; ///< A list of available algorithms.
     QHash<QString, Algorithm*> mAlgorithms; ///< Hashes an algorithm name to the algorithm.

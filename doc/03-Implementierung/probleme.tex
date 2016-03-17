@@ -1,6 +1,6 @@
 Dieser Abschnitt beschäftigt sich mit wesentlichen Problemen während der 
 Implementierung und in diesem Projekt gewählten Lösungen bzw. Übergangslösungen.
-Den Entwurf betreffende Probleme werden in einem eigenen Abschnitt beleuchtet.
+Probleme, die den Entwurf betreffen, werden in einem eigenen Abschnitt beleuchtet.
 
 \subsection{Qt und \texttt{unique\_ptr}}
 Durch die verwendung von C++14 (siehe Abschnitt 11.1 des Pflichtenhefts) ist die verwendung von unique\_ptr, die selbständig ihre Ziele löschen, möglich. Ebenso übernehmen einige Komponenten der Qt-Bibliothek den Besitz übergebene Zeiger. Dynamisch allokierte Objekte, die gleichzeitig von einem unique\_ptr und einer der besagen Qt-Komponenten besessen werden, könnten zwei Versuche das selbe Objekt zu löschen zur Folge haben. Dies ist undefiniertes verhalten. Es müssen beim Verwenden von unique\_ptr also mehrfache Löschungen beachtet werden.

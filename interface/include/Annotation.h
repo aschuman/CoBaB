@@ -47,6 +47,7 @@ public:
 protected: 
     QString mId;    ///<Id
     QString mType;  ///<Type
+    Form mForm;
 
 private:
     QStringList mTypes = (QStringList() << "Face" << "Person" << "Unknown");
