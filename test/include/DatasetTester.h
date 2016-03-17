@@ -10,6 +10,9 @@ class DatasetTester : public QObject
 {
     Q_OBJECT
 private slots:
+    void testValid_data();
+    void testValid();
+
     void testType_data();
     void testType();
 

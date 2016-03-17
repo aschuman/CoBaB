@@ -25,14 +25,14 @@ Dataset::Dataset(const QString& path) {
     if(!createSingleFrameVideoDataset()) {
         if(!createPhotoDataset()) {
             if(!createVideoDataset()) {
-                LOG_ERR("The dataset doesn't contains photos, videos or single frame videos.");
+                LOG_ERR("The dataset doesn't contain photos, videos or single frame videos.");
                 return;
             }
         }
     }
     mValid = createPreviewPhoto();
     if(mType == VIDEO) {
-        mValid = false; // while we dosn't have a video player
+        mValid = false; // while we don't have a video player
     }
 }
 

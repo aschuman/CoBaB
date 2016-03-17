@@ -22,7 +22,7 @@ public slots:
     void playOrPause();
     void stop();
     void loop();
-    void contextMenu(const QPointF &pos) override;
+    void contextMenu(const QPointF &pos, const Annotation* selectedAnnotation = nullptr) override;
     void showFrame();
     void showTime();
     void nextWidget(QAction* action) override;

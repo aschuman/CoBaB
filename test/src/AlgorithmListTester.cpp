@@ -16,8 +16,11 @@ void AlgorithmListTester::testLoadingOfTestAlgorithm()
     bool found = false;
     QList<Algorithm*> algos = mAlgoList->getAlgorithmList();
     for(Algorithm* algo : algos){
-        if(algo->getName() == "Test algorithm")
+        if(algo->getName() == "Test algorithm") {
             found = true;
+            QCOMPARE(algo->getId(), (QString)"default");
+            QCOMPARE(algo->getParameters(), algo->getDefaultParameters());
+        }
     }
     if(!found)
         QFAIL("test algorithm not found");

@@ -1,0 +1,219 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		singleframevideoviewer.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "SingleFrameVideoViewer.h"
+#include "ui_ViewerPageWidget.h"
+#include "log.h"
+
+/**
+ * @brief SingleFrameVideoViewer::SingleFrameVideoViewer Constructs a SingleFrameVideoViewer.
+ */
+SingleFrameVideoViewer::SingleFrameVideoViewer() : ViewerPageWidget(), mIsPlaying(false),
+    mSFVideo("", QList&lt;QPair&lt;int, Annotation*&gt;&gt;()), mFrameIndex(-1), mIsLooping(false)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    Q_INIT_RESOURCE(application);</span>
+<span style = "background-color:#dfd">    connect(ui-&gt;mPlayOrPauseButton, SIGNAL(clicked()), this, SLOT(playOrPause()));</span>
+<span style = "background-color:#dfd">    connect(ui-&gt;mStopButton, SIGNAL(clicked()), this, SLOT(stop()));</span>
+<span style = "background-color:#dfd">    connect(ui-&gt;mLoopButton, SIGNAL(clicked()), this, SLOT(loop()));</span>
+
+<span style = "background-color:#dfd">    connect(&amp;mTimer, SIGNAL(timeout()), this, SLOT(showFrame()));</span>
+<span style = "background-color:#dfd">    mVideoTime.setInterval(1000);</span>
+<span style = "background-color:#dfd">    connect(&amp;mVideoTime, SIGNAL(timeout()), this, SLOT(showTime()));</span>
+
+<span style = "background-color:#dfd">    ui-&gt;mSlider-&gt;setSingleStep(1);</span>
+<span style = "background-color:#dfd">    connect(ui-&gt;mSlider, SIGNAL(sliderPressed()), this, SLOT(pause()));</span>
+<span style = "background-color:#dfd">    connect(ui-&gt;mSlider, SIGNAL(sliderMoved(int)), this, SLOT(slide(int)));</span>
+<span style = "background-color:#dfd">    connect(ui-&gt;mSlider, SIGNAL(sliderReleased()), this, SLOT(play()));</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SingleFrameVideoViewer::showTime Shows the current time in the video.
+ */
+<span style = "background-color:#dfd">void SingleFrameVideoViewer::showTime() {</span>
+<span style = "background-color:#dfd">    ui-&gt;mTime-&gt;setText(QString::number(mFrameIndex*mTimer.interval()/1000));</span>
+<span style = "background-color:#dfd">    ui-&gt;mSlider-&gt;triggerAction(QAbstractSlider::SliderSingleStepAdd);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SingleFrameVideoViewer::display Displays the video in the QGraphicsScene.
+ */
+<span style = "background-color:#dfd">void SingleFrameVideoViewer::display() {</span>
+<span style = "background-color:#dfd">    ViewerPageWidget::display();</span>
+<span style = "background-color:#dfd">    stop();</span>
+<span style = "background-color:#dfd">    ui-&gt;mStopButton-&gt;setIcon(QIcon(":/stop.png"));</span>
+<span style = "background-color:#dfd">    ui-&gt;mLoopButton-&gt;setIcon(QIcon(":/loop.png"));</span>
+<span style = "background-color:#dfd">    mIsLooping = false;</span>
+<span style = "background-color:#dfd">    mFrameIndex = 0;</span>
+
+<span style = "background-color:#dfd">    ui-&gt;mPhotoCount-&gt;setText("Video "+QString::number(mIndex+1)+" von "+QString::number(mDataset-&gt;getNumberOfMedia()));</span>
+
+<span style = "background-color:#dfd">    mSFVideo = *(SingleFrameVideo*)mDataset-&gt;getMediaList().at(mIndex);</span>
+<span style = "background-color:#dfd">    mTimer.setInterval(1000/mSFVideo.getFramerate()); //time interval in milliseconds per frame</span>
+<span style = "background-color:#dfd">    ui-&gt;mSlider-&gt;setMaximum(mSFVideo.getFrameList().size()/mSFVideo.getFramerate());</span>
+<span style = "background-color:#dfd">    mFrameList.clear();</span>
+<span style = "background-color:#dfd">    for(QString iter : mSFVideo.getFrameList()) {</span>
+<span style = "background-color:#dfd">        mFrameList.append(QPixmap(mSFVideo.getPath()+"/"+iter));</span>
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">    if(mFrameList.isEmpty()) {</span>
+        LOG_ERR("empty video");
+<span style = "background-color:#fdd">        return;</span>
+    }
+<span style = "background-color:#dfd">    mImage = new ClickableGraphicsPixmapItem(mFrameList.first());</span>
+<span style = "background-color:#dfd">    if(mImage != nullptr) {</span>
+<span style = "background-color:#dfd">        mGraphicsScene.addItem(mImage);</span>
+<span style = "background-color:#dfd">        connect(mImage, SIGNAL(selected(const QPointF&amp;)), this, SLOT(contextMenu(QPointF)));</span>
+<span style = "background-color:#dfd">        mGraphicsScene.setSceneRect(0,0, mImage-&gt;boundingRect().width(), mImage-&gt;boundingRect().height());</span>
+    }
+<span style = "background-color:#dfd">    mAnnotations.clear();</span>
+<span style = "background-color:#dfd">    for(QPair&lt;int, Annotation*&gt; iter: mSFVideo.getAnnotationList()) {</span>
+<span style = "background-color:#dfd">        mAnnotations.insert(iter.first, iter);</span>
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">    resize();</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SingleFrameVideoViewer::playOrPause Plays the video if it is pausing and pauses it if it is playing.
+ */
+<span style = "background-color:#dfd">void SingleFrameVideoViewer::playOrPause() {</span>
+<span style = "background-color:#dfd">    if(mIsPlaying) {</span>
+<span style = "background-color:#dfd">        pause();</span>
+<span style = "background-color:#dfd">    } else {</span>
+<span style = "background-color:#dfd">        play();</span>
+    }
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SingleFrameVideoViewer::stop Stops the video.
+ */
+<span style = "background-color:#dfd">void SingleFrameVideoViewer::stop() {</span>
+<span style = "background-color:#dfd">    pause();</span>
+<span style = "background-color:#dfd">    ui-&gt;mTime-&gt;setText("0");</span>
+<span style = "background-color:#dfd">    ui-&gt;mSlider-&gt;setSliderPosition(0);</span>
+<span style = "background-color:#dfd">    mAnnotationDrawer.removeAnnotations();</span>
+<span style = "background-color:#dfd">    if(mImage != nullptr)</span>
+<span style = "background-color:#dfd">        mGraphicsScene.removeItem(mImage);</span>
+<span style = "background-color:#dfd">        delete mImage;</span>
+<span style = "background-color:#dfd">    if(!mFrameList.isEmpty()) {</span>
+<span style = "background-color:#dfd">        mImage = new ClickableGraphicsPixmapItem(mFrameList.first());</span>
+    }
+<span style = "background-color:#dfd">    if(mImage != nullptr) {</span>
+<span style = "background-color:#dfd">        mGraphicsScene.addItem(mImage);</span>
+<span style = "background-color:#dfd">        mFrameIndex = 0;</span>
+    }
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SingleFrameVideoViewer::loop Loops the video if it is not looping, else don't loop it.
+ */
+<span style = "background-color:#dfd">void SingleFrameVideoViewer::loop() {</span>
+<span style = "background-color:#dfd">    if(mIsLooping) {</span>
+<span style = "background-color:#dfd">        mIsLooping = false;</span>
+<span style = "background-color:#dfd">        ui-&gt;mLoopButton-&gt;setIcon(QIcon(":/loop.png"));</span>
+<span style = "background-color:#dfd">    } else {</span>
+<span style = "background-color:#dfd">        mIsLooping = true;</span>
+<span style = "background-color:#dfd">        ui-&gt;mLoopButton-&gt;setIcon(QIcon(":/noLoop.png"));</span>
+    }
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SingleFrameVideoViewer::contextMenu Shows a context menu to select an algorithm.
+ * @param pos The position of the mouse.
+ */
+<span style = "background-color:#dfd">void SingleFrameVideoViewer::contextMenu(const QPointF &amp;pos) {</span>
+<span style = "background-color:#dfd">    pause();</span>
+<span style = "background-color:#dfd">    ViewerPageWidget::contextMenu(pos);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SingleFrameVideoViewer::pause Pauses the video.
+ */
+<span style = "background-color:#dfd">void SingleFrameVideoViewer::pause() {</span>
+<span style = "background-color:#dfd">    mVideoTime.stop();</span>
+<span style = "background-color:#dfd">    mTimer.stop();</span>
+<span style = "background-color:#dfd">    mIsPlaying = false;</span>
+<span style = "background-color:#dfd">    ui-&gt;mPlayOrPauseButton-&gt;setIcon(QIcon(":/play.png"));</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SingleFrameVideoViewer::play Plays the video.
+ */
+<span style = "background-color:#dfd">void SingleFrameVideoViewer::play() {</span>
+<span style = "background-color:#dfd">    mIsPlaying = true;</span>
+<span style = "background-color:#dfd">    ui-&gt;mPlayOrPauseButton-&gt;setIcon(QIcon(":/pause.png"));</span>
+<span style = "background-color:#dfd">    mVideoTime.start();</span>
+<span style = "background-color:#dfd">    mTimer.start();</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SingleFrameVideoViewer::showFrame Shows one frame.
+ */
+<span style = "background-color:#dfd">void SingleFrameVideoViewer::showFrame() {</span>
+<span style = "background-color:#dfd">    if(mImage != nullptr) {</span>
+<span style = "background-color:#dfd">        mGraphicsScene.removeItem(mImage);</span>
+<span style = "background-color:#dfd">        delete mImage;</span>
+<span style = "background-color:#dfd">        mAnnotationDrawer.removeAnnotations();</span>
+    }
+<span style = "background-color:#dfd">    if(mCurrentSelection != nullptr){</span>
+<span style = "background-color:#fdd">        mGraphicsScene.removeItem(mCurrentSelection);</span>
+<span style = "background-color:#fdd">        delete mCurrentSelection;</span>
+<span style = "background-color:#fdd">        mCurrentSelection = nullptr;</span>
+    }
+<span style = "background-color:#dfd">    mFrameIndex++;</span>
+<span style = "background-color:#dfd">    if(mFrameIndex &gt;= mFrameList.size()) {</span>
+<span style = "background-color:#dfd">        mTimer.stop();</span>
+<span style = "background-color:#dfd">        mImage = nullptr;</span>
+<span style = "background-color:#dfd">        stop();</span>
+<span style = "background-color:#dfd">        if(mIsLooping) {</span>
+<span style = "background-color:#dfd">            play();</span>
+        }
+<span style = "background-color:#dfd">        return;</span>
+    }
+
+<span style = "background-color:#dfd">    mImage = new ClickableGraphicsPixmapItem(mFrameList.at(mFrameIndex));</span>
+<span style = "background-color:#dfd">    connect(mImage, SIGNAL(selected(const QPointF&amp;)), this, SLOT(contextMenu(QPointF)));</span>
+<span style = "background-color:#dfd">    mGraphicsScene.addItem(mImage);</span>
+<span style = "background-color:#dfd">    mAnnotationDrawer.setAnnotations(mAnnotations.values(mFrameIndex));</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SingleFrameVideoViewer::getFrameIndex Returns the frame in the video.
+ * @return The frame in the Medium (to be set in the SearchObject).
+ */
+<span style = "background-color:#dfd">int SingleFrameVideoViewer::getFrameIndex() {</span>
+<span style = "background-color:#dfd">    return mFrameIndex;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SingleFrameVideoViewer::nextWidget Shows the next widget.
+ * @param action The Action of the context menu that was selceted.
+ */
+<span style = "background-color:#dfd">void SingleFrameVideoViewer::nextWidget(QAction* action) {</span>
+<span style = "background-color:#dfd">    stop();</span>
+<span style = "background-color:#dfd">    ViewerPageWidget::nextWidget(action);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SingleFrameVideoViewer::slide Moves the slider.
+ * @param sec The seconds that have passed since the video started.
+ */
+<span style = "background-color:#fdd">void SingleFrameVideoViewer::slide(int sec) {</span>
+<span style = "background-color:#fdd">    mFrameIndex = sec * mSFVideo.getFramerate() - 1;</span>
+<span style = "background-color:#fdd">    showFrame();</span>
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief SingleFrameVideoViewer::retranslateUi Translates the GUI.
+ */
+<span style = "background-color:#dfd">void SingleFrameVideoViewer::retranslateUi() {</span>
+<span style = "background-color:#dfd">    ViewerPageWidget::retranslateUi();</span>
+<span style = "background-color:#dfd">    ui-&gt;mPhotoCount-&gt;setText(tr("Video ")+QString::number(mIndex+1)+tr(" von ")+QString::number(mDataset-&gt;getNumberOfMedia()));</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

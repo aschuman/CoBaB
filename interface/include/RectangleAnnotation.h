@@ -16,8 +16,6 @@ public:
 
     Annotation* copy() const override;
 
-    Form getForm() const override;
-
     friend QDataStream& operator<<(QDataStream& out, const RectangleAnnotation& annotation);
 
     friend QDataStream& operator>>(QDataStream& in, RectangleAnnotation& annotation);

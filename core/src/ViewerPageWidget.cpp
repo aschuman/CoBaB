@@ -10,7 +10,7 @@
  */
 ViewerPageWidget::ViewerPageWidget() :
     ui(new Ui::ViewerPageWidget), mIndex(0), mImage(nullptr), mSelectionPen(QColor(0,255,230)),
-    mCurrentSelection(nullptr), mAnnotationDrawer(&mGraphicsScene), mSelectedAnnotation(nullptr),
+    mCurrentSelection(nullptr), mAnnotationDrawer(&mGraphicsScene),
     mAlgorithmList(nullptr), mDataset(nullptr), mROIIsChosen(false)
 {
     ui->setupUi(this);
@@ -88,15 +88,14 @@ void ViewerPageWidget::zoomed(double zoomLevel) {
  * @param pos The mouse position.
  */
 void ViewerPageWidget::annotationSelected(Annotation* annotation, const QPointF& pos) {
-    mSelectedAnnotation = annotation->copy();
-    contextMenu(pos);
+    contextMenu(pos, annotation);
 }
 
 /**
  * @brief ViewerPageWidget::contextMenu Shows a context menu to select an Algorithm.
  * @param pos The mouse position.
  */
-void ViewerPageWidget::contextMenu(const QPointF &pos) {
+void ViewerPageWidget::contextMenu(const QPointF &pos, const Annotation* selectedAnnotation) {
     SearchObject searchObject;
     searchObject.setMedium(mDataset->getMediaList().at(mIndex)->getPath());
     searchObject.setFrameIndex(getFrameIndex());
@@ -111,8 +110,8 @@ void ViewerPageWidget::contextMenu(const QPointF &pos) {
         mROI = mCurrentSelection->rect().toRect();
         searchObject.setROI(mROI);
         searchObject.setType(SearchObject::Type::ROI);
-    } else if(mSelectedAnnotation != nullptr) {
-        searchObject.setAnnotation(mSelectedAnnotation);
+    } else if(selectedAnnotation != nullptr) {
+        searchObject.setAnnotation(selectedAnnotation);
         searchObject.setType(SearchObject::Type::ANNOTATION);
     } else {
         searchObject.setType(SearchObject::Type::MEDIUM);
@@ -228,10 +227,6 @@ void ViewerPageWidget::reset()
                 delete mCurrentSelection;
                 mCurrentSelection = nullptr;
             }
-            if(mSelectedAnnotation != nullptr) {
-                delete mSelectedAnnotation;
-                mSelectedAnnotation = nullptr;
-            }
 
             display();
         }
@@ -253,8 +248,6 @@ void ViewerPageWidget::reset()
 void ViewerPageWidget::nextWidget(QAction* action) {
     delete mDataset;
     mDataset = nullptr;
-    delete mSelectedAnnotation;
-    mSelectedAnnotation = nullptr;
     delete mCurrentSelection;
     mCurrentSelection = nullptr;
     delete mImage;

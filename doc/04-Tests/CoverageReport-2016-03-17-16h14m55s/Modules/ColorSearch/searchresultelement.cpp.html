@@ -1,0 +1,114 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		searchresultelement.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">/**
+ * Project \
+ */
+
+
+#include "SearchResultElement.h"
+
+
+/**
+ * @brief SearchResultElement::SearchResultElement Constructs a default SearchResultElement.
+ */
+<span style = "background-color:#dfd">SearchResultElement::SearchResultElement() {</span>
+<span style = "background-color:#dfd">    mScore = 0;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchResultElement::getScore Gets the score of the element.
+ * @return the score
+ */
+<span style = "background-color:#dfd">double SearchResultElement::getScore() const {</span>
+<span style = "background-color:#dfd">    return mScore;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchResultElement::setScore Sets the score of the element.
+ * @param score to be set
+ */
+<span style = "background-color:#dfd">void SearchResultElement::setScore(const double score) {</span>
+<span style = "background-color:#dfd">    mScore = score;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchResultElement::getSearchObject Gets the searchobject.
+ * @return the searchobject
+ */
+<span style = "background-color:#dfd">SearchObject SearchResultElement::getSearchObject() const {</span>
+<span style = "background-color:#dfd">    return mSearchObject;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchResultElement::setSearchObject Sets the searchobject.
+ * @param searchObject to be set
+ */
+<span style = "background-color:#dfd">void SearchResultElement::setSearchObject(const SearchObject&amp; searchObject) {</span>
+<span style = "background-color:#dfd">    mSearchObject = searchObject;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief operator &lt;&lt; Overrides the operator &lt;&lt;.
+ * @param out the datastream
+ * @param SearchResultElement whose data will be sent
+ * @return out the datastream
+ */
+<span style = "background-color:#dfd">QDataStream&amp; operator&lt;&lt;(QDataStream&amp; out, const SearchResultElement&amp; searchResultElement) {</span>
+<span style = "background-color:#dfd">    searchResultElement.toStream(out);</span>
+<span style = "background-color:#dfd">    return out;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief operator &gt;&gt; Overrides the operator &gt;&gt;.
+ * @param in the datastream
+ * @param SearchResultElement to be changed
+ * @return in the datastream
+ */
+<span style = "background-color:#dfd">QDataStream&amp; operator&gt;&gt;(QDataStream&amp; in, SearchResultElement&amp; searchResultElement) {</span>
+<span style = "background-color:#dfd">    searchResultElement.fromStream(in);</span>
+<span style = "background-color:#dfd">    return in;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchResultElement::toStream Calls the &lt;&lt; operator and writes the SearchResultElement to stream.
+ * @param out the datastream
+ */
+<span style = "background-color:#dfd">void SearchResultElement::toStream(QDataStream&amp; out) const {</span>
+
+    //write object to stream
+    out &lt;&lt; mScore
+<span style = "background-color:#dfd">        &lt;&lt; mSearchObject;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchResultElement::fromStream Calls the &gt;&gt; operator and reads the SearchResultElement from stream.
+ * @param in the datastream
+ */
+<span style = "background-color:#dfd">void SearchResultElement::fromStream(QDataStream&amp; in) {</span>
+
+    //read object from stream
+<span style = "background-color:#dfd">    in &gt;&gt; mScore;</span>
+<span style = "background-color:#dfd">    in &gt;&gt; mSearchObject;</span>
+
+
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchResultElement::compareByScore Compares 2 search result elements by score.
+ * @param first element
+ * @param B second element
+ * @return true if A's score is smaller than B's
+ */
+<span style = "background-color:#dfd">bool SearchResultElement::compareByScore(const SearchResultElement&amp; A, const SearchResultElement&amp; B) {</span>
+<span style = "background-color:#dfd">    return (A.getScore() &lt; B.getScore());</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

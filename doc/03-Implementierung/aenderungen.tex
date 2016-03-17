@@ -1,6 +1,29 @@
 Während der Implementierung ergaben sich folgende Änderungen im Entwurf.
 
-\subsection{ViewerPageWidget}
+\subsection{Modell}
+\subsubsection{Annotation}
+Annotation bekommt 2 enum-Klassen Type und Form als public Variablen. Über die Methoden getType() und getForm() kann man auf diese Werte zugreifen.
+
+Außerdem wurde die neue Methode copy() hinzugefügt, die eine neue Annotation erstellt und deren Adresse zurückgibt. 
+
+\subsubsection{RectangleAnnotation}
+Wie Annotation wird RectangleAnnotation auch eine copy() Methode hinzugefügt.
+
+\subsubsection{Algorithm}
+Getter-Methoden wie getName(), getDescription(), getParameter() wurden von SearchAlgorithm und TestAlgorithm in Algorithm verschoben und hier umgesetzt. 
+Neue Methoden getParameter() und getDefaultParameter() geben die Parameterwerte als QJsonObject (aktuell und standard) zurückt. Die Standardparemeter sind als Metadata gespeichert und werden mittels initialize() gesetzt, wenn der Algorithmus als Plugin geladen wird.
+
+\subsubsection{SearchAlgorithm}
+setName() und setDescription() wurden entfernt. Die Matadaten sind nicht zur Laufzeit veränderbar, sondern in einer .json Datei festgespeichert.
+
+\subsubsection{SearchFeedback}
+
+\subsubsection{Bookmark}
+
+\subsubsection{BookmarkList}
+
+\subsection{View}
+\subsubsection{ViewerPageWidget}
 Da sich der Photo- und der SingleFrameVideoViewer in ihren UIs nur um ein paar Buttons unterscheiden, nutzen sie die gemeinsame UI des ViewerPageWidget. Der PhotoViewer blendet die nicht benötigten UI Elemente aus. Daher sind die Buttons des SingleFrameVideoViewers in die Basisklasse verschoben worden.
 
 Der Entwurf war für das GraphicsSingleFrameVideoItem so nicht umsetzbar, da es keinen Sinn macht, dass das GraphicsSingleFrameVideoItem, das im CustomGraphicsView als einzelnes Frame angezeigt wird, einen Player besitzt. Daher wurde die Abspiellogik direkt im SingleFrameVideoViewer implementiert und die beiden Klassen (GraphicsSingleFrameVideoItem und SingleFrameVideoPlayer) wurden weggelassen. Für die Videoframes wurden stattdessen ebenfalls ClickableGraphicsPixmapItems verwendet, was zudem näher an der Implementierung des PhotoViewers liegt.

@@ -4,13 +4,14 @@ TARGET = test
 CONFIG += testcase
 QT += testlib core widgets
 INCLUDEPATH += include
+
+INCLUDEPATH += ../core/include ../interface/include
+unix {
 CONFIG += gcov
 QMAKE_CXXFLAGS += -g -fprofile-arcs -ftest-coverage -O0
 QMAKE_LFLAGS += -g -fprofile-arcs -ftest-coverage -O0
 LIBS += -lgcov
 
-INCLUDEPATH += ../core/include ../interface/include
-unix {
 LIBS += -L../core -lcore
 LIBS += -L../interface -linterface
 }

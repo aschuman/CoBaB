@@ -6,6 +6,7 @@
 Annotation::Annotation() {
     mId = "";
     mType = "Unknown";
+    mForm = Annotation::Form::UNKNOWN_FORM;
 }
 
 /**
@@ -16,6 +17,7 @@ Annotation::Annotation() {
 Annotation::Annotation(const QString& id, const QString& type) {
     mId = id;
     mType = type;
+    mForm = Annotation::Form::UNKNOWN_FORM;
 }
 
 /**
@@ -52,7 +54,7 @@ Annotation::Type Annotation::getType() const {
  * @return the annotation form
  */
 Annotation::Form Annotation::getForm() const {
-    return UNKNOWN_FORM;
+    return mForm;
 }
 
 /**

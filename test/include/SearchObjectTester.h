@@ -9,12 +9,14 @@ class SearchObjectTester : public QObject
 private slots:
 
     void testMedium();
+    void testRectangleAnnotation();
     void testAnnotation();
     void testROI();
     void testSourceDataset();
     void testMediumIndex();
     void testType();
     void testStreamMethods();
+    void testStreamMethodsRectangle();
 
 };
 
