@@ -19,7 +19,7 @@ public:
     
     SearchResult();
 
-    SearchResult(QList<SearchResultElement> list);
+    explicit SearchResult(QList<SearchResultElement> list);
 
     void addResultElement(const SearchResultElement& newElement);
     

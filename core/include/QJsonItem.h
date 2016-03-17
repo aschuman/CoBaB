@@ -12,7 +12,7 @@
 class QJsonTreeItem
 {
 public:
-    QJsonTreeItem(QJsonTreeItem * parent = 0);
+    explicit QJsonTreeItem(QJsonTreeItem * parent = 0);
     ~QJsonTreeItem();
     void appendChild(QJsonTreeItem * item);
     QJsonTreeItem *child(int row);

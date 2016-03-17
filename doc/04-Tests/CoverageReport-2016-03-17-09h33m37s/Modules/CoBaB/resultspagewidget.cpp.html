@@ -1,0 +1,251 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		resultspagewidget.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "include/ResultsPageWidget.h"
+#include "ui_ResultsPageWidget.h"
+
+#include &lt;cmath&gt;
+#include &lt;QPointer&gt;
+#include "SearchResult.h"
+#include "SearchQuery.h"
+#include "ConfigData.h"
+#include "SearchAlgorithm.h"
+
+#define LOGGING_LEVEL_1
+#include "log.h"
+
+/**
+ * @brief temporary
+ * @return
+ */
+SearchResult generateReslut()
+<span style = "background-color:#fdd">{</span>
+<span style = "background-color:#fdd">    QList&lt;SearchResultElement&gt; list;</span>
+<span style = "background-color:#fdd">    SearchObject obj1;</span>
+<span style = "background-color:#fdd">    obj1.setMedium("../test/testdata/Fotos/000_45.bmp");</span>
+<span style = "background-color:#fdd">    SearchObject obj2;</span>
+<span style = "background-color:#fdd">    obj2.setMedium("../test/testdata/Fotos/002_45.bmp");</span>
+<span style = "background-color:#fdd">    SearchObject obj3;</span>
+<span style = "background-color:#fdd">    obj3.setMedium("../test/testdata/Fotos/002_45.bmp");</span>
+<span style = "background-color:#fdd">    SearchObject obj4;</span>
+<span style = "background-color:#fdd">    obj4.setMedium("../test/testdata/Fotos/002_45.bmp");</span>
+<span style = "background-color:#fdd">    SearchObject obj5;</span>
+<span style = "background-color:#fdd">    obj5.setMedium("../test/testdata/Fotos/002_45.bmp");</span>
+<span style = "background-color:#fdd">    SearchObject obj6;</span>
+<span style = "background-color:#fdd">    obj6.setMedium("../test/testdata/Fotos/002_45.bmp");</span>
+<span style = "background-color:#fdd">    SearchObject obj7;</span>
+<span style = "background-color:#fdd">    obj7.setMedium("../test/testdata/Fotos/002_45.bmp");</span>
+<span style = "background-color:#fdd">    SearchObject obj8;</span>
+<span style = "background-color:#fdd">    obj8.setMedium("../test/testdata/Fotos/002_45.bmp");</span>
+
+<span style = "background-color:#fdd">    SearchResultElement element1;</span>
+<span style = "background-color:#fdd">    SearchResultElement element2;</span>
+<span style = "background-color:#fdd">    SearchResultElement element3;</span>
+<span style = "background-color:#fdd">    SearchResultElement element4;</span>
+<span style = "background-color:#fdd">    SearchResultElement element5;</span>
+<span style = "background-color:#fdd">    SearchResultElement element6;</span>
+<span style = "background-color:#fdd">    SearchResultElement element7;</span>
+<span style = "background-color:#fdd">    SearchResultElement element8;</span>
+<span style = "background-color:#fdd">    element1.setSearchObject(obj1);</span>
+<span style = "background-color:#fdd">    element2.setSearchObject(obj2);</span>
+<span style = "background-color:#fdd">    element3.setSearchObject(obj3);</span>
+<span style = "background-color:#fdd">    element4.setSearchObject(obj4);</span>
+<span style = "background-color:#fdd">    element5.setSearchObject(obj5);</span>
+<span style = "background-color:#fdd">    element6.setSearchObject(obj6);</span>
+<span style = "background-color:#fdd">    element7.setSearchObject(obj7);</span>
+<span style = "background-color:#fdd">    element8.setSearchObject(obj8);</span>
+
+<span style = "background-color:#fdd">    list.push_back(element1);</span>
+<span style = "background-color:#fdd">    list.push_back(element2);</span>
+<span style = "background-color:#fdd">    list.push_back(element3);</span>
+<span style = "background-color:#fdd">    list.push_back(element4);</span>
+<span style = "background-color:#fdd">    list.push_back(element5);</span>
+<span style = "background-color:#fdd">    list.push_back(element6);</span>
+<span style = "background-color:#fdd">    list.push_back(element7);</span>
+<span style = "background-color:#fdd">    list.push_back(element8);</span>
+
+<span style = "background-color:#fdd">    return SearchResult(list);</span>
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief Constructs a ResultsPageWidget.
+ *
+ * Sets up user interface.
+ */
+ResultsPageWidget::ResultsPageWidget() :
+    ui(new Ui::ResultsPageWidget),
+    mUseSimpleProgressBar(true)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    ui-&gt;setupUi(this);</span>
+<span style = "background-color:#dfd">    ui-&gt;mListView-&gt;setModel(&amp;mModel);</span>
+<span style = "background-color:#dfd">    ui-&gt;mListView-&gt;setItemDelegate(&amp;mDelegate);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Destructs a ResultsPageWidget.
+ *
+ * Frees user interface.
+ */
+<span style = "background-color:#dfd">ResultsPageWidget::~ResultsPageWidget() {</span>
+<span style = "background-color:#dfd">    delete ui;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ResultsPageWidget::reset
+ */
+void ResultsPageWidget::reset()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    mModel.setSearchResult(nullptr);</span>
+<span style = "background-color:#dfd">    QVariant var;</span>
+<span style = "background-color:#dfd">    emit readFromStack(2, var);</span>
+<span style = "background-color:#dfd">    if(var.canConvert&lt;QPointer&lt;Algorithm&gt;&gt;()) {</span>
+<span style = "background-color:#dfd">        mAlgorithm = var.value&lt;QPointer&lt;Algorithm&gt;&gt;().data();</span>
+<span style = "background-color:#dfd">        SearchAlgorithm* searchAlgo = qobject_cast&lt;SearchAlgorithm*&gt;(mAlgorithm);</span>
+<span style = "background-color:#dfd">        mUseSimpleProgressBar = !(searchAlgo &amp;&amp; searchAlgo-&gt;supportsProgressInfo());</span>
+<span style = "background-color:#dfd">        updateProgressBar(0.0);</span>
+<span style = "background-color:#dfd">        emit startAlgorithm(mAlgorithm);</span>
+<span style = "background-color:#dfd">    } else {</span>
+<span style = "background-color:#fdd">        LOG_ERR("could not find algorithm on stack");</span>
+    }
+<span style = "background-color:#dfd">    ui-&gt;progressBar-&gt;setValue(0);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ResultsPageWidget::setResults
+ * @param result
+ */
+<span style = "background-color:#dfd">void ResultsPageWidget::setResults(SearchResult result) {</span>
+<span style = "background-color:#dfd">    updateProgressBar(1.0);</span>
+
+<span style = "background-color:#dfd">    mResult = std::make_shared&lt;SearchResult&gt;(std::move(result));</span>
+<span style = "background-color:#dfd">    mResult-&gt;sortByScore();</span>
+<span style = "background-color:#dfd">    mModel.setSearchResult(mResult.get());</span>
+
+<span style = "background-color:#dfd">    ConfigData* data = ConfigData::getInstance();</span>
+<span style = "background-color:#dfd">    if (data-&gt;getSoundOn()) {</span>
+<span style = "background-color:#dfd">        Q_INIT_RESOURCE(application);</span>
+<span style = "background-color:#dfd">        QSound::play(":/sound.wav");</span>
+    }
+
+<span style = "background-color:#dfd">    QVariant varQuery;</span>
+<span style = "background-color:#dfd">    emit readFromStack(3, varQuery);</span>
+<span style = "background-color:#dfd">    if (varQuery.canConvert&lt;std::shared_ptr&lt;SearchQuery&gt;&gt;()) {</span>
+<span style = "background-color:#dfd">        SearchQuery* query = varQuery.value&lt;std::shared_ptr&lt;SearchQuery&gt;&gt;().get();</span>
+<span style = "background-color:#dfd">        SearchFeedback feedback = mModel.getFeedback();</span>
+
+<span style = "background-color:#dfd">        QList&lt;DataPacket*&gt; algoInputs;</span>
+<span style = "background-color:#dfd">        algoInputs.push_back(query);</span>
+<span style = "background-color:#dfd">        algoInputs.push_back(&amp;feedback);</span>
+
+<span style = "background-color:#dfd">        if(mAlgorithm-&gt;setInputs(algoInputs)){</span>
+<span style = "background-color:#dfd">            ui-&gt;btnNewSearch-&gt;setEnabled(true);</span>
+        }
+
+<span style = "background-color:#dfd">    } else {</span>
+<span style = "background-color:#fdd">        LOG_ERR("could not find search query on stack");</span>
+    }
+<span style = "background-color:#dfd">    setCursor(QCursor(Qt::CursorShape::ArrowCursor));</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ResultsPageWidget::setProgress
+ * @param progress
+ */
+<span style = "background-color:#fdd">void ResultsPageWidget::setProgress(double progress) {</span>
+<span style = "background-color:#fdd">    updateProgressBar(progress);</span>
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief ResultsPageWidget::on_btnNewSearch_clicked
+ */
+<span style = "background-color:#dfd">void ResultsPageWidget::on_btnNewSearch_clicked() {</span>
+<span style = "background-color:#dfd">    bool newSearchPossible = true;</span>
+
+<span style = "background-color:#dfd">    QVariant varDatasetNo;</span>
+<span style = "background-color:#dfd">    emit readFromStack(4, varDatasetNo);</span>
+<span style = "background-color:#dfd">    if (!varDatasetNo.canConvert&lt;int&gt;()) {</span>
+<span style = "background-color:#fdd">        LOG_ERR("could not find dataset on stack");</span>
+    }
+
+<span style = "background-color:#dfd">    QVariant varSearchQuery;</span>
+<span style = "background-color:#dfd">    emit readFromStack(3, varSearchQuery);</span>
+<span style = "background-color:#dfd">    if(!varSearchQuery.canConvert&lt;std::shared_ptr&lt;SearchQuery&gt;&gt;()) {</span>
+<span style = "background-color:#fdd">        newSearchPossible = false;</span>
+<span style = "background-color:#fdd">        LOG_ERR("could not find search query on stack");</span>
+    }
+
+<span style = "background-color:#dfd">    QVariant varAlgorithm;</span>
+<span style = "background-color:#dfd">    emit readFromStack(2, varAlgorithm);</span>
+<span style = "background-color:#dfd">    if(!varAlgorithm.canConvert&lt;QPointer&lt;Algorithm&gt;&gt;()) {</span>
+<span style = "background-color:#fdd">        LOG_ERR("could not find algorithm on stack");</span>
+    }
+
+    // ToDo: read parameters from stack
+
+<span style = "background-color:#dfd">    QVariant varFeedback;</span>
+<span style = "background-color:#dfd">    if (newSearchPossible) {</span>
+<span style = "background-color:#dfd">        SearchQuery* query = varSearchQuery.value&lt;std::shared_ptr&lt;SearchQuery&gt;&gt;().get();</span>
+<span style = "background-color:#dfd">        auto feedback = std::make_shared&lt;SearchFeedback&gt;(mModel.getFeedback());</span>
+
+<span style = "background-color:#dfd">        QList&lt;DataPacket*&gt; algoInputs;</span>
+<span style = "background-color:#dfd">        algoInputs.push_back(query);</span>
+<span style = "background-color:#dfd">        algoInputs.push_back(feedback.get());</span>
+
+<span style = "background-color:#dfd">        varFeedback.setValue(feedback);</span>
+
+<span style = "background-color:#dfd">        if(!mAlgorithm-&gt;setInputs(algoInputs)){</span>
+<span style = "background-color:#fdd">            newSearchPossible = false;</span>
+        }
+<span style = "background-color:#dfd">    }</span>
+
+<span style = "background-color:#dfd">    if (newSearchPossible) {</span>
+<span style = "background-color:#dfd">        emit pushToStack(varFeedback);</span>
+<span style = "background-color:#dfd">        emit pushToStack(varDatasetNo);</span>
+<span style = "background-color:#dfd">        emit pushToStack(varSearchQuery);</span>
+<span style = "background-color:#dfd">        emit pushToStack(varAlgorithm);</span>
+        //emit pushToStack(varParameter);
+<span style = "background-color:#dfd">        emit exit(EXIT_NEW_SEARCH);</span>
+    }
+
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ResultsPageWidget::updateProgressBar
+ * @param progress
+ */
+<span style = "background-color:#dfd">void ResultsPageWidget::updateProgressBar(double progress) {</span>
+<span style = "background-color:#dfd">    int value = (int)std::lround(progress*100);</span>
+<span style = "background-color:#dfd">    if (mUseSimpleProgressBar &amp;&amp; value &lt; 100) {</span>
+<span style = "background-color:#dfd">        ui-&gt;progressBar-&gt;setMaximum(0);</span>
+    }
+<span style = "background-color:#dfd">    else {</span>
+<span style = "background-color:#dfd">        ui-&gt;progressBar-&gt;setMaximum(100);</span>
+    }
+
+<span style = "background-color:#dfd">    ui-&gt;progressBar-&gt;setTextVisible(!mUseSimpleProgressBar);</span>
+<span style = "background-color:#dfd">    ui-&gt;progressBar-&gt;setValue(value);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ResultsPageWidget::retranslateUi
+ */
+<span style = "background-color:#dfd">void ResultsPageWidget::retranslateUi() {</span>
+<span style = "background-color:#dfd">    ui-&gt;btnNewSearch-&gt;setText(tr("Erneut suchen"));</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ResultsPageWidget::getName
+ * @return
+ */
+<span style = "background-color:#dfd">QString ResultsPageWidget::getName() {</span>
+<span style = "background-color:#dfd">    return tr("CoBaB - Ergebnisse");</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

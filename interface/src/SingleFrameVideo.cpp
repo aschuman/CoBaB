@@ -92,9 +92,9 @@ double SingleFrameVideo::readFramerateFromJson(const QString path) {
         }
 
     QByteArray saveData = loadFile.readAll();
-    QJsonParseError *error = new QJsonParseError();
-    QJsonDocument loadDoc(QJsonDocument::fromJson(saveData, error));
-    if(error->error == QJsonParseError::NoError) {
+    QJsonParseError error;
+    QJsonDocument loadDoc(QJsonDocument::fromJson(saveData, &error));
+    if(error.error == QJsonParseError::NoError) {
         QJsonValue fps = loadDoc.object()["fps"];
         if(fps.isDouble()) {
             if(fps.toDouble() >= 0.0) {

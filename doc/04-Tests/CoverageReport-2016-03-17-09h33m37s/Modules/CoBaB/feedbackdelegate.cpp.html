@@ -1,0 +1,140 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		feedbackdelegate.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "include/FeedbackDelegate.h"
+#include &lt;memory&gt;
+#include &lt;QPainter&gt;
+#include &lt;QMouseEvent&gt;
+#include "SearchObject.h"
+#include "SearchResultElementFeedback.h"
+#include "DualFeedbackEditor.h"
+
+/**
+ * @brief Implementation of QStyledItemDelegate::paint.
+ * @param painter
+ * @param option
+ * @param index
+ */
+void FeedbackDelegate::paint(QPainter *painter, const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index) const
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    if(index.data().canConvert&lt;SearchResultElementFeedback&gt;()){</span>
+<span style = "background-color:#dfd">        SearchResultElementFeedback element = index.data().value&lt;SearchResultElementFeedback&gt;();</span>
+<span style = "background-color:#dfd">        QImage scaledImg = element.img.scaled(option.rect.width(), option.rect.height(), Qt::KeepAspectRatio);</span>
+<span style = "background-color:#dfd">        painter-&gt;drawImage(option.rect.topLeft(), scaledImg);</span>
+
+<span style = "background-color:#dfd">        if(element.rating == 0)</span>
+<span style = "background-color:#dfd">            painter-&gt;setPen(Qt::black);</span>
+<span style = "background-color:#dfd">        else if(element.rating &gt; 0)</span>
+<span style = "background-color:#dfd">            painter-&gt;setPen(Qt::green);</span>
+<span style = "background-color:#dfd">        else</span>
+<span style = "background-color:#dfd">            painter-&gt;setPen(Qt::red);</span>
+
+<span style = "background-color:#dfd">        QPen pen = painter-&gt;pen();</span>
+<span style = "background-color:#dfd">        pen.setWidth(3);</span>
+<span style = "background-color:#dfd">        painter-&gt;setPen(pen);</span>
+
+<span style = "background-color:#dfd">        QRect imageRect(option.rect.x(), option.rect.y(), scaledImg.width(), scaledImg.height());</span>
+
+<span style = "background-color:#dfd">        painter-&gt;drawRect(imageRect);</span>
+
+<span style = "background-color:#dfd">        painter-&gt;setPen(QPen());</span>
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Implementation of QStyledItemDelegate::sizeHint.
+ * @param option
+ * @param index
+ * @return
+ */
+QSize FeedbackDelegate::sizeHint(const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index) const
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    QSize hint;</span>
+<span style = "background-color:#dfd">    if(index.data().canConvert&lt;SearchResultElementFeedback&gt;()){</span>
+<span style = "background-color:#dfd">        SearchResultElementFeedback element = index.data().value&lt;SearchResultElementFeedback&gt;();</span>
+<span style = "background-color:#dfd">        hint = element.img.size();</span>
+<span style = "background-color:#dfd">    } else {</span>
+<span style = "background-color:#fdd">        hint = QStyledItemDelegate::sizeHint(option, index);</span>
+    }
+<span style = "background-color:#dfd">    return hint;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Implementation of QStyledItemDelegate::createEditor.
+ * @param parent
+ * @param option
+ * @param index
+ * @return
+ */
+QWidget *FeedbackDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index) const
+<span style = "background-color:#dfd">{</span>
+    QWidget* editor;
+<span style = "background-color:#dfd">    if(index.data().canConvert&lt;SearchResultElementFeedback&gt;()){</span>
+<span style = "background-color:#dfd">        SearchResultElementFeedback element = index.data().value&lt;SearchResultElementFeedback&gt;();</span>
+<span style = "background-color:#dfd">        DualFeedbackEditor* dfEditor = new DualFeedbackEditor(parent);</span>
+<span style = "background-color:#dfd">        connect(dfEditor, &amp;DualFeedbackEditor::feedbackChanged, this, &amp;FeedbackDelegate::commit);</span>
+<span style = "background-color:#dfd">        editor = dfEditor;</span>
+<span style = "background-color:#dfd">    } else {</span>
+<span style = "background-color:#fdd">        editor = QStyledItemDelegate::createEditor(parent, option, index);</span>
+    }
+<span style = "background-color:#dfd">    return editor;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Implementation of QStyledItemDelegate::setEditorData.
+ * @param editor
+ * @param index
+ */
+void FeedbackDelegate::setEditorData(QWidget *editor, const QModelIndex &amp;index) const
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    if(index.data().canConvert&lt;SearchResultElementFeedback&gt;()){</span>
+<span style = "background-color:#dfd">        SearchResultElementFeedback element = index.data().value&lt;SearchResultElementFeedback&gt;();</span>
+<span style = "background-color:#dfd">        FeedbackEditor* e = qobject_cast&lt;FeedbackEditor*&gt;(editor);</span>
+<span style = "background-color:#dfd">        e-&gt;setFeedback(element.rating);</span>
+<span style = "background-color:#dfd">    } else {</span>
+<span style = "background-color:#fdd">        QStyledItemDelegate::setEditorData(editor, index);</span>
+    }
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Implementation of QStyledItemDelegate::updateEditorGeometry.
+ * @param editor
+ * @param option
+ * @param index
+ */
+void FeedbackDelegate::updateEditorGeometry(QWidget *editor, const QStyleOptionViewItem &amp;option, const QModelIndex &amp;index) const
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    QStyledItemDelegate::updateEditorGeometry(editor, option, index);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Implementation of QStyledItemDelegate::setModelData.
+ * @param editor
+ * @param model
+ * @param index
+ */
+void FeedbackDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &amp;index) const
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    if(index.data().canConvert&lt;SearchResultElementFeedback&gt;()){</span>
+<span style = "background-color:#dfd">        FeedbackEditor* e = qobject_cast&lt;FeedbackEditor*&gt;(editor);</span>
+<span style = "background-color:#dfd">        model-&gt;setData(index, e-&gt;getFeedback());</span>
+<span style = "background-color:#dfd">    } else {</span>
+<span style = "background-color:#fdd">        QStyledItemDelegate::setModelData(editor, model, index);</span>
+    }
+<span style = "background-color:#dfd">}</span>
+
+void FeedbackDelegate::commit()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    FeedbackEditor* editor = qobject_cast&lt;FeedbackEditor*&gt;(sender());</span>
+<span style = "background-color:#dfd">    emit commitData(editor);</span>
+<span style = "background-color:#dfd">}</span>
+
+</pre>
+	</body>
+</html>

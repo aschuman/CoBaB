@@ -1,0 +1,112 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		configdata.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "ConfigData.h"
+#include &lt;QTranslator&gt;
+#include &lt;QApplication&gt;
+
+
+/**
+ * @brief ConfigData::ConfigData Creates the ConfigData object.
+ */
+<span style = "background-color:#dfd">ConfigData::ConfigData() : QSettings("IOSB", "CoBaB"){</span>
+<span style = "background-color:#dfd">    Q_INIT_RESOURCE(application);</span>
+<span style = "background-color:#dfd">    languages.insert("German", QLocale(QLocale::German));</span>
+<span style = "background-color:#dfd">    languages.insert("English", QLocale(QLocale::English));</span>
+<span style = "background-color:#dfd">    mTranslator = new QTranslator(0);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ConfigData::instance The instance of ConfigData.
+ */
+ConfigData* ConfigData::instance = nullptr;
+
+/**
+ * @brief ConfigData::getInstance This method ensures that there is only one instance of ConfigData.
+ * @return The only instance of ConfigData.
+ */
+<span style = "background-color:#dfd">ConfigData* ConfigData::getInstance() {</span>
+<span style = "background-color:#dfd">    if(instance == nullptr) {</span>
+<span style = "background-color:#dfd">        instance = new ConfigData();</span>
+    }
+<span style = "background-color:#dfd">    return instance;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ConfigData::getLanguage Loads the language chosen by the user.
+ * @return The language chosen by the user.
+ */
+<span style = "background-color:#dfd">QString ConfigData::getLanguage() {</span>
+<span style = "background-color:#dfd">    return QSettings::value("language", "German").toString();</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ConfigData::setLanguage Stores the language and sets the translator.
+ * @param language The language chosen by the user.
+ */
+<span style = "background-color:#dfd">void ConfigData::setLanguage(QString language) {</span>
+<span style = "background-color:#dfd">    QSettings::setValue("language", language);</span>
+<span style = "background-color:#dfd">    if(languages.contains(language)) {</span>
+<span style = "background-color:#dfd">        if(mTranslator-&gt;load(languages.value(language), QLatin1String("CoBaB"), QLatin1String("_"), QLatin1String(":/resources/translations"))) {</span>
+<span style = "background-color:#dfd">            qApp-&gt;installTranslator(mTranslator);</span>
+        }
+    }
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ConfigData::getSoundOn Loads the sound setting chosen by the user.
+ * @return True if the user wants to hear a notification sound when the search is finished.
+ */
+<span style = "background-color:#dfd">bool ConfigData::getSoundOn() {</span>
+<span style = "background-color:#dfd">    return QSettings::value("soundOn", false).toBool();</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ConfigData::setSoundOn Stores the sound setting chosen by the user.
+ * @param soundOn True if the user wants to hear a notification sound when the search is finished.
+ */
+<span style = "background-color:#dfd">void ConfigData::setSoundOn(bool soundOn) {</span>
+<span style = "background-color:#dfd">    QSettings::setValue("soundOn", soundOn);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ConfigData::getHelp Returns the help string in the chosen language.
+ * @return The help string.
+ */
+<span style = "background-color:#dfd">QString ConfigData::getHelp() {</span>
+    return tr("Bibliothek:\nEnthÃ¤lt die zuletzt verwendeten DatensÃ¤tze und die DatensÃ¤tze aus dem Standardordner, der per Kommandozeile Ã¼bergeben werden kann.\n"
+    "Per Doppelklick wird der Datensatz ausgewÃ¤hlt, in dem sich das Bild/Video befindet, das als Grundlage fÃ¼r die inhaltsbasierte Suche dienen soll. \n \n"
+    "Viewer:\nÃber die Buttons 'vorheriges' und 'nÃ¤chstes' wird das Bild/Video ausgewÃ¤hlt, das als Grundlage fÃ¼r die inhaltsbasierte Suche dienen soll. \n"
+    "Bei einem Rechtsklick auf das Bild werden die verfÃ¼gbaren Suchalgorithmen aufgelistet. "
+    "FÃ¤hrt man mit der Maus Ã¼ber einen solchen Algorithmus, erscheint eine Beschreibung zu diesem. "
+    "Durch Klicken auf einen Algorithmus kann mit dem Programm fortgefahren werden. \n"
+    "In den Bildern werden auÃerdem, falls vorhanden, Annotationen angezeigt. \n"
+    "Nach einem Klick auf den Button 'Bereich auswÃ¤hlen' kann ein eigenes Rechteck auf dem Bild gezogen werden. "
+    "Mit einem Rechtsklick in die Annotation oder das gezogene Rechteck werden die dafÃ¼r verfÃ¼gbaren Algorithmen angezeigt. \n\n"
+    "Parameter:\nNach der Auswahl eines Algorithmus kann man Parameter fÃ¼r den diesen festlegen. "
+    "AuÃerdem kÃ¶nnen weitere DatensÃ¤tze ausgewÃ¤hlt werden, in denen gesucht werden soll. \n \n"
+    "BestÃ¤tigung:\nHier wird die aktuelle Auswahl angezeigt, die dem Algorithmus Ã¼bergeben wird. \n \n"
+    "Ergebnisse:\nDas Suchergebnis kann als Lesezeichen gespeichert werden. \n"
+    "Die Bilder kÃ¶nnen als positiv (grÃ¼ner Kasten, ein Klick auf das Bild), negativ (roter Kasten, zweiter Klick) oder wieder neutral (dritter Klick) bewertet werden.\n"
+<span style = "background-color:#dfd">    "Durch einen Klick auf den Button 'Erneut suchen' wird das Feedback an den Algorithmus Ã¼bermittelt und eine neue verbesserte Suche gestartet.");</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ConfigData::getAbout Returns the about string in the chosen language.
+ * @return The about string.
+ */
+<span style = "background-color:#dfd">QString ConfigData::getAbout() {</span>
+    return tr("CoBaB ermÃ¶glicht es, anhand eines ausgewÃ¤hlten Bildes"
+    " oder Videos eine inhaltsbasierte Suche in Bild- oder Videodaten durchzufÃ¼hren."
+    " Als Ergebnis liefert CoBaB eine Auswahl Ã¤hnlicher Bilder oder Videos. Durch die Eingabe von Feedback kann diese Auswahl verfeinert werden.\n\n"
+<span style = "background-color:#dfd">    "Autoren: Anja Blechinger, Marie Bommersheim, Georgi Georgiev, Tung Nguyen, Vincent Winkler, Violina Zhekova");</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

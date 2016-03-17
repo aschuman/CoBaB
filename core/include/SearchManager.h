@@ -15,7 +15,7 @@ class SearchManager : public QObject
 {
     Q_OBJECT
 public:
-    SearchManager(ResultsPageWidget* resultsPageWidget);
+    explicit SearchManager(ResultsPageWidget* resultsPageWidget);
 
 public slots:
     void startSearch(Algorithm* algo);

@@ -1,0 +1,97 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		searchresult.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "SearchResult.h"
+
+/**
+ * @brief SearchResult::SearchResult Costructs a default SearchResult.
+ */
+<span style = "background-color:#dfd">SearchResult::SearchResult() {</span>
+<span style = "background-color:#dfd">    mType = DataPacket::Type::SEARCHRESULT;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchResult::SearchResult Constructs a SearchResult.
+ * @param list of SearchResultElements
+ */
+<span style = "background-color:#dfd">SearchResult::SearchResult(QList&lt;SearchResultElement&gt; list) {</span>
+<span style = "background-color:#dfd">    mType = Type::SEARCHRESULT;</span>
+<span style = "background-color:#dfd">    mSearchResultElementList = std::move(list);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchResult::addResultElement Adds a result element.
+ * @param newElement to be added
+ */
+<span style = "background-color:#dfd">void SearchResult::addResultElement(const SearchResultElement &amp;newElement) {</span>
+<span style = "background-color:#dfd">   mSearchResultElementList.append(newElement);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchResult::getSearchResultList Gets the list of SearchResultElements.
+ * @return the list of SearchResultElements
+ */
+<span style = "background-color:#dfd">QList&lt;SearchResultElement&gt; SearchResult::getSearchResultList() const {</span>
+<span style = "background-color:#dfd">    return mSearchResultElementList;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchResult::sortByScore Sorts the SearchResultElements by score.
+ * @return the sorted list
+ */
+<span style = "background-color:#dfd">QList&lt;SearchResultElement&gt; SearchResult::sortByScore() {</span>
+<span style = "background-color:#dfd">    std::sort(mSearchResultElementList.begin(), mSearchResultElementList.end(), SearchResultElement::compareByScore);</span>
+<span style = "background-color:#dfd">    return mSearchResultElementList;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief operator &lt;&lt; Overrides the operator &lt;&lt;.
+ * @param out the datastream
+ * @param searchResult to be written
+ * @return out the datastream
+ */
+<span style = "background-color:#dfd">QDataStream&amp; operator&lt;&lt;(QDataStream&amp; out, const SearchResult&amp; searchResult) {</span>
+<span style = "background-color:#dfd">    searchResult.toStream(out);</span>
+<span style = "background-color:#dfd">    return out;</span>
+
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief operator &gt;&gt; Overrides the operator &gt;&gt;.
+ * @param in the datastream
+ * @param searchResult to be read
+ * @return in the datastream
+ */
+<span style = "background-color:#dfd">QDataStream&amp; operator&gt;&gt;(QDataStream&amp; in, SearchResult&amp; searchResult) {</span>
+<span style = "background-color:#dfd">    searchResult.fromStream(in);</span>
+<span style = "background-color:#dfd">    return in;</span>
+
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchResult::toStream Calls the &lt;&lt; operator and writes the searchresult to stream.
+ * @param out the datastream
+ */
+<span style = "background-color:#dfd">void SearchResult::toStream(QDataStream&amp; out) const  {</span>
+<span style = "background-color:#dfd">    DataPacket::toStream(out);</span>
+<span style = "background-color:#dfd">    out &lt;&lt; mSearchResultElementList;</span>
+
+<span style = "background-color:#dfd">}</span>
+
+/**
+* @brief SearchResult::fromStream Calls the &gt;&gt; operator and calls the searchresult from stream.
+* @param in the datastream
+*/
+<span style = "background-color:#dfd">void SearchResult::fromStream(QDataStream&amp; in) {</span>
+<span style = "background-color:#dfd">    DataPacket::fromStream(in);</span>
+<span style = "background-color:#dfd">    in &gt;&gt; mSearchResultElementList;</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

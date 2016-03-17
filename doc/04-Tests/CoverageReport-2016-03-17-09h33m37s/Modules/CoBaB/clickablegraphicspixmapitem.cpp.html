@@ -1,0 +1,33 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		clickablegraphicspixmapitem.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "ClickableGraphicsPixmapItem.h"
+#include &lt;QGraphicsSceneContextMenuEvent&gt;
+
+/**
+ * @author Anja
+ * @brief ClickableGraphicsPixmapItem::ClickableGraphicsPixmapItem Constructs a ClickableGraphicsPixmapItem with the given pixmap.
+ * @param pixmap
+ */
+ClickableGraphicsPixmapItem::ClickableGraphicsPixmapItem(const QPixmap&amp; pixmap) : QGraphicsPixmapItem(pixmap)
+<span style = "background-color:#dfd">{</span>
+
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ClickableGraphicsPixmapItem::contextMenuEvent Emits a signal that the item was clicked with the right mouse button.
+ * @param event The QGraphicsSceneContextMenuEvent.
+ */
+<span style = "background-color:#dfd">void ClickableGraphicsPixmapItem::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {</span>
+<span style = "background-color:#dfd">    emit selected(event-&gt;pos());</span>
+<span style = "background-color:#dfd">}</span>
+
+</pre>
+	</body>
+</html>

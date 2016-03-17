@@ -1,0 +1,86 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		mediamodel.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "MediaModel.h"
+
+/**
+ * @brief MediaModel::MediaModel Constructs a MediaModel.
+ * @author Anja
+ */
+MediaModel::MediaModel()
+    : QAbstractListModel(nullptr),
+      mDataset(nullptr)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    Q_INIT_RESOURCE(application);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief MediaModel::setDataset Sets the dataset.
+ * @param dataset
+ */
+void MediaModel::setDataset(const Dataset&amp; dataset)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    mDataset = &amp;dataset;</span>
+<span style = "background-color:#dfd">    emit layoutChanged();</span>
+<span style = "background-color:#dfd">    emit dataChanged(createIndex(0,0), createIndex(mDataset-&gt;getNumberOfMedia(), 0));</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief MediaModel::rowCount Returns the number of rows.
+ * @param parent unused
+ * @return The number of rows.
+ */
+int MediaModel::rowCount(const QModelIndex &amp;parent) const
+<span style = "background-color:#dfd">{</span>
+    Q_UNUSED(parent);
+<span style = "background-color:#dfd">    return mDataset ? mDataset-&gt;getNumberOfMedia() : 0;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief MediaModel::data Returns the data stored under the given role for the item referred to by the index.
+ * @param index
+ * @param role
+ * @return
+ */
+QVariant MediaModel::data(const QModelIndex &amp;index, int role) const
+<span style = "background-color:#dfd">{  </span>
+<span style = "background-color:#dfd">    QVariant result;</span>
+<span style = "background-color:#dfd">    switch (role) {</span>
+    case Qt::DisplayRole:
+<span style = "background-color:#dfd">        if(mDataset &amp;&amp; index.row() &lt; mDataset-&gt;getNumberOfMedia()) {</span>
+<span style = "background-color:#dfd">            QFileInfo file(mDataset-&gt;getMediaList().at(index.row())-&gt;getPath());</span>
+<span style = "background-color:#dfd">            result = file.baseName();</span>
+<span style = "background-color:#dfd">        }</span>
+<span style = "background-color:#dfd">        break;</span>
+    case Qt::DecorationRole:
+<span style = "background-color:#dfd">        if(mDataset &amp;&amp; index.row() &lt; mDataset-&gt;getNumberOfMedia()) {</span>
+<span style = "background-color:#dfd">            Medium* medium = mDataset-&gt;getMediaList().at(index.row());</span>
+<span style = "background-color:#dfd">            switch(mDataset-&gt;getType()) {</span>
+                case Dataset::Type::PHOTO:
+<span style = "background-color:#dfd">                    result = QImage(medium-&gt;getPath()).scaledToHeight(100);</span>
+<span style = "background-color:#dfd">                    break;</span>
+                case Dataset::Type::VIDEO:
+<span style = "background-color:#fdd">                    result = QImage(":/videoIcon.png").scaledToHeight(100);</span>
+<span style = "background-color:#fdd">                    break;</span>
+                case Dataset::Type::SINGLE_FRAME_VIDEO:
+<span style = "background-color:#dfd">                    result = QImage(medium-&gt;getPath() + "/" + ((SingleFrameVideo*)medium)-&gt;getFrameList().first()).scaledToHeight(100);</span>
+                    break;
+                default:
+                    break;
+            }
+        }
+        break;
+    default:
+        break;
+    }
+<span style = "background-color:#dfd">    return result;</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

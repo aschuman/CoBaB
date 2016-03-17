@@ -1,0 +1,35 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		annotationgraphicsitemfactory.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "AnnotationGraphicsItemFactory.h"
+
+/**
+ * @brief AnnotationGraphicsItemFactory::AnnotationGraphicsItemFactory Constructs an AnnotationGraphicsItemFactory.
+ */
+AnnotationGraphicsItemFactory::AnnotationGraphicsItemFactory()
+<span style = "background-color:#dfd">{</span>
+
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief AnnotationGraphicsItemFactory::getAnnotationVisualizer Returns a QGraphicsItem dependent on the form of the given Annotation.
+ * @param annotation The Annotation for which a QGraphicsItem should be created.
+ * @return The QGraphicsItem with the fitting form.
+ */
+<span style = "background-color:#dfd">QGraphicsItem* AnnotationGraphicsItemFactory::getAnnotationVisualizer(Annotation* annotation) {</span>
+<span style = "background-color:#dfd">    if(annotation != nullptr) {</span>
+<span style = "background-color:#dfd">        if(annotation-&gt;getForm() == Annotation::Form::RECTANGLE) {</span>
+<span style = "background-color:#dfd">            return new ClickableGraphicsRectItem((RectangleAnnotation*)annotation);</span>
+        }
+    }
+<span style = "background-color:#fdd">    return nullptr;</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

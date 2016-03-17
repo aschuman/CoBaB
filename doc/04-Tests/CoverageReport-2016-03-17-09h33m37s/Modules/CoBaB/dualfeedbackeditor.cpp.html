@@ -1,0 +1,61 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		dualfeedbackeditor.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "include/DualFeedbackEditor.h"
+
+#include &lt;QMouseEvent&gt;
+
+/**
+ * @brief Constructs a DualFeedbackEditor with the given parent.
+ * @param Parent of this widget.
+ */
+DualFeedbackEditor::DualFeedbackEditor(QWidget *parent) : FeedbackEditor(parent)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Returns the recommended size for this widget.
+ * @return The recommended size for this widget.
+ */
+QSize DualFeedbackEditor::sizeHint() const
+<span style = "background-color:#fdd">{</span>
+<span style = "background-color:#fdd">    return QSize(100, 100);</span>
+<span style = "background-color:#fdd">}</span>
+
+void DualFeedbackEditor::setFeedback(int feedback)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    mFeedback = feedback;</span>
+<span style = "background-color:#dfd">}</span>
+
+int DualFeedbackEditor::getFeedback() const
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    return mFeedback;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Returns SearchFeedback::DUAL.
+ * @return SearchFeedback::DUAL.
+ */
+SearchFeedback::Type DualFeedbackEditor::getFeedbackType() const
+<span style = "background-color:#fdd">{</span>
+<span style = "background-color:#fdd">    return SearchFeedback::Type::DUAL;</span>
+<span style = "background-color:#fdd">}</span>
+
+void DualFeedbackEditor::mouseReleaseEvent(QMouseEvent* event)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    if(event-&gt;button() == Qt::LeftButton){</span>
+<span style = "background-color:#dfd">        mFeedback = (mFeedback + 2) % 3 - 1;</span>
+<span style = "background-color:#dfd">        emit feedbackChanged();</span>
+<span style = "background-color:#dfd">        update();</span>
+    }
+<span style = "background-color:#dfd">}</span>
+
+</pre>
+	</body>
+</html>

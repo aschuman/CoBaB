@@ -1,0 +1,23 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		photo.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "Photo.h"
+
+/**
+ * @brief Photo::Photo Creates a Photo with the given path and Annotation.
+ * @param path The path to the Photo.
+ * @param annotations The Annotations which belong to the Photo.
+ */
+Photo::Photo(const QString&amp; path, const QList&lt;QPair&lt;int, Annotation*&gt;&gt; annotations)
+<span style = "background-color:#dfd">    : Medium(path, annotations) {</span>
+<span style = "background-color:#dfd">    mType = Medium::Type::PHOTO;</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

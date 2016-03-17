@@ -22,7 +22,7 @@ public:
         bool noReturn; ///< true if this transition can not be returned from, false otherwise
     };
 
-    PageRegistration(std::unique_ptr<PageWidget> widget);
+    explicit PageRegistration(std::unique_ptr<PageWidget> widget);
     PageRegistration(PageRegistration&& p);
     PageRegistration& operator=(PageRegistration&& p);
 

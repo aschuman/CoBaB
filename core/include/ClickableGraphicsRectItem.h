@@ -14,7 +14,7 @@ class ClickableGraphicsRectItem : public QObject, public QGraphicsRectItem
 {
     Q_OBJECT
 public:
-    ClickableGraphicsRectItem(RectangleAnnotation* annotation);
+    explicit ClickableGraphicsRectItem(RectangleAnnotation* annotation);
 
 signals:
     /**
@@ -23,7 +23,7 @@ signals:
     void selected(Annotation*, const QPointF&);
 
 public slots:
-    void contextMenuEvent(QGraphicsSceneContextMenuEvent* event);
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent* event) override;
 
 private:
     RectangleAnnotation* mAnnotation; ///< The item has the form of the RectangleAnnotation.
