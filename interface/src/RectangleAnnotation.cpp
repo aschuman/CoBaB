@@ -6,7 +6,7 @@
  * @param type annotation type
  */
 RectangleAnnotation::RectangleAnnotation(const QString& id, const QString& type) : Annotation(id, type) {
-
+    mForm = Annotation::Form::RECTANGLE;
 }
 
 /**
@@ -15,14 +15,6 @@ RectangleAnnotation::RectangleAnnotation(const QString& id, const QString& type)
  */
 Annotation* RectangleAnnotation::copy() const {
     return new RectangleAnnotation(*this);
-}
-
-/**
- * @brief RectangleAnnotation::getForm Returns the form of the Annotation (rectangle).
- * @return The form.
- */
-Annotation::Form RectangleAnnotation::getForm() const {
-    return RECTANGLE;
 }
 
 /**
