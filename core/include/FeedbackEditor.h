@@ -16,7 +16,7 @@ public:
      * @brief Constructs a FeedbackEditor.
      * @param Parent of this widget.
      */
-    FeedbackEditor(QWidget* parent = nullptr) : QWidget(parent){};
+    explicit FeedbackEditor(QWidget* parent = nullptr) : QWidget(parent){};
 
     /**
      * @brief Returns the user defined feedback.

@@ -11,7 +11,7 @@ class AlgorithmThread : public QThread
 {
     Q_OBJECT
 public:
-    AlgorithmThread(Algorithm* algo);
+    explicit AlgorithmThread(Algorithm* algo);
     void run() override;
     QList<DataPacket*> getResults();
 

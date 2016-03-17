@@ -10,6 +10,7 @@ TestAlgorithm::TestAlgorithm() {
     mName = "Test algorithm";
     mDescription = "dummy algorithm that scores randomly";
     mSupportProgressInfo = false;
+    mQuery = nullptr;
 }
 
 /**

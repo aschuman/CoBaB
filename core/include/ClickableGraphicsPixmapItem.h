@@ -12,7 +12,7 @@ class ClickableGraphicsPixmapItem : public QObject, public QGraphicsPixmapItem
     Q_OBJECT
 
 public:
-    ClickableGraphicsPixmapItem(const QPixmap& pixmap);
+    explicit ClickableGraphicsPixmapItem(const QPixmap& pixmap);
 
 signals:
     /**

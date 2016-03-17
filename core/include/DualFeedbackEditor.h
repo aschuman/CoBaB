@@ -12,7 +12,7 @@ class DualFeedbackEditor : public FeedbackEditor
 {
     Q_OBJECT
 public:
-    DualFeedbackEditor(QWidget* parent = nullptr);
+    explicit DualFeedbackEditor(QWidget* parent = nullptr);
     QSize sizeHint() const override;
     void setFeedback(int feedback) override;
     int getFeedback() const override;

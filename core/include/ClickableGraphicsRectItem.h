@@ -14,7 +14,7 @@ class ClickableGraphicsRectItem : public QObject, public QGraphicsRectItem
 {
     Q_OBJECT
 public:
-    ClickableGraphicsRectItem(RectangleAnnotation* annotation);
+    explicit ClickableGraphicsRectItem(RectangleAnnotation* annotation);
 
 signals:
     /**

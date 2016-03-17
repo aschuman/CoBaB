@@ -24,7 +24,7 @@ class Navigator : public QObject
 {
     Q_OBJECT
 public:
-    Navigator(std::unique_ptr<MainWindow> mainWindow);
+    explicit Navigator(std::unique_ptr<MainWindow> mainWindow);
     void registerPage(PageType type, std::unique_ptr<PageWidget> widget);
     void registerTransition(PageType origin, int exitCode, PageType target, bool noReturn = false);
     void start(PageType type, std::vector<QVariant> data);

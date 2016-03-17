@@ -9,7 +9,6 @@ void ConfigDataTester::initTestCase() {
 
 void ConfigDataTester::testSoundOn() {
     ConfigData* data = ConfigData::getInstance();
-    QVERIFY(!data->getSoundOn());
 
     data->setSoundOn(true);
     QVERIFY(data->getSoundOn());

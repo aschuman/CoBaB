@@ -10,6 +10,7 @@ PersonAlgorithm::PersonAlgorithm() {
     mName = "PersonSearch";
     mDescription = "Searches for person annotations in photo dataset(s)";
     mSupportProgressInfo = false;
+    mQuery = nullptr;
 }
 
 /**

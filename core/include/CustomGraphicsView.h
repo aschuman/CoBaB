@@ -11,7 +11,7 @@ class CustomGraphicsView : public QGraphicsView
 {
     Q_OBJECT
 public:
-    CustomGraphicsView(QWidget* parent=0);
+    explicit CustomGraphicsView(QWidget* parent=0);
     void zoom(double);
     void resetZoom();
 
