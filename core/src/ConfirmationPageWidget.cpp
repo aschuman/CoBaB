@@ -44,7 +44,6 @@ void ConfirmationPageWidget::reset()
 {
     clearTable();
     std::shared_ptr<DatasetList> list = nullptr;
-    int indexOfChosenDataset = -1;
     const Dataset* chosenDataset = nullptr;
 
     //read available datasets from the stack
@@ -60,7 +59,7 @@ void ConfirmationPageWidget::reset()
     QVariant varChosenDataset;
     emit readFromStack(4, varChosenDataset);
     if(varChosenDataset.canConvert<int>()) {
-        indexOfChosenDataset = varChosenDataset.value<int>();
+        int indexOfChosenDataset = varChosenDataset.value<int>();
 
         if((list != nullptr) && (indexOfChosenDataset < list->getDatasetList().size())) {
             chosenDataset = &(list->getDatasetList().at(indexOfChosenDataset));
@@ -161,7 +160,7 @@ void ConfirmationPageWidget::reset()
         parameters = varParameters.value<std::shared_ptr<QJsonObject>>();
         QJsonObject::const_iterator iter;
         int i = 0;
-        for(iter = parameters->begin(); iter != parameters->end(); iter++) {
+        for(iter = parameters->begin(); iter != parameters->end(); ++iter) {
             ui->mParameters->setRowCount(std::max(parameters->keys().size(), ui->mParameters->rowCount()));
             ui->mParameters->setItem(i, 2, new QTableWidgetItem(iter.key() + " = " + iter.value().toVariant().toString()));
 			
@@ -177,6 +176,13 @@ void ConfirmationPageWidget::reset()
     if(parameters != nullptr) {
         if(!algo->setParameters(*(parameters.get()))) {
             LOG_ERR("could not set parameters");
+        }
+    }
+    if(searchQuery != nullptr) {
+        QList<DataPacket*> dplist;
+        dplist.append(searchQuery.get());
+        if(!algo->setInputs(dplist)) {
+            LOG_ERR("Could not set search query");
         }
     }
 }

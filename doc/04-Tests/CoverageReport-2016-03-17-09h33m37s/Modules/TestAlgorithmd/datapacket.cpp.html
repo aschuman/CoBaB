@@ -1,0 +1,113 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		datapacket.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">/**
+ * Project \
+ */
+
+#include &lt;QUuid&gt;
+#include &lt;typeinfo&gt;
+
+#include "DataPacket.h"
+
+
+/**
+ * @brief DataPacket::DataPacket Creates a Datapacket with a unique number.
+ */
+<span style = "background-color:#dfd">DataPacket::DataPacket() {</span>
+
+<span style = "background-color:#dfd">    mUuid = QUuid::createUuid();</span>
+<span style = "background-color:#dfd">    mType = DataPacket::Type::UNKNOWN;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief DataPacket::getType Gets the type of the datapacket.
+ * @return Type The type of the datapacket
+ */
+<span style = "background-color:#dfd">DataPacket::Type DataPacket::getType() const {</span>
+<span style = "background-color:#dfd">    return mType;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * Gets the uuid of the datapacket
+ * @return QUuid The unique identification number
+ */
+<span style = "background-color:#dfd">QUuid DataPacket::getUuid() const {</span>
+<span style = "background-color:#dfd">    return mUuid;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief
+ * @param out the stream
+ */
+/**
+ * @brief DataPacket::toStream Writes the datapacket to stream.
+ * @param out the stream
+ */
+<span style = "background-color:#dfd">void DataPacket::toStream(QDataStream&amp; out) const {</span>
+    out &lt;&lt; mType
+<span style = "background-color:#dfd">       &lt;&lt; mUuid;</span>
+
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief DataPacket::fromStream Calls the datapacket from stream.
+ * @param in the stream
+ */
+<span style = "background-color:#dfd">void DataPacket::fromStream(QDataStream&amp; in) {</span>
+    DataPacket::Type type;
+<span style = "background-color:#dfd">    QUuid uuid;</span>
+
+<span style = "background-color:#dfd">    in &gt;&gt; type;</span>
+<span style = "background-color:#dfd">    mType = type;</span>
+
+<span style = "background-color:#dfd">    in &gt;&gt; uuid;</span>
+<span style = "background-color:#dfd">    mUuid = uuid;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief operator &gt;&gt; Overrides the operator &gt;&gt;.
+ * @param in the stream, where the datapacket is written
+ * @param datapacket which is written in the stream
+ * @return the datastream
+ */
+<span style = "background-color:#dfd">QDataStream&amp; operator &gt;&gt;(QDataStream&amp; in, DataPacket&amp; datapacket) {</span>
+
+<span style = "background-color:#dfd">    datapacket.fromStream(in);</span>
+
+<span style = "background-color:#dfd">    return in;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief operator &lt;&lt; Overrides the operator &lt;&lt;.
+ * @param out the stream from which the datapacket is called
+ * @param datapacket which is called
+ * @return the datastream
+ */
+<span style = "background-color:#dfd">QDataStream&amp; operator &lt;&lt;(QDataStream&amp; out, const DataPacket&amp; datapacket) {</span>
+
+<span style = "background-color:#dfd">    datapacket.toStream(out);</span>
+
+<span style = "background-color:#dfd">    return out;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief operator &gt;&gt; Overrides the operator &gt;&gt; for the type of the datapacket.
+ * @param in the stream, where the datapacket's type is written
+ * @param type the type of the datapacket
+ * @return the datastream
+ */
+QDataStream&amp; operator &gt;&gt;(QDataStream&amp; in, DataPacket::Type&amp; type)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    in &gt;&gt; (quint32&amp;)type;</span>
+<span style = "background-color:#dfd">    return in;</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

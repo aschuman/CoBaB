@@ -1,0 +1,94 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		searchfeedback.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "SearchFeedback.h"
+
+/**
+ * @brief SearchFeedback::SearchFeedback default constructor
+ */
+<span style = "background-color:#dfd">SearchFeedback::SearchFeedback() {</span>
+<span style = "background-color:#dfd">    mType = DataPacket::Type::SEARCHFEEDBACK;</span>
+<span style = "background-color:#dfd">    mFeedbackType = "Dual";</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchFeedback::SearchFeedback create new feedback with given type
+ * @param type feedback type
+ */
+<span style = "background-color:#dfd">SearchFeedback::SearchFeedback(const QString&amp; feedbackType) {</span>
+<span style = "background-color:#dfd">    mType = DataPacket::Type::SEARCHFEEDBACK;</span>
+<span style = "background-color:#dfd">    mFeedbackType = feedbackType;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchFeedback::setFeedbackList set the list of feedbaks
+ * @param feedbackList new list
+ */
+<span style = "background-color:#dfd">void SearchFeedback::setFeedbackList(const QList&lt;QPair&lt;SearchObject, int&gt;&gt;&amp; feedbackList) {</span>
+<span style = "background-color:#dfd">    mFeedbackList = feedbackList;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchFeedback::getFeedbackList get the list of feedbacks
+ * @return feedback list
+ */
+<span style = "background-color:#dfd">const QList&lt;QPair&lt;SearchObject, int&gt;&gt;&amp; SearchFeedback::getFeedbackList() const {</span>
+<span style = "background-color:#dfd">    return mFeedbackList;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchFeedback::getFeedbackType gets type of all feedbacks in this list
+ * @return feedback type
+ */
+<span style = "background-color:#dfd">SearchFeedback::Type SearchFeedback::getFeedbackType() const {</span>
+<span style = "background-color:#dfd">    return (mFeedbackType == "Dual") ? DUAL : EXTENDED;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief override the operator &lt;&lt;
+ * @param out - the datastream
+ * @param feedback data to write
+ * @return out - the data stream after write
+ */
+<span style = "background-color:#dfd">QDataStream&amp; operator&lt;&lt;(QDataStream&amp; out, const SearchFeedback&amp; feedback) {</span>
+<span style = "background-color:#dfd">    feedback.toStream(out);</span>
+<span style = "background-color:#dfd">    return out;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief override the operator &gt;&gt;
+ * @param out - the datastream
+ * @param feedback save new feedback here
+ * @return out - the data stream after read
+ */
+<span style = "background-color:#dfd">QDataStream&amp; operator&gt;&gt;(QDataStream&amp; in, SearchFeedback&amp; feedback) {</span>
+<span style = "background-color:#dfd">    feedback.fromStream(in);</span>
+<span style = "background-color:#dfd">    return in;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief calls the &lt;&lt; operator
+ * @param in - the data stream
+ */
+<span style = "background-color:#dfd">void SearchFeedback::toStream(QDataStream&amp; out) const {</span>
+<span style = "background-color:#dfd">    DataPacket::toStream(out);</span>
+<span style = "background-color:#dfd">    out &lt;&lt; mFeedbackType &lt;&lt; mFeedbackList;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief calls the &gt;&gt; operator
+ * @param out - the data stream
+ */
+<span style = "background-color:#dfd">void SearchFeedback::fromStream(QDataStream&amp; in) {</span>
+<span style = "background-color:#dfd">    DataPacket::fromStream(in);</span>
+<span style = "background-color:#dfd">    in &gt;&gt; mFeedbackType &gt;&gt; mFeedbackList;</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

@@ -1,0 +1,268 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		bookmark.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "Bookmark.h"
+
+/**
+ * @brief Bookmark::Bookmark default constructor
+ */
+
+<span style = "background-color:#dfd">Bookmark::Bookmark() {</span>
+<span style = "background-color:#dfd">    mName = "new bookmark";</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Bookmark::Bookmark load bookmark from a file
+ * @param path absolute file path
+ */
+<span style = "background-color:#dfd">Bookmark::Bookmark(const QString&amp; path) {</span>
+<span style = "background-color:#dfd">    mPath = path;</span>
+<span style = "background-color:#dfd">    QFile file(path);</span>
+<span style = "background-color:#dfd">    file.open(QIODevice::ReadOnly);</span>
+<span style = "background-color:#dfd">    QDataStream in(&amp;file);</span>
+<span style = "background-color:#dfd">    in &gt;&gt; *this;</span>
+<span style = "background-color:#dfd">    file.close();</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Bookmark::Bookmark construct new bookmark
+ * @param result search result
+ * @param algorithm used algorithm
+ * @param query search query
+ */
+<span style = "background-color:#dfd">Bookmark::Bookmark(const SearchResult&amp; result, const QString&amp; algorithm, const SearchQuery&amp; query) {</span>
+<span style = "background-color:#dfd">    mSearchResult = result;</span>
+<span style = "background-color:#dfd">    mAlgorithm = algorithm;</span>
+<span style = "background-color:#dfd">    mSearchQuery = query;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Bookmark::setName set bookmark name
+ * @param name new name
+ */
+<span style = "background-color:#dfd">void Bookmark::setName(const QString&amp; name) {</span>
+<span style = "background-color:#dfd">    mName = name;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Bookmark::setDate set bookmark date
+ * @param date new date
+ */
+<span style = "background-color:#dfd">void Bookmark::setDate(const QDateTime&amp; date) {</span>
+<span style = "background-color:#dfd">    mDate = date;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Bookmark::setFeedback set new feedback
+ * @param feedback new value
+ */
+<span style = "background-color:#dfd">void Bookmark::setFeedback(const SearchFeedback&amp; feedback) {</span>
+<span style = "background-color:#dfd">	mSearchFeedback = feedback;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief setParameter set the parameters
+ * @param parameter new parameters
+ */
+
+<span style = "background-color:#dfd">void Bookmark::setParameter(const QJsonObject&amp; parameter) {</span>
+<span style = "background-color:#dfd">    mParameter = parameter;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Bookmark::setPath set the absolute path
+ * @param path new absolute path
+ */
+<span style = "background-color:#dfd">void Bookmark::setPath(const QString &amp;path) {</span>
+<span style = "background-color:#dfd">    mPath = path;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Bookmark::getName get bookmark name
+ * @return name
+ */
+<span style = "background-color:#dfd">QString Bookmark::getName() const {</span>
+<span style = "background-color:#dfd">    return mName;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Bookmark::getDate get bookmark date
+ * @return date
+ */
+<span style = "background-color:#dfd">QDateTime Bookmark::getDate() const {</span>
+<span style = "background-color:#dfd">    return mDate;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Bookmark::getAlgorithm get used algorithm
+ * @return search algorithm
+ */
+<span style = "background-color:#fdd">QString Bookmark::getAlgorithm() const {</span>
+<span style = "background-color:#fdd">    return mAlgorithm;</span>
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief Bookmark::getSearchQuery get search query
+ * @return search query
+ */
+<span style = "background-color:#dfd">const SearchQuery&amp; Bookmark::getSearchQuery() const {</span>
+<span style = "background-color:#dfd">    return mSearchQuery;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Bookmark::getParameter get search parameters (QJsonObject)
+ * @return parameters
+ */
+<span style = "background-color:#dfd">QJsonObject Bookmark::getParameter() const {</span>
+<span style = "background-color:#dfd">    return mParameter;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Bookmark::getSearchResult get search result
+ * @return search result
+ */
+<span style = "background-color:#dfd">const SearchResult&amp; Bookmark::getSearchResult() const {</span>
+<span style = "background-color:#dfd">    return mSearchResult;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Bookmark::getFeedback get feedback
+ * @return feedback
+ */
+<span style = "background-color:#dfd">const SearchFeedback&amp; Bookmark::getFeedback() const {</span>
+<span style = "background-color:#dfd">    return mSearchFeedback;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief returns true if 2 bookmarks are same (same name)
+ * @param A first bookmark
+ * @param B second bookmark
+ */
+<span style = "background-color:#dfd">bool operator==(const Bookmark&amp; A, const Bookmark&amp; B) {</span>
+<span style = "background-color:#dfd">    return (A.getName().compare(B.getName()) == 0);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief compareByName compares 2 bookmarks by name
+ * @param A first bookmark
+ * @param B second bookmark
+ * @return true if first bookmark is lexicographically smaller than b
+ */
+
+<span style = "background-color:#dfd">bool Bookmark::smallerByName(const Bookmark&amp; A, const Bookmark&amp; B) {</span>
+<span style = "background-color:#dfd">    return (A.getName().compare(B.getName()) &lt; 0);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief compareByDate compares 2 bookmarks by creation date
+ * @param A first bookmark
+ * @param B second bookmark
+ * @return true if A is created before B
+ */
+<span style = "background-color:#dfd">bool Bookmark::smallerByDate(const Bookmark&amp; A, const Bookmark&amp; B) {</span>
+<span style = "background-color:#dfd">    return (A.getDate() &lt; B.getDate());</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Bookmark::validate check if a bookmark is valid, i.e all the datasets are available
+ * @param bookmark to be checked
+ * @return {@code true} if bookmark is valid, {@code false} otherwise
+ */
+<span style = "background-color:#dfd">bool Bookmark::validate(const Bookmark&amp; bookmark) {</span>
+<span style = "background-color:#dfd">    QList&lt;QString&gt; datasetPaths = bookmark.getSearchQuery().getDatasets();</span>
+<span style = "background-color:#dfd">    QDir dir;</span>
+<span style = "background-color:#dfd">    for (QString&amp; path : datasetPaths) {</span>
+<span style = "background-color:#fdd">        dir.setPath(path);</span>
+<span style = "background-color:#fdd">        if (!dir.exists()) {    //dataset not exist</span>
+<span style = "background-color:#fdd">            return false;</span>
+        }
+<span style = "background-color:#fdd">    }</span>
+<span style = "background-color:#dfd">    return true;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief save save bookmark to file
+ * @param path absolute file path
+ */
+<span style = "background-color:#dfd">void Bookmark::saveFile() const {</span>
+<span style = "background-color:#dfd">    QFile file(mPath);</span>
+<span style = "background-color:#dfd">    file.open(QIODevice::WriteOnly);</span>
+<span style = "background-color:#dfd">    QDataStream out(&amp;file);</span>
+<span style = "background-color:#dfd">    out &lt;&lt; *this;</span>
+<span style = "background-color:#dfd">    file.close();</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Bookmark::deleteFile
+ */
+<span style = "background-color:#dfd">void Bookmark::deleteFile() const {</span>
+<span style = "background-color:#dfd">    QFile file(mPath);</span>
+<span style = "background-color:#dfd">    file.remove();</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief override the operator &lt;&lt;
+ * @param out - the datastream
+ * @param bookmark data to write
+ * @return out - the data stream after write
+ */
+<span style = "background-color:#dfd">QDataStream&amp; operator&lt;&lt;(QDataStream&amp; out, const Bookmark&amp; bookmark) {</span>
+<span style = "background-color:#dfd">    bookmark.toStream(out);</span>
+<span style = "background-color:#dfd">    return out;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief override the operator &gt;&gt;
+ * @param out - the datastream
+ * @param bookmark save new bookmark here
+ * @return out - the data stream after read
+ */
+<span style = "background-color:#dfd">QDataStream&amp; operator&gt;&gt;(QDataStream&amp; in, Bookmark&amp; bookmark) {</span>
+<span style = "background-color:#dfd">    bookmark.fromStream(in);</span>
+<span style = "background-color:#dfd">    return in;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief calls the &lt;&lt; operator
+ * @param in - the data stream
+ */
+<span style = "background-color:#dfd">void Bookmark::toStream(QDataStream&amp; out) const {</span>
+    //convert mParameter to QString
+<span style = "background-color:#dfd">    QJsonDocument doc(mParameter);</span>
+<span style = "background-color:#dfd">    QString parameters(doc.toJson(QJsonDocument::Compact));</span>
+
+    //write to stream
+    out &lt;&lt; mName &lt;&lt; mDate &lt;&lt; mAlgorithm
+        &lt;&lt; mSearchQuery &lt;&lt; parameters
+<span style = "background-color:#dfd">        &lt;&lt; mSearchResult &lt;&lt; mSearchFeedback;</span>
+
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief calls the &gt;&gt; operator
+ * @param out - the data stream
+ */
+<span style = "background-color:#dfd">void Bookmark::fromStream(QDataStream&amp; in) {</span>
+<span style = "background-color:#dfd">    QString parameters;</span>
+    in &gt;&gt; mName &gt;&gt; mDate &gt;&gt; mAlgorithm
+       &gt;&gt; mSearchQuery &gt;&gt; parameters
+<span style = "background-color:#dfd">       &gt;&gt; mSearchResult &gt;&gt; mSearchFeedback;</span>
+
+    //create mParameter from parameters-Strings
+<span style = "background-color:#dfd">    QJsonDocument doc = QJsonDocument::fromJson(parameters.toUtf8());</span>
+<span style = "background-color:#dfd">    if (!doc.isNull() &amp;&amp; doc.isObject()) {</span>
+<span style = "background-color:#dfd">        mParameter = doc.object();</span>
+    }
+<span style = "background-color:#dfd">    else {</span>
+<span style = "background-color:#fdd">        mParameter = QJsonObject();</span>
+    }
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

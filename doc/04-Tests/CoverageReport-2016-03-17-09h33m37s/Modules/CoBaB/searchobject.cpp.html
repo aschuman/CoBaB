@@ -1,0 +1,297 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		searchobject.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "SearchObject.h"
+
+/**
+ * @brief SearchObject::SearchObject Constructs a default searchobject.
+ */
+<span style = "background-color:#dfd">SearchObject::SearchObject() : mAnnotation(nullptr) {</span>
+
+<span style = "background-color:#dfd">    mMedium = "";</span>
+
+<span style = "background-color:#dfd">    mSourceDataset = "";</span>
+
+<span style = "background-color:#dfd">    mMediumIndex = 0;</span>
+<span style = "background-color:#dfd">    mFrameIndex = 0;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchObject::SearchObject Copies a searchobject.
+ * @param other
+ */
+<span style = "background-color:#dfd">SearchObject::SearchObject(const SearchObject&amp; other) {</span>
+<span style = "background-color:#dfd">    mMedium = other.getMedium();</span>
+<span style = "background-color:#dfd">    mROI = other.getROI();</span>
+<span style = "background-color:#dfd">    mSourceDataset = other.getSourceDataset();</span>
+<span style = "background-color:#dfd">    mMediumIndex = other.getMediumIndex();</span>
+<span style = "background-color:#dfd">    mFrameIndex = other.getFrameIndex();</span>
+<span style = "background-color:#dfd">    mType = other.getType();</span>
+<span style = "background-color:#dfd">    setAnnotation(other.getAnnotation());</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchObject::SearchObject Copies a searchobject.
+ * @param other
+ */
+SearchObject::SearchObject(SearchObject &amp;&amp;other)
+    : mMedium(std::move(other.mMedium)),
+      mROI(std::move(other.mROI)),
+      mSourceDataset(std::move(other.mSourceDataset)),
+      mMediumIndex(std::move(other.mMediumIndex)),
+      mFrameIndex(std::move(other.mFrameIndex)),
+      mType(std::move(other.mType)),
+<span style = "background-color:#fdd">      mAnnotation(std::move(other.mAnnotation)) {</span>
+
+<span style = "background-color:#fdd">    other.mAnnotation = nullptr;</span>
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief SearchObject::operator = Overrides the operator =.
+ * @param other
+ * @return
+ */
+<span style = "background-color:#dfd">SearchObject&amp; SearchObject::operator=(const SearchObject &amp;other) {</span>
+<span style = "background-color:#dfd">    mMedium = other.mMedium;</span>
+<span style = "background-color:#dfd">    mROI = other.mROI;</span>
+<span style = "background-color:#dfd">    mSourceDataset = other.mSourceDataset;</span>
+<span style = "background-color:#dfd">    mMediumIndex = other.mMediumIndex;</span>
+<span style = "background-color:#dfd">    mFrameIndex = other.mFrameIndex;</span>
+<span style = "background-color:#dfd">    mType = other.mType;</span>
+<span style = "background-color:#dfd">    setAnnotation(other.mAnnotation);</span>
+<span style = "background-color:#dfd">    return *this;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchObject::operator = Overrides the operator =.
+ * @param other
+ * @return
+ */
+<span style = "background-color:#dfd">SearchObject&amp; SearchObject::operator=(SearchObject &amp;&amp;other) {</span>
+<span style = "background-color:#dfd">    mMedium = std::move(other.mMedium);</span>
+<span style = "background-color:#dfd">    mROI = std::move(other.mROI);</span>
+<span style = "background-color:#dfd">    mSourceDataset = std::move(other.mSourceDataset);</span>
+<span style = "background-color:#dfd">    mMediumIndex = std::move(other.mMediumIndex);</span>
+<span style = "background-color:#dfd">    mFrameIndex = std::move(other.mFrameIndex);</span>
+<span style = "background-color:#dfd">    mType = std::move(other.mType);</span>
+<span style = "background-color:#dfd">    mAnnotation = std::move(other.mAnnotation);</span>
+<span style = "background-color:#dfd">    other.mAnnotation = nullptr;</span>
+<span style = "background-color:#dfd">    return *this;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchObject::~SearchObject Destructs a searchobject.
+ */
+<span style = "background-color:#dfd">SearchObject::~SearchObject() {</span>
+<span style = "background-color:#dfd">    delete mAnnotation;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchObject::getMedium Gets the medium.
+ * @return the medium
+ */
+<span style = "background-color:#dfd">QString SearchObject::getMedium() const {</span>
+<span style = "background-color:#dfd">    return mMedium;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchObject::setMedium Sets the medium.
+ * @param medium to be set
+ */
+<span style = "background-color:#dfd">void SearchObject::setMedium(const QString medium) {</span>
+<span style = "background-color:#dfd">    mMedium = medium;</span>
+<span style = "background-color:#dfd">    mType = SearchObject::Type::MEDIUM;</span>
+
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchObject::getAnnotation Gets the annotation.
+ * @return the annotation
+ */
+<span style = "background-color:#dfd">Annotation* SearchObject::getAnnotation() const {</span>
+<span style = "background-color:#dfd">    return mAnnotation;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchObject::setAnnotation Sets the annotation.
+ * @param annotation to be set
+ */
+<span style = "background-color:#dfd">void SearchObject::setAnnotation(const Annotation* annotation) {</span>
+<span style = "background-color:#dfd">    if(annotation == nullptr) {</span>
+<span style = "background-color:#dfd">        mAnnotation = nullptr;</span>
+<span style = "background-color:#dfd">    } else {</span>
+<span style = "background-color:#dfd">        mAnnotation = annotation-&gt;copy();</span>
+<span style = "background-color:#dfd">        mType = SearchObject::Type::ANNOTATION;</span>
+    }
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchObject::getROI Gets the region of interest.
+ * @return the region of interest
+ */
+<span style = "background-color:#dfd">QRect SearchObject::getROI() const {</span>
+<span style = "background-color:#dfd">    return mROI;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchObject::setROI Sets the region of interest.
+ * @param roi the region of interest
+ */
+<span style = "background-color:#dfd">void SearchObject::setROI(const QRect roi) {</span>
+<span style = "background-color:#dfd">    mROI = roi;</span>
+<span style = "background-color:#dfd">    mType = SearchObject::Type::ROI;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchObject::getSourceDataset Gets the source dataset.
+ * @return the source dataset
+ */
+<span style = "background-color:#dfd">QString SearchObject::getSourceDataset() const {</span>
+<span style = "background-color:#dfd">    return mSourceDataset;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchObject::setSourceDataset Sets the souce dataset.
+ * @param dataset to be set as source
+ */
+<span style = "background-color:#dfd">void SearchObject::setSourceDataset(const QString dataset) {</span>
+<span style = "background-color:#dfd">    mSourceDataset = dataset;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchObject::getFrameIndex Gets the frame in the medium.
+ * @return the index
+ */
+<span style = "background-color:#dfd">int SearchObject::getFrameIndex() const {</span>
+<span style = "background-color:#dfd">    return mFrameIndex;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchObject::setFrameIndex Sets the frame in the medium.
+ * @param index the frame
+ */
+<span style = "background-color:#dfd">void SearchObject::setFrameIndex(const int index) {</span>
+<span style = "background-color:#dfd">    mFrameIndex = index;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchObject::getMediumIndex Gets the index of the medium.
+ * @return the index
+ */
+<span style = "background-color:#dfd">int SearchObject::getMediumIndex() const {</span>
+<span style = "background-color:#dfd">    return mMediumIndex;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchObject::setMediumIndex Sets the index of the medium.
+ * @param index to be set
+ */
+<span style = "background-color:#dfd">void SearchObject::setMediumIndex(const int index) {</span>
+<span style = "background-color:#dfd">    mMediumIndex = index;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchObject::getType Gets the type of the searchobject.
+ * @return the type
+ */
+<span style = "background-color:#dfd">SearchObject::Type SearchObject::getType() const {</span>
+<span style = "background-color:#dfd">    return mType;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchObject::setType Sets the type of the searchobject to type.
+ * @param type
+ */
+<span style = "background-color:#dfd">void SearchObject::setType(const Type type) {</span>
+<span style = "background-color:#dfd">    mType = type;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchObject::toStream Calls the &lt;&lt; operator and writes the searchobject to stream..
+ * @param out the datastream
+ */
+<span style = "background-color:#dfd">void SearchObject::toStream(QDataStream&amp; out) const {</span>
+
+    //write object to stream
+
+    out &lt;&lt; mMedium
+        &lt;&lt; mMediumIndex
+<span style = "background-color:#dfd">        &lt;&lt; mFrameIndex;</span>
+<span style = "background-color:#dfd">    if(mAnnotation != nullptr) {</span>
+        out &lt;&lt; mAnnotation-&gt;getForm()
+<span style = "background-color:#dfd">            &lt;&lt; *mAnnotation;</span>
+<span style = "background-color:#dfd">    } else {</span>
+<span style = "background-color:#dfd">        out &lt;&lt; Annotation::Form::NONE;</span>
+    }
+    out &lt;&lt; mROI
+<span style = "background-color:#dfd">        &lt;&lt; mSourceDataset;</span>
+
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief SearchObject::fromStream Calls the &gt;&gt; operator and calls the searchobject from stream.
+ * @param in the datastream
+ */
+<span style = "background-color:#dfd">void SearchObject::fromStream(QDataStream&amp; in) {</span>
+
+    //read object from stream
+<span style = "background-color:#dfd">    in &gt;&gt; mMedium;</span>
+<span style = "background-color:#dfd">    in &gt;&gt; mMediumIndex;</span>
+<span style = "background-color:#dfd">    in &gt;&gt; mFrameIndex;</span>
+    Annotation::Form form;
+<span style = "background-color:#dfd">    in &gt;&gt; (quint32&amp;)form;</span>
+<span style = "background-color:#dfd">    switch(form) {</span>
+        case Annotation::Form::UNKNOWN_FORM:
+            {
+<span style = "background-color:#fdd">                Annotation temp;</span>
+<span style = "background-color:#fdd">                in &gt;&gt; temp;</span>
+<span style = "background-color:#fdd">                mAnnotation = temp.copy();</span>
+<span style = "background-color:#fdd">            }</span>
+<span style = "background-color:#fdd">            break;</span>
+        case Annotation::Form::RECTANGLE:
+            {
+<span style = "background-color:#dfd">                RectangleAnnotation temp("","");</span>
+<span style = "background-color:#dfd">                in &gt;&gt; temp;</span>
+<span style = "background-color:#dfd">                mAnnotation = temp.copy();</span>
+<span style = "background-color:#dfd">            }</span>
+<span style = "background-color:#dfd">            break;</span>
+        case Annotation::Form::NONE:
+        default:
+<span style = "background-color:#dfd">            mAnnotation = nullptr;</span>
+            break;
+    }
+<span style = "background-color:#dfd">    in &gt;&gt; mROI;</span>
+<span style = "background-color:#dfd">    in &gt;&gt; mSourceDataset;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief operator &lt;&lt; Overrides the operator &lt;&lt;.
+ * @param out the datastream
+ * @param searchObject to be written
+ * @return out the datastream
+ */
+<span style = "background-color:#dfd">QDataStream&amp; operator&lt;&lt;(QDataStream&amp; out, const SearchObject&amp; searchObject) {</span>
+<span style = "background-color:#dfd">    searchObject.toStream(out);</span>
+<span style = "background-color:#dfd">    return out;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief operator &gt;&gt; Overrides the operator &gt;&gt;.
+ * @param in the datastream
+ * @param searchObject to be read
+ * @return in the datastream
+ */
+<span style = "background-color:#dfd">QDataStream&amp; operator&gt;&gt;(QDataStream&amp; in, SearchObject&amp; searchObject) {</span>
+<span style = "background-color:#dfd">    searchObject.fromStream(in);</span>
+<span style = "background-color:#dfd">    return in;</span>
+<span style = "background-color:#dfd">}</span>
+
+</pre>
+	</body>
+</html>

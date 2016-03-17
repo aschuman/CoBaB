@@ -1,0 +1,34 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		clickablegraphicsrectitem.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "ClickableGraphicsRectItem.h"
+#include &lt;QPen&gt;
+
+/**
+ * @brief ClickableGraphicsRectItem::ClickableGraphicsRectItem Constructs a ClickableGraphicsRectItem with the given RectangleAnnotation.
+ * @param annotation The item has the rectangle form of the RectangleAnnotation.
+ */
+ClickableGraphicsRectItem::ClickableGraphicsRectItem(RectangleAnnotation* annotation) : QGraphicsRectItem(), mAnnotation(annotation)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    setPen(QPen(QColor(255, 0, 0)));</span>
+<span style = "background-color:#dfd">    setRect(annotation-&gt;x(), annotation-&gt;y(), annotation-&gt;width(), annotation-&gt;height());</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief ClickableGraphicsRectItem::contextMenuEvent Emits a signal that the item was clicked with the right mouse button.
+ * @param event The QGraphicsSceneContextMenuEvent.
+ */
+<span style = "background-color:#dfd">void ClickableGraphicsRectItem::contextMenuEvent(QGraphicsSceneContextMenuEvent* event) {</span>
+<span style = "background-color:#dfd">    emit selected(mAnnotation, event-&gt;pos());</span>
+<span style = "background-color:#dfd">}</span>
+
+
+</pre>
+	</body>
+</html>

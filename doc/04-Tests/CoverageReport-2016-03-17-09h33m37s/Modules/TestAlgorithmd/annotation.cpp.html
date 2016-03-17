@@ -1,0 +1,106 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		annotation.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "Annotation.h"
+
+/**
+ * @brief Annotation::Annotation default constructor
+ */
+<span style = "background-color:#dfd">Annotation::Annotation() {</span>
+<span style = "background-color:#dfd">    mId = "";</span>
+<span style = "background-color:#dfd">    mType = "Unknown";</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Annotation::Annotation create new Annotation
+ * @param id
+ * @param type
+ */
+<span style = "background-color:#dfd">Annotation::Annotation(const QString&amp; id, const QString&amp; type) {</span>
+<span style = "background-color:#dfd">    mId = id;</span>
+<span style = "background-color:#dfd">    mType = type;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Annotation::copy Copies the Annotation.
+ * @return A copy of this Annotation.
+ */
+<span style = "background-color:#dfd">Annotation* Annotation::copy() const {</span>
+<span style = "background-color:#dfd">    return new Annotation(*this);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Annotation::getId gets Id
+ * @return annotation Id
+ */
+<span style = "background-color:#dfd">QString Annotation::getId() const {</span>
+<span style = "background-color:#dfd">    return mId;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Annotation::getType gets type
+ * @return annotation type
+ */
+<span style = "background-color:#dfd">Annotation::Type Annotation::getType() const {</span>
+<span style = "background-color:#dfd">    switch (mTypes.indexOf(mType)) {</span>
+<span style = "background-color:#dfd">        case 0:     return FACE;</span>
+<span style = "background-color:#dfd">        case 1:     return PERSON;</span>
+<span style = "background-color:#dfd">        default:    return UNKNOWN;</span>
+    }
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Annotation::getForm Returns the form of the Annotation. RECTANGLE, if it is a RectangleAnnotation and
+ *        UNKNOWN for a normal Annotation
+<span style = "background-color:#dfd"> * @return the annotation form</span>
+ */
+<span style = "background-color:#fdd">Annotation::Form Annotation::getForm() const {</span>
+<span style = "background-color:#fdd">    return UNKNOWN_FORM;</span>
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief override the operator &lt;&lt;
+ * @param out - the datastream
+ * @param annotation data to write
+ * @return out - the data stream after write
+ */
+<span style = "background-color:#dfd">QDataStream&amp; operator&lt;&lt;(QDataStream&amp; out, const Annotation&amp; annotation) {</span>
+<span style = "background-color:#dfd">    annotation.toStream(out);</span>
+<span style = "background-color:#dfd">    return out;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief override the operator &gt;&gt;
+ * @param out - the datastream
+ * @param annotation save new annotation
+ * @return out - the data stream after read
+ */
+<span style = "background-color:#dfd">QDataStream&amp; operator&gt;&gt;(QDataStream&amp; in, Annotation&amp; annotation) {</span>
+<span style = "background-color:#dfd">    annotation.fromStream(in);</span>
+<span style = "background-color:#dfd">    return in;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief calls the &lt;&lt; operator
+ * @param in - the data stream
+ */
+<span style = "background-color:#dfd">void Annotation::toStream(QDataStream&amp; out) const {</span>
+<span style = "background-color:#dfd">    out &lt;&lt; mId &lt;&lt; mType;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief calls the &gt;&gt; operator
+ * @param out - the data stream
+ */
+<span style = "background-color:#dfd">void Annotation::fromStream(QDataStream&amp; in) {</span>
+<span style = "background-color:#dfd">    in &gt;&gt; mId &gt;&gt; mType;</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

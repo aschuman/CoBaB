@@ -209,9 +209,9 @@ bool Dataset::containsFps(QString filepath) const {
     QFile loadFile(filepath);
     if (loadFile.open(QIODevice::ReadOnly)) {
         QByteArray saveData = loadFile.readAll();
-        QJsonParseError *error = new QJsonParseError();
-        QJsonDocument loadDoc(QJsonDocument::fromJson(saveData, error));
-        if(error->error == QJsonParseError::NoError) {
+        QJsonParseError error;
+        QJsonDocument loadDoc(QJsonDocument::fromJson(saveData, &error));
+        if(error.error == QJsonParseError::NoError) {
             if(loadDoc.object()["fps"].isDouble()) {
                 loadFile.close();
                 return true;

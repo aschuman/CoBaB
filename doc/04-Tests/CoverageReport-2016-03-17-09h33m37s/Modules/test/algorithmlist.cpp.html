@@ -1,0 +1,123 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		algorithmlist.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "AlgorithmList.h"
+#include &lt;QDir&gt;
+
+#define LOGGING_LEVEL_1
+#include "log.h"
+
+/**
+ * @brief AlgorithmList::AlgorithmList create new AlgorithmList containing all algorithms in a folder
+ * @param path algorithm folder path
+ */
+<span style = "background-color:#dfd">AlgorithmList::AlgorithmList(const QString&amp; path) {</span>
+<span style = "background-color:#dfd">    QDir pluginsDir(path);</span>
+
+<span style = "background-color:#dfd">    for (const QString&amp; fileName : pluginsDir.entryList(QDir::Files))</span>
+    {
+<span style = "background-color:#dfd">        QString filePath = pluginsDir.absoluteFilePath(fileName);</span>
+<span style = "background-color:#dfd">        std::unique_ptr&lt;QPluginLoader&gt; loader =  std::make_unique&lt;QPluginLoader&gt;(filePath);</span>
+<span style = "background-color:#dfd">        LOG("loading plugin '",  fileName.toStdString(), "' ..");</span>
+<span style = "background-color:#dfd">        QObject* plugin = loader-&gt;instance();</span>
+<span style = "background-color:#dfd">        if(plugin){</span>
+<span style = "background-color:#dfd">            Algorithm* loadedAlgorithm = qobject_cast&lt;Algorithm*&gt;(plugin);</span>
+<span style = "background-color:#dfd">            if (loadedAlgorithm) {</span>
+<span style = "background-color:#dfd">                if(loadedAlgorithm-&gt;initialize(loader.get())){</span>
+<span style = "background-color:#dfd">                    mPluginLoaders.push_back(std::move(loader));</span>
+<span style = "background-color:#dfd">                    LOG("sucessfully loaded algorithm '", loadedAlgorithm-&gt;getName().toStdString(), "'");</span>
+<span style = "background-color:#dfd">                } else {</span>
+<span style = "background-color:#fdd">                    LOG("plugin could not be initialized");</span>
+                }
+<span style = "background-color:#dfd">            } else {</span>
+<span style = "background-color:#fdd">                LOG("plugin does not implement Algorithm-interface");</span>
+            }
+<span style = "background-color:#dfd">        } else {</span>
+<span style = "background-color:#dfd">            LOG("could not load plugin");</span>
+        }
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief AlgorithmList::~AlgorithmList destructor to unload the algorithms
+ */
+<span style = "background-color:#dfd">AlgorithmList::~AlgorithmList() {</span>
+<span style = "background-color:#dfd">    for (auto&amp; loader : mPluginLoaders) {</span>
+<span style = "background-color:#dfd">        loader-&gt;unload();</span>
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief AlgorithmList::AlgorithmList
+ * @param a
+ */
+<span style = "background-color:#fdd">AlgorithmList::AlgorithmList(AlgorithmList&amp;&amp; a) : mPluginLoaders(std::move(a.mPluginLoaders)) {</span>
+
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief AlgorithmList::operator =
+ * @param a
+ * @return
+ */
+<span style = "background-color:#fdd">AlgorithmList&amp; AlgorithmList::operator=(AlgorithmList &amp;&amp;a) {</span>
+<span style = "background-color:#fdd">    mPluginLoaders = std::move(a.mPluginLoaders);</span>
+<span style = "background-color:#fdd">    return *this;</span>
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief AlgorithmList::findCompatibleAlgorithms find algorithms compatible mit input data
+ * @param inputDataList list of input data
+ * @return all algorithms compatible mit input data
+ */
+<span style = "background-color:#dfd">QList&lt;Algorithm*&gt; AlgorithmList::findCompatibleAlgorithms(const QList&lt;DataPacket*&gt;&amp; inputDataList) {</span>
+<span style = "background-color:#dfd">    QList&lt;Algorithm*&gt; algos;</span>
+<span style = "background-color:#dfd">    for (auto&amp; loader : mPluginLoaders) {</span>
+<span style = "background-color:#dfd">        auto algo = instanceAlgorithm(loader.get());</span>
+<span style = "background-color:#dfd">        if (algo) {</span>
+<span style = "background-color:#dfd">            if (algo-&gt;setInputs(inputDataList)) {</span>
+<span style = "background-color:#dfd">                algos.push_back(std::move(algo));</span>
+            }
+<span style = "background-color:#dfd">        }</span>
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">    return algos;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief AlgorithmList::getAlgorithmList
+ * @return all loaded algorithms
+ */
+<span style = "background-color:#dfd">QList&lt;Algorithm*&gt; AlgorithmList::getAlgorithmList() {</span>
+<span style = "background-color:#dfd">    QList&lt;Algorithm*&gt; algos;</span>
+<span style = "background-color:#dfd">    for(auto&amp; loader : mPluginLoaders) {</span>
+<span style = "background-color:#dfd">        auto algo = instanceAlgorithm(loader.get());</span>
+<span style = "background-color:#dfd">        if (algo) {</span>
+<span style = "background-color:#dfd">            algos.push_back(std::move(algo));</span>
+<span style = "background-color:#dfd">        }</span>
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">    return algos;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief AlgorithmList::loadAlgorithm load an algorithm from loader
+ * @param loader pointer to loader
+ * @return an pointer to algorithm instance
+ */
+<span style = "background-color:#dfd">Algorithm* AlgorithmList::instanceAlgorithm(QPluginLoader* loader) {</span>
+<span style = "background-color:#dfd">    Algorithm* loadedAlgorithm = nullptr;</span>
+<span style = "background-color:#dfd">    QObject* plugin = loader-&gt;instance();</span>
+
+<span style = "background-color:#dfd">    if (plugin)</span>
+<span style = "background-color:#dfd">        loadedAlgorithm = qobject_cast&lt;Algorithm*&gt;(plugin);</span>
+
+<span style = "background-color:#dfd">    return loadedAlgorithm;</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

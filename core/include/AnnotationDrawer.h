@@ -14,7 +14,7 @@ class AnnotationDrawer : public QObject
     Q_OBJECT
 
 public:
-    AnnotationDrawer(QGraphicsScene* scene);
+    explicit AnnotationDrawer(QGraphicsScene* scene);
     void setAnnotations(QList<QPair<int, Annotation*>> annotations);
     void removeAnnotations();
 

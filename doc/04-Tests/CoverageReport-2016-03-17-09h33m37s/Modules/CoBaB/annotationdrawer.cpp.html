@@ -1,0 +1,51 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		annotationdrawer.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "AnnotationDrawer.h"
+
+/**
+ * @brief AnnotationDrawer::AnnotationDrawer Craetes a new Annotation Drawer with the given QGraphicsScene.
+ * @param scene The QGraphicsScene on which the annotations are drawed.
+ */
+AnnotationDrawer::AnnotationDrawer(QGraphicsScene* scene) : mScene(scene)
+<span style = "background-color:#dfd">{</span>
+
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief AnnotationDrawer::setAnnotations Sets the annotations that should be drawed.
+ * @param annotations The annotations that are drawed on the QGraphicsScene.
+ */
+<span style = "background-color:#dfd">void AnnotationDrawer::setAnnotations(QList&lt;QPair&lt;int, Annotation*&gt;&gt; annotations) {</span>
+<span style = "background-color:#dfd">    for(QPair&lt;int, Annotation*&gt; iter: annotations) {</span>
+<span style = "background-color:#dfd">        QGraphicsItem* item = mFactory.getAnnotationVisualizer(iter.second);</span>
+<span style = "background-color:#dfd">        if(iter.second-&gt;getType() == Annotation::Type::FACE) {</span>
+<span style = "background-color:#dfd">            item-&gt;setZValue(1); // faces are drawn over persons</span>
+        }
+<span style = "background-color:#dfd">        mAnnotations.append(item);</span>
+<span style = "background-color:#dfd">        mScene-&gt;addItem(item);</span>
+        connect((ClickableGraphicsRectItem*)item, SIGNAL(selected(Annotation*, const QPointF&amp;)),
+<span style = "background-color:#dfd">                this, SIGNAL(selected(Annotation*, const QPointF&amp;)));</span>
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief AnnotationDrawer::removeAnnotations Removes the annotations from the QGraphicsScene.
+ */
+<span style = "background-color:#dfd">void AnnotationDrawer::removeAnnotations() {</span>
+<span style = "background-color:#dfd">    for(auto it = mAnnotations.begin(); it != mAnnotations.end(); ++it){</span>
+<span style = "background-color:#dfd">        mScene-&gt;removeItem(*it);</span>
+<span style = "background-color:#dfd">        delete *it;</span>
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">    mAnnotations.clear();</span>
+<span style = "background-color:#dfd">}</span>
+
+</pre>
+	</body>
+</html>

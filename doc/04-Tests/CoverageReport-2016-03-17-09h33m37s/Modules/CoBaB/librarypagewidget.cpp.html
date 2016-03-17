@@ -1,0 +1,103 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		librarypagewidget.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "include/LibraryPageWidget.h"
+#include "ui_LibraryPageWidget.h"
+#include &lt;QVariant&gt;
+#include &lt;QFileDialog&gt;
+#include &lt;QMessageBox&gt;
+#include "Configuration.h"
+
+/**
+ * @brief Constructs a LibraryPageWidget.
+ */
+LibraryPageWidget::LibraryPageWidget() :
+    ui(new Ui::LibraryPageWidget)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    ui-&gt;setupUi(this);</span>
+<span style = "background-color:#dfd">    ui-&gt;mLibraryListView-&gt;setModel(&amp;mModel);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Destructs a LibraryPageWidget.
+ */
+LibraryPageWidget::~LibraryPageWidget()
+<span style = "background-color:#fdd">{</span>
+<span style = "background-color:#fdd">    delete ui;</span>
+<span style = "background-color:#fdd">}</span>
+
+void LibraryPageWidget::reset()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    QVariant var;</span>
+<span style = "background-color:#dfd">    emit readFromStack(-2, var);</span>
+<span style = "background-color:#dfd">    if(var.canConvert&lt;std::shared_ptr&lt;DatasetList&gt;&gt;()){</span>
+<span style = "background-color:#dfd">        mDatasetList = var.value&lt;std::shared_ptr&lt;DatasetList&gt;&gt;().get();</span>
+<span style = "background-color:#dfd">        mModel.setDatasetList(mDatasetList-&gt;getDatasetList());</span>
+    }
+<span style = "background-color:#dfd">}</span>
+
+<span style = "background-color:#dfd">void LibraryPageWidget::retranslateUi() {</span>
+
+<span style = "background-color:#dfd">}</span>
+
+<span style = "background-color:#dfd">QString LibraryPageWidget::getName() {</span>
+<span style = "background-color:#dfd">    return tr("CoBaB - Bibliothek");</span>
+<span style = "background-color:#dfd">}</span>
+
+void LibraryPageWidget::on_mLibraryListView_doubleClicked(const QModelIndex &amp;index)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    int i = index.row();</span>
+<span style = "background-color:#dfd">    int e = -1;</span>
+<span style = "background-color:#dfd">    switch(mDatasetList-&gt;getDatasetList().at(i).getType()){</span>
+    case Dataset::PHOTO:
+<span style = "background-color:#dfd">        e = EXIT_PHOTO;</span>
+<span style = "background-color:#dfd">    break;</span>
+    case Dataset::SINGLE_FRAME_VIDEO:
+<span style = "background-color:#fdd">        e = EXIT_SINGLE_FRAME_VIDEO;</span>
+<span style = "background-color:#fdd">        break;</span>
+    case Dataset::VIDEO:
+<span style = "background-color:#fdd">        e = EXIT_VIDEO;</span>
+        break;
+    }
+
+<span style = "background-color:#dfd">    emit pushToStack(i);</span>
+<span style = "background-color:#dfd">    emit exit(e);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief LibraryPageWidget::showFileDialog Shows a file dialog to select another dataset.
+ */
+<span style = "background-color:#dfd">void LibraryPageWidget::showFileDialog() {</span>
+<span style = "background-color:#dfd">    QString dir = QFileDialog::getExistingDirectory(this, tr("Datenordner Ã¶ffnen"), "/home");</span>
+<span style = "background-color:#dfd">    Dataset dataset(dir);</span>
+<span style = "background-color:#dfd">    if(dataset.isValid()) {</span>
+<span style = "background-color:#dfd">        mDatasetList-&gt;addDataset(dataset);</span>
+<span style = "background-color:#dfd">        mDatasetList-&gt;store(DATASET_HISTORY_FILE);</span>
+<span style = "background-color:#dfd">        int e = -1;</span>
+<span style = "background-color:#dfd">        switch(dataset.getType()){</span>
+        case Dataset::PHOTO:
+<span style = "background-color:#dfd">            e = EXIT_PHOTO;</span>
+<span style = "background-color:#dfd">        break;</span>
+        case Dataset::SINGLE_FRAME_VIDEO:
+<span style = "background-color:#dfd">            e = EXIT_SINGLE_FRAME_VIDEO;</span>
+<span style = "background-color:#dfd">            break;</span>
+        case Dataset::VIDEO:
+<span style = "background-color:#fdd">            e = EXIT_VIDEO;</span>
+            break;
+        }
+<span style = "background-color:#dfd">        emit pushToStack(mDatasetList-&gt;getDatasetList().indexOf(dataset));</span>
+<span style = "background-color:#dfd">        emit exit(e);</span>
+<span style = "background-color:#dfd">    } else {</span>
+<span style = "background-color:#fdd">        QMessageBox msgBox(QMessageBox::Information, "", tr("Kein gÃ¼ltiger Datenordner gewÃ¤hlt"), QMessageBox::Ok, this);</span>
+<span style = "background-color:#fdd">        msgBox.exec();</span>
+<span style = "background-color:#fdd">    }</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

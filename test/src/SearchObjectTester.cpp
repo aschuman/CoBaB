@@ -25,6 +25,8 @@ void SearchObjectTester::testAnnotation()
    QCOMPARE(((RectangleAnnotation*)sobject.getAnnotation())->y(), annotation->y());
    QCOMPARE(((RectangleAnnotation*)sobject.getAnnotation())->width(), annotation->width());
    QCOMPARE(((RectangleAnnotation*)sobject.getAnnotation())->height(), annotation->height());
+
+   delete annotation;
 }
 
 void SearchObjectTester::testROI()
@@ -67,6 +69,7 @@ void SearchObjectTester::testType()
     sobject.setROI(roi);
     QCOMPARE(sobject.getType(), SearchObject::Type::ROI);
 
+    delete annotation;
 }
 
 void SearchObjectTester::testStreamMethods()
@@ -94,6 +97,8 @@ void SearchObjectTester::testStreamMethods()
     QCOMPARE(sobject.getROI(), newSobject.getROI());
     QCOMPARE(sobject.getSourceDataset(), newSobject.getSourceDataset());
     QCOMPARE(sobject.getMediumIndex(), newSobject.getMediumIndex());
+
+    delete annotation;
 
 }
 
