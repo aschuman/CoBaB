@@ -32,7 +32,7 @@ public:
     void showEvent(QShowEvent* event) override;
     void resizeEvent(QResizeEvent* event) override;
 
-    static const int EXIT_NEXT;
+    static const int EXIT_NEXT = 0;     ///< The number the widget exits with.
 
 private slots:
     void on_mSearchButton_clicked();

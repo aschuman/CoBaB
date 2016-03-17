@@ -246,9 +246,3 @@ void ConfirmationPageWidget::on_mSearchButton_clicked()
 {
     exit(EXIT_NEXT);
 }
-
-/**
- * @brief ConfirmationPageWidget::EXIT_NEXT Code noting the type of exit,
- * in this case the ResultsPageWidget is the next widget.
- */
-const int ConfirmationPageWidget::EXIT_NEXT = 0;

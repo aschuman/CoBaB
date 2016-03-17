@@ -5,7 +5,7 @@
 
 /**
  * @brief Constructs a SearchManager connecting it to the given ResultsPageWidget.
- * @param The ResultsPageWidget.
+ * @param resultsPageWidget The ResultsPageWidget.
  */
 SearchManager::SearchManager(ResultsPageWidget *resultsPageWidget)
     : mResultsPageWidget(resultsPageWidget)
@@ -15,7 +15,7 @@ SearchManager::SearchManager(ResultsPageWidget *resultsPageWidget)
 
 /**
  * @brief Runs the given Algorithm and sends the results to the ResultsPageWidget.
- * @param The Algorithm.
+ * @param algo The Algorithm.
  */
 void SearchManager::startSearch(Algorithm *algo)
 {

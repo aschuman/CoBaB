@@ -7,13 +7,16 @@
 #include <QStringList>
 
 /**
- * SearchFeedback implementation
+ * @brief SearchFeedback Specifies the quality of the result of the SearchResult.
  * @author Tung
  */
 
 class SearchFeedback: public DataPacket {
 public:
 
+    /**
+     * @brief The Type enum SearchFeedback can be dual or extended
+     */
     enum Type { DUAL, EXTENDED };
 
     SearchFeedback();

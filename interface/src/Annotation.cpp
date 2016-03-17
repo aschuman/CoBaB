@@ -68,9 +68,9 @@ QDataStream& operator<<(QDataStream& out, const Annotation& annotation) {
 
 /**
  * @brief override the operator >>
- * @param out - the datastream
+ * @param in - the datastream
  * @param annotation save new annotation
- * @return out - the data stream after read
+ * @return in - the data stream after read
  */
 QDataStream& operator>>(QDataStream& in, Annotation& annotation) {
     annotation.fromStream(in);
@@ -79,7 +79,7 @@ QDataStream& operator>>(QDataStream& in, Annotation& annotation) {
 
 /**
  * @brief calls the << operator
- * @param in - the data stream
+ * @param out - the data stream
  */
 void Annotation::toStream(QDataStream& out) const {
     out << mId << mType;
@@ -87,7 +87,7 @@ void Annotation::toStream(QDataStream& out) const {
 
 /**
  * @brief calls the >> operator
- * @param out - the data stream
+ * @param in - the data stream
  */
 void Annotation::fromStream(QDataStream& in) {
     in >> mId >> mType;

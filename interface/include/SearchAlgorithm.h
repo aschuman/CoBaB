@@ -5,7 +5,7 @@
 #include "SearchResult.h"
 
 /**
- * SearchAlgorithm interface
+ * @brief SearchAlgorithm The implementation of this interface allows CoBaB to show detailed information about the algorithm.
  * @author Tung
  */
 
@@ -16,12 +16,21 @@ public:
     virtual bool supportsProgressInfo();
 
 signals:
+    /**
+     * @brief producedIntermediateResults Is send when the algorithm produced intermediate results.
+     * @param searchResult The intermediate result.
+     */
     void producedIntermediateResults(SearchResult& searchResult);
     
+    /**
+     * @brief madeProgress Is send when the algorithm made progress.
+     * @param progress
+     * @param message
+     */
     void madeProgress(double progress, QString message="");
 
 protected:
-    bool mSupportProgressInfo = false;
+    bool mSupportProgressInfo = false;      ///< indicates whether progress information will be sent to application when the search runs
 
 };
 

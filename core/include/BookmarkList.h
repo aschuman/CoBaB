@@ -9,7 +9,7 @@
 #include <QDataStream>
 
 /**
- * BookmarkList implementation
+ * @brief BookmarkList contains a list of bookmarks and stores the bookmarks.
  * @author Tung
  */
 

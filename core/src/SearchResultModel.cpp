@@ -14,7 +14,7 @@ SearchResultModel::SearchResultModel() {
  * Does not take ownership of searchResult.
  * A nullptr for searchResult indicates the absence of any result.
  *
- * @param The SearchResult.
+ * @param searchResult The SearchResult.
  */
 void SearchResultModel::setSearchResult(const SearchResult* searchResult)
 {

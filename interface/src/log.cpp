@@ -2,7 +2,7 @@
 
 /**
  * @brief Opens a stream with the given name.
- * @param Name of the logger.
+ * @param name Name of the logger.
  */
 void file_log_policy::open_ostream(const std::string& name)
 {
@@ -26,7 +26,7 @@ void file_log_policy::close_ostream()
 
 /**
  * @brief Writes the given message to the stream.
- * @param The message.
+ * @param msg The message.
  */
 void file_log_policy::write(const std::string& msg)
 {

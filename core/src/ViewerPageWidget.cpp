@@ -76,7 +76,7 @@ void ViewerPageWidget::zoomOut() {
 
 /**
  * @brief ViewerPageWidget::zoomed The view was zoomed, so the zooming level and display are updated.
- * @param factor The zooming factor.
+ * @param zoomLevel The zooming factor.
  */
 void ViewerPageWidget::zoomed(double zoomLevel) {
     ui->mZoom->setText(QString::number(zoomLevel*100) + " %");

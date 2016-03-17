@@ -2,7 +2,7 @@
 
 /**
  * @brief Constructs an AlgorithmThread with the given Algorithm.
- * @param The Algorithm that will be startet on call to run.
+ * @param algo The Algorithm that will be startet on call to run.
  */
 AlgorithmThread::AlgorithmThread(Algorithm *algo) : mAlgorithm(algo)
 {
@@ -17,6 +17,10 @@ void AlgorithmThread::run()
     emit resultsReady();
 }
 
+/**
+ * @brief AlgorithmThread::getResults Returns the results.
+ * @return The list of DataPackets.
+ */
 QList<DataPacket *> AlgorithmThread::getResults()
 {
     return mResults;

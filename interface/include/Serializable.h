@@ -14,13 +14,13 @@ public:
     
     /**
      * Saves the serializable object in a file.
-     * @param in The QDataStream has the file set as device.
+     * @param out The QDataStream has the file set as device.
      */
     virtual void toStream(QDataStream& out) const = 0;
     
     /**
      * Loads the serializable object from a file.
-     * @param out The QDataStream has the file set as device.
+     * @param in The QDataStream has the file set as device.
      */
     virtual void fromStream(QDataStream& in) = 0;
 

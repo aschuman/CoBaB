@@ -48,7 +48,7 @@ void SearchResultElement::setSearchObject(const SearchObject searchObject) {
 /**
  * @brief operator << Overrides the operator <<.
  * @param out the datastream
- * @param SearchResultElement whose data will be sent
+ * @param searchResultElement whose data will be sent
  * @return out the datastream
  */
 QDataStream& operator<<(QDataStream& out, const SearchResultElement& searchResultElement) {
@@ -59,7 +59,7 @@ QDataStream& operator<<(QDataStream& out, const SearchResultElement& searchResul
 /**
  * @brief operator >> Overrides the operator >>.
  * @param in the datastream
- * @param SearchResultElement to be changed
+ * @param searchResultElement to be changed
  * @return in the datastream
  */
 QDataStream& operator>>(QDataStream& in, SearchResultElement& searchResultElement) {
@@ -93,7 +93,7 @@ void SearchResultElement::fromStream(QDataStream& in) {
 
 /**
  * @brief SearchResultElement::compareByScore Compares 2 search result elements by score.
- * @param first element
+ * @param A first element
  * @param B second element
  * @return true if A's score is smaller than B's
  */

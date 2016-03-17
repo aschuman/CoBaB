@@ -8,15 +8,14 @@
 #include "QJsonModel.h"
 
 namespace Ui {
+class ParameterPageWidget;
+}
 
 /**
  * @brief The class displays the given parameters and enables the editing of chosen parameter values.
  * One may also select the datasets, in which the search will be done.
  * @author Violina, Georgi, Anja
  */
-class ParameterPageWidget;
-}
-
 class ParameterPageWidget : public PageWidget
 {
     Q_OBJECT
@@ -29,7 +28,7 @@ public:
     void retranslateUi() override;
     QString getName() override;
 
-    static const int EXIT_NEXT = 0;
+    static const int EXIT_NEXT = 0;          ///< The number the widget exits with.
 
 public slots:
     void nextButtonClicked();

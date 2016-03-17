@@ -6,7 +6,7 @@
 #include <QDataStream>
 
 /**
- * Annotation implementation
+ * @brief An Annotation represents an area in photos/videos, its type can be face or person.
  * @author Tung
  */
 

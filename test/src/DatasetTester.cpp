@@ -4,6 +4,10 @@
 
 Q_DECLARE_METATYPE(Dataset::Type)
 
+/**
+ * @brief DatasetTester::testType_data The Dataset type needs to be tested with the available types
+ * SingleFrameVideo, Video, and Photo
+ */
 void DatasetTester::testType_data()
 {
     QTest::addColumn<QString>("path");
@@ -15,6 +19,9 @@ void DatasetTester::testType_data()
 
 }
 
+/**
+ * @brief DatasetTester::testType Tests whether the Dataset type is correctly set.
+ */
 void DatasetTester::testType()
 {
     QFETCH(QString, path);
@@ -25,6 +32,9 @@ void DatasetTester::testType()
 
 }
 
+/**
+ * @brief DatasetTester::testName_data The name test needs to be executed for all types.
+ */
 void DatasetTester::testName_data()
 {
     QTest::addColumn<QString>("path");
@@ -37,6 +47,9 @@ void DatasetTester::testName_data()
 
 }
 
+/**
+ * @brief DatasetTester::testName Tests whether the name of the datasets is correcty set.
+ */
 void DatasetTester::testName()
 {
     QFETCH(QString, path);
@@ -47,7 +60,9 @@ void DatasetTester::testName()
 
 }
 
-
+/**
+ * @brief DatasetTester::testPreviewImage_data The preview image needs to be tested for all types and an invalid dataset.
+ */
 void DatasetTester::testPreviewImage_data()
 {
     QTest::addColumn<QString>("path");
@@ -61,6 +76,9 @@ void DatasetTester::testPreviewImage_data()
 
 }
 
+/**
+ * @brief DatasetTester::testPreviewImage Tests whether the preview image is correctly set.
+ */
 void DatasetTester::testPreviewImage()
 {
     QFETCH(QString, path);
@@ -77,6 +95,9 @@ void DatasetTester::testPreviewImage()
 
 }
 
+/**
+ * @brief DatasetTester::testMediaList_data The media list test needs to be executed for all types.
+ */
 void DatasetTester::testMediaList_data()
 {
     QTest::addColumn<QString>("path");
@@ -101,6 +122,9 @@ void DatasetTester::testMediaList_data()
 
 }
 
+/**
+ * @brief DatasetTester::testMediaList Tests whether the correct media list is correctly set.
+ */
 void DatasetTester::testMediaList()
 {
     QFETCH(QString, path);
@@ -112,7 +136,9 @@ void DatasetTester::testMediaList()
     }
 }
 
-
+/**
+ * @brief DatasetTester::testPath_data The path test needs to be executed for all types.
+ */
 void DatasetTester::testPath_data()
 {
     QTest::addColumn<QString>("path");
@@ -125,6 +151,9 @@ void DatasetTester::testPath_data()
 
 }
 
+/**
+ * @brief DatasetTester::testPath Tests whether the path of the dataset is correctly set.
+ */
 void DatasetTester::testPath()
 {
     QFETCH(QString, path);
@@ -138,7 +167,9 @@ void DatasetTester::testPath()
     }
 }
 
-
+/**
+ * @brief DatasetTester::testAnnotationsSFVideo Tests the annotations in a SingleFrameVideo.
+ */
 void DatasetTester::testAnnotationsSFVideo()
 {
     QString path = "../test/testdata/SingleFrameVideo";
@@ -167,6 +198,9 @@ void DatasetTester::testAnnotationsSFVideo()
     QCOMPARE((static_cast<RectangleAnnotation*>(list.at(3).second))->normalized(), rect);
 }
 
+/**
+ * @brief DatasetTester::testAnnotationsVideo Ensures that the video does not contain annotations.
+ */
 void DatasetTester::testAnnotationsVideo()
 {
     QString path = "../test/testdata/Video";
@@ -179,6 +213,9 @@ void DatasetTester::testAnnotationsVideo()
     QVERIFY(list.isEmpty());
 }
 
+/**
+ * @brief DatasetTester::testAnnotationsPhoto Tests whether the annotations in the photo dataset are correctly set.
+ */
 void DatasetTester::testAnnotationsPhoto()
 {
     QString path = "../test/testdata/Fotos";

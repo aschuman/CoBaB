@@ -14,7 +14,7 @@ class FeedbackEditor : public QWidget
 public:
     /**
      * @brief Constructs a FeedbackEditor.
-     * @param Parent of this widget.
+     * @param parent Parent of this widget.
      */
     explicit FeedbackEditor(QWidget* parent = nullptr) : QWidget(parent){};
 
@@ -26,7 +26,7 @@ public:
 
     /**
      * @brief Sets the feedback.
-     * @param The feedback.
+     * @param feedback The feedback.
      */
     virtual void setFeedback(int feedback) = 0;
 

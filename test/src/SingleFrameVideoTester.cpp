@@ -1,6 +1,9 @@
 #include "include/SingleFrameVideoTester.h"
 #include <QtTest>
 
+/**
+ * @brief SingleFrameVideoTester::init Generates a SingleFrameVideo.
+ */
 void SingleFrameVideoTester::init()
 {
     QList<QPair<int, Annotation*>> *annotations = new QList<QPair<int, Annotation*>>();
@@ -8,11 +11,17 @@ void SingleFrameVideoTester::init()
     delete annotations;
 }
 
+/**
+ * @brief SingleFrameVideoTester::testFramerate Tests whether the framerate is correctly read from the Json file.
+ */
 void SingleFrameVideoTester::testFramerate()
 {
     QCOMPARE(mSingleFrameVideo->getFramerate(), 0.5);
 }
 
+/**
+ * @brief SingleFrameVideoTester::testFrameList Tests whether the generated SingleFrameVideo contains the correct frames.
+ */
 void SingleFrameVideoTester::testFrameList()
 {
     QList<QString> list;

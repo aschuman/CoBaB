@@ -4,6 +4,9 @@
 #include <QObject>
 #include "ConfigData.h"
 
+/**
+ * @brief The ConfigDataTester class Tests the ConfigData class.
+ */
 class ConfigDataTester : public QObject
 {
     Q_OBJECT

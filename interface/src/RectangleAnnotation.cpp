@@ -38,9 +38,9 @@ QDataStream& operator<<(QDataStream& out, const RectangleAnnotation& annotation)
 
 /**
  * @brief override the operator >>
- * @param out - the datastream
+ * @param in - the datastream
  * @param annotation save new annotation
- * @return out - the data stream after read
+ * @return in - the data stream after read
  */
 QDataStream& operator>>(QDataStream& in, RectangleAnnotation& annotation) {
     annotation.fromStream(in);
@@ -49,7 +49,7 @@ QDataStream& operator>>(QDataStream& in, RectangleAnnotation& annotation) {
 
 /**
  * @brief calls the << operator
- * @param in - the data stream
+ * @param out - the data stream
  */
 void RectangleAnnotation::toStream(QDataStream& out) const {
     Annotation::toStream(out);                  //write ID + type
@@ -58,7 +58,7 @@ void RectangleAnnotation::toStream(QDataStream& out) const {
 
 /**
  * @brief calls the >> operator
- * @param out - the data stream
+ * @param in - the data stream
  */
 void RectangleAnnotation::fromStream(QDataStream& in) {
     Annotation::fromStream(in);                 //read ID + type
