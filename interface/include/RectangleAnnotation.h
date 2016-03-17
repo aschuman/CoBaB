@@ -14,9 +14,9 @@ public:
 
     RectangleAnnotation(const QString& id, const QString& type);
 
-    Annotation* copy() const;
+    Annotation* copy() const override;
 
-    Form getForm() const;
+    Form getForm() const override;
 
     friend QDataStream& operator<<(QDataStream& out, const RectangleAnnotation& annotation);
 
