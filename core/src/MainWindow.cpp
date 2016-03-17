@@ -160,10 +160,8 @@ void MainWindow::retranslate()
     ConfigData* data = ConfigData::getInstance();
     ui->mAboutAction->setText(tr("Über CoBaB"));
     ui->mHelpAction->setText(tr("Hilfe für CoBaB"));
-    ui->mBookmarkMenu->setTitle(tr("Lesezeichen"));
     ui->mFileMenu->setTitle(tr("Datei"));
     ui->mHelpMenu->setTitle(tr("Hilfe"));
-    ui->mHistoryMenu->setTitle(tr("Chronik"));
     ui->mLanguageMenu->setTitle(tr("Sprache"));
     ui->mGermanAction->setText(tr("Deutsch"));
     ui->mEnglishAction->setText(tr("Englisch"));

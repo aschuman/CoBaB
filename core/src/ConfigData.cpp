@@ -80,11 +80,10 @@ QString ConfigData::getHelp() {
     "In den Bildern werden außerdem, falls vorhanden, Annotationen angezeigt. \n"
     "Nach einem Klick auf den Button 'Bereich auswählen' kann ein eigenes Rechteck auf dem Bild gezogen werden. "
     "Mit einem Rechtsklick in die Annotation oder das gezogene Rechteck werden die dafür verfügbaren Algorithmen angezeigt. \n\n"
-    "Parameter:\nNach der Auswahl eines Algorithmus kann man Parameter für den diesen festlegen. "
+    "Parameter:\nNach der Auswahl eines Algorithmus kann man Parameter für diesen festlegen. "
     "Außerdem können weitere Datensätze ausgewählt werden, in denen gesucht werden soll. \n \n"
     "Bestätigung:\nHier wird die aktuelle Auswahl angezeigt, die dem Algorithmus übergeben wird. \n \n"
-    "Ergebnisse:\nDas Suchergebnis kann als Lesezeichen gespeichert werden. \n"
-    "Die Bilder können als positiv (grüner Kasten, ein Klick auf das Bild), negativ (roter Kasten, zweiter Klick) oder wieder neutral (dritter Klick) bewertet werden.\n"
+    "Ergebnisse:\nDie Bilder können als positiv (grüner Kasten, ein Klick auf das Bild), negativ (roter Kasten, zweiter Klick) oder wieder neutral (dritter Klick) bewertet werden.\n"
     "Durch einen Klick auf den Button 'Erneut suchen' wird das Feedback an den Algorithmus übermittelt und eine neue verbesserte Suche gestartet.");
 }
 

@@ -26,7 +26,7 @@
      <x>0</x>
      <y>0</y>
      <width>629</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="contextMenuPolicy">
@@ -58,25 +58,6 @@
     <addaction name="mLanguageMenu"/>
     <addaction name="mSoundAction"/>
    </widget>
-   <widget class="QMenu" name="mBookmarkMenu">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="contextMenuPolicy">
-     <enum>Qt::PreventContextMenu</enum>
-    </property>
-    <property name="title">
-     <string>&amp;Lesezeichen</string>
-    </property>
-   </widget>
-   <widget class="QMenu" name="mHistoryMenu">
-    <property name="contextMenuPolicy">
-     <enum>Qt::PreventContextMenu</enum>
-    </property>
-    <property name="title">
-     <string>&amp;Chronik</string>
-    </property>
-   </widget>
    <widget class="QMenu" name="mHelpMenu">
     <property name="contextMenuPolicy">
      <enum>Qt::PreventContextMenu</enum>
@@ -89,8 +70,6 @@
    </widget>
    <addaction name="mFileMenu"/>
    <addaction name="mSettingsMenu"/>
-   <addaction name="mBookmarkMenu"/>
-   <addaction name="mHistoryMenu"/>
    <addaction name="mHelpMenu"/>
   </widget>
   <widget class="QToolBar" name="mToolBar">
