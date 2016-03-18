@@ -126,6 +126,9 @@ ColorSearch::~ColorSearch()
 bool ColorSearch::setInputs(const QList<DataPacket*>& inputDataList)
 {
     if (inputDataList.length() < 1) return false;
+    qDebug() << "number of ColorSearch inputs: " << inputDataList.size();
+    bool valid_input = false;
+    mFeedback.setFeedbackList(QList<QPair<SearchObject, int>>()); // clear feedback
 
     for (auto packet : inputDataList)
     {
@@ -134,10 +137,19 @@ bool ColorSearch::setInputs(const QList<DataPacket*>& inputDataList)
         {
             if (!isUseableQuery(*q)) return false;
             mQuery = *q;
-            return true;
+            valid_input = true;
+            continue;
+        }
+
+        SearchFeedback* fb = dynamic_cast<SearchFeedback*>(packet);
+        if (fb)
+        {
+            qDebug() << "found feedback list for ColorSearch: " << fb->getFeedbackList().size();
+            mFeedback = *fb;
+            continue;
         }
     }
-    return false;
+    return valid_input;
 }
 
 
@@ -184,6 +196,16 @@ QList<DataPacket*> ColorSearch::run()
     // compute features for query
     mQueryFeatures.clear();
     searchObjectToFeature(mQuery.getSearchObject(), mQueryFeatures);
+    qDebug() << "ColorSearch feedback size during run(): " << mFeedback.getFeedbackList().size();
+    for (auto fb : mFeedback.getFeedbackList())
+    {
+        qDebug() << fb.second;
+        if (fb.second == 1)
+        {
+            searchObjectToFeature(fb.first, mQueryFeatures);
+            qWarning() << "adding positive feedback to query";
+        }
+    }
     if (mQueryFeatures.size() < 1)
     {
         qWarning() << "no query features could be computed.";
@@ -214,9 +236,9 @@ QList<DataPacket*> ColorSearch::run()
         int ms = t_start.elapsed();
 
         // debugging infos
-        qDebug() << "db entry: "  + searchObjectToString(e.getSearchObject())
-                 + "   score: "   + QString::number(e.getScore(), 'f', 4)
-                 + "   ms(avg): " + QString::number(float(ms)/ii, 'f', 2);
+//        qDebug() << "db entry: "  + searchObjectToString(e.getSearchObject())
+//                 + "   score: "   + QString::number(e.getScore(), 'f', 4)
+//                 + "   ms(avg): " + QString::number(float(ms)/ii, 'f', 2);
 
         // send update signals
         if (ms - last_progress > 1000)
