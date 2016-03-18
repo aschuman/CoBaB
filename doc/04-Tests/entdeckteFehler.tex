@@ -1,0 +1,5 @@
+\begin{itemize}
+\item Wenn man bis infinity gezoomt hatte, ist das Bild verschwunden. Auch wenn man das Bild gewechselt hat, wurde dieses nicht mehr angezeigt, obwohl das andere Bild eigentlich wieder in 100\% angezeigt werden sollte. Dieses Problem haben wir behoben, indem wir das Zoomen begrenzt haben, sodass man infinity gar nicht erst erreichen kann.
+\item Es wurde nicht nach mehreren Datensätzen gesucht. Das Problem war, dass die Datensätze nicht im Algorithmus gesetzt wurden.
+\item Dann wurde nach einem Datensatz mehrfach gesucht. Das Problem war, dass die neuen Datensätze an die Liste des SearchQuerys angehängt wurden, wodurch ein Datensatz mehrfach in der Liste stehen konnte.
+\end{itemize}

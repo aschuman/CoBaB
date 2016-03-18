@@ -1,0 +1,70 @@
+<html>
+    <title>
+        test.exe
+    </title>
+    <head>
+        <link rel="stylesheet" type="text/css" href="third-party/css/style.css">
+        <script src="third-party/RGraph/libraries/RGraph.common.core.js" ></script>
+        <script src="third-party/RGraph/libraries/RGraph.common.dynamic.js" ></script>
+        <script src="third-party/RGraph/libraries/RGraph.common.tooltips.js"></script>
+        <script src="third-party/RGraph/libraries/RGraph.pie.js" ></script>
+
+        <script src="third-party/JQuery/jquery-1.11.1.min.js"></script>
+    </head>
+    <body>
+    <script>
+        $(document).ready(function ()
+        {
+            
+            new RGraph.Pie('pi_3c6dfc2c-575b-4515-b432-1544b64dffcd', [1099, 152])
+                .set('labels', ['Cover 87%','Uncover 13%'])
+                .set('colors', ['rgb(0,255,0)','rgb(255,0,0)'])
+                .set('linewidth', 1)
+                .set('shadow', true)
+                .set('tooltips', ['cover 1099 lines (87%)', 'uncover 152 lines (13%)'])
+                .set('tooltips.event', 'onmousemove')
+                .set('labels.sticks', true)
+                .set('labels.sticks.length', 10)
+                .draw();
+            
+
+      })
+    </script>
+    
+        <h1>
+        test.exe
+        </h1>
+        <h4>
+        
+        </h4>
+        <table id="rounded-corner">
+            <thead>
+                <tr>
+                    <th scope="col" class="rounded-left">Coverage</th>
+                    <th scope="col">Total lines</th>
+                    <th scope="col" class="rounded-right">Items</th>
+                </tr>
+            </thead> 
+            <tfoot>
+                <tr>
+                <td colspan="2" class="rounded-foot-left"></td>
+                <td class="rounded-foot-right"></td>
+                </tr>
+            </tfoot>            
+            <tbody>
+                
+                <tr>
+                    <td>
+            <canvas id="pi_3c6dfc2c-575b-4515-b432-1544b64dffcd" width="280" height="100">Cover 87%</canvas>
+                    </td>            
+                    <td>1251</td>
+                    <td>            
+                       <a href="Modules/test.html">D:\Dokumente\Anja\Studium\3. Semester\PSE\CoBaB\build-CoBaB-Desktop_Qt_5_5_1_MSVC2013_64bit-Debug\test\debug\test.exe</a> 
+                      
+                    </td>
+                </tr>        
+                
+            </tbody>
+        </table>
+    </body>
+</html>

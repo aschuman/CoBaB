@@ -1,0 +1,75 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		rectangleannotation.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "RectangleAnnotation.h"
+
+/**
+ * @brief RectangleAnnotation::RectangleAnnotation creates a new RectangleAnnotation with ID and type
+ * @param id annotation ID
+ * @param type annotation type
+ */
+<span style = "background-color:#dfd">RectangleAnnotation::RectangleAnnotation(const QString&amp; id, const QString&amp; type) : Annotation(id, type) {</span>
+<span style = "background-color:#dfd">    mForm = Annotation::Form::RECTANGLE;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief RectangleAnnotation::copy Copies the RectangleAnnotation.
+ * @return A copy of this RectangleAnnotation.
+ */
+<span style = "background-color:#dfd">Annotation* RectangleAnnotation::copy() const {</span>
+<span style = "background-color:#dfd">    return new RectangleAnnotation(*this);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief override the operator &lt;&lt;
+ * @param out - the datastream
+ * @param annotation data to write
+ * @return out - the data stream after write
+ */
+<span style = "background-color:#dfd">QDataStream&amp; operator&lt;&lt;(QDataStream&amp; out, const RectangleAnnotation&amp; annotation){</span>
+<span style = "background-color:#dfd">    annotation.toStream(out);</span>
+<span style = "background-color:#dfd">    return out;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief override the operator &gt;&gt;
+ * @param out - the datastream
+ * @param annotation save new annotation
+ * @return out - the data stream after read
+ */
+<span style = "background-color:#dfd">QDataStream&amp; operator&gt;&gt;(QDataStream&amp; in, RectangleAnnotation&amp; annotation) {</span>
+<span style = "background-color:#dfd">    annotation.fromStream(in);</span>
+<span style = "background-color:#dfd">    return in;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief calls the &lt;&lt; operator
+ * @param in - the data stream
+ */
+<span style = "background-color:#dfd">void RectangleAnnotation::toStream(QDataStream&amp; out) const {</span>
+<span style = "background-color:#dfd">    Annotation::toStream(out);                  //write ID + type</span>
+<span style = "background-color:#dfd">    out &lt;&lt; x() &lt;&lt; y() &lt;&lt; width() &lt;&lt; height();   //write coordinates</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief calls the &gt;&gt; operator
+ * @param out - the data stream
+ */
+<span style = "background-color:#dfd">void RectangleAnnotation::fromStream(QDataStream&amp; in) {</span>
+<span style = "background-color:#dfd">    Annotation::fromStream(in);                 //read ID + type</span>
+    int newX, newY, newWidth, newHeight;                    //read coordinates
+<span style = "background-color:#dfd">    in &gt;&gt; newX &gt;&gt; newY &gt;&gt; newWidth &gt;&gt; newHeight;            //set coordinates</span>
+<span style = "background-color:#dfd">    setX(newX);</span>
+<span style = "background-color:#dfd">    setY(newY);</span>
+<span style = "background-color:#dfd">    setWidth(newWidth);</span>
+<span style = "background-color:#dfd">    setHeight(newHeight);</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

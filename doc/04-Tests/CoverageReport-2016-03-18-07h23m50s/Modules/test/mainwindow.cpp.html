@@ -1,0 +1,200 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		mainwindow.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "MainWindow.h"
+#include "ui_MainWindow.h"
+#include "ConfigData.h"
+#include "PageWidget.h"
+#include &lt;QMessageBox&gt;
+
+/**
+ * @brief Constructs the MainWindow.
+ * @param parent The parent widget.
+ */
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow),
+    currentWidget(nullptr)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    ui-&gt;setupUi(this);</span>
+<span style = "background-color:#dfd">    QObject::connect(ui-&gt;mHomeAction, SIGNAL(triggered(bool)), this, SIGNAL(requestedHomePage()));</span>
+<span style = "background-color:#dfd">    QObject::connect(ui-&gt;mBackAction, SIGNAL(triggered(bool)), this, SIGNAL(requestedPreviousPage()));</span>
+<span style = "background-color:#dfd">    QObject::connect(ui-&gt;mDatasetAction, SIGNAL(triggered(bool)), this, SIGNAL(requestedFileDialog()));</span>
+
+<span style = "background-color:#dfd">    QObject::connect(ui-&gt;mAboutAction, SIGNAL(triggered(bool)), this, SLOT(showAboutDialog()));</span>
+<span style = "background-color:#dfd">    QObject::connect(ui-&gt;mHelpAction, SIGNAL(triggered(bool)), this, SLOT(showHelpDialog()));</span>
+
+<span style = "background-color:#dfd">    QObject::connect(ui-&gt;mGermanAction, SIGNAL(triggered(bool)), this, SLOT(changeLanguageToGerman()));</span>
+<span style = "background-color:#dfd">    QObject::connect(ui-&gt;mEnglishAction, SIGNAL(triggered(bool)), this, SLOT(changeLanguageToEnglish()));</span>
+
+<span style = "background-color:#dfd">    QObject::connect(ui-&gt;mSoundAction, SIGNAL(triggered(bool)), this, SLOT(changeSound()));</span>
+
+<span style = "background-color:#dfd">    Q_INIT_RESOURCE(application);</span>
+<span style = "background-color:#dfd">    setWindowIcon(QIcon(":/logo.png"));</span>
+
+    //load config data with previously chosen language
+<span style = "background-color:#dfd">    ConfigData* data = ConfigData::getInstance();</span>
+<span style = "background-color:#dfd">    data-&gt;setLanguage(data-&gt;getLanguage());</span>
+<span style = "background-color:#dfd">    retranslate();</span>
+
+<span style = "background-color:#dfd">    Q_INIT_RESOURCE(application);</span>
+<span style = "background-color:#dfd">    QIcon home(":/homeIcon.png");</span>
+<span style = "background-color:#dfd">    ui-&gt;mHomeAction-&gt;setIcon(home);</span>
+<span style = "background-color:#dfd">    QIcon back(":/backIcon.png");</span>
+<span style = "background-color:#dfd">    ui-&gt;mBackAction-&gt;setIcon(back);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Destructs this MainWindow.
+ */
+MainWindow::~MainWindow()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    if(currentWidget)</span>
+<span style = "background-color:#dfd">        ui-&gt;verticalLayout-&gt;removeWidget(currentWidget);</span>
+<span style = "background-color:#dfd">    delete ui;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Displays the given widget as a page.
+ * @param widget Widget to be displayed.
+ */
+void MainWindow::display(QWidget* widget)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    if(widget){</span>
+<span style = "background-color:#dfd">        if(currentWidget){</span>
+<span style = "background-color:#dfd">            currentWidget-&gt;hide();</span>
+<span style = "background-color:#dfd">            ui-&gt;verticalLayout-&gt;removeWidget(currentWidget);</span>
+        }
+<span style = "background-color:#dfd">        ui-&gt;verticalLayout-&gt;addWidget(widget);</span>
+<span style = "background-color:#dfd">        currentWidget = widget;</span>
+<span style = "background-color:#dfd">        currentWidget-&gt;show();</span>
+<span style = "background-color:#dfd">        retranslate();</span>
+    }
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief MainWindow::showAboutDialog Displays the about dialog in the current language.
+ */
+void MainWindow::showAboutDialog()
+<span style = "background-color:#fdd">{</span>
+<span style = "background-color:#fdd">    ConfigData* data = ConfigData::getInstance();</span>
+<span style = "background-color:#fdd">    QMessageBox msgBox(QMessageBox::Information, tr("Ãber CoBaB"), data-&gt;getAbout(), QMessageBox::NoButton, this);</span>
+<span style = "background-color:#fdd">    msgBox.addButton(tr("SchlieÃen"), QMessageBox::DestructiveRole);</span>
+<span style = "background-color:#fdd">    msgBox.exec();</span>
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief MainWindow::showHelpDialog Displays the help dialog in the current language.
+ */
+void MainWindow::showHelpDialog()
+<span style = "background-color:#fdd">{</span>
+<span style = "background-color:#fdd">    ConfigData* data = ConfigData::getInstance();</span>
+<span style = "background-color:#fdd">    QMessageBox msgBox(QMessageBox::Information, tr("Hilfe fÃ¼r CoBaB"), data-&gt;getHelp(), QMessageBox::NoButton, this);</span>
+<span style = "background-color:#fdd">    msgBox.addButton(tr("SchlieÃen"), QMessageBox::DestructiveRole);</span>
+<span style = "background-color:#fdd">    msgBox.exec();</span>
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief MainWindow::showOpenDataset Shows the menu entry to select another dataset.
+ */
+void MainWindow::showOpenDataset()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    ui-&gt;mDatasetAction-&gt;setVisible(true);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief MainWindow::hideOpenDataset Hides the menu entry to select another dataset.
+ */
+void MainWindow::hideOpenDataset()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    ui-&gt;mDatasetAction-&gt;setVisible(false);</span>
+<span style = "background-color:#dfd">}</span>
+
+void MainWindow::setMenuVisible(bool visible)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    ui-&gt;mMenubar-&gt;setVisible(visible);</span>
+<span style = "background-color:#dfd">}</span>
+
+void MainWindow::setReturnEnabled(bool enabled)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    ui-&gt;mBackAction-&gt;setEnabled(enabled);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief MainWindow::changeLanguageToGerman Stores the language as "German" and retranslates the GUI.
+ */
+void MainWindow::changeLanguageToGerman()
+<span style = "background-color:#fdd">{</span>
+<span style = "background-color:#fdd">    ConfigData* data = ConfigData::getInstance();</span>
+<span style = "background-color:#fdd">    data-&gt;setLanguage("German");</span>
+<span style = "background-color:#fdd">    retranslate();</span>
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief MainWindow::changeLanguageToEnglish Stores the language as "English" and retranslates the GUI.
+ */
+void MainWindow::changeLanguageToEnglish()
+<span style = "background-color:#fdd">{</span>
+<span style = "background-color:#fdd">    ConfigData* data = ConfigData::getInstance();</span>
+<span style = "background-color:#fdd">    data-&gt;setLanguage("English");</span>
+<span style = "background-color:#fdd">    retranslate();</span>
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief MainWindow::changeSound Stores the current setting of the notification sound.
+ */
+void MainWindow::changeSound()
+<span style = "background-color:#fdd">{</span>
+<span style = "background-color:#fdd">    ConfigData* data = ConfigData::getInstance();</span>
+<span style = "background-color:#fdd">    bool soundOn = data-&gt;getSoundOn();</span>
+<span style = "background-color:#fdd">    data-&gt;setSoundOn(!soundOn);</span>
+<span style = "background-color:#fdd">    if(soundOn) {</span>
+<span style = "background-color:#fdd">        ui-&gt;mSoundAction-&gt;setText(tr("Ton einschalten"));</span>
+<span style = "background-color:#fdd">    } else {</span>
+<span style = "background-color:#fdd">        ui-&gt;mSoundAction-&gt;setText(tr("Ton ausschalten"));</span>
+    }
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief MainWindow::retranslate Retranslates the MainWindow after changing the language.
+ */
+void MainWindow::retranslate()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    ConfigData* data = ConfigData::getInstance();</span>
+<span style = "background-color:#dfd">    ui-&gt;mAboutAction-&gt;setText(tr("Ãber CoBaB"));</span>
+<span style = "background-color:#dfd">    ui-&gt;mHelpAction-&gt;setText(tr("Hilfe fÃ¼r CoBaB"));</span>
+<span style = "background-color:#dfd">    ui-&gt;mFileMenu-&gt;setTitle(tr("Datei"));</span>
+<span style = "background-color:#dfd">    ui-&gt;mHelpMenu-&gt;setTitle(tr("Hilfe"));</span>
+<span style = "background-color:#dfd">    ui-&gt;mLanguageMenu-&gt;setTitle(tr("Sprache"));</span>
+<span style = "background-color:#dfd">    ui-&gt;mGermanAction-&gt;setText(tr("Deutsch"));</span>
+<span style = "background-color:#dfd">    ui-&gt;mEnglishAction-&gt;setText(tr("Englisch"));</span>
+<span style = "background-color:#dfd">    ui-&gt;mDatasetAction-&gt;setText(tr("Datenordner Ã¶ffnen"));</span>
+<span style = "background-color:#dfd">    ui-&gt;mSettingsMenu-&gt;setTitle(tr("Einstellungen"));</span>
+<span style = "background-color:#dfd">    if(data-&gt;getSoundOn()) {</span>
+<span style = "background-color:#fdd">        ui-&gt;mSoundAction-&gt;setText(tr("Ton ausschalten"));</span>
+<span style = "background-color:#fdd">    } else {</span>
+<span style = "background-color:#dfd">        ui-&gt;mSoundAction-&gt;setText(tr("Ton einschalten"));</span>
+    }
+<span style = "background-color:#dfd">    if(data-&gt;getLanguage() == "German") {</span>
+<span style = "background-color:#dfd">        ui-&gt;mGermanAction-&gt;setChecked(true);</span>
+<span style = "background-color:#dfd">        ui-&gt;mEnglishAction-&gt;setChecked(false);</span>
+<span style = "background-color:#dfd">    } else {</span>
+<span style = "background-color:#fdd">        ui-&gt;mGermanAction-&gt;setChecked(false);</span>
+<span style = "background-color:#fdd">        ui-&gt;mEnglishAction-&gt;setChecked(true);</span>
+    }
+
+<span style = "background-color:#dfd">    PageWidget* pageWidget = dynamic_cast&lt;PageWidget*&gt; (currentWidget);</span>
+<span style = "background-color:#dfd">    if(pageWidget != nullptr) {</span>
+<span style = "background-color:#dfd">        pageWidget-&gt;retranslateUi();</span>
+<span style = "background-color:#dfd">        setWindowTitle(pageWidget-&gt;getName());</span>
+    }
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>
