@@ -37,24 +37,19 @@ QJsonModel::QJsonModel(QObject *parent, QVector<QJsonObject> list) :
 
 }
 
+/**
+ * @brief QJsonModel::getParameters Returns the parameters of the json model.
+ * @return The parameters of the json model.
+ */
 QJsonObject QJsonModel::getParameters() {
     return mRootItem->getChilds().value(0)->toJson();
 }
 
-void QJsonModel::saveSettings(int row, QUrl filename)
-{
-    QJsonObject data;
-    data = mRootItem->getChilds().value(row)->toJson();
-    emit saveQJson(data, filename);
-}
-
-void QJsonModel::loadSettings(int row, QUrl filename)
-{
-    emit requestQJson(filename);
-    mRootItem->getChilds().removeAt(row);
-    int j = mRootItem->getChilds().size() - 1;
-    mRootItem->getChilds().swap(row, j);
-}
+/**
+ * @brief QJsonModel::flags Returns the item flags for the given index.
+ * @param index The model index.
+ * @return The item flags for the given index.
+ */
 Qt::ItemFlags QJsonModel::flags(const QModelIndex& index) const
 {
   if(index.column() == 1)
@@ -67,6 +62,13 @@ Qt::ItemFlags QJsonModel::flags(const QModelIndex& index) const
   return QAbstractItemModel::flags(index);
 }
 
+/**
+ * @brief QJsonModel::setData Sets the role data for the item at index to value.
+ * @param index The model index.
+ * @param value The value.
+ * @param role The role.
+ * @return true if successful; otherwise returns false.
+ */
 bool QJsonModel::setData(const QModelIndex& index, const QVariant& value, int role)
 {
     if (!index.isValid())
@@ -78,6 +80,12 @@ bool QJsonModel::setData(const QModelIndex& index, const QVariant& value, int ro
     }
     return false;
 }
+
+/**
+ * @brief QJsonModel::backtrack Returns the parent of the index.
+ * @param index The model index.
+ * @return The parent of the index.
+ */
 QJsonTreeItem* QJsonModel::backtrack(QModelIndex& index)
 {
     if (index.parent().isValid() == false) //one row under root
@@ -92,14 +100,21 @@ QJsonTreeItem* QJsonModel::backtrack(QModelIndex& index)
         }
 }
 
+/**
+ * @brief QJsonModel::loadQJson Loads the QJsonObject into the model by calling loadJson.
+ * @param data The QJsonObject.
+ */
 void QJsonModel::loadQJson(QJsonObject data)
 {
     QJsonDocument docu = QJsonDocument(data);
     loadJson(docu.toJson());
 }
 
-
-
+/**
+ * @brief QJsonModel::load Checks whether the file can be opened.
+ * @param fileName The path to the json file.
+ * @return true if the file can be opened.
+ */
 bool QJsonModel::load(const QString &fileName)
 {
     QFile file(fileName);
@@ -113,11 +128,21 @@ bool QJsonModel::load(const QString &fileName)
     return success;
 }
 
+/**
+ * @brief QJsonModel::load Loads the json device into the model by calling loadJson.
+ * @param device The io device.
+ * @return true if loadJson was successful
+ */
 bool QJsonModel::load(QIODevice *device)
 {
     return loadJson(device->readAll());
 }
 
+/**
+ * @brief QJsonModel::loadJson Loads the json bytearray into the model.
+ * @param json The bytearray.
+ * @return true if the corresponding document is not empty
+ */
 bool QJsonModel::loadJson(const QByteArray &json)
 {
     mDocument = QJsonDocument::fromJson(json);
@@ -136,7 +161,12 @@ bool QJsonModel::loadJson(const QByteArray &json)
     return false;
 }
 
-
+/**
+ * @brief QJsonModel::data Returns the data stored under the given role for the item referred to by the index.
+ * @param index The model index.
+ * @param role The role.
+ * @return The data stored under the given role for the item referred to by the index.
+ */
 QVariant QJsonModel::data(const QModelIndex &index, int role) const
 {
 
@@ -168,6 +198,13 @@ QVariant QJsonModel::data(const QModelIndex &index, int role) const
 
 }
 
+/**
+ * @brief QJsonModel::headerData Returns the data for the given role and section in the header with the specified orientation.
+ * @param section The section.
+ * @param orientation The orientation.
+ * @param role The role.
+ * @return The data for the given role and section in the header with the specified orientation.
+ */
 QVariant QJsonModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     if (role != Qt::DisplayRole)
@@ -181,6 +218,13 @@ QVariant QJsonModel::headerData(int section, Qt::Orientation orientation, int ro
         return QVariant();
 }
 
+/**
+ * @brief QJsonModel::index Returns the index of the item in the model specified by the given row, column and parent index.
+ * @param row The row.
+ * @param column The column.
+ * @param parent The parent.
+ * @return The index of the item in the model specified by the given row, column and parent index.
+ */
 QModelIndex QJsonModel::index(int row, int column, const QModelIndex &parent) const
 {
     if (!hasIndex(row, column, parent))
@@ -200,6 +244,11 @@ QModelIndex QJsonModel::index(int row, int column, const QModelIndex &parent) co
         return QModelIndex();
 }
 
+/**
+ * @brief QJsonModel::parent Returns the parent of the model item with the given index.
+ * @param index The model index.
+ * @return The parent of the model item with the given index. If the item has no parent, an invalid QModelIndex is returned.
+ */
 QModelIndex QJsonModel::parent(const QModelIndex &index) const
 {
     if (!index.isValid())
@@ -214,6 +263,11 @@ QModelIndex QJsonModel::parent(const QModelIndex &index) const
     return createIndex(parentItem->row(), 0, parentItem);
 }
 
+/**
+ * @brief QJsonModel::rowCount Returns the number of rows under the given parent.
+ * @param parent The parent.
+ * @return The number of rows under the given parent. When the parent is valid it means that rowCount is returning the number of children of parent.
+ */
 int QJsonModel::rowCount(const QModelIndex &parent) const
 {
     QJsonTreeItem *parentItem;
@@ -228,12 +282,22 @@ int QJsonModel::rowCount(const QModelIndex &parent) const
     return parentItem->childCount();
 }
 
+/**
+ * @brief QJsonModel::columnCount Returns the number of columns under the given parent.
+ * @param parent The parent.
+ * @return 2
+ */
 int QJsonModel::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
     return 2;
 }
 
+/**
+ * @brief QJsonModel::setIcon Inserts an icon into the mapping.
+ * @param type the type to which this icon belongs
+ * @param icon the icon
+ */
 void QJsonModel::setIcon(const QJsonValue::Type &type, const QIcon &icon)
 {
     mTypeIcons.insert(type,icon);

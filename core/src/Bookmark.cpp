@@ -179,7 +179,6 @@ bool Bookmark::validate(const Bookmark& bookmark) {
 
 /**
  * @brief save save bookmark to file
- * @param path absolute file path
  */
 void Bookmark::saveFile() const {
     QFile file(mPath);
@@ -210,9 +209,9 @@ QDataStream& operator<<(QDataStream& out, const Bookmark& bookmark) {
 
 /**
  * @brief override the operator >>
- * @param out - the datastream
+ * @param in - the datastream
  * @param bookmark save new bookmark here
- * @return out - the data stream after read
+ * @return in - the data stream after read
  */
 QDataStream& operator>>(QDataStream& in, Bookmark& bookmark) {
     bookmark.fromStream(in);
@@ -221,7 +220,7 @@ QDataStream& operator>>(QDataStream& in, Bookmark& bookmark) {
 
 /**
  * @brief calls the << operator
- * @param in - the data stream
+ * @param out - the data stream
  */
 void Bookmark::toStream(QDataStream& out) const {
     //convert mParameter to QString
@@ -237,7 +236,7 @@ void Bookmark::toStream(QDataStream& out) const {
 
 /**
  * @brief calls the >> operator
- * @param out - the data stream
+ * @param in - the data stream
  */
 void Bookmark::fromStream(QDataStream& in) {
     QString parameters;

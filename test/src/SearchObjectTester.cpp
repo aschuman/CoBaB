@@ -3,8 +3,10 @@
 #include <QtTest>
 #include "RectangleAnnotation.h"
 
-SearchObject sobject;
-
+SearchObject sobject; ///< Instance of SearchObject for testing.
+/**
+ * @brief Tests the funktion of the setter and getter for Medium.
+ */
 void SearchObjectTester::testMedium()
 {
 
@@ -13,7 +15,9 @@ void SearchObjectTester::testMedium()
   QCOMPARE(sobject.getMedium(), medium);
 
 }
-
+/**
+ * @brief Tests the id and the type of an Annotation aswell as its koordinates, width and height.
+ */
 void SearchObjectTester::testRectangleAnnotation()
 {
    RectangleAnnotation* annotation = new RectangleAnnotation("","Unknown");
@@ -28,7 +32,9 @@ void SearchObjectTester::testRectangleAnnotation()
 
    delete annotation;
 }
-
+/**
+ * @brief Tests any anotation for id and type , not just rectangle Annotation like RectangleAnnotationTester.
+ */
 void SearchObjectTester::testAnnotation()
 {
    Annotation* annotation = new Annotation("","Unknown");
@@ -37,7 +43,9 @@ void SearchObjectTester::testAnnotation()
    QCOMPARE(sobject.getAnnotation()->getType(), annotation->getType());
    delete annotation;
 }
-
+/**
+ * @brief Tests the getter and setter of the region of interest  selected by the user.
+ */
 void SearchObjectTester::testROI()
 {
 
@@ -46,7 +54,9 @@ void SearchObjectTester::testROI()
     QCOMPARE(sobject.getROI(), roi);
 
 }
-
+/**
+ * @brief Tests the getter and setter of the sourcedataset.
+ */
 void SearchObjectTester::testSourceDataset()
 {
 
@@ -54,7 +64,9 @@ void SearchObjectTester::testSourceDataset()
     sobject.setSourceDataset(sourceDataset);
     QCOMPARE(sobject.getSourceDataset(), sourceDataset);
 }
-
+/**
+ * @brief Tests the getter and setter of the MediumIndex.
+ */
 void SearchObjectTester::testMediumIndex()
 {
 
@@ -62,7 +74,9 @@ void SearchObjectTester::testMediumIndex()
     sobject.setMediumIndex(mediumindex);
     QCOMPARE(sobject.getMediumIndex(), mediumindex);
 }
-
+/**
+ * @brief Tests the type of the SearchObject.
+ */
 void SearchObjectTester::testType()
 {
 
@@ -80,7 +94,9 @@ void SearchObjectTester::testType()
 
     delete annotation;
 }
-
+/**
+ * @brief Tests the sending and receiving of information through stream.
+ */
 void SearchObjectTester::testStreamMethods()
 {
     Annotation* annotation = new Annotation("test", "Unknown");
@@ -106,7 +122,9 @@ void SearchObjectTester::testStreamMethods()
 
     delete annotation;
 }
-
+/**
+ * @brief Tests the sending and receiving of information through stream for a RectangleAnnotation.
+ */
 void SearchObjectTester::testStreamMethodsRectangle()
 {
     RectangleAnnotation* annotation = new RectangleAnnotation("test", "Unknown");

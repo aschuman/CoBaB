@@ -32,9 +32,13 @@ public:
 
     void setResults(SearchResult result);
 
-    static const int EXIT_NEW_SEARCH = 0;
+    static const int EXIT_NEW_SEARCH = 0;       ///< The number the widget exits with.
 
 signals:
+    /**
+     * @brief startAlgorithm Is send when the algorithm should be started.
+     * @param algo The chosen algorithm.
+     */
     void startAlgorithm(Algorithm* algo);
 
 public slots:

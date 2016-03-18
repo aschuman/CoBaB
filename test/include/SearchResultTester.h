@@ -4,7 +4,10 @@
 #include <QObject>
 #include "SearchResult.h"
 #include "SearchResultElement.h"
-
+/**
+ * @brief The SearchResultTester class
+ * @author Violina
+ */
 class SearchResultTester : public QObject
 {
     Q_OBJECT

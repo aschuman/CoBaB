@@ -16,11 +16,17 @@ Neue Methoden getParameter() und getDefaultParameter() geben die Parameterwerte 
 \subsubsection{SearchAlgorithm}
 setName() und setDescription() wurden entfernt. Die Matadaten sind nicht zur Laufzeit veränderbar, sondern in einer .json Datei festgespeichert.
 
-\subsubsection{SearchFeedback}
-
 \subsubsection{Bookmark}
+Ein Bookmark kann in einer Datei gespeichert werden. Die Klasse Bookmark ist daher mit einem default-Konstruktor und einem Konstruktor Bookmark(QString &path) vorgesehen, um das Bookmark-Objekt aus dieser Datei wiederzuherstellen.
+
+Das Bookmark-Objekt bekommt ein neues Attribute : mPath. Den Wert kann man über setPath() setzen. Die Methode saveFile() speichert das Bookmark in die Datei mit diesem Pfad, und deleteFile() löscht die Datei, falls vorhanden.
+
+Um 2 Bookmarks nach Datum oder Name zu vergleichen, sind die Methoden smallerByName() und smallerByDate() hinzugefügt.
+
+validate(Bookmark &b) prüft ein Bookmark-Objekt auf die Gültigkeit, wie z.Bsp. ob der Datensatz noch vorhanden ist.
 
 \subsubsection{BookmarkList}
+Die Methode save(QString &path) wurde entfernt, weil nun nicht alle Bookmarks in der Liste zusammengespeichert werden, sondern jede in eine Datei. Wenn ein Bookmark hinzugefügt bzw. aus der Liste entfernt ist, wird die entsprechende Datei erstellt bzw. gelöscht.
 
 \subsection{View}
 \subsubsection{ViewerPageWidget}

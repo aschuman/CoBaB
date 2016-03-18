@@ -107,11 +107,19 @@ void MainWindow::hideOpenDataset()
     ui->mDatasetAction->setVisible(false);
 }
 
+/**
+ * @brief MainWindow::setMenuVisible Sets the menubar visible.
+ * @param visible The menubar is only visible when the LibraryPageWidget is displayed.
+ */
 void MainWindow::setMenuVisible(bool visible)
 {
     ui->mMenubar->setVisible(visible);
 }
 
+/**
+ * @brief MainWindow::setReturnEnabled Enables the back action.
+ * @param enabled The back action is disabled after starting a new search.
+ */
 void MainWindow::setReturnEnabled(bool enabled)
 {
     ui->mBackAction->setEnabled(enabled);

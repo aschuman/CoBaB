@@ -4,7 +4,7 @@
 
 /**
  * @brief Constructs a DualFeedbackEditor with the given parent.
- * @param Parent of this widget.
+ * @param parent Parent of this widget.
  */
 DualFeedbackEditor::DualFeedbackEditor(QWidget *parent) : FeedbackEditor(parent)
 {
@@ -38,6 +38,10 @@ SearchFeedback::Type DualFeedbackEditor::getFeedbackType() const
     return SearchFeedback::Type::DUAL;
 }
 
+/**
+ * @brief DualFeedbackEditor::mouseReleaseEvent Updates the feedback when the mouse was released.
+ * @param event The mouse event.
+ */
 void DualFeedbackEditor::mouseReleaseEvent(QMouseEvent* event)
 {
     if(event->button() == Qt::LeftButton){

@@ -2,7 +2,9 @@
 #include "SearchResultElement.h"
 
 #include <QtTest>
-
+/**
+ * @brief Tests the getter and setter of the score.
+ */
 void SearchResultElementTester::testScore()
 {
     SearchResultElement s;
@@ -10,6 +12,9 @@ void SearchResultElementTester::testScore()
     s.setScore(5.);
     QCOMPARE(s.getScore(), 5.);
 }
+/**
+ * @brief Tests the setter and getter of the SearchObject.
+ */
 void SearchResultElementTester::testSearchObject()
 {
     SearchResultElement s;
@@ -22,6 +27,9 @@ void SearchResultElementTester::testSearchObject()
     QCOMPARE(s.getSearchObject().getSourceDataset(), object.getSourceDataset());
     QCOMPARE(s.getSearchObject().getMediumIndex(), 1);
 }
+/**
+ * @brief Tests the sending and seceiving of information throught streams.
+ */
 void SearchResultElementTester::testStreamMethods()
 {
     SearchResultElement s;

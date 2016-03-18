@@ -16,6 +16,10 @@ class DataPacket: public Serializable {
 
 public: 
 
+    /**
+     * @brief The Type enum The type of a DataPacket can be searchresult, searchquery, searchfeedback,
+     * or unknown (intialization)
+     */
     enum Type { SEARCHRESULT, SEARCHQUERY, SEARCHFEEDBACK, UNKNOWN };
 
     DataPacket();
@@ -32,7 +36,7 @@ public:
 
     friend QDataStream& operator <<(QDataStream& out, const DataPacket& datapacket);
 
-    friend QDataStream& operator >>(QDataStream& in, DataPacket::Type& e);
+    friend QDataStream& operator >>(QDataStream& in, DataPacket::Type& type);
 
 protected: 
 

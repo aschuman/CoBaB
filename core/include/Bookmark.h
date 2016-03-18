@@ -10,7 +10,7 @@
 #include <QJsonDocument>
 
 /**
- * Bookmark implementation
+ * @brief A Bookmark stores a SearchResult, SearchQuery, and SearchFeedback so a former search can be restored.
  * @author Tung
  */
 

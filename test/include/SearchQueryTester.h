@@ -2,7 +2,10 @@
 #define SEARCHQUERYTESTER_H
 
 #include <QObject>
-
+/**
+ * @brief The SearchQueryTester class
+ * @author Georgi
+ */
 class SearchQueryTester : public QObject
 {
     Q_OBJECT

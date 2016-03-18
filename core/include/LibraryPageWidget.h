@@ -25,9 +25,9 @@ public:
     void retranslateUi() override;
     QString getName() override;
 
-    static const int EXIT_PHOTO = 0;
-    static const int EXIT_SINGLE_FRAME_VIDEO = 1;
-    static const int EXIT_VIDEO = 2;
+    static const int EXIT_PHOTO = 0;                    ///< indicates that the chosen dataset is a photo dataset
+    static const int EXIT_SINGLE_FRAME_VIDEO = 1;       ///< indicates that the chosen dataset is a single frame video dataset
+    static const int EXIT_VIDEO = 2;                    ///< indicates that the chosen dataset is a video dataset
 
 public slots:
     void showFileDialog();

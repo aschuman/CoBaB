@@ -7,7 +7,7 @@
 #include <QPluginLoader>
 
 /**
- * Algorithm interface
+ * @brief Algorithms which should be executed with CoBaB need to implement this interface.
  * @author Tung
  */
 
@@ -16,7 +16,7 @@ class Algorithm : public QObject {
 public: 
     virtual ~Algorithm() = default;
     
-    virtual bool setInputs(const QList<DataPacket*>& inputDataList) = 0;
+    virtual bool setInputs(const QList<DataPacket*>& inputDataList) = 0;    ///< set input for algorithm
     
     virtual bool setParameters(const QJsonObject& parameters);
 
@@ -33,17 +33,17 @@ public:
     bool initialize(QPluginLoader* loader);
 
 public slots:
-    virtual QList<DataPacket*> run() = 0;
+    virtual QList<DataPacket*> run() = 0;   ///< start the search
 
     virtual void cancel();
 
 protected:
-    QString mDescription = "";
-    QString mName = "";
-    QString mId = "";
-    bool mCancel = false;
-    QJsonObject mParameters;
-    QJsonObject mDefaultParameters;
+    QString mDescription = "";              ///< a QString that describes the algorithm
+    QString mName = "";                     ///< algorithm name (must be unique)
+    QString mId = "";                       ///< algorithm ID
+    bool mCancel = false;                   ///< indicates whether the algorithm is cancelled
+    QJsonObject mParameters;                ///< the current parameters for this algorithm
+    QJsonObject mDefaultParameters;         ///< the QJsonObject parameter file for this algorithm
 };
 
 #define Algorithm_iid "org.CoBaB.Algorithm"

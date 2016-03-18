@@ -19,6 +19,9 @@ public:
     SearchFeedback::Type getFeedbackType() const override;
 
 signals:
+    /**
+     * @brief feedbackChanged Is send when the feedback changed.
+     */
     void feedbackChanged();
 
 protected:

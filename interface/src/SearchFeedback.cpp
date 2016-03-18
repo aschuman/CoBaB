@@ -10,7 +10,7 @@ SearchFeedback::SearchFeedback() {
 
 /**
  * @brief SearchFeedback::SearchFeedback create new feedback with given type
- * @param type feedback type
+ * @param feedbackType feedback type
  */
 SearchFeedback::SearchFeedback(const QString& feedbackType) {
     mType = DataPacket::Type::SEARCHFEEDBACK;
@@ -54,9 +54,9 @@ QDataStream& operator<<(QDataStream& out, const SearchFeedback& feedback) {
 
 /**
  * @brief override the operator >>
- * @param out - the datastream
+ * @param in - the datastream
  * @param feedback save new feedback here
- * @return out - the data stream after read
+ * @return in - the data stream after read
  */
 QDataStream& operator>>(QDataStream& in, SearchFeedback& feedback) {
     feedback.fromStream(in);
@@ -65,7 +65,7 @@ QDataStream& operator>>(QDataStream& in, SearchFeedback& feedback) {
 
 /**
  * @brief calls the << operator
- * @param in - the data stream
+ * @param out - the data stream
  */
 void SearchFeedback::toStream(QDataStream& out) const {
     DataPacket::toStream(out);
@@ -74,7 +74,7 @@ void SearchFeedback::toStream(QDataStream& out) const {
 
 /**
  * @brief calls the >> operator
- * @param out - the data stream
+ * @param in - the data stream
  */
 void SearchFeedback::fromStream(QDataStream& in) {
     DataPacket::fromStream(in);

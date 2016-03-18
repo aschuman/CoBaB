@@ -5,7 +5,7 @@
 #include <QRect>
 
 /**
- * RectangleAnnotation implementation
+ * @brief RectangleAnnotation A rectangle annotation
  * @author Tung
  */
 

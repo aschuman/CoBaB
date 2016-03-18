@@ -16,6 +16,9 @@ class SearchObject: public Serializable {
 
 public:
 
+    /**
+     * @brief The Type enum The type of a SearchObject can be medium, roi, or annotation
+     */
     enum Type { MEDIUM, ROI, ANNOTATION };
 
     SearchObject();

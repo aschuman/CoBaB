@@ -19,6 +19,10 @@
 
 #include "QJsonItem.h"
 
+/**
+ * @brief QJsonTreeItem::QJsonTreeItem Creates a new QJsonTreeItem with the given parent.
+ * @param parent The parent of this QJsonTreeItem.
+ */
 QJsonTreeItem::QJsonTreeItem(QJsonTreeItem *parent)
 {
 
@@ -32,6 +36,11 @@ QJsonTreeItem::~QJsonTreeItem()
     qDeleteAll(mChilds);
 
 }
+
+/**
+ * @brief QJsonTreeItem::getChilds Returns the childs of this QJsonTreeItem
+ * @return The list of childs.
+ */
 QList<QJsonTreeItem*> QJsonTreeItem::getChilds()
 {
     return mChilds;
@@ -89,27 +98,47 @@ QJsonValue QJsonTreeItem::toJsonValue() {
     return value;
 }
 
-
+/**
+ * @brief QJsonTreeItem::appendChild Adds a child item to the QJsonTreeItem.
+ * @param item The new child.
+ */
 void QJsonTreeItem::appendChild(QJsonTreeItem *item)
 {
     mChilds.append(item);
 }
 
+/**
+ * @brief QJsonTreeItem::child Returns the value of the childs at the given row.
+ * @param row The row of the childs.
+ * @return The value of the childs at the given row.
+ */
 QJsonTreeItem *QJsonTreeItem::child(int row)
 {
     return mChilds.value(row);
 }
 
+/**
+ * @brief QJsonTreeItem::parent Returns the parent of this QJsonTreeItem.
+ * @return The parent of this QJsonTreeItem.
+ */
 QJsonTreeItem *QJsonTreeItem::parent()
 {
     return mParent;
 }
 
+/**
+ * @brief QJsonTreeItem::childCount Returns the number of childs.
+ * @return The number of childs.
+ */
 int QJsonTreeItem::childCount() const
 {
     return mChilds.count();
 }
 
+/**
+ * @brief QJsonTreeItem::row Returns the row of this QJsonTreeItem.
+ * @return The row.
+ */
 int QJsonTreeItem::row() const
 {
     if (mParent)
@@ -118,36 +147,66 @@ int QJsonTreeItem::row() const
     return 0;
 }
 
+/**
+ * @brief QJsonTreeItem::setKey Sets the key for this QJsonTreeItem.
+ * @param key The key for this QJsonTreeItem.
+ */
 void QJsonTreeItem::setKey(const QString &key)
 {
     mKey = key;
 }
 
+/**
+ * @brief QJsonTreeItem::setValue Sets the value for this QJsonTreeItem.
+ * @param value The value for this QJsonTreeItem.
+ */
 void QJsonTreeItem::setValue(QString value)
 {
     mValue = value;
 }
 
+/**
+ * @brief QJsonTreeItem::setType Sets the type of this QJsonTreeItem.
+ * @param type The type of this QJsonTreeItem.
+ */
 void QJsonTreeItem::setType(const QJsonValue::Type &type)
 {
     mType = type;
 }
 
+/**
+ * @brief QJsonTreeItem::key Returns the key.
+ * @return The key.
+ */
 QString QJsonTreeItem::key() const
 {
     return mKey;
 }
 
+/**
+ * @brief QJsonTreeItem::value Returns the value.
+ * @return The value.
+ */
 QString QJsonTreeItem::value() const
 {
     return mValue;
 }
 
+/**
+ * @brief QJsonTreeItem::type Returns the type.
+ * @return The type.
+ */
 QJsonValue::Type QJsonTreeItem::type() const
 {
     return mType;
 }
 
+/**
+ * @brief QJsonTreeItem::load Loads the QJsonTree with all children.
+ * @param value The value of the parent.
+ * @param parent The parent of the tree item.
+ * @return The root item.
+ */
 QJsonTreeItem* QJsonTreeItem::load(const QJsonValue& value, QJsonTreeItem* parent)
 {
 

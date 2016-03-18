@@ -3,6 +3,9 @@
 
 #include <QObject>
 
+/**
+ * @brief The DatasetTester class Tests the Dataset class.
+ */
 class DatasetTester : public QObject
 {
     Q_OBJECT

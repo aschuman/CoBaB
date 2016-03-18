@@ -4,6 +4,9 @@
 #include <QObject>
 #include "DatasetList.h"
 
+/**
+ * @brief The DatasetListTester class Tests the DatasetList class.
+ */
 class DatasetListTester : public QObject
 {
     Q_OBJECT
@@ -13,7 +16,7 @@ private slots:
     void testLoadStore();
 
 private:
-    DatasetList mList;
+    DatasetList mList;      //< The dataset list to test.
 
 };
 

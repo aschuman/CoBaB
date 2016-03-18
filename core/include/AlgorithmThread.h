@@ -17,6 +17,9 @@ public:
 
 
 signals:
+    /**
+     * @brief resultsReady Is send when the results are ready.
+     */
     void resultsReady();
 
 private:
