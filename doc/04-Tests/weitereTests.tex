@@ -1,0 +1,5 @@
+\subsection{CppCheck}
+CppCheck ist ein Tool zur statischen Codeanalyse, das auch während der Implementierung fortlaufend verwendet wurde. In der Testphase wurde versucht, die damit gefundenen Fehler und Warnungen zu beseitigen. Dabei blieb eine Stilwarnung übrig, da der NavigatorTester keinen Konstruktor hat, den er aber auch nicht benötigt.
+
+\subsection{Stresstest}
+CoBaB wurde mit einem Datensatz mit 350 Bildern mit 1704x2272 Pixeln getestet. Dabei wurde der ColorSearch Algorithmus verwendet. Obwohl sich die Laufzeit enorm erhöht hat (ca. 10 min. von der Datensatzauswahl bis zur Ergebnisansicht), ist CoBaB nicht abgestürzt und hat am Ende das Ergebnis angezeigt. Im Vergleich dazu benötigt CoBaB ca. 15 Sekunden, wenn der Datensatz 350 48x128 Pixel Bilder enthält.

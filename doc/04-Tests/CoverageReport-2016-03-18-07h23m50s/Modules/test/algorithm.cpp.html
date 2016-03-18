@@ -1,0 +1,107 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		algorithm.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "Algorithm.h"
+
+/**
+ * @brief Algorithm::getId get the algorithm ID
+ * @return algorithm ID
+ */
+<span style = "background-color:#fdd">QString Algorithm::getId() const {</span>
+<span style = "background-color:#fdd">    return mId;</span>
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief Algorithm::getName get name of the algorithm
+ * @return algorithm name (must be unique)
+ */
+<span style = "background-color:#fdd">QString Algorithm::getName() const {</span>
+<span style = "background-color:#fdd">    return mName;</span>
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief Algorithm::getDescription show algorithm description
+ * @return a QString that describes the algorithm
+ */
+<span style = "background-color:#fdd">QString Algorithm::getDescription() const {</span>
+<span style = "background-color:#fdd">    return mDescription;</span>
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief Algorithm::initialize Loads the corresponding QJsonObject for this algorithm
+ * @param loader The plugin loader which loads the QJsonObject
+ * @return True, if all went well.
+ */
+<span style = "background-color:#dfd">bool Algorithm::initialize(QPluginLoader *loader) {</span>
+    //read the QJsonObject parameter
+<span style = "background-color:#dfd">    if (!loader) return false;</span>
+<span style = "background-color:#dfd">    QJsonObject tmp = loader-&gt;metaData();</span>
+<span style = "background-color:#dfd">    if (tmp.isEmpty()) return false;</span>
+<span style = "background-color:#dfd">    QJsonValue v = tmp.value("MetaData");</span>
+<span style = "background-color:#dfd">    if (v.isUndefined()) return false;</span>
+<span style = "background-color:#dfd">    QJsonObject o = v.toObject();</span>
+<span style = "background-color:#dfd">    if (o.isEmpty()) return false;</span>
+
+<span style = "background-color:#dfd">    mId = "";</span>
+<span style = "background-color:#dfd">    mName = "";</span>
+<span style = "background-color:#dfd">    mDescription = "";</span>
+
+<span style = "background-color:#dfd">    QString version = "";</span>
+<span style = "background-color:#dfd">    if (o.contains("Author")) {}</span>
+<span style = "background-color:#dfd">    if (o.contains("Date")) {}</span>
+<span style = "background-color:#dfd">    if (o.contains("Name")) mName = o.value("Name").toString();</span>
+    else {} //LOG WARNING
+<span style = "background-color:#dfd">    if (o.contains("Version")) version = o.value("Version").toString();</span>
+    else {} //LOG WARNING
+<span style = "background-color:#dfd">    if (o.contains("Description")) mDescription = o.value("Description").toString();</span>
+    else {} //LOG WARNING
+<span style = "background-color:#dfd">    mId = mName + " " + version;</span>
+<span style = "background-color:#dfd">    if (mId.trimmed() == "") {} //LOG WARNING</span>
+
+<span style = "background-color:#dfd">    if (o.contains("Properties")) mDefaultParameters = o.value("Properties").toObject();</span>
+    else {} //LOG WARNING
+
+<span style = "background-color:#dfd">    return true;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Algorithm::setParameters Set the algorithm's parameters.
+ * @param parameters The new parameters as Json object.
+ * @return True, if all went well.
+ */
+<span style = "background-color:#fdd">bool Algorithm::setParameters(const QJsonObject&amp; parameters) {</span>
+<span style = "background-color:#fdd">    mParameters = parameters;</span>
+<span style = "background-color:#fdd">    return true;</span>
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief Algorithm::getParameters Returns the parameters set for this algorithm.
+ * @return The current parameters for this algorithm.
+ */
+<span style = "background-color:#dfd">QJsonObject Algorithm::getParameters() {</span>
+<span style = "background-color:#dfd">    return mParameters;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Algorithm::getDefaultParameters Returns the parameter file for this algorithm.
+ * @return The QJsonObject parameter file for this algorithm.
+ */
+<span style = "background-color:#dfd">QJsonObject Algorithm::getDefaultParameters() {</span>
+<span style = "background-color:#dfd">    return mDefaultParameters;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Cancel running algorithm.
+ */
+<span style = "background-color:#fdd">void Algorithm::cancel() {</span>
+<span style = "background-color:#fdd">    mCancel = true;</span>
+<span style = "background-color:#fdd">}</span>
+</pre>
+	</body>
+</html>

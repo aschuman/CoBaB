@@ -1,0 +1,212 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		navigator.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "Navigator.h"
+#include &lt;cassert&gt;
+
+#define LOGGING_LEVEL_1
+#include "log.h"
+
+/**
+ * @brief Consturcts the Navigator and connects it to mainWindow.
+ * @param mainWindow MainWindow in which the Navigator will display PageWidgets.
+ */
+Navigator::Navigator(std::unique_ptr&lt;MainWindow&gt; mainWindow)
+    : mMainWindow(move(mainWindow)),
+      mInitialStackSize(0)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    QObject::connect(mMainWindow.get(), SIGNAL(requestedPreviousPage()), this, SLOT(toPreviousPage()));</span>
+<span style = "background-color:#dfd">    QObject::connect(mMainWindow.get(), SIGNAL(requestedHomePage()), this, SLOT(toHomePage()));</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Enables a PageWidget to be inserted into the respective MainWindow by this Navigator.
+ * @param type Type that will identify the PageWidget. Can not be PageWidget::None.
+ *          An already registered Type will be overridden by this registration.
+ * @param widget PageWidget that will be registered.
+ */
+void Navigator::registerPage(PageType type, std::unique_ptr&lt;PageWidget&gt; widget)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    assert(type != PageType::NONE);</span>
+<span style = "background-color:#dfd">    QObject::connect(widget.get(), SIGNAL(pushToStack(QVariant)), this, SLOT(tryPush(QVariant)));</span>
+<span style = "background-color:#dfd">    QObject::connect(widget.get(), SIGNAL(readFromStack(int, QVariant&amp;)), this, SLOT(tryRead(int,QVariant&amp;)));</span>
+<span style = "background-color:#dfd">    QObject::connect(widget.get(), SIGNAL(exit(int)), this, SLOT(tryExit(int)));</span>
+<span style = "background-color:#dfd">    if(type == PageType::LIBRARY) {</span>
+<span style = "background-color:#dfd">        QObject::connect(mMainWindow.get(), SIGNAL(requestedFileDialog()), widget.get(), SLOT(showFileDialog()));</span>
+    }
+
+<span style = "background-color:#dfd">    mPageRegistrations.insert(std::map&lt;PageType, PageRegistration&gt;::value_type(type, PageRegistration(move(widget))));</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Starts the Navigation.
+ * @param type First page that will be registered.
+ * @param data Initial data stack.
+ */
+void Navigator::start(PageType type, std::vector&lt;QVariant&gt; data)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    mInitialStackSize = data.size();</span>
+<span style = "background-color:#dfd">    mDataStack = move(data);</span>
+<span style = "background-color:#dfd">    mPageStack.push_back(PageStackFrame(type));</span>
+<span style = "background-color:#dfd">    tryDisplayTopPage();</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Pushes to data stack.
+ * @param item Value to be pushed to the stack
+ */
+void Navigator::tryPush(QVariant item)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    PageRegistration* registration = checkSender();</span>
+<span style = "background-color:#dfd">    if(registration){</span>
+<span style = "background-color:#dfd">        mDataStack.push_back(item);</span>
+<span style = "background-color:#dfd">        mPageStack.back().incrementSize();</span>
+    }
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Reads from data stack.
+ * @param index Position to be read from. (0 referes to the top of te stack)
+ * @param value Reference to a valid QVariant object that will be equipped with the desired stack element.
+ */
+void Navigator::tryRead(int index, QVariant &amp;value)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    PageRegistration* registration = checkSender();</span>
+<span style = "background-color:#dfd">    if(registration){</span>
+<span style = "background-color:#dfd">        if(index &gt;= 0)</span>
+<span style = "background-color:#dfd">            index = mDataStack.size() - 1 - index;</span>
+<span style = "background-color:#dfd">        else</span>
+<span style = "background-color:#dfd">            index = -index - 1;</span>
+
+<span style = "background-color:#dfd">        if(index &lt; mDataStack.size())</span>
+<span style = "background-color:#dfd">            value = mDataStack[index];</span>
+<span style = "background-color:#dfd">        else</span>
+<span style = "background-color:#dfd">            LOG_ERR("tried to read data stack out of range");</span>
+    }
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Lets the current page exit and displays its successor
+ *          according to the exit code and the registered transitions.
+ * @param exitCode Arbitrary exit code.
+ */
+void Navigator::tryExit(int exitCode)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    PageRegistration* registration = checkSender();</span>
+<span style = "background-color:#dfd">    if(registration){</span>
+<span style = "background-color:#dfd">        PageRegistration::TransitionTarget target = registration-&gt;getTarget(exitCode);</span>
+<span style = "background-color:#dfd">        PageStackFrame frame(target.type);</span>
+<span style = "background-color:#dfd">        frame.setNoReturn(target.noReturn);</span>
+<span style = "background-color:#dfd">        mPageStack.push_back(std::move(frame));</span>
+<span style = "background-color:#dfd">        tryDisplayTopPage();</span>
+    }
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Returns to the previously displayed page
+ *          and removes the elements from the data stack the current page has pushed.
+ */
+void Navigator::toPreviousPage()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    if(mPageStack.size() &gt; 1 &amp;&amp; !mPageStack.back().getNoReturn()){</span>
+<span style = "background-color:#dfd">        LOG("going to previous page");</span>
+<span style = "background-color:#dfd">        mDataStack.resize(mDataStack.size() - mPageStack.back().getSize());</span>
+<span style = "background-color:#dfd">        mPageStack.pop_back();</span>
+<span style = "background-color:#dfd">        mDataStack.resize(mDataStack.size() - mPageStack.back().getSize());</span>
+<span style = "background-color:#dfd">        mPageStack.back().setSize(0);</span>
+
+<span style = "background-color:#dfd">        tryDisplayTopPage();</span>
+    }
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Returns to the initial page given by Navigator::start.
+ *          Clears the data stack except the initial elements given by Navigator::start
+ *          and elements added by the initial page.
+ */
+void Navigator::toHomePage()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    LOG("going to home page");</span>
+<span style = "background-color:#dfd">    mPageStack.resize(1);</span>
+<span style = "background-color:#dfd">    mDataStack.resize(mInitialStackSize);</span>
+<span style = "background-color:#dfd">    mPageStack.back().setSize(0);</span>
+
+<span style = "background-color:#dfd">    tryDisplayTopPage();</span>
+<span style = "background-color:#dfd">}</span>
+
+PageRegistration *Navigator::checkSender()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    auto itRegistration = mPageRegistrations.find(getCurrentPageType());</span>
+<span style = "background-color:#dfd">    PageRegistration* registration = nullptr;</span>
+
+<span style = "background-color:#dfd">    if(itRegistration != mPageRegistrations.end()){</span>
+<span style = "background-color:#dfd">        registration = &amp;itRegistration-&gt;second;</span>
+        //PageWidget&amp; widget = registration-&gt;getWidget();
+
+        /*if(&amp;widget != QObject::sender()){ ToDo: find out sender
+            // ToDo: write to log
+            registration = nullptr;
+        }*/
+    }
+<span style = "background-color:#dfd">    return registration;</span>
+<span style = "background-color:#dfd">}</span>
+
+bool Navigator::tryDisplayTopPage()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    bool success = false;</span>
+<span style = "background-color:#dfd">    if(!mPageStack.empty()){</span>
+<span style = "background-color:#dfd">        PageType type = mPageStack.back().getType();</span>
+
+<span style = "background-color:#dfd">        LOG("displaying ", to_String(type), " page..");</span>
+<span style = "background-color:#dfd">        auto itRegistration = mPageRegistrations.find(type);</span>
+<span style = "background-color:#dfd">        if(itRegistration != mPageRegistrations.end()){</span>
+<span style = "background-color:#dfd">            PageWidget&amp; targetWidget = itRegistration-&gt;second.getWidget();</span>
+<span style = "background-color:#dfd">            targetWidget.reset();</span>
+<span style = "background-color:#dfd">            if(getCurrentPageType() == PageType::LIBRARY) {</span>
+<span style = "background-color:#dfd">                mMainWindow-&gt;showOpenDataset();</span>
+<span style = "background-color:#dfd">            } else {</span>
+<span style = "background-color:#dfd">                mMainWindow-&gt;hideOpenDataset();</span>
+            }
+<span style = "background-color:#dfd">            mMainWindow-&gt;display(&amp;targetWidget);</span>
+<span style = "background-color:#dfd">            mMainWindow-&gt;setReturnEnabled(!mPageStack.back().getNoReturn());</span>
+<span style = "background-color:#dfd">            success = true;</span>
+<span style = "background-color:#dfd">        }else{</span>
+<span style = "background-color:#fdd">            LOG_ERR("could not display unregistered page ", to_String(type));</span>
+        }
+<span style = "background-color:#dfd">    }</span>
+
+<span style = "background-color:#dfd">    mMainWindow-&gt;setMenuVisible(mPageStack.size() == 1);</span>
+<span style = "background-color:#dfd">    return success;</span>
+<span style = "background-color:#dfd">}</span>
+
+PageType Navigator::getCurrentPageType() const
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    return mPageStack.empty() ? PageType::NONE : mPageStack.back().getType();</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Registers a transition. If during navigation origin exits with exitCode,
+ *          target will be displayed.
+ * @param origin PageWidget that during navigation has to be displayed for this transition to take effect.
+ * @param exitCode Exit code that has to be emmited by origin for this transition to take effect.
+ * @param target PageWidget that will be displayed as effect of this transition.
+ * @param noReturn true if this transition can not be returned from, false otherwise
+ */
+void Navigator::registerTransition(PageType origin, int exitCode, PageType target, bool noReturn)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    auto it = mPageRegistrations.find(origin);</span>
+<span style = "background-color:#dfd">    if(it != mPageRegistrations.end()){</span>
+<span style = "background-color:#dfd">        it-&gt;second.addTransition(exitCode, target, noReturn);</span>
+<span style = "background-color:#dfd">    } else {</span>
+<span style = "background-color:#fdd">        LOG_ERR("could not register transition from unregistered page ", to_String(origin));</span>
+    }
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>
