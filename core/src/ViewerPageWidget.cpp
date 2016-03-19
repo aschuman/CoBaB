@@ -94,6 +94,7 @@ void ViewerPageWidget::annotationSelected(Annotation* annotation, const QPointF&
 /**
  * @brief ViewerPageWidget::contextMenu Shows a context menu to select an Algorithm.
  * @param pos The mouse position.
+ * @param selectedAnnotation The selected Annotation.
  */
 void ViewerPageWidget::contextMenu(const QPointF &pos, const Annotation* selectedAnnotation) {
     SearchObject searchObject;

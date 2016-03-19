@@ -45,17 +45,18 @@ AlgorithmList::~AlgorithmList() {
 }
 
 /**
- * @brief AlgorithmList::AlgorithmList
- * @param a
+ * @brief AlgorithmList::AlgorithmList Move-constructs an AlgorithmList instance,
+ * making it point at the same object that a was pointing to.
+ * @param a the AlgorithmList to be move-constructed
  */
 AlgorithmList::AlgorithmList(AlgorithmList&& a) : mPluginLoaders(std::move(a.mPluginLoaders)) {
 
 }
 
 /**
- * @brief AlgorithmList::operator =
- * @param a
- * @return
+ * @brief AlgorithmList::operator = Move-assigns a to this AlgorithmList instance.
+ * @param a the AlgorithmList to be move-assigned to this AlgorithmList
+ * @return reference to this list
  */
 AlgorithmList& AlgorithmList::operator=(AlgorithmList &&a) {
     mPluginLoaders = std::move(a.mPluginLoaders);
@@ -81,7 +82,7 @@ QList<Algorithm*> AlgorithmList::findCompatibleAlgorithms(const QList<DataPacket
 }
 
 /**
- * @brief AlgorithmList::getAlgorithmList
+ * @brief AlgorithmList::getAlgorithmList Returns all loaded algorithms
  * @return all loaded algorithms
  */
 QList<Algorithm*> AlgorithmList::getAlgorithmList() {

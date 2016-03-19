@@ -18,7 +18,7 @@ void AlgorithmThread::run()
 }
 
 /**
- * @brief AlgorithmThread::getResults Returns the results.
+ * @brief Returns the results.
  * @return The list of DataPackets.
  */
 QList<DataPacket *> AlgorithmThread::getResults()

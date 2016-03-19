@@ -115,8 +115,9 @@ void SingleFrameVideoViewer::loop() {
 /**
  * @brief SingleFrameVideoViewer::contextMenu Shows a context menu to select an algorithm.
  * @param pos The position of the mouse.
+ * @param selectedAnnotation The selected annotation.
  */
-void SingleFrameVideoViewer::contextMenu(const QPointF &pos, const Annotation *selectedAnnotation) {
+void SingleFrameVideoViewer::contextMenu(const QPointF &pos, const Annotation* selectedAnnotation) {
     pause();
     ViewerPageWidget::contextMenu(pos, selectedAnnotation);
 }
