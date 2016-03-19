@@ -2,20 +2,26 @@
 #include "DataPacket.h"
 
 #include <QtTest>
-
+/**
+ * @brief Tests the generating of the Uuid.
+ */
 void DataPacketTester::testUuid()
 {
     DataPacket data;
     QVERIFY(data.getUuid() != nullptr);
 
 }
-
+/**
+ * @brief Tests the type of the DataPacket.
+ */
 void DataPacketTester::testType()
 {
     DataPacket data;
     QVERIFY(data.getType() == DataPacket::Type::UNKNOWN);
 }
-
+/**
+ * @brief Tests the sending and receiving of information through streams.
+ */
 void DataPacketTester::testStreamMethods()
 {
     DataPacket data;

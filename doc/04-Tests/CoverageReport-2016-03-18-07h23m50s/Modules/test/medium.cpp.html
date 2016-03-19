@@ -1,0 +1,90 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		medium.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "Medium.h"
+
+/**
+ * @brief Medium::Medium Creates a new Medium which has the given path and Annotation list.
+ * @param path The path to the Medium.
+ * @param annotations The list of Annotation which belong to this Medium.
+ */
+Medium::Medium(const QString path, const QList&lt;QPair&lt;int, Annotation*&gt;&gt; annotations)
+<span style = "background-color:#dfd">    : mPath(path), mAnnotationList(annotations) {</span>
+<span style = "background-color:#dfd">    mType = Medium::Type::PHOTO;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Medium::Medium Copy constructor for Medium.
+ * @param other The Medium to be copied.
+ */
+<span style = "background-color:#dfd">Medium::Medium(const Medium&amp; other) {</span>
+<span style = "background-color:#dfd">    mPath = other.getPath();</span>
+<span style = "background-color:#dfd">    mType = other.getType();</span>
+<span style = "background-color:#dfd">    for(QPair&lt;int, Annotation*&gt; iter: other.getAnnotationList()) {</span>
+<span style = "background-color:#dfd">        Annotation* annotation = new RectangleAnnotation(*(RectangleAnnotation*)iter.second);</span>
+<span style = "background-color:#dfd">        mAnnotationList.append(QPair&lt;int, Annotation*&gt;(iter.first, annotation));</span>
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Medium::operator = Sets this Medium to other.
+ * @param other The other Medium.
+ * @return This Medium.
+ */
+<span style = "background-color:#fdd">Medium&amp; Medium::operator=(const Medium&amp; other) {</span>
+<span style = "background-color:#fdd">    mPath = other.mPath;</span>
+<span style = "background-color:#fdd">    mType = other.mType;</span>
+<span style = "background-color:#fdd">    mAnnotationList = other.mAnnotationList;</span>
+<span style = "background-color:#fdd">    return *this;</span>
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief Medium::copy Copies this Medium.
+ * @return A copy of this Medium.
+ */
+<span style = "background-color:#dfd">Medium* Medium::copy() {</span>
+<span style = "background-color:#dfd">    return new Medium(*this);</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Medium::~Medium Deletes the Medium.
+ */
+<span style = "background-color:#dfd">Medium::~Medium() {</span>
+<span style = "background-color:#dfd">    for(QPair&lt;int, Annotation*&gt; iter: mAnnotationList) {</span>
+<span style = "background-color:#dfd">        if(iter.second != nullptr)</span>
+<span style = "background-color:#dfd">            delete iter.second;</span>
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Medium::getType Returns the Type of the Medium.
+ * @return The Type of the Medium.
+ */
+<span style = "background-color:#dfd">Medium::Type Medium::getType() const {</span>
+<span style = "background-color:#dfd">    return mType;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Medium::getAnnotationList Returns the list of Annotation which belong to the Medium.
+ * @return The list of Annotation.
+ */
+<span style = "background-color:#dfd">QList&lt;QPair&lt;int, Annotation*&gt;&gt; Medium::getAnnotationList() const {</span>
+<span style = "background-color:#dfd">    return mAnnotationList;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Medium::getPath Returns the path to the Medium.
+ * @return The path to the Medium.
+ */
+<span style = "background-color:#dfd">QString Medium::getPath() const {</span>
+<span style = "background-color:#dfd">    return mPath;</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

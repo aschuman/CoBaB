@@ -5,6 +5,7 @@
 
 #include "SearchAlgorithm.h"
 #include "SearchQuery.h"
+#include "SearchFeedback.h"
 
 #include "ColorHistogram.h"
 
@@ -47,6 +48,7 @@ private:
 
     // basic members
     SearchQuery mQuery;                                 ///< Query for current/next #run().
+    SearchFeedback mFeedback;                           ///< Feedback for the current/next #run().
     QHash<QString, std::shared_ptr<Dataset>> mDatasets; ///< The relevant datasets.
 
     // algorithm parameters

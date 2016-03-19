@@ -2,13 +2,18 @@
 #include "SearchResult.h"
 
 #include <QtTest>
-
+/**
+ * @brief Tests the type of the SearchResult.
+ */
 void SearchResultTester::testType()
 {
     QList<SearchResultElement> list;
     SearchResult s(list);
     QVERIFY(s.getType() == DataPacket::Type::SEARCHRESULT);
 }
+/**
+ * @brief Tests setter and getter of the list of SearchResultElements.
+ */
 void SearchResultTester::testList()
 {
     QList<SearchResultElement> list;
@@ -23,6 +28,9 @@ void SearchResultTester::testList()
     QCOMPARE(s.getSearchResultList().takeLast().getScore(), element2.getScore());
 
 }
+/**
+ * @brief Tests the sorting method for SearchResultElements.
+ */
 void SearchResultTester::testSort()
 {
     QList<SearchResultElement> list;
@@ -52,6 +60,9 @@ void SearchResultTester::testSort()
     QCOMPARE(sortedList.at(4).getScore(), element3.getScore());
 
 }
+/**
+ * @brief Tests the sending and receiving of information through streams.
+ */
 void SearchResultTester::testStreamMethods()
 {
 

@@ -1,0 +1,59 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		log.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "log.h"
+
+/**
+ * @brief Opens a stream with the given name.
+ * @param Name of the logger.
+ */
+void file_log_policy::open_ostream(const std::string&amp; name)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">   out_stream-&gt;open( name.c_str(), std::ios_base::binary|std::ios_base::out );</span>
+<span style = "background-color:#dfd">   if( !out_stream-&gt;is_open() )</span>
+   {
+<span style = "background-color:#fdd">        throw(std::runtime_error("LOGGER: Unable to open an output stream"));</span>
+   }
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Closes the stream.
+ */
+void file_log_policy::close_ostream()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    if( out_stream )</span>
+    {
+<span style = "background-color:#dfd">        out_stream-&gt;close();</span>
+    }
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Writes the given message to the stream.
+ * @param The message.
+ */
+void file_log_policy::write(const std::string&amp; msg)
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    (*out_stream)&lt;&lt;msg&lt;&lt;std::endl;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Closes the stream if necessary.
+ */
+file_log_policy::~file_log_policy()
+<span style = "background-color:#dfd">{</span>
+<span style = "background-color:#dfd">    if( out_stream )</span>
+    {
+<span style = "background-color:#dfd">        close_ostream();</span>
+    }
+<span style = "background-color:#dfd">}</span>
+
+<span style = "background-color:#dfd">logger&lt;file_log_policy&gt; log_inst("execution.log");</span>
+</pre>
+	</body>
+</html>

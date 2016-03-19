@@ -1,0 +1,385 @@
+<html>
+	<head>
+	<link href="../../third-party/google-code-prettify/prettify-CppCoverage.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="../../third-party/google-code-prettify/prettify.js"></script>
+	</head>
+	<title>
+		dataset.cpp
+	</title>
+	<body onload="prettyPrint()">
+		<pre class="prettyprint lang-cpp linenums">#include "Dataset.h"
+#include &lt;QDirIterator&gt;
+#include &lt;QJsonDocument&gt;
+#include &lt;QJsonObject&gt;
+#include &lt;QJsonParseError&gt;
+#include &lt;QTextStream&gt;
+#include &lt;algorithm&gt;
+#include "log.h"
+
+/**
+ * @brief Dataset::Dataset Creates a new Dataset with the given path.
+ * @param path The path of the Dataset.
+ */
+<span style = "background-color:#dfd">Dataset::Dataset(const QString&amp; path) {</span>
+<span style = "background-color:#dfd">    Q_INIT_RESOURCE(application);</span>
+<span style = "background-color:#dfd">    mValid = false;</span>
+<span style = "background-color:#dfd">    QDir dir(path);</span>
+<span style = "background-color:#dfd">    if(!dir.exists()) {</span>
+        LOG_ERR("The Dataset with the given path does not exists.");
+<span style = "background-color:#dfd">        return;</span>
+    }
+<span style = "background-color:#dfd">    mPath = dir.absolutePath();</span>
+<span style = "background-color:#dfd">    mName = dir.dirName();</span>
+
+<span style = "background-color:#dfd">    if(!createSingleFrameVideoDataset()) {</span>
+<span style = "background-color:#dfd">        if(!createPhotoDataset()) {</span>
+<span style = "background-color:#dfd">            if(!createVideoDataset()) {</span>
+                LOG_ERR("The dataset doesn't contain photos, videos or single frame videos.");
+<span style = "background-color:#fdd">                return;</span>
+            }
+        }
+    }
+<span style = "background-color:#dfd">    mValid = createPreviewPhoto();</span>
+<span style = "background-color:#dfd">    if(mType == VIDEO) {</span>
+<span style = "background-color:#dfd">        mValid = false; // while we don't have a video player</span>
+    }
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Dataset::Dataset Constructs a Dataset as a copy of other.
+ * @param other Another Dataset that is copied.
+ */
+<span style = "background-color:#dfd">Dataset::Dataset(const Dataset&amp; other) {</span>
+<span style = "background-color:#dfd">    mName = other.getName();</span>
+<span style = "background-color:#dfd">    mPreviewPhoto = other.getPreviewPhoto();</span>
+<span style = "background-color:#dfd">    mPath = other.getPath();</span>
+<span style = "background-color:#dfd">    mType = other.getType();</span>
+<span style = "background-color:#dfd">    mValid = other.isValid();</span>
+<span style = "background-color:#dfd">    for(Medium* iter: other.getMediaList()) {</span>
+<span style = "background-color:#dfd">        Medium* medium = iter-&gt;copy();</span>
+<span style = "background-color:#dfd">        mMediaList.append(medium);</span>
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Dataset::operator = Sets this Dataset to other.
+ * @param other The other Dataset.
+ * @return This Dataset.
+ */
+Dataset&amp; Dataset::operator=(const Dataset&amp; other)
+<span style = "background-color:#fdd">{</span>
+<span style = "background-color:#fdd">    mName = other.mName;</span>
+<span style = "background-color:#fdd">    mPreviewPhoto = other.mPreviewPhoto;</span>
+<span style = "background-color:#fdd">    mPath = other.mPath;</span>
+<span style = "background-color:#fdd">    mType = other.mType;</span>
+<span style = "background-color:#fdd">    for(Medium* iter: other.getMediaList()) {</span>
+<span style = "background-color:#fdd">        Medium* medium = iter-&gt;copy();</span>
+<span style = "background-color:#fdd">        mMediaList.append(medium);</span>
+<span style = "background-color:#fdd">    }</span>
+<span style = "background-color:#fdd">    return *this;</span>
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief Dataset::~Dataset Deletes the Dataset.
+ */
+<span style = "background-color:#dfd">Dataset::~Dataset() {</span>
+<span style = "background-color:#dfd">    qDeleteAll(mMediaList);</span>
+<span style = "background-color:#dfd">    mMediaList.clear();</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Dataset::isValid Returns, if the dataset is valid.
+ * @return If the dataset is valid.
+ */
+<span style = "background-color:#dfd">bool Dataset::isValid() const {</span>
+<span style = "background-color:#dfd">    return mValid;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Dataset::createVideoAnnotations Creates an Annotation list for videos.
+ * @param path The path to the Annotation file.
+ * @return The list of Annotations.
+ */
+<span style = "background-color:#dfd">QList&lt;QPair&lt;int, Annotation*&gt;&gt; Dataset::createVideoAnnotations(QString path) {</span>
+<span style = "background-color:#dfd">    QList&lt;QPair&lt;QString, Annotation*&gt;&gt; annotationsWithName = parseAnnotations(path);</span>
+<span style = "background-color:#dfd">    QList&lt;QPair&lt;int, Annotation*&gt;&gt; annotations;</span>
+<span style = "background-color:#dfd">    if(annotationsWithName.isEmpty()) {</span>
+<span style = "background-color:#dfd">        return annotations;</span>
+    }
+    std::sort(annotationsWithName.begin(), annotationsWithName.end(),
+<span style = "background-color:#dfd">        [](const QPair&lt;QString,Annotation*&gt; a, const QPair&lt;QString,Annotation*&gt; b) {</span>
+<span style = "background-color:#dfd">            return (a.first &lt; b.first);</span>
+<span style = "background-color:#dfd">        }</span>
+<span style = "background-color:#dfd">    );</span>
+
+<span style = "background-color:#dfd">    int j = 0;</span>
+<span style = "background-color:#dfd">    QString frame = annotationsWithName.at(0).first;</span>
+<span style = "background-color:#dfd">    for(int i = 0; i &lt; annotationsWithName.size(); i++) {</span>
+<span style = "background-color:#dfd">        if (annotationsWithName.at(i).first != frame) {</span>
+<span style = "background-color:#dfd">            frame = annotationsWithName.at(i).first;</span>
+<span style = "background-color:#dfd">            j++;</span>
+        }
+<span style = "background-color:#dfd">        QPair&lt;int,Annotation*&gt; pair(j, annotationsWithName.at(i).second);</span>
+<span style = "background-color:#dfd">        if(pair.second != nullptr) {</span>
+<span style = "background-color:#dfd">            annotations.append(pair);</span>
+        }
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">    return annotations;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Dataset::createSingleFrameVideoDataset Creates a SingleFrameVideo Dataset.
+ * @return True if the creation was successful.
+ */
+<span style = "background-color:#dfd">bool Dataset::createSingleFrameVideoDataset() {</span>
+<span style = "background-color:#dfd">    bool successful = false;</span>
+<span style = "background-color:#dfd">    QStringList filters(FRAMERATE_FILE);</span>
+<span style = "background-color:#dfd">    QDirIterator iter(mPath, filters, QDir::Filter::Files, QDirIterator::Subdirectories);</span>
+<span style = "background-color:#dfd">    while(iter.hasNext()) {</span>
+<span style = "background-color:#dfd">        QString filepath = iter.next();</span>
+<span style = "background-color:#dfd">        if(containsFps(filepath)) {</span>
+<span style = "background-color:#dfd">            if(!successful) {</span>
+<span style = "background-color:#dfd">                mType = Type::SINGLE_FRAME_VIDEO;</span>
+<span style = "background-color:#dfd">                successful = true;</span>
+            }
+<span style = "background-color:#dfd">            QFileInfo file(filepath);</span>
+<span style = "background-color:#dfd">            QList&lt;QPair&lt;int, Annotation*&gt;&gt; annotations = createVideoAnnotations(file.dir().path()+"/"+ANNOTATION_FILE+ANNOTATION_EXTENSION);</span>
+<span style = "background-color:#dfd">            SingleFrameVideo* sfvideo = new SingleFrameVideo(file.dir().path(), annotations);</span>
+<span style = "background-color:#dfd">            mMediaList.append(sfvideo);</span>
+<span style = "background-color:#dfd">        }</span>
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">    return successful;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Dataset::createVideoDataset Creates a video Dataset.
+ * @return True if the creation was successful.
+ */
+<span style = "background-color:#dfd">bool Dataset::createVideoDataset() {</span>
+<span style = "background-color:#dfd">    QStringList videoFilter(VALID_VIDEO_TYPES);</span>
+<span style = "background-color:#dfd">    QDirIterator videoIter(mPath, videoFilter, QDir::Filter::Files, QDirIterator::Subdirectories);</span>
+<span style = "background-color:#dfd">    if(videoIter.hasNext()) {</span>
+<span style = "background-color:#dfd">        mType = Type::VIDEO;</span>
+<span style = "background-color:#dfd">        while(videoIter.hasNext()) {</span>
+<span style = "background-color:#dfd">            QString filepath = videoIter.next();</span>
+<span style = "background-color:#dfd">            QFileInfo file(filepath);</span>
+<span style = "background-color:#dfd">            QList&lt;QPair&lt;int, Annotation*&gt;&gt; annotations = createVideoAnnotations(file.baseName()+ANNOTATION_EXTENSION);</span>
+<span style = "background-color:#dfd">            Video* video = new Video(filepath, annotations);</span>
+<span style = "background-color:#dfd">            mMediaList.append(video);</span>
+<span style = "background-color:#dfd">        }</span>
+<span style = "background-color:#dfd">        return true;</span>
+    }
+<span style = "background-color:#fdd">    return false;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Dataset::createPhotoDataset Creates a Photo Dataset.
+ * @return True if the creation was successful.
+ */
+<span style = "background-color:#dfd">bool Dataset::createPhotoDataset() {</span>
+<span style = "background-color:#dfd">    QList&lt;QPair&lt;QString, Annotation*&gt;&gt; annotationsWithName = parseAnnotations(mPath+"/"+ANNOTATION_FILE+ANNOTATION_EXTENSION);</span>
+<span style = "background-color:#dfd">    QList&lt;QPair&lt;int, Annotation*&gt;&gt; annotations;</span>
+
+<span style = "background-color:#dfd">    QStringList photoFilter(VALID_PHOTO_TYPES);</span>
+<span style = "background-color:#dfd">    QDirIterator photoIter(mPath, photoFilter, QDir::Filter::Files, QDirIterator::Subdirectories);</span>
+<span style = "background-color:#dfd">    bool isPhotoDir = false;</span>
+<span style = "background-color:#dfd">    QString photoPath;</span>
+<span style = "background-color:#dfd">    QStringList preview(PREVIEW_PHOTO);</span>
+<span style = "background-color:#dfd">    while(photoIter.hasNext()) {</span>
+<span style = "background-color:#dfd">        photoPath = photoIter.next();</span>
+<span style = "background-color:#dfd">        QFileInfo file(photoPath);</span>
+<span style = "background-color:#dfd">        QString fileName = file.fileName();</span>
+<span style = "background-color:#dfd">        if(!preview.contains(fileName)){</span>
+            // the dataset doesn't just contain preview photos, so it's a real photo dataset
+<span style = "background-color:#dfd">            if(!isPhotoDir) {</span>
+<span style = "background-color:#dfd">                mType = Type::PHOTO;</span>
+<span style = "background-color:#dfd">                isPhotoDir = true;</span>
+            }
+<span style = "background-color:#dfd">            annotations.clear();</span>
+<span style = "background-color:#dfd">            for(int i = 0; i &lt; annotationsWithName.size(); i++) {</span>
+<span style = "background-color:#dfd">                if(annotationsWithName.at(i).first == fileName){</span>
+<span style = "background-color:#dfd">                    QPair&lt;int, Annotation*&gt; pair(0, annotationsWithName.at(i).second);</span>
+<span style = "background-color:#dfd">                    annotations.append(pair);</span>
+                }
+<span style = "background-color:#dfd">            }</span>
+<span style = "background-color:#dfd">            Photo* photo = new Photo(photoPath, annotations);</span>
+<span style = "background-color:#dfd">            mMediaList.append(photo);</span>
+        }
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">    return isPhotoDir;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Dataset::containsFps Checks if the configuration file contains an entry for frames per second.
+ * @param filepath The path of the configuration file.
+ * @return True if the configuration file contains an entry for frames per second.
+ */
+<span style = "background-color:#dfd">bool Dataset::containsFps(QString filepath) const {</span>
+<span style = "background-color:#dfd">    QFile loadFile(filepath);</span>
+<span style = "background-color:#dfd">    if (loadFile.open(QIODevice::ReadOnly)) {</span>
+<span style = "background-color:#dfd">        QByteArray saveData = loadFile.readAll();</span>
+        QJsonParseError error;
+<span style = "background-color:#dfd">        QJsonDocument loadDoc(QJsonDocument::fromJson(saveData, &amp;error));</span>
+<span style = "background-color:#dfd">        if(error.error == QJsonParseError::NoError) {</span>
+<span style = "background-color:#dfd">            if(loadDoc.object()["fps"].isDouble()) {</span>
+<span style = "background-color:#dfd">                loadFile.close();</span>
+<span style = "background-color:#dfd">                return true;</span>
+            }
+        }
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">    loadFile.close();</span>
+<span style = "background-color:#dfd">    return false;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Dataset::getName Returns the name of the Dataset.
+ * @return The name of the Dataset.
+ */
+<span style = "background-color:#dfd">QString Dataset::getName() const {</span>
+<span style = "background-color:#dfd">    return mName;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Dataset::getNumberOfMedia Returns the number of Medium in this Dataset.
+ * @return The number of Medium in this Dataset.
+ */
+<span style = "background-color:#fdd">int Dataset::getNumberOfMedia() const {</span>
+<span style = "background-color:#fdd">    return mMediaList.size();</span>
+<span style = "background-color:#fdd">}</span>
+
+/**
+ * @brief Dataset::getPreviewPhoto Returns the preview photo of this Dataset.
+ * @return The preview photo of this Dataset.
+ */
+<span style = "background-color:#dfd">QImage Dataset::getPreviewPhoto() const {</span>
+<span style = "background-color:#dfd">    return mPreviewPhoto;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Dataset::getMediaList Returns the list of Medium in this Dataset.
+ * @return The list of Medium in this Dataset.
+ */
+<span style = "background-color:#dfd">QList&lt;Medium*&gt; Dataset::getMediaList() const {</span>
+<span style = "background-color:#dfd">    return mMediaList;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Dataset::getPath Returns the absolute path of the Dataset.
+ * @return The path of the Dataset.
+ */
+<span style = "background-color:#dfd">QString Dataset::getPath() const {</span>
+<span style = "background-color:#dfd">    return mPath;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Dataset::getType Returns the Type of the Dataset.
+ * @return The Type of the Dataset.
+ */
+<span style = "background-color:#dfd">Dataset::Type Dataset::getType() const {</span>
+<span style = "background-color:#dfd">    return mType;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Dataset::createPreviewPhoto Creates a preview photo for the Dataset.
+ */
+<span style = "background-color:#dfd">bool Dataset::createPreviewPhoto() {</span>
+<span style = "background-color:#dfd">    QStringList filters(PREVIEW_PHOTO);</span>
+<span style = "background-color:#dfd">    QDirIterator iter(mPath, filters, QDir::Filter::Files, QDirIterator::Subdirectories);</span>
+<span style = "background-color:#dfd">    if(iter.hasNext()) {</span>
+<span style = "background-color:#dfd">       mPreviewPhoto = QImage(iter.next()).scaledToHeight(100);</span>
+<span style = "background-color:#dfd">    } else {</span>
+<span style = "background-color:#dfd">        if(mType == Type::PHOTO) {</span>
+            //first photo in the list
+<span style = "background-color:#fdd">            QImage preview(mMediaList.first()-&gt;getPath());</span>
+<span style = "background-color:#fdd">            mPreviewPhoto = preview.scaledToHeight(100);</span>
+<span style = "background-color:#fdd">        } else if(mType == Type::SINGLE_FRAME_VIDEO) {</span>
+            //first frame in the first single frame video
+<span style = "background-color:#dfd">            SingleFrameVideo *sfvideo = (SingleFrameVideo*)mMediaList.first();</span>
+<span style = "background-color:#dfd">            if(sfvideo-&gt;getFrameList().isEmpty()) {</span>
+                LOG_ERR("There are no frames in this single frame video.");
+<span style = "background-color:#fdd">                return false;</span>
+            }
+<span style = "background-color:#dfd">            QImage preview(sfvideo-&gt;getPath() + "/" + sfvideo-&gt;getFrameList().first());</span>
+<span style = "background-color:#dfd">            mPreviewPhoto = preview.scaledToHeight(100);</span>
+<span style = "background-color:#dfd">        } else if(mType == Type::VIDEO) {</span>
+<span style = "background-color:#dfd">            QImage preview(":/videoIcon.png");</span>
+<span style = "background-color:#dfd">            mPreviewPhoto = preview.scaledToHeight(100);</span>
+<span style = "background-color:#dfd">        }</span>
+    }
+<span style = "background-color:#dfd">    return true;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief Dataset::parseAnnotations Parses the Annotations from the Annotation file.
+ * @param filepath The path to the Annotation file.
+ * @return The list of Annotation for this Dataset. The first entry in the pair is the name of the photo/frame in the video,
+ * the second is the Annotation in this photo/frame.
+ */
+<span style = "background-color:#dfd">QList&lt;QPair&lt;QString, Annotation*&gt;&gt; Dataset::parseAnnotations(const QString&amp; filepath) {</span>
+<span style = "background-color:#dfd">    QList&lt;QPair&lt;QString, Annotation*&gt;&gt; annotations;</span>
+<span style = "background-color:#dfd">    QFile file(filepath);</span>
+<span style = "background-color:#dfd">    if(!file.exists() || !file.open(QFile::ReadOnly)) {</span>
+        LOG_ERR("The annotation file doesn't exists or couldn't be opened.");
+<span style = "background-color:#dfd">        return annotations;</span>
+    }
+<span style = "background-color:#dfd">    QTextStream stream(&amp;file);</span>
+<span style = "background-color:#dfd">    QString line;</span>
+<span style = "background-color:#dfd">    stream.readLine(); // first line</span>
+
+<span style = "background-color:#dfd">    stream.readLineInto(&amp;line); //header line</span>
+<span style = "background-color:#dfd">    QStringList list = line.split(" ", QString::SkipEmptyParts);</span>
+    //the positions in the line (so it's no problem, if the positions change)
+<span style = "background-color:#dfd">    int count = list.first().toInt(); // number of arguments</span>
+<span style = "background-color:#dfd">    int idPos = list.indexOf("id")+1;</span>
+<span style = "background-color:#dfd">    int xPos = list.indexOf("x")+1;</span>
+<span style = "background-color:#dfd">    int yPos = list.indexOf("y")+1;</span>
+<span style = "background-color:#dfd">    int widthPos = list.indexOf("width")+1;</span>
+<span style = "background-color:#dfd">    int heightPos = list.indexOf("height")+1;</span>
+<span style = "background-color:#dfd">    int typePos = list.indexOf("class")+1;</span>
+
+    // read in the annotations
+<span style = "background-color:#dfd">    while (stream.readLineInto(&amp;line)) {</span>
+<span style = "background-color:#dfd">        QStringList list = line.split(" ", QString::SkipEmptyParts);</span>
+
+<span style = "background-color:#dfd">        QString imagePath = list.at(0);</span>
+<span style = "background-color:#dfd">        int quantity = list.at(1).toInt(); // number of annotations</span>
+<span style = "background-color:#dfd">        if(2+quantity*count &gt; list.size()) {</span>
+<span style = "background-color:#fdd">            continue;</span>
+        }
+<span style = "background-color:#dfd">        for(int i = 0; i &lt; quantity; i++) {</span>
+<span style = "background-color:#dfd">            QString id = list.at(idPos+i*count);</span>
+<span style = "background-color:#dfd">            int x = list.at(xPos+i*count).toDouble();</span>
+<span style = "background-color:#dfd">            int y = list.at(yPos+i*count).toDouble();</span>
+<span style = "background-color:#dfd">            int width = list.at(widthPos+i*count).toDouble();</span>
+<span style = "background-color:#dfd">            int height = list.at(heightPos+i*count).toDouble();</span>
+<span style = "background-color:#dfd">            QString type = list.at(typePos+i*count);</span>
+
+<span style = "background-color:#dfd">            RectangleAnnotation* annotation = new RectangleAnnotation(id, type);</span>
+<span style = "background-color:#dfd">            annotation-&gt;setRect(x, y, width, height);</span>
+<span style = "background-color:#dfd">            QPair&lt;QString, Annotation*&gt; pair(imagePath, annotation);</span>
+<span style = "background-color:#dfd">            annotations.append(pair);</span>
+<span style = "background-color:#dfd">        }</span>
+<span style = "background-color:#dfd">        if(quantity == 0) {</span>
+<span style = "background-color:#dfd">            QPair&lt;QString, Annotation*&gt; pair(imagePath, nullptr);</span>
+<span style = "background-color:#dfd">            annotations.append(pair);</span>
+<span style = "background-color:#dfd">        }</span>
+<span style = "background-color:#dfd">    }</span>
+<span style = "background-color:#dfd">    file.close();</span>
+<span style = "background-color:#dfd">    return annotations;</span>
+<span style = "background-color:#dfd">}</span>
+
+/**
+ * @brief operator == Compares if two datasets are the same.
+ * @param A One Dataset.
+ * @param B Another Dataset.
+ * @return If the datasets are equal.
+ */
+<span style = "background-color:#dfd">bool operator==(const Dataset&amp; A, const Dataset&amp; B) {</span>
+<span style = "background-color:#dfd">    if(A.getPath() == B.getPath() &amp;&amp; A.getType() == B.getType()) {</span>
+<span style = "background-color:#fdd">        return true;</span>
+    }
+<span style = "background-color:#dfd">    return false;</span>
+<span style = "background-color:#dfd">}</span>
+</pre>
+	</body>
+</html>

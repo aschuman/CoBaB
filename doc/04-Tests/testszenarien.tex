@@ -1,17 +1,18 @@
 % !TeX spellcheck = de_DE_frami
 \subsection{Testdaten}
-Zum Testen während der Entwicklung und zum Durchspielen der Testszenarien werden mindestens nachfolgende Testdaten benötigt:
+Zum Testen während der Entwicklung und zum Durchspielen der Testszenarien wurden nachfolgende Testdaten verwendet:
 \begin{itemize}
-	\item ein Bilddatensatz (mit mehreren Bildern und mindestens einem annotiertem Bild)
-	\item ein Datensatz mit mindestens einem Video aus Einzelbildern
+	\item ein Bilddatensatz (mit mehreren Bildern und mindestens einem annotiertem Bild, Bildgröße: 48x128 Pixel)
+	\item ein Bilddatensatz (mit mehreren größeren Bildern, Bildgröße: 1536x2048 Pixel)
+	\item ein Datensatz mit mindestens zwei Videos aus Einzelbildern und verschiedenen Framerates
 	\item ein Testsuchverfahren, das eine beliebige Sortierung als Suchergebnis zurück gibt
-	\item ein Suchverfahren, das auf eine Annotation des oben geforderten annotierten Bildes anwendbar ist
+	\item ein Suchverfahren, das auf eine Personenannotation des oben geforderten annotierten Bildes anwendbar ist
 \end{itemize}
 Insbesondere die Schnittstelle zwischen Suchverfahren und Anwendung soll durch diese Testdaten überprüft werden.
 
 \subsection{Testszenarien}
-Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den Arbeitsablauf des Benutzers im Detail.
-
+Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den Arbeitsablauf des Benutzers im Detail. Sie wurden auf Windows 7, 8 und Fedora 22 ausgeführt.
+\pagebreak
 \subsubsection{Testszenarien der Pflichtanforderungen}
 \begin{enumerate} [label=\bfseries /TS \arabic*0/, leftmargin=*]
 	\item Grundfunktionalität \newline \newline
@@ -22,8 +23,7 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	\hline
 	2. & \textbf{Aktion} Der Benutzer doppelklickt einen Datensatz & \\
 	   & \textbf{Nachbedingung} Es wird eine Übersicht des Datensatzes angezeigt & bestanden \\
-	\end{tabular}	   
-	\begin{tabular}{@{}rp{4in}|l}
+	\hline
 	3. & \textbf{Aktion} Der Benutzer klickt auf ein Bild aus der Übersicht & \\
 	   & \textbf{Nachbedingung} Das Bild wird groß dargestellt & bestanden \\
 	\hline    
@@ -47,15 +47,16 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	\hline   
    10. & \textbf{Aktion} Der Benutzer wählt die Schaltfläche zur Rückkehr & \\
 	   & \textbf{Nachbedingung} Es werden wieder die vorgenommenen Einstellungen angezeigt; eine Schaltfläche zum Starten der Suche wird angezeigt & bestanden \\
-	\hline
+	\end{tabular}
+
+	\begin{tabular}{@{}rp{4in}|l}
    11. & \textbf{Aktion} Der Benutzer startet die Suche erneut & \\
 	   & \textbf{Nachbedingung} Eine Animation zeigt die Aktivität des Suchverfahrens an & bestanden \\
-	\hline   
+	\hline
    12. & \textbf{Aktion} Der Benutzer beendet das Programm (während der laufenden Suche) über den üblichen Schließen-Button & \\ 
 	   & \textbf{Nachbedingung} die GUI ist nicht mehr sichtbar; der Prozess hat terminiert & bestanden \\
 	\end{tabular}
-	
-	\pagebreak
+	\newline
 
 	\item Kommandozeile \newline \newline
 	\begin{tabular}{@{}rp{4in}|l}
@@ -82,12 +83,12 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	\hline
 	4. & \textbf{Aktion} Der Benutzer linksklickt auf ein Suchverfahren & \\
 	   & \textbf{Nachbedingung} Es wird die Parameterauswahl angezeigt & bestanden \\
-	\hline
-	5. & \textbf{Aktion} Der Benutzer wählt seine Parameter und bestätigt sie & \\
-	   & \textbf{Nachbedingung} Es wird der gewählte annotierte Bildbereich angezeigt; eine Schaltfläche zur Rückkehr zur Parameterauswahl wird angezeigt & bestanden \\
 	\end{tabular}
 	
 	\begin{tabular}{@{}rp{4in}|l}
+	5. & \textbf{Aktion} Der Benutzer wählt seine Parameter und bestätigt sie & \\
+	   & \textbf{Nachbedingung} Es wird der gewählte annotierte Bildbereich angezeigt; eine Schaltfläche zur Rückkehr zur Parameterauswahl wird angezeigt & bestanden \\
+	\hline
 	6. & \textbf{Aktion} Der Benutzer linksklickt die Schaltfläche zur Rückkehr zweimal & \\
 	   & \textbf{Nachbedingung}	Das eben gewählte Bild wird in der vergrößerten Ansicht dargestellt & nicht bestanden\\
 	\hline
@@ -110,7 +111,7 @@ Die folgenden Testszenarien sind dem Pflichtenheft entnommen und beschreiben den
 	   & \textbf{Nachbedingung} Die Bibliothek wird angezeigt & bestanden \\
 	\end{tabular}
 	\par
-6. und 10. haben nicht bestanden, da bei der Rückkehr zum ViewerPageWidget nicht mehr das ausgewählte, sondern das erste Bild des Datensatzes angezeigt wird. Das liegt daran, dass dies aufgrund des aktuellen Designs nicht möglich ist. Beim Anzeigen des ViewerPageWidgets wird die reset Methode aufgerufen, unabhängig davon, ob das vorherige PageWidget das Library- oder ParameterPageWidget war. Da dies nicht unterschieden werden kann, kann auch nicht unterschieden werden, ob das erste, oder das zuletzt gewählte Bild angezeigt werden soll. Das Testszenario schlägt daher fehl, was aber keine funktionalen Anforderungen betrifft. 
+6. und 10. haben nicht bestanden, da bei der Rückkehr zum ViewerPageWidget nicht mehr das ausgewählte, sondern das erste Bild des Datensatzes angezeigt wird. Das liegt daran, dass dies aufgrund des aktuellen Designs nicht möglich ist. Beim Anzeigen des ViewerPageWidgets wird die reset Methode aufgerufen, unabhängig davon, ob das vorherige PageWidget das Library- oder ParameterPageWidget war. Daher kann nicht unterschieden werden, ob das erste, oder das zuletzt gewählte Bild angezeigt werden soll. Das Testszenario schlägt daher fehl, was aber keine funktionalen Anforderungen betrifft. 
 	\pagebreak
 
 	\item Feedback und weitere Suche \newline \newline
@@ -446,7 +447,7 @@ Der Test hat nicht bestanden, weil die Funktion nicht implementiert wurde.
 	   & \textbf{Nachbedingung} Die Ergebnisse der Suche werden angezeigt & bestanden \\
 	\end{tabular}
 	\par
-2. hat nicht bestanden, da es keinen Button gibt, um die laufende Suche abzubrechen.
+2. hat nicht bestanden, da es keinen Button gibt, um die laufende Suche abzubrechen. Die Funktionalität ist ebenfalls nicht implementiert.
 	\newline
 
 	\item zusätzliche Datensätze \newline \newline

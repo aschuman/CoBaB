@@ -9,6 +9,7 @@
 #include <QDebug>
 #include <QResizeEvent>
 #include <QPointer>
+#include "SearchFeedback.h"
 
 /**
  * @brief ConfirmationPageWidget::ConfirmationPageWidget Constructs a ConfirmationPageWidget.
@@ -171,6 +172,14 @@ void ConfirmationPageWidget::reset()
         LOG_ERR("no parameters");
     }
 
+    // check if tere is feedback
+    QVariant varFeedback;
+    SearchFeedback* feedback = nullptr;
+    emit readFromStack(5, varFeedback);
+    if(varFeedback.canConvert<std::shared_ptr<SearchFeedback>>()) {
+        feedback = varFeedback.value<std::shared_ptr<SearchFeedback>>().get();
+    }
+
     ui->mParameters->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     if(parameters != nullptr) {
@@ -180,9 +189,13 @@ void ConfirmationPageWidget::reset()
     }
     if(searchQuery != nullptr) {
         QList<DataPacket*> dplist;
-        dplist.append(searchQuery.get());
+        dplist.push_back(searchQuery.get());
+        dplist.push_back(feedback);
         if(!algo->setInputs(dplist)) {
-            LOG_ERR("Could not set search query");
+            dplist.pop_back();
+            if(!algo->setInputs(dplist)){
+                LOG_ERR("Could not set search query");
+            }
         }
     }
 }

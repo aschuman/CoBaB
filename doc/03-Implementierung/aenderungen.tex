@@ -10,17 +10,22 @@ Außerdem wurde die neue Methode copy() hinzugefügt, die eine neue Annotation e
 Wie Annotation wird RectangleAnnotation auch eine copy() Methode hinzugefügt.
 
 \subsubsection{Algorithm}
-Getter-Methoden wie getName(), getDescription(), getParameter() wurden von SearchAlgorithm und TestAlgorithm in Algorithm verschoben und hier umgesetzt. 
-Neue Methoden getParameter() und getDefaultParameter() geben die Parameterwerte als QJsonObject (aktuell und standard) zurückt. Die Standardparemeter sind als Metadata gespeichert und werden mittels initialize() gesetzt, wenn der Algorithmus als Plugin geladen wird.
-
+Getter-Methoden wie getName(), getDescription(), getParameter() wurden von SearchAlgorithm und TestAlgorithm in Algorithm verschoben und hier umgesetzt.
+Neue Methoden getParameter() und getDefaultParameter() geben die Parameterwerte als QJsonObject (aktuell und standard) zurück. Die Standardparemeter sind als Metadata gespeichert und werden mittels initialize() gesetzt, wenn der Algorithmus als Plugin geladen wird.
 \subsubsection{SearchAlgorithm}
-setName() und setDescription() wurden entfernt. Die Matadaten sind nicht zur Laufzeit veränderbar, sondern in einer .json Datei festgespeichert.
-
-\subsubsection{SearchFeedback}
+setName() und setDescription() wurden entfernt. Die Matadaten sind nicht zur Laufzeit veränderbar, sondern in einer .json Datei fest gespeichert
 
 \subsubsection{Bookmark}
+Ein Bookmark kann in einer Datei gespeichert werden. Die Klasse Bookmark ist daher mit einem default-Konstruktor und einem Konstruktor Bookmark(QString &path) vorgesehen, um das Bookmark-Objekt aus dieser Datei wiederzuherstellen.
+
+Das Bookmark-Objekt bekommt ein neues Attribute : mPath. Den Wert kann man über setPath() setzen. Die Methode saveFile() speichert das Bookmark in die Datei mit diesem Pfad, und deleteFile() löscht die Datei, falls vorhanden.
+
+Um 2 Bookmarks nach Datum oder Name zu vergleichen, sind die Methoden smallerByName() und smallerByDate() hinzugefügt.
+
+validate(Bookmark &b) prüft ein Bookmark-Objekt auf die Gültigkeit, wie z.Bsp. ob der Datensatz noch vorhanden ist.
 
 \subsubsection{BookmarkList}
+Die Methode save(QString &path) wurde entfernt, weil nun nicht alle Bookmarks in der Liste zusammengespeichert werden, sondern jede in eine Datei. Wenn ein Bookmark hinzugefügt bzw. aus der Liste entfernt ist, wird die entsprechende Datei erstellt bzw. gelöscht.
 
 \subsection{View}
 \subsubsection{ViewerPageWidget}
