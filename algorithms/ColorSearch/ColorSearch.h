@@ -52,11 +52,13 @@ private:
     QHash<QString, std::shared_ptr<Dataset>> mDatasets; ///< The relevant datasets.
 
     // algorithm parameters
-    int mNumBins;                           ///< Number of bins per channel to use for search.
+    int mNumBins;                               ///< Number of bins per channel to use for search.
 
     // features
-    QVector<ColorHistogram> mQueryFeatures; ///< Features corresponding to the query.
-    QList<SearchResultElement> mSearchDb;   ///< Index/DB of all objects to compare to.
+    QVector<ColorHistogram> mQueryFeatures;     ///< Features corresponding to the query.
+    QVector<ColorHistogram> mPositiveFeatures;  ///< Features corresponding to the pos. feedback.
+    QVector<ColorHistogram> mNegativeFeatures;  ///< Features corresponding to the neg. feedback.
+    QList<SearchResultElement> mSearchDb;       ///< Index/DB of all objects to compare to.
 };
 
 #endif

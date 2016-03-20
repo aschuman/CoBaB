@@ -141,13 +141,13 @@ bool ColorSearch::setInputs(const QList<DataPacket*>& inputDataList)
             continue;
         }
 
-        SearchFeedback* fb = dynamic_cast<SearchFeedback*>(packet);
-        if (fb)
-        {
-            qDebug() << "found feedback list for ColorSearch: " << fb->getFeedbackList().size();
-            mFeedback = *fb;
-            continue;
-        }
+//        SearchFeedback* fb = dynamic_cast<SearchFeedback*>(packet);
+//        if (fb)
+//        {
+//            qDebug() << "found feedback list for ColorSearch: " << fb->getFeedbackList().size();
+//            mFeedback = *fb;
+//            continue;
+//        }
     }
     return valid_input;
 }
@@ -195,15 +195,19 @@ QList<DataPacket*> ColorSearch::run()
 
     // compute features for query
     mQueryFeatures.clear();
+    mPositiveFeatures.clear();
+    mNegativeFeatures.clear();
     searchObjectToFeature(mQuery.getSearchObject(), mQueryFeatures);
-    qDebug() << "ColorSearch feedback size during run(): " << mFeedback.getFeedbackList().size();
     for (auto fb : mFeedback.getFeedbackList())
     {
         qDebug() << fb.second;
         if (fb.second == 1)
         {
-            searchObjectToFeature(fb.first, mQueryFeatures);
-            qWarning() << "adding positive feedback to query";
+            searchObjectToFeature(fb.first, mPositiveFeatures);
+        }
+        else
+        {
+            searchObjectToFeature(fb.first, mNegativeFeatures);
         }
     }
     if (mQueryFeatures.size() < 1)
@@ -262,6 +266,7 @@ QList<DataPacket*> ColorSearch::run()
     }
 
     // wrap up
+    qDebug() << "returning " << result->getSearchResultList().size() << " results";
     QList<DataPacket*> list;
     list.append((DataPacket*)result);
     return list;
@@ -424,7 +429,28 @@ SearchResultElement ColorSearch::processDbEntry(int idx)
         }
     }
 
-    mSearchDb[idx].setScore(score);
+    double negscore = numeric_limits<double>::max();
+    for (const ColorHistogram& qf : mNegativeFeatures)
+    {
+        for (const ColorHistogram& dbf : features)
+        {
+            double dist = qf.diff(dbf);
+            if (abs(dist) < score) negscore = abs(dist);
+        }
+    }
+
+    double posscore = numeric_limits<double>::max();
+    for (const ColorHistogram& qf : mPositiveFeatures)
+    {
+        for (const ColorHistogram& dbf : features)
+        {
+            double dist = qf.diff(dbf);
+            if (abs(dist) < score) posscore = abs(dist);
+        }
+    }
+
+    if (posscore < 0.01) mSearchDb[idx].setScore(posscore);
+    else                 mSearchDb[idx].setScore(score);
     return mSearchDb[idx];
 }
 
